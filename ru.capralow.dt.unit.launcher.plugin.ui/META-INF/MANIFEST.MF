@@ -3,7 +3,6 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Запуск модульных тестов для EDT
 Bundle-SymbolicName: ru.capralow.dt.unit.launcher.plugin.ui;singleton:=true
 Bundle-Version: 0.1.0.qualifier
-Bundle-Activator: org.eclipse.jdt.internal.junit.ui.JUnitPlugin
 Bundle-Vendor: Капралов Александр Александрович
 Require-Bundle: org.eclipse.core.runtime,
  com._1c.g5.v8.dt.product.application;bundle-version="1.10.2",
@@ -26,8 +25,4 @@ Import-Package: org.eclipse.emf.common.notify,
  org.eclipse.xtext.resource,
  org.eclipse.xtext.util,
  org.eclipse.xtext.validation
-Bundle-ClassPath: .,
- org.eclipse.jdt.core_3.13.102.v20180330-0919.jar,
- org.eclipse.jdt.junit.core_3.9.100.v20180321-0831.jar,
- org.eclipse.jdt.ui_3.13.100.v20180330-0726.jar,
- org.eclipse.jdt.junit_3.10.75.v20180322-1731.jar
+Bundle-ClassPath: .
