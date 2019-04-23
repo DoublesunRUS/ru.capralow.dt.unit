@@ -1,0 +1,33 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Запуск модульных тестов для EDT
+Bundle-SymbolicName: ru.capralow.dt.unit.launcher.plugin.ui;singleton:=true
+Bundle-Version: 0.1.0.qualifier
+Bundle-Activator: org.eclipse.jdt.internal.junit.ui.JUnitPlugin
+Bundle-Vendor: Капралов Александр Александрович
+Require-Bundle: org.eclipse.core.runtime,
+ com._1c.g5.v8.dt.product.application;bundle-version="1.10.2",
+ org.eclipse.ui,
+ org.eclipse.debug.core
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Automatic-Module-Name: dt.validator.bsl-language-server.plugin
+Bundle-ActivationPolicy: lazy
+Import-Package: org.eclipse.emf.common.notify,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.ecore.resource,
+ org.eclipse.jface.text,
+ org.eclipse.jface.text.templates,
+ org.eclipse.jface.text.templates.persistence,
+ org.eclipse.ui.editors.text.templates,
+ org.eclipse.ui.texteditor,
+ org.eclipse.xtext,
+ org.eclipse.xtext.nodemodel,
+ org.eclipse.xtext.nodemodel.util,
+ org.eclipse.xtext.resource,
+ org.eclipse.xtext.util,
+ org.eclipse.xtext.validation
+Bundle-ClassPath: .,
+ org.eclipse.jdt.core_3.13.102.v20180330-0919.jar,
+ org.eclipse.jdt.junit.core_3.9.100.v20180321-0831.jar,
+ org.eclipse.jdt.ui_3.13.100.v20180330-0726.jar,
+ org.eclipse.jdt.junit_3.10.75.v20180322-1731.jar

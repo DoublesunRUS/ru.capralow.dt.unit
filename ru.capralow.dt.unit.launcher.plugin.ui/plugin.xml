@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+
+	<extension point="org.eclipse.ui.views">
+		<view
+			name="JUnit"
+			icon="/icons/full/eview16/junit.png"
+			fastViewWidthRatio="0.40"
+			id="org.eclipse.jdt.junit.ResultView"
+			class="org.eclipse.jdt.internal.junit.ui.TestRunnerViewPart"
+			category="com._1c.g5.v8.dt.ui.v8category">
+		</view>
+	</extension>
+
+</plugin>

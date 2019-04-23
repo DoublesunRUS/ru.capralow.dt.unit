@@ -1,0 +1,15 @@
+<settings>
+	<servers>
+		<server>
+			<id>dt_repository</id>
+			<username>${env.partners_v8_1c_ru_username}</username>
+			<password>${env.partners_v8_1c_ru_password}</password>
+		</server>
+	</servers>
+	
+	<mirrors>
+	</mirrors>
+
+	<proxies>
+	</proxies>
+</settings>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/ru.capralow.dt.unit.launcher_0.1.0.qualifier.jar" id="ru.capralow.dt.unit.launcher" version="0.1.0.qualifier">
+      <category name="ru.capralow.dt.plugin.category.public"/>
+   </feature>
+   <category-def name="ru.capralow.dt.plugin.category.public" label="Плагины для EDT"/>
+</site>
