@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="1C:EDT Topaz Platform" sequenceNumber="5">
+<?pde version="3.8"?><target name="1C:EDT Topaz Platform" sequenceNumber="8">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
 <unit id="com._1c.g5.aef.feature.feature.group" version="0.0.0"/>
@@ -95,6 +95,6 @@
 <unit id="org.eclipse.xtext.xbase.lib.feature.group" version="0.0.0"/>
 <repository location="https://edt.1c.ru/releases/topaz/1.10.2/"/>
 </location>
-<location path="/Users/kapral/Разработка/rcp-git/ru.capralow.dt.unit.launcher/target" type="Profile"/>
+<location path="${project_loc}" type="Profile"/>
 </locations>
 </target>
