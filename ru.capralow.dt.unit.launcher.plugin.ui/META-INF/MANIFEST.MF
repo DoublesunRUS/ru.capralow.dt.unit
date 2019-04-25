@@ -11,18 +11,31 @@ Require-Bundle: org.eclipse.core.runtime,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Automatic-Module-Name: dt.validator.bsl-language-server.plugin
 Bundle-ActivationPolicy: lazy
-Import-Package: org.eclipse.emf.common.notify,
+Import-Package: com._1c.g5.v8.dt.bm.index.emf;version="6.2.2",
+ com._1c.g5.v8.dt.bsl.model;version="3.5.0",
+ com._1c.g5.v8.dt.core;version="3.3.0",
+ com._1c.g5.v8.dt.core.platform;version="7.1.0",
+ com._1c.g5.v8.dt.metadata.mdclass;version="6.3.0",
+ com._1c.g5.wiring;version="2.0.0",
+ com._1c.g5.wiring.binder;version="1.1.0",
+ com.google.inject;version="1.3.0",
+ org.eclipse.emf.common.notify,
+ org.eclipse.emf.common.util,
  org.eclipse.emf.ecore,
  org.eclipse.emf.ecore.resource,
+ org.eclipse.emf.ecore.util,
  org.eclipse.jface.text,
  org.eclipse.jface.text.templates,
  org.eclipse.jface.text.templates.persistence,
  org.eclipse.ui.editors.text.templates,
  org.eclipse.ui.texteditor,
  org.eclipse.xtext,
+ org.eclipse.xtext.builder,
  org.eclipse.xtext.nodemodel,
  org.eclipse.xtext.nodemodel.util,
  org.eclipse.xtext.resource,
  org.eclipse.xtext.util,
- org.eclipse.xtext.validation
+ org.eclipse.xtext.validation,
+ org.slf4j;version="1.7.10"
 Bundle-ClassPath: .
+Bundle-Activator: ru.capralow.dt.unit.launcher.plugin.ui.Activator

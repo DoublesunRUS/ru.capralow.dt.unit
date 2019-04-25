@@ -1,30 +1,83 @@
 package ru.capralow.dt.unit.launcher.plugin.ui;
 
-import org.osgi.framework.BundleActivator;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
-public class Activator implements BundleActivator {
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 
-	private static BundleContext context;
+public class Activator extends AbstractUIPlugin {
 
-	static BundleContext getContext() {
-		return context;
+	public static final String PLUGIN_ID = "ru.capralow.dt.unit.launcher.plugin.ui"; //$NON-NLS-1$
+
+	private static Activator plugin;
+
+	private BundleContext bundleContext;
+
+	private Injector injector;
+
+	public static Activator getDefault() {
+		return plugin;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
-	 */
+	public static void log(IStatus status) {
+		plugin.getLog().log(status);
+	}
+
+	public static void logError(Throwable throwable) {
+		log(createErrorStatus(throwable.getMessage(), throwable));
+	}
+
+	public static IStatus createErrorStatus(String message, Throwable throwable) {
+		return new Status(IStatus.ERROR, PLUGIN_ID, 0, message, throwable);
+	}
+
+	public static IStatus createWarningStatus(String message) {
+		return new Status(IStatus.WARNING, PLUGIN_ID, 0, message, null);
+	}
+
+	public static IStatus createWarningStatus(final String message, Exception throwable) {
+		return new Status(IStatus.WARNING, PLUGIN_ID, 0, message, throwable);
+	}
+
+	@Override
 	public void start(BundleContext bundleContext) throws Exception {
-		Activator.context = bundleContext;
+		super.start(bundleContext);
+
+		this.bundleContext = bundleContext;
+
+		plugin = this;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
-	 */
+	@Override
 	public void stop(BundleContext bundleContext) throws Exception {
-		Activator.context = null;
+		plugin = null;
+		super.stop(bundleContext);
+	}
+
+	protected BundleContext getContext() {
+		return bundleContext;
+	}
+
+	public synchronized Injector getInjector() {
+		if (injector == null)
+			injector = createInjector();
+
+		return injector;
+	}
+
+	private Injector createInjector() {
+		try {
+			return Guice.createInjector(new UnitLauncherExternalDependenciesModule(this));
+
+		} catch (Exception e) {
+			String msg = String.format("Не удалось создать injector для \"%1$s\"", getBundle().getSymbolicName());
+			log(createErrorStatus(msg, e));
+			return null;
+
+		}
 	}
 
 }
