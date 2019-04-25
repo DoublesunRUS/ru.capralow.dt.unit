@@ -7,7 +7,8 @@ Bundle-Vendor: Капралов Александр Александрович
 Require-Bundle: org.eclipse.core.runtime,
  com._1c.g5.v8.dt.product.application;bundle-version="1.10.2",
  org.eclipse.ui,
- org.eclipse.debug.core
+ org.eclipse.debug.core,
+ org.eclipse.ui.ide
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Automatic-Module-Name: dt.validator.bsl-language-server.plugin
 Bundle-ActivationPolicy: lazy
@@ -15,6 +16,7 @@ Import-Package: com._1c.g5.v8.dt.bm.index.emf;version="6.2.2",
  com._1c.g5.v8.dt.bsl.model;version="3.5.0",
  com._1c.g5.v8.dt.core;version="3.3.0",
  com._1c.g5.v8.dt.core.platform;version="7.1.0",
+ com._1c.g5.v8.dt.mcore;version="4.1.0",
  com._1c.g5.v8.dt.metadata.mdclass;version="6.3.0",
  com._1c.g5.wiring;version="2.0.0",
  com._1c.g5.wiring.binder;version="1.1.0",
@@ -39,3 +41,4 @@ Import-Package: com._1c.g5.v8.dt.bm.index.emf;version="6.2.2",
  org.slf4j;version="1.7.10"
 Bundle-ClassPath: .
 Bundle-Activator: ru.capralow.dt.unit.launcher.plugin.ui.Activator
+Export-Package: ru.capralow.dt.unit.launcher.plugin.ui
