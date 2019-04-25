@@ -37,6 +37,7 @@ import com._1c.g5.v8.dt.core.platform.IConfigurationProject;
 import com._1c.g5.v8.dt.core.platform.IExtensionProject;
 import com._1c.g5.v8.dt.core.platform.IV8Project;
 import com._1c.g5.v8.dt.core.platform.IV8ProjectManager;
+import com._1c.g5.v8.dt.mcore.util.Environment;
 import com._1c.g5.v8.dt.metadata.mdclass.CommonModule;
 import com._1c.g5.v8.dt.metadata.mdclass.Configuration;
 import com.google.inject.Inject;
@@ -65,8 +66,8 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 		return null;
 	}
 
-	public static void saveFeatures(String keyName, List<String> methodsNames, IPath projectLocation,
-			String moduleName) {
+	public static void saveFeatures(String keyName, List<String> methodsNames, IPath projectLocation, String moduleName,
+			Boolean forServer, Boolean forClient) {
 		StringBuilder fileText = new StringBuilder();
 		fileText.append(String.join(System.lineSeparator(),
 				"# language: ru",
@@ -76,13 +77,28 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 				"Функционал: Модульное тестирование 1С",
 				"	Как Разработчик",
 				"	Я Хочу чтобы возвращаемое значение метода совпадало с эталонным",
-				"	Чтобы я мог гарантировать работоспособность метода",
-				"",
-				String.format("Сценарий: %1$s", moduleName),
-				"	И я выполняю код встроенного языка на сервере"));
-		for (String methodName : methodsNames) {
+				"	Чтобы я мог гарантировать работоспособность метода"));
+		if (forServer) {
 			fileText.append(System.lineSeparator());
-			fileText.append(String.format("	| '%1$s(Объект);' |", methodName));
+			fileText.append(System.lineSeparator());
+			fileText.append(String.join(System.lineSeparator(),
+					String.format("Сценарий: %1$s (сервер)", moduleName),
+					"	И я выполняю код встроенного языка на сервере"));
+			for (String methodName : methodsNames) {
+				fileText.append(System.lineSeparator());
+				fileText.append(String.format("	| '%1$s(Объект);' |", methodName));
+			}
+		}
+		if (forClient) {
+			fileText.append(System.lineSeparator());
+			fileText.append(System.lineSeparator());
+			fileText.append(String.join(System.lineSeparator(),
+					String.format("Сценарий: %1$s (клиент)", moduleName),
+					"	И я выполняю код встроенного языка"));
+			for (String methodName : methodsNames) {
+				fileText.append(System.lineSeparator());
+				fileText.append(String.format("	| '%1$s(Форма);' |", methodName));
+			}
 		}
 
 		String featuresPathName = getFeaturesLocation(projectLocation);
@@ -166,10 +182,13 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 				units.put(keyName, methodsNames);
 			}
 
+			Boolean forServer = module.getEnvironments().contains(Environment.SERVER);
+			Boolean forClient = module.getEnvironments().contains(Environment.THIN_CLIENT);
+
 			String moduleName = ((CommonModule) module.getOwner()).getName();
 			deleteModuleFeatures(project.getLocation(), moduleName);
 			for (Entry<String, List<String>> entry : units.entrySet())
-				saveFeatures(entry.getKey(), entry.getValue(), project.getLocation(), moduleName);
+				saveFeatures(entry.getKey(), entry.getValue(), project.getLocation(), moduleName, forServer, forClient);
 			deleteEmptyDirs(project.getLocation(), moduleName);
 		}
 
