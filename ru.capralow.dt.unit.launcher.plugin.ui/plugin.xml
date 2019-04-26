@@ -41,4 +41,20 @@
 		</menuContribution>
 	</extension>
 	
+	<extension point="org.eclipse.debug.core.launchConfigurationTypes">
+		<launchConfigurationType
+			name="Модульные тесты 1С"
+			delegate="ru.capralow.dt.unit.launcher.plugin.ui.UnitLauncherLaunchConfigurationDelegate"
+			modes="run, debug"
+			id="ru.capralow.dt.unit.launcher.plugin.ui.UnitLauncher">
+		</launchConfigurationType>
+	</extension>
+	<extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+		<launchConfigurationTabGroup
+			class="ru.capralow.dt.unit.launcher.plugin.ui.UnitLauncherLaunchConfigurationTabGroup"
+			id="ru.capralow.dt.unit.launcher.plugin.ui.UnitLauncherLaunchConfigurationTabGroup"
+			type="ru.capralow.dt.unit.launcher.plugin.ui.UnitLauncher">
+		</launchConfigurationTabGroup>
+	</extension>
+
 </plugin>
