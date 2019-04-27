@@ -15,12 +15,8 @@ public class UnitTestLaunchTabGroup extends AbstractLaunchConfigurationTabGroup 
 	@Inject
 	private IInfobaseManager infobaseManager;
 
-	@Inject
-
 	@Override
 	public void createTabs(ILaunchConfigurationDialog dialog, String mode) {
-		setTabs(new ILaunchConfigurationTab[] { new UnitTestLaunchTab(), new CommonTab() });
-
 		List<ILaunchConfigurationTab> tabs = new ArrayList<>();
 		if (infobaseManager.isPersistenceSupported()) {
 			tabs.add(new UnitTestLaunchTab());

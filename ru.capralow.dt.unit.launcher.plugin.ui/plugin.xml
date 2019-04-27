@@ -50,7 +50,7 @@
 	<extension point="org.eclipse.debug.core.launchConfigurationTypes">
 		<launchConfigurationType
 			name="Модульные тесты 1С"
-			delegate="ru.capralow.dt.unit.launcher.plugin.ui.launchconfigurations.UnitTestLaunchDelegate"
+			delegate="ru.capralow.dt.unit.launcher.plugin.ui.ExecutableExtensionFactory:ru.capralow.dt.unit.launcher.plugin.ui.launchconfigurations.UnitTestLaunchDelegate"
 			modes="run, debug"
 			id="ru.capralow.dt.unit.launcher.plugin.ui.UnitTestLaunch">
 		</launchConfigurationType>
