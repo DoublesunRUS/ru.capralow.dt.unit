@@ -8,7 +8,8 @@ Require-Bundle: org.eclipse.core.runtime,
  com._1c.g5.v8.dt.product.application;bundle-version="1.10.2",
  org.eclipse.ui,
  org.eclipse.debug.core,
- org.eclipse.ui.ide
+ org.eclipse.ui.ide,
+ org.eclipse.jdt.junit;bundle-version="3.10.75"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Automatic-Module-Name: dt.validator.bsl-language-server.plugin
 Bundle-ActivationPolicy: lazy
@@ -53,7 +54,8 @@ Import-Package: com._1c.g5.v8.dt.bm.index.emf;version="6.2.2",
  org.eclipse.xtext.nodemodel.util,
  org.eclipse.xtext.resource,
  org.eclipse.xtext.util,
- org.eclipse.xtext.validation
+ org.eclipse.xtext.validation,
+ org.junit.runner;version="4.12.0"
 Bundle-ClassPath: .
 Bundle-Activator: ru.capralow.dt.unit.launcher.plugin.ui.UnitLauncherPlugin
 Export-Package: ru.capralow.dt.unit.launcher.plugin.ui,
