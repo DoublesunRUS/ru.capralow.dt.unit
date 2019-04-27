@@ -1,4 +1,4 @@
-package ru.capralow.dt.unit.launcher.plugin.ui;
+package ru.capralow.dt.unit.launcher.plugin.ui.launchconfigurations;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
@@ -12,7 +12,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-public class UnitLauncherLaunchConfigurationTab extends AbstractLaunchConfigurationTab {
+public class UnitTestLaunchTab extends AbstractLaunchConfigurationTab {
 
 	private Text text;
 
@@ -40,7 +40,7 @@ public class UnitLauncherLaunchConfigurationTab extends AbstractLaunchConfigurat
 	@Override
 	public void initializeFrom(ILaunchConfiguration configuration) {
 		try {
-			String consoleText = configuration.getAttribute(UnitLauncherLaunchConfigurationAttributes.CONSOLE_TEXT,
+			String consoleText = configuration.getAttribute(UnitTestLaunchAttributes.CONSOLE_TEXT,
 					"\"C:\\Program Files\\1cv8\\8.3.12.1790\\bin\\1cv8.exe\" /Execute \"C:\\Разработка\\vanessa-automation\\vanessa-automation-single.epf\" /C\"StartFeaturePlayer;VBParams=C:\\temp\\VBParams.json\"");
 			text.setText(consoleText);
 		} catch (CoreException e) {
@@ -51,7 +51,7 @@ public class UnitLauncherLaunchConfigurationTab extends AbstractLaunchConfigurat
 	@Override
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
 		// set the text value for the CONSOLE_TEXT key
-		configuration.setAttribute(UnitLauncherLaunchConfigurationAttributes.CONSOLE_TEXT, text.getText());
+		configuration.setAttribute(UnitTestLaunchAttributes.CONSOLE_TEXT, text.getText());
 	}
 
 	@Override

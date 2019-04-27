@@ -14,14 +14,27 @@ Automatic-Module-Name: dt.validator.bsl-language-server.plugin
 Bundle-ActivationPolicy: lazy
 Import-Package: com._1c.g5.v8.dt.bm.index.emf;version="6.2.2",
  com._1c.g5.v8.dt.bsl.model;version="3.5.0",
+ com._1c.g5.v8.dt.common;version="6.0.2",
  com._1c.g5.v8.dt.core;version="3.3.0",
  com._1c.g5.v8.dt.core.platform;version="7.1.0",
- com._1c.g5.v8.dt.debug.core;version="5.0.0",
+ com._1c.g5.v8.dt.debug.core.launchconfigurations;version="4.0.0",
+ com._1c.g5.v8.dt.debug.core.model;version="3.5.0",
+ com._1c.g5.v8.dt.launching.core;version="4.1.0",
+ com._1c.g5.v8.dt.launching.core.launchconfigurations;version="6.0.0",
+ com._1c.g5.v8.dt.launching.ui.launchconfigurations;version="5.0.0",
  com._1c.g5.v8.dt.mcore;version="4.1.0",
  com._1c.g5.v8.dt.mcore.util;version="3.6.0",
  com._1c.g5.v8.dt.metadata.mdclass;version="6.3.0",
+ com._1c.g5.v8.dt.platform.services.core.dump;version="3.0.0",
+ com._1c.g5.v8.dt.platform.services.core.infobases;version="8.0.0",
+ com._1c.g5.v8.dt.platform.services.core.publication;version="6.1.0",
+ com._1c.g5.v8.dt.platform.services.core.runtimes.environments;version="3.0.0",
+ com._1c.g5.v8.dt.platform.services.core.runtimes.execution;version="8.0.0",
+ com._1c.g5.v8.dt.platform.services.model;version="4.2.0",
  com._1c.g5.wiring;version="2.0.0",
  com._1c.g5.wiring.binder;version="1.1.0",
+ com.google.common.base;version="15.0.0",
+ com.google.common.collect;version="15.0.0",
  com.google.inject;version="1.3.0",
  org.eclipse.debug.ui,
  org.eclipse.emf.common.notify,
@@ -40,8 +53,8 @@ Import-Package: com._1c.g5.v8.dt.bm.index.emf;version="6.2.2",
  org.eclipse.xtext.nodemodel.util,
  org.eclipse.xtext.resource,
  org.eclipse.xtext.util,
- org.eclipse.xtext.validation,
- org.slf4j;version="1.7.10"
+ org.eclipse.xtext.validation
 Bundle-ClassPath: .
-Bundle-Activator: ru.capralow.dt.unit.launcher.plugin.ui.Activator
-Export-Package: ru.capralow.dt.unit.launcher.plugin.ui
+Bundle-Activator: ru.capralow.dt.unit.launcher.plugin.ui.UnitLauncherPlugin
+Export-Package: ru.capralow.dt.unit.launcher.plugin.ui,
+ ru.capralow.dt.unit.launcher.plugin.ui.xtextbuilder

@@ -2,9 +2,15 @@
 <?eclipse version="3.4"?>
 <plugin>
 	
+	<extension point="com._1c.g5.wiring.serviceProvider">
+		<bundle
+			symbolicName="ru.capralow.dt.unit.launcher.plugin.ui">
+		</bundle>
+	</extension>
+	
 	<extension point="org.eclipse.xtext.builder.participant">
 		<participant
-			class="ru.capralow.dt.unit.launcher.plugin.ui.UnitLauncherExecutableExtensionFactory:ru.capralow.dt.unit.launcher.plugin.ui.UnitLauncherXtextBuilderParticipant"
+			class="ru.capralow.dt.unit.launcher.plugin.ui.ExecutableExtensionFactory:ru.capralow.dt.unit.launcher.plugin.ui.xtextbuilder.UnitLauncherXtextBuilderParticipant"
 			fileExtensions="bsl">
 		</participant>
 	</extension>
@@ -18,7 +24,7 @@
 	<extension point="org.eclipse.ui.handlers">
 		<handler
 			commandId="ru.capralow.dt.unit.launcher.plugin.ui.commands.OpenFeaturesDirectory"
-			class="ru.capralow.dt.unit.launcher.plugin.ui.UnitLauncherExecutableExtensionFactory:ru.capralow.dt.unit.launcher.plugin.ui.OpenFeaturesDirectoryHandler">
+			class="ru.capralow.dt.unit.launcher.plugin.ui.ExecutableExtensionFactory:ru.capralow.dt.unit.launcher.plugin.ui.xtextbuilder.OpenFeaturesDirectoryHandler">
 		</handler>
 	</extension>
 	<extension point="org.eclipse.ui.menus">
@@ -44,17 +50,17 @@
 	<extension point="org.eclipse.debug.core.launchConfigurationTypes">
 		<launchConfigurationType
 			name="Модульные тесты 1С"
-			delegate="ru.capralow.dt.unit.launcher.plugin.ui.UnitLauncherLaunchConfigurationDelegate"
+			delegate="ru.capralow.dt.unit.launcher.plugin.ui.launchconfigurations.UnitTestLaunchDelegate"
 			modes="run, debug"
-			id="ru.capralow.dt.unit.launcher.plugin.ui.UnitLauncher">
+			id="ru.capralow.dt.unit.launcher.plugin.ui.UnitTestLaunch">
 		</launchConfigurationType>
 	</extension>
 	<extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
 		<launchConfigurationTabGroup
-			class="ru.capralow.dt.unit.launcher.plugin.ui.UnitLauncherLaunchConfigurationTabGroup"
-			id="ru.capralow.dt.unit.launcher.plugin.ui.UnitLauncherLaunchConfigurationTabGroup"
-			type="ru.capralow.dt.unit.launcher.plugin.ui.UnitLauncher">
+			class="ru.capralow.dt.unit.launcher.plugin.ui.ExecutableExtensionFactory:ru.capralow.dt.unit.launcher.plugin.ui.launchconfigurations.UnitTestLaunchTabGroup"
+			id="ru.capralow.dt.unit.launcher.plugin.ui.UnitTestLaunchTabGroup"
+			type="ru.capralow.dt.unit.launcher.plugin.ui.UnitTestLaunch">
 		</launchConfigurationTabGroup>
 	</extension>
-
+	
 </plugin>

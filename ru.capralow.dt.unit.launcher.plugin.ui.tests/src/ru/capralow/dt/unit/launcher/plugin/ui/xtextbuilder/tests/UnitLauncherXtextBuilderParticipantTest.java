@@ -1,10 +1,10 @@
-package ru.capralow.dt.unit.launcher.plugin.ui.tests;
+package ru.capralow.dt.unit.launcher.plugin.ui.xtextbuilder.tests;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import ru.capralow.dt.unit.launcher.plugin.ui.UnitLauncherXtextBuilderParticipant;
+import ru.capralow.dt.unit.launcher.plugin.ui.xtextbuilder.UnitLauncherXtextBuilderParticipant;
 
 public class UnitLauncherXtextBuilderParticipantTest {
 	private static final String UNIT_TEST = "// @unit-test";

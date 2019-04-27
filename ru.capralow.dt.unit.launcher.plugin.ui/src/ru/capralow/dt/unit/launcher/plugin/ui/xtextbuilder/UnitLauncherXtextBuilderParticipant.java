@@ -1,4 +1,4 @@
-package ru.capralow.dt.unit.launcher.plugin.ui;
+package ru.capralow.dt.unit.launcher.plugin.ui.xtextbuilder;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -9,6 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -27,8 +28,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com._1c.g5.v8.dt.bsl.model.Method;
 import com._1c.g5.v8.dt.bsl.model.Module;
@@ -42,9 +41,9 @@ import com._1c.g5.v8.dt.metadata.mdclass.CommonModule;
 import com._1c.g5.v8.dt.metadata.mdclass.Configuration;
 import com.google.inject.Inject;
 
-public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.builder.IXtextBuilderParticipant {
-	private static final Logger LOGGER = LoggerFactory.getLogger(UnitLauncherXtextBuilderParticipant.class);
+import ru.capralow.dt.unit.launcher.plugin.ui.UnitLauncherPlugin;
 
+public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.builder.IXtextBuilderParticipant {
 	public static String getFeaturesLocation(IPath projectLocation) {
 		return projectLocation + "/features/";
 	}
@@ -82,22 +81,24 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 			fileText.append(System.lineSeparator());
 			fileText.append(System.lineSeparator());
 			fileText.append(String.join(System.lineSeparator(),
+					"@classname=ModuleExceptionPath",
 					String.format("Сценарий: %1$s (сервер)", moduleName),
 					"	И я выполняю код встроенного языка на сервере"));
 			for (String methodName : methodsNames) {
 				fileText.append(System.lineSeparator());
-				fileText.append(String.format("	| '%1$s(Объект);' |", methodName));
+				fileText.append(String.format("	| '%1$s(Объект());' |", methodName));
 			}
 		}
 		if (forClient) {
 			fileText.append(System.lineSeparator());
 			fileText.append(System.lineSeparator());
 			fileText.append(String.join(System.lineSeparator(),
+					"@classname=ModuleExceptionPath",
 					String.format("Сценарий: %1$s (клиент)", moduleName),
 					"	И я выполняю код встроенного языка"));
 			for (String methodName : methodsNames) {
 				fileText.append(System.lineSeparator());
-				fileText.append(String.format("	| '%1$s(Форма);' |", methodName));
+				fileText.append(String.format("	| '%1$s(Ванесса);' |", methodName));
 			}
 		}
 
@@ -119,8 +120,8 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 			bufferedWriter.write(fileText.toString());
 
 		} catch (IOException e) {
-			String msg = String.format("Не удалось записать feature файл: \"%1$s\"", fileName);
-			LOGGER.error(msg, e);
+			String msg = MessageFormat.format("Не удалось записать feature файл: \"{0}\"", fileName);
+			UnitLauncherPlugin.createErrorStatus(msg, e);
 
 		}
 	}
@@ -133,8 +134,8 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 			object = objectItr.next().getEObjectOrProxy();
 
 		if (object == null) {
-			String msg = String.format("Не найден объект конфигурации: \"%1$s\"", "");
-			LOGGER.error(msg);
+			String msg = MessageFormat.format("Не найден объект конфигурации: \"{0}\"", "");
+			UnitLauncherPlugin.createErrorStatus(msg);
 			return null;
 		}
 
@@ -203,14 +204,14 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 					try {
 						Files.delete(file.toPath());
 					} catch (IOException e) {
-						String msg = String.format("Не удалось удалить пустые каталоги: \"%1$s\"", moduleName);
-						LOGGER.error(msg);
+						String msg = MessageFormat.format("Не удалось удалить пустые каталоги: \"{0}\"", moduleName);
+						UnitLauncherPlugin.createErrorStatus(msg);
 					}
 			});
 
 		} catch (IOException e) {
-			String msg = String.format("Не удалось удалить пустые каталоги: \"%1$s\"", moduleName);
-			LOGGER.error(msg);
+			String msg = MessageFormat.format("Не удалось удалить пустые каталоги: \"{0}\"", moduleName);
+			UnitLauncherPlugin.createErrorStatus(msg);
 
 		}
 	}
@@ -224,14 +225,14 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 					try {
 						Files.delete(file.toPath());
 					} catch (IOException e) {
-						String msg = String.format("Не удалось удалить файлы: \"%1$s\"", moduleName);
-						LOGGER.error(msg);
+						String msg = MessageFormat.format("Не удалось удалить файлы: \"{0}\"", moduleName);
+						UnitLauncherPlugin.createErrorStatus(msg);
 					}
 			});
 
 		} catch (IOException e) {
-			String msg = String.format("Не удалось удалить файлы: \"%1$s\"", moduleName);
-			LOGGER.error(msg);
+			String msg = MessageFormat.format("Не удалось удалить файлы: \"{0}\"", moduleName);
+			UnitLauncherPlugin.createErrorStatus(msg);
 
 		}
 

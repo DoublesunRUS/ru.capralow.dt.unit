@@ -1,4 +1,4 @@
-package ru.capralow.dt.unit.launcher.plugin.ui;
+package ru.capralow.dt.unit.launcher.plugin.ui.xtextbuilder;
 
 import java.io.File;
 
@@ -36,9 +36,7 @@ public class OpenFeaturesDirectoryHandler extends AbstractHandler {
 			return null;
 		}
 
-		Program.launch(featuresLocation);
-
-		return null;
+		return Program.launch(featuresLocation);
 	}
 
 }
