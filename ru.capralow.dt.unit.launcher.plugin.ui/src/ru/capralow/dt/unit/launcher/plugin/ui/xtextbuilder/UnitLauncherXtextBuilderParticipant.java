@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 
 import com._1c.g5.v8.dt.bsl.model.Method;
@@ -34,6 +35,7 @@ import com._1c.g5.v8.dt.bsl.model.Module;
 import com._1c.g5.v8.dt.bsl.model.ModuleType;
 import com._1c.g5.v8.dt.core.platform.IConfigurationProject;
 import com._1c.g5.v8.dt.core.platform.IExtensionProject;
+import com._1c.g5.v8.dt.core.platform.IExternalObjectProject;
 import com._1c.g5.v8.dt.core.platform.IV8Project;
 import com._1c.g5.v8.dt.core.platform.IV8ProjectManager;
 import com._1c.g5.v8.dt.mcore.util.Environment;
@@ -129,7 +131,11 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 	private static Module getCommonModule(Delta delta, Configuration configuration) {
 		EObject object = null;
 
-		Iterator<IEObjectDescription> objectItr = delta.getNew().getExportedObjects().iterator();
+		IResourceDescription deltaDescription = delta.getNew();
+		if (deltaDescription == null)
+			return null;
+
+		Iterator<IEObjectDescription> objectItr = deltaDescription.getExportedObjects().iterator();
 		if (objectItr.hasNext())
 			object = objectItr.next().getEObjectOrProxy();
 
@@ -163,6 +169,15 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 
 		else if (v8Project instanceof IExtensionProject)
 			configuration = ((IExtensionProject) v8Project).getConfiguration();
+
+		else if (v8Project instanceof IExternalObjectProject)
+			configuration = ((IExternalObjectProject) v8Project).getParent().getConfiguration();
+
+		if (configuration == null) {
+			String msg = MessageFormat.format("Не удалось определить конфигурацию для проекта: \"{0}\"", v8Project);
+			UnitLauncherPlugin.createErrorStatus(msg);
+			return;
+		}
 
 		List<Delta> deltas = context.getDeltas();
 		for (Delta delta : deltas) {
