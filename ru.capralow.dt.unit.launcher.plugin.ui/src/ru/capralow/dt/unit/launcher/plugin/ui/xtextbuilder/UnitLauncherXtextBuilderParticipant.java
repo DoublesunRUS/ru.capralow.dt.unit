@@ -88,7 +88,7 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 					"	И я выполняю код встроенного языка на сервере"));
 			for (String methodName : methodsNames) {
 				fileText.append(System.lineSeparator());
-				fileText.append(String.format("	| '%1$s(Объект());' |", methodName));
+				fileText.append(String.format("	| '%1$s.%2$s(Объект());' |", moduleName, methodName));
 			}
 		}
 		if (forClient) {
@@ -100,7 +100,7 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 					"	И я выполняю код встроенного языка"));
 			for (String methodName : methodsNames) {
 				fileText.append(System.lineSeparator());
-				fileText.append(String.format("	| '%1$s(Ванесса);' |", methodName));
+				fileText.append(String.format("	| '%1$s.%2$s(Ванесса);' |", moduleName, methodName));
 			}
 		}
 
@@ -158,11 +158,7 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 	@Inject
 	private IV8ProjectManager projectManager;
 
-	@Override
-	public void build(IBuildContext context, IProgressMonitor monitor) throws CoreException {
-		IProject project = context.getBuiltProject();
-		IV8Project v8Project = projectManager.getProject(project);
-
+	private Configuration getConfigurationFromProject(IV8Project v8Project) {
 		Configuration configuration = null;
 		if (v8Project instanceof IConfigurationProject)
 			configuration = ((IConfigurationProject) v8Project).getConfiguration();
@@ -172,6 +168,16 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 
 		else if (v8Project instanceof IExternalObjectProject)
 			configuration = ((IExternalObjectProject) v8Project).getParent().getConfiguration();
+
+		return configuration;
+	}
+
+	@Override
+	public void build(IBuildContext context, IProgressMonitor monitor) throws CoreException {
+		IProject project = context.getBuiltProject();
+		IV8Project v8Project = projectManager.getProject(project);
+
+		Configuration configuration = getConfigurationFromProject(v8Project);
 
 		if (configuration == null) {
 			String msg = MessageFormat.format("Не удалось определить конфигурацию для проекта: \"{0}\"", v8Project);

@@ -1,16 +1,18 @@
 package ru.capralow.dt.unit.launcher.plugin.ui;
 
-import java.io.File;
-
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.IDebugEventSetListener;
 import org.eclipse.debug.core.model.IProcess;
-import org.eclipse.jdt.junit.JUnitCore;
 
+import com._1c.g5.v8.dt.core.platform.IV8ProjectManager;
 import com._1c.g5.wiring.IManagedService;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
+import ru.capralow.dt.unit.launcher.plugin.ui.launchconfigurations.UnitTestLaunch;
+
+@Singleton
 public class UnitLauncherManager implements IManagedService, IDebugEventSetListener {
 
 	public void activate() {
@@ -21,19 +23,15 @@ public class UnitLauncherManager implements IManagedService, IDebugEventSetListe
 		DebugPlugin.getDefault().removeDebugEventListener(this);
 	}
 
+	@Inject
+	private IV8ProjectManager projectManager;
+
 	@Override
 	public void handleDebugEvents(DebugEvent[] events) {
 		for (DebugEvent event : events) {
 			Object source = event.getSource();
 			if (source instanceof IProcess && event.getKind() == DebugEvent.TERMINATE) {
-				File file = new File("/Users/kapral/Downloads/junit (6).xml");
-
-				try {
-					JUnitCore.importTestRunSession(file);
-				} catch (CoreException e) {
-					UnitLauncherPlugin.createErrorStatus("Не удалось прочитать файл с результатом модульных тестов.",
-							e);
-				}
+				UnitTestLaunch.showJUnitResult((IProcess) source, projectManager);
 			}
 		}
 	}

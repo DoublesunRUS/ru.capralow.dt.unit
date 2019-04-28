@@ -47,20 +47,4 @@
 		</menuContribution>
 	</extension>
 	
-	<extension point="org.eclipse.debug.core.launchConfigurationTypes">
-		<launchConfigurationType
-			name="Модульные тесты 1С"
-			delegate="ru.capralow.dt.unit.launcher.plugin.ui.ExecutableExtensionFactory:ru.capralow.dt.unit.launcher.plugin.ui.launchconfigurations.UnitTestLaunchDelegate"
-			modes="run, debug"
-			id="ru.capralow.dt.unit.launcher.plugin.ui.UnitTestLaunch">
-		</launchConfigurationType>
-	</extension>
-	<extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
-		<launchConfigurationTabGroup
-			class="ru.capralow.dt.unit.launcher.plugin.ui.ExecutableExtensionFactory:ru.capralow.dt.unit.launcher.plugin.ui.launchconfigurations.UnitTestLaunchTabGroup"
-			id="ru.capralow.dt.unit.launcher.plugin.ui.UnitTestLaunchTabGroup"
-			type="ru.capralow.dt.unit.launcher.plugin.ui.UnitTestLaunch">
-		</launchConfigurationTabGroup>
-	</extension>
-	
 </plugin>
