@@ -9,5 +9,3 @@ Require-Bundle: ru.capralow.dt.unit.launcher.plugin.ui,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Automatic-Module-Name: dt.validator.bsl-language-server.plugin
 Bundle-ActivationPolicy: lazy
-Bundle-ClassPath: .
-Import-Package: ru.capralow.dt.unit.launcher.plugin.ui
