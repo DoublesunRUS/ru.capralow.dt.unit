@@ -4,6 +4,7 @@ Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.jdt.junit;singleton:=true
 Bundle-Version: 3.10.75.v20180322-1731
 Bundle-ClassPath: .
+Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Automatic-Module-Name: org.eclipse.jdt.junit
 Bundle-ActivationPolicy: lazy

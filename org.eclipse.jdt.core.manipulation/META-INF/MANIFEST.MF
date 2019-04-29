@@ -20,6 +20,7 @@ Export-Package: org.eclipse.jdt.core.manipulation,
  org.eclipse.jdt.internal.corext.refactoring.util,
  org.eclipse.jdt.internal.corext.template.java,
  org.eclipse.jdt.internal.corext.util
+Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Automatic-Module-Name: org.eclipse.jdt.core.manipulation
 Bundle-ActivationPolicy: lazy

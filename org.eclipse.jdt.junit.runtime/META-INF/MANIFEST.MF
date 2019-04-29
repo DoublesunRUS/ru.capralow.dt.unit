@@ -6,6 +6,7 @@ Bundle-Version: 3.4.651.v20171130-0906
 Bundle-ClassPath: .
 Export-Package: org.eclipse.jdt.internal.junit.runner,
  org.eclipse.jdt.internal.junit.runner.junit3
+Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Automatic-Module-Name: org.eclipse.jdt.junit.runtime
 Bundle-ActivationPolicy: lazy

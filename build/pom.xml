@@ -290,7 +290,7 @@
 					<artifactId>tycho-p2-repository-plugin</artifactId>
 					<version>${tycho.version}</version>
 					<configuration>
-						<repositoryName>BSL проверки ${qualifier}</repositoryName>
+						<repositoryName>Запуск модульных тестов ${qualifier}</repositoryName>
 					</configuration>
 				</plugin>
 				

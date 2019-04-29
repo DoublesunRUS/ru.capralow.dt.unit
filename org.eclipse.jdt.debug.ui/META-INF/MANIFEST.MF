@@ -5,6 +5,7 @@ Bundle-SymbolicName: org.eclipse.jdt.debug.ui;singleton:=true
 Bundle-Version: 3.8.100.v20180322-1256
 Bundle-ClassPath: snippetsupport.jar
 Export-Package: org.eclipse.jdt.internal.debug.ui.propertypages;version="3.8.100.v20180322-1256"
+Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Automatic-Module-Name: org.eclipse.jdt.debug.ui
 Bundle-ActivationPolicy: lazy

@@ -8,6 +8,7 @@ Export-Package: org.eclipse.core.expressions,
  org.eclipse.core.internal.expressions,
  org.eclipse.core.internal.expressions.propertytester,
  org.eclipse.core.internal.expressions.util
+Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Automatic-Module-Name: org.eclipse.core.expressions
 Bundle-ActivationPolicy: lazy

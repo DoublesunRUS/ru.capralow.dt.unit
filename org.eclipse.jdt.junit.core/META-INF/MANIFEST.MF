@@ -12,6 +12,7 @@ Export-Package: org.eclipse.jdt.internal.junit,
  org.eclipse.jdt.junit,
  org.eclipse.jdt.junit.launcher,
  org.eclipse.jdt.junit.model
+Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Automatic-Module-Name: org.eclipse.jdt.junit.core
 Bundle-ActivationPolicy: lazy
