@@ -1,0 +1,54 @@
+﻿env:
+  - PLUGIN_VERSION="0.1.0"
+
+jdk:
+  - openjdk8
+
+addons:
+  sonarcloud:
+    organization: "doublesunrus-github"
+    token: $SONAR_TOKEN
+
+git:
+  depth: false
+
+language: node_js
+
+script: 
+- mvn clean test verify -f build/pom.xml -s build/settings.xml 
+- mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -f build/pom.xml -s build/settings.xml -Dsonar.projectKey=$SONAR_PROJECT_KEY
+
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - '$HOME/.sonar/cache'
+
+after_success:
+- curl -l -u $FTP_USER:$FTP_PASSWORD ftp://$FTP_ADDRESS/$PLUGIN_VERSION/ | xargs -I{} -- curl -v -u $FTP_USER:$FTP_PASSWORD ftp://$FTP_ADDRESS/$PLUGIN_VERSION/ -Q "-DELE {}"
+- curl -l -u $FTP_USER:$FTP_PASSWORD ftp://$FTP_ADDRESS/$PLUGIN_VERSION/features/ | xargs -I{} -- curl -v -u $FTP_USER:$FTP_PASSWORD ftp://$FTP_ADDRESS/$PLUGIN_VERSION/features/ -Q "-DELE {}"
+- curl -l -u $FTP_USER:$FTP_PASSWORD ftp://$FTP_ADDRESS/$PLUGIN_VERSION/plugins/ | xargs -I{} -- curl -v -u $FTP_USER:$FTP_PASSWORD ftp://$FTP_ADDRESS/$PLUGIN_VERSION/plugins/ -Q "-DELE {}"
+- curl -l -u $FTP_USER:$FTP_PASSWORD ftp://$FTP_ADDRESS/$PLUGIN_VERSION/ -v -Q "-RMD features"
+- curl -l -u $FTP_USER:$FTP_PASSWORD ftp://$FTP_ADDRESS/$PLUGIN_VERSION/ -v -Q "-RMD plugins"
+- curl -l -u $FTP_USER:$FTP_PASSWORD ftp://$FTP_ADDRESS/ -v -Q "-RMD $PLUGIN_VERSION"
+- find repository/target/repository/ -type f | xargs -L 1 bash -c 'curl --ftp-create-dirs -T $1 -u $FTP_USER:$FTP_PASSWORD ftp://$FTP_ADDRESS/$PLUGIN_VERSION/${1##repository/target/repository/}' \;
+- find repository/index.html -type f | xargs -L 1 bash -c 'curl --ftp-create-dirs -T $1 -u $FTP_USER:$FTP_PASSWORD ftp://$FTP_ADDRESS/$PLUGIN_VERSION/${1##repository/}' \;
+
+- |
+  if [ "$TRAVIS_TAG" != "" ]; then
+    curl -l -u $FTP_USER:$FTP_PASSWORD ftp://$FTP_ADDRESS/latest/ | xargs -I{} -- curl -v -u $FTP_USER:$FTP_PASSWORD ftp://$FTP_ADDRESS/latest/ -Q "-DELE {}"
+    curl -l -u $FTP_USER:$FTP_PASSWORD ftp://$FTP_ADDRESS/latest/features/ | xargs -I{} -- curl -v -u $FTP_USER:$FTP_PASSWORD ftp://$FTP_ADDRESS/latest/features/ -Q "-DELE {}"
+    curl -l -u $FTP_USER:$FTP_PASSWORD ftp://$FTP_ADDRESS/latest/plugins/ | xargs -I{} -- curl -v -u $FTP_USER:$FTP_PASSWORD ftp://$FTP_ADDRESS/latest/plugins/ -Q "-DELE {}"
+    curl -l -u $FTP_USER:$FTP_PASSWORD ftp://$FTP_ADDRESS/latest/ -v -Q "-RMD features"
+    curl -l -u $FTP_USER:$FTP_PASSWORD ftp://$FTP_ADDRESS/latest/ -v -Q "-RMD plugins"
+    curl -l -u $FTP_USER:$FTP_PASSWORD ftp://$FTP_ADDRESS/ -v -Q "-RMD latest"
+    find repository/target/repository/ -type f | xargs -L 1 bash -c 'curl --ftp-create-dirs -T $1 -u $FTP_USER:$FTP_PASSWORD ftp://$FTP_ADDRESS/latest/${1##repository/target/repository/}' \;
+    find repository/index.html -type f | xargs -L 1 bash -c 'curl --ftp-create-dirs -T $1 -u $FTP_USER:$FTP_PASSWORD ftp://$FTP_ADDRESS/latest/${1##repository/}' \;
+  fi
+
+deploy:
+  provider: releases
+  api_key: $GITHUB_OAUTH_TOKEN
+  file: repository/target/repository-$PLUGIN_VERSION-SNAPSHOT.zip
+  skip_cleanup: true
+  on:
+    tags: true
