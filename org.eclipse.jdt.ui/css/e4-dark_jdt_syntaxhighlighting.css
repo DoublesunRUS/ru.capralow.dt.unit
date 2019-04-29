@@ -1,0 +1,102 @@
+/*******************************************************************************
+ * Copyright (c) 2014, 2018 Lars Vogel and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Lars Vogel <Lars.Vogel@gmail.com> - initial API and implementation
+ *     Andrea Guarinoni <andrea.guarinoni@gmail.com> - intial color schema definition
+ *******************************************************************************/
+
+/* ############################## JDT syntax highlighting ############################## */
+
+IEclipsePreferences#org-eclipse-jdt-ui:org-eclipse-jdt-ui { /* pseudo attribute added to allow contributions without replacing this node, see Bug 466075 */
+	preferences:
+		'content_assist_completion_replacement_background=200,200,0'
+		'content_assist_completion_replacement_foreground=200,0,0'
+		'content_assist_parameters_background=52,57,61'
+		'content_assist_parameters_foreground=238,238,238'
+		'content_assist_proposals_background=52,57,61'
+		'content_assist_proposals_foreground=238,238,238'
+		'java_bracket=249,250,244'
+		'java_comment_task_tag=154,140,124'
+		'java_default=217,232,247'
+		'java_doc_default=128,128,128'
+		'java_doc_keyword=154,140,124'
+		'java_doc_link=169,156,140'
+		'java_doc_tag=30,120,155'
+		'java_keyword=204,120,50'
+		'java_keyword_return=204,120,50'
+		'java_multi_line_comment=128,128,128'
+		'java_operator=230,230,250'
+		'java_single_line_comment=128,128,128'
+		'java_string=23,198,163'
+		'matchingBracketsColor=102,112,125'
+		'pf_coloring_argument=221,40,103'
+		'pf_coloring_assignment=217,232,247'
+		'pf_coloring_comment=128,128,128'
+		'pf_coloring_key=217,232,247'
+		'pf_coloring_value=23,198,163'
+		'semanticHighlighting.abstractClass.bold=true'
+		'semanticHighlighting.abstractClass.color=62,171,230'
+		'semanticHighlighting.abstractClass.enabled=true'
+		'semanticHighlighting.abstractMethodInvocation.color=128,246,167'
+		'semanticHighlighting.abstractMethodInvocation.enabled=true'
+		'semanticHighlighting.annotation.bold=true'
+		'semanticHighlighting.annotation.color=255,147,147'
+		'semanticHighlighting.annotation.enabled=true'
+		'semanticHighlighting.annotation.italic=true'
+		'semanticHighlighting.annotationElementReference.color=235,75,100'
+		'semanticHighlighting.annotationElementReference.enabled=true'
+		'semanticHighlighting.class.color=18,144,195'
+		'semanticHighlighting.class.enabled=true'
+		'semanticHighlighting.class.bold=true'
+		'semanticHighlighting.deprecatedMember.color=171,31,54'
+		'semanticHighlighting.deprecatedMember.enabled=true'
+		'semanticHighlighting.deprecatedMember.underline=false'
+		'semanticHighlighting.deprecatedMember.strikethrough=true'
+		'semanticHighlighting.enum.color=204,129,186'
+		'semanticHighlighting.enum.enabled=true'
+		'semanticHighlighting.enum.italic=true'
+		'semanticHighlighting.field.color=102,225,248'
+		'semanticHighlighting.field.enabled=true'
+		'semanticHighlighting.inheritedMethodInvocation.color=205,246,104'
+		'semanticHighlighting.inheritedMethodInvocation.enabled=true'
+		'semanticHighlighting.interface.color=128,242,246'
+		'semanticHighlighting.interface.enabled=true'
+		'semanticHighlighting.localVariable.color=255,191,38'
+		'semanticHighlighting.localVariable.enabled=true'
+		'semanticHighlighting.localVariableDeclaration.color=237,127,72'
+		'semanticHighlighting.localVariableDeclaration.enabled=true'
+		'semanticHighlighting.method.color=167,236,33'
+		'semanticHighlighting.method.enabled=true'
+		'semanticHighlighting.methodDeclarationName.color=30,181,64'
+		'semanticHighlighting.methodDeclarationName.enabled=true'
+		'semanticHighlighting.number.color=104,151,187'
+		'semanticHighlighting.number.enabled=true'
+		'semanticHighlighting.parameterVariable.color=121,171,255'
+		'semanticHighlighting.parameterVariable.enabled=true'
+		'semanticHighlighting.staticField.color=141,218,248'
+		'semanticHighlighting.staticField.enabled=true'
+		'semanticHighlighting.staticFinalField.color=141,218,248'
+		'semanticHighlighting.staticFinalField.enabled=true'
+		'semanticHighlighting.staticMethodInvocation.color=150,236,63'
+		'semanticHighlighting.staticMethodInvocation.enabled=true'
+		'semanticHighlighting.typeArgument.color=215,131,127'
+		'semanticHighlighting.typeArgument.enabled=true'
+		'semanticHighlighting.typeParameter.color=191,164,164'
+		'semanticHighlighting.typeParameter.enabled=true'
+		'semanticHighlighting.varKeyword.color=204,120,50'
+		'sourceHoverBackgroundColor=68,68,68'
+}
+
+BulletListBlock > StyledText {
+    background-color: #3f4447;
+    color: #BBBBBB;
+}
+
+
+
+

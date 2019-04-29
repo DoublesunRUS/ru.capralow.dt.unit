@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.eclipse.jdt.junit.runtime;singleton:=true
+Bundle-Version: 3.4.651.v20171130-0906
+Bundle-ClassPath: .
+Export-Package: org.eclipse.jdt.internal.junit.runner,
+ org.eclipse.jdt.internal.junit.runner.junit3
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Automatic-Module-Name: org.eclipse.jdt.junit.runtime
+Bundle-ActivationPolicy: lazy
+Bundle-Vendor: %providerName

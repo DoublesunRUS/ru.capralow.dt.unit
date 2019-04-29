@@ -1,0 +1,202 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Schema file written by PDE -->
+<schema targetNamespace="org.eclipse.jdt.launching" xmlns="http://www.w3.org/2001/XMLSchema">
+<annotation>
+      <appInfo>
+         <meta.schema plugin="org.eclipse.jdt.launching" id="vmInstalls" name="Java VM Installs"/>
+      </appInfo>
+      <documentation>
+         Allows specific configurations of Java runtime environments and development kits to be contributed to the Java development tooling.
+      </documentation>
+   </annotation>
+
+   <element name="extension">
+      <annotation>
+         <appInfo>
+            <meta.element />
+         </appInfo>
+      </annotation>
+      <complexType>
+         <sequence>
+            <element ref="vmInstall" minOccurs="1" maxOccurs="unbounded"/>
+         </sequence>
+         <attribute name="point" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="id" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="name" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appInfo>
+                  <meta.attribute translatable="true"/>
+               </appInfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="vmInstall">
+      <complexType>
+         <sequence>
+            <element ref="library" minOccurs="0" maxOccurs="unbounded"/>
+         </sequence>
+         <attribute name="id" type="string" use="required">
+            <annotation>
+               <documentation>
+                  Unique identifier for this VM install
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="vmInstallType" type="string" use="required">
+            <annotation>
+               <documentation>
+                  References a registered VM install type via the corresponding vmInstallType&apos;s id
+               </documentation>
+               <appInfo>
+                  <meta.attribute kind="identifier" basedOn="org.eclipse.jdt.launching.vmInstallTypes/vmInstallType/@id"/>
+               </appInfo>
+            </annotation>
+         </attribute>
+         <attribute name="name" type="string" use="required">
+            <annotation>
+               <documentation>
+                  Human readable name for this VM install
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="home" type="string" use="required">
+            <annotation>
+               <documentation>
+                  Path to the home installation directory for this VM install. Paths must be absolute and may use string substitution variables such as ${eclipse_home}. Since 3.4, this attribute may reference a VM definition file in addition to a home directory. The Execution Environment VM type included with the SDK supports &lt;a href=&quot; http://wiki.eclipse.org/Execution_Environment_Descriptions&quot;&gt;execution environment descriptions&lt;/a&gt;. When an execution environment description file is specified, any library elements are ignored. In this case, libraries are defined by the execution environment description file.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="javadocURL" type="string">
+            <annotation>
+               <documentation>
+                  URL referencing the default javadoc location for all libraries in this VM install.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="vmArgs" type="string">
+            <annotation>
+               <documentation>
+                  Default VM arguments used when launching this VM install as they should appear on the command line.
+               </documentation>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="library">
+      <complexType>
+         <attribute name="path" type="string" use="required">
+            <annotation>
+               <documentation>
+                  File system path to a system library, relative to the VM install&apos;s home directory.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="sourcePath" type="string">
+            <annotation>
+               <documentation>
+                  File system path to the source archive associated with this libaray, relative to the VM install&apos;s home directory. When unspecified, this library has no source attachment.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="packageRootPath" type="string">
+            <annotation>
+               <documentation>
+                  Path within the source archive where package names begin. For example, if the source for java.lang.Object is located at &quot;src\java\lang\Object&quot; the package root path would be &quot;src&quot;. When unspecified the package root path is automatically detected.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="javadocURL" type="string">
+            <annotation>
+               <documentation>
+                  URL referencing the javadoc location for this library. Overrides the javadoc URL specified for the VM install.
+               </documentation>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <annotation>
+      <appInfo>
+         <meta.section type="since"/>
+      </appInfo>
+      <documentation>
+         3.2
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appInfo>
+         <meta.section type="examples"/>
+      </appInfo>
+      <documentation>
+         Following is an example vm install definition.
+&lt;p&gt;
+&lt;pre&gt;
+&lt;extension point=&quot;org.eclipse.jdt.launching.vmInstalls&quot;&gt;
+ &lt;vmInstall
+  home=&quot;${eclipse_home}/jre&quot;
+  id=&quot;com.example.vm.id&quot;
+  name=&quot;JRE-1.4&quot;
+  vmInstallType=&quot;com.example.vm.type&quot;/&gt;
+&lt;/extension&gt; 
+&lt;/pre&gt;
+&lt;/p&gt;
+&lt;p&gt;
+The following example will create a JRE definition based on the contents of the specified execution environment description file. When an execution environment description file is provided as the home location the &quot;Execution Environment Description&quot; VM type must be specified for the &lt;code&gt;vmInstallType&lt;/code&gt; attribute.
+&lt;/p&gt;
+&lt;p&gt;
+&lt;pre&gt;
+&lt;extension point=&quot;org.eclipse.jdt.launching.vmInstalls&quot;&gt;
+ &lt;vmInstall
+  home=&quot;${eclipse_home}/jre-def.ee&quot;
+  id=&quot;com.example.ee.id&quot;
+  name=&quot;Default JRE&quot;
+  vmInstallType=&quot;org.eclipse.jdt.launching.EEVMType&quot;/&gt;
+&lt;/extension&gt; 
+&lt;/pre&gt;
+&lt;/p&gt;
+      </documentation>
+   </annotation>
+
+
+   <annotation>
+      <appInfo>
+         <meta.section type="implementation"/>
+      </appInfo>
+      <documentation>
+         JDT does not provide any specific VM installs.
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appInfo>
+         <meta.section type="copyright"/>
+      </appInfo>
+      <documentation>
+         Copyright (c) 2007 IBM Corporation and others.&lt;br&gt;
+All rights reserved. This program and the accompanying materials are made 
+available under the terms of the Eclipse Public License v1.0 which 
+accompanies this distribution, and is available at 
+&lt;a href=&quot;http://www.eclipse.org/legal/epl-v10.html&quot;&gt;http://www.eclipse.org/legal/epl-v10.html&lt;/a&gt;
+      </documentation>
+   </annotation>
+
+</schema>

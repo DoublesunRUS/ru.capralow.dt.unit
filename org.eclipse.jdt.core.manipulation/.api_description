@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<component name="org.eclipse.jdt.core.manipulation_1.9.100.v20180321-0831" version="1.2">
+    <plugin id="org.eclipse.jdt.core.manipulation_1.9.100.v20180321-0831"/>
+    <package name="org.eclipse.jdt.core.refactoring" visibility="1">
+        <type name="IJavaRefactorings" restrictions="3"/>
+        <type name="RenameTypeArguments" restrictions="2"/>
+    </package>
+    <package name="org.eclipse.jdt.core.refactoring.descriptors" visibility="1">
+        <type name="ChangeMethodSignatureDescriptor" restrictions="4"/>
+        <type name="ConvertAnonymousDescriptor" restrictions="4"/>
+        <type name="ConvertLocalVariableDescriptor" restrictions="4"/>
+        <type name="ConvertMemberTypeDescriptor" restrictions="4"/>
+        <type name="CopyDescriptor" restrictions="4"/>
+        <type name="DeleteDescriptor" restrictions="4"/>
+        <type name="EncapsulateFieldDescriptor" restrictions="4"/>
+        <type name="ExtractClassDescriptor" restrictions="6"/>
+        <type name="ExtractConstantDescriptor" restrictions="4"/>
+        <type name="ExtractInterfaceDescriptor" restrictions="4"/>
+        <type name="ExtractLocalDescriptor" restrictions="4"/>
+        <type name="ExtractMethodDescriptor" restrictions="4"/>
+        <type name="ExtractSuperclassDescriptor" restrictions="4"/>
+        <type name="GeneralizeTypeDescriptor" restrictions="4"/>
+        <type name="InferTypeArgumentsDescriptor" restrictions="4"/>
+        <type name="InlineConstantDescriptor" restrictions="4"/>
+        <type name="InlineLocalVariableDescriptor" restrictions="4"/>
+        <type name="InlineMethodDescriptor" restrictions="4"/>
+        <type name="IntroduceFactoryDescriptor" restrictions="4"/>
+        <type name="IntroduceIndirectionDescriptor" restrictions="4"/>
+        <type name="IntroduceParameterDescriptor" restrictions="4"/>
+        <type name="IntroduceParameterObjectDescriptor" restrictions="6"/>
+        <type name="JavaRefactoringContribution" restrictions="2"/>
+        <type name="JavaRefactoringDescriptor" restrictions="2"/>
+        <type name="MoveDescriptor" restrictions="4"/>
+        <type name="MoveMethodDescriptor" restrictions="4"/>
+        <type name="MoveStaticMembersDescriptor" restrictions="4"/>
+        <type name="PullUpDescriptor" restrictions="4"/>
+        <type name="PushDownDescriptor" restrictions="4"/>
+        <type name="RenameJavaElementDescriptor" restrictions="4"/>
+        <type name="RenameLocalVariableDescriptor" restrictions="4"/>
+        <type name="RenameResourceDescriptor" restrictions="4"/>
+        <type name="UseSupertypeDescriptor" restrictions="4"/>
+    </package>
+    <package name="org.eclipse.jdt.core.refactoring.participants" visibility="1">
+        <type name="ChangeMethodSignatureArguments" restrictions="2"/>
+        <type name="IRefactoringProcessorIds" restrictions="3"/>
+        <type name="JavaParticipantManager" restrictions="6"/>
+    </package>
+</component>

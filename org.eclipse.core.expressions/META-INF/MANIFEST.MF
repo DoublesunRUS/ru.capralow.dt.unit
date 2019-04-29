@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.eclipse.core.expressions;singleton:=true
+Bundle-Version: 3.6.0.v20170207-1037
+Bundle-ClassPath: .
+Export-Package: org.eclipse.core.expressions,
+ org.eclipse.core.internal.expressions,
+ org.eclipse.core.internal.expressions.propertytester,
+ org.eclipse.core.internal.expressions.util
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Automatic-Module-Name: org.eclipse.core.expressions
+Bundle-ActivationPolicy: lazy
+Bundle-Activator: org.eclipse.core.internal.expressions.ExpressionPlugin
+Bundle-Vendor: %providerName
+Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.3.0,4.0.0)"

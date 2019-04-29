@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<component name="org.eclipse.jdt.ui_3.13.100.v20180330-0726" version="1.2">
+    <plugin id="org.eclipse.jdt.ui_3.13.100.v20180330-0726"/>
+    <package name="org.eclipse.jdt.ui" visibility="1">
+        <type name="CodeGeneration" restrictions="6"/>
+        <type name="CodeStyleConfiguration" restrictions="6"/>
+        <type name="IContextMenuConstants" restrictions="3"/>
+        <type name="IJavaElementSearchConstants" restrictions="3"/>
+        <type name="IPackagesViewPart" restrictions="3"/>
+        <type name="ISharedImages" restrictions="3"/>
+        <type name="ITypeHierarchyViewPart" restrictions="3"/>
+        <type name="IWorkingCopyManager" restrictions="3"/>
+        <type name="IWorkingCopyManagerExtension" restrictions="3"/>
+        <type name="IWorkingCopyProvider" restrictions="3"/>
+        <type name="JavaElementComparator" restrictions="2"/>
+        <type name="JavaElementContentProvider" restrictions="2"/>
+        <type name="JavaElementImageDescriptor" restrictions="2"/>
+        <type name="JavaElementLabelProvider" restrictions="2"/>
+        <type name="JavaElementLabels" restrictions="6"/>
+        <type name="JavaElementSorter" restrictions="2"/>
+        <type name="JavaUI" restrictions="4"/>
+        <type name="JavadocContentAccess" restrictions="6"/>
+        <type name="OverrideIndicatorLabelDecorator" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/viewsupport/ImageDescriptorRegistry;)V"/>
+            <method name="computeAdornmentFlags" restrictions="8" signature="(Ljava/lang/Object;)I"/>
+            <method name="findInHierarchy" restrictions="8" signature="(Lorg/eclipse/jdt/core/IType;Lorg/eclipse/jdt/core/ITypeHierarchy;Ljava/lang/String;[Ljava/lang/String;)I"/>
+            <method name="getOverrideIndicators" restrictions="8" signature="(Lorg/eclipse/jdt/core/IMethod;)I"/>
+        </type>
+        <type name="PreferenceConstants" restrictions="6"/>
+        <type name="ProblemsLabelDecorator" restrictions="0">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/viewsupport/ImageDescriptorRegistry;)V"/>
+        </type>
+        <type name="SharedASTProvider" restrictions="4"/>
+        <type name="StandardJavaElementContentProvider" restrictions="0">
+            <method name="exists" restrictions="8" signature="(Ljava/lang/Object;)Z"/>
+            <method name="internalGetParent" restrictions="8" signature="(Ljava/lang/Object;)Ljava/lang/Object;"/>
+            <method name="skipProjectPackageFragmentRoot" restrictions="8" signature="(Lorg/eclipse/jdt/core/IPackageFragmentRoot;)Ljava/lang/Object;"/>
+        </type>
+    </package>
+    <package name="org.eclipse.jdt.ui.actions" visibility="1">
+        <type name="AbstractOpenWizardAction" restrictions="2"/>
+        <type name="AddDelegateMethodsAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/CompilationUnitEditor;)V"/>
+        </type>
+        <type name="AddGetterSetterAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/CompilationUnitEditor;)V"/>
+        </type>
+        <type name="AddJavaDocStubAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/CompilationUnitEditor;)V"/>
+        </type>
+        <type name="AddToClasspathAction" restrictions="2"/>
+        <type name="AddUnimplementedConstructorsAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/CompilationUnitEditor;)V"/>
+        </type>
+        <type name="BuildActionGroup" restrictions="2"/>
+        <type name="CCPActionGroup" restrictions="2"/>
+        <type name="ChangeTypeAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+            <method name="selectionChanged" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaTextSelection;)V"/>
+        </type>
+        <type name="ConvertAnonymousToNestedAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+            <method name="selectionChanged" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaTextSelection;)V"/>
+        </type>
+        <type name="ConvertLocalToFieldAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+            <method name="selectionChanged" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaTextSelection;)V"/>
+        </type>
+        <type name="ConvertNestedToTopAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+            <method name="selectionChanged" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaTextSelection;)V"/>
+        </type>
+        <type name="CustomFiltersActionGroup" restrictions="2">
+            <method name="internalGetEnabledFilterIds" restrictions="8" signature="()[Ljava/lang/String;"/>
+        </type>
+        <type name="DeclarationsSearchGroup" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+        </type>
+        <type name="ExternalizeStringsAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/CompilationUnitEditor;)V"/>
+            <method name="run" restrictions="8" signature="(Lorg/eclipse/jdt/core/ICompilationUnit;)V"/>
+        </type>
+        <type name="ExtractClassAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+            <method name="selectionChanged" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaTextSelection;)V"/>
+        </type>
+        <type name="ExtractConstantAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+            <method name="selectionChanged" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaTextSelection;)V"/>
+        </type>
+        <type name="ExtractInterfaceAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+            <method name="selectionChanged" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaTextSelection;)V"/>
+        </type>
+        <type name="ExtractMethodAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+            <method name="selectionChanged" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaTextSelection;)V"/>
+        </type>
+        <type name="ExtractTempAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+            <method name="selectionChanged" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaTextSelection;)V"/>
+        </type>
+        <type name="FindAction" restrictions="2"/>
+        <type name="FindBreakContinueTargetOccurrencesAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+            <method name="selectionChanged" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaTextSelection;)V"/>
+        </type>
+        <type name="FindDeclarationsAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+        </type>
+        <type name="FindDeclarationsInHierarchyAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+        </type>
+        <type name="FindDeclarationsInProjectAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+        </type>
+        <type name="FindDeclarationsInWorkingSetAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;[Lorg/eclipse/ui/IWorkingSet;)V"/>
+        </type>
+        <type name="FindExceptionOccurrencesAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+            <method name="selectionChanged" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaTextSelection;)V"/>
+        </type>
+        <type name="FindImplementOccurrencesAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+            <method name="selectionChanged" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaTextSelection;)V"/>
+        </type>
+        <type name="FindImplementorsAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+        </type>
+        <type name="FindImplementorsInProjectAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+        </type>
+        <type name="FindImplementorsInWorkingSetAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;[Lorg/eclipse/ui/IWorkingSet;)V"/>
+        </type>
+        <type name="FindMethodExitOccurrencesAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+            <method name="selectionChanged" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaTextSelection;)V"/>
+        </type>
+        <type name="FindOccurrencesInFileAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+            <method name="selectionChanged" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaTextSelection;)V"/>
+        </type>
+        <type name="FindReadReferencesAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+        </type>
+        <type name="FindReadReferencesInHierarchyAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+        </type>
+        <type name="FindReadReferencesInProjectAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+        </type>
+        <type name="FindReadReferencesInWorkingSetAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;[Lorg/eclipse/ui/IWorkingSet;)V"/>
+        </type>
+        <type name="FindReferencesAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+        </type>
+        <type name="FindReferencesInHierarchyAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+        </type>
+        <type name="FindReferencesInProjectAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+        </type>
+        <type name="FindReferencesInWorkingSetAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;[Lorg/eclipse/ui/IWorkingSet;)V"/>
+        </type>
+        <type name="FindStringsToExternalizeAction" restrictions="2"/>
+        <type name="FindWriteReferencesAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+        </type>
+        <type name="FindWriteReferencesInHierarchyAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+        </type>
+        <type name="FindWriteReferencesInProjectAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+        </type>
+        <type name="FindWriteReferencesInWorkingSetAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;[Lorg/eclipse/ui/IWorkingSet;)V"/>
+        </type>
+        <type name="FormatAllAction" restrictions="2"/>
+        <type name="GenerateActionGroup" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/CompilationUnitEditor;Ljava/lang/String;)V"/>
+            <method name="editorStateChanged" restrictions="8" signature="()V"/>
+        </type>
+        <type name="GenerateHashCodeEqualsAction" restrictions="0">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/CompilationUnitEditor;)V"/>
+        </type>
+        <type name="GenerateNewConstructorUsingFieldsAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/CompilationUnitEditor;)V"/>
+        </type>
+        <type name="GenerateToStringAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/CompilationUnitEditor;)V"/>
+        </type>
+        <type name="IJavaEditorActionDefinitionIds" restrictions="3"/>
+        <type name="ImplementorsSearchGroup" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+        </type>
+        <type name="ImportActionGroup" restrictions="2"/>
+        <type name="InferTypeArgumentsAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+            <method name="selectionChanged" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaTextSelection;)V"/>
+        </type>
+        <type name="InlineAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+        </type>
+        <type name="InlineTempAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+            <method name="selectionChanged" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaTextSelection;)V"/>
+        </type>
+        <type name="IntroduceFactoryAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+            <method name="selectionChanged" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaTextSelection;)V"/>
+        </type>
+        <type name="IntroduceIndirectionAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+            <method name="selectionChanged" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaTextSelection;)V"/>
+        </type>
+        <type name="IntroduceParameterAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+            <method name="selectionChanged" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaTextSelection;)V"/>
+        </type>
+        <type name="JavaSearchActionGroup" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+        </type>
+        <type name="JdtActionConstants" restrictions="2"/>
+        <type name="MemberFilterActionGroup" restrictions="2"/>
+        <type name="ModifyParametersAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+            <method name="selectionChanged" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaTextSelection;)V"/>
+        </type>
+        <type name="MoveAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+        </type>
+        <type name="NavigateActionGroup" restrictions="2"/>
+        <type name="OccurrencesSearchGroup" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+        </type>
+        <type name="OpenAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+            <method name="getElementToOpen" restrictions="8" signature="(Ljava/lang/Object;)Ljava/lang/Object;"/>
+            <method name="run" restrictions="8" signature="([Ljava/lang/Object;)V"/>
+        </type>
+        <type name="OpenAttachedJavadocAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+            <method name="getDialogTitle" restrictions="8" signature="()Ljava/lang/String;"/>
+        </type>
+        <type name="OpenEditorActionGroup" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+        </type>
+        <type name="OpenExternalJavadocAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+        </type>
+        <type name="OpenImplementationAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+        </type>
+        <type name="OpenJavaBrowsingPerspectiveAction" restrictions="2"/>
+        <type name="OpenJavaPerspectiveAction" restrictions="2"/>
+        <type name="OpenNewAnnotationWizardAction" restrictions="2"/>
+        <type name="OpenNewClassWizardAction" restrictions="2"/>
+        <type name="OpenNewEnumWizardAction" restrictions="2"/>
+        <type name="OpenNewInterfaceWizardAction" restrictions="2"/>
+        <type name="OpenNewJavaProjectWizardAction" restrictions="2"/>
+        <type name="OpenNewPackageWizardAction" restrictions="2"/>
+        <type name="OpenNewSourceFolderWizardAction" restrictions="2"/>
+        <type name="OpenProjectAction" restrictions="2"/>
+        <type name="OpenSuperImplementationAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+        </type>
+        <type name="OpenTypeHierarchyAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+        </type>
+        <type name="OpenViewActionGroup" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+        </type>
+        <type name="OrganizeImportsAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+        </type>
+        <type name="OverrideMethodsAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/CompilationUnitEditor;)V"/>
+        </type>
+        <type name="ProjectActionGroup" restrictions="2"/>
+        <type name="PullUpAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+            <method name="selectionChanged" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaTextSelection;)V"/>
+        </type>
+        <type name="PushDownAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+            <method name="selectionChanged" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaTextSelection;)V"/>
+        </type>
+        <type name="ReadReferencesSearchGroup" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+        </type>
+        <type name="RefactorActionGroup" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;Ljava/lang/String;Z)V"/>
+        </type>
+        <type name="ReferencesSearchGroup" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+        </type>
+        <type name="RefreshAction" restrictions="2"/>
+        <type name="RemoveFromClasspathAction" restrictions="2"/>
+        <type name="RenameAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+        </type>
+        <type name="ReplaceInvocationsAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+            <method name="selectionChanged" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaTextSelection;)V"/>
+        </type>
+        <type name="SelectionDispatchAction" restrictions="2">
+            <method name="run" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaTextSelection;)V"/>
+            <method name="selectionChanged" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaTextSelection;)V"/>
+        </type>
+        <type name="SelfEncapsulateFieldAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+            <method name="selectionChanged" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaTextSelection;)V"/>
+        </type>
+        <type name="ShowActionGroup" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+        </type>
+        <type name="ShowInNavigatorViewAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+        </type>
+        <type name="ShowInPackageViewAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+        </type>
+        <type name="SortMembersAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/CompilationUnitEditor;)V"/>
+        </type>
+        <type name="SurroundWithTryCatchAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/CompilationUnitEditor;)V"/>
+        </type>
+        <type name="SurroundWithTryMultiCatchAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/CompilationUnitEditor;)V"/>
+        </type>
+        <type name="UseSupertypeAction" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+            <method name="selectionChanged" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaTextSelection;)V"/>
+        </type>
+        <type name="WorkingSetFindAction" restrictions="6">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;Lorg/eclipse/jdt/ui/actions/FindAction;Ljava/lang/String;)V"/>
+        </type>
+        <type name="WriteReferencesSearchGroup" restrictions="2">
+            <method name="&lt;init&gt;" restrictions="8" signature="(Lorg/eclipse/jdt/internal/ui/javaeditor/JavaEditor;)V"/>
+        </type>
+    </package>
+    <package name="org.eclipse.jdt.ui.cleanup" visibility="1">
+        <type name="CleanUpOptions" restrictions="2"/>
+    </package>
+    <package name="org.eclipse.jdt.ui.dialogs" visibility="1">
+        <type name="ITypeInfoRequestor" restrictions="3"/>
+        <type name="ITypeSelectionComponent" restrictions="3"/>
+    </package>
+    <package name="org.eclipse.jdt.ui.refactoring" visibility="1">
+        <type name="IRefactoringProcessorIds" restrictions="3"/>
+        <type name="RefactoringSaveHelper" restrictions="2"/>
+        <type name="RenameSupport" restrictions="6"/>
+    </package>
+    <package name="org.eclipse.jdt.ui.search" visibility="1">
+        <type name="ElementQuerySpecification" restrictions="6"/>
+        <type name="ISearchRequestor" restrictions="3"/>
+        <type name="PatternQuerySpecification" restrictions="6"/>
+        <type name="QuerySpecification" restrictions="2"/>
+    </package>
+    <package name="org.eclipse.jdt.ui.text" visibility="1">
+        <type name="IJavaColorConstants" restrictions="3"/>
+        <type name="JavaSourceViewerConfiguration" restrictions="2"/>
+        <type name="JavaTextTools" restrictions="2"/>
+    </package>
+    <package name="org.eclipse.jdt.ui.text.java" visibility="1">
+        <type name="IInvocationContext" restrictions="3"/>
+        <type name="IProblemLocation" restrictions="3"/>
+        <type name="JavaContentAssistInvocationContext" restrictions="2"/>
+    </package>
+    <package name="org.eclipse.jdt.ui.text.java.correction" visibility="1">
+        <type name="ASTRewriteCorrectionProposal" restrictions="0">
+            <method name="createImportRewrite" restrictions="16" signature="(Lorg/eclipse/jdt/core/dom/CompilationUnit;)Lorg/eclipse/jdt/core/dom/rewrite/ImportRewrite;"/>
+            <method name="getImportRewrite" restrictions="16" signature="()Lorg/eclipse/jdt/core/dom/rewrite/ImportRewrite;"/>
+            <method name="setImportRewrite" restrictions="16" signature="(Lorg/eclipse/jdt/core/dom/rewrite/ImportRewrite;)V"/>
+        </type>
+        <type name="CUCorrectionProposal" restrictions="0">
+            <method name="didOpenEditor" restrictions="8" signature="()Z"/>
+            <method name="getPreviewContent" restrictions="8" signature="()Ljava/lang/String;"/>
+        </type>
+    </package>
+    <package name="org.eclipse.jdt.ui.wizards" visibility="1">
+        <type name="BuildPathDialogAccess" restrictions="4"/>
+        <type name="NewAnnotationWizardPage" restrictions="2"/>
+        <type name="NewClassWizardPage" restrictions="2"/>
+        <type name="NewEnumWizardPage" restrictions="2"/>
+        <type name="NewInterfaceWizardPage" restrictions="2"/>
+        <type name="NewModuleInfoWizardPage" restrictions="2"/>
+        <type name="NewPackageWizardPage" restrictions="2"/>
+    </package>
+</component>

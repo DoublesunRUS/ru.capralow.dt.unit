@@ -1,0 +1,32 @@
+# Prints debug information
+org.eclipse.jdt.ui/debug=true
+
+# Prints debug information related to the AST provider
+org.eclipse.jdt.ui/debug/ASTProvider=false
+
+# Prints debug information related to BreadcrumbItemDropDown
+org.eclipse.jdt.ui/debug/BreadcrumbItemDropDown=false
+
+# trace generation of type constraints and create toString info for debugging
+org.eclipse.jdt.ui/debug/TypeConstraints=false
+
+# timing output for code assist
+org.eclipse.jdt.ui/debug/ResultCollector=false
+
+#Reports the time to create the refactor action group
+org.eclipse.jdt.ui/perf/explorer/RefactorActionGroup=150
+
+#Reports the time to make the package explorer actions
+org.eclipse.jdt.ui/perf/explorer/makeActions=1000
+
+#Reports the time to create the package explorer view
+org.eclipse.jdt.ui/perf/explorer/createPartControl=1300
+
+#Reports the time for a single search participant
+org.eclipse.jdt.ui/perf/search/participants=300
+
+#Reports the time for a single completion proposal computer
+org.eclipse.jdt.ui/perf/content_assist/extensions=1000
+
+#Reports the time for a single completion proposal sorter
+org.eclipse.jdt.ui/perf/content_assist_sorters/extensions

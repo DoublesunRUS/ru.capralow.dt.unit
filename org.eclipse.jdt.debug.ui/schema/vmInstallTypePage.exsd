@@ -1,0 +1,125 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Schema file written by PDE -->
+<schema targetNamespace="org.eclipse.jdt.debug.ui" xmlns="http://www.w3.org/2001/XMLSchema">
+<annotation>
+      <appinfo>
+         <meta.schema plugin="org.eclipse.jdt.debug.ui" id="vmInstallTypePage" name="VM Install Type UI Page"/>
+      </appinfo>
+      <documentation>
+         This extension point provides a mechanism for contributing UI that will appear in the JRE tab of the launch configuration dialog.
+The UI is shown only when a VM of the specified install type is selected in the JRE tab.
+      </documentation>
+   </annotation>
+
+   <element name="extension">
+      <complexType>
+         <sequence>
+            <element ref="vmInstallTypePage" minOccurs="0" maxOccurs="unbounded"/>
+         </sequence>
+         <attribute name="point" type="string" use="required">
+            <annotation>
+               <documentation>
+                  a fully qualified identifier of the target extension point
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="id" type="string">
+            <annotation>
+               <documentation>
+                  an optional identifier of the extension instance
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="name" type="string">
+            <annotation>
+               <documentation>
+                  an optional name of the extension instance
+               </documentation>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="vmInstallTypePage">
+      <complexType>
+         <attribute name="id" type="string" use="required">
+            <annotation>
+               <documentation>
+                  specifies a unique identifier for this vm install type UI page.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="vmInstallTypeID" type="string" use="required">
+            <annotation>
+               <documentation>
+                  specifies VM install type that this UI page is applicable to (corresponds to the id of a VM install type).
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="identifier" basedOn="org.eclipse.jdt.launching.vmInstallTypes/vmInstallType/@id"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+         <attribute name="class" type="string" use="required">
+            <annotation>
+               <documentation>
+                  specifies a fully qualified name of a Java class that implements &lt;code&gt;ILaunchConfigurationTab&lt;/code&gt;.
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="java" basedOn="org.eclipse.debug.ui.AbstractLaunchConfigurationTab"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="examples"/>
+      </appinfo>
+      <documentation>
+         The following is an example of a VM install type page extension point:
+
+&lt;p&gt;
+&lt;pre&gt;
+ &lt;extension point=&quot;org.eclipse.jdt.debug.ui.vmInstallTypePage&quot;&gt;
+  &lt;vmInstallTypePage
+   id=&quot;com.example.ExampleVMInstallTypePage&quot;
+   vmInstallTypeID=&quot;com.example.ExampleVMInstallTypeIdentifier&quot;
+   class=&quot;com.example.ExampleVMInstallTypePage&quot;&gt;
+  &lt;/vmInstallTypePage&gt;
+ &lt;/extension&gt;
+&lt;/pre&gt;
+&lt;/p&gt;
+
+In the above example, the contributed page will be shown in the JRE tab of the launch configuration dialog
+whenever the currently selected JRE has a VM Install type identifier of &lt;samp&gt;com.example.ExampleVMInstallTypeIdentifier&lt;/samp&gt;.
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="apiInfo"/>
+      </appinfo>
+      <documentation>
+         Value of the attribute &lt;b&gt;class&lt;/b&gt; must be a fully qualified name of a Java class that implements the interface
+&lt;b&gt;org.eclipse.debug.ui.ILaunchConfigurationTab&lt;/b&gt;.
+      </documentation>
+   </annotation>
+
+
+
+
+   <annotation>
+      <appinfo>
+         <meta.section type="copyright"/>
+      </appinfo>
+      <documentation>
+         Copyright (c) 2000, 2005 IBM Corporation and others.&lt;br&gt;
+All rights reserved. This program and the accompanying materials are made 
+available under the terms of the Eclipse Public License v1.0 which 
+accompanies this distribution, and is available at 
+&lt;a href=&quot;http://www.eclipse.org/legal/epl-v10.html&quot;&gt;http://www.eclipse.org/legal/epl-v10.html&lt;/a&gt;
+      </documentation>
+   </annotation>
+
+</schema>

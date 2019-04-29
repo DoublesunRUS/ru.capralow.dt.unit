@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<component name="org.eclipse.jdt.debug.ui_3.8.100.v20180322-1256" version="1.2">
+    <plugin id="org.eclipse.jdt.debug.ui_3.8.100.v20180322-1256"/>
+    <package name="org.eclipse.jdt.debug.ui" visibility="1">
+        <type name="IJavaDebugUIConstants" restrictions="3"/>
+        <type name="JavaDebugUtils" restrictions="6"/>
+        <type name="JavaSourceLookupDialog" restrictions="2"/>
+        <type name="JavaUISourceLocator" restrictions="2"/>
+    </package>
+    <package name="org.eclipse.jdt.debug.ui.actions" visibility="1">
+        <type name="JavaBreakpointPropertiesRulerActionDelegate" restrictions="6"/>
+    </package>
+    <package name="org.eclipse.jdt.debug.ui.launchConfigurations" visibility="1">
+        <type name="AppletArgumentsTab" restrictions="2"/>
+        <type name="AppletMainTab" restrictions="2"/>
+        <type name="AppletParametersTab" restrictions="2"/>
+        <type name="JavaArgumentsTab" restrictions="2"/>
+        <type name="JavaClasspathTab" restrictions="2"/>
+        <type name="JavaConnectTab" restrictions="2"/>
+        <type name="JavaDependenciesTab" restrictions="2"/>
+        <type name="JavaJRETab" restrictions="2"/>
+        <type name="JavaMainTab" restrictions="2"/>
+        <type name="JavaSourceLookupTab" restrictions="2"/>
+    </package>
+</component>

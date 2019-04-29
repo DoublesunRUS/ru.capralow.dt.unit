@@ -1,0 +1,3933 @@
+Signature-Version: 1.0
+SHA-256-Digest-Manifest-Main-Attributes: 0iZdgHfRcdRfMj6eoPjzuxYpCHJLB
+ MNYbg/9/RFQ2bQ=
+SHA-256-Digest-Manifest: xtRy2BejmsLfWdTX9qFeLBz0v1pNq3xCH9MFWlhWqus=
+Created-By: 1.8.0_162 (Oracle Corporation)
+
+Name: org/eclipse/jdt/debug/ui/launchConfigurations/AppletParametersTa
+ b$2.class
+SHA-256-Digest: aRi9TCwBMowgWJdruSJeot44wTp1B2tKVTaDo+80CsU=
+
+Name: icons/full/obj16/jwatch_obj@2x.png
+SHA-256-Digest: TceZiVxjaH9IPtROst10YqrCWk5rERsxmoD1kCrbdkQ=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaDebugOptionsManager$2.clas
+ s
+SHA-256-Digest: /5negYniA+lWIRBnbP17l+Jzp3k0fBooove4gTGOxsQ=
+
+Name: org/eclipse/jdt/internal/debug/ui/console/JavaStackTracePagePart
+ icipant.class
+SHA-256-Digest: YgyRfkXJVAeYJvOj1xuGvzr/YPBzIOl9rN2fx1FVdEE=
+
+Name: icons/full/elcl16/var_cntnt_prvdr.png
+SHA-256-Digest: Czosp3y0vhzaefg2bSm5Bq9nXAsnDm9Bf/aGOb0PUBk=
+
+Name: icons/full/elcl16/suspend_co.png
+SHA-256-Digest: u+K/8dDKS6tBC3Q71mMCClQxJ2kqW6w+CvGgKLpvM0Q=
+
+Name: org/eclipse/jdt/internal/debug/ui/monitors/JavaOwningThread.clas
+ s
+SHA-256-Digest: KW8PU38y7IvSzuzX8Fn7oJaK2hMuSyCIhxXGlvfqIiU=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/OpenReceivingTypeActio
+ n.class
+SHA-256-Digest: I+nhAMEzwvlLpep8hlAlYSonYFUXbdPcRBGe9jJLOTY=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/DebugTypeSelectionDia
+ log$DebugTypeLabelProvider.class
+SHA-256-Digest: 7hY6zb/ZVFV/DbN7E/Q/x15AcphrAPL5hjSLLiNheL0=
+
+Name: org/eclipse/jdt/internal/debug/ui/contentassist/JavaDebugContent
+ AssistProcessor.class
+SHA-256-Digest: JxJHaETMHXeGkx2vjzf4yN+3i3g27jiUU/t/8ayk4/k=
+
+Name: org/eclipse/jdt/internal/debug/ui/breakpoints/MethodBreakpointEd
+ itor.class
+SHA-256-Digest: 2T+gYZFIS7goZOJ2QGB6tnhIghI8/juEPGnd6NJui2E=
+
+Name: org/eclipse/jdt/internal/debug/ui/display/DisplayView$DataDispla
+ y.class
+SHA-256-Digest: Adb03RXuPQxdD/tOy1Sy4A6CX4Gqmj/6+BBYJhfaytc=
+
+Name: org/eclipse/jdt/internal/debug/core/refactoring/ClassPrepareBrea
+ kpointTypeChange.class
+SHA-256-Digest: FVKgTQ8C14h8ikPch8L48Nkkvt//RXyHg3Dh+wVr8cI=
+
+Name: org/eclipse/jdt/internal/debug/ui/breakpoints/AddExceptionAction
+ $1.class
+SHA-256-Digest: a+RkIWDFbQeTak/JrF6oJeBo2K0muWK9Z+/i6+SKhPQ=
+
+Name: org/eclipse/jdt/debug/ui/breakpoints/JavaBreakpointConditionEdit
+ or$4.class
+SHA-256-Digest: uISiQ2BUJhOQCsTXUus9g1iz8N8k7E+ixsBy+C4zih0=
+
+Name: org/eclipse/jdt/internal/debug/ui/classpath/ClasspathModel.class
+SHA-256-Digest: W5hRLS+xnUstODt8LAPN2RzYD3NbgJK9MH3rHxqb7jU=
+
+Name: org/eclipse/jdt/internal/debug/core/refactoring/LineBreakpointTy
+ peChange.class
+SHA-256-Digest: rtH7F1tPP/xyZspuy2w3BU3qp1VQuDK57UBkK5Xc8Ro=
+
+Name: org/eclipse/jdt/internal/debug/ui/display/DisplayView$5.class
+SHA-256-Digest: NGIR4d0/xWnWMOOaXdZlH66FD9qUx5dAxYpaJ35r+x0=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/JREsUpdater$1.class
+SHA-256-Digest: Pa2idmea65096GmVV646KwqEjAejtkeKQDvgismPDGQ=
+
+Name: org/eclipse/jdt/debug/ui/launchConfigurations/JavaArgumentsTab$1
+ .class
+SHA-256-Digest: vzy9OToW7Su+9aBMmE2yaWJGXMu4ymXoql47qd7MJVU=
+
+Name: org/eclipse/jdt/internal/debug/ui/monitors/MonitorsAdapterFactor
+ y.class
+SHA-256-Digest: S/i1EPVCEJGzkHHHTT+RKNIZBp9Lx7n+nrWLU6rlfx4=
+
+Name: icons/full/wizban/library_wiz@2x.png
+SHA-256-Digest: wkJ0o8WHeVTF4ylN81vzH6lU34e8FIBkANXQvynlkWc=
+
+Name: icons/full/etool16/java_applet@2x.png
+SHA-256-Digest: j4cDbTlL3OXs0+8iXVQruR3vH+Sgd9kEELOaDEnl4j8=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/JREsPreferencePage$3.clas
+ s
+SHA-256-Digest: ns+2kFZMoyU0ZhzbGFCOvqAe2FEQxlsOPf3pni/4MQU=
+
+Name: org/eclipse/jdt/internal/debug/ui/snippeteditor/SnippetMessages.
+ properties
+SHA-256-Digest: ZaWDqO1XfrvZpqV7T9Uug+pH3XQ7wJ/tJnEW4MtVqoI=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/StandardVMPage$1.class
+SHA-256-Digest: ZU1mLjQ3AnIiVfoju3rsq4nZ1XVUZNvMjQD4fRzeSuo=
+
+Name: org/eclipse/jdt/internal/debug/ui/JDIDebugUIPlugin.class
+SHA-256-Digest: ub3l7a5LiSE5FRGm5yYviijjqaj9UcuzugrQffT4IRk=
+
+Name: org/eclipse/jdt/internal/debug/ui/DebugUIMessages.properties
+SHA-256-Digest: cSfXAzUMpgyt3NSzZPVcYHu5JafMgWob1uC5U8E4QR0=
+
+Name: org/eclipse/jdt/internal/debug/ui/propertypages/ExceptionFilterE
+ ditor$3.class
+SHA-256-Digest: yswFFoQGolbEqHMJjnu0wKZ8OLkuw3DPQ0z4uVt599g=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/PopupInspectAction$2.c
+ lass
+SHA-256-Digest: 6oRraxJ399elRAkK6hcomnY7YtiHBM/rH22APp5qC1w=
+
+Name: org/eclipse/jdt/internal/debug/ui/snippeteditor/JavaSnippetEdito
+ r$2.class
+SHA-256-Digest: af/AaB87IhXBtMFIYjBZ1LNouh+7qof/WlkLx/r/Gr4=
+
+Name: org/eclipse/jdt/internal/debug/ui/JDISourceViewer.class
+SHA-256-Digest: 7MHJI9ScNbOshtdHRM6JKNwznjxrlgnRYvL43K5Qxg0=
+
+Name: org/eclipse/jdt/internal/debug/ui/classpath/DefaultClasspathEntr
+ yDialog$1$1.class
+SHA-256-Digest: bDyRvn0t8/KY3gt7wU5Sfmw+3gs9gcgu3D2hrn54b/U=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/ArchiveFileFilter.cla
+ ss
+SHA-256-Digest: nqn4UG2Kxm6pXVsXlnReWSww/sRxxXXdrkzIvCh50a0=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/OpenVariableDeclaredTy
+ peAction.class
+SHA-256-Digest: Iv8H5YKfk6T1JRIwbHUz96gdfX9+eHPQxhVP2HBVdJY=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/AbstractJavaClasspath
+ Tab.class
+SHA-256-Digest: UfiiyrCa5arLvHZohnYmoGPG1TS3npbI8rBmCVPcqM8=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/JavaObjectValueEditor$
+ 2.class
+SHA-256-Digest: 4RsvFxKFMPZWLA39hZuHgGUDRjvU9m71PfjEBWls17o=
+
+Name: org/eclipse/jdt/internal/debug/ui/breakpoints/CompositeBreakpoin
+ tEditor.class
+SHA-256-Digest: Teq95q21ojZyKugm9R9eABapb3ToVyuuLZIF6Q9yavA=
+
+Name: icons/full/dtool16/java_applet.gif
+SHA-256-Digest: 7actOQsU3ZEKHm/6+o2b4LOZB2Tqn85s51pFLaUsXuw=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/LocalJavaApplicationT
+ abGroup.class
+SHA-256-Digest: xIEOtrnmJFAI72E2SENfmADEU0JKAJnOQjbVlfB6DqQ=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaDetailFormattersManager.cl
+ ass
+SHA-256-Digest: MczYqGlmD1efaj/fTs/c88MbDXJaxJTKAdhnpMbtzYo=
+
+Name: org/eclipse/jdt/internal/debug/ui/breakpoints/AddExceptionTypeDi
+ alogExtension$2.class
+SHA-256-Digest: ZoHS96KbCCvIi7S955GQ2VfKSldZmlDYVoKvZ6C69Yk=
+
+Name: org/eclipse/jdt/internal/debug/ui/display/JavaInspectExpression.
+ class
+SHA-256-Digest: rYNB+Sndkdg/YNH7hv9NiHjPAUZpgAJ9wRFRz70pkgs=
+
+Name: icons/full/ovr16/exit_ovr_disabled.gif
+SHA-256-Digest: xJNYxQ46sx9wUBu+Wrg7/pHr8g2xMfaXBHQSfySRkWc=
+
+Name: icons/full/obj16/contended_monitor_obj.gif
+SHA-256-Digest: byiRU2UK1d/SKTXHabS1kqYcV4QjjjM1/EJqpMQVVKA=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/JREsEnvironmentLabelProvi
+ der.class
+SHA-256-Digest: 5o08M/4HV5aM0BHjZDWQRVB5qbIk6mLrWUJ3HbyC248=
+
+Name: org/eclipse/jdt/internal/debug/ui/threadgroups/JavaDebugTargetCo
+ ntentProvider.class
+SHA-256-Digest: ocdZYQMVG5VTYTmAZ2NCsm8dt0J//h43z3pXGiECe5A=
+
+Name: org/eclipse/jdt/internal/debug/ui/breakpoints/ToggleClassPrepare
+ BreakpointAction.class
+SHA-256-Digest: FidDXaY8gSsu2lpcLO2uXMnXHGd+BxwS7itH9W2vLDU=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/LibraryContentProvider$Su
+ bElement.class
+SHA-256-Digest: Y3U+Bm6ZXNLQK3a7gUTl8Tl4REtCW3jafdTu0v5Eulo=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/AddExternalFolderActio
+ n.class
+SHA-256-Digest: KiBEIu9sBK1DrHFXzPEg6SGTnyIbxQd0hMcxNm56VqM=
+
+Name: icons/full/elcl16/thread_view@2x.png
+SHA-256-Digest: cPYqDfPIObpNwNMU3ftydQFgwiNyddUMP/tvFiub8co=
+
+Name: icons/full/obj16/brkp_obj@2x.png
+SHA-256-Digest: xlevyU8j/Gs2mVJEE/rDlCHgDC5phV9PqpnXktq92XM=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/OpenFromClipboardActio
+ n$1.class
+SHA-256-Digest: k4eoZkuodBnBff5rx1HKo6mfVrq8VekpwvzfEEdkgPA=
+
+Name: icons/full/dlcl16/static_co@2x.png
+SHA-256-Digest: JA3azpHhH7/eacsk+r7sqsnMS1IE5R1fL0Gg6sM9pBU=
+
+Name: org/eclipse/jdt/internal/debug/ui/monitors/JavaWaitingThread.cla
+ ss
+SHA-256-Digest: eLO7LBkYcOXAJQbcUIZ4vC5o5keLrEncMOOnKsljkjg=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/StepIntoSelectionHyper
+ linkDetector$StepIntoSelectionHyperlink.class
+SHA-256-Digest: bdyvwAGphC0ZOwVSydtp15eFj8XdpY8jFu/aGTmfEmQ=
+
+Name: icons/full/obj16/thread_and_monitor_obj@2x.png
+SHA-256-Digest: OUk/f+yfjBAqTn6vyROXAynvzGqJZbxN/cVinqhrokQ=
+
+Name: org/eclipse/jdt/internal/debug/ui/IJavaDebugHelpContextIds.class
+SHA-256-Digest: YmNM+pIgs+Sc66p4YEvvypxkuFgLYP9YdpfNrS9Cunw=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaWatchExpressionDelegate.cl
+ ass
+SHA-256-Digest: uxbvkCs8ZUp1Ip9LBZaWbnDL8EZWigbS8nPqhuOiEV0=
+
+Name: org/eclipse/jdt/internal/debug/ui/console/JavaConsoleTracker.cla
+ ss
+SHA-256-Digest: dufP0Yr6lIcG80sZ7OY/hes4cAPm+anw83qnUgLJfTk=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/DebugTypeSelectionDia
+ log$DebugTypeSelectionHistory.class
+SHA-256-Digest: z2sohFyhX/qp174JqvAfzUgPJXtC0IkYR3b2SHvvqaM=
+
+Name: icons/full/dlcl16/monitor_view.png
+SHA-256-Digest: u2pDgzpuyJ9hqInTyiBRQFdufVTCQ29dyTzzLEo1r8E=
+
+Name: org/eclipse/jdt/internal/debug/ui/HeapWalkingPreferencePage$1.cl
+ ass
+SHA-256-Digest: BCwMhnDCCGr7eTyd/NCZ3RuTX8Oru0ea2mkuIHG4T18=
+
+Name: org/eclipse/jdt/internal/debug/core/refactoring/MethodBreakpoint
+ MethodChange.class
+SHA-256-Digest: FjDH+/GbeBhAEwQZauvewJ7aFFqwNGKpMaDsJKt2WI8=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/JavaVariableValueEdito
+ r.class
+SHA-256-Digest: FzNqPo6FYcTtuFMoQN1lDkgziUtOPH/uzgvuOGlFcLo=
+
+Name: icons/full/etool16/java_app.gif
+SHA-256-Digest: 8u6Fl6Sf/5I2rIgx02+Os7/Ma36BqLE4OmWhB0iKy/s=
+
+Name: icons/full/obj16/library_obj.gif
+SHA-256-Digest: a+dEfzAXQNGmu88gMQcv4JWCXeQuIh0nly25AMoMMoc=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/JREContainerWizardPage$1.
+ class
+SHA-256-Digest: 8EH062cbEfIujaQcUIndAajPpP+n1j225KHBohP1Y+M=
+
+Name: icons/full/ovr16/warning_co.gif
+SHA-256-Digest: AxdBZsJ5b6cThsXwUEgrD3jJgMB2YcfLODWLHTcPPMg=
+
+Name: icons/full/elcl16/runtoline_co.png
+SHA-256-Digest: 6XHPV2kE73vemlMFqxCafhcElF/b6VxuHArs7R9SaV0=
+
+Name: icons/full/etool16/insp_sbook.gif
+SHA-256-Digest: WDCOfGWLnkr/4kjmZXb8PgvtsmdvtVUI/33hM2veKLI=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/VMArgumentsBlock.clas
+ s
+SHA-256-Digest: 8/H1vcFHUdr1utgqVHbl+JrRl1ezRC2eUH/Jikn6Mcc=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/AddTypeStepFilterActio
+ n.class
+SHA-256-Digest: 3a4WRczMjUuEjwWFiNi6uSyfWz6jZenh/gRJuRdYEzk=
+
+Name: icons/full/etool16/disp_sbook@2x.png
+SHA-256-Digest: q8drHawWiU3TMCOrXffMtbQnlK0KqFZe0r+J7vR6E2g=
+
+Name: org/eclipse/jdt/internal/debug/ui/HotCodeReplaceErrorDialog.clas
+ s
+SHA-256-Digest: GBmr+pcxfgL601QUufbmafeREbxtqy/pEshSK0bQaoY=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ExcludeExceptionLocati
+ onAction.class
+SHA-256-Digest: rML9HFOL1KnhCKW/Pq66eqoPLcuDFMWP5JDBVAIAzDk=
+
+Name: icons/full/obj16/jrtexception_obj.gif
+SHA-256-Digest: +oRRgUes7744JdW/+3LcYo+HwWgr4ddStkR1tkBGoX0=
+
+Name: org/eclipse/jdt/internal/debug/ui/classpath/RuntimeClasspathView
+ er.class
+SHA-256-Digest: aiPCYtps+T4xzy8dE5cW4jdQ2ZG6zmbN7KlP7JLlebQ=
+
+Name: org/eclipse/jdt/debug/ui/launchConfigurations/AppletParametersTa
+ b.class
+SHA-256-Digest: DB9w5mKZMTHZp3yFXAmg6IUbbXfUjTN1qA2GAJWP3Rk=
+
+Name: org/eclipse/jdt/internal/debug/ui/propertypages/ExceptionFilterE
+ ditor$8.class
+SHA-256-Digest: kXFC+l8weOVr4s5Gmj6MlM0sYuX4e3KQRc8WCtqRgzk=
+
+Name: icons/full/etool16/run_exc@2x.png
+SHA-256-Digest: mjW+b0a8pIYbrdYAieaXaTdBLTZl6AIOAVFF7p6EnY8=
+
+Name: icons/full/dlcl16/static_co.png
+SHA-256-Digest: 9XLOlnzcumSrPsTD+83yZhvHahPfC7X9x7XYQmGjj8Y=
+
+Name: icons/full/ovr16/conditional_ovr_disabled.gif
+SHA-256-Digest: x6oSfFggBBpswF5m+8oPSwpblZcfSlS5A+1w/iNpGOM=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/BreakpointHitCountActi
+ on.class
+SHA-256-Digest: DH0iMuEaWcmxgivAevlL7WjWuNrnYcqLaONweOnLxq4=
+
+Name: org/eclipse/jdt/internal/debug/ui/monitors/ContendedMonitorConte
+ ntProvider.class
+SHA-256-Digest: zdA2Ve0P17ty3b3NKpv7mP/YNVvQGTBaA1Tl1qA5RGM=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/InstalledJREsBlock$15.cla
+ ss
+SHA-256-Digest: LkUetRYqLJAbR+rzbV0le2N5vMlcftqfICBd2A4J5yI=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/InstalledJREsBlock$VMLabe
+ lProvider.class
+SHA-256-Digest: bpv88rehgms02Nhi7n1lk9F6UODSk9GgXrfkzsOLcTw=
+
+Name: org/eclipse/jdt/internal/debug/ui/JDIDebugUIPlugin$1.class
+SHA-256-Digest: zwalygLILnqJATYUnTLYk4d8m2L+fNwTZGpdmbnlDzU=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ToggleBreakpointAdapte
+ r$5.class
+SHA-256-Digest: p4SjzariUWwEG6/0siRcBA5l0XmVsWaqVAhIWTg0UQw=
+
+Name: icons/full/obj16/insp_sbook.png
+SHA-256-Digest: FyagWMCmYj0gQEW7kOVGHptngh2Z2BcAwjRaOqxtR0w=
+
+Name: org/eclipse/jdt/debug/ui/launchConfigurations/JavaConnectTab$1.c
+ lass
+SHA-256-Digest: fM/S33LKSMH6IbO86PGQ3nFJETDDMcgkHPqG3TOWFC8=
+
+Name: org/eclipse/jdt/internal/debug/ui/JDIImageDescriptor.class
+SHA-256-Digest: /64X73IcUyJpWwIEMp+TxdkhFTvdnrtm/TC/a2gXVMQ=
+
+Name: org/eclipse/jdt/internal/debug/ui/sourcelookup/SourceLookupMessa
+ ges.properties
+SHA-256-Digest: QFztZhglA1BakFt9yLlWvFShbE+cuuVsv+ooByrCi10=
+
+Name: icons/full/ovr16/warning_co@2x.png
+SHA-256-Digest: Mde1qfw+KhNLMyPJhoE9VUIWpZ5OiE+L+J69vi7bjys=
+
+Name: org/eclipse/jdt/debug/ui/launchConfigurations/JavaLaunchShortcut
+ .class
+SHA-256-Digest: 6APZS5N0GX6Yy0qtYsuji3W8oCjrBb7ay1cLi75BBxM=
+
+Name: org/eclipse/jdt/internal/debug/core/refactoring/RefactoringMessa
+ ges.class
+SHA-256-Digest: LUu51+OBw3cyU+HT0cx6G1IEuzsiT5K58d6p0vPT27o=
+
+Name: icons/full/ovr16/deadlock_ovr.png
+SHA-256-Digest: fXCIAFEcMxOR/F9IgUBpKATLILVQF3x6zElKvdynuu4=
+
+Name: org/eclipse/jdt/internal/debug/core/refactoring/WatchpointTypeCh
+ ange.class
+SHA-256-Digest: U1DMKc+IDJysL3pXETjXeW3fkXWSL796Sal/bguiFmE=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/OpenFromClipboardActio
+ n$6.class
+SHA-256-Digest: UnskPg0n3Rf0HcVfirGoa8WjFNElBZwlk3gV0oX9bPU=
+
+Name: icons/full/dtool16/insp_sbook@2x.png
+SHA-256-Digest: exAfVSWHT/ECmQIFdy10oyps1S7s+ntc6b1NnSJkz0E=
+
+Name: icons/full/etool16/java_attach@2x.png
+SHA-256-Digest: uLlbp36BOGcDe1OoV77wPocFzqV2yj1d+VbwXhACkZc=
+
+Name: org/eclipse/jdt/internal/debug/ui/sourcelookup/ClasspathContaine
+ rSourceContainerBrowser.class
+SHA-256-Digest: FW+eUFk7Z/nnAM2qtSXlwrtSZfv+RDsTsYHQjXlK0vY=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/SelectDefaultSystemLi
+ braryQuickFix.class
+SHA-256-Digest: QdhasaOkBXs7QbRdE4i+5RVnDbXcolmsRPxtRUUv/aQ=
+
+Name: icons/full/eview16/thread_and_monitor_view.gif
+SHA-256-Digest: hFsRbjgWBjo5S1b1lvUrk3oh2RW02A2Fsx4ORsSxm+8=
+
+Name: icons/full/obj16/localvariable_obj.png
+SHA-256-Digest: og0bf0bwyG29//IVT8M1yjHPkcu8Q6BtxppOoLFDgrY=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/RemoveDetailFormatterA
+ ction.class
+SHA-256-Digest: ykEX/rnxH3u79NP1Ok6i6/lsuBJQaKsnA5NMMchrh/k=
+
+Name: icons/full/obj16/owned_monitor_obj@2x.png
+SHA-256-Digest: QqUcH2E7FUCd5ucyW3kcYPxyC6UBPlhmywl4ddxLb30=
+
+Name: icons/full/obj16/package_obj.gif
+SHA-256-Digest: VGtyRNzMUqqku/EfYTvQBj5MKrboNFAN3rCwOYo/Nfs=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/LauncherMessages.prop
+ erties
+SHA-256-Digest: hl6+slaNvCZRws9Zj8ZZ3HyH4Z3FDITMDRCHnq8Ecyw=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/LibraryContentProvider.cl
+ ass
+SHA-256-Digest: 8NYGMm0mJ2L2ilAXVOxoXDt/0eYL4EIMUU6EzdzzL44=
+
+Name: icons/full/ovr16/error_co@2x.png
+SHA-256-Digest: vGyzf80DEcxMV6XzYtJg7KfPmKYX0q79o3l6KNG7DBo=
+
+Name: org/eclipse/jdt/internal/debug/ui/classpath/DefaultClasspathEntr
+ yEditor.class
+SHA-256-Digest: MpWPW14pQs9CJB2FVzHix+BcdFMBWRdPT81iukg04yU=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ShowQualifiedAction.cl
+ ass
+SHA-256-Digest: kUCHL0Ig7/uDO/xNNGYJSBQHGT9YTDVvdwmxHYfyRw0=
+
+Name: org/eclipse/jdt/internal/debug/ui/variables/VariableMessages.cla
+ ss
+SHA-256-Digest: AesPCaANKKk1B2ByAhWsXgvk04YG2ayWKrY7XYLInOI=
+
+Name: icons/full/ovr16/exit_ovr.png
+SHA-256-Digest: DDqvaPF38T/9KIhJWZJ2vysxbm4XVqu9ahEBZnXIX4g=
+
+Name: icons/full/obj16/thread_and_monitor_obj.gif
+SHA-256-Digest: 80sVaiBWBxDAm6gAdQmotGOqZ0VecL+yVpEm/bc651c=
+
+Name: icons/full/obj16/jar_obj.gif
+SHA-256-Digest: OALv38fBBxbVtoJiVSYtYtyw5XsedF3ij7MHYBIILTA=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaDebugImages.class
+SHA-256-Digest: 2/n0QNr/1wxCNFtSPRr3FBjc0xWrGEKCSabGYW76eBo=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaDetailFormattersManager$Ev
+ aluationListener.class
+SHA-256-Digest: UTStFWNWNxH64P+AYXvtl8zh2tEdUF39szCqiox14/U=
+
+Name: org/eclipse/jdt/debug/ui/console/JavaStackTraceConsoleFactory.cl
+ ass
+SHA-256-Digest: GHadOzHW6tVBBwp4vHJSzlBpwJmmJ0qsV+mE4BGrmhM=
+
+Name: org/eclipse/jdt/internal/debug/ui/JDIElementImageDescriptor.clas
+ s
+SHA-256-Digest: VNwsDelwUUkrnkvBzTcIlp9pJoS4tDuLvXSjwVxuUcE=
+
+Name: org/eclipse/jdt/internal/debug/ui/classpath/ClasspathMessages.pr
+ operties
+SHA-256-Digest: 49QjOTs5nyAWphW0vs0LwNN4gcFaa+vLShfQzjOsPag=
+
+Name: org/eclipse/jdt/internal/debug/ui/ErrorDialogWithToggle.class
+SHA-256-Digest: 3/05GYbsW8bUGaECKR/pjn+UOV/KjoJOX8/1ky0m4DE=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/EvaluateAction$1.class
+SHA-256-Digest: v9bmPTYrTjWNrel1360XclB3PAknW1M54y6xLzw9Y2A=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/InstalledJREsBlock$10.cla
+ ss
+SHA-256-Digest: bhyxP54J5Lm8GusZtm6YZw5x4Gb8IKhc928gisT47oE=
+
+Name: icons/full/dlcl16/sethitcount_co.png
+SHA-256-Digest: VMCLzO+msvMiIu10wEGIcFNP8h2DOPzq5pNw3hgJyYI=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ShowStratumAction$2.cl
+ ass
+SHA-256-Digest: 5U6oWnlOaK2MKIvSIWSz+onVLTCFHwo+2Ls3lWMpUHY=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/AbstractAddStepFilterA
+ ction.class
+SHA-256-Digest: NLZl8vMlHDKtd8ygKiQ9BkR8rKnsVfWNKJWIdWiRRzU=
+
+Name: icons/full/ovr16/uncaught_ovr.gif
+SHA-256-Digest: qlGtidaJ9z0Yz9MCsY+DTQ0v7ogALwFLPETpzDrUShE=
+
+Name: icons/full/obj16/thread_obj.png
+SHA-256-Digest: q4q24pEroluCmVagLI3gWwv2zZngnDa8mVG+p5DdnR4=
+
+Name: icons/full/obj16/jsbook_run_obj.png
+SHA-256-Digest: qvVPx+j/7DClzoK99w4tJsxhFTEIf+M8wrPmcSi75Vo=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/InstalledJREsBlock$4.clas
+ s
+SHA-256-Digest: T24wjNv7yFehHG56yADxxCKx+She6E1WX+kXparoveE=
+
+Name: org/eclipse/jdt/internal/debug/core/refactoring/BreakpointRename
+ Participant.class
+SHA-256-Digest: oemV+hUxzlFuSIFijN+UygTrUdRrbj4bKBoNmfdOUN0=
+
+Name: org/eclipse/jdt/internal/debug/ui/variables/VariableMessages.pro
+ perties
+SHA-256-Digest: AWw6iNDwRMYTzKDLYllDuGN2HEnRTzKcfOyM+VfQoRM=
+
+Name: org/eclipse/jdt/internal/debug/ui/console/ConsoleMessages.class
+SHA-256-Digest: MZk7eae+PKeMwZn0YUg3P7MGGyccKTEIJBs31CvDha4=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/VMArgumentsBlock$2.cl
+ ass
+SHA-256-Digest: G4CAtRMjma5JbQc+VrKSczKko/q8sKDGmgSsCm/LNvI=
+
+Name: icons/full/obj16/brkpi_obj@2x.png
+SHA-256-Digest: knsfuzi9nxKAsucFUEF0JcU+3QNvQg4OAqj0dbqCQPU=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/OpenVariableConcreteTy
+ peHierarchyAction.class
+SHA-256-Digest: wcjhAvcS97dToWUTluGQ0bJ/L4RkZnPlKlFy3zUrlXk=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaDetailFormattersPreference
+ Page$1.class
+SHA-256-Digest: /PDTO3v8jF1LSYrxyU72eSP6Ykqyv4xgOgThCYz3bgM=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ShowStratumAction.clas
+ s
+SHA-256-Digest: +n3mVaZZO969jO6BKC11nVHNRBY8HI4tFFdcIGCJHJU=
+
+Name: icons/full/ovr16/conditional_ovr.png
+SHA-256-Digest: nGONN/n2M2SCBRQ3DfMJhAc+xSLVXws/s5SkQK8AXBY=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ToggleBreakpointAdapte
+ r.class
+SHA-256-Digest: HMObXO14ZhLxxZFDo1IBt35QTDJv+6nfdcUyOSorLAU=
+
+Name: org/eclipse/jdt/internal/debug/ui/classpath/BootpathFilter.class
+SHA-256-Digest: 20MTrUUPaJs1mDo+I6hcfk1bPxATi8WzCJwcrswH68M=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ShowSystemThreadsActio
+ n$1.class
+SHA-256-Digest: EBmCfpYyGLhIF3nkwGgoH00+rbuYrBH94K2ss7NxDe4=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/OpenVariableTypeAction
+ .class
+SHA-256-Digest: OWg5s28+VkCHC1f22pObxrOBFphmIeKhSRKjEM8Z53k=
+
+Name: org/eclipse/jdt/internal/debug/ui/sourcelookup/JavaProjectSource
+ ContainerBrowser$ContentProvider.class
+SHA-256-Digest: afmaKahgaziF031dY2zgyFtU6Z9TRCCcXCf9GLb3sAg=
+
+Name: icons/full/elcl16/static_co@2x.png
+SHA-256-Digest: zg3WH2Jrgq5ymYPn/juehnfbxtkjyixrijBuxgA2j8c=
+
+Name: icons/full/obj16/jload_obj.gif
+SHA-256-Digest: JmkRTqmowoFfaTK4lASKDrAzyypEWqdOAxOwJjgA2Zg=
+
+Name: org/eclipse/jdt/internal/debug/ui/variables/JavaDebugElementAdap
+ terFactory.class
+SHA-256-Digest: g/715y9kXwpbXz/snGnwuDk6/jh2vPh2zFQQoLfONz8=
+
+Name: icons/full/dtool16/disp_sbook.png
+SHA-256-Digest: 0J2l9WJgiMFA9P5Y3c5PXCP4ALOdi9fLaMzFtS0PTFw=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaDetailFormattersPreference
+ Page.class
+SHA-256-Digest: /w4fiva9BVrBZTsxgcYnY0CWtd6hBO6vDbwIZbffX5k=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/AbstractJavaMainTab.c
+ lass
+SHA-256-Digest: /ENURl+bQARRPBrkiOQpqnOGWoojaDXqi8901sCimAw=
+
+Name: icons/full/obj16/thread_obj@2x.png
+SHA-256-Digest: m69IgtClJMi22A+2wpkSNHjB0coQp3vn6KITsRaPYpM=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ExpressionInputDialog$
+ 3.class
+SHA-256-Digest: /6hu6Dm3kFxpuHoQaK7irMilHr3obXfOSejidZmTaIc=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaDetailFormattersPreference
+ Page$2.class
+SHA-256-Digest: xoUkt2KaN+A/ExxlOFKkBAg7ibPskNLIKsKpDOsrQc4=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/VMConnectTimeoutStatu
+ sHandler$1.class
+SHA-256-Digest: kkWZPqUTH5yuRHL8IJ1pTRVFmDOL1MKgEVQ7NCpGSMs=
+
+Name: icons/full/dtool16/java_app@2x.png
+SHA-256-Digest: ayByJrGoSbFVpn/AMU65XywJ8z1knYZz4wfP2ZNP5ow=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/ExecutionEnvironmentsPref
+ erencePage.class
+SHA-256-Digest: mT12r9fwYNsv4+FosJrD6cnW5tQG+awPBcw14rzkIJU=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/JREsComboBlock$7.class
+SHA-256-Digest: u9Z8p5UF3MINdDVcRpve4kkvHGLmN+HJzJZiKeVb0o8=
+
+Name: icons/full/obj16/reference_obj.png
+SHA-256-Digest: 7qkbDcJrM+CaEkHcn3DpYZ6IbkYuMd8rQJM24Cy1pIY=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/VMConnectTimeoutStatu
+ sHandler.class
+SHA-256-Digest: Lacs8pmoFDBKWg4ByBrLltflg+eLiVyZUalOPhEMc94=
+
+Name: org/eclipse/jdt/internal/debug/core/refactoring/WatchpointChange
+ .class
+SHA-256-Digest: EgEOMRkcnQctX+L9vXfl88zQL2QwFjk/WYRplIg51Fk=
+
+Name: org/eclipse/jdt/internal/debug/ui/snippeteditor/SnippetEditorAct
+ ionContributor.class
+SHA-256-Digest: 22fChFRLY8Dyri7kV7rVTFI+PyNIBpkB4yyJcwL5FOE=
+
+Name: icons/full/elcl16/final_co@2x.png
+SHA-256-Digest: hXn+TDkz/IOJyZXiGDVMrg5anzaFnhjGK00hFD6gn8k=
+
+Name: org/eclipse/jdt/internal/debug/ui/console/JavaNativeStackTraceHy
+ perlink.class
+SHA-256-Digest: lVFBfnJjwlu8YeNPg4mLJOMpKJxcPV9kpODHa5UAR7M=
+
+Name: org/eclipse/jdt/internal/debug/ui/breakpoints/StandardJavaBreakp
+ ointEditor$1.class
+SHA-256-Digest: DbZW4BlClTXoI0YQII2dOR3clJhIpW/6Nfsmd/6RpSY=
+
+Name: icons/full/etool16/java_applet.gif
+SHA-256-Digest: UsQZMG8wL1QpisSD3iSFJLT40sYOFeu54ymoQdlIX50=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/BreakpointToggleUtils.
+ class
+SHA-256-Digest: Gl8okKt9di/AYcRkcLpGxM8G2iW01tVjGPUBzL5vFI8=
+
+Name: org/eclipse/jdt/internal/debug/ui/breakpoints/AbstractDetailPane
+ .class
+SHA-256-Digest: vRzZseCTKiDcMqaAiJGjiL0fOrnw2id7cPivt7VSYyU=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/InstalledJREsBlock$11.cla
+ ss
+SHA-256-Digest: LcDXOFc0dYD2IRWWFmokqhwrP7xVIbDeCq5QpMT5MnI=
+
+Name: org/eclipse/jdt/internal/debug/ui/CreateStepFilterDialog$1.class
+SHA-256-Digest: 1oIeHx5vIgcomzOaUAC5E3jO5sIqeJlTFUSZ5M2gPDw=
+
+Name: org/eclipse/jdt/debug/ui/JavaSourceLookupDialog.class
+SHA-256-Digest: BSY5fCzQHs3Qn70RZaAYeTZy+bhpQZrdBsnp2fX2Q/k=
+
+Name: org/eclipse/jdt/internal/debug/ui/classpath/DefaultClasspathEntr
+ yDialog$1.class
+SHA-256-Digest: GUBMyQqfnXSZGAAqEk89Rd02v0f40uff/EX+MIROmyQ=
+
+Name: org/eclipse/jdt/internal/debug/ui/variables/VariableOptionsActio
+ n.class
+SHA-256-Digest: C3FtjxJgbh+MDOhgc6AfQU42ZJNggHkeEZ1ZDMYlHSA=
+
+Name: org/eclipse/jdt/internal/debug/ui/snippeteditor/NewSnippetFileWi
+ zardPage$1.class
+SHA-256-Digest: aSz/3qhn+nUqL6WCksa8B4gs0qkgpa/3HrQLQR5DAFg=
+
+Name: org/eclipse/jdt/internal/debug/ui/IJDIPreferencesConstants.class
+SHA-256-Digest: E5wHVXQSdvQ6N/oG3E66MDDHXydFrMtNFW9yBEByBlw=
+
+Name: org/eclipse/jdt/internal/debug/ui/snippeteditor/JavaSnippetEdito
+ r$10.class
+SHA-256-Digest: F/IAcN5r6z1JywU6bjMrLRRQT/fv4LYPJREvHjxYhqw=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaStepFilterPreferencePage$S
+ tepFilterContentProvider.class
+SHA-256-Digest: HUrr/eE4opAEVOV+OyDiiSPHHFPASObMTs2O0uvS7S8=
+
+Name: org/eclipse/jdt/internal/debug/ui/console/JavaStackTraceHyperlin
+ k$2.class
+SHA-256-Digest: 4G8WDK9K9h/Gwo2g3L9/gtPNj+sOs6W16okaKTNclYo=
+
+Name: org/eclipse/jdt/internal/debug/ui/snippeteditor/JavaSnippetEdito
+ r$15.class
+SHA-256-Digest: QuZVA7uiZn0TaDH3n9QyTvMM3go9620OT4ltZHSvH40=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/InstalledJREsBlock$8.clas
+ s
+SHA-256-Digest: cUl1U51H3H7X+N899Vmu2c/mq5jHRblU+edun7BnTJo=
+
+Name: org/eclipse/jdt/internal/debug/core/refactoring/LineBreakpointCh
+ ange.class
+SHA-256-Digest: TIiM7QhT4nUATdDR6XVR/jBQuKguo0y4k68IvGZo2EA=
+
+Name: org/eclipse/jdt/internal/debug/ui/monitors/JavaElementContentPro
+ vider$1.class
+SHA-256-Digest: RbLvaueY0qCWOayuuUPLZJjNGqG31ilhTo4FzP00NUQ=
+
+Name: org/eclipse/jdt/internal/debug/ui/breakpoints/StandardJavaBreakp
+ ointEditor$7.class
+SHA-256-Digest: zicq/KVMFsX8YYAXWeCZNbefy9MnsAdSoSSuPgraM08=
+
+Name: icons/full/obj16/prj_obj.gif
+SHA-256-Digest: 1sKZ4fbjptMa33FuDnx2dDRtG+b94ENQv+TqrYnA5Hk=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaDetailFormattersPreference
+ Page$7.class
+SHA-256-Digest: wjBWjMx/ATZkGq8XJjqMo3Xmp+vGbzNSq9V3aQ0vgl4=
+
+Name: org/eclipse/jdt/internal/debug/core/refactoring/BreakpointRename
+ PackageParticipant.class
+SHA-256-Digest: RfLp/ORvM2MZ/T+KrZcvCHApuA99BlbDDxLN8few4qg=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/ExecutionEnvironmentsPref
+ erencePage$1.class
+SHA-256-Digest: QMnWdXUEiPC/nvgpuyROshv9vn80GDsxkbiYu6uNPTk=
+
+Name: org/eclipse/jdt/internal/debug/ui/sourcelookup/JavaDebugShowInAd
+ apterFactory.class
+SHA-256-Digest: CLpng1YrT0EPvJkK1K/QJCJ5l/RevZicj/qSM4l9jls=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/OpenPreferencePageRes
+ olution$1.class
+SHA-256-Digest: 3u7Ft0vkUsZR+EkmucpqXEezx17poVKXAqWyHeBjpTA=
+
+Name: org/eclipse/jdt/internal/debug/core/refactoring/MethodBreakpoint
+ TypeChange.class
+SHA-256-Digest: Mmn/L5VfgVWatpti8xfj7e9tDoKHfQs61yGnihSe6+I=
+
+Name: org/eclipse/jdt/internal/debug/ui/BreakpointMarkerUpdater.class
+SHA-256-Digest: XAPSkFUTPV+n15Mfp0Qnb7mGPDsHc/Pk0ASjH4WoX2g=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaLogicalStructuresPreferenc
+ ePage$LogicalStructuresListViewerLabelProvider.class
+SHA-256-Digest: oSk3R/cqx78Q/Siu/GTcpZNvDehQZmn11VLWnzHsMSs=
+
+Name: org/eclipse/jdt/internal/debug/ui/snippeteditor/JavaSnippetEdito
+ r.class
+SHA-256-Digest: 1w4vLkZIZzK5sKQtXM/exClCJXiqdPqOWh4LN8OuYkc=
+
+Name: org/eclipse/jdt/internal/debug/ui/variables/JavaVariableCellModi
+ fier.class
+SHA-256-Digest: IuBRaGxX5ww+4L7K2BQQxH7V4eT/zBMGZGP4PR8eFmg=
+
+Name: icons/full/dlcl16/thread_view.png
+SHA-256-Digest: QNt9W+0mewDjfeYyJ7c8ze4atEXXj+2LSn/3n6hUVxc=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/InstalledJREsBlock$9.clas
+ s
+SHA-256-Digest: INxArnQwQUGTv3RdXGZSPmjhQJjmrx0K/9oErRw4amM=
+
+Name: icons/full/ovr16/installed_ovr.gif
+SHA-256-Digest: KPdO/gdviWEyI9MZSWfURzv7KtDdyy2syxBJ/+TNP/0=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/LauncherMessages.clas
+ s
+SHA-256-Digest: 5XaGm0TgJ7YK8gBe0KTad/L+x4I+O/b2nMvQQ0mmkuc=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/SharedJavaMainTab$2.c
+ lass
+SHA-256-Digest: jds3c+2g6XSiTSgiC2xV9hIGVysXcaeIENknwByH8DY=
+
+Name: icons/full/dlcl16/deadlock_view@2x.png
+SHA-256-Digest: xLecG9wtHeF5mimet7HKL50QttPtqvTn8YsF7E/c7dY=
+
+Name: org/eclipse/jdt/internal/debug/ui/snippeteditor/SelectImportsDia
+ log$4.class
+SHA-256-Digest: zPk9ot2ly6lqJ85pbtyO3RI+mubrbET0YsvNDnEHeu4=
+
+Name: icons/full/obj16/jexception_obj.png
+SHA-256-Digest: KkKuKyJ8kez+gTn2Bsuk5pAZF35n/Nrfa4T8e8NCMTo=
+
+Name: org/eclipse/jdt/internal/debug/ui/MemberActionFilter.class
+SHA-256-Digest: pXG4x/oJmh9e0iF1ftDiAtmABsO/X1YsmkNi1vyRxiI=
+
+Name: org/eclipse/jdt/internal/debug/ui/contentassist/DynamicTypeConte
+ xt$ITypeProvider.class
+SHA-256-Digest: M/9a9VAcCfjRZ3c6E23QhT8zaKzUg8qWOqCQ8PMpVB8=
+
+Name: org/eclipse/jdt/internal/debug/ui/heapwalking/Messages.class
+SHA-256-Digest: ydT5Ik9vtcnHDPKbkm/pW2o0ArYbvV5OaHlzjzGp6Ds=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/RunToLineAdapter$1.cla
+ ss
+SHA-256-Digest: sjWy5ypCAxAKOJdhEXS13lOiBIXPju4bhC74A1hYCO0=
+
+Name: org/eclipse/jdt/internal/debug/ui/console/JavaStackTraceConsoleV
+ iewer.class
+SHA-256-Digest: 2ZgcaM4gmlvkE89551ZgTMj+O8nAiu+eu7A5nS8enrA=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/VMArgumentsBlock$1.cl
+ ass
+SHA-256-Digest: l4vMQwbHucT2DSkmjFqZ5j8iUp+LjTJgdTORg+zm6YQ=
+
+Name: org/eclipse/jdt/internal/debug/ui/EvaluationContextManager.class
+SHA-256-Digest: 5C5SIHKmJ0GH21YMx3bvN4YhtfuYni0yVyHd5tqxCrg=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaDebugOptionsManager.class
+SHA-256-Digest: 9jWJeyRkuqDtJ43Loh6bg+ZYCvGW3Eth6avwi/sUSsY=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaDetailFormattersManager$Ex
+ pression.class
+SHA-256-Digest: fyUbgWojkFZn60Qqb1TV1JyaPyccKymuaFuSDq6BsY0=
+
+Name: org/eclipse/jdt/internal/debug/ui/breakpoints/StandardJavaBreakp
+ ointEditor$2.class
+SHA-256-Digest: DTrKSvhNCTJV48lVXtBnNM7+CBoo4xx98zJJ9nGQDbg=
+
+Name: icons/full/obj16/class_obj.png
+SHA-256-Digest: YocTOYp8V9vlP3QUHU6oj0F+w5Dwv0koqfnGv5dKIsQ=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/AddVMInstallWizard.class
+SHA-256-Digest: EzLVPA0S4kht8OPL/0K7t+44BC5rqYZAKjR0SyduGDA=
+
+Name: icons/full/elcl16/static_co.png
+SHA-256-Digest: FvDKKVbSeHgB0X5baCgLebAvsTAaEPlNQ492IxcBywc=
+
+Name: icons/full/obj16/methodresult_obj_disabled@2x.png
+SHA-256-Digest: 7t8Qgf97kFyGqE3MUyEqicI3OPcj9ybdOs6Wpf9nDNg=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/SelectDefaultSystemLi
+ braryQuickFix$1.class
+SHA-256-Digest: BkkGF95bYAEToXy9+X2EAEtKxufzqhKSEvsqJnqgUgk=
+
+Name: org/eclipse/jdt/internal/debug/ui/snippeteditor/SelectImportsDia
+ log$3.class
+SHA-256-Digest: gc7grpcGOH1taTtM8qtwlihotsWCmNw7rgeF4BpcDyA=
+
+Name: org/eclipse/jdt/internal/debug/ui/snippeteditor/SelectImportsDia
+ log$ImportsContentProvider.class
+SHA-256-Digest: gXHxAV401V6YtHSeFz7LhzPRF+pZV4YavKTFq8lf21k=
+
+Name: org/eclipse/jdt/internal/debug/ui/CreateStepFilterDialog.class
+SHA-256-Digest: ScnAK734csZx3ShFQFhnZEZR3/w2d5fMoNO/V8NL8cE=
+
+Name: icons/full/ovr16/installed_ovr_disabled.png
+SHA-256-Digest: UVTMFZKSy6d7LcglB8yvVU0m/Ykh6S3b2DtAjgosQB8=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/RuntimeClasspathAdvan
+ cedDialog$2.class
+SHA-256-Digest: ZpOdNflR1w5Khu416OzL1j1Oo4AmDXD8dEyQO3CgJRI=
+
+Name: icons/full/obj16/jline_obj.gif
+SHA-256-Digest: rNuN8WjKCRacdKLG+yMtD2MSmc+PCjGH3siJEI53K/w=
+
+Name: icons/full/elcl16/thread_view.gif
+SHA-256-Digest: Td+4H/CLFnmA8uB1XMC7MXnQwwszK67hpo/TqvkG0aM=
+
+Name: icons/full/etool16/disp_sbook.gif
+SHA-256-Digest: H1ri+QxfV7qNwulfGTw0d5UTJRecBFQwBzg/NQQ6Ndo=
+
+Name: org/eclipse/jdt/internal/debug/ui/SuspendTimeoutStatusHandler$1.
+ class
+SHA-256-Digest: HP1TF1YlIhjLlNElPez5yDX6RolbTpFI2Wr5aDkujTo=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/LibraryStandin.class
+SHA-256-Digest: Kekh4omtHh0wRQnCyvssjn6K+3XUmdjNTpDfUYqtiHE=
+
+Name: org/eclipse/jdt/internal/debug/ui/sourcelookup/JavaProjectSource
+ ContainerBrowser.class
+SHA-256-Digest: O/QA+4ujIB+3XR+4Z7vUHuOFuTzxPuuI3dGLG2MaIa4=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaDetailFormattersPreference
+ Page$6.class
+SHA-256-Digest: 5ASpiZoPkq5DmdgZPx8OnlD/dgI8AYgrlvhZY4euKgo=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/NewDetailFormatterActi
+ on.class
+SHA-256-Digest: evnbDcWqvPfMj3EnyC1q4zXSR453xKPuQg5h5PcMa+s=
+
+Name: org/eclipse/jdt/internal/debug/ui/breakpoints/AddClassPrepareBre
+ akpointAction$1.class
+SHA-256-Digest: jbRMaJ1qLQd3X2tlOUG3areofzJbHcXLuC9M22LBlEs=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/AttachSourceAction.cla
+ ss
+SHA-256-Digest: rp/QmpvGJpXHwbMqsu05orhFmbSFqF+F6sewxHRxn8w=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/StandardVMPage.class
+SHA-256-Digest: 2vBosTS7G4qJMeZJpnJLNqshjBbrSrjjTB08W9bTo3s=
+
+Name: icons/full/dtool16/insp_sbook.png
+SHA-256-Digest: D0WFxtvJl9S/TQhNXz1zj7JsHl8yxMmQdp3Do6IBChg=
+
+Name: icons/full/wizban/java_attach_wiz@2x.png
+SHA-256-Digest: Ioru0hCRNrpW7GONAxPGC2BOjwWtKBIWC6GXHvM24iY=
+
+Name: icons/full/etool16/run_exc.png
+SHA-256-Digest: 4B0MEPvUP4PcqMhnHZHyLhgSj7cXl8gcdmW767iJZVs=
+
+Name: icons/full/obj16/jsbook_obj.png
+SHA-256-Digest: KN2uYI+ZwmCngZpTSt8F3hlEoeqbFCQeTYvJO69/e+Y=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ShowQualifiedAction$1.
+ class
+SHA-256-Digest: 3hVxE7JtddKY91WjDYmceP0QAPD9PHJBXoipuN/oI20=
+
+Name: icons/full/elcl16/final_co.png
+SHA-256-Digest: t9AVmOBGw2ZiYJj2ETF6NqdWd+5yLgsuWVNoVUcjlyQ=
+
+Name: icons/full/ovr16/owned_ovr.png
+SHA-256-Digest: mcc2a7gZwNyw01rZnEyNRCXiSP/8hNzWtbNUF/Yon00=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaDebugHover.class
+SHA-256-Digest: A3yIt3i+iFHwFVPiv2FzwFLdBVm4uU5t+zDmVeuK5yw=
+
+Name: org/eclipse/jdt/internal/debug/ui/ExpressionInformationControlCr
+ eator$ExpressionInformationControl.class
+SHA-256-Digest: UhfLWmIvPRSoKAHbnwJiKsCFdTWhslBDgDnaCMng1kY=
+
+Name: org/eclipse/jdt/internal/debug/ui/classpath/RuntimeClasspathView
+ er$RuntimeClasspathFilteredTree.class
+SHA-256-Digest: P0Ecc3rLKoUNoGf/7mbqT0tS6dHfaVZYJBeERGGvM9k=
+
+Name: org/eclipse/jdt/internal/debug/ui/snippeteditor/JavaSnippetEdito
+ r$6.class
+SHA-256-Digest: GFwdqHh0ZdMhUZqOirGmSCFYUdhXvaxbE7ybY0vQ3lc=
+
+Name: icons/full/ovr16/scoped_ovr.png
+SHA-256-Digest: cRQudynp+YIgyxu2GT9rZWZWHkT7/4mZeptjNDD2pBc=
+
+Name: org/eclipse/jdt/internal/debug/core/refactoring/DeleteBreakpoint
+ Change.class
+SHA-256-Digest: /fNT+WW+heXmeGYKISi9xUWpeLRWO8/PC+HX50yZpCI=
+
+Name: org/eclipse/jdt/debug/ui/breakpoints/JavaBreakpointConditionEdit
+ or$8.class
+SHA-256-Digest: KDkoxedzSaYQsg0oLOHERqFdSW1+Cq7z3gfV8tHk+Oo=
+
+Name: icons/full/obj16/jspbrkpt_obj.png
+SHA-256-Digest: vkhpKylhbfd18MtVVMfIeMjrcJinIXuGS6C+9svJzXk=
+
+Name: org/eclipse/jdt/internal/debug/core/refactoring/BreakpointMovePa
+ rticipant.class
+SHA-256-Digest: PrUox28fp8Aa9z0I1amF4Ip2tK3tABJl4MveMssctZg=
+
+Name: org/eclipse/jdt/internal/debug/ui/DetailFormatterDialog$5.class
+SHA-256-Digest: YZUho6XDVW1NARF6VFXyV9mvCtOFNyWKGmPDsZdXpO8=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/TerminateEvaluationAct
+ ion$1$1.class
+SHA-256-Digest: KjzF7TmAXQEGmlEa2Q7zM7s12dFP1qi9zeEXh1ddwHY=
+
+Name: icons/full/wizban/newsbook_wiz.png
+SHA-256-Digest: 5y/0n1xinhWF6+8SpuBejhQBPvU4DzPzsDF30AFpw8k=
+
+Name: icons/full/dtool16/run_sbook.gif
+SHA-256-Digest: 0g8i2hns7vT0vqacExFTm7YeCluUu/xZRiTI7qIn/qc=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/RuntimeClasspathViewe
+ r$1.class
+SHA-256-Digest: +iAZRmEBTmeYBHXf25Ux1kxT4BOdsYUixQ3hY81/X38=
+
+Name: icons/full/etool16/debug_exc@2x.png
+SHA-256-Digest: aJM/4tSViwbNNkYKFg1e0g6JtzMODfqqyKnmwFPdGQk=
+
+Name: org/eclipse/jdt/internal/debug/ui/snippeteditor/JavaSnippetEdito
+ r$8.class
+SHA-256-Digest: 50g/JUZ8SVZciRk3QUIA8yljQlkaWcwHPW2i5PjlaCU=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/JavaWorkingDirectoryB
+ lock.class
+SHA-256-Digest: mJAhn6HM90klQQg5tzhRIsSipcKTavAGiRXRumADsCY=
+
+Name: org/eclipse/jdt/internal/debug/ui/display/DisplayMessages.proper
+ ties
+SHA-256-Digest: gxsRo5O7yseMwFJYGpDWNhW5muQ86WSQ5e7KfCKJcAI=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/MoveUpAction.class
+SHA-256-Digest: zLEByejrqpqzSbwpEahyzpf16TDWWL7spV7/zrsgZ8o=
+
+Name: org/eclipse/jdt/internal/debug/ui/console/JavaExceptionHyperLink
+ .class
+SHA-256-Digest: tZtsWfxrxVxR2LwYkASbUyGGHJa6N7S5w0tX5qg8pA8=
+
+Name: icons/full/ovr16/scoped_ovr_disabled.png
+SHA-256-Digest: p/xiHZkIxMKewa4VjC86DlaXT2kd6LnkQoYnLLVjMdg=
+
+Name: org/eclipse/jdt/debug/ui/breakpoints/JavaBreakpointConditionEdit
+ or$9.class
+SHA-256-Digest: UyRUKrw0vUXNOoVqyxYMPAa+u6QKShIlqIalMhty4Kg=
+
+Name: icons/full/elcl16/all_references.png
+SHA-256-Digest: 0i+9AjZfw1GITV9QWjGf2CBeeemRVshS9K7Q1HinPDY=
+
+Name: org/eclipse/jdt/internal/debug/ui/breakpoints/StandardJavaBreakp
+ ointEditor$6.class
+SHA-256-Digest: 26o6wzeQ+YcaGwAPp3ph10eyWUVyuD9Ie6bkTLjmvYU=
+
+Name: org/eclipse/jdt/internal/debug/ui/DetailFormatterDialog$4.class
+SHA-256-Digest: B9LRXYIGGXFYDyjZ1A7f8mfz2M+9MdjmL8qbRxluYQs=
+
+Name: org/eclipse/jdt/internal/debug/ui/JDIModelPresentation.class
+SHA-256-Digest: RbBvdyUkh+PPOC3GDSv7OqfCmwQTvqqctVzoV7EFA2o=
+
+Name: icons/full/elcl16/var_cntnt_prvdr@2x.png
+SHA-256-Digest: omhwgmh7R2zbJd8B/gcT/CvmkXdzcuPg+qNmHsb4fTA=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaWatchExpressionDelegate$Ev
+ aluationRunnable$1$1.class
+SHA-256-Digest: laOVmgIyT2WwcLwIYMq6ouWl+Dq7ZMkPbGIf5SmcROA=
+
+Name: icons/full/ovr16/ownsmonitor_ovr.png
+SHA-256-Digest: /t55yy8KjuDYt1WVmI+fBFAmuQI9QN6xEJVo0EQCRHY=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/AddProjectAction.class
+SHA-256-Digest: HKXK3qyNMfV/fls3VjUbWASVxkj+Kygi1SA9SM1qFxE=
+
+Name: icons/full/dtool16/java_applet@2x.png
+SHA-256-Digest: 2wSghmaGRZVO3XOab2egk7GFxE1FdkXn86e2wPCT0cw=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaDebugPreferencePage.class
+SHA-256-Digest: Sz3iAPcrbk9SUaZCD1Coik9ke1QDT/Rh07rjwrHuKF0=
+
+Name: org/eclipse/jdt/internal/debug/ui/monitors/JavaThreadContentProv
+ ider.class
+SHA-256-Digest: dHlbDjNuWDQhHZLPE7qAcDIG6eIY9VH31CAhksJVc28=
+
+Name: org/eclipse/jdt/internal/debug/ui/contentassist/JavaDebugContent
+ AssistProcessor$1.class
+SHA-256-Digest: SyKfD9/913RyMxaxu8D+KMfBrh3CroGLxt7n8TrNXzA=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ForceReturnAction.clas
+ s
+SHA-256-Digest: jAtKmqa1pv1qmjTqwrJIj+7Gq1REQVj4lXO3itv4S4w=
+
+Name: org/eclipse/jdt/internal/debug/core/refactoring/WatchpointTypeRe
+ nameChange.class
+SHA-256-Digest: sfxD+XvOTzN4szmf9b+EkJ9c+mQ2UjizXoBXK9b3+gU=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaDetailFormattersManager$1.
+ class
+SHA-256-Digest: 3af+PiVmhs4XY6+yDvSbSSxLweDp7bpC8/g9fJRawNY=
+
+Name: org/eclipse/jdt/internal/debug/ui/snippeteditor/JavaSnippetEdito
+ r$7.class
+SHA-256-Digest: hj7iByiexfRFQL413A17CCeARrlCq6BzNSeJaA56RtU=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/SourceElementLabelPro
+ vider.class
+SHA-256-Digest: s9w3S0ardmTCMZKoVPOTaB4oC6bEVvIWZt1cMVIipKs=
+
+Name: icons/full/dlcl16/exc_catch.gif
+SHA-256-Digest: Pt8me0hz2E0jAZSKBH7wJsWbYurzBJCb1QxDYr++dP4=
+
+Name: org/eclipse/jdt/internal/debug/ui/classpath/RuntimeClasspathView
+ er$3.class
+SHA-256-Digest: oi5PjgA5jzF1AtiJ6GudhwOCjJyjQa5VohsdP6pTF0Q=
+
+Name: org/eclipse/jdt/internal/debug/ui/DetailFormatterDialog$3.class
+SHA-256-Digest: G2oMtWBE3tvVvz5domVAiGriRZKOdyYgVRMODR7zArA=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/VMLibraryBlock$1.class
+SHA-256-Digest: HpLRKGcgkmU+d4z24x79LmAzwrKpy2lk9ysk7mpixwU=
+
+Name: icons/full/obj16/brkpd_obj.png
+SHA-256-Digest: UVfv+jPh4nPrRffLoBTprKBCgjBYb3mxOPFXehpd5uU=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/JavaPrimitiveValueEdit
+ or$1.class
+SHA-256-Digest: znPvwbx5eDyILmj8qi0khc7NsE64RbvV/t9/yKctTDQ=
+
+Name: icons/full/etool16/run_sbook@2x.png
+SHA-256-Digest: w6RKPi81e5geRKV4pQ+Hjx//Z4jTqONoOxvBDzy/pXA=
+
+Name: org/eclipse/jdt/internal/debug/ui/snippeteditor/JavaSnippetEdito
+ r$14.class
+SHA-256-Digest: WOehCkxwLIam45CtuWHxbmjyjhaRP+f2Khn25nRsqk8=
+
+Name: icons/full/obj16/jsbook_obj.gif
+SHA-256-Digest: x+rMK5j0hkr8A9g8Wn3DlM287jrNyJ78wsit9OL85sc=
+
+Name: org/eclipse/jdt/internal/debug/ui/display/DetailsViewerConfigura
+ tion.class
+SHA-256-Digest: uNcoMhrhScFErMXSVMTPmL2u4YRsNQZUBDR+EWh3HXk=
+
+Name: org/eclipse/jdt/internal/debug/ui/heapwalking/AllReferencesActio
+ nDelegate.class
+SHA-256-Digest: YKZ5JRroXATSKr1uqLJ1BygeJcm3KrjwbnXC+syhSlc=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaSourceLocationWorkbenchAda
+ pterFactory$SourceLocationPropertiesAdapter.class
+SHA-256-Digest: V3WwdKjPH+wEAY44dPtKoH7ODKQrM2CHJhP2S6qtB3M=
+
+Name: icons/full/dlcl16/static_co.gif
+SHA-256-Digest: Z/6LgsKQQ+LJs50YXsJ7DBccwYiJtDMKWmDtD1Nh9XQ=
+
+Name: org/eclipse/jdt/internal/debug/ui/contentassist/CurrentValueCont
+ ext.class
+SHA-256-Digest: ACiujG6A6nN1X1iFc8za4fYqQa8zLfk94x7x+B15OFY=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/EEVMPage.class
+SHA-256-Digest: mLAkL2W8MPf1C9C+5P0L8Ciaz448/gC37jyxcvHBKF0=
+
+Name: org/eclipse/jdt/internal/debug/ui/propertypages/InstanceFilterEd
+ itor.class
+SHA-256-Digest: XSZS3OTk4F9ldxq6QabafOaO6KGfGGqsfej4plFQBa4=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaDetailFormattersManager$Ev
+ aluationListener$1.class
+SHA-256-Digest: 2dPdjgJYVTl0KCEdkOYnAt5sg/FjFQk6AVv3pNMnk0Y=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ToggleBreakpointAdapte
+ r$6.class
+SHA-256-Digest: lBwPWfu6oNiPVTKJhL2rXz/sOn7U9ErW5ta38MRwgVg=
+
+Name: org/eclipse/jdt/internal/debug/ui/variables/JavaStackFrameLabelP
+ rovider.class
+SHA-256-Digest: t7HYseYby5cG0GJrQ0eehKFQ0qihinhTG8AwAH5FQf8=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaHotCodeReplaceListener.cla
+ ss
+SHA-256-Digest: C5bNWFD43E3oo0oPP5dwUYQkEDOiBpZ15k4VRI6TCXE=
+
+Name: icons/full/ovr16/deadlock_ovr.gif
+SHA-256-Digest: 5i5vvaaSVYiBQOOGJupa1Lty69AwmX4dLN2IvZNFr54=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/VMTypePage$TypeLabelProvi
+ der.class
+SHA-256-Digest: rp//E/aBfVlkX7cbBG01P5DkoJC8vKIDljBoP+IEV/g=
+
+Name: icons/full/obj16/jspbrkpt_obj.gif
+SHA-256-Digest: VFVSTPpY32JIPjfLS3QXf85KaI0HNeXGQ8xDkuOPt4U=
+
+Name: snippetsupport.jar
+SHA-256-Digest: cM81eL5sbz4IlJYrexN+pEEdeOAKjo9p6G2ymqToN1I=
+
+Name: icons/full/eview16/variable_tab@2x.png
+SHA-256-Digest: zHkXq+LBmwDacpJYgBLQwHkXLbz5HLIiNcJOg2YfdJo=
+
+Name: icons/full/obj16/jrtexception_obj@2x.png
+SHA-256-Digest: IZs7S4/YWYzb61ByJg7bhgjLsG3EU/W3GB+BaozFnu0=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaStepFilterPreferencePage$5
+ .class
+SHA-256-Digest: Ssc9499pj6YWj6/K+TfM4qaQcx3YrQc+XtuUgUGKew4=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/OpenTypeAction.class
+SHA-256-Digest: ER0jwoy97+hvSf+vENPDeYJDn37Jta5uh7BJEgqMpt8=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/JREsEnvironmentLabelProvi
+ der$IExecutionEnvironmentProvider.class
+SHA-256-Digest: 15v8YcKOx7daEr7Mh8UTG5D1KMXa2MiEmpjYNliREks=
+
+Name: org/eclipse/jdt/internal/debug/ui/breakpoints/WatchpointDetailPa
+ ne.class
+SHA-256-Digest: GQyEiNmJhJOJne3xS/UesW2ynYhpQc6kP9HJhfxOXpU=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/OpenFromClipboardActio
+ n$2.class
+SHA-256-Digest: X75Hwo0WZ1ib6lyqSvowX8kSGG4gf1cBmHegFlTFQaQ=
+
+Name: org/eclipse/jdt/internal/debug/ui/snippeteditor/SnippetEditorPro
+ pertyPage$Proxy.class
+SHA-256-Digest: TdF4/frMRCO28PTs6egX/FgarWSBU70gN8u7UeXN5+k=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaStackFrameActionFilter.cla
+ ss
+SHA-256-Digest: N1pICPgatUFQCEtS1+EdBRfOjAPN+kgi6CI43EChWnQ=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/JREMessages.class
+SHA-256-Digest: P7uKfqylHXvItZzjVO93IormaS/MANwyIHaFw4/Tb/I=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/NameValuePairDialog$1
+ .class
+SHA-256-Digest: 65C7fJtFqxpYWkm6Nbc0UQfWpu64OOx1NUaBQwk055w=
+
+Name: org/eclipse/jdt/internal/debug/core/refactoring/BreakpointMovePa
+ ckageParticipant.class
+SHA-256-Digest: jhCN2EKgaP6z7Po1NC94iQJDKauYracbTtpOQiA+Wgk=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/EntryToggleAction.clas
+ s
+SHA-256-Digest: zqXi7DPXh+hpDlKdnR8XwzZGcP4tBwLF24b31qXIxOk=
+
+Name: icons/full/elcl16/runtoline_co.gif
+SHA-256-Digest: ErIfhn4vC55HtnFNCvtoITbyALmHh5WpNKvur7QTrLw=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/WorkspaceOperationRun
+ ner.class
+SHA-256-Digest: 5KPSqfSjA6XBZUWZGY3ni11mmLDSTbnxY/iLqqF+/8w=
+
+Name: org/eclipse/jdt/internal/debug/ui/heapwalking/AllReferencesInVie
+ wActionDelegate.class
+SHA-256-Digest: y7I3MFqJkp7jOTeKi3xRCU/GnGibGtoChIh9GkGH944=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/StepIntoSelectionHyper
+ linkDetector.class
+SHA-256-Digest: 2qEURa/Ppw0moTQEpjOpSTuL83g3krhcIaz1R4OM44I=
+
+Name: icons/full/obj16/thread_and_monitor_obj.png
+SHA-256-Digest: VkcI680h/zlFlBdg6F5gOeH+dqs4Lqbvsym1VvJxl7w=
+
+Name: icons/full/obj16/package_obj.png
+SHA-256-Digest: lCgwy7BfPpdN7rxqUyd34F2Ra10PvBfpQnzNqDSziz8=
+
+Name: icons/full/etool16/run_sbook.png
+SHA-256-Digest: 82mdG80DOcalsWmMeUimarzTB10GzzkS/obRo9mcwZo=
+
+Name: org/eclipse/jdt/debug/ui/launchConfigurations/AbstractVMInstallP
+ age.class
+SHA-256-Digest: RSJJmXGrsNPknvktnH9f+mplfoSAs9wmdzk55B9t8DY=
+
+Name: icons/full/dtool16/term_sbook.gif
+SHA-256-Digest: UOwyjIljDhBuIxUAaTCMnIuZGA8LNQPr7NrBYN0xAUY=
+
+Name: org/eclipse/jdt/debug/ui/launchConfigurations/JavaArgumentsTab$2
+ .class
+SHA-256-Digest: NOucg+x7ukyO0YO1ETXaPad65WZWxwA6ekPbKFW8b8Q=
+
+Name: icons/full/ovr16/scoped_ovr@2x.png
+SHA-256-Digest: rVjwAazgoLXZES1nANw7wn7/H6Sdp08GzaGdVtxCX1A=
+
+Name: org/eclipse/jdt/internal/debug/ui/sourcelookup/StackFrameShowInS
+ ourceAdapter.class
+SHA-256-Digest: OGqSEgkQS/1FaUR+rAAlyWbwm8yOV5kqlQIq0tTOcRk=
+
+Name: org/eclipse/jdt/internal/debug/ui/propertypages/ExceptionFilterE
+ ditor$2.class
+SHA-256-Digest: pn+/IAbFthGpuWsPcd6nXaLKvyck155qnhkCDNHqNuQ=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/PopupInspectAction$1.c
+ lass
+SHA-256-Digest: Y8320WffB36xVh/e/aoWHplyOu6PPtaG++xBVAnQKMI=
+
+Name: org/eclipse/jdt/internal/debug/ui/sourcelookup/WorkbenchAdapterF
+ actory.class
+SHA-256-Digest: oc6q/wgPTnssN6Qnx7X957sCFKSQLXuHTKIasFa7T34=
+
+Name: icons/full/dlcl16/constant_co@2x.png
+SHA-256-Digest: v6QoIei9DTIAedo1fx3/1Xhw6FoVZCvQxQpx0Qy96/E=
+
+Name: org/eclipse/jdt/internal/debug/ui/propertypages/ThreadFilterEdit
+ or.class
+SHA-256-Digest: qKM7f8LCMyDJvEAklXP21ef1hHKjlIVwFRxxUTuX2c8=
+
+Name: org/eclipse/jdt/debug/ui/JavaUISourceLocator.class
+SHA-256-Digest: 5uF9CfRL+kBbdREK+QI55GORx2mJtEugnZxnspOa4ZI=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/JavaObjectValueEditor$
+ 1.class
+SHA-256-Digest: HTrE+WqFqbsESfqhMp8eIW2knYlSHOF8cEhw6eptHI0=
+
+Name: icons/full/ovr16/uncaught_ovr.png
+SHA-256-Digest: 0wvHx2UQ2t6pGgSBU8m2JFPeqUV+fryQbfbBs6FgQEA=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/OpenDialogAction.class
+SHA-256-Digest: wO5woLhLi1mk7vZieuV56XZvmmAV+Ybay4XLLIyeBiw=
+
+Name: org/eclipse/jdt/internal/debug/ui/breakpoints/AddExceptionTypeDi
+ alogExtension$3.class
+SHA-256-Digest: VJUgOxBxMb32Qo0Ba+2sxZ6/E64AcsTeZkFIcs4hAuU=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/VMDetailsDialog.class
+SHA-256-Digest: j/2qCRQMtTNGM3XQz6omLyYkav9JTOvRkv7/pwaXLms=
+
+Name: org/eclipse/jdt/internal/debug/ui/BreakpointUtils.class
+SHA-256-Digest: ojcO7BvKYBe37jdMpTsrQa4NY1evNChg/4E/kt7u5a0=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/OpenFromClipboardActio
+ n$7.class
+SHA-256-Digest: yW0A2ELkDOlcPHMJ1vt/ozXPgDfPB/JCpBVO/5KaL4g=
+
+Name: org/eclipse/jdt/debug/ui/launchConfigurations/AppletParametersTa
+ b$3.class
+SHA-256-Digest: yCMhktPdcShrf+Uvq3zvCZsq7Bm0uLDFRs4hvaBgHGM=
+
+Name: icons/full/obj16/library_obj@2x.png
+SHA-256-Digest: 7bzc+XAJGphNwlUDksOYBUx8LbvmOChHu/NvOe1ukcs=
+
+Name: icons/full/obj16/localvariable_obj.gif
+SHA-256-Digest: 0q9M8SRH7BUJnB/4y6OMTUDzaiLlZdvb+zWFsa+FCa4=
+
+Name: org/eclipse/jdt/internal/debug/ui/threadgroups/JavaThreadGroupLa
+ belProvider.class
+SHA-256-Digest: uI8b571+WcEa4G3se/51VlcxGNAkQUOoVsJTul03xdU=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/StepIntoSelectionUtils
+ $1$1.class
+SHA-256-Digest: 2VqzM4YC3tnoDId0KFH/542hXB/APfKgctpxf49aUkw=
+
+Name: icons/full/elcl16/suspend_co.gif
+SHA-256-Digest: nXJP3dZ8/H4REZvWDwkF6Gl4zl3V4RBNzOb+UHOEg0s=
+
+Name: icons/full/etool16/term_sbook.gif
+SHA-256-Digest: IW+L6P1ZzPrHsr+KrMYgrwUoY0gQCwyQPb8q3llmUX4=
+
+Name: org/eclipse/jdt/internal/debug/ui/DetailFormatterDialog.class
+SHA-256-Digest: DazEBShFFNqlb5SM4sI/nsNuqbMrHoXu+/h5kXxV/dA=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ExceptionUncaughtToggl
+ eAction.class
+SHA-256-Digest: NuSghiqctYq9Ad1cvh3gWx8VPdiILhTutr/Yluop7JM=
+
+Name: org/eclipse/jdt/internal/debug/ui/snippeteditor/JavaSnippetViewe
+ rConfiguration.class
+SHA-256-Digest: 6X8mvLRK52R/QGYJXp2jttWttHpZknNeUkmYz4GeXdg=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaLogicalStructuresPreferenc
+ ePage$LogicalStructuresListViewerContentProvider.class
+SHA-256-Digest: xZ7/dNhDpZnOzel6aAPp97NzY8LCBqTh4MGgmLmHGt4=
+
+Name: org/eclipse/jdt/internal/debug/ui/HeapWalkingPreferencePage$2.cl
+ ass
+SHA-256-Digest: iVqgtB3IaR9Nb11tbgYwj83AJPbijThXN2BjmQh4HV4=
+
+Name: org/eclipse/jdt/internal/debug/core/refactoring/WatchpointFieldC
+ hange.class
+SHA-256-Digest: KmFz7rLUiINBpImzT9usyFPtEiSXILwKquOzlrrHbhE=
+
+Name: icons/full/ovr16/caught_ovr.png
+SHA-256-Digest: TW19avqI29B52kYUC+gy0apLCuZgguqZtZRlXxnV8zU=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/StepIntoSelectionHandl
+ er$4.class
+SHA-256-Digest: hijNpcx94Pqkx/wH7KlrXVn6+0VtZ1Yjo8T+4DASzFY=
+
+Name: icons/full/obj16/jline_obj.png
+SHA-256-Digest: /oQ5292aNa/pzlfl+QBEtZ7OL11S/PXn4uW343kpx84=
+
+Name: org/eclipse/jdt/internal/debug/ui/display/DisplayView$1.class
+SHA-256-Digest: PQ8acgNqhuXJTLAk7FQJwLeDN6tSBoMgPWoB7oyKI3k=
+
+Name: icons/full/elcl16/constant_co.gif
+SHA-256-Digest: Ecql2Gpm4BopceJQUUjcMRlzVyC9OAFrdQhukgP67mk=
+
+Name: org/eclipse/jdt/internal/debug/ui/variables/ColumnPresentationAd
+ apterFactory.class
+SHA-256-Digest: a2rBbn1Dcmq/9du6zpriKl0ewTVaGlpAwLn0aK8TpDY=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/JREDescriptor.class
+SHA-256-Digest: hllXqe094LroX7D8uSRyookq2J5LaJBWNjeqHTe+hk0=
+
+Name: org/eclipse/jdt/internal/debug/ui/snippeteditor/JavaSnippetEdito
+ r$3.class
+SHA-256-Digest: fx6y5Y4g1QO7hx49RQPC7MjOAZr2riza5PD1zCzgBW4=
+
+Name: org/eclipse/jdt/internal/debug/ui/display/DisplayView$4.class
+SHA-256-Digest: r80rTi2OKaJBdKQjn89ks0HZCy3WjknXL7IO5e7b0x8=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ExitToggleAction.class
+SHA-256-Digest: ZDa42q0HN2A7LQqqvEznsYhbHH1Z27e9iaTI4TUwj08=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/OpenVariableConcreteTy
+ peAction.class
+SHA-256-Digest: HpTA4qbGB+lg1tBklFJe9+cDYzqJahjgR1xqvqw994c=
+
+Name: org/eclipse/jdt/internal/debug/ui/threadgroups/JavaModelProxyFac
+ tory.class
+SHA-256-Digest: i7L/z685StUYgn/OCF83bj7PGD7nV4mrUmlUkdwYTiM=
+
+Name: org/eclipse/jdt/internal/debug/ui/monitors/OwnedMonitorContentPr
+ ovider.class
+SHA-256-Digest: v91j7VBQAfq1FY9mLk1h8ZpZUlajZyd/l8H879KpRjc=
+
+Name: org/eclipse/jdt/internal/debug/ui/propertypages/ExceptionFilterE
+ ditor$7.class
+SHA-256-Digest: pFSwuwYzPRtK/5+RJPPQLnsYMeq5z5VQ8vJpSwWt7W0=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ViewFilterAction.class
+SHA-256-Digest: J5hnhYmI6pifyO3Gm4LozrlLXRZXCf2xt7SYDmdC7YE=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/RuntimeClasspathAction
+ .class
+SHA-256-Digest: YYeeIr4KPZ/trfh0xjhl9L1+57b502UjKb8JXyibRRs=
+
+Name: icons/full/obj16/prj_obj@2x.png
+SHA-256-Digest: hhBV0VobVDZIQTTC5mK2YYKYP7RUjq9urv/8G1qnxaY=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/ExecutionEnvironmentS
+ elector.class
+SHA-256-Digest: +PCmSWc/MQES5SN1o+8IQH0s2zdNllLw8m90SQ+4Nso=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/TerminateEvaluationAct
+ ion$1.class
+SHA-256-Digest: 7ktKT+Q5C9fFlWtLH7UPwW83ol7RS4RS9D/60FGYAXk=
+
+Name: org/eclipse/jdt/internal/debug/ui/breakpoints/AddExceptionTypeDi
+ alogExtension$1.class
+SHA-256-Digest: WBd2TlvoA251Rq9JeVjl3/aEnKSaXRR5nbCgOvDGESI=
+
+Name: org/eclipse/jdt/internal/debug/ui/snippeteditor/JavaSnippetEdito
+ r$WaitThread.class
+SHA-256-Digest: B//mOpTJD3hdO2KMPGj5BjHcdSBB4n7fj8NY51qKpJw=
+
+Name: icons/full/dlcl16/monitor_view@2x.png
+SHA-256-Digest: If6KbiuwuIg6HRV3g0WCNBcmhx2Fhcdo76H1M5Y7K5U=
+
+Name: org/eclipse/jdt/internal/debug/ui/snippeteditor/SnippetFileDocum
+ entProvider.class
+SHA-256-Digest: XvK/9WseXv2fXyHFJJiKL9kFVxNsU+JYL8dKvRM0nAc=
+
+Name: icons/full/obj16/jload_obj@2x.png
+SHA-256-Digest: KGlnqeA73y1aJVyLUkyU0azRTSKxo0ghcPYkt09SZlA=
+
+Name: org/eclipse/jdt/internal/debug/core/refactoring/LaunchConfigurat
+ ionITypeMoveParticipant.class
+SHA-256-Digest: ev5dgeeQHNIY58aLM4ODmQYPGaG55Cix0HhDyEP/n9w=
+
+Name: org/eclipse/jdt/internal/debug/ui/StatusInfo.class
+SHA-256-Digest: PDCNhuiEXyvFpVrDVr8tdaZf46GEtEcQaRWaRHKadQE=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/StringValueInputDialog
+ $3.class
+SHA-256-Digest: 4iyQhnAGPD6Tryas70ZZhOVeXg5a9TQJgUGjkCFI71I=
+
+Name: org/eclipse/jdt/internal/debug/ui/propertypages/VMCapabilitiesPr
+ opertyPage$1.class
+SHA-256-Digest: OkWTYYNr5+hkD1gZb+Wz+5vuAFjr11m4w2Dk1cD8WOc=
+
+Name: icons/full/dtool16/debug_exc@2x.png
+SHA-256-Digest: rEK3VjfvrzyEBRG2pJ21C2dOMm/Ybl9StRv5qX/D1q4=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/AddAdvancedAction.clas
+ s
+SHA-256-Digest: CHZGExTHnTHBnxqNlJqDTMhxEOy4zcJ4sHoywPgx8e0=
+
+Name: icons/full/etool16/insp_sbook.png
+SHA-256-Digest: ZUJPo2cSXlUDK2q09pCphbjXXQ4kZ0Bm3G0Op+vkvbk=
+
+Name: icons/full/ovr16/installed_ovr.png
+SHA-256-Digest: ZuCFKjpRYcxq1xi6WaKmafa9Lr6KDl4CAQg/5yHGud8=
+
+Name: org/eclipse/jdt/internal/debug/ui/snippeteditor/ScrapbookSourcep
+ athProvider.class
+SHA-256-Digest: D3TjxnhT0c8HExinG5V+YnyQg9pVuDUlqCH2dbuBWSo=
+
+Name: org/eclipse/jdt/internal/debug/ui/DebugWorkingCopyManager.class
+SHA-256-Digest: 43SIyn2fDZMzDQ6yYqs5jv8Fap9yU0YdlrV5O1x/jeo=
+
+Name: icons/full/ovr16/entry_ovr@2x.png
+SHA-256-Digest: zK7MYfU7XrTWU6hdoHDE6kKNZo4bu7eAuHwXNeIup9s=
+
+Name: org/eclipse/jdt/internal/debug/ui/console/JavaStackTraceConsole$
+ JavaStackTraceConsolePartitioner.class
+SHA-256-Digest: aGdEvovX59otMmUshexmOrnjhj5fsevFl0rfPRxTx3U=
+
+Name: icons/full/dtool16/disp_sbook.gif
+SHA-256-Digest: gB6Qp5Rslhi3OT1Pb0VDAaBK9YvOsFv3bNlSGhqKv1s=
+
+Name: icons/full/ovr16/exit_ovr_disabled.png
+SHA-256-Digest: /o9PDcdKh9plzzAW2lrL0Tj4yh2y620NsZahOgtu78A=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaDetailFormattersManager$Ke
+ y.class
+SHA-256-Digest: 0zBlxfci0ziTS8o3W5i1evkG2a0hPngzLWoA7H1z/jA=
+
+Name: org/eclipse/jdt/internal/debug/ui/propertypages/JavaBreakpointPa
+ ge.class
+SHA-256-Digest: J0ZyVAU72wHV8VUWzmPSQ8iY24LJwQ6ulhX8budHhx8=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/JavaBreakpointProperti
+ esRulerAction.class
+SHA-256-Digest: ZWZ3zRpmGVGVjd4QpcbB0ODX8HdJc4lMyPbBCxFmkak=
+
+Name: icons/full/ovr16/trigger_suppressed_ovr@2x.png
+SHA-256-Digest: q42pnm1oR1j1H8zt6/limVkXOFuftL6GVJlS5hbBICo=
+
+Name: icons/full/dtool16/java_attach.gif
+SHA-256-Digest: JkX+cuFnBD4bkxrAwCK3BfBTR4aKH6K1d6C6F/toSTY=
+
+Name: icons/full/obj16/contended_monitor_obj@2x.png
+SHA-256-Digest: LpU+gwc7XNGgDaKQLbj1dmLLYs6IN9cIueU5kzzGCco=
+
+Name: icons/full/obj16/jmeth_obj.gif
+SHA-256-Digest: jhDcpRWqV+maHX8exE3JJfy3TbH7ysFa/F0j7DUQH7c=
+
+Name: org/eclipse/jdt/internal/debug/ui/EditLogicalStructureDialog$3.c
+ lass
+SHA-256-Digest: l6n1s/lLxLeCQHisN6fPR992T4Se3071EEtNWadtS3Y=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/JREsPreferencePage$2.clas
+ s
+SHA-256-Digest: Y8ZhDX1Xjg7z3xP9/IUzK6MNGZYhf9tJUMD0xyl10xE=
+
+Name: org/eclipse/jdt/internal/debug/ui/monitors/JavaContendedMonitor.
+ class
+SHA-256-Digest: d/OGbxu01fydNR96+X3P47jkxpomrLzlzAw6g8yoe5k=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/RuntimeClasspathEntry
+ LabelProvider.class
+SHA-256-Digest: fCPQ5lXHyp1LlzY36bz3ydcuoolZ7znh6qjiqw3agIk=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/IEntriesChangedListen
+ er.class
+SHA-256-Digest: 62ysesosoVNbYi0xnQRnh1QCk7fSmtyCoFab3DwNwgQ=
+
+Name: org/eclipse/jdt/internal/debug/ui/threadgroups/ThreadGroupMessag
+ es.properties
+SHA-256-Digest: GH1mUWze1hl5SPpBZueY/HdHGZtoKTDK3rdrYiY+Xpg=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ToggleBreakpointAdapte
+ r$1.class
+SHA-256-Digest: +fWHTz+TAuYbjaOv1mLt/0ebD1CcwD/b/OaXrtbITnQ=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/StepIntoSelectionHandl
+ er$1.class
+SHA-256-Digest: frvEfCfEdo5xJLJnIok+Sszl8yPOT6/BBCVsdoj0/aE=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ShowMonitorThreadInfor
+ mation.class
+SHA-256-Digest: VBZJN0qcICntvqrM1bvGk72C3NL3VKt+PDgpgsT2X/w=
+
+Name: icons/full/obj16/class_obj.gif
+SHA-256-Digest: 8lOKR+CypGFW7Lm654PTwgmFKIZmOCsgAA89Py+M+IA=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/InstanceFiltersAction$
+ InstanceFilterDialog.class
+SHA-256-Digest: 61SkLxJGFEI49ZxVXMzjP8FrSWURloO4pdSuHf4K1V0=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/JavaPrimitiveValueEdit
+ or.class
+SHA-256-Digest: ZqGs9U3LIMoD+Oc4ZC7hxOk6T7Rcq0zUHIrk6DPrCq8=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/StepIntoEditorSelectio
+ nHandler.class
+SHA-256-Digest: GM9WxdXTk9yT90QzjcdNHCSadSdUBkl9lLUI1pUGfxQ=
+
+Name: org/eclipse/jdt/debug/ui/launchConfigurations/AppletParametersTa
+ b$1.class
+SHA-256-Digest: qG2SgMEGy3IYe2nXPgK6MDyYWsCJjjhhuKElRl4SOe0=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/DebugTypeSelectionDia
+ log$DebugTypeItemsFilter.class
+SHA-256-Digest: KzLZ3hq72SWnHAELbQNUP2Zis9EyZdWfC3SxhuI4txQ=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/ExecutionEnvironmentsPref
+ erencePage$2.class
+SHA-256-Digest: K2sBRx7pZwmpscBqEJqC/5cauaTy05LgbPzVFUCu+e0=
+
+Name: icons/full/obj16/contended_monitor_obj.png
+SHA-256-Digest: G1kxo8wWqu4GN0f+SK/ugcNldcjlXJzV68A4ZcitV3E=
+
+Name: org/eclipse/jdt/internal/debug/ui/EditLogicalStructureDialog$1.c
+ lass
+SHA-256-Digest: OSijippPPKAt2W2pn4hE9tVB5QfbbDz/5bZ24eEoMnQ=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/AppletSelectionDialog
+ .class
+SHA-256-Digest: tH0iyAZkA0kxrNFmJ04OA6A4fnF3XmCsDFLO+HUqW9k=
+
+Name: icons/full/obj16/jexceptiond_obj@2x.png
+SHA-256-Digest: t6T+APd1crh8mwckhpQqYiNsV82CLmIGBGVPaOHAOQA=
+
+Name: icons/full/obj16/jsbook_obj@2x.png
+SHA-256-Digest: VTtU+fya2n5sX1TZ/Jdw+DJKILx5rnjx6m3bxaTASFc=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaStepFilterPreferencePage$1
+ 0.class
+SHA-256-Digest: fxlqY5jLObyzwLwY2+QLLpL1EOM98en2llbURzmxRDg=
+
+Name: org/eclipse/jdt/internal/debug/ui/sourcelookup/StackFrameShowInT
+ argetListAdapter.class
+SHA-256-Digest: qeDa4cCHA6VhuhD9pg2aDrY93KKBYKATi+KxjWQJDtY=
+
+Name: org/eclipse/jdt/internal/debug/ui/snippeteditor/StopAction.class
+SHA-256-Digest: xmFPmLz4lYTFj/Ye0prbOdw3KAFGRr2elwMkV0Tfcpw=
+
+Name: META-INF/eclipse.inf
+SHA-256-Digest: Wtobld143jKeQa3j+O6xbbG2CgA3BSKOcvnZp2H2fFs=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/OpenFromClipboardActio
+ n$4.class
+SHA-256-Digest: s9M81sSJrt0YowNS1AtbxnqSi2ax1guZclqQzx5bSQc=
+
+Name: icons/full/dlcl16/deadlock_view.gif
+SHA-256-Digest: /XD3zK1b1K7kRHICBXHFfo+y1Wa/k6yQdt5c8u8yFVU=
+
+Name: org/eclipse/jdt/internal/debug/ui/snippeteditor/SnippetEditorSto
+ rageDocumentProvider.class
+SHA-256-Digest: sYZJJH/XChsu8oB+hDHljHTLySZx0TVBfafYtJ4Ln1w=
+
+Name: org/eclipse/jdt/internal/debug/core/refactoring/MethodBreakpoint
+ Change.class
+SHA-256-Digest: gFCWjtgfkH7GW7KYnIp0Keg3KOOYPYqgqAf6GI8Ab0Q=
+
+Name: org/eclipse/jdt/internal/debug/ui/console/JavaStackTraceConsoleP
+ age.class
+SHA-256-Digest: mc1ArCC+hpfS7YdC3dFSOWfr9/EEc1cUPO/nQvmm/Xg=
+
+Name: org/eclipse/jdt/internal/debug/ui/propertypages/ExceptionFilterE
+ ditor$4.class
+SHA-256-Digest: 2ONDxeLfTYtTid6zBaYE4larnIKvOaIDU4QpewUENSo=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/StandardVMPage$2.class
+SHA-256-Digest: 44eGgeiCm56U/rw5YYN4Y5qS5/GYBO1vgH8OmJQXShk=
+
+Name: org/eclipse/jdt/internal/debug/ui/breakpoints/WatchpointEditor.c
+ lass
+SHA-256-Digest: 7aJdN5/qEYEnbGejVoYjmj4MoHQaZI6wXOLZXisKvk4=
+
+Name: org/eclipse/jdt/internal/debug/ui/snippeteditor/JavaSnippetEdito
+ r$1.class
+SHA-256-Digest: x/DY6L/DtFTykwUeGf+MyUixbb+GMFVp3XSdQYW6BcU=
+
+Name: icons/full/obj16/threadgroup_obj.gif
+SHA-256-Digest: BbdC67PUuC+VM3TCCulKv6sNA+UBPlTixbb7RTi2SRU=
+
+Name: org/eclipse/jdt/internal/debug/ui/console/JavaStackTraceHyperlin
+ k.class
+SHA-256-Digest: /sKqgnjAer2gH7XFrG8hC9K1T75F0fEU/Yo78f/4CfM=
+
+Name: icons/full/ovr16/deadlock_ovr@2x.png
+SHA-256-Digest: KPxsN5HnMZax30ZxzHinA25xuzWkpGylGCcnrvq6hMk=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/InspectAction.class
+SHA-256-Digest: 2LT/YZmoEG9rf43XrahKHoFq13lnLHAOXNC9jxQHDNU=
+
+Name: icons/full/ovr16/exit_ovr.gif
+SHA-256-Digest: WTVU4YIJf4XGiqpGXc0FVUcVvkBzHiAFN4KsX/USjhg=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ToggleBreakpointAdapte
+ r$3.class
+SHA-256-Digest: YcsAjbPSJqeUK7UBsWEbxONnkrkeZ5UyPSqJvVK+y3s=
+
+Name: org/eclipse/jdt/internal/debug/ui/breakpoints/BreakpointDetailPa
+ neFactory.class
+SHA-256-Digest: xSw2abH50VIBXBZ3paZ6nQfMftWdEYdoIF02RV6nBQI=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ExecuteAction$1.class
+SHA-256-Digest: SjH8yI6hKZGow1v0N/tnoOAk5u3ZqWAN+PKMgP7/6Sg=
+
+Name: icons/full/ovr16/installed_ovr_disabled@2x.png
+SHA-256-Digest: LqsSwcIfNCB1CdILyrBXKUO3yQL9ERJ24kc30oNcLUM=
+
+Name: org/eclipse/jdt/internal/debug/ui/propertypages/JavaBreakpointPa
+ ge$2.class
+SHA-256-Digest: orO+9NZlfIxxuAX2KdN5JCoSdyGDGrDEMHYjY+YlvGw=
+
+Name: icons/full/dlcl16/suspend_co@2x.png
+SHA-256-Digest: EKuaZFUEAqz7ZKJV0njCykAAjPcEoJxpcQlSaeASUOE=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaVarActionFilter.class
+SHA-256-Digest: jabJYIkv0sofayH5P5vya90vL8nzFWILf1Ru4QFBsa8=
+
+Name: icons/full/obj16/localvariable_obj@2x.png
+SHA-256-Digest: EZ8LHRXawxwc9m7RJP2NPpyhVLxioYGlNG+RfBj64hc=
+
+Name: icons/full/obj16/jexcept_obj.png
+SHA-256-Digest: oo/QN6wb8B4GTSIzQQ8gu2WjhJ4kfHTtkFTK0oTSoW4=
+
+Name: org/eclipse/jdt/internal/debug/ui/DetailFormatter.class
+SHA-256-Digest: UggYDaYRQqZV06uUGh1zzmkBjEjLCjDbhrOandt6X38=
+
+Name: org/eclipse/jdt/internal/debug/ui/breakpoints/AddClassPrepareBre
+ akpointAction.class
+SHA-256-Digest: Ae6xDXof9ymWd2pzzXv8xY00EEANAK8FcH5lwPYIHBU=
+
+Name: icons/full/etool16/java_app@2x.png
+SHA-256-Digest: 8sRpT5pIWzw86ErJLyxnV/MYVZmR4tg2h0/GON/CqGA=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaStepFilterPreferencePage$8
+ .class
+SHA-256-Digest: r1N0LZi4BIlX+mMh8gy2GYDa9SeAnFjxK6E44TePnSY=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/StandardVMPage$4.class
+SHA-256-Digest: fctyzrYszx9Z/RLwqmJ+PWNzvDBW43IdgYj3voio8rk=
+
+Name: org/eclipse/jdt/internal/debug/ui/breakpoints/MethodBreakpointDe
+ tailPane.class
+SHA-256-Digest: vnFSl4kc9fxD2q7WMJT4ZpeMIScpym0iBb0kT8IZSao=
+
+Name: icons/full/dtool16/java_app.gif
+SHA-256-Digest: aXLGrTutkWqCOVq6bNtkUKUYqggFZrgUpr2R7cZSbh8=
+
+Name: org/eclipse/jdt/internal/debug/ui/propertypages/JavaBreakpointAd
+ vancedPage.class
+SHA-256-Digest: dyotOEO1c6VCeDjZy7yac04mWX9voeFNapAkGeqB44w=
+
+Name: icons/full/elcl16/thread_view.png
+SHA-256-Digest: gCIRbgpDjAyLozur5oJyE/tlM4BTvcWpEDUWbsWwu7Y=
+
+Name: org/eclipse/jdt/internal/debug/core/refactoring/JDTDebugRefactor
+ ingUtil.class
+SHA-256-Digest: M9fjG2Vp1vcopqHspP2N0g5fMBpsKuYOOgj0ojujZZg=
+
+Name: icons/full/dlcl16/suspend_co.png
+SHA-256-Digest: 8P7WQ8of+out6w0AdY0/y0I4e3U2VIx7Kda5sgD9u2I=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/StepIntoSelectionHandl
+ er$2.class
+SHA-256-Digest: J2IUmxVvy0ZVjl42ann8+qW+MgYMY/ggZYvrb347Y8E=
+
+Name: org/eclipse/jdt/internal/debug/ui/snippeteditor/SnippetAction.cl
+ ass
+SHA-256-Digest: PnBHv1fFSuC8JVIak2CtVTjMP3cETzXMWJtw+dK/JXE=
+
+Name: icons/full/dtool16/debug_exc.gif
+SHA-256-Digest: uaW/AIkUKWBfVUrnla183UhR8vibzVdXlVxd0BWiPHs=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/AddExternalJarAction.c
+ lass
+SHA-256-Digest: +pA3qDPZwKXCE80m1GZqC9ohxfi8Q1vyurLeJEcvnyE=
+
+Name: icons/full/dlcl16/final_co@2x.png
+SHA-256-Digest: aTSc2cu6ee+XlsFKe5wWDY1JWVrdx1SQZ2KY+zrrFDc=
+
+Name: icons/full/obj16/brkp_obj.png
+SHA-256-Digest: Amwd0TkoL9a/tH6ozTv3exHMUthFVcIORPnAXLuJCug=
+
+Name: icons/full/eview16/thread_and_monitor_view.png
+SHA-256-Digest: JGFikvnQgoJl56VAzk/+Ufe3309VBHXCKk8mq+tKRdc=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/OpenFromClipboardActio
+ n$5.class
+SHA-256-Digest: K5sgyhIduluGqRuf8cfbID7Xr0vxhqF9MsfBVqBTpIk=
+
+Name: org/eclipse/jdt/internal/debug/ui/variables/JavaContentProviderF
+ ilter.class
+SHA-256-Digest: Ffevmrf49MnlLLnQ6dX7+FpUhD4nO6q6Kt6ey/uTq7w=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ShowConstantsAction.cl
+ ass
+SHA-256-Digest: kCVdl+TqWu//pMzuKFIB6G0U9MJG/fRvkXbmshVQMyM=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ExpressionInputDialog.
+ class
+SHA-256-Digest: Ihe9pvZHQcS3WbhdjY/BYh6LJk1r9KsdMueVZhSGBQ0=
+
+Name: org/eclipse/jdt/internal/debug/ui/breakpoints/StandardJavaBreakp
+ ointEditor.class
+SHA-256-Digest: 6BPn/mlWSj2mBkRmwgFR9Th7NQle5PMlh5IH1/KnSNU=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/AppletLaunchConfigura
+ tionUtils.class
+SHA-256-Digest: t9PYABoTtaB45wJ7vLqo0XTUmtgI1gsp3IrzrR2bxsg=
+
+Name: org/eclipse/jdt/internal/debug/ui/propertypages/ExceptionFilterE
+ ditor$6.class
+SHA-256-Digest: FSkBc0l5ZY/PuFd4lJ3UYLNjCji5A36zWIGzwpl8MSI=
+
+Name: org/eclipse/jdt/internal/debug/ui/ImageDescriptorRegistry$1$1.cl
+ ass
+SHA-256-Digest: U/Gnu2UO3Zq5WUnHUU+waRoyAMPUd3ipO15bc+cI73Q=
+
+Name: org/eclipse/jdt/internal/debug/ui/threadgroups/JavaThreadGroupCo
+ ntentProvider.class
+SHA-256-Digest: Dv2baHgcORi1/9nghMmhG7/w5mXd/LUrWK+8Ri1L9lA=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/SelectSystemLibraryQu
+ ickFix$1.class
+SHA-256-Digest: PtA83d3gONjy16wsSTeQlJOBJ+QVeB0WD3mWx6Zau+c=
+
+Name: icons/full/obj16/owned_monitor_obj.gif
+SHA-256-Digest: RsinJoiTFblMVU7EA8GnoeSgOWju1oIzX2p4ajGFeJM=
+
+Name: org/eclipse/jdt/debug/ui/breakpoints/JavaBreakpointConditionEdit
+ or$11.class
+SHA-256-Digest: w0OM421NzQ1+eNAAWnkYt5Ga+IFW+LMgDQRJANf1RIg=
+
+Name: org/eclipse/jdt/internal/debug/ui/HotCodeReplaceErrorDialog$2.cl
+ ass
+SHA-256-Digest: IkHUPfv970aC0f171ikCVaUZNfh8EhVYBEtaSn1XTHQ=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaBreakpointWorkbenchAdapter
+ Factory.class
+SHA-256-Digest: SwWtKT6KLAJMuvSlBHZ4EP3xAZJs6vv+riivyO7zaTI=
+
+Name: icons/full/obj16/envvar_obj@2x.png
+SHA-256-Digest: hmg4C9m7PB2cyeumpZqCy5TDi9ayP9lJAYm7u4BVpIM=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ProjectSelectionDialog
+ $2.class
+SHA-256-Digest: fauvLnvRw9R3zhTUTx4bi44brC8cwSH4yohIkD6TsTo=
+
+Name: org/eclipse/jdt/internal/debug/ui/ZipEntryStorageEditorInput.cla
+ ss
+SHA-256-Digest: ZLiCO2sM90a69RpRBoK6+uY422S6sgUAQlJvCHR5IhA=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaStepFilterPreferencePage$2
+ .class
+SHA-256-Digest: vJ2UGI9Zw5VlX2//kZFa2ic3DWc0T6DiIwJZ1GY0Qh0=
+
+Name: icons/full/ovr16/error_co.gif
+SHA-256-Digest: Yzm+zO5ZepdPNNa4nP4bCPeoDeRidvpBhuv6zVPVI7s=
+
+Name: org/eclipse/jdt/internal/debug/ui/snippeteditor/NewSnippetFileWi
+ zardPage.class
+SHA-256-Digest: aF99tWhkToz4oj0om4eBP88f6bHwxwcvKDGNyzXI+ek=
+
+Name: icons/full/ovr16/contentionformonitor_ovr@2x.png
+SHA-256-Digest: 552pvTK4gaxLCp49fhK0MPJCxtwIsVyDIKJ5peLZD3k=
+
+Name: org/eclipse/jdt/internal/debug/ui/propertypages/ThreadFilterEdit
+ or$CheckHandler.class
+SHA-256-Digest: MzvljsOHi/LVCsCl/YXwJyBNA1li/O/ldUxAAXq3VfM=
+
+Name: icons/full/elcl16/exc_catch@2x.png
+SHA-256-Digest: 3E5wjVEVeTtkpS8nYBtmYiwaGFXU1TFejHgH+bH8q5M=
+
+Name: org/eclipse/jdt/internal/debug/ui/contentassist/TypeContext.clas
+ s
+SHA-256-Digest: CiILY2aVk9MwV95bpOOdVy6kYsQM1khmwLNTNeKSoZs=
+
+Name: icons/full/ovr16/entry_ovr_disabled.png
+SHA-256-Digest: a4DeMk3vLe9j35e4ugKZRKZFid7/2ExFf7PC/7IBh3s=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ToggleBreakpointAdapte
+ r$4.class
+SHA-256-Digest: yarFQ5n4TLbrrD5EndnMubUBQdXb+Y/0uz13VUTyD3U=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/ExecutionEnvironmentsPref
+ erencePage$JREsContentProvider.class
+SHA-256-Digest: y5jnbOjnoF9uCmVQlQZZzByNhxD8WpgUK7JI86pvDg8=
+
+Name: org/eclipse/jdt/debug/ui/launchConfigurations/AppletParametersTa
+ b$AppletTabListener.class
+SHA-256-Digest: k9e6lXENbkhNaenlX3yLQreyrESU3I4ontZGhTH9uuQ=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/OpenTypeAction$1Result
+ Exception.class
+SHA-256-Digest: ZUuA+PGMhHgPqwtAhUQ/J7PO5xRtEjp+8VjmD7PDFQU=
+
+Name: org/eclipse/jdt/internal/debug/ui/monitors/OwningThreadContentPr
+ ovider.class
+SHA-256-Digest: H/NENOoPVvZD40d0I3QqwbCkOcVeQJR21JqtUSrzwfg=
+
+Name: org/eclipse/jdt/debug/ui/breakpoints/JavaBreakpointConditionEdit
+ or$10.class
+SHA-256-Digest: vplRid+hnw8hv1LF7WDfljD4TrPQH39T8+x/wHmp7o8=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaStepFilterPreferencePage$3
+ .class
+SHA-256-Digest: 2BuhIMkMM+oe5j1iZNEUynsomd1cW+hhQeDs4K46F14=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ActionMessages.propert
+ ies
+SHA-256-Digest: rUeQJivWP3v+kkcntMiJJJuBRnK0VfZjqlj+GrqmRGg=
+
+Name: icons/full/dlcl16/thread_view@2x.png
+SHA-256-Digest: QJRX7iHYWvgoaVFkE+uiDmaDS/7AWGUbbDOPkCRxkcI=
+
+Name: icons/full/etool16/java_applet.png
+SHA-256-Digest: 8FbImrPk05EMIoiMROnAEPckziaG1JBH4COm2k/Rvpw=
+
+Name: org/eclipse/jdt/internal/debug/ui/breakpoints/SuspendOnUncaughtE
+ xceptionListener.class
+SHA-256-Digest: BDTzQXa2Mh3b0cm/AOk3ahs9WnHSrYijJZDnheRJNMQ=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ProjectSelectionDialog
+ $1.class
+SHA-256-Digest: XLtBaM5E5Syb2xiwLgwPZ8mGSTLxSRHBWxxWQiCF+L8=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/SharedJavaMainTab.cla
+ ss
+SHA-256-Digest: R/U00tupPrdeeqNoxp0E9ex4Em4zU9WXQMh72gnEcgk=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/StandardVMPage$5.class
+SHA-256-Digest: xRRIPsSEZO3a3toz/As/MnQ5JjrRUac4BEmvrpFocEM=
+
+Name: icons/full/obj16/monitor_obj.gif
+SHA-256-Digest: J4TSMZDPzBAWRrCRmE+6kRh0vdQp/ZAU3IhCRsaKgAs=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ForceReturnAction$1.cl
+ ass
+SHA-256-Digest: xbMGW2pE/7jwQQwxV5x50S/7jlX9RrKS4Cl3fRfy3Z8=
+
+Name: org/eclipse/jdt/internal/debug/ui/propertypages/JavaBreakpointPa
+ ge$3.class
+SHA-256-Digest: w/G5+bOAKAvsMeUu+Ci6uP6uuFbP5RNLXjjbO7xcN+s=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaStepFilterPreferencePage$9
+ .class
+SHA-256-Digest: kchD5rmGFYnMepAGdnwFV6gHx2a/9+PVQ06eEu8UY4I=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/AddJarAction.class
+SHA-256-Digest: zgNNKclaFmXkAEbFt/b+fxy639+PlEh36WmeshL2g+s=
+
+Name: icons/full/ovr16/contention_ovr@2x.png
+SHA-256-Digest: 06NzkjstvIcbYqDDsQli+NrSovcJfepiBfJFisl9+NY=
+
+Name: icons/full/dlcl16/resume_co.png
+SHA-256-Digest: AbDFsTC5eU3yevqSB8ojcHwOkTf/7EendeFlNHGZLJM=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaStepFilterPreferencePage$4
+ .class
+SHA-256-Digest: wFOi+OmTIPK/tW7JZbNS5OrgfWt6924EST9dBRKZcJ0=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/AddFolderAction.class
+SHA-256-Digest: VXDL02G+fZQrfOkbsGxATJIFrofinxMVQqg+gEImbOA=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ToggleBreakpointAdapte
+ r$7.class
+SHA-256-Digest: /8odmB9TwEueR9tu+kDGRf+xS0OnEqGithQ7sfid62I=
+
+Name: org/eclipse/jdt/internal/debug/ui/threadgroups/JavaThreadEventHa
+ ndler.class
+SHA-256-Digest: 8/MNvPZ/XEIUrOtPiwO/pj9MAK3uca1yYa3t2po3EnQ=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaWatchExpressionDelegate$Ev
+ aluationRunnable.class
+SHA-256-Digest: ToDudtc7ZtuHe3i/OPTtCji5EgQli0aDEGAOe9c9Fls=
+
+Name: org/eclipse/jdt/internal/debug/ui/snippeteditor/JavaSnippetEdito
+ r$WaitThread$1.class
+SHA-256-Digest: ZdLCWJUpODbBiov3e5MhScOpXO01i78R3RuVQHkt9Tc=
+
+Name: icons/full/obj16/insp_sbook.gif
+SHA-256-Digest: gZPV7B/KOQVEViIJ03rvURkQy30DEVxarJNQrOIUQhU=
+
+Name: org/eclipse/jdt/internal/debug/ui/console/JavaStackTraceConsole$
+ 2.class
+SHA-256-Digest: G214SpQvI5UwWdLiT9oF+6guyBCuH/+x1eE+hnH3yJA=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ForceReturnAction$2.cl
+ ass
+SHA-256-Digest: wCW5Q5bTrgTIqntrH58BgIcU29VvcKCFNPug4GA1QW8=
+
+Name: icons/full/elcl16/runtoline_co@2x.png
+SHA-256-Digest: NlACpWQIv18wPvEJmhipayQEVSPWeJSOkn3ciQmHKG4=
+
+Name: icons/full/dlcl16/constant_co.gif
+SHA-256-Digest: wYlx4tls6Na3qvZq5+PSVshr3fCIvOJuCC+rlpqLjQQ=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaStepFilterPreferencePage$7
+ .class
+SHA-256-Digest: ajfO7cAdGC1BxJlpxtEtRlim2VC5GBT5Z55fg4KdA70=
+
+Name: org/eclipse/jdt/internal/debug/ui/breakpoints/AddExceptionAction
+ $2.class
+SHA-256-Digest: NGxQgo9Q9If6RgpD9JW2b8zZ/FkhY0BkC0HwCi4ER4M=
+
+Name: org/eclipse/jdt/internal/debug/ui/HotCodeReplaceErrorDialog$1.cl
+ ass
+SHA-256-Digest: yjPSCjr7VZ/kV4smzc9TrN6cjOmd2cIWFwjLcZ++H1E=
+
+Name: org/eclipse/jdt/internal/debug/ui/breakpoints/StandardBreakpoint
+ DetailPane.class
+SHA-256-Digest: UN3KuFtY+u+xEzjpGUEgOHvRqWHFntxawxvaj/24xjc=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaPrimitivesPreferencePage.c
+ lass
+SHA-256-Digest: OnsHe2j4AAb6rpbPLphpNbZpQrlOD9iwSVLebuM35X8=
+
+Name: org/eclipse/jdt/internal/debug/ui/LocalFileStorageEditorInput.cl
+ ass
+SHA-256-Digest: snGTSLiSig6TYNfa/GahQxTQbKIAQuF0h9tjyp1o3qA=
+
+Name: org/eclipse/jdt/internal/debug/ui/monitors/ThreadMonitorManager$
+ RefreshAndDetectDeadlock.class
+SHA-256-Digest: jMWBgp4irtpNuq680jl+M1TaCaXzLPWtjlLrsnpTKPc=
+
+Name: icons/full/elcl16/autoform_menu.png
+SHA-256-Digest: 5+tjOClmCg33wdVkC+YOjyxUF6kPYD9tZZtpkMf4ReU=
+
+Name: org/eclipse/jdt/internal/debug/core/refactoring/RefactoringMessa
+ ges.properties
+SHA-256-Digest: LK8SHfXHUd0ZjYCUN4aY2viAyPArA7qQOo20qFwEPQc=
+
+Name: icons/full/obj16/jar_obj@2x.png
+SHA-256-Digest: qKOk9DzteOlY/doDJR5Su29ALc9C4Ea+Ee+9zXtgFNE=
+
+Name: icons/full/elcl16/constant_co@2x.png
+SHA-256-Digest: eNIOlgs+3GIBKcTLpWX6XXHfrV9ZlHLzfKwniIrjVwM=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/RuntimeClasspathViewe
+ r.class
+SHA-256-Digest: S+TM1zg3noQT2o9YkToGWaGaN0RlpR58iusXROBVvek=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/SourceLookupBlock.cla
+ ss
+SHA-256-Digest: uH4iLh2PeZHVSINR45k5UwUGB4n+w8gq2WOildgt9Fs=
+
+Name: icons/full/elcl16/deadlock_view@2x.png
+SHA-256-Digest: ofN7gdMEVGmPzYw4Pi7CqKg+xxlcBizDc+KUKndPz+o=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/EditVMInstallWizard.class
+SHA-256-Digest: /9LY7GHaAiTeG0r2zhf+iDpxJvu6TGhckxjCKbW9x/Y=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaDebugOptionsManager$InitJo
+ b.class
+SHA-256-Digest: SQYr18KzdcsbfbaP93SeYOhHs9sqmfhdDDRQO76ASNQ=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ForceReturnAction$3.cl
+ ass
+SHA-256-Digest: 5a7jq++MgqQgFvTTzB77jEnFrmMSq7AZrC5m3iJ/RdY=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaStepFilterPreferencePage$6
+ .class
+SHA-256-Digest: yBbd/R+zUD5SdsJndMIiHH3v6PUESwcqVu0sRwXLKXI=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/StandardVMCommandTab.clas
+ s
+SHA-256-Digest: MwOPO0tP61DqBWMRu/nn8Xq2kIqjIGnWr39uJdBKShc=
+
+Name: org/eclipse/jdt/internal/debug/ui/console/JavaNativeConsoleTrack
+ er.class
+SHA-256-Digest: WuISW36REsVqY9RuYkc4thWptLv2JsWiLZwoA0t02C0=
+
+Name: icons/full/elcl16/all_instances.gif
+SHA-256-Digest: zb6a84C9QBAUazZY5fecZJdmd03GZODN7sYGmojl42Y=
+
+Name: org/eclipse/jdt/internal/debug/ui/display/IDataDisplay.class
+SHA-256-Digest: /tr+MW87Tx21FWJqxu1SDnbjBodWqZb0DfjEV0PSats=
+
+Name: org/eclipse/jdt/internal/debug/ui/propertypages/JavaBreakpointPa
+ ge$1.class
+SHA-256-Digest: 7AN4mv7mOjeap6Cqs8bwth6ahVTmEn8ShiFQHQMOhF4=
+
+Name: icons/full/elcl16/autoform_menu@2x.png
+SHA-256-Digest: qqf61liKJYpRbUeujEKv8iNorCRZgUmvEGfxAxigtEg=
+
+Name: org/eclipse/jdt/internal/debug/ui/breakpoints/AddExceptionTypeDi
+ alogExtension.class
+SHA-256-Digest: IQ8PNvyJMMOl7Obs6KLgywaN2sDBPc9NGNLeF07yl2Q=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/VMTypePage$1.class
+SHA-256-Digest: SFduVjDhAvXRlaRzU5cr6SYHXWf/CP7A2JdEZAZJUIo=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/PopupDisplayAction$Dis
+ playPopup.class
+SHA-256-Digest: YbFs9XkLhMCR9Xr/jokEzv2X3oR/fwEK8zAqRRiLpVs=
+
+Name: icons/full/elcl16/monitor_view.png
+SHA-256-Digest: wHxMzUhh6FU7IDhiFYNEPZcys85qSxf0LpS9S2rvI9U=
+
+Name: org/eclipse/jdt/internal/debug/ui/console/JavaStackTracePagePart
+ icipant$1.class
+SHA-256-Digest: tApq8MsuAwh452nb07ToqXi1PuP+xQjahp2GE1JmVDg=
+
+Name: icons/full/ovr16/uncaught_ovr@2x.png
+SHA-256-Digest: O7lYzNA8mFHBEHQLEAVofsRaFi7r3VHOMj5UmV/bhjQ=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/JavaAppletTabGroup.cl
+ ass
+SHA-256-Digest: g8XCZFF6KMAVHy81TZutfHhtNdx5QqqpHNrvg2jcxN4=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ExecuteAction.class
+SHA-256-Digest: BgkUGSTxDhnthpTnp3bK0UA7uW/h5GkkVUWGTWBCFB4=
+
+Name: org/eclipse/jdt/internal/debug/ui/heapwalking/Messages.propertie
+ s
+SHA-256-Digest: NCzCd3O24uLZb8G8AEEouvyLcQXENGAYOBtwYParkQc=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/OpenDeclaringTypeActio
+ n.class
+SHA-256-Digest: wfsRMaxZvlguDkmtQa+Fp8cE9O32DbMsQZGKJQfiQ5Y=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/DefineSystemLibraryQu
+ ickFix.class
+SHA-256-Digest: 9UgAsAzNgioTxhortiaKPycTxa/HKxDhlbnFOWyORUo=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/AddFolderAction$1.clas
+ s
+SHA-256-Digest: MsDgjnjBz+mMs7MdPucDX2itPFCzJBcfpHzFj0LFxOo=
+
+Name: icons/full/obj16/classpath_obj.gif
+SHA-256-Digest: gqAnYxBEivHScRuNH0dkrsgEHYbVRA1qrJMDCo57YAs=
+
+Name: org/eclipse/jdt/internal/debug/ui/monitors/JavaMonitor.class
+SHA-256-Digest: HyImNemjcAz3zw5zH63ExW2XPggwWuMOoIkkb+xaCOY=
+
+Name: icons/full/obj16/library_obj.png
+SHA-256-Digest: knhk5RQ3dZHRESeyWCX0k/YzfzXEa9VnsSee2v1jKv0=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/VMTypePage$2.class
+SHA-256-Digest: M6O6LzheGVlfT8R2R6VovibAEoYA5Z7EyI4UAUFg8aU=
+
+Name: icons/full/dtool16/watch_exp.gif
+SHA-256-Digest: fkxD9CzsX6Fdxpd0SLS51HYevpl2WT4XwwiojxIzmAY=
+
+Name: icons/full/etool16/java_app.png
+SHA-256-Digest: n2MHfvAo3qdS2DH0N1bTSdH12gMqHsUvvdirIQNVOxA=
+
+Name: icons/full/ovr16/exit_ovr_disabled@2x.png
+SHA-256-Digest: f67OTMtg/qMnk66+cgn93vIDbrKbW6g1NasPR5mfAPU=
+
+Name: org/eclipse/jdt/internal/debug/ui/classpath/VariableClasspathEnt
+ ryAdapterFactory.class
+SHA-256-Digest: +4EFYqto2pvRnx/s5gJBxVXb13aQGDGq/UmUoCStfrY=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/JREsComboBlock.class
+SHA-256-Digest: 8oV5H9W/bGWM9kpzqaleq31tufrGFRFtlGfNsgMizsM=
+
+Name: icons/full/ovr16/conditional_ovr@2x.png
+SHA-256-Digest: dbypzsp2aE598ljxA8yc7Me3NapFNwkO2rswH0jHX8A=
+
+Name: org/eclipse/jdt/internal/debug/ui/console/JavaStackTraceConsole$
+ 1.class
+SHA-256-Digest: 77Xn0dOKs6qG8ESNtWExglrwnphKFa227oyEzR7GZqo=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaSourceLocationWorkbenchAda
+ pterFactory.class
+SHA-256-Digest: 6S49PD5sHOfhZwUaGRnjdm74cq9y/lVq7FrqLQeQHD8=
+
+Name: icons/full/elcl16/sethitcount_co.png
+SHA-256-Digest: yYCavenJn0UGe9ONou47QEd4It2xjRx1NkrlvSOQIu4=
+
+Name: icons/full/obj16/reference_obj@2x.png
+SHA-256-Digest: riw7E2lw7jJpdPnQZv53CsJDD7tj0s2FR5J9+uaYu20=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ToggleBreakpointAdapte
+ r$8.class
+SHA-256-Digest: JcEbRUWlmwWEkVFIwi/TV+XN4g2H/vwkC35BQ3mlshM=
+
+Name: org/eclipse/jdt/internal/debug/ui/ExpressionInformationControlCr
+ eator$ExpressionInformationControl$DetailPaneContainer.class
+SHA-256-Digest: H2xqj46sqZCkCgJrmBuJaRJLm4sdlR1IswwLZ76jiD4=
+
+Name: org/eclipse/jdt/internal/debug/ui/EditLogicalStructureDialog$2.c
+ lass
+SHA-256-Digest: kZ+fK3eoCUhxG8pi88FVSjMkuvQTI4FOFuRdHlREVc0=
+
+Name: org/eclipse/jdt/internal/debug/ui/console/FormatStackTraceAction
+ Delegate.class
+SHA-256-Digest: eKQVpDcaI04ClbN/hWb+CDKBemTkTQSSmtdhAHgZjz8=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/InspectAction$1.class
+SHA-256-Digest: TRWvFc9S1srniSVVAsHRtG4wRHee6v0kzm8Ub5++M5I=
+
+Name: org/eclipse/jdt/internal/debug/ui/monitors/JavaMonitorThread.cla
+ ss
+SHA-256-Digest: XEoKsdHZ5eenn4eyKOPHI8B2crxxoMXvhrewDRPQUpg=
+
+Name: org/eclipse/jdt/internal/debug/ui/FilterLabelProvider.class
+SHA-256-Digest: C0VBd9qj2BfWX9nO3N7jWfAVDEMtDrIbCanRdxL5OD4=
+
+Name: org/eclipse/jdt/internal/debug/ui/breakpoints/StandardJavaBreakp
+ ointEditor$4.class
+SHA-256-Digest: 4wHPscLxEcN3x/bsD/hNkLDesn2TB7Ybrfpz0cRC/FQ=
+
+Name: org/eclipse/jdt/internal/debug/ui/snippeteditor/NewSnippetFileCr
+ eationWizard.class
+SHA-256-Digest: DP+W7QYzsYL+y4uOJL3jBHBnffA4+HygP7TuQmCcUh8=
+
+Name: org/eclipse/jdt/internal/debug/ui/classpath/DependenciesContentP
+ rovider.class
+SHA-256-Digest: r+riBJbW6ib5PWCUxolDmx+RCxqtsEQzSYf0oHXnhSY=
+
+Name: icons/full/obj16/brkpi_obj.png
+SHA-256-Digest: mzP4P7CfcTu9jGmTG8SwE9h4F8SXTPSTdjkgNpH1iMo=
+
+Name: org/eclipse/jdt/internal/debug/core/refactoring/BreakpointChange
+ .class
+SHA-256-Digest: vJxxCJUpokuSwJqOUKWh02ojEOHRcyU94e2AVw5A+p4=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/AddPackageStepFilterAc
+ tion.class
+SHA-256-Digest: Q+k+k6bHVjDZPYh9YiF2af+jYEGUaCxQJa4dWSje4O4=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/MainMethodSearchEngin
+ e.class
+SHA-256-Digest: W4Tj/jeDTFzdns7suenAxazZ7y7o/IqUsOvWZzYaJCQ=
+
+Name: icons/full/dlcl16/resume_co@2x.png
+SHA-256-Digest: zm/s18IuZ1KNdT6gdGynvMIzuv0WgkEn2BR3NTgx9xY=
+
+Name: org/eclipse/jdt/internal/debug/ui/sourcelookup/StackFrameShowInS
+ ourceAdapter$LazyShowInContext.class
+SHA-256-Digest: E1OoCAHmVlMtNPr3iuz1cRC4vVUkazl0015T90ytX88=
+
+Name: org/eclipse/jdt/debug/ui/launchConfigurations/JavaSourceLookupTa
+ b.class
+SHA-256-Digest: ZD/4IO/7EbVH2AECltvXujPlob8FQf09cGULIvzkIdk=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/DisplayAction.class
+SHA-256-Digest: 5tn0OwmNdgnlscv00aukmRyU0NcZietdREdEmJGqd64=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/MoveDownAction.class
+SHA-256-Digest: v1qoZYr+YP65T6Jy32wAKen6PPnN4PgQpcyb33ghmak=
+
+Name: org/eclipse/jdt/internal/debug/ui/classpath/RuntimeClasspathView
+ er$RuntimeClasspathFilteredTree$1.class
+SHA-256-Digest: rjbvALlxer1lV3Mnnn5s0QZUqHHL0J/jZNcMoxtCG7g=
+
+Name: icons/full/dtool16/insp_sbook.gif
+SHA-256-Digest: eTCsKwAzKhIEATWU+8fDyUOblFCfB2Orkn0qQOgHySU=
+
+Name: org/eclipse/jdt/internal/debug/ui/variables/JavaStackFrameMement
+ oProvider.class
+SHA-256-Digest: dysY+4cLo0bAtvlo3gkPYrNzO+VUhQMX0YsIkbOa7E8=
+
+Name: icons/full/dtool16/java_attach.png
+SHA-256-Digest: /75kScQIM5pE/f3vhuVI6jMklJqQDJoGEjUbE16PFVI=
+
+Name: org/eclipse/jdt/internal/debug/ui/ConditionalBreakpointErrorDial
+ og.class
+SHA-256-Digest: nwV2WtLsJHhBHqUconu4U+9WY4jDLeLgVbZ3TSotKfs=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/AppletSelectionDialog
+ $1.class
+SHA-256-Digest: 6lOijUY1pw8+18hnltwEMc2geniBCJDtpsNDhiyRkDk=
+
+Name: icons/full/ovr16/scoped_ovr.gif
+SHA-256-Digest: zMdY5XUBqD18VxXm72Hg6Uz8FHoxtqoJfNLiUA4FqwM=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/SourceLookupBlock$2.c
+ lass
+SHA-256-Digest: UCEhoJ/hfxg0KrUKTpm9S04yL5IsE8RCwSj2Yir0KP4=
+
+Name: org/eclipse/jdt/internal/debug/ui/snippeteditor/JavaSnippetCompl
+ etionProcessor$1.class
+SHA-256-Digest: dhBGgLP4GJckOc9VlaZlW42ILsRJ9QxPALz++PXHuWo=
+
+Name: icons/full/dlcl16/resume_co.gif
+SHA-256-Digest: IunLZme4EdxTzHzVk+7CGAttpwlMuUF094PsRKlOMao=
+
+Name: org/eclipse/jdt/internal/debug/ui/snippeteditor/JavaSnippetEdito
+ r$12.class
+SHA-256-Digest: qiFu7swEtAC3DDf1tXJTDRYSnNVVBT5hhuAUapsgqT0=
+
+Name: org/eclipse/jdt/internal/debug/ui/classpath/ClasspathMessages.cl
+ ass
+SHA-256-Digest: ciIEQ9Syw75tQTJT0jVjbK+1Y4DeV7XV7NQAvP919/g=
+
+Name: icons/full/ovr16/owned_ovr.gif
+SHA-256-Digest: 3lgrX7of/pvnU1UY+V1YHeDBuJpUzkL/Eu2pUmjz9+0=
+
+Name: icons/full/etool16/debug_exc.gif
+SHA-256-Digest: 18AZ3pUZgR/cz13IDSpoGm/WJrk3orgj+sVDwmskz1I=
+
+Name: org/eclipse/jdt/internal/debug/ui/snippeteditor/SnippetDocumentS
+ etupParticipant.class
+SHA-256-Digest: s5WJk9IC9a6WQEsdMNFC78h26DX6yLotAygffsSDExg=
+
+Name: icons/full/etool16/disp_sbook.png
+SHA-256-Digest: Xz8XbnGIQ5heC6z/IPDFeCKkpeft8Rm/khPHCGhpJw8=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/OpenTypeAction$2.class
+SHA-256-Digest: Fp/jDisF96VWAh/yMPm72twjv31mjw0bA4v7Oiyib7Q=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/AppletLaunchConfigura
+ tionUtils$1.class
+SHA-256-Digest: LLjptaYxpH/G5znyMbNF7fdiaDeJr5Jdo/qFklbUGYs=
+
+Name: icons/full/elcl16/deadlock_view.png
+SHA-256-Digest: MZAY61/F1K0NNE+DZsZCkhBMZOg3U7EWsbcnvya5tAI=
+
+Name: org/eclipse/jdt/debug/ui/launchConfigurations/JavaApplicationLau
+ nchShortcut.class
+SHA-256-Digest: NHFC25/SMlOaZuZ0/Xkxku0MQFCZRm8spFdAQKA2zHo=
+
+Name: icons/full/dtool16/run_exc@2x.png
+SHA-256-Digest: 54xEV2R1qkyQ5O3Ins5Sirqfh0/ZfsuTeclR+uga6aQ=
+
+Name: org/eclipse/jdt/internal/debug/core/refactoring/BreakpointRename
+ TypeParticipant.class
+SHA-256-Digest: 9scLNZplENA6jgImY8toM3HlegEc2CURiupMqST2nFk=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/JREsComboBlock$4.class
+SHA-256-Digest: yCsFedW/gXG428+aDU5OFUWjb22597hLZZh7ChefosI=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaDetailFormattersPreference
+ Page$4.class
+SHA-256-Digest: CvDtmM3xPsg0A+GtzJH1Jh3rJIWnmjtjuzkPnrrlU8A=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/OpenFromClipboardActio
+ n$8.class
+SHA-256-Digest: xrx9B8A39nyMuiaD0bdIB7cG1dU7tQrXIL6nGOvp4U8=
+
+Name: icons/full/dlcl16/exc_catch.png
+SHA-256-Digest: X1hovcU2x4ElqMUctYIDU/m27EnHE3n6FK7hKxvgMMA=
+
+Name: icons/full/elcl16/monitor_view.gif
+SHA-256-Digest: 6JbqIfOpHEtuuPGRhzhoIU8GvVr3tY1LTfw92NcgD5M=
+
+Name: icons/full/dtool16/term_sbook@2x.png
+SHA-256-Digest: dxRWto89inEV6RoBbpOlhyISV3JQxczglige08uGgVA=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/JavaBreakpointProperti
+ esRulerAction$1.class
+SHA-256-Digest: F02e1TY+t5qN3PYor6A8ZEAJqR692bDGRSjfqMOox18=
+
+Name: icons/full/wizban/java_attach_wiz.png
+SHA-256-Digest: zRMbcjj6DPEZlqu2+iu0wfmxcG8dc0NeZ0x2kKSStLc=
+
+Name: org/eclipse/jdt/internal/debug/ui/breakpoints/JavaBreakpointType
+ AdapterFactory.class
+SHA-256-Digest: VsCUzN7/wJoN+3c9RXqCz8N44yrX7C6i/JkBWJqPlGg=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/RemoteJavaApplication
+ TabGroup.class
+SHA-256-Digest: 8fo5Uh7qy8ASonijWSwFTf81yj41uAqVQybOEKhvpIA=
+
+Name: icons/full/ovr16/scoped_ovr_disabled@2x.png
+SHA-256-Digest: GcLxoyY/Pu5ZQNAVF+wJ/C/CCxdpnJCbskWmv0NZEfI=
+
+Name: org/eclipse/jdt/internal/debug/ui/JDIModelPresentation$1.class
+SHA-256-Digest: oub78fPQZP2folqS9P9vuyCfMVcJK6rpM+PTIPUjAuk=
+
+Name: icons/full/etool16/watch_exp@2x.png
+SHA-256-Digest: uA9Be2xQDV+aDz2UPOiw/0Sfgt9K+uKTC7dJASVPMNg=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/SourceElementQualifie
+ rProvider.class
+SHA-256-Digest: rBVRFqbnOKm6mkms746SVFFeY8+icrAKVadp6yk7X/I=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/OpenStackFrameAction.c
+ lass
+SHA-256-Digest: lxgx7MziqL1Ji65aNiciqUybTw64W5yQ5KeBJpx25Vc=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/OpenVariableDeclaredTy
+ peHierarchyAction.class
+SHA-256-Digest: faH1gX8E/JqDH8txqtt/J9/eTztqB7rkxyjZKMdRNgc=
+
+Name: icons/full/ovr16/ownsmonitor_ovr.gif
+SHA-256-Digest: 2avYtQX4VzhMgEFByjLM/2IV7dt0wOxTVd7rn5F54i0=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/PopupDisplayAction.cla
+ ss
+SHA-256-Digest: rH/DCyYXHCIiFqrzT0X2rBrVFy5IPmuvbK+NPtZs3+c=
+
+Name: org/eclipse/jdt/internal/debug/ui/variables/JavaVariableColumnPr
+ esentationFactory.class
+SHA-256-Digest: XB6PNiKOK4rqfmohhiUxsD3S71nlA9wO1Ndvi4TQdEY=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/ProjectClasspathArgum
+ entSelector.class
+SHA-256-Digest: nBx9eINFUTKHVdGPBWcJjfL/XCYnr5F7Q1VuPmaDbhk=
+
+Name: icons/full/obj16/readwrite_obj.png
+SHA-256-Digest: ek3AkHCz+gjgnOQ/jr1E4fZ6F3drnmR7FGj48d+YQtY=
+
+Name: icons/full/ovr16/trigger_suppressed_ovr.png
+SHA-256-Digest: 1ii6NHQdH5zBi2GqiAl6IN3OR5HGelb6EVUekfpkycQ=
+
+Name: org/eclipse/jdt/internal/debug/core/refactoring/ExceptionBreakpo
+ intTypeChange.class
+SHA-256-Digest: rlFOYTaNsOycnsCtLB2ds2+16+58Y0wT3iumr2bbaNk=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/InstanceFiltersAction$
+ 1.class
+SHA-256-Digest: JNn7ST0WVROUsfFuO6lwfvZ3VXxTOizoMXDEUCUtcFM=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/StepIntoSelectionHandl
+ er$3.class
+SHA-256-Digest: zMe5sxAO5GKarZ8tj2zguy2Inp2EthabMGJrdCxeWVQ=
+
+Name: org/eclipse/jdt/internal/debug/ui/snippeteditor/SnippetEditorPro
+ pertyPage.class
+SHA-256-Digest: pPXfcgwJ6pUBBOw5qXNfKctsw674/I/CiYH1SthBHIw=
+
+Name: org/eclipse/jdt/internal/debug/ui/propertypages/JavaExceptionBre
+ akpointAdvancedPage.class
+SHA-256-Digest: lLgYJ+FbFb/51ISEJ5vVEv/Aht+5cHZKAfaPUBKxED4=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ShowSystemThreadsActio
+ n.class
+SHA-256-Digest: XC1TPSp1BTog/+mzMreB4sDArvz186VK3Xtk8Y0l9sg=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/ExecutionEnvironmentsLabe
+ lProvider.class
+SHA-256-Digest: X4aB/nhplGwavVpUp5iP7nDqJ4p1H6aGOJqQa0YM0Xk=
+
+Name: org/eclipse/jdt/internal/debug/ui/JDIContentAssistPreference.cla
+ ss
+SHA-256-Digest: CwNSVSAPZemw3i7mLqlL/Lupe+TlvLQhTTP7JccVOkY=
+
+Name: org/eclipse/jdt/internal/debug/ui/breakpoints/BreakpointMessages
+ .properties
+SHA-256-Digest: wrRztPcRFlGvACQtKcEgAxhvw8ZpmuUvllDXtW6ngrU=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ObjectActionDelegate.c
+ lass
+SHA-256-Digest: njee1Z2vuQ0mG+sIYXUWNUGZ+iUzeldBK0iSf2hhbYI=
+
+Name: icons/full/dtool16/run_sbook@2x.png
+SHA-256-Digest: 8Hl30ntpDae+vwGN5sEReNKUlCudWa1zuvkR+LT+8YI=
+
+Name: org/eclipse/jdt/internal/debug/core/refactoring/LaunchConfigurat
+ ionProjectMainTypeChange.class
+SHA-256-Digest: P4TU0ndEAiq7q1vW/Lt0NAyLgAfalMxVLSCcXFwzupM=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/OpenFromClipboardActio
+ n$3.class
+SHA-256-Digest: OxLDFiiZs531dV+GkQ2TnTE1Wyv9vJWe5RfGDgdYY2o=
+
+Name: org/eclipse/jdt/internal/debug/ui/breakpoints/AbstractDetailPane
+ $1.class
+SHA-256-Digest: teJKUv/ujlyaggCwusY376R1rhYck5K2v/amiVI+kMk=
+
+Name: icons/full/dtool16/term_sbook.png
+SHA-256-Digest: RKVh2c/KmWxkKIcbJmgQqhRTEaAj+8nFDalQpXIRtLU=
+
+Name: icons/full/ovr16/trigger_ovr@2x.png
+SHA-256-Digest: pbNlkBZeRZW970UnOVEtjIKhF3rZSRgiRisKoHb807E=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/StandardVMPage$3.class
+SHA-256-Digest: ydZ9FzqvCPbaXntwOOxIDYcgvt7p/v6AByNEr0epDZ4=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/JREsPreferencePage$1.clas
+ s
+SHA-256-Digest: 0XdCWO+grZobG80suWwCBfpigEXbRFZXblachshlg+U=
+
+Name: org/eclipse/jdt/internal/debug/ui/propertypages/ExceptionFilterE
+ ditor.class
+SHA-256-Digest: ExOSqBsDrFOqd9ZWHt6HZZdlSuD4m55Qu3AGjGNaYKk=
+
+Name: org/eclipse/jdt/internal/debug/core/refactoring/BreakpointRename
+ FieldParticipant.class
+SHA-256-Digest: ZzcSI5OPC3TbqVainJMXGqsmNT+tpOzuW4qVg5/S0ic=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/BreakpointHitCountActi
+ on$HitCountDialog$1.class
+SHA-256-Digest: JlqxYc9S5YhlNxBv2WDgMD/2QyDytbiLe943UCBee/A=
+
+Name: icons/full/elcl16/sethitcount_co@2x.png
+SHA-256-Digest: t7SZ2Qf6NSadOYAnZXfahlgm3S/tSchPLkexIf23QCQ=
+
+Name: org/eclipse/jdt/internal/debug/ui/JDIModelPresentation$IValueDet
+ ailProvider.class
+SHA-256-Digest: 3JfPmtgUP1GsKjon1PqHPpHCsHy/iWZkHGyA7tdsn5g=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaStepFilterPreferencePage$1
+ .class
+SHA-256-Digest: woAhuJdnvnjcilx1/QvdpFVhpI6fuEwMiacmKm+yIZw=
+
+Name: org/eclipse/jdt/internal/debug/core/refactoring/ExceptionBreakpo
+ intChange.class
+SHA-256-Digest: AeFQ0C6CWgRxYUwKYLvL8A1rA+2gR7ZxrteEFg2fOyE=
+
+Name: icons/full/elcl16/static_co.gif
+SHA-256-Digest: VfXjbO5ptacPb3fL6jjJxxgBydiM/UC/6OTBLVVP88c=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/EditDetailFormatterAct
+ ion.class
+SHA-256-Digest: dPRCCYdMIa+IV1aOohpuyG+RnTddxOTyi/962U8vRwg=
+
+Name: icons/full/obj16/methodresult_obj_disabled.png
+SHA-256-Digest: vaKJ0krI2kzn4wgSK+/v+Vdb9vbvlp1lVMjuRK2LlIU=
+
+Name: icons/full/obj16/insp_sbook@2x.png
+SHA-256-Digest: ChGbxyLA9dK18U3nzxC3/fx03NGTMBsvIdxcU7fgQ0g=
+
+Name: org/eclipse/jdt/internal/debug/ui/snippeteditor/SelectImportsDia
+ log$1.class
+SHA-256-Digest: 8uKY65lqxcczEuOMSTgEhqmp1HNEgjqpVdp64HkiDzs=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/VMArgumentsBlock$4.cl
+ ass
+SHA-256-Digest: VA+Q3x9UbEit8ftM+Iy8pCJt7d/wg3AHxsHMC0/2DVw=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/AbstractJavaMainTab$W
+ idgetListener.class
+SHA-256-Digest: vii7bLGWAnCSmefjIMJWdOpqGKryu3Uy+RyYVVoSfuM=
+
+Name: org/eclipse/jdt/debug/ui/JavaDebugUtils.class
+SHA-256-Digest: TZ/A0AQ2NFAkmGS0VZLXGYAf8FyI8HaKn1FIp7rdzDU=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/OpenReceivingTypeHiera
+ rchyAction.class
+SHA-256-Digest: nMR133219edIOcfwRSQKPk0tVIcnW7EzdSFVtoQK3N4=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/StringValueInputDialog
+ $1.class
+SHA-256-Digest: 05AjOToyHi/CDyWu+jsQYxUYN5Luz79kk5wZsMWKJWo=
+
+Name: org/eclipse/jdt/debug/ui/breakpoints/JavaBreakpointConditionEdit
+ or$2.class
+SHA-256-Digest: +SR9zVP1i7tbtkBjR2Y6nfD0eNxqQx994DgZG3QZbk0=
+
+Name: org/eclipse/jdt/internal/debug/ui/display/DisplayView$2.class
+SHA-256-Digest: pFcwMFDf0Kel0y5k16QlpmcTlpugSqsIeh4laKip8lQ=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/InstalledJREsBlock$13.cla
+ ss
+SHA-256-Digest: uJ1eAyqdLH50nXw2UfgJ5tL3ozwBOynQggZYt2Vum7Y=
+
+Name: icons/full/obj16/envvar_obj.png
+SHA-256-Digest: zboip7cYqU3PRsrYdLkonjfZ0AXH6MrBDEuev0qrrlA=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/VMLibraryBlock.class
+SHA-256-Digest: UqA0YvHmXzwbAqvESpCsVTADvae06NVuLyd2t3K7194=
+
+Name: org/eclipse/jdt/internal/debug/ui/propertypages/ExceptionFilterE
+ ditor$5.class
+SHA-256-Digest: ORm+LW9n1rMxqlTTf3GSUEjWXzyrTSaDhBWSQUb/vmY=
+
+Name: org/eclipse/jdt/internal/debug/ui/variables/JavaVariableLabelPro
+ vider.class
+SHA-256-Digest: 5vDf0804MCSbuWX2d41Prjh9MHL5nxpO660beUBgLQ8=
+
+Name: icons/full/obj16/jexceptiond_obj.png
+SHA-256-Digest: ReykVUHnwV/PDl2ZqaKAR7D+4KsQZ0BuyY/tZN5yadk=
+
+Name: org/eclipse/jdt/internal/debug/ui/classpath/ClasspathEntry.class
+SHA-256-Digest: 6kbR8ZYpb7K9Kreq3W/lIwmgOySCv6pf5mOwbbs3AtQ=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/ExecutionEnvironmentsPref
+ erencePage$3.class
+SHA-256-Digest: Om3ZcQ+lTA4BcC3qIINsCcl5VCY1UeyyBMLY5YVMQaI=
+
+Name: org/eclipse/jdt/internal/debug/ui/monitors/ThreadMonitorManager.
+ class
+SHA-256-Digest: /qlqY+yIHa0vP2BSWxA9K6V4ausUUCwvRW66GzNjjKQ=
+
+Name: icons/full/ovr16/entry_ovr.gif
+SHA-256-Digest: 7xTkO+26DdbDPcFJtuFB88abJ+HZOZde9bP/uGhmmFA=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaDetailFormattersPreference
+ Page$FormatterListViewerContentProvider.class
+SHA-256-Digest: +RGe1tgnXFrXnEIDcGrRYG2/c+qjqcVXzxpEc7eJqhA=
+
+Name: org/eclipse/jdt/debug/ui/launchConfigurations/AppletMainTab.clas
+ s
+SHA-256-Digest: StUqe6CWrVHCjUBFd2T2hA//VLeJok9BqFx+htLXt1U=
+
+Name: org/eclipse/jdt/internal/debug/ui/HeapWalkingPreferencePage.clas
+ s
+SHA-256-Digest: 9u3EeX/HYsnsnRKXIlib4BSv8GWxOg9o+4wR6cj2PS0=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ToggleBreakpointAdapte
+ r$2.class
+SHA-256-Digest: kWozsRYNVHxKn7EFjyHRcm2c+fRU1W9T1dTdiinc84Q=
+
+Name: org/eclipse/jdt/internal/debug/ui/variables/JavaExpressionConten
+ tProvider.class
+SHA-256-Digest: JruoWwR3e+zS9lpkJV6u3kmBcGVVsUODsonPkqiMTzU=
+
+Name: org/eclipse/jdt/internal/debug/core/refactoring/LaunchConfigurat
+ ionIJavaProjectRenameParticipant.class
+SHA-256-Digest: +CfeT06EzZi49zYA6+gZqMrtVK9P9uFYzOsMxhDQbbM=
+
+Name: org/eclipse/jdt/internal/debug/ui/display/DisplayView.class
+SHA-256-Digest: Zi3nnFJlB4UHyOvatq/jf3L3raicK8VoUNFWkBwpTzI=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/InstalledJREsBlock$6.clas
+ s
+SHA-256-Digest: 6DP3KxocquBugT9QCPk8+YTOq9nEdKPskz4ZAF42IlA=
+
+Name: icons/full/ovr16/sync_ovr.gif
+SHA-256-Digest: 1rVs5fQP0Q/F/8MUahjuTBCTmtUwqGtOuHNE70PAZBc=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/RemoveAction.class
+SHA-256-Digest: P02nsbLJYiYU4mmRT2OM5jpkSJHNc81gJly0FFPzBA8=
+
+Name: org/eclipse/jdt/internal/debug/ui/console/JavaLikeExtensionsReso
+ lver.class
+SHA-256-Digest: Cxy6PXjfODOVA/bnvWs63bQBXGsA1693L1iWhricRME=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaLogicalStructuresPreferenc
+ ePage$2.class
+SHA-256-Digest: q0CuI6hgIfEVsUIJw+etgDvrjRqxrFFP+gEYdBrabYY=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/StringValueInputDialog
+ $2.class
+SHA-256-Digest: qtcdHwzBe2jUxzh5xKlFR4BFb7C9M8mkr5oSTAv32PM=
+
+Name: org/eclipse/jdt/internal/debug/ui/EditLogicalStructureDialog$Att
+ ributesLabelProvider.class
+SHA-256-Digest: Aybvxr+7UWgOA+L3v/j3GKSWzoduvhAA7tWZSy0uqTs=
+
+Name: org/eclipse/jdt/internal/debug/ui/ExceptionHandler.class
+SHA-256-Digest: 30YxSVEaRe4dzgWKqw8twQZ9GJUn/ZTZdYnJOIGxo7g=
+
+Name: icons/full/ovr16/uncaught_ovr_disabled@2x.png
+SHA-256-Digest: pMxNxDax8gY5QRSNnZo2l9RwegZQU8l8CvC3sNQ+jRE=
+
+Name: org/eclipse/jdt/internal/debug/ui/EvaluationContextManager$1.cla
+ ss
+SHA-256-Digest: yCi05ueGQ17Q7fGJ9Pk5Jslll+bgkYdTVqCVc0aROJs=
+
+Name: org/eclipse/jdt/internal/debug/ui/DebugUIMessages.class
+SHA-256-Digest: SZ5MiDh7XEPjRive11qYC4FCwKj/sFH0zcFuyEvjxAM=
+
+Name: icons/full/ovr16/uncaught_ovr_disabled.png
+SHA-256-Digest: R+9vQ2v1jLK7JAovCq13x0H5cz2+zsfAfn4RDW+a6yA=
+
+Name: org/eclipse/jdt/internal/debug/ui/classpath/RuntimeClasspathView
+ er$1.class
+SHA-256-Digest: u2E1ohX8by9tNILbaUlFwAEwHy5pr+YzrFtBRdVXl00=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/BreakpointToggleAction
+ .class
+SHA-256-Digest: AMp/9y4j8Jqo7DNscVJLUOtVzQxfthXHPmW17dRlolg=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/JavaPrimitiveValueEdit
+ or$PrimitiveValidator.class
+SHA-256-Digest: jPki17z/utdKSgApH52AIM3WwfSQj96FQJPatlf2TZU=
+
+Name: icons/full/ovr16/trigger_ovr.png
+SHA-256-Digest: 4pF04U/8Ckm49l7zAThtRAf4yxqAKotyXp6FOV2nYZE=
+
+Name: org/eclipse/jdt/internal/debug/ui/ExpressionInformationControlCr
+ eator.class
+SHA-256-Digest: JK02nIJDaT7NuCyF1IexzBObOf/OkDv/Z99W6qbwJJM=
+
+Name: org/eclipse/jdt/internal/debug/ui/monitors/WaitingThreadContentP
+ rovider.class
+SHA-256-Digest: fDUKvbDncbLeDrkllGFCK5DPTfhIFkaRqqzHEUsbnzo=
+
+Name: icons/full/elcl16/resume_co@2x.png
+SHA-256-Digest: +aegtHESj6NjlEIoA3YqpPCBjIp+rLW6Xf2OLY4IvjY=
+
+Name: icons/full/obj16/jmeth_obj.png
+SHA-256-Digest: iZsGJ/zT+tOxv5rxiiKgqfdVJkd2ozrrytpV26k0SW0=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/RuntimeClasspathAdvan
+ cedDialog$1.class
+SHA-256-Digest: fyHvo5OHV0KYSigmA5ToKc7HwPSJmVDhrF6TOOt6xiA=
+
+Name: icons/full/eview16/thread_and_monitor_view@2x.png
+SHA-256-Digest: ShqovNcIYXfbBw9Rz/8ZwfXUZi+H/jLx2syJE+U/dAw=
+
+Name: icons/full/ovr16/contention_ovr.gif
+SHA-256-Digest: oRnGnSgX7irqev3GYb0v+UZCo2cZqUyZPTO/NWEtaHo=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaThreadActionFilter.class
+SHA-256-Digest: JU8n3vJ/1TkFIabvjP7ld34GBMPSI/utF4Vkf1sglG0=
+
+Name: org/eclipse/jdt/internal/debug/ui/EditLogicalStructureDialog$Att
+ ributesContentProvider.class
+SHA-256-Digest: lVFtYSpHKGgZ1cz+lX4FrNZY8O4Ixo75uO7I1HpQBqQ=
+
+Name: org/eclipse/jdt/debug/ui/JavaUISourceLocator$1.class
+SHA-256-Digest: Adeov3+BFiRrcdxZV0KVfuuzt1q48KvOpfs1x4V9Sow=
+
+Name: org/eclipse/jdt/debug/ui/breakpoints/JavaBreakpointConditionEdit
+ or$7.class
+SHA-256-Digest: 9rhXK8Kct/Fkw4xWkTf72pulIkitPwotYE3qK0xQS9E=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ValidBreakpointLocatio
+ nLocator.class
+SHA-256-Digest: qU7n4jlNaoX8Y9fi8cZgUsnlcytNOCt0HYyrbMqde8w=
+
+Name: icons/full/elcl16/exc_catch.png
+SHA-256-Digest: pRhLA6PLRoXt8BmDyGo/Z9rwyrRx8vY9zM8wu93DJ28=
+
+Name: org/eclipse/jdt/internal/debug/ui/DetailFormatterDialog$1.class
+SHA-256-Digest: UDfuLg4Hz3TXBDhWjHQB8M48dClMtKyzrEpjAcs54yw=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/AppletSelectionDialog
+ $PackageRenderer.class
+SHA-256-Digest: n/OcSgYaWDThxcBWsmlYWWtU5O3ZUnWqyOn9S9S6Pjs=
+
+Name: org/eclipse/jdt/internal/debug/ui/propertypages/VMCapabilitiesPr
+ opertyPage$ScrollPain.class
+SHA-256-Digest: r9ZDh6lqLrs+tawcUZea+XTfKTFjwP4GaHbNXVE8t5c=
+
+Name: icons/full/ovr16/caught_ovr_disabled@2x.png
+SHA-256-Digest: 2zHL4r01xXlftvGBSprZeeqmaL364cNPEG1TqKj05wQ=
+
+Name: org/eclipse/jdt/internal/debug/ui/propertypages/ThreadFilterEdit
+ or$ThreadFilterContentProvider.class
+SHA-256-Digest: vB+zotznBKyf3x4PzWH4L6O1PFJJD3dk5ZgG8akM5ro=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/BreakpointSuspendPolic
+ yToggleAction.class
+SHA-256-Digest: nvZPnjc7c1ZmJbw2d6BookLw29nGBcAkpNLlhzPMn/8=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/BuildJREDescriptor.class
+SHA-256-Digest: dtZTZpNs/QjtzgT5EoW4hAsm2IV2h1GpChXApG+JpcM=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/StepIntoSelectionUtils
+ $1.class
+SHA-256-Digest: PVTiS5NJPnSUzbV3NKbdUHQVQpMMxXKA3mF8wF0qxdk=
+
+Name: org/eclipse/jdt/internal/debug/ui/contentassist/DynamicTypeConte
+ xt.class
+SHA-256-Digest: qPmDYSz3RWcoRyV0LqPs3cEPlkXdcLwnFFPg+Lnt1pQ=
+
+Name: org/eclipse/jdt/internal/debug/ui/display/DisplayView$3.class
+SHA-256-Digest: I0f7PJTcWuKvDujdbXXXT4IoIXYFm9J6GgO2YqbscYc=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaWatchExpressionDelegate$Ev
+ aluationRunnable$1.class
+SHA-256-Digest: 5hNNdqBunhqfk+48nZyoSRIa21o+utMJYooW/Tr8zJo=
+
+Name: icons/full/obj16/jload_obj.png
+SHA-256-Digest: fUQZ3XoSHoOmlyZk02IZs6RQ1KhqvWxsdgecJPKJWvc=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/RuntimeClasspathViewe
+ r$ContentProvider.class
+SHA-256-Digest: s6oYB50MkcpPiX2jSIe9RyJz3zlhPLUBnxJZu0dPctU=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/EditClasspathEntryActi
+ on.class
+SHA-256-Digest: ymfFhTcWb/tkQWtmAOaVnpZorq5afD+nGcs8wWBTc3I=
+
+Name: org/eclipse/jdt/internal/debug/ui/console/JavaExceptionConsoleTr
+ acker.class
+SHA-256-Digest: pDSQLc4b9Hub+UG4H/wzoD3MFNjvRG8ErBlgg7yqNpY=
+
+Name: icons/full/ovr16/caught_ovr@2x.png
+SHA-256-Digest: AGjOqJ93DoFmMyr87JT4RUFt1Dtz1n1Gd8uBs43TjF0=
+
+Name: org/eclipse/jdt/internal/debug/core/refactoring/BreakpointRename
+ ProjectParticipant.class
+SHA-256-Digest: wUx250oW+ncB9jZWL+aa62K3hpmZuVkkGkudRgevlw8=
+
+Name: org/eclipse/jdt/internal/debug/ui/breakpoints/ExceptionBreakpoin
+ tEditor.class
+SHA-256-Digest: qU4PE2tRI1QCet76advdpKuf5zsqhZOJgERzJYvls+0=
+
+Name: icons/full/ovr16/installed_ovr@2x.png
+SHA-256-Digest: vr6l4lL0yPE1aO2EweJk4PkPMLP9OEpRb9SQ+wvrG4M=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/BreakpointLocationVeri
+ fierJob$1.class
+SHA-256-Digest: +kuyT6k/RkMsV1INKdUEfYlK6PdRCVPiAjxvAEVWJrE=
+
+Name: org/eclipse/jdt/internal/debug/ui/Filter.class
+SHA-256-Digest: 4qtN5zChP054VD3l0tN2Ikc45Kd7n52upl+exxxPLRA=
+
+Name: icons/full/obj16/classpath_obj@2x.png
+SHA-256-Digest: Hxoyx/LEq24JIpwombZcm+NFjNmi5YLJyjbTEFAit1o=
+
+Name: icons/full/etool16/java_attach.png
+SHA-256-Digest: CSFqyD3wPlNkgBpaaeAstNJhJVNmoeEqWntEedQ5j94=
+
+Name: icons/full/ovr16/contentionformonitor_ovr.gif
+SHA-256-Digest: 31ISHlY57H73YOHFvQKscvHZBVnpxN2NGwDy4jpInto=
+
+Name: org/eclipse/jdt/internal/debug/ui/snippeteditor/JavaSnippetEdito
+ r$5.class
+SHA-256-Digest: 1e8PbD2CEtmmCMdbLvMSXYoFxjnLEwB3+UTCqk1oGFY=
+
+Name: icons/full/ovr16/owned_ovr@2x.png
+SHA-256-Digest: J30tXARBCf7qrWdTkNJip8WNjVDkkcGkUhM9z797WsM=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/DebugTypeSelectionDia
+ log$1.class
+SHA-256-Digest: m4Wmo96mPMnIgtYNCMDiCLgWFEqGyoFc+uxr0aGJh14=
+
+Name: icons/full/dtool16/watch_exp.png
+SHA-256-Digest: QDxCtGpwowE0N40WnL9iRFS6blNSf1p/B2XLDfTc/6c=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/StringValueInputDialog
+ .class
+SHA-256-Digest: ZQv6bWZHYKkUCy76KYCrStOQe3TuNuy0JtzYGvBSEgc=
+
+Name: org/eclipse/jdt/debug/ui/launchConfigurations/JavaMainTab.class
+SHA-256-Digest: KTFvYzap68hitWdNcfUmKi0y6Nng1eVTGMQxAd6WPEw=
+
+Name: org/eclipse/jdt/internal/debug/ui/classpath/ClasspathGroup.class
+SHA-256-Digest: JjfwtYWvfQjsLjgPbu5UvJtDgrsl6I9DoSPCYUsbyX8=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/RestoreDefaultEntriesA
+ ction.class
+SHA-256-Digest: oXczB3zYD8OFna2C1Cf/ec+o6NQ9fDg6DJvM3CwWGgY=
+
+Name: icons/full/elcl16/all_instances.png
+SHA-256-Digest: zvQKPEkRO2KNtV8aHa4FGLkvexzwq8ZYU9MjAHTxVx0=
+
+Name: org/eclipse/jdt/debug/ui/launchConfigurations/JavaArgumentsTab$3
+ .class
+SHA-256-Digest: pa+OGwPQkzsZJa9AHx8V2YwasPHO/BplIEVN9z8xIHI=
+
+Name: org/eclipse/jdt/debug/ui/launchConfigurations/JavaJRETab.class
+SHA-256-Digest: 198/c7g7IXxP9cXo4N2ci8lrWbYAFsSffa6zjcDK/xg=
+
+Name: org/eclipse/jdt/debug/ui/breakpoints/JavaBreakpointConditionEdit
+ or$6.class
+SHA-256-Digest: tsgrADw8Ryl8TI368KoxVjJHiS29UYQ/vRJPCY9+BWA=
+
+Name: org/eclipse/jdt/internal/debug/ui/DetailFormatterDialog$6.class
+SHA-256-Digest: bGXqRqMNZX/NLhx1SRGVYsr4Hs4uek5OE3TiBVvz1pA=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/EditStepFiltersAction.
+ class
+SHA-256-Digest: H3UYxcOqGyeDkkCeqy/0W7XV0y3yyAakrsGTiaR6ppA=
+
+Name: org/eclipse/jdt/internal/debug/ui/display/DisplayMessages.class
+SHA-256-Digest: KvGFMzQKF8NkK9jXp0LCpbk8Jxi7JTngaAStt3DhfNQ=
+
+Name: icons/full/wizban/library_wiz.png
+SHA-256-Digest: vCo4+cJaz1evS8cq2e6tDLm9x/7/TM3vXFPbmXGWY0k=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaBreakpointWorkbenchAdapter
+ Factory$1.class
+SHA-256-Digest: lL3Jx1a2BcZqdVR++AYOtyTIsPSPvUJ038UeTT0P/f4=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/DebugTypeSelectionDia
+ log.class
+SHA-256-Digest: VSjQC+yPwtzb6gGMlp4ZUH8B0Y3rbO+TAD87fszuyo4=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/RetargetToggleTracepoi
+ ntAction.class
+SHA-256-Digest: 6FeO95jjXpEMe3a5VfdZWIna5tqXyad3HhEIPfnjWiw=
+
+Name: org/eclipse/jdt/internal/debug/ui/classpath/AbstractClasspathEnt
+ ry.class
+SHA-256-Digest: bqrgiUKc00Z53YIITbGsWpii7wEDwccEVJS7l5Q1bj4=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ObjectFilter.class
+SHA-256-Digest: CIQAng2I/rBG8fx5OI4srthBMj0cxXRABwtzd70uTQc=
+
+Name: org/eclipse/jdt/internal/debug/ui/search/LaunchConfigurationQuer
+ yParticipant.class
+SHA-256-Digest: kgygSgdFtZkEauwqsT1vu5AhYYbIhtSmd6nXm54x4Lo=
+
+Name: org/eclipse/jdt/internal/debug/ui/console/JavaStackTraceHyperlin
+ k$1.class
+SHA-256-Digest: tYLQB1mJGgwFcxkx/wSqI1yNTLomsomnHOco+7OKPp8=
+
+Name: icons/full/dlcl16/suspend_co.gif
+SHA-256-Digest: s4C2IbI9+SiOo3UEsHU8AsTn+xVKR/9/qqSjgHFFmDs=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ProjectSelectionDialog
+ .class
+SHA-256-Digest: AEbEliR07VG8Zr2D21OiNE43EZLdyQTyx/514X8M8B0=
+
+Name: org/eclipse/jdt/internal/debug/ui/propertypages/ExceptionFilterE
+ ditor$1.class
+SHA-256-Digest: HbnVIPlpMOOAnXD4D/47fAwNmRHhv67rgVkdTSoNv6M=
+
+Name: org/eclipse/jdt/internal/debug/ui/snippeteditor/JavaSnippetEdito
+ r$4.class
+SHA-256-Digest: O/3GR6BZtffgUJlACw6zcooTCXjyxhT32j1wEUyt0OY=
+
+Name: org/eclipse/jdt/internal/debug/ui/snippeteditor/SelectImportsAct
+ ion.class
+SHA-256-Digest: rVrxMu3NuFptdg1exODeUJrrR9XDZQEtxZ/KBZhrYjg=
+
+Name: org/eclipse/jdt/internal/debug/ui/breakpoints/BreakpointMessages
+ .class
+SHA-256-Digest: Aw5nT+Wra3JRCCUPDK/phRP0LSOB3md8nSPjAnj4Aeo=
+
+Name: icons/full/obj16/class_obj@2x.png
+SHA-256-Digest: iXHmgrbffME4wKWxuPa3HrcIySiolM29n2snNy2z8F8=
+
+Name: org/eclipse/jdt/internal/debug/ui/threadgroups/TargetAdapterFact
+ ory.class
+SHA-256-Digest: zord/cX53StHf6PvbmRs4Rhz4nyHVg66034Dcuamxfw=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/VMTypePage.class
+SHA-256-Digest: dWy3SMCXDib6xn8I/Tqch33jNjdkBB+O261DJiBURgs=
+
+Name: org/eclipse/jdt/internal/debug/ui/breakpoints/AbstractJavaBreakp
+ ointEditor.class
+SHA-256-Digest: VY5YdQAR2sTD00q7cQKkaoBW763fB4k7Akk8gGo1GAY=
+
+Name: icons/full/dtool16/run_exc.png
+SHA-256-Digest: QaLp1uzFEIGOhMrpGnYZ2/a2lg0OtiPLnXZSiw4HKD8=
+
+Name: icons/full/dtool16/debug_exc.png
+SHA-256-Digest: f7Xo1w+ICVgIT77mpdUwK3w1TLBDIwwIALEDXUGL5q4=
+
+Name: icons/full/ovr16/caught_ovr_disabled.gif
+SHA-256-Digest: jACSxpCHcpX+S1+Xtxl7Cx4Zq3OlQEkDyeFMq9arRO4=
+
+Name: org/eclipse/jdt/internal/debug/ui/snippeteditor/JavaSnippetEdito
+ r$11.class
+SHA-256-Digest: MEswOSCm1YlPuHtv9QoGZVUKF0KixPL+64dVp72vH4M=
+
+Name: org/eclipse/jdt/internal/debug/ui/DetailFormatterDialog$2.class
+SHA-256-Digest: ow2ic0Jh3vP5smom22oJRrvSos5BCUYj51jrkh1AatE=
+
+Name: org/eclipse/jdt/internal/debug/ui/classpath/VariableClasspathEnt
+ ryWorkbenchAdapter.class
+SHA-256-Digest: RILdHdbzSI8JUJYj/cENHrf7WbAwdXJg58rs9iGZQw0=
+
+Name: icons/full/dlcl16/final_co.png
+SHA-256-Digest: sFbO/8ccHM8ieZJjUZOAYNbG4a1zaZy7DrHMgVv0HVg=
+
+Name: icons/full/obj16/classpath_obj.png
+SHA-256-Digest: kniYpimmlAE499ZixEbfJB5TBmSibzBB18XDk9gyDg8=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/InstalledJREsBlock$Instal
+ lListener$1.class
+SHA-256-Digest: dznv1bHddp9n3kLQA/SPi70ui+yMcIWFCx04r79ql08=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/VMInstallWizard.class
+SHA-256-Digest: LzyZSGF55r2ZiDgCqpZIZoap0JR2GmqpZcfjKkY/4dk=
+
+Name: icons/full/obj16/monitor_obj.png
+SHA-256-Digest: 1TtVqhPWjWKS0QzJJRcgX4C8ZekhU9sfc9dqbNx7fy8=
+
+Name: org/eclipse/jdt/debug/ui/launchConfigurations/JavaDependenciesTa
+ b.class
+SHA-256-Digest: zGHhapqmtIUNGq6sdInMelaUejlk9eJj5NjL4wOBuNE=
+
+Name: icons/full/obj16/jwatch_obj.gif
+SHA-256-Digest: DXvD3+wiU5FxXUPXx2wBAkTxL85waEDoyE3nL4YKc48=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ExceptionCaughtToggleA
+ ction.class
+SHA-256-Digest: DFPz+cbdWcv19dPqmtTSTVosRaX9c2Uu3LBY5DSALS4=
+
+Name: icons/full/wizban/newsbook_wiz@2x.png
+SHA-256-Digest: YEcZ23xI5+3bdwFGQOya/6WvR0kq7Fe59pt9KqQYp8g=
+
+Name: org/eclipse/jdt/internal/debug/ui/threadgroups/JavaDebugTargetPr
+ oxy.class
+SHA-256-Digest: JW33BsBb1l4Qm1et6Pj6INH7JfKCk2HH3o1N5Vf0iuM=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/SharedJavaMainTab$1.c
+ lass
+SHA-256-Digest: sG7tSLUk2Bv4/3irBvOoIXq5xXwfXL4KEtdMycrEXMc=
+
+Name: icons/full/etool16/new_sbook@2x.png
+SHA-256-Digest: EiWvdZdzphxUVWRaJLAaHJ74uqCsR0EdX65a0ORyeXQ=
+
+Name: icons/full/obj16/readwrite_obj@2x.png
+SHA-256-Digest: heDzmRnMsMXxSxTTi51ZChAdX27SfeUJdgb7FJ/aRjs=
+
+Name: org/eclipse/jdt/internal/debug/ui/classpath/RuntimeClasspathView
+ er$2.class
+SHA-256-Digest: JrxhFUcKvhwEB5jqhVFr7tXJcCr2tUlvuB3WoyeHZgw=
+
+Name: icons/full/obj16/methodresult_obj@2x.png
+SHA-256-Digest: AA+EnEGLA2yHURYaL1b5z+HyR+R6f30lqVGODl0JEEo=
+
+Name: org/eclipse/jdt/internal/debug/ui/classpath/ClasspathContentProv
+ ider.class
+SHA-256-Digest: F/ywuaAAcl0U5jnM+hHwrmm35zEEtoh4tQVlEaBXx9w=
+
+Name: org/eclipse/jdt/internal/debug/ui/heapwalking/InstanceCountActio
+ nDelegate.class
+SHA-256-Digest: 0yP5PoYz6+MqYRaCXzoXiaN0lhuDrYo8ksI+as4rG0o=
+
+Name: org/eclipse/jdt/internal/debug/ui/ImageDescriptorRegistry.class
+SHA-256-Digest: xCgiU39U0oLHfLnohQmaV+MvltcjklBN/Hwf0SKv+W8=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/RuntimeClasspathAdvan
+ cedDialog.class
+SHA-256-Digest: zUPgwzBw+f88am8A5McD/DjWo3RRgeqclokJTIt5e88=
+
+Name: org/eclipse/jdt/internal/debug/ui/breakpoints/StandardJavaBreakp
+ ointEditor$3.class
+SHA-256-Digest: OlH6zaLjvguzI3BpvmAYbHhqv5wJlly4rDjzOdE2SEk=
+
+Name: icons/full/wizban/java_app_wiz.png
+SHA-256-Digest: csSWsTchPmEXxotB4sqNyvjWd1TAPgAZCL6kgLID3KY=
+
+Name: org/eclipse/jdt/internal/debug/ui/snippeteditor/JavaSnippetEdito
+ r$9.class
+SHA-256-Digest: 2NtckDkPrmJecPV6RAedWUA3eKbN536rJkUm+1x1jUw=
+
+Name: icons/full/eview16/variable_tab.gif
+SHA-256-Digest: tp9UR+zeuIpnnG0inYzPR2mc6h4t6V5EVg97RZLWlEA=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ControlAccessibleListe
+ ner.class
+SHA-256-Digest: Z/5/2xdr9GMJ4MMeZdpb2AQcmvxCTchl59bcJTbrhs8=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ToggleBooleanPreferenc
+ eAction.class
+SHA-256-Digest: vkMpwgP2aRS5dmZnCJOj01jtQokk8AVvBv+OoZV03UU=
+
+Name: icons/full/obj16/brkp_obj.gif
+SHA-256-Digest: mJdC1fMHnj0wbGLe6UNSS3FRkA1F3jLfkDYgrRxfXw0=
+
+Name: org/eclipse/jdt/internal/debug/ui/FilterViewerComparator.class
+SHA-256-Digest: X3XmsvArz9mhss1RsREe10alhodxx6hKtHbmaEuUHNw=
+
+Name: icons/full/elcl16/resume_co.png
+SHA-256-Digest: /i3vEj6BrabNMix6DFCTcBqqNAn1NRULLuTjjiLEZhY=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaDetailFormattersPreference
+ Page$8.class
+SHA-256-Digest: iguGUnjEq0OZlRqBDauUJz51iiCow4NEqhmhwhjj3OA=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/AddLibraryAction.class
+SHA-256-Digest: RilprTdfJqWbT187Y5PcGZwVdhvg1s4R8z5o2JnrvNw=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ShowStaticVariablesAct
+ ion.class
+SHA-256-Digest: 3i5kizU2WFOj0b3rJSfs1Uz+GqCxQzHUnBmkV3svcGY=
+
+Name: org/eclipse/jdt/internal/debug/ui/display/DisplayViewerConfigura
+ tion.class
+SHA-256-Digest: XK1u5A3KD3xSaK8hXD3BLbFbg6nrhF2c1dcMk++4MPQ=
+
+Name: icons/full/elcl16/monitor_view@2x.png
+SHA-256-Digest: Jh2ayG5/PMkBAhQ+oAxiJ/LxB0ArJNghGB4ygAKwZho=
+
+Name: icons/full/dlcl16/constant_co.png
+SHA-256-Digest: Be7iA3LwbRSIFJdrvS9h6d9d/Z6kVgMQp2pgnw4hheA=
+
+Name: org/eclipse/jdt/internal/debug/ui/snippeteditor/JavaSnippetEdito
+ r$13.class
+SHA-256-Digest: ZtFz9njIa2SRmZIEsYoH9CBOULYtROx9y+Mh4dJu0ww=
+
+Name: org/eclipse/jdt/debug/ui/breakpoints/JavaBreakpointConditionEdit
+ or.class
+SHA-256-Digest: 4BX4YC9YEKAO9otsIHlEgg2DTlzvWxwOUchFflryAhk=
+
+Name: org/eclipse/jdt/internal/debug/ui/classpath/RuntimeClasspathView
+ er$1$1.class
+SHA-256-Digest: 8utaElvQfLsBjqC9hGRFQMugPoyyR/TtlWysdo1GiRE=
+
+Name: icons/full/etool16/watch_exp.gif
+SHA-256-Digest: t1B0sIZK1+Csm9pdViQP9Am+Cc6dDUZyiz1YwOBgeUA=
+
+Name: org/eclipse/jdt/internal/debug/ui/StorageEditorInput.class
+SHA-256-Digest: BHmJ5Ars2/0MShUDA0exl7AKLHFh/opWGLy35BNu5CM=
+
+Name: org/eclipse/jdt/internal/debug/ui/monitors/ThreadMonitorManager$
+ DetectDeadlock.class
+SHA-256-Digest: n5EMpGq/j74lVQpW6Fn2K90ed5k9pxjbFLfyOLZ0xTA=
+
+Name: org/eclipse/jdt/internal/debug/ui/threadgroups/ThreadGroupAdapte
+ rFactory.class
+SHA-256-Digest: kjwq0bjB30WOcnejcqghExr0BHFG3a3nbkjIk9ezIIA=
+
+Name: icons/full/obj16/owned_monitor_obj.png
+SHA-256-Digest: 1TWFkUGw2jF3PlUYWRsjIZi059B3WgfvRKwpnVRexFw=
+
+Name: org/eclipse/jdt/internal/debug/ui/console/JavaStackTraceConsole.
+ class
+SHA-256-Digest: N+pCwgyWy6DM0luPWVRZ/AFLfGSOiaj3VOn63oiPqlU=
+
+Name: org/eclipse/jdt/internal/debug/ui/variables/JavaVariableEditor.c
+ lass
+SHA-256-Digest: vv8aR0SOS3CXMA/sfYOQVKkOu149Xg0/yTirdZHVigs=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/BreakpointHitCountActi
+ on$HitCountDialog.class
+SHA-256-Digest: VqePcALj27SCQs6my7fP0bSgQcHDiN2KNfZTwdLbgQs=
+
+Name: icons/full/obj16/jmeth_obj@2x.png
+SHA-256-Digest: uoqXTJOQjXecQKjnON9voAPvvnu6QDw+nOSfILfDRhc=
+
+Name: icons/full/elcl16/all_instances@2x.png
+SHA-256-Digest: fDCRYRtVopcmi+7/zq1afwcO+nOU4TrO7P7dtLwp2vQ=
+
+Name: icons/full/wizban/java_app_wiz@2x.png
+SHA-256-Digest: gxq4/u6PedYT95i2DYf9mqDiG4o/a9yotObCBMWdVXo=
+
+Name: icons/full/dlcl16/monitor_view.gif
+SHA-256-Digest: LDKJe7Op9jK67eaijnzMpLrh9UIuR1T+af2lUxWfl9w=
+
+Name: org/eclipse/jdt/internal/debug/core/refactoring/LaunchConfigurat
+ ionITypeRenameParticipant.class
+SHA-256-Digest: zHyYAYQiJ9k4RG+a04HFFBFYGGgWV84SLkIA82Tou20=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/JREsPreferencePage.class
+SHA-256-Digest: 1/MDMGRSjkLhsuhvYjYDgB4idFcukHnxsZq2zVSoYaA=
+
+Name: org/eclipse/jdt/internal/debug/ui/breakpoints/StandardJavaBreakp
+ ointEditor$5.class
+SHA-256-Digest: zQhq3UrtQp32hN/jqf0WgKXh8TCizJoi/OY73e+kX7o=
+
+Name: icons/full/etool16/new_sbook.png
+SHA-256-Digest: 84ECGRG4Hh//PfrLq+I+W9whGJMCENEb2WIyI8wxDUE=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ActionDelegateHelper.c
+ lass
+SHA-256-Digest: dbo9oJN4ZnfKbdD6ToEBYatqfdW9tiCWn+kAthWBVF8=
+
+Name: icons/full/dtool16/java_app.png
+SHA-256-Digest: R/5DKCvH4qwWaxaxbvt9OnD7WdB8Ciz5TPYV6mpCPwc=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ShowThreadGroups.class
+SHA-256-Digest: 2PM8jk4TNFnJzmudljQ2dyzzFrN+ly658OAE7NQSVNY=
+
+Name: plugin.xml
+SHA-256-Digest: IfmbkwNbD2czc3Hbyt4cVRCamEd5FbMlNBts6olVAtc=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/IClasspathViewer.clas
+ s
+SHA-256-Digest: JblWzsbctePFEtFQ5MvDAVsJxhoblGeykSeGqLR+p8Q=
+
+Name: org/eclipse/jdt/internal/debug/ui/propertypages/PropertyPageMess
+ ages.properties
+SHA-256-Digest: f++zkSLdfTwTFmC4R59i/inI2Ncl28ytjBWtNscPD90=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ShowStratumAction$1.cl
+ ass
+SHA-256-Digest: NceT6AewsIrcXLTdvXQglsJbbLkEmShOHjhoEAtI3L4=
+
+Name: org/eclipse/jdt/internal/debug/ui/JDIDebugUIPlugin$2.class
+SHA-256-Digest: h14+hFvHsCNtNRvMpM2F6BY3bIzNcQJOIJkzU/7T6CU=
+
+Name: icons/full/obj16/jsbook_run_obj.gif
+SHA-256-Digest: srH6PFS81RHAQ8HjYxvXPGmAkd0q10jq9Osn395d124=
+
+Name: icons/full/elcl16/autoform_menu.gif
+SHA-256-Digest: GSTe2nxEXcQgaRBSY/teMQ+RT5OiXLq/bEoEZnOfDqY=
+
+Name: icons/full/obj16/jexception_obj@2x.png
+SHA-256-Digest: UlxTJjFcBLnOZ+kIJ5qxSutdkIp0KKE/irrUgAwEzec=
+
+Name: icons/full/elcl16/sethitcount_co.gif
+SHA-256-Digest: z/LuNTJ3nM0Rjm+bONiQLwCJVPKqEASrjp6gqEi+jEI=
+
+Name: org/eclipse/jdt/internal/debug/ui/variables/JavaStackFrameConten
+ tProvider.class
+SHA-256-Digest: +tOr0eDA9Xjj4UgjsjQlcFC4n+4ErYlxEGY6eFenAs0=
+
+Name: org/eclipse/jdt/internal/debug/ui/monitors/NoMonitorInformationE
+ lement.class
+SHA-256-Digest: nWURbG5+GuZQUaBN3CwVGl7KbFOBzGHlszLnkLDJCFg=
+
+Name: icons/full/obj16/jrtexception_obj.png
+SHA-256-Digest: DtvAbVAXlU66xpff2zczpHOw7QOFA+HK03vFofH+CLY=
+
+Name: org/eclipse/jdt/debug/ui/launchConfigurations/JavaConnectTab.cla
+ ss
+SHA-256-Digest: 6kvH2/LvEZ52g+LQaci9FNX4qpFFF/o57SgOfMtNag0=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/OpenTypeAction$1.class
+SHA-256-Digest: Jp6SIkbcpkKD+QLHJAIHfXUAuUjWQ83R2NDDeZgI7SU=
+
+Name: org/eclipse/jdt/internal/debug/ui/console/ConsoleMessages.proper
+ ties
+SHA-256-Digest: 1iG+lrRyslmHymzLJXvqOFWuUp4J48vWpbijvUDQn4w=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/JREContainerWizardPage.cl
+ ass
+SHA-256-Digest: GBBlXLgrtkRBOuKJe0j+rdkvCzpmvcLnWbbYDcl5hgM=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ShowNullArrayEntriesAc
+ tion.class
+SHA-256-Digest: WFadQDzHynbe5AYfxpkWB5k0G8HNjc88Zhpgv0Nqo3M=
+
+Name: .api_description
+SHA-256-Digest: JpSfV055xP05EKorVTITZBXMKpreZAs2kPj3AfWTftE=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/InstalledJREsBlock$14.cla
+ ss
+SHA-256-Digest: 5RbwjHZPopCI5SiEQq96ylkdMv7cobN/5i0a+n2LWp4=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/AddVariableAction.clas
+ s
+SHA-256-Digest: zqo9XiqUb/GjIyUa/JQIKiwOH+YpYf20/udCAP4PqTM=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/JREMessages.properties
+SHA-256-Digest: EzcDiHHYzdB0dOXtC52nZkO6PFL7MHsWEcDX/S1czm8=
+
+Name: org/eclipse/jdt/internal/debug/ui/propertypages/ExceptionFilterE
+ ditor$FilterContentProvider.class
+SHA-256-Digest: s1Fz++7wJYRFmoVPaHbd/3wNsFuKzM5lo8tIn3yt4Xc=
+
+Name: icons/full/dlcl16/exc_catch@2x.png
+SHA-256-Digest: /KJjnZtqdxfan3GaVSGjdjEWz3bsO5MTgDe7RAlK1qY=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/JavaObjectValueEditor.
+ class
+SHA-256-Digest: UncTkFcqzeRSgkmuaK3SeCm+tAHT8gAPY/5Tvxq8Fqw=
+
+Name: icons/full/ovr16/scoped_ovr_disabled.gif
+SHA-256-Digest: FYMi9VkHpfldsbAR9SbzDbW/PInjL6VMYBPV5h+wS7s=
+
+Name: icons/full/elcl16/suspend_co@2x.png
+SHA-256-Digest: fU44UHq8GjKv8Wz7fR20WgMk/2mPivQdcis6hOItZzg=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/BreakpointLocationVeri
+ fierJob.class
+SHA-256-Digest: UEaa1ruL2BH3QxoCVA2qHIgWQBURa0UM8T5llYYg0S0=
+
+Name: icons/full/dtool16/java_attach@2x.png
+SHA-256-Digest: q0WNSR6ua5G504x1sHq1AURVm7pJlASFE7uC09JcuA4=
+
+Name: org/eclipse/jdt/internal/debug/ui/classpath/IClasspathEntry.clas
+ s
+SHA-256-Digest: cITAjXrOPzJPzk3Au4vBxQ7qQkLx2H6NJ+ymVyjd1kE=
+
+Name: icons/full/obj16/jsbook_run_obj@2x.png
+SHA-256-Digest: wOX5kxV3gJDfSCKnaAlszwdkUStoVpIis5SDWNngcfU=
+
+Name: org/eclipse/jdt/internal/debug/core/refactoring/BreakpointMoveTy
+ peParticipant.class
+SHA-256-Digest: LW7qi4MBXdkIzj7LSqyNUBCyRiOIfHztPAoOTrLTFqc=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/EEVMPage$1.class
+SHA-256-Digest: crVusLFmrnTzG1sQEXITauRZdm9xi79ukdkU9T8ZKv4=
+
+Name: org/eclipse/jdt/internal/debug/ui/propertypages/InstanceFilterEd
+ itor$InstanceFilterContentProvider.class
+SHA-256-Digest: iWCzaa0gNNtps8D+KdgYcOU/TqjZYKGu/x41kFc0Z5k=
+
+Name: org/eclipse/jdt/debug/ui/breakpoints/JavaBreakpointConditionEdit
+ or$5.class
+SHA-256-Digest: cHhq7J1fwGaBBiK4kyW2V18kL2NXkcp9cliFPGMNEK8=
+
+Name: org/eclipse/jdt/internal/debug/ui/TypeNameResolver.class
+SHA-256-Digest: S+S1UDuhh086pzb4L/WYQA65sx7BvB/VEw72eR4SsnI=
+
+Name: org/eclipse/jdt/debug/ui/launchConfigurations/JavaLaunchTab.clas
+ s
+SHA-256-Digest: bKdzvrj9DRzmEERmDtrrHCLBbugx4/SkNxhlCk+R05M=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/WatchAction.class
+SHA-256-Digest: VMyjK0umK0vIBlemd0kjokS4sszuPd8izJ1xvO+Xipg=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/EvaluateAction.class
+SHA-256-Digest: S93XvNoIoYbhPmti08KuulGU6tQyAzI2sw9F2IdiEV0=
+
+Name: icons/full/ovr16/ownsmonitor_ovr@2x.png
+SHA-256-Digest: XwSIm5FR7DUeHcTbZ5P5NesD05cAIds2AEclTq7XvHw=
+
+Name: icons/full/ovr16/conditional_ovr.gif
+SHA-256-Digest: pwgtkPDnCadNNWxw+Hp5NiiQNXKdoHB5AJpj05nGji4=
+
+Name: org/eclipse/jdt/internal/debug/core/refactoring/LaunchConfigurat
+ ionIPackageFragmentMoveParticipant.class
+SHA-256-Digest: B5vad/1E05Nfvd0qC1UoA15dMBbDQmiykBam+gvmvY8=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/InstalledJREsBlock$JREsCo
+ ntentProvider.class
+SHA-256-Digest: q15QjF8JNMTn9OjOYohE5rrpg4dyKqRF1EFQa8Juzd4=
+
+Name: org/eclipse/jdt/internal/debug/ui/display/DisplayViewAction.clas
+ s
+SHA-256-Digest: 1xYcBbYCtfUPdK6uRKC6UNxCOwwHnf29wLREBy3aVts=
+
+Name: org/eclipse/jdt/internal/debug/ui/sourcelookup/WorkbenchAdapter.
+ class
+SHA-256-Digest: eQkIf2doikgqhhj5sl0OZ2E/v34AINN5TNYTHLnUKVY=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/StepIntoSelectionHandl
+ er.class
+SHA-256-Digest: LV8TLrurKK/D1Fm+PsU7CLvl9iT2or6Rm1Bxgt9wJSg=
+
+Name: icons/full/etool16/watch_exp.png
+SHA-256-Digest: CO9I7xdiP9RJTtbbgO+ecR7YfjX/TjsqbArZLhPJxo8=
+
+Name: org/eclipse/jdt/internal/debug/ui/NoLineNumberAttributesStatusHa
+ ndler$1.class
+SHA-256-Digest: Kxoi38TRasMxdumexqF+YQhujUeSZHIRxo4tApE7wYk=
+
+Name: org/eclipse/jdt/debug/ui/console/JavaStackTraceConsoleFactory$1.
+ class
+SHA-256-Digest: 58WehpA7ceSvQDdGe1vf5c1l1f+32FEz/xDIfWdwmJY=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/AddFolderAction$FileFi
+ lter.class
+SHA-256-Digest: TlCWg16MMx9yu1igwxEl7fJQn9yieRKlvrCI3PqzDhw=
+
+Name: org/eclipse/jdt/debug/ui/launchConfigurations/AppletArgumentsTab
+ .class
+SHA-256-Digest: 4qjONLs/tG2wRVFGQXl3TXG89Zs13FAgoOdCoiFsh7M=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/JREsComboBlock$3.class
+SHA-256-Digest: vYhtT7Vrn3Na8r/J6HrwzSduV8nIebAXyJ5nVUe5CMU=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/OpenFromClipboardActio
+ n.class
+SHA-256-Digest: xUkw0Q1njLwqFeD1eYeWKyVcgEwtRdQlI6U6zE2W3fI=
+
+Name: org/eclipse/jdt/internal/debug/ui/contentassist/IJavaDebugConten
+ tAssistContext.class
+SHA-256-Digest: 8sYQXPgh2fCovk6nwNTTwr8k0abp4fyjyGTVbE7oaAs=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/PopupDisplayAction$1.c
+ lass
+SHA-256-Digest: 4SAU964a24dSdlagM2DSuKNl9S2eWbog2g08iirmZQo=
+
+Name: icons/full/elcl16/all_references.gif
+SHA-256-Digest: NZKZEG9rxEYZBykH38X/JClRYvRZ1x03zWNlu24GjJ0=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/StandardVMCommandTab$3.cl
+ ass
+SHA-256-Digest: DJeSD4p1GQKkcWSZmAeyY0EsRP6Zh/9kXQM/WwYVXmI=
+
+Name: icons/full/dlcl16/sethitcount_co@2x.png
+SHA-256-Digest: cMoWGJ8bbtEp/zRywSVP5Jb3Q1EYmGZIS71TfIO83/w=
+
+Name: icons/full/etool16/run_exc.gif
+SHA-256-Digest: wxu3yoEN5+jVeeHncu/86b4csSOmu6js1Q3BaTPfI6s=
+
+Name: icons/full/obj16/jline_obj@2x.png
+SHA-256-Digest: Nic9hucwUJKI0pDEXEDerKZkc8/W2Un2H/+9/eouZZc=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaDetailFormattersPreference
+ Page$5.class
+SHA-256-Digest: TYMrp9SAUlE4PMqV7R5xYO4f97byhheY373UY88P1p8=
+
+Name: org/eclipse/jdt/internal/debug/ui/contentassist/CurrentFrameCont
+ ext.class
+SHA-256-Digest: joUQILLtqSe1cNeKmrRRrgyZ42rGdo2z+YfLPT2Ltmg=
+
+Name: org/eclipse/jdt/internal/debug/ui/heapwalking/JavaWatchExpressio
+ nFilter.class
+SHA-256-Digest: WykEXXKcbnpwspfu4xSi3OPXkgzJGOCArp1KDw+NVgk=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaDetailFormattersPreference
+ Page$3.class
+SHA-256-Digest: 58y22Q1kl13m8EqpSdFaUKJRh4e7lm7uQE2T+lMZ07M=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/InstalledJREsBlock$7.clas
+ s
+SHA-256-Digest: MauT8c0JJFWnq90ULOpDhnnWTMrToW2fMlaDQkYhNeU=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaLogicalStructuresPreferenc
+ ePage.class
+SHA-256-Digest: lBEnbbGsl4n1x7Qyx4lalynVmIDq35UkjS2w/5syLDA=
+
+Name: org/eclipse/jdt/internal/debug/ui/classpath/ClasspathEntryAdapte
+ rFactory.class
+SHA-256-Digest: VMgroYAWDBp1/T6lw2gAZ3/yDVbVmP8cmIcGc0RboDA=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ActionMessages.class
+SHA-256-Digest: RoGoyG4jUmMNNFlYh/UaiVHr1xE/1w9dav0ilYrPaTA=
+
+Name: org/eclipse/jdt/internal/debug/ui/breakpoints/LineBreakpointDeta
+ ilPane.class
+SHA-256-Digest: ZwNu9xA8kVi8pUGw0fKp11D7g3N3TaETKwcKFYteqQ0=
+
+Name: org/eclipse/jdt/internal/debug/ui/EditLogicalStructureDialog.cla
+ ss
+SHA-256-Digest: IWkpwykn3/vuq1TXejkQ9PZrMerVaM0mqbe0Tn+MaSo=
+
+Name: icons/full/ovr16/sync_ovr.png
+SHA-256-Digest: VwoHleKfgMPi8ud6V3X3y3lN7nhH9THwH6xZxsvMEj4=
+
+Name: org/eclipse/jdt/internal/debug/ui/snippeteditor/SelectImportsDia
+ log$2.class
+SHA-256-Digest: C1LKaNOjHZpd6M7tDFsAMXz1Yvo6ZHabbN4ElAyGAuU=
+
+Name: org/eclipse/jdt/internal/debug/ui/classpath/ClasspathLabelProvid
+ er.class
+SHA-256-Digest: lgkK0tyGUxL14Hm2o3BvkqnLRMipBmAEXYgE4qfbnmY=
+
+Name: org/eclipse/jdt/internal/debug/core/refactoring/BreakpointRename
+ MethodParticipant.class
+SHA-256-Digest: Za4nMokjlZJuX/Q7f38IfN4YboWmyVKOOSycXSaLzO0=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/RetargettableActionAda
+ pterFactory.class
+SHA-256-Digest: /gtZRJRB9QK7UDMG36tbRqHZjbKTus0KCtTDah8kdRc=
+
+Name: icons/full/obj16/jexcept_obj.gif
+SHA-256-Digest: d1MoFVLKmsSxUEeHDt4L+hVXjJoaP/mvKQOAiXomdyI=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ExpressionInputDialog$
+ 1.class
+SHA-256-Digest: WMcufXCd3Vn/g6uq0ihwyC48VLl2c0esPhkeHrkDOh4=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/StepIntoSelectionUtils
+ .class
+SHA-256-Digest: GplBsEsZr3sDU763jD9be7Rm6uLE5uK5Uy3JXwYvNOQ=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaLogicalStructuresPreferenc
+ ePage$1.class
+SHA-256-Digest: wtasqQSkjlzvKoezeUA3Vj7OIQwvyxlkeDOlzgxw480=
+
+Name: org/eclipse/jdt/internal/debug/ui/sourcelookup/ClasspathVariable
+ SourceContainerBrowser.class
+SHA-256-Digest: FlZw/jeCsOdSVcfLF6d/kOqfSVFEHWO5rboFOZs0pZ4=
+
+Name: org/eclipse/jdt/internal/debug/ui/classpath/DefaultClasspathEntr
+ yDialog.class
+SHA-256-Digest: DVsh3yFuxxINJnl2QBjICH/l3p1KD7uPhr8FLLe8JwM=
+
+Name: icons/full/obj16/envvar_obj.gif
+SHA-256-Digest: gd4AdfS/a8UHOWRgKkU3T3sq3KRgIdqoRwbbzvm9PxM=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/JREsComboBlock$5.class
+SHA-256-Digest: pHmMGpqlXSGn0PTr4Bx0f62v7abzvNBTPrVpSQbI9Eo=
+
+Name: org/eclipse/jdt/internal/debug/ui/breakpoints/SuspendOnCompilati
+ onErrorListener.class
+SHA-256-Digest: PzaSpe3XIvfDD98FEa6kMsMzIxW1O5h5oyqevLtreqY=
+
+Name: icons/full/ovr16/error_co.png
+SHA-256-Digest: 8tEFE11AJ/7G1jt+wrX8OAT0dZkAOJKRoztB5a0k7hY=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ToggleBooleanPreferenc
+ eAction$1.class
+SHA-256-Digest: IsNUycoWypeg7e5s1rTPXt+CdT8+mOVBQZfl7skm2tw=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/InstalledJREsBlock.class
+SHA-256-Digest: fHEPaCcvfNX1VcvDID4gekmUaEKLm0qn+UIxkn4SXsw=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/SourceLookupBlock$1.c
+ lass
+SHA-256-Digest: A5r2m7ISiIb89BJ9INWidpnxBz9CSEC2QooeAWzvVyk=
+
+Name: icons/full/obj16/threadgroup_obj@2x.png
+SHA-256-Digest: 2C6Te99u9cQOiJr2uOhDQIHiU4mRQglM+l7DTfLVNSU=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaHotCodeReplaceListener$1$1
+ .class
+SHA-256-Digest: oas4miYvwURT02fBw8izX6bc3ayxoHGL36l1s/psWRU=
+
+Name: icons/full/ovr16/entry_ovr_disabled.gif
+SHA-256-Digest: HGwHYkCZPDXP2oFnRV4Xpmde36Dum+BrxWRfoYcNQ9M=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/AppletWorkingDirector
+ yBlock.class
+SHA-256-Digest: Df6ehJBRYBtZ6AyodQx/fWhWfDLoWEOBkrObYQMrQLU=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaStepFilterPreferencePage.c
+ lass
+SHA-256-Digest: H5zhkaI25LurKMz1Kk8l+fTEusc6+PPu9i9CiAQ6ePQ=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/JREsComboBlock$8.class
+SHA-256-Digest: qbU0ISuAfX+n9LZq6PC26UAx9yQ0hlTIPcNiJ1zvpY4=
+
+Name: org/eclipse/jdt/debug/ui/launchConfigurations/AppletMainTab$1.cl
+ ass
+SHA-256-Digest: wndxJTJ7wHkSDhfRIPcrrmuM9eXavgSJIcDPaasIzWE=
+
+Name: org/eclipse/jdt/internal/debug/ui/display/DataDisplay.class
+SHA-256-Digest: 7zXAXFoJuBD8GuqipLru5GsuPVXMFGaomZyJznysoO8=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/PopupInspectAction.cla
+ ss
+SHA-256-Digest: P+mV7AWtBVm3Y7xOrKi+KF8+vJYyNh99pp96YU4Zsrg=
+
+Name: org/eclipse/jdt/internal/debug/ui/threadgroups/JavaThreadEventHa
+ ndler$1.class
+SHA-256-Digest: ONX4gbxIERHlICIG4n0YzK5NYkm0rbp3U81bM6CX7p4=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/InstalledJREsBlock$5.clas
+ s
+SHA-256-Digest: EWJvKOMKaSfhcWvbM9LVr8FhR2EG0HDEniSPGrKO1YM=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/JavaBreakpointProperti
+ esAction.class
+SHA-256-Digest: /AwDHkO1O034eA0m0lrys42T5WrMjyYsFgB1rsov/SM=
+
+Name: icons/full/ovr16/installed_ovr_disabled.gif
+SHA-256-Digest: XMYStqwX6VdE/6Izgz7bdGM2zHAIDeQSQMkyabFW0ZI=
+
+Name: org/eclipse/jdt/internal/debug/ui/snippeteditor/SnippetMessages.
+ class
+SHA-256-Digest: pQBulP0WUKOvvxp3y3htaeLPNo/RTZB0t2O1XzV2mMY=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaDebugOptionsManager$1.clas
+ s
+SHA-256-Digest: xezHMyyRcCvo2HiYE8Wru3yVi/IL9i7d1EaqCGxBKuk=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaLogicalStructuresPreferenc
+ ePage$3.class
+SHA-256-Digest: 1LCft47/8OcfiRuKR+VAIq0PHxydd9Xt0FKHeMv1ApI=
+
+Name: icons/full/obj16/readwrite_obj.gif
+SHA-256-Digest: 7C/ais/cV9eqRKXoQDgOc5d4VSKHVMzOig8DSFjV4qs=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/InstalledJREsBlock$12.cla
+ ss
+SHA-256-Digest: brr6aqJs4KGjXojM2zv9Ptxi1ZvnnHX2bX/BrBreeIE=
+
+Name: icons/full/ovr16/warning_co.png
+SHA-256-Digest: bILxTuSJY7vpWurlLtUlbaEuCuMh7ny/3vVf+RmnfRM=
+
+Name: org/eclipse/jdt/internal/debug/ui/monitors/JavaOwnedMonitor.clas
+ s
+SHA-256-Digest: n44eGkyjUJu4OBiXCSTWymwpuOsxt26bNn+CjiDsdKg=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/VMArgumentsBlock$3.cl
+ ass
+SHA-256-Digest: 4udt0wsxe7J5hSi2zdw8Rzb2KoqQvFYDhkg8DoXlad8=
+
+Name: icons/full/obj16/jar_obj.png
+SHA-256-Digest: wRTWQUn5Hsa3mWdTluz9zr9QUaICSdaHvsQn7hUjFhU=
+
+Name: org/eclipse/jdt/internal/debug/ui/snippeteditor/ScrapbookLaunche
+ r.class
+SHA-256-Digest: g4+uolfAYR68XSB46HnvZm3pQRCbz8lbRwi1tjqrvWU=
+
+Name: org/eclipse/jdt/internal/debug/ui/propertypages/PropertyPageMess
+ ages.class
+SHA-256-Digest: rpzSURVW2vXbkRQghOw0CKoaJwWSVyenXl25wQvg8L4=
+
+Name: org/eclipse/jdt/debug/ui/launchConfigurations/JavaClasspathTab.c
+ lass
+SHA-256-Digest: ZbiByqORnwJXAPqAQHxHQOFh3MaP9kQJ6+WzBwbnvjE=
+
+Name: org/eclipse/jdt/internal/debug/ui/PackageSelectionDialog.class
+SHA-256-Digest: OYkv9VaR0AiGYW7HTfHidavavdElIqsFoVr/0fRqXv8=
+
+Name: icons/full/ovr16/entry_ovr_disabled@2x.png
+SHA-256-Digest: wDN/gu2i5Mblchpwld4oFMuiZbWQ4WQ/U2jTDVhbdZU=
+
+Name: org/eclipse/jdt/debug/ui/breakpoints/JavaBreakpointConditionEdit
+ or$3.class
+SHA-256-Digest: ChjXiAQIM8os0biElmOxPKwW4UKnj7sPVrqZv1E6oFw=
+
+Name: org/eclipse/jdt/internal/debug/ui/snippeteditor/JavaSnippetCompl
+ etionProcessor.class
+SHA-256-Digest: sbCs66lrndK54uvGYrV2h8J/0hIqsWJFSlCaaDjJLJA=
+
+Name: org/eclipse/jdt/internal/debug/ui/console/JavaStackTraceConsoleF
+ actory.class
+SHA-256-Digest: lWe0X4KN+CHj1VRSX1G2rOW6E4gY3RbdL/KOVyfqb8A=
+
+Name: org/eclipse/jdt/internal/debug/ui/breakpoints/ExceptionBreakpoin
+ tDetailPane.class
+SHA-256-Digest: z5TB/alpAIqzrK6gn+iERSj98Y/1fcapdOfa6g2fLGY=
+
+Name: org/eclipse/jdt/internal/debug/ui/SuspendTimeoutStatusHandler.cl
+ ass
+SHA-256-Digest: dumry8LuS7ctlXyeJJ22nscLGBk27MAyHDY9JfsOlK8=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/JREsComboBlock$6.class
+SHA-256-Digest: fVVyjQeuU9zNUtmIg4zk5gxVSI6LTCLPBJLvptp3Fq8=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/JreResolutionGenerato
+ r.class
+SHA-256-Digest: Mdy8wHXnWiMeaQHtiXBms0XGJVNcjYyFkIqUkf/CdMk=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ExpressionInputDialog$
+ 2.class
+SHA-256-Digest: QZUkuKydNh6u0v0P9xVHBbZai6a7qXLKkNznJNGgs7I=
+
+Name: icons/full/ovr16/entry_ovr.png
+SHA-256-Digest: pEtaQ31B3Cf3RR2Rzs1aKqxDQcC0XkBlHAZJ4FmlXTg=
+
+Name: org/eclipse/jdt/internal/debug/ui/heapwalking/AllInstancesAction
+ Delegate.class
+SHA-256-Digest: A4jq3CsQq9xpH6iQatrHt7Znq7HcCZ3pZXprOShAlLo=
+
+Name: icons/full/dtool16/run_sbook.png
+SHA-256-Digest: QGVyt6YhbO9NecXkSLW2UOFuDF5+U/Nf8qH0SpeDWS4=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/DisplayAction$2.class
+SHA-256-Digest: mgofCyyCg3hUJNHc1Ll+Vlt36OKRtkUONsQsDq26Cjg=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/EEVMPage$3.class
+SHA-256-Digest: XTUYUjwYawCUrJw73jf7hGxsyqSOEg2zqmFRcvOaQbw=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/MainMethodSearchEngin
+ e$MethodCollector.class
+SHA-256-Digest: b2m0iGywtgeMrEfhn5MFHgeN8SlgGw/0dFqYQLXbvuE=
+
+Name: icons/full/obj16/jexceptiond_obj.gif
+SHA-256-Digest: tXMVLvXX4W17sVt7OnpkEIwBgHSM/UqOeiy9ogILU4Q=
+
+Name: org/eclipse/jdt/internal/debug/ui/variables/JavaVariableContentP
+ rovider.class
+SHA-256-Digest: q2dloLLOsTayIerpyfg0pHgJkeQSw7iCs3yJgYG5f9c=
+
+Name: icons/full/obj16/thread_obj.gif
+SHA-256-Digest: hGpQqF2l3YbWijaSo9+Hev5WwJiEnsIG6G37tjI5J3w=
+
+Name: org/eclipse/jdt/internal/debug/ui/propertypages/InstanceFilterEd
+ itor$CheckHandler.class
+SHA-256-Digest: U20mzNBExqBEuAFYJ3zxoKuZRSXO2D+R63fz/vteIpw=
+
+Name: icons/full/ovr16/caught_ovr_disabled.png
+SHA-256-Digest: LrHbQ9AHN+qIxGKTL6WxgsuANZ7zfw5bhhyciZakhMM=
+
+Name: org/eclipse/jdt/internal/debug/ui/variables/JavaVariableColumnPr
+ esentation.class
+SHA-256-Digest: rrzmhTqRzxL4IZfNmORh7mgbii7FE7lDOhM8AHmhtXw=
+
+Name: org/eclipse/jdt/debug/ui/breakpoints/JavaBreakpointConditionEdit
+ or$1.class
+SHA-256-Digest: eTLuCFzEeN3uuts0LGa0DrlMDRUiKtx5gvPJkTGIOdc=
+
+Name: org/eclipse/jdt/internal/debug/ui/NoLineNumberAttributesStatusHa
+ ndler.class
+SHA-256-Digest: h822vL+TXqdpN8PFKaN5vdQau8nOZ0hdU6sKd96xqDI=
+
+Name: icons/full/obj16/jspbrkpt_obj@2x.png
+SHA-256-Digest: GSblUbXrtoqTWByU5LQ5320IC+OrBgn4bj0sykUQBd4=
+
+Name: org/eclipse/jdt/internal/debug/ui/breakpoints/AddExceptionAction
+ .class
+SHA-256-Digest: 5yRMtsWD/+x+js0We2Lwrfjs6diOJfkOyponmcCnAUE=
+
+Name: org/eclipse/jdt/internal/debug/ui/snippeteditor/SnippetOpenOnSel
+ ectionAction.class
+SHA-256-Digest: Tqx2qVNddFX0fS2CFHXEok1EJKfTySug0fEpDwdhYfg=
+
+Name: icons/full/obj16/monitor_obj@2x.png
+SHA-256-Digest: Zxn/yNnIEWelBf3jCM+JpFQIWDtKXhiRP76gWHuOqSQ=
+
+Name: icons/full/ovr16/contentionformonitor_ovr.png
+SHA-256-Digest: MZyxQCH3pewaqBOxpXSaaFbcAFROKKs+pdTUi3caBiY=
+
+Name: icons/full/elcl16/resume_co.gif
+SHA-256-Digest: sfeHOg78pqzoU781FzHgAM0yIboaRCEacKnHBeFjRnk=
+
+Name: org/eclipse/jdt/internal/debug/ui/ImageDescriptorRegistry$1.clas
+ s
+SHA-256-Digest: 9g3+FZeGdW8G1wYRpsnV0h4z3WJZqXql1V/mYD2pOFY=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/SelectSystemLibraryQu
+ ickFix.class
+SHA-256-Digest: xCT17cfhQgLDJLLdR4MVs4/ehV1+WaYg8uiPtLwh9Mc=
+
+Name: org/eclipse/jdt/debug/ui/launchConfigurations/JavaAppletLaunchSh
+ ortcut.class
+SHA-256-Digest: Dgn+ovfAUSjUncy6auMZKwoNVCYA4vT3pOSsYtvF1XI=
+
+Name: icons/full/obj16/jexception_obj.gif
+SHA-256-Digest: 4u8FaBxJouH7haNEqpPT9IZlD6aoGBvFQiuC8OZlp/Y=
+
+Name: org/eclipse/jdt/internal/debug/ui/threadgroups/ThreadGroupMessag
+ es.class
+SHA-256-Digest: jpByUycqpqWUw2iAEDbnbxvbg2qhzk5w6kSpHpBzfD4=
+
+Name: icons/full/etool16/java_attach.gif
+SHA-256-Digest: FjcHzwMgeJuxnsXDnqlZj/HJ/YoFU2gLke5MEmZGee4=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/ViewFilterAction$Updat
+ er.class
+SHA-256-Digest: 7tRksKfQIHuTAG/JRwBUbx8KGQ/Fia2cNtSYDM0uJ2g=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/OpenPreferencePageRes
+ olution.class
+SHA-256-Digest: FpHswJ4RGvBzlS+0uejLCFe/0LOpaQVavShBACAjpq8=
+
+Name: org/eclipse/jdt/internal/debug/ui/ExpressionInformationControlCr
+ eator$ExpressionInformationControl$TreeRoot.class
+SHA-256-Digest: rTJSlGJMtpX5MU8dFHeqIeUAVaqmPeljqgjQhmxufzY=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/StandardVMCommandTab$1.cl
+ ass
+SHA-256-Digest: EG5qK7IRLLfZYs9sRSouBJcRfjNKNtP/SPalwyjSYug=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/DebugTypeSelectionDia
+ log$DebugTypeDetailsLabelProvider.class
+SHA-256-Digest: AYvBx1UZx/rXdQ2/x2PW8YSlijsz2JPcWj9IrSM2ByY=
+
+Name: org/eclipse/jdt/debug/ui/launchConfigurations/JavaArgumentsTab.c
+ lass
+SHA-256-Digest: zvdPIjdknI+E1muEIb+Qb1L2Zf+a1tiGbIOyMqby/PY=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaHotCodeReplaceListener$2.c
+ lass
+SHA-256-Digest: slEcV7+2taZSNp4ys3d2VYjfU21z6uEWILoZCE+MveI=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/InstalledJREsBlock$17.cla
+ ss
+SHA-256-Digest: ndLItgBSLNOnnr2uwsxGA2/8iMbdTSDg1buqSqFIBC0=
+
+Name: icons/full/elcl16/constant_co.png
+SHA-256-Digest: w+K6LH1sC+OKzKWN4Eq5eai3PYVa6LizDLlLqdxZQ1U=
+
+Name: icons/full/dlcl16/sethitcount_co.gif
+SHA-256-Digest: J5MR1Qdzuij5E7rkmSUpnK/zYs7dH9Z8Dik8D0q9KcM=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/DisplayAction$3.class
+SHA-256-Digest: xqTeR79aEIWHWnIeqHQ7kJR99xZ3I/tDYIBUdLOBLUQ=
+
+Name: org/eclipse/jdt/internal/debug/ui/snippeteditor/SelectImportsDia
+ log.class
+SHA-256-Digest: crXEZdPvQj/41s5s+BYf+ej/7vp4Bj1kIU0r1yg8TGI=
+
+Name: icons/full/elcl16/final_co.gif
+SHA-256-Digest: NEctqqq+P7v0F0x4XfWOjn5x/S3jO6hI0DNRF6f0p64=
+
+Name: icons/full/obj16/prj_obj.png
+SHA-256-Digest: AyJmZTjfrtOdkDrmOuS84+me3VMQ4J+oAo7xX0w5eeM=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/InstalledJREsBlock$2.clas
+ s
+SHA-256-Digest: wISAHZ6fQODN1psuwnJRLWzTD+Fuoxp0gemyPNhhrg8=
+
+Name: org/eclipse/jdt/debug/ui/launchConfigurations/JavaJRETab$2.class
+SHA-256-Digest: 86qAfOq+24dula7gaJFzUgvAlYg4FjSOttEx7M5LPxg=
+
+Name: icons/full/obj16/threadgroup_obj.png
+SHA-256-Digest: g1mckhKb/Pwyhc3KUb6ebIfYINwADmDBbQgz0j3Xuro=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/InstalledJREsBlock$16.cla
+ ss
+SHA-256-Digest: E49JUhgLnWkZxxrlq/uI85ZwZEW8nMg3TKztOsltkAU=
+
+Name: icons/full/eview16/variable_tab.png
+SHA-256-Digest: 17TGBC7uOpzo+cmakFKFg7w24sTbvIM/Y0nc/c1kzUo=
+
+Name: org/eclipse/jdt/internal/debug/ui/ExpressionInformationControlCr
+ eator$ExpressionInformationControl$2.class
+SHA-256-Digest: 5APL5/kvGdDmXsb23YXCxIn7A9SpdbeZbPZod9GVm3k=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/StandardVMCommandTab$2.cl
+ ass
+SHA-256-Digest: 4GhkxCQDNznfcHR+wHw/vKwWNsv+njChlCzVHWRPVSc=
+
+Name: icons/full/obj16/brkpd_obj@2x.png
+SHA-256-Digest: FSsYnkNOMGmxwokwSiLMRaO9D+UTKcQyIQ3brQ3SPQQ=
+
+Name: icons/full/etool16/new_sbook.gif
+SHA-256-Digest: yvaFJFBh08OVAXWHbtib8AAXms/P5n/6hMFOtj2vOys=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/InstalledJREsBlock$3.clas
+ s
+SHA-256-Digest: k+HJNmI1QiAyUiIRbNgVSWkyyUMOS+8hKCOIqwbXvbk=
+
+Name: org/eclipse/jdt/internal/debug/ui/JDIDebugUIPreferenceInitialize
+ r.class
+SHA-256-Digest: 0nDag61d4kuCuYlqoNDmI3+AniApe/AaoZwDP+gr36Q=
+
+Name: icons/full/obj16/reference_obj.gif
+SHA-256-Digest: m8SjdIn907yLbKnqlXTMT9mSx+3BjMPdemHzX7cq8ek=
+
+Name: org/eclipse/jdt/internal/debug/ui/ExpressionInformationControlCr
+ eator$ExpressionInformationControl$3.class
+SHA-256-Digest: 9XBQRvs9UfX51PGc1TNIKi/Qqo98Rpxo8UFADzCx4rk=
+
+Name: icons/full/dlcl16/deadlock_view.png
+SHA-256-Digest: lRx+Q1AZkoBMhT7f598pC4d3aH6Bs2qs+UpkEOXmN2Q=
+
+Name: icons/full/dtool16/watch_exp@2x.png
+SHA-256-Digest: doyaBKYtWjPr8yosONQgQJCyJI6kGqmUXfB5kBaTtIE=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/BreakpointHitCountActi
+ on$1.class
+SHA-256-Digest: 1Kb2wW+9G9hi6a6ks6SoHw4ooUX8qplAPM4ElKmM9rc=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/RunToLineAdapter.class
+SHA-256-Digest: aS75hrCdBORLdOFowat8hXXyxt4sGeDsDck5XVFCiOo=
+
+Name: org/eclipse/jdt/internal/debug/ui/propertypages/VMCapabilitiesPr
+ opertyPage.class
+SHA-256-Digest: bFUa9wXlpOkrkonQTp2bKg2dQbSC+PiDzsAxlQRZG3U=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaWordFinder.class
+SHA-256-Digest: JnFiKFFi4iQX8NOJGEHU4SgWeAi8MEb6Dbu3dfNNcEg=
+
+Name: org/eclipse/jdt/internal/debug/ui/threadgroups/JavaDebugTargetPr
+ oxy$1.class
+SHA-256-Digest: MJ2xV+hOwe8BXYyPG4+MfqIv7KOrWCegv2hB2NHWE+Q=
+
+Name: org/eclipse/jdt/internal/debug/ui/monitors/JavaElementContentPro
+ vider.class
+SHA-256-Digest: XymcNDAuw5k3oQ8+vp/EevzB3mpXbFNtf6GzvI00tfU=
+
+Name: org/eclipse/jdt/internal/debug/ui/snippeteditor/ISnippetStateCha
+ ngedListener.class
+SHA-256-Digest: cmcHlEyakgRFotdYew0ONqTOGueXCdrmYmUU5CqNFYo=
+
+Name: icons/full/ovr16/contention_ovr.png
+SHA-256-Digest: ufYU/DkeeMx4aOBm0qjv4AqOmlr2n1Ng82bv8oOEaEg=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/JREsEnvironmentComparator
+ .class
+SHA-256-Digest: ItnSB8IHOBvtoW5hk5zHlDEwqb4atgj5mVPZUJUltWw=
+
+Name: icons/full/ovr16/exit_ovr@2x.png
+SHA-256-Digest: ufV7ZOiM+p4y11xuHqKtCxPZEttayreyYzory5ypqI0=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/LibraryLabelProvider.clas
+ s
+SHA-256-Digest: j5hPZ8qZVoSWXZtMgmRk0ejcg8FAKQVP3l9l2fqaFiE=
+
+Name: org/eclipse/jdt/internal/debug/ui/breakpoints/ExceptionInspector
+ .class
+SHA-256-Digest: xciu50VampIqZaHFKyyaVge8tHd5Lpj/lz7DJwWfve0=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/IAddVMDialogRequestor.cla
+ ss
+SHA-256-Digest: FyWEj/9PqpAPFOZivu266qNLLYAEcgn27vzxiheyQmE=
+
+Name: org/eclipse/jdt/internal/debug/ui/sourcelookup/SourceElementLabe
+ lProviderAdapterFactory.class
+SHA-256-Digest: Q8y8lPo9XL1I84f1vEjojIbMg5Vm3SIMXcwbinOIweU=
+
+Name: icons/full/etool16/run_sbook.gif
+SHA-256-Digest: yhOGToFYsovqWILesyTa/FVu9bYV+K/4nu/VV2Fxd6s=
+
+Name: org/eclipse/jdt/internal/debug/ui/ActionFilterAdapterFactory.cla
+ ss
+SHA-256-Digest: opSrSu9yWyzh7xOrZkRlNB1gCTwKAfQRbWWg+lZTspc=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/InstanceFiltersAction.
+ class
+SHA-256-Digest: R0T8wI45lB4DDVNxUqnX40j2XG0Pzk8+HJXUH7bVXws=
+
+Name: plugin.properties
+SHA-256-Digest: QeznJAHWjvPzpXmoXPPFxr4cLkSL+AJ/mpVrDA2y8sY=
+
+Name: org/eclipse/jdt/internal/debug/ui/console/AutoFormatSettingActio
+ n.class
+SHA-256-Digest: YDFtU1Fhnf9yNi9sPvjZoYVv8qYe/uuplqSTmKjuC74=
+
+Name: org/eclipse/jdt/internal/debug/ui/EvaluationStackFrameContextSta
+ tusHandler.class
+SHA-256-Digest: zPG4x0rPKmTNSKNqKZuuHli8SeRhuVnl7xFcmrrN0qY=
+
+Name: icons/full/dlcl16/thread_view.gif
+SHA-256-Digest: aDOhLr09XHZWRTJC7zWslEXoQDeWl8tgdjrhlpAbXxc=
+
+Name: icons/full/etool16/debug_exc.png
+SHA-256-Digest: O7BpNeFdr9Ja7AO5sOWDuhKIaJuDKVcK6TK1FbyGrIw=
+
+Name: icons/full/elcl16/var_cntnt_prvdr.gif
+SHA-256-Digest: S7uAGnNTKHl1UkdCWdpa7YzRl5HQAai5OkFvdhc1mEI=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/EEVMPage$5.class
+SHA-256-Digest: yYBa/gLdG9bTn51yhAL0ybrpHFczSWWZ8f8MhMGpffM=
+
+Name: org/eclipse/jdt/internal/debug/core/refactoring/ClassPrepareBrea
+ kpointChange.class
+SHA-256-Digest: Ts/6SfmzrKmVQurkzEIYDqV6D9frrDoiv3wnrS9z/Zw=
+
+Name: org/eclipse/jdt/internal/debug/ui/sourcelookup/SourceElementLabe
+ lProviderAdapter.class
+SHA-256-Digest: 8mIW5VR/S07NmlZwyL5G9JF4SQY/ETq8/PMrnNtljsU=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/InstalledJREsBlock$1.clas
+ s
+SHA-256-Digest: B3fpFeewxPlexStH/5h/om6/GK4/0/taTk7m2P+Vqvc=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/BreakpointToggleUtils$
+ 1.class
+SHA-256-Digest: dA2koNF06hKS1ceXHgeWO2hTddTAlmPMS1cXX4qjIto=
+
+Name: org/eclipse/jdt/internal/debug/ui/display/DisplayResourceBundleM
+ essages.properties
+SHA-256-Digest: H/vxd203cDpw6QaoP1bzVCqwiWLLaT9VwJP4weINCpo=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/JREsComboBlock$2.class
+SHA-256-Digest: v/ZVCxeTPygtuSRqJV6awl5+huXShrIQLr1RMLJtD/0=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/NameValuePairDialog.c
+ lass
+SHA-256-Digest: jNla6Opxdo89I4acaANErkQLFwzkROthtnCItGhBoBM=
+
+Name: icons/full/ovr16/uncaught_ovr_disabled.gif
+SHA-256-Digest: met0VIHQAvbuqBkYsSeeHWLN6TNcg/hUMGGGY8vE6nA=
+
+Name: org/eclipse/jdt/debug/ui/IJavaDebugUIConstants.class
+SHA-256-Digest: pP4CY+eNZV5zfxAzJJtvfZ+ABp5T0Dq60TKynleoNfE=
+
+Name: org/eclipse/jdt/internal/debug/ui/ExpressionInformationControlCr
+ eator$ExpressionInformationControl$1.class
+SHA-256-Digest: kdjfOyrEL+tWFRPSZ5hqYJ1xatt4jn/dfhowRyNM4Wg=
+
+Name: icons/full/dtool16/disp_sbook@2x.png
+SHA-256-Digest: qCJ4xfcdAC7RXX7UUGsdDAAE9uPouDOerSXR8jy5R80=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/EEVMPage$2.class
+SHA-256-Digest: Dc87YmHueqrzGtiAxa5y7sPG/4dxIxyyTMa+912Qg3g=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/RuntimeClasspathAction
+ $1.class
+SHA-256-Digest: gJVKADKapg2lCzsnxi0wyCrLYUX2808D2L0S2HJzCVE=
+
+Name: org/eclipse/jdt/internal/debug/ui/JDIDebugUIPlugin$3.class
+SHA-256-Digest: oGXgz+CYFNzeAKjHvyz7BLKijxP7JrKaycXUkWnEnFg=
+
+Name: org/eclipse/jdt/debug/ui/launchConfigurations/JavaJRETab$1.class
+SHA-256-Digest: R5qsSp4FBxFCfzgVifFfuHGM1/DBqMMKfvcIAKAlE3o=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/OpenDeclaringTypeHiera
+ rchyAction.class
+SHA-256-Digest: 6DUwsZpxSIuxwHLDBHmPk0+ZcfgGJgZTKLh5XrWJOOg=
+
+Name: icons/full/elcl16/all_references@2x.png
+SHA-256-Digest: YaQR2VRsdjJTp8a8Rr93+uDBVy758kWFeQj05u7gok8=
+
+Name: icons/full/etool16/term_sbook.png
+SHA-256-Digest: cducb09coDzJgYzYWvuSVrx6z/pQjnD3eUOHOd3jhxg=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/JREsComboBlock$1.class
+SHA-256-Digest: WgRoA6HsQkk/4UVWcxyYaiD+m6qy0S7XkRp/djLhLjM=
+
+Name: icons/full/obj16/jwatch_obj.png
+SHA-256-Digest: y6fQbldQGWBh3vZ76Y1bGEcwbqRJ2ShDJyOhd2H06w8=
+
+Name: icons/full/ovr16/conditional_ovr_disabled@2x.png
+SHA-256-Digest: K36I1oUwwtfIQvlSY5Ef4y8V05W3ZRt7LoCIgkUKRuw=
+
+Name: icons/full/obj16/methodresult_obj.png
+SHA-256-Digest: Pxh0ID0pmEATqbUokoRM+yv/l4uDyNd0q2myDi8lAKs=
+
+Name: icons/full/ovr16/conditional_ovr_disabled.png
+SHA-256-Digest: zuQ5gR54QUt6qBCJtiSYQfKmfHzudRJ0zhQIwJtbJt4=
+
+Name: org/eclipse/jdt/internal/debug/ui/classpath/DependencyModel.clas
+ s
+SHA-256-Digest: wBDA5+8yUQBI70uk6W5zWiRz3/KLvkcypcRqFAl7i+o=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/MainMethodSearchEngin
+ e$1.class
+SHA-256-Digest: TQuVT0n77fUb/dnqswJzC/cmqzx6REP8kqtKhbWY7Wc=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/JREsUpdater.class
+SHA-256-Digest: bXoTp+ruz0GBeg6C1E/LLosAo6Nv74h+Nx8R0w51Kyg=
+
+Name: icons/full/etool16/term_sbook@2x.png
+SHA-256-Digest: BcmPxan7KFeCkKcFdbwdnaZFKKlridl0/WASslHYtRo=
+
+Name: org/eclipse/jdt/internal/debug/ui/JDIDebugUIPlugin$4.class
+SHA-256-Digest: Law6CwJsrCziJlR+hLrqajeGEOtV/H7kz6eyWdwkCPw=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/JREsLabelProvider.class
+SHA-256-Digest: z9i5LaW6NHWDbbAb53L7RPUHMisUwRbkmbiOztOVw7g=
+
+Name: org/eclipse/jdt/internal/debug/ui/EvaluationContextStatusHandler
+ .class
+SHA-256-Digest: 4DIE7Zyjpqdxok2dw/xSx8Q3rh5gLPFG3uf4qAa85+M=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/InstalledJREsBlock$Instal
+ lListener.class
+SHA-256-Digest: 7T6KMkoSmqfJrcDBtCQIFkW/lZwPLqUbE/0gQIBSklo=
+
+Name: icons/full/obj16/package_obj@2x.png
+SHA-256-Digest: UxoZOYmGI0DTt6eCYbYNlJ1Xw56FZqkRMAMfySkxKSw=
+
+Name: org/eclipse/jdt/internal/debug/ui/sourcelookup/SourceLookupMessa
+ ges.class
+SHA-256-Digest: I7skc6iLk2AjhQlP6oCp1en8JqawAu30jN923na+Nlk=
+
+Name: icons/full/elcl16/deadlock_view.gif
+SHA-256-Digest: ub01PhN+4lMSLCZtD1EpiHnVuCsEeWW8pBvRvpwG1mk=
+
+Name: org/eclipse/jdt/internal/debug/ui/IJDIStatusConstants.class
+SHA-256-Digest: n0kMF5f14/VHrmwmEm9HRmQLENuZOmZDpuPuxRcD4pQ=
+
+Name: org/eclipse/jdt/internal/debug/ui/snippeteditor/SnippetOpenHiera
+ rchyOnSelectionAction.class
+SHA-256-Digest: ykgZnkA4zGhc/8rWHqJH+RYzhzbT8/tbQEYAVY3d200=
+
+Name: icons/full/ovr16/sync_ovr@2x.png
+SHA-256-Digest: ad2ONLotHNF27aFpbbeeWq1JtHGGBGwdlTU9PtpXyEE=
+
+Name: icons/full/dtool16/java_applet.png
+SHA-256-Digest: KSsv+jXMOIrq1kzH2lPatfqPBJb4BEoBehn9Bex8bvo=
+
+Name: org/eclipse/jdt/internal/debug/ui/contentassist/JavaDebugComplet
+ ionProposalCollector.class
+SHA-256-Digest: izsSTL82jI37qlmP5DfNd0BUY7TyjIMdmguON4Ln0qY=
+
+Name: org/eclipse/jdt/internal/debug/ui/search/LaunchConfigurationQuer
+ yParticipant$UIParticipant.class
+SHA-256-Digest: XUqtq6QEva2N7cM10AHkJms7pF4MRu8SAy8nlmMiMUI=
+
+Name: icons/full/ovr16/caught_ovr.gif
+SHA-256-Digest: qPXtq7+EJbzl6wAXW81ucL+TUUk0nzEdX0CavRK4SEU=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaDebugPreferencePage$JavaDe
+ bugIntegerFieldEditor.class
+SHA-256-Digest: jEBpw8fv3k7CjNG7NDrf+liOUwfPZUYt5G9b9/JPS7c=
+
+Name: about.html
+SHA-256-Digest: fz3somdR7f7Qlv4MFhaJfkDWglIbzI8gaTyRV90fCPs=
+
+Name: icons/full/dtool16/run_exc.gif
+SHA-256-Digest: Y7GCvDLZeYZV85/F7eqk2uA6MuWcsmw/ocWrxi0YcPk=
+
+Name: org/eclipse/jdt/internal/debug/ui/heapwalking/AllInstancesAction
+ Delegate$1.class
+SHA-256-Digest: iOvhF9kWf9oEP+517hQZRkNMcXViNheOvp7lGKHSpRU=
+
+Name: org/eclipse/jdt/internal/debug/ui/JDISourceViewer$1.class
+SHA-256-Digest: xHwkJmrBqixNBtJbkcPMWiY7m4BpfSKRkGGEAngA/+8=
+
+Name: org/eclipse/jdt/internal/debug/ui/JavaHotCodeReplaceListener$1.c
+ lass
+SHA-256-Digest: eze2mI35eXiOfw+q5r4R0l1ht6DCNbuFaSg0zW5UtsI=
+
+Name: org/eclipse/jdt/internal/debug/ui/snippeteditor/ShowInPackageVie
+ wAction.class
+SHA-256-Digest: +vTZezOHPSUTJ+t+5cqbulZyLmFVGgWkOrQWFpfo8gY=
+
+Name: org/eclipse/jdt/debug/ui/actions/JavaBreakpointPropertiesRulerAc
+ tionDelegate.class
+SHA-256-Digest: iROxvzPXzmFICzs4nga1PDf2lBY2CWVH4q0dZHqwIuY=
+
+Name: org/eclipse/jdt/internal/debug/core/refactoring/LaunchConfigurat
+ ionIPackageFragmentRenameParticipant.class
+SHA-256-Digest: I0NCflErHt/+hhLmbcI9NbOWbkThPBsaXNvCKUYyy7U=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/TerminateEvaluationAct
+ ion.class
+SHA-256-Digest: GM9Xj79jHqoDUSu2pUxfyXWKX2KbPxWpVXyu92AHJj0=
+
+Name: org/eclipse/jdt/internal/debug/ui/classpath/IClasspathEditor.cla
+ ss
+SHA-256-Digest: cvMYM53C8dvAU4age8T9rhvR1bSKfXieJTWVC8KbwMA=
+
+Name: icons/full/elcl16/exc_catch.gif
+SHA-256-Digest: 8vNHOLfZ70eBLpyjVhCYpOPc5U/3Wzf9KCsLIyirkq8=
+
+Name: icons/full/dlcl16/final_co.gif
+SHA-256-Digest: YrMsEaBKLspxFBUndI+hiEjO9SgN34aTBSGObU4PeuY=
+
+Name: icons/full/obj16/brkpi_obj.gif
+SHA-256-Digest: uI80dwzWGt22gn7al/lo3hesrKvz7h6PowdOl2EDfAc=
+
+Name: org/eclipse/jdt/internal/debug/ui/launcher/JREResolution.class
+SHA-256-Digest: fUc9T+MjDCoEot+fcL1EYybUemFGfAuIIIPxPfs0vmM=
+
+Name: org/eclipse/jdt/internal/debug/ui/jres/EEVMPage$4.class
+SHA-256-Digest: xGYtmzRFz4cU61OMAP+XoySY7x45GWFbSuNeLleQp4c=
+
+Name: icons/full/etool16/insp_sbook@2x.png
+SHA-256-Digest: s8kSSw8QR+f0rB+QjDL9L4JUv6AHlc5irl0qv5l+qKk=
+
+Name: org/eclipse/jdt/internal/debug/ui/actions/DisplayAction$1.class
+SHA-256-Digest: aExUTtgEhErmuPW1XPlZQVcI4htvrMqP78LWs5HQ5ds=
+

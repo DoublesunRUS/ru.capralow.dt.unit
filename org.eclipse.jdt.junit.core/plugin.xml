@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension-point id="org.eclipse.jdt.junit.testRunListeners" name="%testRunListeners.name" schema="schema/testRunListeners.exsd"/>
+   <extension-point id="org.eclipse.jdt.junit.internal_testKinds" name="%testKinds.name" schema="schema/internal_testKinds.exsd"/>
+
+   <extension
+         point="org.eclipse.debug.core.launchConfigurationTypes">
+      <launchConfigurationType
+            name="%Launch.label"
+            delegateDescription="%JUnitLaunchDelegate.description"
+            delegateName="%JUnitLaunchDelegate.name"
+            delegate="org.eclipse.jdt.junit.launcher.JUnitLaunchConfigurationDelegate"
+            modes="run, debug"
+            id="org.eclipse.jdt.junit.launchconfig"
+            sourceLocatorId="org.eclipse.jdt.launching.sourceLocator.JavaSourceLookupDirector"
+            sourcePathComputerId="org.eclipse.jdt.launching.sourceLookup.javaSourcePathComputer"
+            migrationDelegate="org.eclipse.jdt.internal.junit.launcher.JUnitMigrationDelegate">
+      </launchConfigurationType>
+   </extension>
+   <extension
+         point="org.eclipse.debug.core.launchConfigurationComparators">
+      <launchConfigurationComparator
+            attribute="org.eclipse.jdt.junit.CONTAINER"
+            class="org.eclipse.jdt.internal.junit.launcher.ContainerComparator"
+            id="org.eclipse.jdt.junit.containerComparator">
+      </launchConfigurationComparator>
+   </extension>
+   
+   <extension
+         point="org.eclipse.jdt.core.classpathVariableInitializer">
+      <classpathVariableInitializer
+            variable="JUNIT_HOME"
+            class="org.eclipse.jdt.internal.junit.buildpath.JUnitHomeInitializer"
+            deprecated="%classpathVariableInitializer.deprecated.JUNIT_HOME"
+            readOnly="true">
+      </classpathVariableInitializer>
+      <classpathVariableInitializer
+            variable="JUNIT_SRC_HOME"
+            class="org.eclipse.jdt.internal.junit.buildpath.JUnitHomeInitializer"
+            deprecated="%classpathVariableInitializer.deprecated.JUNIT_SRC_HOME"
+            readOnly="true">
+      </classpathVariableInitializer>
+   </extension>
+         
+   <extension
+         point="org.eclipse.core.expressions.propertyTesters">
+      <propertyTester
+            properties="isTest,canLaunchAsJUnit"
+            namespace="org.eclipse.jdt.junit"
+            type="org.eclipse.core.runtime.IAdaptable"
+            class="org.eclipse.jdt.internal.junit.JUnitPropertyTester"
+            id="org.eclipse.jdt.junit.JUnitPropertyTester">
+      </propertyTester>
+   </extension>
+
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer class="org.eclipse.jdt.internal.junit.JunitPreferenceInitializer"/>
+   </extension>
+   
+    <!-- JUnit Container -->
+   
+   <extension
+      point="org.eclipse.jdt.core.classpathContainerInitializer">
+      <classpathContainerInitializer
+            class="org.eclipse.jdt.internal.junit.buildpath.JUnitContainerInitializer"
+            id="org.eclipse.jdt.junit.JUNIT_CONTAINER">
+      </classpathContainerInitializer>
+   </extension>
+   
+   <extension
+         point="org.eclipse.jdt.junit.internal_testKinds">
+      <kind
+            id="org.eclipse.jdt.junit.loader.junit3"
+            displayName="%testKind.junit3"
+            finderClass="org.eclipse.jdt.internal.junit.launcher.JUnit3TestFinder"
+            loaderPluginId="org.eclipse.jdt.junit.runtime"
+            loaderClass="org.eclipse.jdt.internal.junit.runner.junit3.JUnit3TestLoader">
+         <runtimeClasspathEntry pluginId="org.eclipse.jdt.junit.runtime"/>     	
+      </kind>
+   </extension>
+   <extension
+         point="org.eclipse.jdt.junit.internal_testKinds">
+      <kind
+            id="org.eclipse.jdt.junit.loader.junit4"
+            displayName="%testKind.junit4" 
+            finderClass="org.eclipse.jdt.internal.junit.launcher.JUnit4TestFinder"
+            loaderPluginId="org.eclipse.jdt.junit4.runtime"
+            loaderClass="org.eclipse.jdt.internal.junit4.runner.JUnit4TestLoader">
+         <runtimeClasspathEntry pluginId="org.eclipse.jdt.junit4.runtime" />
+         <runtimeClasspathEntry pluginId="org.eclipse.jdt.junit.runtime"/>     	
+      </kind>
+   </extension>
+      <extension
+         point="org.eclipse.jdt.junit.internal_testKinds">
+      <kind
+            id="org.eclipse.jdt.junit.loader.junit5"
+            displayName="%testKind.junit5"
+            finderClass="org.eclipse.jdt.internal.junit.launcher.JUnit5TestFinder"
+            loaderPluginId="org.eclipse.jdt.junit5.runtime"
+            loaderClass="org.eclipse.jdt.internal.junit5.runner.JUnit5TestLoader">
+         <runtimeClasspathEntry pluginId="org.eclipse.jdt.junit5.runtime" />
+         <runtimeClasspathEntry pluginId="org.eclipse.jdt.junit.runtime" />
+      </kind>
+   </extension>
+   <extension
+         point="org.eclipse.core.contenttype.contentTypes">
+      <content-type
+            base-type="org.eclipse.core.runtime.xml"
+            file-extensions="xml"
+            id="org.eclipse.jdt.junit.JUnitResult"
+            name="%JUnitTestResult.content-type.name"
+            priority="high">
+         <describer
+               class="org.eclipse.core.runtime.content.XMLRootElementContentDescriber2">
+            <parameter
+                  name="element"
+                  value="testrun">
+            </parameter>
+            <parameter
+                  name="element"
+                  value="testsuite">
+            </parameter>
+            <parameter
+                  name="element"
+                  value="testsuites">
+            </parameter>
+         </describer>
+      </content-type>
+   </extension>   
+</plugin>
