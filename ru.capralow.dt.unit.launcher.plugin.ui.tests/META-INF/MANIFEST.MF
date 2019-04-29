@@ -3,9 +3,11 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: ru.capralow.dt.unit.launcher.plugin.ui.tests;singleton:=true
 Bundle-Version: 0.1.0.qualifier
+Bundle-ClassPath: .
 Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Automatic-Module-Name: dt.unit.launcher.plugin.ui.tests
 Require-Bundle: ru.capralow.dt.unit.launcher.plugin.ui,
  org.junit;bundle-version="4.12.0"
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Automatic-Module-Name: dt.validator.bsl-language-server.plugin
 Bundle-ActivationPolicy: lazy

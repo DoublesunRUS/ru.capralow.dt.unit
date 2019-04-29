@@ -11,7 +11,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.jdt.junit;bundle-version="[3.2.0,4.0.0)",
  org.eclipse.jdt.junit.core;bundle-version="[3.6.0,4.0.0)"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Automatic-Module-Name: dt.unit.launcher.plugin
+Automatic-Module-Name: dt.unit.launcher.plugin.ui
 Bundle-ActivationPolicy: lazy
 Import-Package: com._1c.g5.v8.dt.bsl.model;version="3.5.0",
  com._1c.g5.v8.dt.core.platform;version="7.1.0",
