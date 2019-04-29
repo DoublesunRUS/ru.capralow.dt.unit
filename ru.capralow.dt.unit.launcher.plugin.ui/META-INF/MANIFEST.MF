@@ -1,16 +1,17 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Запуск модульных тестов для EDT
+Bundle-Name: %pluginName
 Bundle-SymbolicName: ru.capralow.dt.unit.launcher.plugin.ui;singleton:=true
 Bundle-Version: 0.1.0.qualifier
-Bundle-Vendor: Капралов Александр Александрович
+Bundle-Vendor: %providerName
 Require-Bundle: org.eclipse.core.runtime,
  com._1c.g5.v8.dt.product.application;bundle-version="1.10.2",
  org.eclipse.ui,
  org.eclipse.debug.core,
- org.eclipse.jdt.junit;bundle-version="3.10.75"
+ org.eclipse.jdt.junit;bundle-version="[3.2.0,4.0.0)",
+ org.eclipse.jdt.junit.core;bundle-version="[3.6.0,4.0.0)"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Automatic-Module-Name: dt.validator.bsl-language-server.plugin
+Automatic-Module-Name: dt.unit.launcher.plugin
 Bundle-ActivationPolicy: lazy
 Import-Package: com._1c.g5.v8.dt.bsl.model;version="3.5.0",
  com._1c.g5.v8.dt.core.platform;version="7.1.0",
