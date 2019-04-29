@@ -1,6 +1,8 @@
 ﻿env:
   - PLUGIN_VERSION="0.1.0"
 
+language: java
+
 jdk:
   - openjdk8
 
@@ -11,8 +13,6 @@ addons:
 
 git:
   depth: false
-
-language: node_js
 
 script: 
 - mvn clean test verify -f build/pom.xml -s build/settings.xml 
