@@ -41,7 +41,8 @@ Export-Package: com.sun.jdi;x-friends:="org.eclipse.jdt.debug.ui,org.e
  "org.eclipse.jdt.debug.ui"
 Bundle-Name: %pluginName
 Bundle-Version: 3.11.50.v20170920-1717
-Bundle-ClassPath: jdi.jar,jdimodel.jar,tools.jar
+Bundle-ClassPath: jdi.jar,
+ jdimodel.jar
 Bundle-Localization: plugin
 Bundle-Activator: org.eclipse.jdt.internal.debug.core.JDIDebugPlugin
 Created-By: Apache Maven 3.3.3
