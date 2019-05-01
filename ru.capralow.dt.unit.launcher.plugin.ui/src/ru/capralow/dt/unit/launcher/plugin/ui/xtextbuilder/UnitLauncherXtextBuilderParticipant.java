@@ -74,31 +74,28 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 				"# language: ru",
 				"",
 				"@tree",
+				"@classname=ModuleExceptionPath",
 				"",
 				"Функционал: Модульное тестирование 1С",
 				"	Как Разработчик",
 				"	Я Хочу чтобы возвращаемое значение метода совпадало с эталонным",
 				"	Чтобы я мог гарантировать работоспособность метода"));
-		if (forServer) {
-			fileText.append(System.lineSeparator());
-			fileText.append(System.lineSeparator());
-			fileText.append(String.join(System.lineSeparator(),
-					"@classname=ModuleExceptionPath",
-					String.format("Сценарий: %1$s (сервер)", moduleName),
-					"	И я выполняю код встроенного языка на сервере"));
-			for (String methodName : methodsNames) {
+		for (String methodName : methodsNames) {
+			if (forServer) {
+				fileText.append(System.lineSeparator());
+				fileText.append(System.lineSeparator());
+				fileText.append(String.join(System.lineSeparator(),
+						String.format("Сценарий: %1$s (сервер): %2$s", moduleName, methodName),
+						"	И я выполняю код встроенного языка на сервере"));
 				fileText.append(System.lineSeparator());
 				fileText.append(String.format("	| '%1$s.%2$s(Объект());' |", moduleName, methodName));
 			}
-		}
-		if (forClient) {
-			fileText.append(System.lineSeparator());
-			fileText.append(System.lineSeparator());
-			fileText.append(String.join(System.lineSeparator(),
-					"@classname=ModuleExceptionPath",
-					String.format("Сценарий: %1$s (клиент)", moduleName),
-					"	И я выполняю код встроенного языка"));
-			for (String methodName : methodsNames) {
+			if (forClient) {
+				fileText.append(System.lineSeparator());
+				fileText.append(System.lineSeparator());
+				fileText.append(String.join(System.lineSeparator(),
+						String.format("Сценарий: %1$s (клиент): %2$s", moduleName, methodName),
+						"	И я выполняю код встроенного языка"));
 				fileText.append(System.lineSeparator());
 				fileText.append(String.format("	| '%1$s.%2$s(Ванесса);' |", moduleName, methodName));
 			}
