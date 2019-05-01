@@ -68,7 +68,7 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 	}
 
 	public static void saveFeatures(String keyName, List<String> methodsNames, IPath projectLocation, String moduleName,
-			Boolean forServer, Boolean forClient) {
+			String moduleSynonym, Boolean forServer, Boolean forClient) {
 		StringBuilder fileText = new StringBuilder();
 		fileText.append(String.join(System.lineSeparator(),
 				"# language: ru",
@@ -76,7 +76,7 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 				"@tree",
 				"@classname=ModuleExceptionPath",
 				"",
-				"Функционал: Модульное тестирование 1С",
+				String.format("Функционал: %1$s", moduleSynonym),
 				"	Как Разработчик",
 				"	Я Хочу чтобы возвращаемое значение метода совпадало с эталонным",
 				"	Чтобы я мог гарантировать работоспособность метода"));
@@ -204,10 +204,19 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 			Boolean forServer = module.getEnvironments().contains(Environment.SERVER);
 			Boolean forClient = module.getEnvironments().contains(Environment.THIN_CLIENT);
 
-			String moduleName = ((CommonModule) module.getOwner()).getName();
+			CommonModule commonModule = (CommonModule) module.getOwner();
+
+			String moduleName = commonModule.getName();
+			String moduleSynonym = commonModule.getSynonym().get("ru");
 			deleteModuleFeatures(project.getLocation(), moduleName);
 			for (Entry<String, List<String>> entry : units.entrySet())
-				saveFeatures(entry.getKey(), entry.getValue(), project.getLocation(), moduleName, forServer, forClient);
+				saveFeatures(entry.getKey(),
+						entry.getValue(),
+						project.getLocation(),
+						moduleName,
+						moduleSynonym,
+						forServer,
+						forClient);
 			deleteEmptyDirs(project.getLocation(), moduleName);
 		}
 
