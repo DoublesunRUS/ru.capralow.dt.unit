@@ -1,6 +1,8 @@
 package ru.capralow.dt.unit.launcher.plugin.ui.launchconfigurations;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Map;
 
 import org.eclipse.core.runtime.CoreException;
@@ -33,7 +35,9 @@ public class UnitTestLaunch {
 
 			JUnitCore.importTestRunSession(file);
 
-		} catch (CoreException e) {
+			Files.deleteIfExists(file.toPath());
+
+		} catch (CoreException | IOException e) {
 			UnitLauncherPlugin.createErrorStatus("Не удалось прочитать файл с результатом модульных тестов.", e);
 
 		}
