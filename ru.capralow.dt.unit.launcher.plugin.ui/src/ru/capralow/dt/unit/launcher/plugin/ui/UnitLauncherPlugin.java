@@ -1,5 +1,7 @@
 package ru.capralow.dt.unit.launcher.plugin.ui;
 
+import java.text.MessageFormat;
+
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
@@ -69,7 +71,7 @@ public class UnitLauncherPlugin extends AbstractUIPlugin {
 			return Guice.createInjector(new ExternalDependenciesModule(this));
 
 		} catch (Exception e) {
-			String msg = String.format("Не удалось создать injector для \"%1$s\"", getBundle().getSymbolicName());
+			String msg = MessageFormat.format("Не удалось создать injector для \"{0}\"", getBundle().getSymbolicName());
 			log(createErrorStatus(msg, e));
 			return null;
 

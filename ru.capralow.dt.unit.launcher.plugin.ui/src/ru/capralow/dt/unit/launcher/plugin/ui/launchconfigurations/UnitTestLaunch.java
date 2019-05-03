@@ -24,7 +24,8 @@ public class UnitTestLaunch {
 		try {
 			IPath projectLocation = getProjectLocation(process, projectManager);
 			if (projectLocation == null) {
-				UnitLauncherPlugin.createErrorStatus("Не удалось определить путь к фреймворку тестирования.");
+				String msg = "Не удалось определить путь к фреймворку тестирования.";
+				UnitLauncherPlugin.log(UnitLauncherPlugin.createErrorStatus(msg));
 				return;
 			}
 
@@ -35,7 +36,8 @@ public class UnitTestLaunch {
 			Files.deleteIfExists(file.toPath());
 
 		} catch (CoreException | IOException e) {
-			UnitLauncherPlugin.createErrorStatus("Не удалось прочитать файл с результатом модульных тестов.", e);
+			String msg = "Не удалось прочитать файл с результатом модульных тестов.";
+			UnitLauncherPlugin.log(UnitLauncherPlugin.createErrorStatus(msg, e));
 
 		}
 	}

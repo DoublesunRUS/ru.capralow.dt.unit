@@ -120,7 +120,7 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 
 		} catch (IOException e) {
 			String msg = MessageFormat.format("Не удалось записать feature файл: \"{0}\"", fileName);
-			UnitLauncherPlugin.createErrorStatus(msg, e);
+			UnitLauncherPlugin.log(UnitLauncherPlugin.createErrorStatus(msg, e));
 
 		}
 	}
@@ -138,7 +138,7 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 
 		if (object == null) {
 			String msg = MessageFormat.format("Не найден объект конфигурации: \"{0}\"", "");
-			UnitLauncherPlugin.createErrorStatus(msg);
+			UnitLauncherPlugin.log(UnitLauncherPlugin.createErrorStatus(msg));
 			return null;
 		}
 
@@ -178,7 +178,7 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 
 		if (configuration == null) {
 			String msg = MessageFormat.format("Не удалось определить конфигурацию для проекта: \"{0}\"", v8Project);
-			UnitLauncherPlugin.createErrorStatus(msg);
+			UnitLauncherPlugin.log(UnitLauncherPlugin.createErrorStatus(msg));
 			return;
 		}
 
@@ -232,13 +232,13 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 						Files.delete(file.toPath());
 					} catch (IOException e) {
 						String msg = MessageFormat.format("Не удалось удалить пустые каталоги: \"{0}\"", moduleName);
-						UnitLauncherPlugin.createErrorStatus(msg);
+						UnitLauncherPlugin.log(UnitLauncherPlugin.createErrorStatus(msg, e));
 					}
 			});
 
 		} catch (IOException e) {
 			String msg = MessageFormat.format("Не удалось удалить пустые каталоги: \"{0}\"", moduleName);
-			UnitLauncherPlugin.createErrorStatus(msg);
+			UnitLauncherPlugin.log(UnitLauncherPlugin.createErrorStatus(msg, e));
 
 		}
 	}
@@ -253,13 +253,13 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 						Files.delete(file.toPath());
 					} catch (IOException e) {
 						String msg = MessageFormat.format("Не удалось удалить файлы: \"{0}\"", moduleName);
-						UnitLauncherPlugin.createErrorStatus(msg);
+						UnitLauncherPlugin.log(UnitLauncherPlugin.createErrorStatus(msg, e));
 					}
 			});
 
 		} catch (IOException e) {
 			String msg = MessageFormat.format("Не удалось удалить файлы: \"{0}\"", moduleName);
-			UnitLauncherPlugin.createErrorStatus(msg);
+			UnitLauncherPlugin.log(UnitLauncherPlugin.createErrorStatus(msg, e));
 
 		}
 
