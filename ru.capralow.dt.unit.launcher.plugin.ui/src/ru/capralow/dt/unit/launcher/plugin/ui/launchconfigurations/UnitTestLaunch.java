@@ -17,39 +17,24 @@ import ru.capralow.dt.unit.launcher.plugin.ui.UnitLauncherPlugin;
 
 public class UnitTestLaunch {
 
-	public static void deleteOldJUnitResult(IProcess process, IV8ProjectManager projectManager) {
-		if (process.getLabel().contains("dbgs"))
-			return;
-
-		try {
-			IPath projectLocation = getProjectLocation(process, projectManager);
-			if (projectLocation == null)
-				return;
-
-			File file = new File(projectLocation.toString() + "/junit.xml");
-
-			Files.deleteIfExists(file.toPath());
-
-		} catch (CoreException | IOException e) {
-			UnitLauncherPlugin.createErrorStatus("Не удалось удалить старый файл с результатом модульных тестов.", e);
-
-		}
-	}
-
 	public static void showJUnitResult(IProcess process, IV8ProjectManager projectManager) {
 		if (process.getLabel().contains("dbgs"))
 			return;
 
 		try {
 			IPath projectLocation = getProjectLocation(process, projectManager);
-			if (projectLocation == null)
+			if (projectLocation == null) {
+				UnitLauncherPlugin.createErrorStatus("Не удалось определить путь к фреймворку тестирования.");
 				return;
+			}
 
 			File file = new File(projectLocation.toString() + "/junit.xml");
 
 			JUnitCore.importTestRunSession(file);
 
-		} catch (CoreException e) {
+			Files.deleteIfExists(file.toPath());
+
+		} catch (CoreException | IOException e) {
 			UnitLauncherPlugin.createErrorStatus("Не удалось прочитать файл с результатом модульных тестов.", e);
 
 		}
