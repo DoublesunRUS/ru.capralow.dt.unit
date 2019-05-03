@@ -22,14 +22,9 @@ public class UnitTestLaunch {
 			return;
 
 		try {
-			ILaunchConfiguration launchConfiguration = process.getLaunch().getLaunchConfiguration();
-			Map<String, Object> launchAttributes = launchConfiguration.getAttributes();
-			Object externalObjectName = launchAttributes
-					.get(com._1c.g5.v8.dt.debug.core.IDebugConfigurationAttributes.EXTERNAL_OBJECT_PROJECT_NAME);
-			if (externalObjectName == null || !((String) externalObjectName).equalsIgnoreCase("ФреймворкТестирования"))
+			IPath projectLocation = getProjectLocation(process, projectManager);
+			if (projectLocation == null)
 				return;
-
-			IPath projectLocation = projectManager.getProject((String) externalObjectName).getProject().getLocation();
 
 			File file = new File(projectLocation.toString() + "/junit.xml");
 
@@ -46,14 +41,9 @@ public class UnitTestLaunch {
 			return;
 
 		try {
-			ILaunchConfiguration launchConfiguration = process.getLaunch().getLaunchConfiguration();
-			Map<String, Object> launchAttributes = launchConfiguration.getAttributes();
-			Object externalObjectName = launchAttributes
-					.get(com._1c.g5.v8.dt.debug.core.IDebugConfigurationAttributes.EXTERNAL_OBJECT_PROJECT_NAME);
-			if (externalObjectName == null || !((String) externalObjectName).equalsIgnoreCase("ФреймворкТестирования"))
+			IPath projectLocation = getProjectLocation(process, projectManager);
+			if (projectLocation == null)
 				return;
-
-			IPath projectLocation = projectManager.getProject((String) externalObjectName).getProject().getLocation();
 
 			File file = new File(projectLocation.toString() + "/junit.xml");
 
@@ -63,6 +53,17 @@ public class UnitTestLaunch {
 			UnitLauncherPlugin.createErrorStatus("Не удалось прочитать файл с результатом модульных тестов.", e);
 
 		}
+	}
+
+	private static IPath getProjectLocation(IProcess process, IV8ProjectManager projectManager) throws CoreException {
+		ILaunchConfiguration launchConfiguration = process.getLaunch().getLaunchConfiguration();
+		Map<String, Object> launchAttributes = launchConfiguration.getAttributes();
+		Object externalObjectName = launchAttributes
+				.get(com._1c.g5.v8.dt.debug.core.IDebugConfigurationAttributes.EXTERNAL_OBJECT_PROJECT_NAME);
+		if (externalObjectName == null || !((String) externalObjectName).equalsIgnoreCase("ФреймворкТестирования"))
+			return null;
+
+		return projectManager.getProject((String) externalObjectName).getProject().getLocation();
 	}
 
 	private UnitTestLaunch() {
