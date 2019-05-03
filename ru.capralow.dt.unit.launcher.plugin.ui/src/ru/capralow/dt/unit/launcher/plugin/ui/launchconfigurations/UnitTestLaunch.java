@@ -17,6 +17,30 @@ import ru.capralow.dt.unit.launcher.plugin.ui.UnitLauncherPlugin;
 
 public class UnitTestLaunch {
 
+	public static void deleteOldJUnitResult(IProcess process, IV8ProjectManager projectManager) {
+		if (process.getLabel().contains("dbgs"))
+			return;
+
+		try {
+			ILaunchConfiguration launchConfiguration = process.getLaunch().getLaunchConfiguration();
+			Map<String, Object> launchAttributes = launchConfiguration.getAttributes();
+			Object externalObjectName = launchAttributes
+					.get(com._1c.g5.v8.dt.debug.core.IDebugConfigurationAttributes.EXTERNAL_OBJECT_PROJECT_NAME);
+			if (externalObjectName == null || !((String) externalObjectName).equalsIgnoreCase("ФреймворкТестирования"))
+				return;
+
+			IPath projectLocation = projectManager.getProject((String) externalObjectName).getProject().getLocation();
+
+			File file = new File(projectLocation.toString() + "/junit.xml");
+
+			Files.deleteIfExists(file.toPath());
+
+		} catch (CoreException | IOException e) {
+			UnitLauncherPlugin.createErrorStatus("Не удалось удалить старый файл с результатом модульных тестов.", e);
+
+		}
+	}
+
 	public static void showJUnitResult(IProcess process, IV8ProjectManager projectManager) {
 		if (process.getLabel().contains("dbgs"))
 			return;
@@ -35,9 +59,7 @@ public class UnitTestLaunch {
 
 			JUnitCore.importTestRunSession(file);
 
-			Files.deleteIfExists(file.toPath());
-
-		} catch (CoreException | IOException e) {
+		} catch (CoreException e) {
 			UnitLauncherPlugin.createErrorStatus("Не удалось прочитать файл с результатом модульных тестов.", e);
 
 		}

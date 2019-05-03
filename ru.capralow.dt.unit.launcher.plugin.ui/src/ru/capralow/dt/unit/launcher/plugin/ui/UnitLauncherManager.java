@@ -30,8 +30,12 @@ public class UnitLauncherManager implements IManagedService, IDebugEventSetListe
 	public void handleDebugEvents(DebugEvent[] events) {
 		for (DebugEvent event : events) {
 			Object source = event.getSource();
-			if (source instanceof IProcess && event.getKind() == DebugEvent.TERMINATE) {
-				UnitTestLaunch.showJUnitResult((IProcess) source, projectManager);
+			if (source instanceof IProcess) {
+				if (event.getKind() == DebugEvent.CREATE)
+					UnitTestLaunch.deleteOldJUnitResult((IProcess) source, projectManager);
+
+				else if (event.getKind() == DebugEvent.TERMINATE)
+					UnitTestLaunch.showJUnitResult((IProcess) source, projectManager);
 			}
 		}
 	}
