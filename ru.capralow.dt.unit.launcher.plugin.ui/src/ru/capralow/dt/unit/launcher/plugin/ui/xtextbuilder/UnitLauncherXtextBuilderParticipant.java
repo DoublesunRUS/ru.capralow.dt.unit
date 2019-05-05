@@ -217,12 +217,12 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 						moduleSynonym,
 						forServer,
 						forClient);
-			deleteEmptyDirs(project.getLocation(), moduleName);
 		}
+		deleteEmptyDirs(project.getLocation());
 
 	}
 
-	private void deleteEmptyDirs(IPath projectLocation, String moduleName) {
+	private void deleteEmptyDirs(IPath projectLocation) {
 		Path pathToBeDeleted = Paths.get(getFeaturesLocation(projectLocation));
 		if (!pathToBeDeleted.toFile().exists())
 			return;
@@ -239,7 +239,8 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 			});
 
 		} catch (IOException e) {
-			String msg = MessageFormat.format("Не удалось удалить пустые каталоги для модуля: \"{0}\"", moduleName);
+			String msg = MessageFormat.format("Не удалось удалить пустые каталоги для проекта: \"{0}\"",
+					pathToBeDeleted);
 			UnitLauncherPlugin.log(UnitLauncherPlugin.createErrorStatus(msg, e));
 
 		}
