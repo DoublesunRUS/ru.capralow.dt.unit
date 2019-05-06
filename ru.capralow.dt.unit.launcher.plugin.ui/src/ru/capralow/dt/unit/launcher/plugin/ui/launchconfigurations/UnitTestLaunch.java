@@ -3,6 +3,7 @@ package ru.capralow.dt.unit.launcher.plugin.ui.launchconfigurations;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.text.MessageFormat;
 import java.util.Map;
 
 import org.eclipse.core.runtime.CoreException;
@@ -10,6 +11,9 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.jdt.junit.JUnitCore;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
 
 import com._1c.g5.v8.dt.core.platform.IV8ProjectManager;
 
@@ -32,6 +36,18 @@ public class UnitTestLaunch {
 			File file = new File(projectLocation.toString() + "/junit.xml");
 
 			JUnitCore.importTestRunSession(file);
+
+			Display.getDefault().asyncExec(() -> {
+				String panelId = "org.eclipse.jdt.junit.ResultView";
+				try {
+					PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(panelId);
+
+				} catch (PartInitException e) {
+					String msg = MessageFormat.format("Не удалось отобразить панель {0}.", panelId);
+					UnitLauncherPlugin.log(UnitLauncherPlugin.createErrorStatus(msg, e));
+
+				}
+			});
 
 			Files.deleteIfExists(file.toPath());
 
