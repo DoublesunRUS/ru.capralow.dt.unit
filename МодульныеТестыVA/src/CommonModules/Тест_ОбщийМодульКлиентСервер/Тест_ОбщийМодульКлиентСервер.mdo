@@ -3,7 +3,7 @@
   <name>Тест_ОбщийМодульКлиентСервер</name>
   <synonym>
     <key>ru</key>
-    <value>Общий модуль (клиент-сервер)</value>
+    <value>Общий модуль - клиент/сервер</value>
   </synonym>
   <clientManagedApplication>true</clientManagedApplication>
   <server>true</server>

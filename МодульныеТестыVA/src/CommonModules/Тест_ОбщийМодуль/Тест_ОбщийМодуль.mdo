@@ -3,7 +3,7 @@
   <name>Тест_ОбщийМодуль</name>
   <synonym>
     <key>ru</key>
-    <value>Общий модуль (сервер)</value>
+    <value>Общий модуль - сервер</value>
   </synonym>
   <server>true</server>
   <clientOrdinaryApplication>true</clientOrdinaryApplication>
