@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="com._1c.g5.v8.dt.launching.core.RuntimeClient">
+<intAttribute key="com._1c.g5.v8.dt.debug.core.ATTR_DEBUG_SERVER_PORT" value="-1"/>
+<stringAttribute key="com._1c.g5.v8.dt.debug.core.ATTR_EXTERNAL_OBJECT_NAME" value="VanessaAutomationsingle"/>
+<stringAttribute key="com._1c.g5.v8.dt.debug.core.ATTR_EXTERNAL_OBJECT_PROJECT_NAME" value="ФреймворкТестирования"/>
+<stringAttribute key="com._1c.g5.v8.dt.debug.core.ATTR_EXTERNAL_OBJECT_TYPE" value="com._1c.g5.v8.dt.metadata.mdclass.impl.ExternalDataProcessorImpl"/>
+<stringAttribute key="com._1c.g5.v8.dt.debug.core.ATTR_PROJECT_NAME" value="МодульныеТесты"/>
+<stringAttribute key="com._1c.g5.v8.dt.debug.core.ATTR_RUNTIME_INSTALLATION" value="com._1c.g5.v8.dt.platform.services.core.resolvableInstallations.environments:com._1c.g5.v8.dt.platform.services.core.runtimeType.EnterprisePlatform=8.3.12"/>
+<stringAttribute key="com._1c.g5.v8.dt.debug.core.ATTR_USE_LOCAL_DEBUG_SERVER" value="AUTO"/>
+<booleanAttribute key="com._1c.g5.v8.dt.debug.core.INFOBASE_USE_DEFAULT" value="true"/>
+<booleanAttribute key="com._1c.g5.v8.dt.launching.core.ATTR_ASSOCIATE_AFTER_DEPLOY" value="true"/>
+<intAttribute key="com._1c.g5.v8.dt.launching.core.ATTR_CALL_DELAY" value="100"/>
+<booleanAttribute key="com._1c.g5.v8.dt.launching.core.ATTR_CLIENT_AUTO_SELECT" value="true"/>
+<intAttribute key="com._1c.g5.v8.dt.launching.core.ATTR_DATA_RECEIVING_DELAY" value="15"/>
+<intAttribute key="com._1c.g5.v8.dt.launching.core.ATTR_DATA_SENDING_DELAY" value="45"/>
+<booleanAttribute key="com._1c.g5.v8.dt.launching.core.ATTR_DEPLOY_BEFORE_LAUNCH" value="true"/>
+<booleanAttribute key="com._1c.g5.v8.dt.launching.core.ATTR_DEPLOY_FULL_CONFIGURATION" value="false"/>
+<booleanAttribute key="com._1c.g5.v8.dt.launching.core.ATTR_DO_NOT_CLEAR_LOG" value="false"/>
+<booleanAttribute key="com._1c.g5.v8.dt.launching.core.ATTR_DO_NOT_DISPLAY_WARNINGS" value="true"/>
+<booleanAttribute key="com._1c.g5.v8.dt.launching.core.ATTR_EMULATE_DELAY" value="false"/>
+<booleanAttribute key="com._1c.g5.v8.dt.launching.core.ATTR_LAUNCH_OS_INFOBASE_ACCESS" value="false"/>
+<booleanAttribute key="com._1c.g5.v8.dt.launching.core.ATTR_LAUNCH_USER_USE_INFOBASE_ACCESS" value="true"/>
+<booleanAttribute key="com._1c.g5.v8.dt.launching.core.ATTR_NEED_INFOBASE_PUBLICATION" value="false"/>
+<booleanAttribute key="com._1c.g5.v8.dt.launching.core.ATTR_SHOW_ALL_FUNCTIONS" value="true"/>
+<booleanAttribute key="com._1c.g5.v8.dt.launching.core.ATTR_SHOW_PERFORMANCE" value="true"/>
+<booleanAttribute key="com._1c.g5.v8.dt.launching.core.ATTR_SLOW_CONNECTION" value="false"/>
+<stringAttribute key="com._1c.g5.v8.dt.launching.core.ATTR_STARTUP_OPTION" value="StartFeaturePlayer;VBParams=../VBParams.json"/>
+<listAttribute key="org.eclipse.debug.ui.favoriteGroups">
+<listEntry value="org.eclipse.debug.ui.launchGroup.debug"/>
+</listAttribute>
+<stringAttribute key="process_factory_id" value="com._1c.g5.v8.dt.debug.core.RunimeProcessFactory"/>
+</launchConfiguration>
