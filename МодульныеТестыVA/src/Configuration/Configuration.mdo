@@ -1,16 +1,15 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="1f41b432-5d77-43b4-bd55-957589ad8c44">
   <name>МодульныеТестыVA</name>
   <synonym>
     <key>ru</key>
     <value>Модульные тесты VA</value>
   </synonym>
+  <comment></comment>
   <objectBelonging>Adopted</objectBelonging>
   <extension xsi:type="mdclassExtension:ConfigurationExtension">
     <defaultRunMode>Checked</defaultRunMode>
     <usePurposes>Checked</usePurposes>
-    <commandInterface>Extended</commandInterface>
-    <mainSectionCommandInterface>Extended</mainSectionCommandInterface>
     <defaultLanguage>Checked</defaultLanguage>
     <modalityUseMode>Checked</modalityUseMode>
     <interfaceCompatibilityMode>Checked</interfaceCompatibilityMode>
@@ -30,7 +29,6 @@
   <scriptVariant>Russian</scriptVariant>
   <vendor></vendor>
   <version></version>
-  <updateCatalogAddress></updateCatalogAddress>
   <defaultLanguage>Language.Русский</defaultLanguage>
   <dataLockControlMode>Managed</dataLockControlMode>
   <objectAutonumerationMode>NotAutoFree</objectAutonumerationMode>
@@ -39,11 +37,6 @@
   <compatibilityMode>8.3.12</compatibilityMode>
   <languages uuid="446a5195-f122-4818-8dd0-fc90f02416f0">
     <name>Русский</name>
-    <synonym>
-      <key>ru</key>
-      <value>Русский</value>
-    </synonym>
-    <comment></comment>
     <objectBelonging>Adopted</objectBelonging>
     <extension xsi:type="mdclassExtension:LanguageExtension">
       <languageCode>Checked</languageCode>

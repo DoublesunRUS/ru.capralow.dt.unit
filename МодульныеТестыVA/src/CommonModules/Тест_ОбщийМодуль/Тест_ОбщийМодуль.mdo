@@ -5,6 +5,7 @@
     <key>ru</key>
     <value>Общий модуль - сервер</value>
   </synonym>
+  <comment></comment>
   <server>true</server>
   <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>
