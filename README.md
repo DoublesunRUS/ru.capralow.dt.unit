@@ -5,7 +5,7 @@
 
 Минимальная версия EDT: 1.10.2
 
-Текущий релиз в ветке [master: 0.1.0](https://github.com/DoublesunRUS/ru.capralow.dt.unit.launcher/tree/master).<br>
+Текущий релиз в ветке [master: 0.2.0](https://github.com/DoublesunRUS/ru.capralow.dt.unit.launcher/tree/master).<br>
 Разработка ведется в ветке [dev](https://github.com/DoublesunRUS/ru.capralow.dt.unit.launcher/tree/dev).<br>
 
 В данном репозитории хранятся только исходники.<br>

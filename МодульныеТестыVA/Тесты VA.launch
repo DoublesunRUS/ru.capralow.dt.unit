@@ -5,7 +5,7 @@
 <stringAttribute key="com._1c.g5.v8.dt.debug.core.ATTR_EXTERNAL_OBJECT_PROJECT_NAME" value="ФреймворкТестирования"/>
 <stringAttribute key="com._1c.g5.v8.dt.debug.core.ATTR_EXTERNAL_OBJECT_TYPE" value="com._1c.g5.v8.dt.metadata.mdclass.impl.ExternalDataProcessorImpl"/>
 <stringAttribute key="com._1c.g5.v8.dt.debug.core.ATTR_PROJECT_NAME" value="МодульныеТесты"/>
-<stringAttribute key="com._1c.g5.v8.dt.debug.core.ATTR_RUNTIME_INSTALLATION" value="com._1c.g5.v8.dt.platform.services.core.resolvableInstallations.environments:com._1c.g5.v8.dt.platform.services.core.runtimeType.EnterprisePlatform=8.3.12"/>
+<stringAttribute key="com._1c.g5.v8.dt.debug.core.ATTR_RUNTIME_INSTALLATION" value="com._1c.g5.v8.dt.platform.services.core.resolvableInstallations.environments:com._1c.g5.v8.dt.platform.services.core.runtimeType.EnterprisePlatform=8.3"/>
 <stringAttribute key="com._1c.g5.v8.dt.debug.core.ATTR_USE_LOCAL_DEBUG_SERVER" value="AUTO"/>
 <booleanAttribute key="com._1c.g5.v8.dt.debug.core.INFOBASE_USE_DEFAULT" value="true"/>
 <booleanAttribute key="com._1c.g5.v8.dt.launching.core.ATTR_ASSOCIATE_AFTER_DEPLOY" value="true"/>

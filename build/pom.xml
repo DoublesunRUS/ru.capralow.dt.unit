@@ -6,7 +6,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>ru.capralow.dt.unit.launcher</groupId>
 	<artifactId>build</artifactId>
-	<version>0.1.0-SNAPSHOT</version>
+	<version>0.2.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>Запуск модульных тестов для EDT</name>
@@ -32,6 +32,8 @@
 
 	<modules>
 		<module>../target</module>
+		<module>../ru.capralow.dt.launching.core</module>
+		<module>../ru.capralow.dt.launching.ui</module>
 		<module>../ru.capralow.dt.unit.launcher.plugin.ui</module>
 		<module>../ru.capralow.dt.unit.launcher.plugin.ui.tests</module>
 		<module>../ru.capralow.dt.unit.launcher.plugin.feature</module>
@@ -179,7 +181,7 @@
 						<artifact>
 							<groupId>ru.capralow.dt.unit.launcher.target</groupId>
 							<artifactId>default</artifactId>
-							<version>0.1.0-SNAPSHOT</version>
+							<version>0.2.0-SNAPSHOT</version>
 						</artifact>
 					</target>
 					<environments>

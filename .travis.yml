@@ -12,7 +12,7 @@ git:
   depth: false
 
 env:
-  - PLUGIN_VERSION="0.1.0"
+  - PLUGIN_VERSION="0.2.0"
 
 script: 
 - mvn clean test verify -f build/pom.xml -s build/settings.xml 

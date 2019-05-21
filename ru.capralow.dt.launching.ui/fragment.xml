@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<fragment>
+	
+	<extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+		<launchConfigurationTabGroup
+			class="com._1c.g5.v8.dt.internal.launching.ui.LaunchingUiExecutableExtensionFactory:ru.capralow.dt.launching.ui.launchconfigurations.UnitTestLaunchTabGroup"
+			id="ru.capralow.dt.unit.launcher.plugin.ui.UnitTestLaunchTabGroup"
+			type="ru.capralow.dt.unit.launcher.plugin.ui.UnitTestLaunch">
+		</launchConfigurationTabGroup>
+	</extension>
+	
+</fragment>

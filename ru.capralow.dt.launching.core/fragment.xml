@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<fragment>
+
+	<extension point="org.eclipse.debug.core.launchConfigurationTypes">
+		<launchConfigurationType
+			name="1СUnit"
+			delegate="com._1c.g5.v8.dt.internal.launching.core.LaunchingExecutableExtensionFactory:com._1c.g5.v8.dt.internal.launching.core.launchconfigurations.RuntimeClientLaunchDelegate"
+			modes="run, debug"
+			id="ru.capralow.dt.unit.launcher.plugin.ui.UnitTestLaunch">
+		</launchConfigurationType>
+	</extension>
+
+</fragment>
