@@ -37,7 +37,7 @@ public class UnitTestLaunchTabGroup extends AbstractLaunchConfigurationTabGroup
 		if (infobaseManager.isPersistenceSupported()) {
 			tabs.add(new UnitTestLaunchTab());
 
-			RuntimeClientMainTab mainTab = (RuntimeClientMainTab) runtimeClientMainTabProvider.get();
+			RuntimeClientMainTab mainTab = runtimeClientMainTabProvider.get();
 			mainTab.setRuntimeClientChangeNotifier(this);
 			tabs.add(mainTab);
 			tabs.add((ILaunchConfigurationTab) argumentsTabProvider.get());
@@ -56,8 +56,8 @@ public class UnitTestLaunchTabGroup extends AbstractLaunchConfigurationTabGroup
 	}
 
 	public void notifyClientChange(String componentTypeId) {
-		ILaunchConfigurationTab[] tabs;
-		for (int length = (tabs = getTabs()).length, i = 0; i < length; ++i) {
+		ILaunchConfigurationTab[] tabs = getTabs();
+		for (int length = tabs.length, i = 0; i < length; ++i) {
 			final ILaunchConfigurationTab tab = tabs[i];
 			if (tab instanceof IRuntimeClientChangeListener) {
 				((IRuntimeClientChangeListener) tab).runtimeClientChanged(componentTypeId);
@@ -66,8 +66,8 @@ public class UnitTestLaunchTabGroup extends AbstractLaunchConfigurationTabGroup
 	}
 
 	public void notifyClientAutoSelect() {
-		ILaunchConfigurationTab[] tabs;
-		for (int length = (tabs = getTabs()).length, i = 0; i < length; ++i) {
+		ILaunchConfigurationTab[] tabs = getTabs();
+		for (int length = tabs.length, i = 0; i < length; ++i) {
 			final ILaunchConfigurationTab tab = tabs[i];
 			if (tab instanceof IRuntimeClientChangeListener) {
 				((IRuntimeClientChangeListener) tab).runtimeClientAutoSelected();
@@ -76,8 +76,8 @@ public class UnitTestLaunchTabGroup extends AbstractLaunchConfigurationTabGroup
 	}
 
 	public void notifyPorjectChange(final IProject project) {
-		ILaunchConfigurationTab[] tabs;
-		for (int length = (tabs = getTabs()).length, i = 0; i < length; ++i) {
+		ILaunchConfigurationTab[] tabs = getTabs();
+		for (int length = tabs.length, i = 0; i < length; ++i) {
 			final ILaunchConfigurationTab tab = tabs[i];
 			if (tab instanceof IRuntimeClientChangeListener) {
 				((IRuntimeClientChangeListener) tab).projectChanged(project);
@@ -86,8 +86,8 @@ public class UnitTestLaunchTabGroup extends AbstractLaunchConfigurationTabGroup
 	}
 
 	public void notifyInfobaseChange(final InfobaseReference infobase) {
-		ILaunchConfigurationTab[] tabs;
-		for (int length = (tabs = getTabs()).length, i = 0; i < length; ++i) {
+		ILaunchConfigurationTab[] tabs = getTabs();
+		for (int length = tabs.length, i = 0; i < length; ++i) {
 			final ILaunchConfigurationTab tab = tabs[i];
 			if (tab instanceof IRuntimeClientChangeListener) {
 				((IRuntimeClientChangeListener) tab).infobaseChanged(infobase);

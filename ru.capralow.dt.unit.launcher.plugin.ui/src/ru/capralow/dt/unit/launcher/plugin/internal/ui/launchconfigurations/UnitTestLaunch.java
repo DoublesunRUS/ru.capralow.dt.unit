@@ -1,4 +1,4 @@
-package ru.capralow.dt.unit.launcher.plugin.ui.launchconfigurations;
+package ru.capralow.dt.unit.launcher.plugin.internal.ui.launchconfigurations;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,7 +17,7 @@ import org.eclipse.ui.PlatformUI;
 
 import com._1c.g5.v8.dt.core.platform.IV8ProjectManager;
 
-import ru.capralow.dt.unit.launcher.plugin.ui.UnitLauncherPlugin;
+import ru.capralow.dt.unit.launcher.plugin.internal.ui.UnitLauncherPlugin;
 
 public class UnitTestLaunch {
 

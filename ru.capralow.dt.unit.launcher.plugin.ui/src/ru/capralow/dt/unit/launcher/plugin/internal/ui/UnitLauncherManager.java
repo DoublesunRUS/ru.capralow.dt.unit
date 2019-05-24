@@ -1,4 +1,4 @@
-package ru.capralow.dt.unit.launcher.plugin.ui;
+package ru.capralow.dt.unit.launcher.plugin.internal.ui;
 
 import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugPlugin;
@@ -10,7 +10,7 @@ import com._1c.g5.wiring.IManagedService;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
-import ru.capralow.dt.unit.launcher.plugin.ui.launchconfigurations.UnitTestLaunch;
+import ru.capralow.dt.unit.launcher.plugin.internal.ui.launchconfigurations.UnitTestLaunch;
 
 @Singleton
 public class UnitLauncherManager implements IManagedService, IDebugEventSetListener {

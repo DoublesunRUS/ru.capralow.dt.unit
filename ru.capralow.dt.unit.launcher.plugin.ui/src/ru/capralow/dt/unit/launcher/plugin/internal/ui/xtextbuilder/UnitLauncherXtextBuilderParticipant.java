@@ -1,4 +1,4 @@
-package ru.capralow.dt.unit.launcher.plugin.ui.xtextbuilder;
+package ru.capralow.dt.unit.launcher.plugin.internal.ui.xtextbuilder;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -43,7 +43,7 @@ import com._1c.g5.v8.dt.metadata.mdclass.CommonModule;
 import com._1c.g5.v8.dt.metadata.mdclass.Configuration;
 import com.google.inject.Inject;
 
-import ru.capralow.dt.unit.launcher.plugin.ui.UnitLauncherPlugin;
+import ru.capralow.dt.unit.launcher.plugin.internal.ui.UnitLauncherPlugin;
 
 public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.builder.IXtextBuilderParticipant {
 	public static String getFeaturesLocation(IPath projectLocation) {

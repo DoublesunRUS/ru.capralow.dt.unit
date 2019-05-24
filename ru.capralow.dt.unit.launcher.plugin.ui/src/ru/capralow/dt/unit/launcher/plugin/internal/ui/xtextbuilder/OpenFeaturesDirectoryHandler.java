@@ -1,4 +1,4 @@
-package ru.capralow.dt.unit.launcher.plugin.ui.xtextbuilder;
+package ru.capralow.dt.unit.launcher.plugin.internal.ui.xtextbuilder;
 
 import java.io.File;
 

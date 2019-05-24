@@ -1,4 +1,4 @@
-package ru.capralow.dt.unit.launcher.plugin.ui;
+package ru.capralow.dt.unit.launcher.plugin.internal.ui;
 
 import java.text.MessageFormat;
 

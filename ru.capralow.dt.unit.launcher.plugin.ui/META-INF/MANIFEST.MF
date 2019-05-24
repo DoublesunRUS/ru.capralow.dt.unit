@@ -31,6 +31,4 @@ Import-Package: com._1c.g5.v8.dt.bsl.model,
  org.eclipse.xtext.nodemodel.util,
  org.eclipse.xtext.resource
 Bundle-ClassPath: .
-Bundle-Activator: ru.capralow.dt.unit.launcher.plugin.ui.UnitLauncherPlugin
-Export-Package: ru.capralow.dt.unit.launcher.plugin.ui,
- ru.capralow.dt.unit.launcher.plugin.ui.xtextbuilder
+Bundle-Activator: ru.capralow.dt.unit.launcher.plugin.internal.ui.UnitLauncherPlugin
