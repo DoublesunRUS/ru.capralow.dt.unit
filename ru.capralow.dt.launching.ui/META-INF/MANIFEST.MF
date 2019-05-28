@@ -9,6 +9,7 @@ Bundle-Localization: fragment
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
-Import-Package: com.google.common.io
+Import-Package: com.google.common.io,
+ ru.capralow.dt.unit.launcher.plugin.core
 Require-Bundle: org.eclipse.emf.ecore.xcore.lib,
  org.eclipse.xtext.xbase.lib

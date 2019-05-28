@@ -34,6 +34,7 @@
 		<module>../target</module>
 		<module>../ru.capralow.dt.launching.core</module>
 		<module>../ru.capralow.dt.launching.ui</module>
+		<module>../ru.capralow.dt.unit.launcher.plugin.core</module>
 		<module>../ru.capralow.dt.unit.launcher.plugin.ui</module>
 		<module>../ru.capralow.dt.unit.launcher.plugin.ui.tests</module>
 		<module>../ru.capralow.dt.unit.launcher.plugin.feature</module>

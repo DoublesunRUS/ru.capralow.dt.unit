@@ -1,4 +1,4 @@
-package ru.capralow.dt.launching.core;
+package ru.capralow.dt.unit.launcher.plugin.core;
 
 public final class UnitTestLaunchConfigurationAttributes {
 	public static final String RUN_MODULE_TESTS = "ru.capralow.dt.launching.core.ATTR_RUN_MODULE_TESTS";
@@ -10,6 +10,6 @@ public final class UnitTestLaunchConfigurationAttributes {
 	public static final String FRAMEWORK = "ru.capralow.dt.launching.core.ATTR_FRAMEWORK";
 
 	private UnitTestLaunchConfigurationAttributes() {
-		throw new IllegalStateException(Messages.InternalClass_Warning);
+		throw new IllegalStateException(Messages.UnitTestLaunchConfigurationAttributes_Internal_class);
 	}
 }

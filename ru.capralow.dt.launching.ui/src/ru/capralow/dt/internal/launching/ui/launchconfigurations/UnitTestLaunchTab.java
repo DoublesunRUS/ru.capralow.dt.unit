@@ -47,7 +47,7 @@ import com.google.inject.Inject;
 
 import ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model.TestFramework;
 import ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model.ulFactory;
-import ru.capralow.dt.launching.core.UnitTestLaunchConfigurationAttributes;
+import ru.capralow.dt.unit.launcher.plugin.core.UnitTestLaunchConfigurationAttributes;
 
 public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 		implements SelectionListener, ISelectionChangedListener {

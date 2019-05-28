@@ -1,16 +1,9 @@
-package ru.capralow.dt.unit.launcher.plugin.internal.ui;
-
-import java.text.MessageFormat;
+package ru.capralow.dt.unit.launcher.plugin.internal.core;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
-
-import com._1c.g5.wiring.InjectorAwareServiceRegistrator;
-import com._1c.g5.wiring.ServiceInitialization;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
 
 public class UnitLauncherPlugin extends AbstractUIPlugin {
 	public static final String ID = "ru.capralow.dt.unit.launcher.plugin.ui";
@@ -40,43 +33,16 @@ public class UnitLauncherPlugin extends AbstractUIPlugin {
 		getDefault().getLog().log(status);
 	}
 
-	private InjectorAwareServiceRegistrator registrator;
-
-	private Injector injector;
-
-	public synchronized Injector getInjector() {
-		if (injector == null)
-			injector = createInjector();
-
-		return injector;
-	}
-
 	@Override
 	public void start(BundleContext bundleContext) throws Exception {
 		super.start(bundleContext);
 		plugin = this;
-		registrator = new InjectorAwareServiceRegistrator(bundleContext, this::getInjector);
-		ServiceInitialization.schedule(() -> registrator.activateManagedService(UnitLauncherManager.class));
 	}
 
 	@Override
 	public void stop(BundleContext bundleContext) throws Exception {
 		plugin = null;
 		super.stop(bundleContext);
-		registrator.deactivateManagedServices(this);
-	}
-
-	private Injector createInjector() {
-		try {
-			return Guice.createInjector(new ExternalDependenciesModule(this));
-
-		} catch (Exception e) {
-			String msg = MessageFormat.format(Messages.UnitLauncherPlugin_Failed_to_create_injector_for_0,
-					getBundle().getSymbolicName());
-			log(createErrorStatus(msg, e));
-			return null;
-
-		}
 	}
 
 }

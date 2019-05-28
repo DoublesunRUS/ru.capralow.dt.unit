@@ -17,6 +17,7 @@ import org.eclipse.ui.PlatformUI;
 
 import com._1c.g5.v8.dt.core.platform.IV8ProjectManager;
 
+import ru.capralow.dt.unit.launcher.plugin.core.UnitTestLaunchConfigurationAttributes;
 import ru.capralow.dt.unit.launcher.plugin.internal.ui.UnitLauncherPlugin;
 
 public class UnitTestLaunch {
@@ -26,6 +27,11 @@ public class UnitTestLaunch {
 			return;
 
 		try {
+			String frameworkName = process.getLaunch().getLaunchConfiguration()
+					.getAttribute(UnitTestLaunchConfigurationAttributes.FRAMEWORK, "");
+			if (frameworkName.isEmpty())
+				return;
+
 			IPath projectLocation = getProjectLocation(process, projectManager);
 			if (projectLocation == null) {
 				String msg = "Не удалось определить путь к фреймворку тестирования.";
