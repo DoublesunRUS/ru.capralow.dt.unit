@@ -10,7 +10,7 @@
 	
 	<extension point="org.eclipse.xtext.builder.participant">
 		<participant
-			class="ru.capralow.dt.unit.launcher.plugin.ui.ExecutableExtensionFactory:ru.capralow.dt.unit.launcher.plugin.ui.xtextbuilder.UnitLauncherXtextBuilderParticipant"
+			class="ru.capralow.dt.unit.launcher.plugin.internal.ui.ExecutableExtensionFactory:ru.capralow.dt.unit.launcher.plugin.ui.xtextbuilder.UnitLauncherXtextBuilderParticipant"
 			fileExtensions="bsl">
 		</participant>
 	</extension>
@@ -24,7 +24,7 @@
 	<extension point="org.eclipse.ui.handlers">
 		<handler
 			commandId="ru.capralow.dt.unit.launcher.plugin.ui.commands.OpenFeaturesDirectory"
-			class="ru.capralow.dt.unit.launcher.plugin.ui.ExecutableExtensionFactory:ru.capralow.dt.unit.launcher.plugin.ui.xtextbuilder.OpenFeaturesDirectoryHandler">
+			class="ru.capralow.dt.unit.launcher.plugin.internal.ui.ExecutableExtensionFactory:ru.capralow.dt.unit.launcher.plugin.internal.ui.xtextbuilder.OpenFeaturesDirectoryHandler">
 		</handler>
 	</extension>
 	<extension point="org.eclipse.ui.menus">

@@ -7,3 +7,8 @@ Fragment-Host: com._1c.g5.v8.dt.launching.ui
 Automatic-Module-Name: ru.capralow.dt.debug.ui
 Bundle-Localization: fragment
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Import-Package: com.google.common.io
+Require-Bundle: org.eclipse.emf.ecore.xcore.lib,
+ org.eclipse.xtext.xbase.lib

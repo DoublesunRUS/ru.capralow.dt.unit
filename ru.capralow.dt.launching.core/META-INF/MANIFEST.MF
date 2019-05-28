@@ -8,3 +8,4 @@ Automatic-Module-Name: ru.capralow.dt.launching.core
 Bundle-Localization: fragment
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Vendor: %providerName
+Bundle-ClassPath: .

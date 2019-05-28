@@ -1,4 +1,4 @@
-package ru.capralow.dt.launching.ui.launchconfigurations;
+package ru.capralow.dt.internal.launching.ui.launchconfigurations;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +25,8 @@ public class UnitTestLaunchTabGroup extends AbstractLaunchConfigurationTabGroup
 	@Inject
 	private IInfobaseManager infobaseManager;
 	@Inject
+	private Provider<UnitTestLaunchTab> unitTestLaunchTabProvider;
+	@Inject
 	private Provider<RuntimeClientMainTab> runtimeClientMainTabProvider;
 	@Inject
 	private Provider<ArgumentsTab> argumentsTabProvider;
@@ -35,7 +37,7 @@ public class UnitTestLaunchTabGroup extends AbstractLaunchConfigurationTabGroup
 	public void createTabs(ILaunchConfigurationDialog dialog, String mode) {
 		List<ILaunchConfigurationTab> tabs = new ArrayList<>();
 		if (infobaseManager.isPersistenceSupported()) {
-			tabs.add(new UnitTestLaunchTab());
+			tabs.add((ILaunchConfigurationTab) unitTestLaunchTabProvider.get());
 
 			RuntimeClientMainTab mainTab = runtimeClientMainTabProvider.get();
 			mainTab.setRuntimeClientChangeNotifier(this);
