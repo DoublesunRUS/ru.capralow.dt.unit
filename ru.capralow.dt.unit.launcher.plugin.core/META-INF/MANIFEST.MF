@@ -12,4 +12,5 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Automatic-Module-Name: ru.capralow.dt.unit.launcher.plugin.core
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName
-Export-Package: ru.capralow.dt.unit.launcher.plugin.core
+Export-Package: ru.capralow.dt.unit.launcher.plugin.core,
+ ru.capralow.dt.unit.launcher.plugin.internal.core;x-internal:=true

@@ -33,3 +33,6 @@ Import-Package: com._1c.g5.v8.dt.bsl.model,
  ru.capralow.dt.unit.launcher.plugin.core
 Bundle-ClassPath: .
 Bundle-Activator: ru.capralow.dt.unit.launcher.plugin.internal.ui.UnitLauncherPlugin
+Export-Package: ru.capralow.dt.unit.launcher.plugin.internal.ui;x-internal:=true,
+ ru.capralow.dt.unit.launcher.plugin.internal.ui.launchconfigurations;x-internal:=true,
+ ru.capralow.dt.unit.launcher.plugin.internal.ui.xtextbuilder;x-internal:=true
