@@ -11,5 +11,6 @@ Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Import-Package: com.google.common.io,
  ru.capralow.dt.unit.launcher.plugin.core,
+ ru.capralow.dt.unit.launcher.plugin.core.frameworks,
  ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model
 Export-Package: ru.capralow.dt.internal.launching.ui.launchconfigurations;x-internal:=true

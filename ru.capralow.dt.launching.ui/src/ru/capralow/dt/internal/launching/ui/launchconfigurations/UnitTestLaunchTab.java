@@ -1,9 +1,5 @@
 package ru.capralow.dt.internal.launching.ui.launchconfigurations;
 
-import java.io.IOException;
-import java.io.Reader;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -38,35 +34,17 @@ import com._1c.g5.v8.dt.core.platform.IV8Project;
 import com._1c.g5.v8.dt.core.platform.IV8ProjectManager;
 import com._1c.g5.v8.dt.internal.launching.ui.LaunchingUiPlugin;
 import com._1c.g5.v8.dt.internal.launching.ui.launchconfigurations.AbstractRuntimeClientTab;
+import com._1c.g5.v8.dt.launching.core.ILaunchConfigurationAttributes;
 import com._1c.g5.v8.dt.metadata.mdclass.CommonModule;
 import com._1c.g5.v8.dt.platform.services.ui.AutoCompleteComboViewer;
-import com.google.common.io.CharSource;
-import com.google.common.io.CharStreams;
-import com.google.common.io.Resources;
 import com.google.inject.Inject;
 
 import ru.capralow.dt.unit.launcher.plugin.core.UnitTestLaunchConfigurationAttributes;
+import ru.capralow.dt.unit.launcher.plugin.core.frameworks.FrameworkUtils;
 import ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.TestFramework;
-import ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.ulFactory;
 
 public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 		implements SelectionListener, ISelectionChangedListener {
-
-	private static CharSource getFileInputSupplier(String partName) {
-		return Resources.asCharSource(
-				UnitTestLaunchConfigurationAttributes.class.getResource("/frameworks/" + partName),
-				StandardCharsets.UTF_8);
-	}
-
-	private static String readContents(CharSource source) {
-		try (Reader reader = source.openBufferedStream()) {
-			return CharStreams.toString(reader);
-
-		} catch (IOException | NullPointerException e) {
-			return "";
-
-		}
-	}
 
 	private Collection<TestFramework> frameworks;
 
@@ -123,6 +101,10 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 		TestFramework framework = getSelectedFramework();
 		configuration.setAttribute(UnitTestLaunchConfigurationAttributes.FRAMEWORK,
 				framework == null ? null : framework.getName());
+
+		configuration.setAttribute(ILaunchConfigurationAttributes.STARTUP_OPTION,
+				framework == null ? null : "/Execute " + framework.getResourcePath());
+
 	}
 
 	@Override
@@ -135,7 +117,7 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 		configuration.setAttribute(UnitTestLaunchConfigurationAttributes.RUN_MODULE_TESTS, true);
 		configuration.setAttribute(UnitTestLaunchConfigurationAttributes.RUN_EXTENSION_TESTS, false);
 
-		frameworks = getFrameworks();
+		frameworks = FrameworkUtils.getFrameworks();
 		if (frameworks != null) {
 			String framework = ((TestFramework) frameworks.toArray()[0]).getName();
 			configuration.setAttribute(UnitTestLaunchConfigurationAttributes.FRAMEWORK, framework);
@@ -232,19 +214,8 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 	}
 
 	private void frameworkSetSelection(ILaunchConfiguration configuration) throws CoreException {
-		if (frameworks == null)
-			return;
+		TestFramework framework = FrameworkUtils.getFrameworkFromConfiguration(configuration, frameworks);
 
-		TestFramework framework = null;
-		Iterator<TestFramework> itrFrameworks = frameworks.iterator();
-		while (itrFrameworks.hasNext()) {
-			TestFramework candidate = itrFrameworks.next();
-			if (candidate.getName()
-					.equals(configuration.getAttribute(UnitTestLaunchConfigurationAttributes.FRAMEWORK, ""))) {
-
-				framework = candidate;
-			}
-		}
 		frameworkViewer
 				.setSelection(framework == null ? StructuredSelection.EMPTY : new StructuredSelection(framework));
 	}
@@ -252,26 +223,6 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 	private Collection<IProject> getExtensionProjects() {
 		return projectManager.getProjects(IExtensionProject.class).stream().map(IV8Project::getProject)
 				.collect(Collectors.toList());
-	}
-
-	private Collection<TestFramework> getFrameworks() {
-		ArrayList<TestFramework> newFrameworks = new ArrayList<>();
-
-		String frameworksContents = readContents(getFileInputSupplier("frameworks.txt"));
-
-		for (String frameworkString : frameworksContents.split(System.lineSeparator())) {
-			String[] frameworkList = frameworkString.split("[,]");
-
-			TestFramework framework = ulFactory.eINSTANCE.createTestFramework();
-			framework.setName(frameworkList[0]);
-			framework.setVersion(frameworkList[1]);
-			framework.setResourcePath(frameworkList[2]);
-			framework.setEpfName(frameworkList[3]);
-
-			newFrameworks.add(framework);
-		}
-
-		return newFrameworks.stream().collect(Collectors.toList());
 	}
 
 	private List<CommonModule> getModulesForProject(IProject project) {
@@ -354,7 +305,7 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 		if (projects != null)
 			projectViewer.setInput(projects);
 
-		frameworks = getFrameworks();
+		frameworks = FrameworkUtils.getFrameworks();
 		frameworkViewer.setInput(frameworks);
 
 		try {

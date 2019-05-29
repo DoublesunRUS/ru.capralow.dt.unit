@@ -42,7 +42,7 @@ public class UnitTestLaunchTabGroup extends AbstractLaunchConfigurationTabGroup
 			RuntimeClientMainTab mainTab = runtimeClientMainTabProvider.get();
 			mainTab.setRuntimeClientChangeNotifier(this);
 			tabs.add(mainTab);
-			tabs.add((ILaunchConfigurationTab) argumentsTabProvider.get());
+			// tabs.add((ILaunchConfigurationTab) argumentsTabProvider.get());
 			if ("debug".equals(mode)) {
 				tabs.add((ILaunchConfigurationTab) debugConnectionTabProvider.get());
 			}

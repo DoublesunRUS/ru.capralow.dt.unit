@@ -10,3 +10,6 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Vendor: %providerName
 Bundle-ClassPath: .
 Export-Package: ru.capralow.dt.internal.launching.core;x-internal:=true
+Import-Package: org.eclipse.core.runtime;version="3.5.0",
+ ru.capralow.dt.unit.launcher.plugin.core.frameworks,
+ ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model
