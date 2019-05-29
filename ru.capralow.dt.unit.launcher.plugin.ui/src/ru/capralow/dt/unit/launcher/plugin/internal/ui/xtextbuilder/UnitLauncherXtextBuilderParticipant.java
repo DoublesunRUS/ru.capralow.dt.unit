@@ -43,7 +43,7 @@ import com._1c.g5.v8.dt.metadata.mdclass.CommonModule;
 import com._1c.g5.v8.dt.metadata.mdclass.Configuration;
 import com.google.inject.Inject;
 
-import ru.capralow.dt.unit.launcher.plugin.internal.ui.UnitLauncherPlugin;
+import ru.capralow.dt.unit.launcher.plugin.internal.ui.UnitLauncherUiPlugin;
 
 public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.builder.IXtextBuilderParticipant {
 	public static String getFeaturesLocation(IPath projectLocation) {
@@ -120,7 +120,7 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 
 		} catch (IOException e) {
 			String msg = MessageFormat.format("Не удалось записать feature файл: \"{0}\"", fileName);
-			UnitLauncherPlugin.log(UnitLauncherPlugin.createErrorStatus(msg, e));
+			UnitLauncherUiPlugin.log(UnitLauncherUiPlugin.createErrorStatus(msg, e));
 
 		}
 	}
@@ -138,7 +138,7 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 
 		if (object == null) {
 			String msg = MessageFormat.format("Не найден объект конфигурации: \"{0}\"", "");
-			UnitLauncherPlugin.log(UnitLauncherPlugin.createErrorStatus(msg));
+			UnitLauncherUiPlugin.log(UnitLauncherUiPlugin.createErrorStatus(msg));
 			return null;
 		}
 
@@ -178,7 +178,7 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 
 		if (configuration == null) {
 			String msg = MessageFormat.format("Не удалось определить конфигурацию для проекта: \"{0}\"", v8Project);
-			UnitLauncherPlugin.log(UnitLauncherPlugin.createErrorStatus(msg));
+			UnitLauncherUiPlugin.log(UnitLauncherUiPlugin.createErrorStatus(msg));
 			return;
 		}
 
@@ -234,14 +234,14 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 						Files.delete(file.toPath());
 					} catch (IOException e) {
 						String msg = MessageFormat.format("Не удалось удалить пустой каталог: \"{0}\"", file.toPath());
-						UnitLauncherPlugin.log(UnitLauncherPlugin.createErrorStatus(msg, e));
+						UnitLauncherUiPlugin.log(UnitLauncherUiPlugin.createErrorStatus(msg, e));
 					}
 			});
 
 		} catch (IOException e) {
 			String msg = MessageFormat.format("Не удалось удалить пустые каталоги для проекта: \"{0}\"",
 					pathToBeDeleted);
-			UnitLauncherPlugin.log(UnitLauncherPlugin.createErrorStatus(msg, e));
+			UnitLauncherUiPlugin.log(UnitLauncherUiPlugin.createErrorStatus(msg, e));
 
 		}
 	}
@@ -259,13 +259,13 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 						Files.delete(file.toPath());
 					} catch (IOException e) {
 						String msg = MessageFormat.format("Не удалось удалить файл: \"{0}\"", fileName);
-						UnitLauncherPlugin.log(UnitLauncherPlugin.createErrorStatus(msg, e));
+						UnitLauncherUiPlugin.log(UnitLauncherUiPlugin.createErrorStatus(msg, e));
 					}
 			});
 
 		} catch (IOException e) {
 			String msg = MessageFormat.format("Не удалось удалить файлы для модуля: \"{0}\"", moduleName);
-			UnitLauncherPlugin.log(UnitLauncherPlugin.createErrorStatus(msg, e));
+			UnitLauncherUiPlugin.log(UnitLauncherUiPlugin.createErrorStatus(msg, e));
 
 		}
 

@@ -1,6 +1,6 @@
 /**
  */
-package ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model;
+package ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model;
 
 import org.eclipse.emf.ecore.EFactory;
 
@@ -9,7 +9,7 @@ import org.eclipse.emf.ecore.EFactory;
  * The <b>Factory</b> for the model.
  * It provides a create method for each non-abstract class of the model.
  * <!-- end-user-doc -->
- * @see ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model.ulPackage
+ * @see ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.ulPackage
  * @generated
  */
 public interface ulFactory extends EFactory {
@@ -19,7 +19,7 @@ public interface ulFactory extends EFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	ulFactory eINSTANCE = ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model.impl.ulFactoryImpl.init();
+	ulFactory eINSTANCE = ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.impl.ulFactoryImpl.init();
 
 	/**
 	 * Returns a new object of class '<em>Test Framework</em>'.

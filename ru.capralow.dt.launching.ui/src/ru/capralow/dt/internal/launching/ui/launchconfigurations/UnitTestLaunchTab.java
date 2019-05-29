@@ -45,15 +45,16 @@ import com.google.common.io.CharStreams;
 import com.google.common.io.Resources;
 import com.google.inject.Inject;
 
-import ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model.TestFramework;
-import ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model.ulFactory;
 import ru.capralow.dt.unit.launcher.plugin.core.UnitTestLaunchConfigurationAttributes;
+import ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.TestFramework;
+import ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.ulFactory;
 
 public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 		implements SelectionListener, ISelectionChangedListener {
 
 	private static CharSource getFileInputSupplier(String partName) {
-		return Resources.asCharSource(UnitTestLaunchTab.class.getResource("/frameworks/" + partName),
+		return Resources.asCharSource(
+				UnitTestLaunchConfigurationAttributes.class.getResource("/frameworks/" + partName),
 				StandardCharsets.UTF_8);
 	}
 

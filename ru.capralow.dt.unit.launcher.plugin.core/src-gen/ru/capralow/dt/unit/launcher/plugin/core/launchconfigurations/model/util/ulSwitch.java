@@ -1,13 +1,13 @@
 /**
  */
-package ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model.util;
+package ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.util;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.Switch;
 
-import ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model.*;
+import ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -19,7 +19,7 @@ import ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model.*;
  * until a non-null result is returned,
  * which is the result of the switch.
  * <!-- end-user-doc -->
- * @see ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model.ulPackage
+ * @see ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.ulPackage
  * @generated
  */
 public class ulSwitch<T> extends Switch<T> {

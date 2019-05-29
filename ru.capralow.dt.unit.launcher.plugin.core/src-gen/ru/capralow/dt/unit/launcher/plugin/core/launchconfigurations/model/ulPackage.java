@@ -1,6 +1,6 @@
 /**
  */
-package ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model;
+package ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -19,9 +19,9 @@ import org.eclipse.emf.ecore.EPackage;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
- * @see ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model.ulFactory
+ * @see ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.ulFactory
  * @model kind="package"
- *        annotation="http://www.eclipse.org/emf/2002/GenModel loadInitialization='false' literalsInterface='true' nonNLSMarkers='true' prefix='ul' updateClasspath='false' basePackage='ru.capralow.dt.internal.launching.ui.launchconfigurations.ul'"
+ *        annotation="http://www.eclipse.org/emf/2002/GenModel loadInitialization='false' literalsInterface='true' nonNLSMarkers='true' prefix='ul' updateClasspath='false' basePackage='ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations'"
  * @generated
  */
 public interface ulPackage extends EPackage {
@@ -39,7 +39,7 @@ public interface ulPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model"; //$NON-NLS-1$
+	String eNS_URI = "http://ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model"; //$NON-NLS-1$
 
 	/**
 	 * The package namespace name.
@@ -55,14 +55,14 @@ public interface ulPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	ulPackage eINSTANCE = ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model.impl.ulPackageImpl.init();
+	ulPackage eINSTANCE = ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.impl.ulPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model.impl.TestFrameworkImpl <em>Test Framework</em>}' class.
+	 * The meta object id for the '{@link ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.impl.TestFrameworkImpl <em>Test Framework</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model.impl.TestFrameworkImpl
-	 * @see ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model.impl.ulPackageImpl#getTestFramework()
+	 * @see ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.impl.TestFrameworkImpl
+	 * @see ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.impl.ulPackageImpl#getTestFramework()
 	 * @generated
 	 */
 	int TEST_FRAMEWORK = 0;
@@ -132,65 +132,65 @@ public interface ulPackage extends EPackage {
 
 
 	/**
-	 * Returns the meta object for class '{@link ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model.TestFramework <em>Test Framework</em>}'.
+	 * Returns the meta object for class '{@link ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.TestFramework <em>Test Framework</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Test Framework</em>'.
-	 * @see ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model.TestFramework
+	 * @see ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.TestFramework
 	 * @generated
 	 */
 	EClass getTestFramework();
 
 	/**
-	 * Returns the meta object for the attribute '{@link ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model.TestFramework#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.TestFramework#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model.TestFramework#getName()
+	 * @see ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.TestFramework#getName()
 	 * @see #getTestFramework()
 	 * @generated
 	 */
 	EAttribute getTestFramework_Name();
 
 	/**
-	 * Returns the meta object for the attribute '{@link ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model.TestFramework#getVersion <em>Version</em>}'.
+	 * Returns the meta object for the attribute '{@link ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.TestFramework#getVersion <em>Version</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Version</em>'.
-	 * @see ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model.TestFramework#getVersion()
+	 * @see ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.TestFramework#getVersion()
 	 * @see #getTestFramework()
 	 * @generated
 	 */
 	EAttribute getTestFramework_Version();
 
 	/**
-	 * Returns the meta object for the attribute '{@link ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model.TestFramework#getResourcePath <em>Resource Path</em>}'.
+	 * Returns the meta object for the attribute '{@link ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.TestFramework#getResourcePath <em>Resource Path</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Resource Path</em>'.
-	 * @see ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model.TestFramework#getResourcePath()
+	 * @see ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.TestFramework#getResourcePath()
 	 * @see #getTestFramework()
 	 * @generated
 	 */
 	EAttribute getTestFramework_ResourcePath();
 
 	/**
-	 * Returns the meta object for the attribute '{@link ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model.TestFramework#getEpfName <em>Epf Name</em>}'.
+	 * Returns the meta object for the attribute '{@link ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.TestFramework#getEpfName <em>Epf Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Epf Name</em>'.
-	 * @see ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model.TestFramework#getEpfName()
+	 * @see ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.TestFramework#getEpfName()
 	 * @see #getTestFramework()
 	 * @generated
 	 */
 	EAttribute getTestFramework_EpfName();
 
 	/**
-	 * Returns the meta object for the '{@link ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model.TestFramework#toString() <em>To String</em>}' operation.
+	 * Returns the meta object for the '{@link ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.TestFramework#toString() <em>To String</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the '<em>To String</em>' operation.
-	 * @see ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model.TestFramework#toString()
+	 * @see ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.TestFramework#toString()
 	 * @generated
 	 */
 	EOperation getTestFramework__ToString();
@@ -219,11 +219,11 @@ public interface ulPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model.impl.TestFrameworkImpl <em>Test Framework</em>}' class.
+		 * The meta object literal for the '{@link ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.impl.TestFrameworkImpl <em>Test Framework</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model.impl.TestFrameworkImpl
-		 * @see ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model.impl.ulPackageImpl#getTestFramework()
+		 * @see ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.impl.TestFrameworkImpl
+		 * @see ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.impl.ulPackageImpl#getTestFramework()
 		 * @generated
 		 */
 		EClass TEST_FRAMEWORK = eINSTANCE.getTestFramework();

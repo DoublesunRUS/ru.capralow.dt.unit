@@ -12,9 +12,9 @@ import com._1c.g5.wiring.ServiceInitialization;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
-public class UnitLauncherPlugin extends AbstractUIPlugin {
+public class UnitLauncherUiPlugin extends AbstractUIPlugin {
 	public static final String ID = "ru.capralow.dt.unit.launcher.plugin.ui";
-	private static UnitLauncherPlugin plugin;
+	private static UnitLauncherUiPlugin plugin;
 
 	public static IStatus createErrorStatus(String message) {
 		return new Status(IStatus.ERROR, ID, 0, message, (Throwable) null);
@@ -32,7 +32,7 @@ public class UnitLauncherPlugin extends AbstractUIPlugin {
 		return new Status(IStatus.ERROR, ID, 0, message, throwable);
 	}
 
-	public static UnitLauncherPlugin getDefault() {
+	public static UnitLauncherUiPlugin getDefault() {
 		return plugin;
 	}
 

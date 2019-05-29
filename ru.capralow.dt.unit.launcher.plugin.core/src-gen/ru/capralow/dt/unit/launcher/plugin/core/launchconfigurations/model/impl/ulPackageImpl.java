@@ -1,6 +1,6 @@
 /**
  */
-package ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model.impl;
+package ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -10,9 +10,9 @@ import org.eclipse.emf.ecore.EcorePackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model.TestFramework;
-import ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model.ulFactory;
-import ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model.ulPackage;
+import ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.TestFramework;
+import ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.ulFactory;
+import ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.ulPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -39,7 +39,7 @@ public class ulPackageImpl extends EPackageImpl implements ulPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model.ulPackage#eNS_URI
+	 * @see ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.ulPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */

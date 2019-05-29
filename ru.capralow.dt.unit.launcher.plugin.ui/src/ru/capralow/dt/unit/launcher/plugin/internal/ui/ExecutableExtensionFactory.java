@@ -9,12 +9,12 @@ public class ExecutableExtensionFactory extends AbstractGuiceAwareExecutableExte
 
 	@Override
 	protected Bundle getBundle() {
-		return UnitLauncherPlugin.getDefault().getBundle();
+		return UnitLauncherUiPlugin.getDefault().getBundle();
 	}
 
 	@Override
 	protected Injector getInjector() {
-		return UnitLauncherPlugin.getDefault().getInjector();
+		return UnitLauncherUiPlugin.getDefault().getInjector();
 	}
 
 }

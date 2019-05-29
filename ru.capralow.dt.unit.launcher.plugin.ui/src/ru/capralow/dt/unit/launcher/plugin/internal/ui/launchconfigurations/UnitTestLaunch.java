@@ -18,7 +18,7 @@ import org.eclipse.ui.PlatformUI;
 import com._1c.g5.v8.dt.core.platform.IV8ProjectManager;
 
 import ru.capralow.dt.unit.launcher.plugin.core.UnitTestLaunchConfigurationAttributes;
-import ru.capralow.dt.unit.launcher.plugin.internal.ui.UnitLauncherPlugin;
+import ru.capralow.dt.unit.launcher.plugin.internal.ui.UnitLauncherUiPlugin;
 
 public class UnitTestLaunch {
 
@@ -35,7 +35,7 @@ public class UnitTestLaunch {
 			IPath projectLocation = getProjectLocation(process, projectManager);
 			if (projectLocation == null) {
 				String msg = "Не удалось определить путь к фреймворку тестирования.";
-				UnitLauncherPlugin.log(UnitLauncherPlugin.createErrorStatus(msg));
+				UnitLauncherUiPlugin.log(UnitLauncherUiPlugin.createErrorStatus(msg));
 				return;
 			}
 
@@ -50,7 +50,7 @@ public class UnitTestLaunch {
 
 				} catch (PartInitException e) {
 					String msg = MessageFormat.format("Не удалось отобразить панель {0}.", panelId);
-					UnitLauncherPlugin.log(UnitLauncherPlugin.createErrorStatus(msg, e));
+					UnitLauncherUiPlugin.log(UnitLauncherUiPlugin.createErrorStatus(msg, e));
 
 				}
 			});
@@ -59,7 +59,7 @@ public class UnitTestLaunch {
 
 		} catch (CoreException | IOException e) {
 			String msg = "Не удалось прочитать файл с результатом модульных тестов.";
-			UnitLauncherPlugin.log(UnitLauncherPlugin.createErrorStatus(msg, e));
+			UnitLauncherUiPlugin.log(UnitLauncherUiPlugin.createErrorStatus(msg, e));
 
 		}
 	}

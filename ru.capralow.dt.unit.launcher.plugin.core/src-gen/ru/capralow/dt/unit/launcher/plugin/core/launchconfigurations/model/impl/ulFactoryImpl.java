@@ -1,6 +1,6 @@
 /**
  */
-package ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model.impl;
+package ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model.*;
+import ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.*;
 
 /**
  * <!-- begin-user-doc -->

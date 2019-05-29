@@ -1,6 +1,6 @@
 @GenModel(loadInitialization="false", literalsInterface="true", nonNLSMarkers="true", prefix="ul", updateClasspath="false")
-@Ecore(nsPrefix="ul", nsURI="http://ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model")
-package ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model
+@Ecore(nsPrefix="ul", nsURI="http://ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model")
+package ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model
 
 class TestFramework {
 	String name = ""

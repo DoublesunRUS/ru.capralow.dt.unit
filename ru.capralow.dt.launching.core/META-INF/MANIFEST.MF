@@ -9,3 +9,4 @@ Bundle-Localization: fragment
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Vendor: %providerName
 Bundle-ClassPath: .
+Export-Package: ru.capralow.dt.internal.launching.core;x-internal:=true

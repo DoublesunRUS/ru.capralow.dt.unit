@@ -1,6 +1,6 @@
 /**
  */
-package ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model.impl;
+package ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.impl;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -13,8 +13,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model.TestFramework;
-import ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model.ulPackage;
+import ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.TestFramework;
+import ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.ulPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,10 +24,10 @@ import ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model.ulPack
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model.impl.TestFrameworkImpl#getName <em>Name</em>}</li>
- *   <li>{@link ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model.impl.TestFrameworkImpl#getVersion <em>Version</em>}</li>
- *   <li>{@link ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model.impl.TestFrameworkImpl#getResourcePath <em>Resource Path</em>}</li>
- *   <li>{@link ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model.impl.TestFrameworkImpl#getEpfName <em>Epf Name</em>}</li>
+ *   <li>{@link ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.impl.TestFrameworkImpl#getName <em>Name</em>}</li>
+ *   <li>{@link ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.impl.TestFrameworkImpl#getVersion <em>Version</em>}</li>
+ *   <li>{@link ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.impl.TestFrameworkImpl#getResourcePath <em>Resource Path</em>}</li>
+ *   <li>{@link ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.impl.TestFrameworkImpl#getEpfName <em>Epf Name</em>}</li>
  * </ul>
  *
  * @generated

@@ -5,9 +5,9 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
-public class UnitLauncherPlugin extends AbstractUIPlugin {
+public class UnitLauncherCorePlugin extends AbstractUIPlugin {
 	public static final String ID = "ru.capralow.dt.unit.launcher.plugin.ui";
-	private static UnitLauncherPlugin plugin;
+	private static UnitLauncherCorePlugin plugin;
 
 	public static IStatus createErrorStatus(String message) {
 		return new Status(IStatus.ERROR, ID, 0, message, (Throwable) null);
@@ -25,7 +25,7 @@ public class UnitLauncherPlugin extends AbstractUIPlugin {
 		return new Status(IStatus.ERROR, ID, 0, message, throwable);
 	}
 
-	public static UnitLauncherPlugin getDefault() {
+	public static UnitLauncherCorePlugin getDefault() {
 		return plugin;
 	}
 

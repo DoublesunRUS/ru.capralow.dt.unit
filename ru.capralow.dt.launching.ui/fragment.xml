@@ -10,12 +10,4 @@
 		</launchConfigurationTabGroup>
 	</extension>
 	
-	<extension point="org.eclipse.emf.ecore.generated_package">
-		<!-- @generated frameworks -->
-		<package
-			uri="http://ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model"
-			class="ru.capralow.dt.internal.launching.ui.launchconfigurations.ul.model.ulPackage"
-			genModel="model/frameworks.xcore"/>
-	</extension>
-	
 </fragment>
