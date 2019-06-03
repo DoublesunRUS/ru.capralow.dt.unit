@@ -1,1 +1,1 @@
-Vanessa-Automation,1.2.024,vanessa-automation,vanessa-automation-single.epf
+Vanessa-Automation,1.2.025-b1,vanessa-automation,vanessa-automation-single.epf
