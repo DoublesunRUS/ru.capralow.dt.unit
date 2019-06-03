@@ -7,6 +7,8 @@ final class Messages extends NLS {
 
 	public static String FrameworkUtils_Unable_to_delete_framework_file_0;
 
+	public static String FrameworkUtils_Wrong_project_class;
+
 	public static String FrameworkUtils_Internal_class;
 
 	static {

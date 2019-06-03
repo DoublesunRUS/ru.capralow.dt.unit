@@ -10,7 +10,7 @@
 	
 	<extension point="org.eclipse.xtext.builder.participant">
 		<participant
-			class="ru.capralow.dt.unit.launcher.plugin.internal.ui.ExecutableExtensionFactory:ru.capralow.dt.unit.launcher.plugin.ui.xtextbuilder.UnitLauncherXtextBuilderParticipant"
+			class="ru.capralow.dt.unit.launcher.plugin.internal.ui.ExecutableExtensionFactory:ru.capralow.dt.unit.launcher.plugin.internal.ui.xtextbuilder.UnitLauncherXtextBuilderParticipant"
 			fileExtensions="bsl">
 		</participant>
 	</extension>

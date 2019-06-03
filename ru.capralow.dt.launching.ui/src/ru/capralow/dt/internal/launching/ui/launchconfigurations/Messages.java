@@ -12,8 +12,6 @@ final class Messages extends NLS {
 
 	public static String UnitTestLaunchTab_Framework;
 
-	public static String UnitTestLaunchTab_WrongProjectClass;
-
 	static {
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);
 	}

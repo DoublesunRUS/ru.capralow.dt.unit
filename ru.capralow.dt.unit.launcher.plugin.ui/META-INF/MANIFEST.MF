@@ -30,7 +30,8 @@ Import-Package: com._1c.g5.v8.dt.bsl.model,
  org.eclipse.xtext.nodemodel,
  org.eclipse.xtext.nodemodel.util,
  org.eclipse.xtext.resource,
- ru.capralow.dt.unit.launcher.plugin.core
+ ru.capralow.dt.unit.launcher.plugin.core,
+ ru.capralow.dt.unit.launcher.plugin.core.frameworks
 Bundle-ClassPath: .
 Bundle-Activator: ru.capralow.dt.unit.launcher.plugin.internal.ui.UnitLauncherUiPlugin
 Export-Package: ru.capralow.dt.unit.launcher.plugin.internal.ui;x-internal:=true,

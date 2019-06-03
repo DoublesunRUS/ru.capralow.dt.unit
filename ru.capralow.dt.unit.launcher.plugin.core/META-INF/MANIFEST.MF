@@ -21,5 +21,8 @@ Export-Package: ru.capralow.dt.unit.launcher.plugin.core,
  ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.impl;x-internal:=true,
  ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.util;x-internal:=true,
  ru.capralow.dt.unit.launcher.plugin.internal.core;x-internal:=true
-Import-Package: org.eclipse.core.resources,
+Import-Package: com._1c.g5.v8.dt.core.platform,
+ com._1c.g5.v8.dt.metadata.mdclass;version="6.3.0",
+ com._1c.g5.wiring,
+ org.eclipse.core.resources,
  org.eclipse.debug.core

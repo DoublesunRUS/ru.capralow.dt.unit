@@ -9,13 +9,21 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.stream.Collectors;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.emf.common.util.URI;
+import org.osgi.framework.Bundle;
 
+import com._1c.g5.v8.dt.core.platform.IExtensionProject;
+import com._1c.g5.v8.dt.core.platform.IV8Project;
+import com._1c.g5.v8.dt.core.platform.IV8ProjectManager;
+import com._1c.g5.v8.dt.metadata.mdclass.CommonModule;
 import com.google.common.io.CharSource;
 import com.google.common.io.CharStreams;
 import com.google.common.io.Resources;
@@ -26,6 +34,63 @@ import ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.ulFac
 import ru.capralow.dt.unit.launcher.plugin.internal.core.UnitLauncherCorePlugin;
 
 public class FrameworkUtils {
+	private static final String FRAMEWORK_PLUGIN = "ru.capralow.dt.unit.launcher.plugin.core";
+
+	public static String getConfigurationFilesPath(ILaunchConfiguration configuration) {
+		Bundle bundle = getFrameworkBundle();
+		IPath resourcePath = Platform.getStateLocation(bundle);
+		return resourcePath + "/" + configuration.getName() + "/";
+	}
+
+	public static CommonModule getConfigurationModule(ILaunchConfiguration configuration,
+			IV8ProjectManager projectManager) throws CoreException {
+		IProject project = getConfigurationProject(configuration, projectManager);
+		if (project == null)
+			return null;
+
+		List<CommonModule> modules = getModulesForProject(project, projectManager);
+		if (modules == null)
+			return null;
+
+		String extensionModuleName = configuration
+				.getAttribute(UnitTestLaunchConfigurationAttributes.EXTENSION_MODULE_TO_TEST, (String) null);
+
+		Iterator<CommonModule> itrModules = modules.iterator();
+		while (itrModules.hasNext()) {
+			CommonModule candidate = itrModules.next();
+			if (candidate.getName().equals(extensionModuleName))
+				return candidate;
+
+		}
+
+		return null;
+	}
+
+	public static IProject getConfigurationProject(ILaunchConfiguration configuration, IV8ProjectManager projectManager)
+			throws CoreException {
+		String extensionProjectName = configuration
+				.getAttribute(UnitTestLaunchConfigurationAttributes.EXTENSION_PROJECT_TO_TEST, (String) null);
+
+		Collection<IProject> projects = getExtensionProjects(projectManager);
+
+		Iterator<IProject> itrProjects = projects.iterator();
+		while (itrProjects.hasNext()) {
+			IProject candidate = itrProjects.next();
+			if (candidate.getName().equals(extensionProjectName))
+				return candidate;
+		}
+
+		return null;
+	}
+
+	public static Collection<IProject> getExtensionProjects(IV8ProjectManager projectManager) {
+		return projectManager.getProjects(IExtensionProject.class).stream().map(IV8Project::getProject)
+				.collect(Collectors.toList());
+	}
+
+	public static Bundle getFrameworkBundle() {
+		return Platform.getBundle(FRAMEWORK_PLUGIN);
+	}
 
 	public static TestFramework getFrameworkFromConfiguration(ILaunchConfiguration configuration,
 			Collection<TestFramework> frameworks) throws CoreException {
@@ -66,10 +131,16 @@ public class FrameworkUtils {
 		return newFrameworks.stream().collect(Collectors.toList());
 	}
 
-	private static CharSource getFileInputSupplier(String partName) {
-		return Resources.asCharSource(
-				UnitTestLaunchConfigurationAttributes.class.getResource("/frameworks/" + partName),
-				StandardCharsets.UTF_8);
+	public static List<CommonModule> getModulesForProject(IProject project, IV8ProjectManager projectManager) {
+		IV8Project v8Project = projectManager.getProject(project);
+		if (!(v8Project instanceof IExtensionProject)) {
+			String msg = Messages.FrameworkUtils_Wrong_project_class;
+			throw new NullPointerException(msg);
+		}
+
+		IExtensionProject extensionProject = (IExtensionProject) v8Project;
+
+		return extensionProject.getConfiguration().getCommonModules().stream().collect(Collectors.toList());
 	}
 
 	public static URI getResourceURIforPlugin(String fileName) {
@@ -78,6 +149,12 @@ public class FrameworkUtils {
 		File file = getResourceFile(uri);
 
 		return URI.createFileURI(file.getPath());
+	}
+
+	private static CharSource getFileInputSupplier(String partName) {
+		return Resources.asCharSource(
+				UnitTestLaunchConfigurationAttributes.class.getResource("/frameworks/" + partName),
+				StandardCharsets.UTF_8);
 	}
 
 	private static File getResourceFile(URI uri) {

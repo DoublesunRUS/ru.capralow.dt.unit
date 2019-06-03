@@ -1,9 +1,8 @@
 package ru.capralow.dt.internal.launching.ui.launchconfigurations;
 
+import java.io.File;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
@@ -29,9 +28,8 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 
-import com._1c.g5.v8.dt.core.platform.IExtensionProject;
-import com._1c.g5.v8.dt.core.platform.IV8Project;
 import com._1c.g5.v8.dt.core.platform.IV8ProjectManager;
+import com._1c.g5.v8.dt.debug.core.IDebugConfigurationAttributes;
 import com._1c.g5.v8.dt.internal.launching.ui.LaunchingUiPlugin;
 import com._1c.g5.v8.dt.internal.launching.ui.launchconfigurations.AbstractRuntimeClientTab;
 import com._1c.g5.v8.dt.launching.core.ILaunchConfigurationAttributes;
@@ -50,13 +48,9 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 
 	private ComboViewer frameworkViewer;
 
-	private Collection<CommonModule> modules;
-
 	private ComboViewer moduleViewer;
-
 	@Inject
 	private IV8ProjectManager projectManager;
-	private Collection<IProject> projects;
 
 	private ComboViewer projectViewer;
 
@@ -85,10 +79,10 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 
 	@Override
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
-		configuration.setAttribute(UnitTestLaunchConfigurationAttributes.RUN_MODULE_TESTS,
-				runModuleTests.getSelection());
 		configuration.setAttribute(UnitTestLaunchConfigurationAttributes.RUN_EXTENSION_TESTS,
 				runExtensionTests.getSelection());
+		configuration.setAttribute(UnitTestLaunchConfigurationAttributes.RUN_MODULE_TESTS,
+				runModuleTests.getSelection());
 
 		IProject project = getSelectedProject();
 		configuration.setAttribute(UnitTestLaunchConfigurationAttributes.EXTENSION_PROJECT_TO_TEST,
@@ -99,11 +93,31 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 				commonModule == null ? null : commonModule.getName());
 
 		TestFramework framework = getSelectedFramework();
-		configuration.setAttribute(UnitTestLaunchConfigurationAttributes.FRAMEWORK,
-				framework == null ? null : framework.getName());
 
-		configuration.setAttribute(ILaunchConfigurationAttributes.STARTUP_OPTION,
-				framework == null ? null : "/Execute " + framework.getResourcePath());
+		if (framework == null) {
+			configuration.setAttribute(UnitTestLaunchConfigurationAttributes.FRAMEWORK, (String) null);
+			configuration.setAttribute(ILaunchConfigurationAttributes.STARTUP_OPTION, (String) null);
+			configuration.setAttribute(IDebugConfigurationAttributes.EXTERNAL_OBJECT_PROJECT_NAME, (String) null);
+			configuration.setAttribute(IDebugConfigurationAttributes.EXTERNAL_OBJECT_NAME, (String) null);
+			configuration.setAttribute(IDebugConfigurationAttributes.EXTERNAL_OBJECT_TYPE, (String) null);
+
+		} else {
+			String paramsFilePathName = FrameworkUtils.getConfigurationFilesPath(configuration);
+
+			configuration.setAttribute(UnitTestLaunchConfigurationAttributes.FRAMEWORK, framework.getName());
+			String startupOption = "StartFeaturePlayer;VBParams=$StartupOptionsPath$";
+			startupOption = startupOption.replace("$StartupOptionsPath$",
+					paramsFilePathName + File.separator + "params.json");
+
+			configuration.setAttribute(ILaunchConfigurationAttributes.STARTUP_OPTION, startupOption);
+
+			configuration.setAttribute(IDebugConfigurationAttributes.EXTERNAL_OBJECT_PROJECT_NAME,
+					"ФреймворкТестирования");
+			configuration.setAttribute(IDebugConfigurationAttributes.EXTERNAL_OBJECT_NAME, "VanessaAutomationsingle");
+			configuration.setAttribute(IDebugConfigurationAttributes.EXTERNAL_OBJECT_TYPE,
+					"com._1c.g5.v8.dt.metadata.mdclass.impl.ExternalDataProcessorImpl");
+
+		}
 
 	}
 
@@ -153,7 +167,7 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 			StructuredSelection selection = (StructuredSelection) event.getSelection();
 			if (!selection.isEmpty()) {
 				IProject project = (IProject) selection.getFirstElement();
-				modules = getModulesForProject(project);
+				List<CommonModule> modules = FrameworkUtils.getModulesForProject(project, projectManager);
 				if (modules != null)
 					moduleViewer.setInput(modules);
 
@@ -220,23 +234,6 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 				.setSelection(framework == null ? StructuredSelection.EMPTY : new StructuredSelection(framework));
 	}
 
-	private Collection<IProject> getExtensionProjects() {
-		return projectManager.getProjects(IExtensionProject.class).stream().map(IV8Project::getProject)
-				.collect(Collectors.toList());
-	}
-
-	private List<CommonModule> getModulesForProject(IProject project) {
-		IV8Project v8Project = projectManager.getProject(project);
-		if (!(v8Project instanceof IExtensionProject)) {
-			String msg = Messages.UnitTestLaunchTab_WrongProjectClass;
-			throw new NullPointerException(msg);
-		}
-
-		IExtensionProject extensionProject = (IExtensionProject) v8Project;
-
-		return extensionProject.getConfiguration().getCommonModules().stream().collect(Collectors.toList());
-	}
-
 	private TestFramework getSelectedFramework() {
 		IStructuredSelection selection = frameworkViewer.getStructuredSelection();
 		return !selection.isEmpty() && selection.getFirstElement() instanceof TestFramework
@@ -259,49 +256,19 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 	}
 
 	private void moduleSetSelection(ILaunchConfiguration configuration) throws CoreException {
-		IProject project = getSelectedProject();
-		if (project == null)
-			return;
-
-		modules = getModulesForProject(project);
-		if (modules == null)
-			return;
-		moduleViewer.setInput(modules);
-
-		CommonModule module = null;
-		Iterator<CommonModule> itrModules = modules.iterator();
-		while (itrModules.hasNext()) {
-			CommonModule candidate = itrModules.next();
-			if (candidate.getName().equals(
-					configuration.getAttribute(UnitTestLaunchConfigurationAttributes.EXTENSION_MODULE_TO_TEST, ""))) {
-
-				module = candidate;
-			}
-		}
+		CommonModule module = FrameworkUtils.getConfigurationModule(configuration, projectManager);
 		moduleViewer.setSelection(module == null ? StructuredSelection.EMPTY : new StructuredSelection(module));
 
 	}
 
 	private void projectSetSelection(ILaunchConfiguration configuration) throws CoreException {
-		if (projects == null)
-			return;
-
-		IProject project = null;
-		Iterator<IProject> itrProjects = projects.iterator();
-		while (itrProjects.hasNext()) {
-			IProject candidate = itrProjects.next();
-			if (candidate.getName().equals(
-					configuration.getAttribute(UnitTestLaunchConfigurationAttributes.EXTENSION_PROJECT_TO_TEST, ""))) {
-
-				project = candidate;
-			}
-		}
+		IProject project = FrameworkUtils.getConfigurationProject(configuration, projectManager);
 		projectViewer.setSelection(project == null ? StructuredSelection.EMPTY : new StructuredSelection(project));
 	}
 
 	@Override
 	protected void doInitializeFrom(ILaunchConfiguration configuration) {
-		projects = getExtensionProjects();
+		Collection<IProject> projects = FrameworkUtils.getExtensionProjects(projectManager);
 		if (projects != null)
 			projectViewer.setInput(projects);
 
