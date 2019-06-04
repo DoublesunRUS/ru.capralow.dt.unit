@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.text.MessageFormat;
@@ -16,6 +17,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.URIUtil;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.osgi.framework.Bundle;
@@ -100,18 +102,19 @@ public class RuntimeUnitLauncherLaunchDelegate extends RuntimeClientLaunchDelega
 		try {
 			URL frameworkParamsURL = FileLocator
 					.toFileURL(bundle.getEntry(framework.getResourcePath() + "params.json"));
+			File file = URIUtil.toFile(URIUtil.toURI(frameworkParamsURL));
 
-			if (!(new File(frameworkParamsURL.toString())).exists()) {
+			if (!file.exists()) {
 				String msg = MessageFormat.format(
 						Messages.RuntimeUnitLauncherLaunchDelegate_Failed_to_save_framework_params_0,
-						frameworkParamsURL.toString());
+						file.toString());
 				LaunchingPlugin.log(LaunchingPlugin.createErrorStatus(msg, new IOException()));
 				return;
 			}
 
 			parseParamsTemplate(frameworkParamsURL, configuration, projectManager);
 
-		} catch (IOException e) {
+		} catch (IOException | URISyntaxException e) {
 			String msg = MessageFormat.format(
 					Messages.RuntimeUnitLauncherLaunchDelegate_Failed_to_save_framework_params_0,
 					framework.getResourcePath() + "params.json");
