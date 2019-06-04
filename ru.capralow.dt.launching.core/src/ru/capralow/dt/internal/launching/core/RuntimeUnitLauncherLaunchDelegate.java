@@ -17,6 +17,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.URIUtil;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
@@ -41,10 +42,7 @@ public class RuntimeUnitLauncherLaunchDelegate extends RuntimeClientLaunchDelega
 		return Resources.asCharSource(resourceURL, StandardCharsets.UTF_8);
 	}
 
-	private static void parseParamsTemplate(URL frameworkParamsURL, ILaunchConfiguration configuration,
-			IV8ProjectManager projectManager) throws IOException {
-		String paramsFilePathName = FrameworkUtils.getConfigurationFilesPath(configuration);
-
+	private static String getFeaturesPath(ILaunchConfiguration configuration, IV8ProjectManager projectManager) {
 		String featuresPath = "";
 		try {
 			Boolean runModuleTests = configuration.getAttribute(UnitTestLaunchConfigurationAttributes.RUN_MODULE_TESTS,
@@ -61,6 +59,14 @@ public class RuntimeUnitLauncherLaunchDelegate extends RuntimeClientLaunchDelega
 					.createErrorStatus(Messages.RuntimeUnitLauncherLaunchDelegate_Incorrect_launch_configuration, e));
 
 		}
+
+		return featuresPath;
+	}
+
+	private static void parseParamsTemplate(URL frameworkParamsURL, ILaunchConfiguration configuration,
+			IV8ProjectManager projectManager) throws IOException {
+		String paramsFilePathName = FrameworkUtils.getConfigurationFilesPath(configuration);
+		String featuresPath = getFeaturesPath(configuration, projectManager);
 
 		String templateContent = readContents(getFileInputSupplier(frameworkParamsURL));
 		StringTemplate template = new StringTemplate(templateContent);
@@ -100,8 +106,10 @@ public class RuntimeUnitLauncherLaunchDelegate extends RuntimeClientLaunchDelega
 
 		Bundle bundle = FrameworkUtils.getFrameworkBundle();
 		try {
-			URL frameworkParamsURL = FileLocator
-					.toFileURL(bundle.getEntry(framework.getResourcePath() + "params.json"));
+			URL frameworkParamsBundleURL = FileLocator
+					.find(bundle, new Path(framework.getResourcePath() + "params.json"), null);
+			URL frameworkParamsURL = FileLocator.toFileURL(frameworkParamsBundleURL);
+
 			if (frameworkParamsURL == null) {
 				String msg = MessageFormat.format(
 						Messages.RuntimeUnitLauncherLaunchDelegate_Failed_to_get_framework_params_from_bundle_0_1,
