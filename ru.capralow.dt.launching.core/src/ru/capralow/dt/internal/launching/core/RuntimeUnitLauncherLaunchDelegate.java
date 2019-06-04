@@ -83,8 +83,11 @@ public class RuntimeUnitLauncherLaunchDelegate extends RuntimeClientLaunchDelega
 	private static String readContents(CharSource source) {
 		try (Reader reader = source.openBufferedStream()) {
 			return CharStreams.toString(reader);
+
 		} catch (IOException | NullPointerException e) {
+			LaunchingPlugin.log(LaunchingPlugin.createErrorStatus(e.getMessage(), e));
 			return "";
+
 		}
 	}
 
