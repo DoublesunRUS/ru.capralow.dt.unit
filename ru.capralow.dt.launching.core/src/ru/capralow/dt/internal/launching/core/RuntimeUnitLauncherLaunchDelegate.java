@@ -102,11 +102,19 @@ public class RuntimeUnitLauncherLaunchDelegate extends RuntimeClientLaunchDelega
 		try {
 			URL frameworkParamsURL = FileLocator
 					.toFileURL(bundle.getEntry(framework.getResourcePath() + "params.json"));
+			if (frameworkParamsURL == null) {
+				String msg = MessageFormat.format(
+						Messages.RuntimeUnitLauncherLaunchDelegate_Failed_to_get_framework_params_from_bundle_0_1,
+						bundle.getSymbolicName(),
+						framework.getResourcePath() + "params.json");
+				LaunchingPlugin.log(LaunchingPlugin.createErrorStatus(msg, new IOException()));
+				return;
+			}
 			File file = URIUtil.toFile(URIUtil.toURI(frameworkParamsURL));
 
 			if (!file.exists()) {
 				String msg = MessageFormat.format(
-						Messages.RuntimeUnitLauncherLaunchDelegate_Failed_to_save_framework_params_0,
+						Messages.RuntimeUnitLauncherLaunchDelegate_Failed_to_read_framework_params_0,
 						file.toString());
 				LaunchingPlugin.log(LaunchingPlugin.createErrorStatus(msg, new IOException()));
 				return;
