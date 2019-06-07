@@ -44,18 +44,16 @@ import ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.TestF
 public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 		implements SelectionListener, ISelectionChangedListener {
 
-	private ComboViewer extensionProjectViewer;
-
-	private Collection<TestFramework> frameworks;
-
-	private ComboViewer frameworkViewer;
-	private ComboViewer moduleViewer;
-
 	@Inject
 	private IV8ProjectManager projectManager;
 
-	private Button runExtensionTests;
+	private Collection<TestFramework> frameworks;
 
+	private ComboViewer extensionProjectViewer;
+	private ComboViewer moduleViewer;
+	private ComboViewer frameworkViewer;
+
+	private Button runExtensionTests;
 	private Button runModuleTests;
 
 	public UnitTestLaunchTab() {
@@ -92,8 +90,8 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 			runExtensionTests.setSelection(
 					configuration.getAttribute(UnitTestLaunchConfigurationAttributes.RUN_EXTENSION_TESTS, false));
 
-			extensionProjectSetSelection(configuration);
-			moduleSetSelection(configuration);
+			setExtensionProjectSelection(configuration);
+			setModuleSelection(configuration);
 
 			frameworkSetSelection(configuration);
 
@@ -259,12 +257,6 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 		frameworkViewer.addSelectionChangedListener(this);
 	}
 
-	private void extensionProjectSetSelection(ILaunchConfiguration configuration) throws CoreException {
-		IProject project = FrameworkUtils.getConfigurationProject(configuration, projectManager);
-		extensionProjectViewer
-				.setSelection(project == null ? StructuredSelection.EMPTY : new StructuredSelection(project));
-	}
-
 	private void frameworkSetSelection(ILaunchConfiguration configuration) throws CoreException {
 		TestFramework framework = FrameworkUtils.getFrameworkFromConfiguration(configuration, frameworks);
 
@@ -293,7 +285,13 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 				: null;
 	}
 
-	private void moduleSetSelection(ILaunchConfiguration configuration) throws CoreException {
+	private void setExtensionProjectSelection(ILaunchConfiguration configuration) throws CoreException {
+		IProject project = FrameworkUtils.getConfigurationProject(configuration, projectManager);
+		extensionProjectViewer
+				.setSelection(project == null ? StructuredSelection.EMPTY : new StructuredSelection(project));
+	}
+
+	private void setModuleSelection(ILaunchConfiguration configuration) throws CoreException {
 		CommonModule module = FrameworkUtils.getConfigurationModule(configuration, projectManager);
 		moduleViewer.setSelection(module == null ? StructuredSelection.EMPTY : new StructuredSelection(module));
 	}
