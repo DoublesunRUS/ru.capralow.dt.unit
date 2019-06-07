@@ -38,6 +38,8 @@ import ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.TestF
 
 public class RuntimeUnitLauncherLaunchDelegate extends RuntimeClientLaunchDelegate {
 
+	private static final String PARAMS_FILE_NAME = "params.json";
+
 	private static CharSource getFileInputSupplier(URL resourceURL) {
 		return Resources.asCharSource(resourceURL, StandardCharsets.UTF_8);
 	}
@@ -77,7 +79,7 @@ public class RuntimeUnitLauncherLaunchDelegate extends RuntimeClientLaunchDelega
 		if (!paramsFilePath.exists())
 			paramsFilePath.mkdirs();
 
-		try (FileOutputStream outputStream = new FileOutputStream(paramsFilePathName + "params.json");
+		try (FileOutputStream outputStream = new FileOutputStream(paramsFilePathName + PARAMS_FILE_NAME);
 				OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream, StandardCharsets.UTF_8);
 				BufferedWriter bufferedWriter = new BufferedWriter(outputStreamWriter);)
 
@@ -107,14 +109,14 @@ public class RuntimeUnitLauncherLaunchDelegate extends RuntimeClientLaunchDelega
 		Bundle bundle = FrameworkUtils.getFrameworkBundle();
 		try {
 			URL frameworkParamsBundleURL = FileLocator
-					.find(bundle, new Path(framework.getResourcePath() + "params.json"), null);
+					.find(bundle, new Path(framework.getResourcePath() + PARAMS_FILE_NAME), null);
 			URL frameworkParamsURL = FileLocator.toFileURL(frameworkParamsBundleURL);
 
 			if (frameworkParamsURL == null) {
 				String msg = MessageFormat.format(
 						Messages.RuntimeUnitLauncherLaunchDelegate_Failed_to_get_framework_params_from_bundle_0_1,
 						bundle.getSymbolicName(),
-						framework.getResourcePath() + "params.json");
+						framework.getResourcePath() + PARAMS_FILE_NAME);
 				LaunchingPlugin.log(LaunchingPlugin.createErrorStatus(msg, new IOException()));
 				return;
 			}
@@ -133,7 +135,7 @@ public class RuntimeUnitLauncherLaunchDelegate extends RuntimeClientLaunchDelega
 		} catch (IOException | URISyntaxException e) {
 			String msg = MessageFormat.format(
 					Messages.RuntimeUnitLauncherLaunchDelegate_Failed_to_save_framework_params_0,
-					framework.getResourcePath() + "params.json");
+					framework.getResourcePath() + PARAMS_FILE_NAME);
 			LaunchingPlugin.log(LaunchingPlugin.createErrorStatus(msg, e));
 
 		}

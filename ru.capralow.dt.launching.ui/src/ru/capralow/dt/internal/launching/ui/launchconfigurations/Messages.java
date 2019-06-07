@@ -5,6 +5,8 @@ import org.eclipse.osgi.util.NLS;
 final class Messages extends NLS {
 	private static final String BUNDLE_NAME = "ru.capralow.dt.internal.launching.ui.launchconfigurations.messages";
 
+	public static String UnitTestLaunchTab_Tab_message;
+
 	public static String UnitTestLaunchTab_RunModuleTests;
 	public static String UnitTestLaunchTab_ExtensionModule_to_Test;
 	public static String UnitTestLaunchTab_RunExtensionTests;
