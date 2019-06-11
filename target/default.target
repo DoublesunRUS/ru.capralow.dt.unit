@@ -28,6 +28,8 @@
 <unit id="com._1c.g5.v8.dt.platform.support_v8.3.10.feature.feature.group" version="0.0.0"/>
 <unit id="com._1c.g5.v8.dt.platform.support_v8.3.11.feature.feature.group" version="0.0.0"/>
 <unit id="com._1c.g5.v8.dt.platform.support_v8.3.12.feature.feature.group" version="0.0.0"/>
+<unit id="com._1c.g5.v8.dt.platform.support_v8.3.13.feature.feature.group" version="0.0.0"/>
+<unit id="com._1c.g5.v8.dt.platform.support_v8.3.14.feature.feature.group" version="0.0.0"/>
 <unit id="com._1c.g5.v8.dt.platform.support_v8.3.8.feature.feature.group" version="0.0.0"/>
 <unit id="com._1c.g5.v8.dt.platform.support_v8.3.9.feature.feature.group" version="0.0.0"/>
 <unit id="com._1c.g5.v8.dt.product.docs.feature.feature.group" version="0.0.0"/>
@@ -93,7 +95,7 @@
 <unit id="org.eclipse.xsd.edit.feature.group" version="0.0.0"/>
 <unit id="org.eclipse.xsd.feature.group" version="0.0.0"/>
 <unit id="org.eclipse.xtext.xbase.lib.feature.group" version="0.0.0"/>
-<repository id="dt_repository" location="https://edt.1c.ru/releases/topaz/1.10.2/"/>
+<repository id="dt_repository" location="https://edt.1c.ru/releases/topaz/1.11.0/"/>
 </location>
 </locations>
 </target>
