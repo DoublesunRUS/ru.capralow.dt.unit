@@ -76,24 +76,42 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 
 	@Override
 	public void doInitializeFrom(ILaunchConfiguration configuration) {
-		Collection<IProject> projects = FrameworkUtils.getExtensionProjects(projectManager);
-		if (projects != null)
-			extensionProjectViewer.setInput(projects);
-
-		frameworks = FrameworkUtils.getFrameworks();
-		frameworkViewer.setInput(frameworks);
-
 		try {
-			runModuleTests.setSelection(
-					configuration.getAttribute(UnitTestLaunchConfigurationAttributes.RUN_MODULE_TESTS, false));
+			String extensionProjectName = configuration
+					.getAttribute(UnitTestLaunchConfigurationAttributes.EXTENSION_PROJECT_TO_TEST, (String) null);
 
-			runExtensionTests.setSelection(
-					configuration.getAttribute(UnitTestLaunchConfigurationAttributes.RUN_EXTENSION_TESTS, false));
+			Boolean runExtensionTestsValue = configuration
+					.getAttribute(UnitTestLaunchConfigurationAttributes.RUN_EXTENSION_TESTS, false);
+			Boolean runModuleTestsValue = configuration
+					.getAttribute(UnitTestLaunchConfigurationAttributes.RUN_MODULE_TESTS, false);
 
-			setExtensionProjectSelection(configuration);
-			setModuleSelection(configuration);
+			String extensionModuleName = configuration
+					.getAttribute(UnitTestLaunchConfigurationAttributes.EXTENSION_MODULE_TO_TEST, (String) null);
 
-			frameworkSetSelection(configuration);
+			String frameworkName = configuration.getAttribute(UnitTestLaunchConfigurationAttributes.FRAMEWORK,
+					(String) null);
+
+			Collection<IProject> projects = FrameworkUtils.getExtensionProjects(projectManager);
+			if (projects != null)
+				extensionProjectViewer.setInput(projects);
+
+			frameworks = FrameworkUtils.getFrameworks();
+			frameworkViewer.setInput(frameworks);
+
+			IProject project = FrameworkUtils.getConfigurationProject(extensionProjectName, projectManager);
+			extensionProjectViewer
+					.setSelection(project == null ? StructuredSelection.EMPTY : new StructuredSelection(project));
+
+			runExtensionTests.setSelection(runExtensionTestsValue);
+
+			runModuleTests.setSelection(runModuleTestsValue);
+
+			CommonModule module = FrameworkUtils.getConfigurationModule(extensionModuleName, project, projectManager);
+			moduleViewer.setSelection(module == null ? StructuredSelection.EMPTY : new StructuredSelection(module));
+
+			TestFramework framework = FrameworkUtils.getConfigurationFramework(frameworkName, frameworks);
+			frameworkViewer
+					.setSelection(framework == null ? StructuredSelection.EMPTY : new StructuredSelection(framework));
 
 		} catch (CoreException e) {
 			LaunchingUiPlugin.log(e);
@@ -158,8 +176,8 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 
 	@Override
 	public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
-		configuration.setAttribute(UnitTestLaunchConfigurationAttributes.RUN_MODULE_TESTS, true);
-		configuration.setAttribute(UnitTestLaunchConfigurationAttributes.RUN_EXTENSION_TESTS, false);
+		configuration.setAttribute(UnitTestLaunchConfigurationAttributes.RUN_EXTENSION_TESTS, true);
+		configuration.setAttribute(UnitTestLaunchConfigurationAttributes.RUN_MODULE_TESTS, false);
 
 		frameworks = FrameworkUtils.getFrameworks();
 		if (frameworks != null) {
@@ -228,7 +246,10 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 		moduleViewer.setContentProvider(ArrayContentProvider.getInstance());
 		moduleViewer.setLabelProvider(new WorkbenchLabelProvider());
 		moduleViewer.setComparator(new ViewerComparator());
-		moduleViewer.addSelectionChangedListener(this);
+		ISelectionChangedListener moduleViewerListener = event -> {
+			updateLaunchConfigurationDialog();
+		};
+		moduleViewer.addSelectionChangedListener(moduleViewerListener);
 
 	}
 
@@ -254,14 +275,10 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 			}
 		});
 		frameworkViewer.setComparator(new ViewerComparator());
-		frameworkViewer.addSelectionChangedListener(this);
-	}
-
-	private void frameworkSetSelection(ILaunchConfiguration configuration) throws CoreException {
-		TestFramework framework = FrameworkUtils.getFrameworkFromConfiguration(configuration, frameworks);
-
-		frameworkViewer
-				.setSelection(framework == null ? StructuredSelection.EMPTY : new StructuredSelection(framework));
+		ISelectionChangedListener frameworkViewerListener = event -> {
+			updateLaunchConfigurationDialog();
+		};
+		frameworkViewer.addSelectionChangedListener(frameworkViewerListener);
 	}
 
 	private IProject getSelectedExtensionProject() {
@@ -283,17 +300,6 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 		return !selection.isEmpty() && selection.getFirstElement() instanceof CommonModule
 				? (CommonModule) selection.getFirstElement()
 				: null;
-	}
-
-	private void setExtensionProjectSelection(ILaunchConfiguration configuration) throws CoreException {
-		IProject project = FrameworkUtils.getConfigurationProject(configuration, projectManager);
-		extensionProjectViewer
-				.setSelection(project == null ? StructuredSelection.EMPTY : new StructuredSelection(project));
-	}
-
-	private void setModuleSelection(ILaunchConfiguration configuration) throws CoreException {
-		CommonModule module = FrameworkUtils.getConfigurationModule(configuration, projectManager);
-		moduleViewer.setSelection(module == null ? StructuredSelection.EMPTY : new StructuredSelection(module));
 	}
 
 }

@@ -42,6 +42,39 @@ public class FrameworkUtils {
 		return resourcePath + "/" + configuration.getName() + "/";
 	}
 
+	public static TestFramework getConfigurationFramework(ILaunchConfiguration configuration,
+			Collection<TestFramework> frameworks) throws CoreException {
+		if (frameworks == null)
+			return null;
+
+		String frameworkName = configuration.getAttribute(UnitTestLaunchConfigurationAttributes.FRAMEWORK,
+				(String) null);
+
+		Iterator<TestFramework> itrFrameworks = frameworks.iterator();
+		while (itrFrameworks.hasNext()) {
+			TestFramework candidate = itrFrameworks.next();
+			if (candidate.getName().equals(frameworkName))
+				return candidate;
+		}
+
+		return null;
+	}
+
+	public static TestFramework getConfigurationFramework(String frameworkName, Collection<TestFramework> frameworks)
+			throws CoreException {
+		if (frameworks == null)
+			return null;
+
+		Iterator<TestFramework> itrFrameworks = frameworks.iterator();
+		while (itrFrameworks.hasNext()) {
+			TestFramework candidate = itrFrameworks.next();
+			if (candidate.getName().equals(frameworkName))
+				return candidate;
+		}
+
+		return null;
+	}
+
 	public static CommonModule getConfigurationModule(ILaunchConfiguration configuration,
 			IV8ProjectManager projectManager) throws CoreException {
 		IProject project = getConfigurationProject(configuration, projectManager);
@@ -60,7 +93,25 @@ public class FrameworkUtils {
 			CommonModule candidate = itrModules.next();
 			if (candidate.getName().equals(extensionModuleName))
 				return candidate;
+		}
 
+		return null;
+	}
+
+	public static CommonModule getConfigurationModule(String extensionModuleName, IProject project,
+			IV8ProjectManager projectManager) throws CoreException {
+		if (project == null)
+			return null;
+
+		List<CommonModule> modules = getModulesForProject(project, projectManager);
+		if (modules == null)
+			return null;
+
+		Iterator<CommonModule> itrModules = modules.iterator();
+		while (itrModules.hasNext()) {
+			CommonModule candidate = itrModules.next();
+			if (candidate.getName().equals(extensionModuleName))
+				return candidate;
 		}
 
 		return null;
@@ -83,6 +134,20 @@ public class FrameworkUtils {
 		return null;
 	}
 
+	public static IProject getConfigurationProject(String extensionProjectName, IV8ProjectManager projectManager)
+			throws CoreException {
+		Collection<IProject> projects = getExtensionProjects(projectManager);
+
+		Iterator<IProject> itrProjects = projects.iterator();
+		while (itrProjects.hasNext()) {
+			IProject candidate = itrProjects.next();
+			if (candidate.getName().equals(extensionProjectName))
+				return candidate;
+		}
+
+		return null;
+	}
+
 	public static Collection<IProject> getExtensionProjects(IV8ProjectManager projectManager) {
 		return projectManager.getProjects(IExtensionProject.class).stream().map(IV8Project::getProject)
 				.collect(Collectors.toList());
@@ -90,25 +155,6 @@ public class FrameworkUtils {
 
 	public static Bundle getFrameworkBundle() {
 		return Platform.getBundle(FRAMEWORK_PLUGIN);
-	}
-
-	public static TestFramework getFrameworkFromConfiguration(ILaunchConfiguration configuration,
-			Collection<TestFramework> frameworks) throws CoreException {
-		if (frameworks == null)
-			return null;
-
-		TestFramework framework = null;
-		Iterator<TestFramework> itrFrameworks = frameworks.iterator();
-		while (itrFrameworks.hasNext()) {
-			TestFramework candidate = itrFrameworks.next();
-			if (candidate.getName()
-					.equals(configuration.getAttribute(UnitTestLaunchConfigurationAttributes.FRAMEWORK, ""))) {
-
-				framework = candidate;
-			}
-		}
-
-		return framework;
 	}
 
 	public static Collection<TestFramework> getFrameworks() {

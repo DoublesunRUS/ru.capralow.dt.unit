@@ -103,7 +103,7 @@ public class RuntimeUnitLauncherLaunchDelegate extends RuntimeClientLaunchDelega
 
 	private static void saveParamsToFile(ILaunchConfiguration configuration, IV8ProjectManager projectManager)
 			throws CoreException {
-		TestFramework framework = FrameworkUtils.getFrameworkFromConfiguration(configuration,
+		TestFramework framework = FrameworkUtils.getConfigurationFramework(configuration,
 				FrameworkUtils.getFrameworks());
 
 		Bundle bundle = FrameworkUtils.getFrameworkBundle();
