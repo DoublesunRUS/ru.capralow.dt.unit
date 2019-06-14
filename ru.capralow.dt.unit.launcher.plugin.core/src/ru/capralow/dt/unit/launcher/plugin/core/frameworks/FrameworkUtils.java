@@ -60,8 +60,7 @@ public class FrameworkUtils {
 		return null;
 	}
 
-	public static TestFramework getConfigurationFramework(String frameworkName, Collection<TestFramework> frameworks)
-			throws CoreException {
+	public static TestFramework getConfigurationFramework(String frameworkName, Collection<TestFramework> frameworks) {
 		if (frameworks == null)
 			return null;
 
@@ -82,7 +81,7 @@ public class FrameworkUtils {
 			return null;
 
 		List<CommonModule> modules = getModulesForProject(project, projectManager);
-		if (modules == null)
+		if (modules.isEmpty())
 			return null;
 
 		String extensionModuleName = configuration
@@ -99,12 +98,12 @@ public class FrameworkUtils {
 	}
 
 	public static CommonModule getConfigurationModule(String extensionModuleName, IProject project,
-			IV8ProjectManager projectManager) throws CoreException {
+			IV8ProjectManager projectManager) {
 		if (project == null)
 			return null;
 
 		List<CommonModule> modules = getModulesForProject(project, projectManager);
-		if (modules == null)
+		if (modules.isEmpty())
 			return null;
 
 		Iterator<CommonModule> itrModules = modules.iterator();
@@ -134,14 +133,36 @@ public class FrameworkUtils {
 		return null;
 	}
 
-	public static IProject getConfigurationProject(String extensionProjectName, IV8ProjectManager projectManager)
-			throws CoreException {
+	public static IProject getConfigurationProject(String extensionProjectName, IV8ProjectManager projectManager) {
 		Collection<IProject> projects = getExtensionProjects(projectManager);
 
 		Iterator<IProject> itrProjects = projects.iterator();
 		while (itrProjects.hasNext()) {
 			IProject candidate = itrProjects.next();
 			if (candidate.getName().equals(extensionProjectName))
+				return candidate;
+		}
+
+		return null;
+	}
+
+	public static String getConfigurationTag(ILaunchConfiguration configuration, IV8ProjectManager projectManager)
+			throws CoreException {
+		IProject project = getConfigurationProject(configuration, projectManager);
+		if (project == null)
+			return null;
+
+		List<String> tags = getTagsForProject(project, projectManager);
+		if (tags.isEmpty())
+			return null;
+
+		String extensionTagName = configuration
+				.getAttribute(UnitTestLaunchConfigurationAttributes.EXTENSION_TAG_TO_TEST, (String) null);
+
+		Iterator<String> itrTags = tags.iterator();
+		while (itrTags.hasNext()) {
+			String candidate = itrTags.next();
+			if (candidate.equals(extensionTagName))
 				return candidate;
 		}
 
@@ -178,6 +199,9 @@ public class FrameworkUtils {
 	}
 
 	public static List<CommonModule> getModulesForProject(IProject project, IV8ProjectManager projectManager) {
+		if (project == null || projectManager == null)
+			return new ArrayList<>();
+
 		IV8Project v8Project = projectManager.getProject(project);
 		if (!(v8Project instanceof IExtensionProject)) {
 			String msg = Messages.FrameworkUtils_Wrong_project_class;
@@ -195,6 +219,21 @@ public class FrameworkUtils {
 		File file = getResourceFile(uri);
 
 		return URI.createFileURI(file.getPath());
+	}
+
+	public static List<String> getTagsForProject(IProject project, IV8ProjectManager projectManager) {
+		if (project == null || projectManager == null)
+			return new ArrayList<>();
+
+		IV8Project v8Project = projectManager.getProject(project);
+		if (!(v8Project instanceof IExtensionProject)) {
+			String msg = Messages.FrameworkUtils_Wrong_project_class;
+			throw new NullPointerException(msg);
+		}
+
+		IExtensionProject extensionProject = (IExtensionProject) v8Project;
+
+		return new ArrayList<>();
 	}
 
 	private static CharSource getFileInputSupplier(String partName) {

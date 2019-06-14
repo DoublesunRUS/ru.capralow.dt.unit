@@ -50,11 +50,13 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 	private Collection<TestFramework> frameworks;
 
 	private ComboViewer extensionProjectViewer;
-	private ComboViewer moduleViewer;
+	private ComboViewer extensionModuleViewer;
+	private ComboViewer extensionTagViewer;
 	private ComboViewer frameworkViewer;
 
 	private Button runExtensionTests;
 	private Button runModuleTests;
+	private Button runTagTests;
 
 	public UnitTestLaunchTab() {
 		setMessage(Messages.UnitTestLaunchTab_Tab_message);
@@ -84,9 +86,14 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 					.getAttribute(UnitTestLaunchConfigurationAttributes.RUN_EXTENSION_TESTS, false);
 			Boolean runModuleTestsValue = configuration
 					.getAttribute(UnitTestLaunchConfigurationAttributes.RUN_MODULE_TESTS, false);
+			Boolean runTagTestsValue = configuration.getAttribute(UnitTestLaunchConfigurationAttributes.RUN_TAG_TESTS,
+					false);
 
 			String extensionModuleName = configuration
 					.getAttribute(UnitTestLaunchConfigurationAttributes.EXTENSION_MODULE_TO_TEST, (String) null);
+
+			String extensionTagName = configuration
+					.getAttribute(UnitTestLaunchConfigurationAttributes.EXTENSION_TAG_TO_TEST, (String) null);
 
 			String frameworkName = configuration.getAttribute(UnitTestLaunchConfigurationAttributes.FRAMEWORK,
 					(String) null);
@@ -103,11 +110,15 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 					.setSelection(project == null ? StructuredSelection.EMPTY : new StructuredSelection(project));
 
 			runExtensionTests.setSelection(runExtensionTestsValue);
-
 			runModuleTests.setSelection(runModuleTestsValue);
+			runTagTests.setSelection(runTagTestsValue);
 
 			CommonModule module = FrameworkUtils.getConfigurationModule(extensionModuleName, project, projectManager);
-			moduleViewer.setSelection(module == null ? StructuredSelection.EMPTY : new StructuredSelection(module));
+			extensionModuleViewer
+					.setSelection(module == null ? StructuredSelection.EMPTY : new StructuredSelection(module));
+
+			extensionTagViewer.setSelection(
+					extensionTagName == null ? StructuredSelection.EMPTY : new StructuredSelection(extensionTagName));
 
 			TestFramework framework = FrameworkUtils.getConfigurationFramework(frameworkName, frameworks);
 			frameworkViewer
@@ -131,6 +142,7 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 				runExtensionTests.getSelection());
 		configuration.setAttribute(UnitTestLaunchConfigurationAttributes.RUN_MODULE_TESTS,
 				runModuleTests.getSelection());
+		configuration.setAttribute(UnitTestLaunchConfigurationAttributes.RUN_TAG_TESTS, runTagTests.getSelection());
 
 		IProject project = getSelectedExtensionProject();
 		configuration.setAttribute(UnitTestLaunchConfigurationAttributes.EXTENSION_PROJECT_TO_TEST,
@@ -139,6 +151,10 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 		CommonModule commonModule = getSelectedModule();
 		configuration.setAttribute(UnitTestLaunchConfigurationAttributes.EXTENSION_MODULE_TO_TEST,
 				commonModule == null ? null : commonModule.getName());
+
+		String tag = getSelectedTag();
+		configuration.setAttribute(UnitTestLaunchConfigurationAttributes.EXTENSION_TAG_TO_TEST,
+				tag == null ? null : tag);
 
 		TestFramework framework = getSelectedFramework();
 
@@ -178,6 +194,7 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 	public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
 		configuration.setAttribute(UnitTestLaunchConfigurationAttributes.RUN_EXTENSION_TESTS, true);
 		configuration.setAttribute(UnitTestLaunchConfigurationAttributes.RUN_MODULE_TESTS, false);
+		configuration.setAttribute(UnitTestLaunchConfigurationAttributes.RUN_TAG_TESTS, false);
 
 		frameworks = FrameworkUtils.getFrameworks();
 		if (frameworks != null) {
@@ -215,10 +232,14 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 			StructuredSelection selection = (StructuredSelection) event.getSelection();
 			if (!selection.isEmpty()) {
 				IProject project = (IProject) selection.getFirstElement();
+
 				List<CommonModule> modules = FrameworkUtils.getModulesForProject(project, projectManager);
 				if (modules != null)
-					moduleViewer.setInput(modules);
+					extensionModuleViewer.setInput(modules);
 
+				List<String> tags = FrameworkUtils.getTagsForProject(project, projectManager);
+				if (tags != null)
+					extensionTagViewer.setInput(tags);
 			}
 
 			updateLaunchConfigurationDialog();
@@ -240,17 +261,37 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 		Label launchModule = new Label(composite, SWT.NONE);
 		launchModule.setText(Messages.UnitTestLaunchTab_ExtensionModule_to_Test);
 		// 4.2
-		moduleViewer = new AutoCompleteComboViewer(composite);
+		extensionModuleViewer = new AutoCompleteComboViewer(composite);
 		GridDataFactory.fillDefaults().align(4, 16777216).grab(true, false).hint(200, -1)
-				.applyTo(moduleViewer.getControl());
-		moduleViewer.setContentProvider(ArrayContentProvider.getInstance());
-		moduleViewer.setLabelProvider(new WorkbenchLabelProvider());
-		moduleViewer.setComparator(new ViewerComparator());
+				.applyTo(extensionModuleViewer.getControl());
+		extensionModuleViewer.setContentProvider(ArrayContentProvider.getInstance());
+		extensionModuleViewer.setLabelProvider(new WorkbenchLabelProvider());
+		extensionModuleViewer.setComparator(new ViewerComparator());
 		ISelectionChangedListener moduleViewerListener = event -> {
 			updateLaunchConfigurationDialog();
 		};
-		moduleViewer.addSelectionChangedListener(moduleViewerListener);
+		extensionModuleViewer.addSelectionChangedListener(moduleViewerListener);
 
+		// 5.1
+		runTagTests = createRadioButton(composite, Messages.UnitTestLaunchTab_RunTagTests);
+		runTagTests.addSelectionListener(this);
+		// 5.2
+		new Label(composite, SWT.NONE);
+
+		// 6.1
+		Label launchTag = new Label(composite, SWT.NONE);
+		launchTag.setText(Messages.UnitTestLaunchTab_ExtensionTag_to_Test);
+		// 6.2
+		extensionTagViewer = new AutoCompleteComboViewer(composite);
+		GridDataFactory.fillDefaults().align(4, 16777216).grab(true, false).hint(200, -1)
+				.applyTo(extensionTagViewer.getControl());
+		extensionTagViewer.setContentProvider(ArrayContentProvider.getInstance());
+		extensionTagViewer.setLabelProvider(new WorkbenchLabelProvider());
+		extensionTagViewer.setComparator(new ViewerComparator());
+		ISelectionChangedListener tagViewerListener = event -> {
+			updateLaunchConfigurationDialog();
+		};
+		extensionTagViewer.addSelectionChangedListener(tagViewerListener);
 	}
 
 	private void createFrameworkSettings(Composite parent) {
@@ -296,9 +337,16 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 	}
 
 	private CommonModule getSelectedModule() {
-		IStructuredSelection selection = moduleViewer.getStructuredSelection();
+		IStructuredSelection selection = extensionModuleViewer.getStructuredSelection();
 		return !selection.isEmpty() && selection.getFirstElement() instanceof CommonModule
 				? (CommonModule) selection.getFirstElement()
+				: null;
+	}
+
+	private String getSelectedTag() {
+		IStructuredSelection selection = extensionTagViewer.getStructuredSelection();
+		return !selection.isEmpty() && selection.getFirstElement() instanceof String
+				? (String) selection.getFirstElement()
 				: null;
 	}
 

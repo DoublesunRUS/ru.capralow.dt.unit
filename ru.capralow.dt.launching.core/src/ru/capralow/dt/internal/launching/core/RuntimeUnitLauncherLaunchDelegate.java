@@ -40,21 +40,22 @@ public class RuntimeUnitLauncherLaunchDelegate extends RuntimeClientLaunchDelega
 
 	private static final String PARAMS_FILE_NAME = "params.json";
 
-	private static CharSource getFileInputSupplier(URL resourceURL) {
-		return Resources.asCharSource(resourceURL, StandardCharsets.UTF_8);
-	}
-
 	private static String getFeaturesPath(ILaunchConfiguration configuration, IV8ProjectManager projectManager) {
 		String featuresPath = "";
 		try {
 			Boolean runModuleTests = configuration.getAttribute(UnitTestLaunchConfigurationAttributes.RUN_MODULE_TESTS,
 					false);
+			Boolean runTagTests = configuration.getAttribute(UnitTestLaunchConfigurationAttributes.RUN_TAG_TESTS,
+					false);
 			IProject project = FrameworkUtils.getConfigurationProject(configuration, projectManager);
 			CommonModule commonModule = FrameworkUtils.getConfigurationModule(configuration, projectManager);
+			String tag = FrameworkUtils.getConfigurationTag(configuration, projectManager);
 
 			featuresPath = project.getLocation() + "/features/";
 			if (runModuleTests)
 				featuresPath += commonModule.getName() + ".feature";
+			else if (runTagTests)
+				featuresPath += tag + "/";
 
 		} catch (CoreException e) {
 			LaunchingPlugin.log(LaunchingPlugin
@@ -63,6 +64,10 @@ public class RuntimeUnitLauncherLaunchDelegate extends RuntimeClientLaunchDelega
 		}
 
 		return featuresPath;
+	}
+
+	private static CharSource getFileInputSupplier(URL resourceURL) {
+		return Resources.asCharSource(resourceURL, StandardCharsets.UTF_8);
 	}
 
 	private static void parseParamsTemplate(URL frameworkParamsURL, ILaunchConfiguration configuration,
