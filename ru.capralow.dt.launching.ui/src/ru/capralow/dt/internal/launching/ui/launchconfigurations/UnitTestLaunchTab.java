@@ -83,7 +83,7 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 					.getAttribute(UnitTestLaunchConfigurationAttributes.EXTENSION_PROJECT_TO_TEST, (String) null);
 
 			Boolean runExtensionTestsValue = configuration
-					.getAttribute(UnitTestLaunchConfigurationAttributes.RUN_EXTENSION_TESTS, false);
+					.getAttribute(UnitTestLaunchConfigurationAttributes.RUN_EXTENSION_TESTS, true);
 			Boolean runModuleTestsValue = configuration
 					.getAttribute(UnitTestLaunchConfigurationAttributes.RUN_MODULE_TESTS, false);
 			Boolean runTagTestsValue = configuration.getAttribute(UnitTestLaunchConfigurationAttributes.RUN_TAG_TESTS,
@@ -112,6 +112,9 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 			runExtensionTests.setSelection(runExtensionTestsValue);
 			runModuleTests.setSelection(runModuleTestsValue);
 			runTagTests.setSelection(runTagTestsValue);
+
+			extensionModuleViewer.getControl().setEnabled(runModuleTestsValue);
+			extensionTagViewer.getControl().setEnabled(runTagTestsValue);
 
 			CommonModule module = FrameworkUtils.getConfigurationModule(extensionModuleName, project, projectManager);
 			extensionModuleViewer
@@ -248,12 +251,31 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 
 		// 2.1
 		runExtensionTests = createRadioButton(composite, Messages.UnitTestLaunchTab_RunExtensionTests);
+		SelectionListener runExtensionTestsListener = SelectionListener.widgetSelectedAdapter(event -> {
+			Button element = (Button) event.getSource();
+			if (element.getSelection()) {
+				extensionModuleViewer.getControl().setEnabled(false);
+				extensionTagViewer.getControl().setEnabled(false);
+			}
+
+			updateLaunchConfigurationDialog();
+		});
+		runExtensionTests.addSelectionListener(runExtensionTestsListener);
 		// 2.2
 		new Label(composite, SWT.NONE);
 
 		// 3.1
 		runModuleTests = createRadioButton(composite, Messages.UnitTestLaunchTab_RunModuleTests);
-		runModuleTests.addSelectionListener(this);
+		SelectionListener runModuleTestsListener = SelectionListener.widgetSelectedAdapter(event -> {
+			Button element = (Button) event.getSource();
+			if (element.getSelection()) {
+				extensionModuleViewer.getControl().setEnabled(true);
+				extensionTagViewer.getControl().setEnabled(false);
+			}
+
+			updateLaunchConfigurationDialog();
+		});
+		runModuleTests.addSelectionListener(runModuleTestsListener);
 		// 3.2
 		new Label(composite, SWT.NONE);
 
@@ -267,14 +289,20 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 		extensionModuleViewer.setContentProvider(ArrayContentProvider.getInstance());
 		extensionModuleViewer.setLabelProvider(new WorkbenchLabelProvider());
 		extensionModuleViewer.setComparator(new ViewerComparator());
-		ISelectionChangedListener moduleViewerListener = event -> {
-			updateLaunchConfigurationDialog();
-		};
-		extensionModuleViewer.addSelectionChangedListener(moduleViewerListener);
+		extensionModuleViewer.addSelectionChangedListener(this);
 
 		// 5.1
 		runTagTests = createRadioButton(composite, Messages.UnitTestLaunchTab_RunTagTests);
-		runTagTests.addSelectionListener(this);
+		SelectionListener runTagTestsListener = SelectionListener.widgetSelectedAdapter(event -> {
+			Button element = (Button) event.getSource();
+			if (element.getSelection()) {
+				extensionModuleViewer.getControl().setEnabled(false);
+				extensionTagViewer.getControl().setEnabled(true);
+			}
+
+			updateLaunchConfigurationDialog();
+		});
+		runTagTests.addSelectionListener(runTagTestsListener);
 		// 5.2
 		new Label(composite, SWT.NONE);
 
@@ -288,10 +316,7 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 		extensionTagViewer.setContentProvider(ArrayContentProvider.getInstance());
 		extensionTagViewer.setLabelProvider(new WorkbenchLabelProvider());
 		extensionTagViewer.setComparator(new ViewerComparator());
-		ISelectionChangedListener tagViewerListener = event -> {
-			updateLaunchConfigurationDialog();
-		};
-		extensionTagViewer.addSelectionChangedListener(tagViewerListener);
+		extensionTagViewer.addSelectionChangedListener(this);
 	}
 
 	private void createFrameworkSettings(Composite parent) {
@@ -316,10 +341,7 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 			}
 		});
 		frameworkViewer.setComparator(new ViewerComparator());
-		ISelectionChangedListener frameworkViewerListener = event -> {
-			updateLaunchConfigurationDialog();
-		};
-		frameworkViewer.addSelectionChangedListener(frameworkViewerListener);
+		frameworkViewer.addSelectionChangedListener(this);
 	}
 
 	private IProject getSelectedExtensionProject() {
