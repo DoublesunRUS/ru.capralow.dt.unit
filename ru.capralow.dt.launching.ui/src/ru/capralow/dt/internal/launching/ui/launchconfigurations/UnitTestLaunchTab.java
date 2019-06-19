@@ -1,6 +1,5 @@
 package ru.capralow.dt.internal.launching.ui.launchconfigurations;
 
-import java.io.File;
 import java.util.Collection;
 import java.util.List;
 
@@ -189,8 +188,7 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 
 			configuration.setAttribute(UnitTestLaunchConfigurationAttributes.FRAMEWORK, framework.getName());
 			String startupOption = "StartFeaturePlayer;VBParams=$StartupOptionsPath$";
-			startupOption = startupOption.replace("$StartupOptionsPath$",
-					paramsFilePathName + File.separator + "params.json");
+			startupOption = startupOption.replace("$StartupOptionsPath$", paramsFilePathName + "params.json");
 
 			configuration.setAttribute(ILaunchConfigurationAttributes.STARTUP_OPTION, startupOption);
 
