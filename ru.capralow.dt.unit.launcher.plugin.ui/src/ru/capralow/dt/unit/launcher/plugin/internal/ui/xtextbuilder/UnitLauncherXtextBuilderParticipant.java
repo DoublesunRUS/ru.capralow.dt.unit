@@ -163,7 +163,8 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 		Configuration configuration = getConfigurationFromProject(v8Project);
 
 		if (configuration == null) {
-			String msg = MessageFormat.format("Не удалось определить конфигурацию для проекта: \"{0}\"", v8Project);
+			String msg = MessageFormat.format("Не удалось определить базовую конфигурацию для проекта: \"{0}\"",
+					v8Project);
 			UnitLauncherUiPlugin.log(UnitLauncherUiPlugin.createErrorStatus(msg));
 			return;
 		}
