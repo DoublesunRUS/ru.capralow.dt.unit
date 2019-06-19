@@ -155,20 +155,6 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 	@Inject
 	private IV8ProjectManager projectManager;
 
-	private Configuration getConfigurationFromProject(IV8Project v8Project) {
-		Configuration configuration = null;
-		if (v8Project instanceof IConfigurationProject)
-			configuration = ((IConfigurationProject) v8Project).getConfiguration();
-
-		else if (v8Project instanceof IExtensionProject)
-			configuration = ((IExtensionProject) v8Project).getConfiguration();
-
-		else if (v8Project instanceof IExternalObjectProject)
-			configuration = ((IExternalObjectProject) v8Project).getParent().getConfiguration();
-
-		return configuration;
-	}
-
 	@Override
 	public void build(IBuildContext context, IProgressMonitor monitor) throws CoreException {
 		IProject project = context.getBuiltProject();
@@ -269,6 +255,24 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 
 		}
 
+	}
+
+	private Configuration getConfigurationFromProject(IV8Project v8Project) {
+		Configuration configuration = null;
+		if (v8Project instanceof IConfigurationProject) {
+			configuration = ((IConfigurationProject) v8Project).getConfiguration();
+
+		} else if (v8Project instanceof IExtensionProject) {
+			configuration = ((IExtensionProject) v8Project).getConfiguration();
+
+		} else if (v8Project instanceof IExternalObjectProject) {
+			IConfigurationProject parent = ((IExternalObjectProject) v8Project).getParent();
+			if (parent == null)
+				return null;
+			configuration = parent.getConfiguration();
+		}
+
+		return configuration;
 	}
 
 }
