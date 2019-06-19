@@ -4,7 +4,7 @@
 
 	<extension point="org.eclipse.debug.core.launchConfigurationTypes">
 		<launchConfigurationType
-			name="1Unit"
+			name="%UnitTestLaunch"
 			delegate="com._1c.g5.v8.dt.internal.launching.core.LaunchingExecutableExtensionFactory:ru.capralow.dt.internal.launching.core.RuntimeUnitLauncherLaunchDelegate"
 			modes="run, debug"
 			id="ru.capralow.dt.unit.launcher.plugin.ui.UnitTestLaunch">

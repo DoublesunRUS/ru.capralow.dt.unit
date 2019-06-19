@@ -356,6 +356,9 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 		});
 		frameworkViewer.setComparator(new ViewerComparator());
 		frameworkViewer.addSelectionChangedListener(this);
+
+		framework.setVisible(false);
+		frameworkViewer.getControl().setVisible(false);
 	}
 
 	private IProject getSelectedExtensionProject() {
