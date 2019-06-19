@@ -13,7 +13,7 @@
 	<extension point="org.eclipse.debug.ui.launchConfigurationTypeImages">
 		<launchConfigurationTypeImage
 			configTypeID="ru.capralow.dt.unit.launcher.plugin.ui.UnitTestLaunch"
-			icon="icons/obj16/1CUnit.png"
+			icon="icons/obj16/1Unit.png"
 			id="ru.capralow.dt.unit.launcher.plugin.ui.launchConfigurationTypeImage.UnitTestLaunch">
 		</launchConfigurationTypeImage>
 	</extension>

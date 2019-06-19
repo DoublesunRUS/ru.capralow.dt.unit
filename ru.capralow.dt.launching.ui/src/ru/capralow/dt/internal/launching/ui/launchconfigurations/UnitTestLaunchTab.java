@@ -138,13 +138,13 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 
 	@Override
 	public Image getImage() {
-		String imagePath = "ru.capralow.dt.launching.ui/obj16/1CUnit.png";
+		String imagePath = "ru.capralow.dt.launching.ui/obj16/1Unit.png";
 		Image image = LaunchingUiPlugin.getImage(imagePath);
 		if (image == null) {
 			ImageRegistry registry = LaunchingUiPlugin.getDefault().getImageRegistry();
 			registry.put(imagePath,
 					LaunchingUiPlugin.imageDescriptorFromPlugin("ru.capralow.dt.launching.ui",
-							"icons/obj16/1CUnit.png"));
+							"icons/obj16/1Unit.png"));
 			image = registry.get(imagePath);
 		}
 		return image;
@@ -152,7 +152,7 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 
 	@Override
 	public String getName() {
-		return "1CUnit";
+		return "1Unit";
 	}
 
 	@Override
