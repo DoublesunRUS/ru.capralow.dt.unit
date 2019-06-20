@@ -13,7 +13,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 
 public class UnitLauncherUiPlugin extends AbstractUIPlugin {
-	public static final String ID = "ru.capralow.dt.unit.launcher.plugin.ui";
+	public static final String ID = "ru.capralow.dt.unit.launcher.plugin.ui"; //$NON-NLS-1$
 	private static UnitLauncherUiPlugin plugin;
 
 	public static IStatus createErrorStatus(String message) {

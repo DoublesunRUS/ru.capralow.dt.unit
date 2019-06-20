@@ -137,13 +137,13 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 
 	@Override
 	public Image getImage() {
-		String imagePath = "ru.capralow.dt.launching.ui/obj16/1Unit.png";
+		String imagePath = "ru.capralow.dt.launching.ui/obj16/1Unit.png"; //$NON-NLS-1$
 		Image image = LaunchingUiPlugin.getImage(imagePath);
 		if (image == null) {
 			ImageRegistry registry = LaunchingUiPlugin.getDefault().getImageRegistry();
 			registry.put(imagePath,
-					LaunchingUiPlugin.imageDescriptorFromPlugin("ru.capralow.dt.launching.ui",
-							"icons/obj16/1Unit.png"));
+					LaunchingUiPlugin.imageDescriptorFromPlugin("ru.capralow.dt.launching.ui", //$NON-NLS-1$
+							"icons/obj16/1Unit.png")); //$NON-NLS-1$
 			image = registry.get(imagePath);
 		}
 		return image;
@@ -151,7 +151,7 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 
 	@Override
 	public String getName() {
-		return "1Unit";
+		return "1Unit"; //$NON-NLS-1$
 	}
 
 	@Override
@@ -187,16 +187,16 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 			String paramsFilePathName = FrameworkUtils.getConfigurationFilesPath(configuration);
 
 			configuration.setAttribute(UnitTestLaunchConfigurationAttributes.FRAMEWORK, framework.getName());
-			String startupOption = "StartFeaturePlayer;VBParams=$StartupOptionsPath$";
-			startupOption = startupOption.replace("$StartupOptionsPath$", paramsFilePathName + "params.json");
+			String startupOption = "StartFeaturePlayer;VBParams=$StartupOptionsPath$"; //$NON-NLS-1$
+			startupOption = startupOption.replace("$StartupOptionsPath$", paramsFilePathName + "params.json"); //$NON-NLS-1$ //$NON-NLS-2$
 
 			configuration.setAttribute(ILaunchConfigurationAttributes.STARTUP_OPTION, startupOption);
 
 			configuration.setAttribute(IDebugConfigurationAttributes.EXTERNAL_OBJECT_PROJECT_NAME,
-					"ФреймворкТестирования");
-			configuration.setAttribute(IDebugConfigurationAttributes.EXTERNAL_OBJECT_NAME, "VanessaAutomationsingle");
+					"ФреймворкТестирования"); //$NON-NLS-1$
+			configuration.setAttribute(IDebugConfigurationAttributes.EXTERNAL_OBJECT_NAME, "VanessaAutomationsingle"); //$NON-NLS-1$
 			configuration.setAttribute(IDebugConfigurationAttributes.EXTERNAL_OBJECT_TYPE,
-					"com._1c.g5.v8.dt.metadata.mdclass.impl.ExternalDataProcessorImpl");
+					"com._1c.g5.v8.dt.metadata.mdclass.impl.ExternalDataProcessorImpl"); //$NON-NLS-1$
 
 		}
 
@@ -350,7 +350,7 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 			@Override
 			public String getText(Object element) {
 				if (element == null)
-					return "";
+					return ""; //$NON-NLS-1$
 				return element.toString();
 			}
 		});

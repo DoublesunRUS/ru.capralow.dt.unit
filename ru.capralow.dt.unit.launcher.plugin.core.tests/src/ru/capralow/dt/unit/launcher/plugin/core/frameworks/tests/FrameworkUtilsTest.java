@@ -17,14 +17,14 @@ public class FrameworkUtilsTest {
 	public void testGetModulesForProjectEmpty() {
 		List<CommonModule> modules = FrameworkUtils.getModulesForProject(null, null);
 
-		assertEquals("Список модулей: пустой", new ArrayList<CommonModule>(), modules);
+		assertEquals("Список модулей: пустой", new ArrayList<CommonModule>(), modules); //$NON-NLS-1$
 	}
 
 	@Test
 	public void testGetTagsForProjectEmpty() {
 		List<String> tags = FrameworkUtils.getTagsForProject(null, null);
 
-		assertEquals("Список тегов: пустой", new ArrayList<String>(), tags);
+		assertEquals("Список тегов: пустой", new ArrayList<String>(), tags); //$NON-NLS-1$
 	}
 
 }

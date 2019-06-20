@@ -31,7 +31,9 @@ public class OpenFeaturesDirectoryHandler extends AbstractHandler {
 		String featuresLocation = UnitLauncherXtextBuilderParticipant.getFeaturesLocation(project.getLocation());
 
 		if (!(new File(featuresLocation).exists())) {
-			MessageDialog.openInformation(null, "Модульные тесты", "У выбранного проекта нет модульных тестов.");
+			MessageDialog.openInformation(null,
+					Messages.OpenFeaturesDirectoryHandler_Unit_tests_caption,
+					Messages.OpenFeaturesDirectoryHandler_Selected_project_doesnt_have_unit_tests);
 
 			return null;
 		}

@@ -12,6 +12,6 @@ class TestFramework {
 	String epfName = ""
 	
 	op String toString() {
-		return name + " " + version;
+		return name + " " + version; //$NON-NLS-1$
 	}
 }

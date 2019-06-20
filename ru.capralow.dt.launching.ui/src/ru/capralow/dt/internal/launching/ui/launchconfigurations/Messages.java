@@ -3,7 +3,7 @@ package ru.capralow.dt.internal.launching.ui.launchconfigurations;
 import org.eclipse.osgi.util.NLS;
 
 final class Messages extends NLS {
-	private static final String BUNDLE_NAME = "ru.capralow.dt.internal.launching.ui.launchconfigurations.messages";
+	private static final String BUNDLE_NAME = "ru.capralow.dt.internal.launching.ui.launchconfigurations.messages"; //$NON-NLS-1$
 
 	public static String UnitTestLaunchTab_Tab_message;
 

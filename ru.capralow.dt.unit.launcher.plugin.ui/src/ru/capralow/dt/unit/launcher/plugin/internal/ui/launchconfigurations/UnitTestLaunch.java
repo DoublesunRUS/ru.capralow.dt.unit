@@ -20,12 +20,12 @@ import ru.capralow.dt.unit.launcher.plugin.internal.ui.UnitLauncherUiPlugin;
 public class UnitTestLaunch {
 
 	public static void showJUnitResult(IProcess process) {
-		if (process.getLabel().contains("dbgs"))
+		if (process.getLabel().contains("dbgs")) //$NON-NLS-1$
 			return;
 
 		try {
 			String frameworkName = process.getLaunch().getLaunchConfiguration()
-					.getAttribute(UnitTestLaunchConfigurationAttributes.FRAMEWORK, "");
+					.getAttribute(UnitTestLaunchConfigurationAttributes.FRAMEWORK, ""); //$NON-NLS-1$
 			if (frameworkName.isEmpty())
 				return;
 
@@ -33,22 +33,22 @@ public class UnitTestLaunch {
 
 			String paramsFilePathName = FrameworkUtils.getConfigurationFilesPath(configuration);
 
-			File file = new File(paramsFilePathName + File.separator + "junit.xml");
+			File file = new File(paramsFilePathName + File.separator + "junit.xml"); //$NON-NLS-1$
 			if (!file.exists()) {
-				String msg = "Не удалось определить путь к фреймворку тестирования.";
-				UnitLauncherUiPlugin.log(UnitLauncherUiPlugin.createErrorStatus(msg));
+				UnitLauncherUiPlugin.log(
+						UnitLauncherUiPlugin.createErrorStatus(Messages.UnitTestLaunch_Unable_to_get_framework_path));
 				return;
 			}
 
 			JUnitCore.importTestRunSession(file);
 
 			Display.getDefault().asyncExec(() -> {
-				String panelId = "org.eclipse.jdt.junit.ResultView";
+				String panelId = "org.eclipse.jdt.junit.ResultView"; //$NON-NLS-1$
 				try {
 					PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(panelId);
 
 				} catch (PartInitException e) {
-					String msg = MessageFormat.format("Не удалось отобразить панель {0}.", panelId);
+					String msg = MessageFormat.format(Messages.UnitTestLaunch_Unable_to_show_junit_panel_0, panelId);
 					UnitLauncherUiPlugin.log(UnitLauncherUiPlugin.createErrorStatus(msg, e));
 
 				}
@@ -57,13 +57,13 @@ public class UnitTestLaunch {
 			Files.deleteIfExists(file.toPath());
 
 		} catch (CoreException | IOException e) {
-			String msg = "Не удалось прочитать файл с результатом модульных тестов.";
-			UnitLauncherUiPlugin.log(UnitLauncherUiPlugin.createErrorStatus(msg, e));
+			UnitLauncherUiPlugin.log(
+					UnitLauncherUiPlugin.createErrorStatus(Messages.UnitTestLaunch_Unable_to_read_junit_xml_file, e));
 
 		}
 	}
 
 	private UnitTestLaunch() {
-		throw new IllegalStateException("Вспомогательный класс");
+		throw new IllegalStateException(Messages.UnitTestLaunch_Internal_class);
 	}
 }

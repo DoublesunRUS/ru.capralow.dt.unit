@@ -34,12 +34,12 @@ import ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.ulFac
 import ru.capralow.dt.unit.launcher.plugin.internal.core.UnitLauncherCorePlugin;
 
 public class FrameworkUtils {
-	private static final String FRAMEWORK_PLUGIN = "ru.capralow.dt.unit.launcher.plugin.core";
+	private static final String FRAMEWORK_PLUGIN = "ru.capralow.dt.unit.launcher.plugin.core"; //$NON-NLS-1$
 
 	public static String getConfigurationFilesPath(ILaunchConfiguration configuration) {
 		Bundle bundle = getFrameworkBundle();
 		IPath resourcePath = Platform.getStateLocation(bundle);
-		return resourcePath + "/" + configuration.getName() + "/";
+		return resourcePath + "/" + configuration.getName() + "/"; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	public static TestFramework getConfigurationFramework(ILaunchConfiguration configuration,
@@ -181,15 +181,15 @@ public class FrameworkUtils {
 	public static Collection<TestFramework> getFrameworks() {
 		ArrayList<TestFramework> newFrameworks = new ArrayList<>();
 
-		String frameworksContents = readContents(getFileInputSupplier("frameworks.txt"));
+		String frameworksContents = readContents(getFileInputSupplier("frameworks.txt")); //$NON-NLS-1$
 
 		for (String frameworkString : frameworksContents.split(System.lineSeparator())) {
-			String[] frameworkList = frameworkString.split("[,]");
+			String[] frameworkList = frameworkString.split("[,]"); //$NON-NLS-1$
 
 			TestFramework framework = ulFactory.eINSTANCE.createTestFramework();
 			framework.setName(frameworkList[0]);
 			framework.setVersion(frameworkList[1]);
-			framework.setResourcePath("frameworks" + File.separator + frameworkList[2] + File.separator);
+			framework.setResourcePath("frameworks" + File.separator + frameworkList[2] + File.separator); //$NON-NLS-1$
 			framework.setEpfName(frameworkList[3]);
 
 			newFrameworks.add(framework);
@@ -204,7 +204,7 @@ public class FrameworkUtils {
 
 		IV8Project v8Project = projectManager.getProject(project);
 		if (!(v8Project instanceof IExtensionProject)) {
-			String msg = Messages.FrameworkUtils_Wrong_project_class;
+			String msg = MessageFormat.format(Messages.FrameworkUtils_Wrong_project_class_0, v8Project.getClass());
 			throw new NullPointerException(msg);
 		}
 
@@ -227,7 +227,7 @@ public class FrameworkUtils {
 
 		IV8Project v8Project = projectManager.getProject(project);
 		if (!(v8Project instanceof IExtensionProject)) {
-			String msg = Messages.FrameworkUtils_Wrong_project_class;
+			String msg = MessageFormat.format(Messages.FrameworkUtils_Wrong_project_class_0, v8Project.getClass());
 			throw new NullPointerException(msg);
 		}
 
@@ -238,7 +238,7 @@ public class FrameworkUtils {
 
 	private static CharSource getFileInputSupplier(String partName) {
 		return Resources.asCharSource(
-				UnitTestLaunchConfigurationAttributes.class.getResource("/frameworks/" + partName),
+				UnitTestLaunchConfigurationAttributes.class.getResource("/frameworks/" + partName), //$NON-NLS-1$
 				StandardCharsets.UTF_8);
 	}
 
@@ -271,7 +271,7 @@ public class FrameworkUtils {
 			return CharStreams.toString(reader);
 
 		} catch (IOException | NullPointerException e) {
-			return "";
+			return ""; //$NON-NLS-1$
 
 		}
 	}

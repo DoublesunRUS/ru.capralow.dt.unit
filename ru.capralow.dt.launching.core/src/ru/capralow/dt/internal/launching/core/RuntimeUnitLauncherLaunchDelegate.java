@@ -38,10 +38,10 @@ import ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.TestF
 
 public class RuntimeUnitLauncherLaunchDelegate extends RuntimeClientLaunchDelegate {
 
-	private static final String PARAMS_FILE_NAME = "params.json";
+	private static final String PARAMS_FILE_NAME = "params.json"; //$NON-NLS-1$
 
 	private static String getFeaturesPath(ILaunchConfiguration configuration, IV8ProjectManager projectManager) {
-		String featuresPath = "";
+		String featuresPath = ""; //$NON-NLS-1$
 		try {
 			Boolean runModuleTests = configuration.getAttribute(UnitTestLaunchConfigurationAttributes.RUN_MODULE_TESTS,
 					false);
@@ -51,11 +51,11 @@ public class RuntimeUnitLauncherLaunchDelegate extends RuntimeClientLaunchDelega
 			CommonModule commonModule = FrameworkUtils.getConfigurationModule(configuration, projectManager);
 			String tag = FrameworkUtils.getConfigurationTag(configuration, projectManager);
 
-			featuresPath = project.getLocation() + "/features/";
+			featuresPath = project.getLocation() + "/features/"; //$NON-NLS-1$
 			if (runModuleTests)
-				featuresPath += commonModule.getName() + ".feature";
+				featuresPath += commonModule.getName() + ".feature"; //$NON-NLS-1$
 			else if (runTagTests)
-				featuresPath += tag + "/";
+				featuresPath += tag + "/"; //$NON-NLS-1$
 
 		} catch (CoreException e) {
 			LaunchingPlugin.log(LaunchingPlugin
@@ -77,8 +77,8 @@ public class RuntimeUnitLauncherLaunchDelegate extends RuntimeClientLaunchDelega
 
 		String templateContent = readContents(getFileInputSupplier(frameworkParamsURL));
 		StringTemplate template = new StringTemplate(templateContent);
-		template.setAttribute("FeaturesPath", featuresPath);
-		template.setAttribute("JUnitPath", paramsFilePathName);
+		template.setAttribute("FeaturesPath", featuresPath); //$NON-NLS-1$
+		template.setAttribute("JUnitPath", paramsFilePathName); //$NON-NLS-1$
 
 		File paramsFilePath = new File(paramsFilePathName);
 		if (!paramsFilePath.exists())
@@ -101,7 +101,7 @@ public class RuntimeUnitLauncherLaunchDelegate extends RuntimeClientLaunchDelega
 
 		} catch (IOException | NullPointerException e) {
 			LaunchingPlugin.log(LaunchingPlugin.createErrorStatus(e.getMessage(), e));
-			return "";
+			return ""; //$NON-NLS-1$
 
 		}
 	}

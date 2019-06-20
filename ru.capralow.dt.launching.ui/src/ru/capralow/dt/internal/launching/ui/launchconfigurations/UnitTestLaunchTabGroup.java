@@ -40,7 +40,7 @@ public class UnitTestLaunchTabGroup extends AbstractLaunchConfigurationTabGroup
 
 			tabs.add((ILaunchConfigurationTab) unitTestLaunchTabProvider.get());
 
-			if ("debug".equals(mode))
+			if ("debug".equals(mode)) //$NON-NLS-1$
 				tabs.add((ILaunchConfigurationTab) debugConnectionTabProvider.get());
 
 			tabs.add(new CommonTab());
@@ -53,16 +53,6 @@ public class UnitTestLaunchTabGroup extends AbstractLaunchConfigurationTabGroup
 		setTabs((ILaunchConfigurationTab[]) tabs.toArray(new ILaunchConfigurationTab[tabs.size()]));
 	}
 
-	public void notifyClientChange(String componentTypeId) {
-		ILaunchConfigurationTab[] tabs = getTabs();
-		for (int length = tabs.length, i = 0; i < length; ++i) {
-			final ILaunchConfigurationTab tab = tabs[i];
-			if (tab instanceof IRuntimeClientChangeListener) {
-				((IRuntimeClientChangeListener) tab).runtimeClientChanged(componentTypeId);
-			}
-		}
-	}
-
 	public void notifyClientAutoSelect() {
 		ILaunchConfigurationTab[] tabs = getTabs();
 		for (int length = tabs.length, i = 0; i < length; ++i) {
@@ -73,12 +63,12 @@ public class UnitTestLaunchTabGroup extends AbstractLaunchConfigurationTabGroup
 		}
 	}
 
-	public void notifyPorjectChange(final IProject project) {
+	public void notifyClientChange(String componentTypeId) {
 		ILaunchConfigurationTab[] tabs = getTabs();
 		for (int length = tabs.length, i = 0; i < length; ++i) {
 			final ILaunchConfigurationTab tab = tabs[i];
 			if (tab instanceof IRuntimeClientChangeListener) {
-				((IRuntimeClientChangeListener) tab).projectChanged(project);
+				((IRuntimeClientChangeListener) tab).runtimeClientChanged(componentTypeId);
 			}
 		}
 	}
@@ -89,6 +79,16 @@ public class UnitTestLaunchTabGroup extends AbstractLaunchConfigurationTabGroup
 			final ILaunchConfigurationTab tab = tabs[i];
 			if (tab instanceof IRuntimeClientChangeListener) {
 				((IRuntimeClientChangeListener) tab).infobaseChanged(infobase);
+			}
+		}
+	}
+
+	public void notifyPorjectChange(final IProject project) {
+		ILaunchConfigurationTab[] tabs = getTabs();
+		for (int length = tabs.length, i = 0; i < length; ++i) {
+			final ILaunchConfigurationTab tab = tabs[i];
+			if (tab instanceof IRuntimeClientChangeListener) {
+				((IRuntimeClientChangeListener) tab).projectChanged(project);
 			}
 		}
 	}

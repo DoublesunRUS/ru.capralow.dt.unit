@@ -47,18 +47,18 @@ import ru.capralow.dt.unit.launcher.plugin.internal.ui.UnitLauncherUiPlugin;
 
 public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.builder.IXtextBuilderParticipant {
 	public static String getFeaturesLocation(IPath projectLocation) {
-		return projectLocation + "/features/";
+		return projectLocation + "/features/"; //$NON-NLS-1$
 	}
 
 	public static String getUnitTestKeyFromMethodText(String methodText) {
-		String[] methodLines = methodText.split("\\r?\\n");
+		String[] methodLines = methodText.split("\\r?\\n"); //$NON-NLS-1$
 		for (String methodLine : methodLines) {
-			if (methodLine.toLowerCase().contains("@unit-test")) {
-				String keyName = methodLine.substring(methodLine.toLowerCase().indexOf("@unit-test") + 10);
-				if (!keyName.isEmpty() && keyName.startsWith(":"))
-					keyName = keyName.substring(1).split("[ ]")[0];
+			if (methodLine.toLowerCase().contains("@unit-test")) { //$NON-NLS-1$
+				String keyName = methodLine.substring(methodLine.toLowerCase().indexOf("@unit-test") + 10); //$NON-NLS-1$
+				if (!keyName.isEmpty() && keyName.startsWith(":")) //$NON-NLS-1$
+					keyName = keyName.substring(1).split("[ ]")[0]; //$NON-NLS-1$
 				else
-					keyName = "";
+					keyName = ""; //$NON-NLS-1$
 
 				return keyName;
 			}
@@ -71,45 +71,45 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 			String moduleSynonym, Boolean forServer, Boolean forClient) {
 		StringBuilder fileText = new StringBuilder();
 		fileText.append(String.join(System.lineSeparator(),
-				"# language: ru",
-				"",
-				"@tree",
-				"@classname=ModuleExceptionPath",
-				"",
-				String.format("Функционал: %1$s", moduleSynonym),
-				"	Как Разработчик",
-				"	Я Хочу чтобы возвращаемое значение метода совпадало с эталонным",
-				"	Чтобы я мог гарантировать работоспособность метода"));
+				"# language: ru", //$NON-NLS-1$
+				"", //$NON-NLS-1$
+				"@tree", //$NON-NLS-1$
+				"@classname=ModuleExceptionPath", //$NON-NLS-1$
+				"", //$NON-NLS-1$
+				String.format("Функционал: %1$s", moduleSynonym), //$NON-NLS-1$
+				"	Как Разработчик", //$NON-NLS-1$
+				"	Я Хочу чтобы возвращаемое значение метода совпадало с эталонным", //$NON-NLS-1$
+				"	Чтобы я мог гарантировать работоспособность метода")); //$NON-NLS-1$
 		for (String methodName : methodsNames) {
 			if (forServer) {
 				fileText.append(System.lineSeparator());
 				fileText.append(System.lineSeparator());
 				fileText.append(String.join(System.lineSeparator(),
-						String.format("Сценарий: %1$s (сервер): %2$s", moduleName, methodName),
-						"	И я выполняю код встроенного языка на сервере"));
+						String.format("Сценарий: %1$s (сервер): %2$s", moduleName, methodName), //$NON-NLS-1$
+						"	И я выполняю код встроенного языка на сервере")); //$NON-NLS-1$
 				fileText.append(System.lineSeparator());
-				fileText.append(String.format("	| '%1$s.%2$s(Объект());' |", moduleName, methodName));
+				fileText.append(String.format("	| '%1$s.%2$s(Объект());' |", moduleName, methodName)); //$NON-NLS-1$
 			}
 			if (forClient) {
 				fileText.append(System.lineSeparator());
 				fileText.append(System.lineSeparator());
 				fileText.append(String.join(System.lineSeparator(),
-						String.format("Сценарий: %1$s (клиент): %2$s", moduleName, methodName),
-						"	И я выполняю код встроенного языка"));
+						String.format("Сценарий: %1$s (клиент): %2$s", moduleName, methodName), //$NON-NLS-1$
+						"	И я выполняю код встроенного языка")); //$NON-NLS-1$
 				fileText.append(System.lineSeparator());
-				fileText.append(String.format("	| '%1$s.%2$s(Ванесса);' |", moduleName, methodName));
+				fileText.append(String.format("	| '%1$s.%2$s(Ванесса);' |", moduleName, methodName)); //$NON-NLS-1$
 			}
 		}
 
 		String featuresPathName = getFeaturesLocation(projectLocation);
 		if (!keyName.isEmpty())
-			featuresPathName += keyName.concat("/");
+			featuresPathName += keyName.concat("/"); //$NON-NLS-1$
 
 		File featuresPath = new File(featuresPathName);
 		if (!featuresPath.exists())
 			featuresPath.mkdirs();
 
-		String fileName = String.format("%1$s/%2$s.feature", featuresPathName, moduleName);
+		String fileName = String.format("%1$s/%2$s.feature", featuresPathName, moduleName); //$NON-NLS-1$
 
 		try (FileOutputStream outputStream = new FileOutputStream(fileName);
 				OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream, StandardCharsets.UTF_8);
@@ -119,7 +119,8 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 			bufferedWriter.write(fileText.toString());
 
 		} catch (IOException e) {
-			String msg = MessageFormat.format("Не удалось записать feature файл: \"{0}\"", fileName);
+			String msg = MessageFormat
+					.format(Messages.UnitLauncherXtextBuilderParticipant_Error_while_saving_feature_file_0, fileName);
 			UnitLauncherUiPlugin.log(UnitLauncherUiPlugin.createErrorStatus(msg, e));
 
 		}
@@ -133,13 +134,17 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 			return null;
 
 		Iterator<IEObjectDescription> objectItr = deltaDescription.getExportedObjects().iterator();
-		if (objectItr.hasNext())
-			object = objectItr.next().getEObjectOrProxy();
+		if (objectItr.hasNext()) {
+			IEObjectDescription objectDescription = objectItr.next();
+			object = objectDescription.getEObjectOrProxy();
 
-		if (object == null) {
-			String msg = MessageFormat.format("Не найден объект конфигурации: \"{0}\"", "");
-			UnitLauncherUiPlugin.log(UnitLauncherUiPlugin.createErrorStatus(msg));
-			return null;
+			if (object == null) {
+				String msg = MessageFormat.format(
+						Messages.UnitLauncherXtextBuilderParticipant_Unable_to_find_configuration_object_0,
+						objectDescription.getName());
+				UnitLauncherUiPlugin.log(UnitLauncherUiPlugin.createErrorStatus(msg));
+				return null;
+			}
 		}
 
 		if (!(object instanceof Module))
@@ -163,7 +168,8 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 		Configuration configuration = getConfigurationFromProject(v8Project);
 
 		if (configuration == null) {
-			String msg = MessageFormat.format("Не удалось определить базовую конфигурацию для проекта: \"{0}\"",
+			String msg = MessageFormat.format(
+					Messages.UnitLauncherXtextBuilderParticipant_Unable_to_get_configuration_from_base_project_0,
 					v8Project);
 			UnitLauncherUiPlugin.log(UnitLauncherUiPlugin.createErrorStatus(msg));
 			return;
@@ -194,7 +200,7 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 			CommonModule commonModule = (CommonModule) module.getOwner();
 
 			String moduleName = commonModule.getName();
-			String moduleSynonym = commonModule.getSynonym().get("ru");
+			String moduleSynonym = commonModule.getSynonym().get("ru"); //$NON-NLS-1$
 			deleteModuleFeatures(project.getLocation(), moduleName);
 			for (Entry<String, List<String>> entry : units.entrySet())
 				saveFeatures(entry.getKey(),
@@ -220,13 +226,16 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 					try {
 						Files.delete(file.toPath());
 					} catch (IOException e) {
-						String msg = MessageFormat.format("Не удалось удалить пустой каталог: \"{0}\"", file.toPath());
+						String msg = MessageFormat.format(
+								Messages.UnitLauncherXtextBuilderParticipant_Unable_to_delete_empty_folder_0,
+								file.toPath());
 						UnitLauncherUiPlugin.log(UnitLauncherUiPlugin.createErrorStatus(msg, e));
 					}
 			});
 
 		} catch (IOException e) {
-			String msg = MessageFormat.format("Не удалось удалить пустые каталоги для проекта: \"{0}\"",
+			String msg = MessageFormat.format(
+					Messages.UnitLauncherXtextBuilderParticipant_Unable_to_delete_empty_folders_for_project_0,
 					pathToBeDeleted);
 			UnitLauncherUiPlugin.log(UnitLauncherUiPlugin.createErrorStatus(msg, e));
 
@@ -240,18 +249,22 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 
 		try (Stream<Path> files = Files.walk(dirPath);) {
 			files.map(Path::toFile).sorted(Comparator.comparing(File::isDirectory)).forEach(file -> {
-				String fileName = moduleName + ".feature";
+				String fileName = moduleName + ".feature"; //$NON-NLS-1$
 				if (file.exists() && file.getName().endsWith(fileName))
 					try {
 						Files.delete(file.toPath());
 					} catch (IOException e) {
-						String msg = MessageFormat.format("Не удалось удалить файл: \"{0}\"", fileName);
+						String msg = MessageFormat.format(
+								Messages.UnitLauncherXtextBuilderParticipant_Unable_to_delete_feature_file_0,
+								fileName);
 						UnitLauncherUiPlugin.log(UnitLauncherUiPlugin.createErrorStatus(msg, e));
 					}
 			});
 
 		} catch (IOException e) {
-			String msg = MessageFormat.format("Не удалось удалить файлы для модуля: \"{0}\"", moduleName);
+			String msg = MessageFormat.format(
+					Messages.UnitLauncherXtextBuilderParticipant_Unable_to_delete_feature_files_for_module_0,
+					moduleName);
 			UnitLauncherUiPlugin.log(UnitLauncherUiPlugin.createErrorStatus(msg, e));
 
 		}

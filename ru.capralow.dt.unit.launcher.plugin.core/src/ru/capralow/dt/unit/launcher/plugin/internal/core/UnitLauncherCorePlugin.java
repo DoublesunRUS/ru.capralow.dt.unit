@@ -6,7 +6,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 public class UnitLauncherCorePlugin extends AbstractUIPlugin {
-	public static final String ID = "ru.capralow.dt.unit.launcher.plugin.ui";
+	public static final String ID = "ru.capralow.dt.unit.launcher.plugin.ui"; //$NON-NLS-1$
 	private static UnitLauncherCorePlugin plugin;
 
 	public static IStatus createErrorStatus(String message) {
