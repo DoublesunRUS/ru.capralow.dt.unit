@@ -248,9 +248,6 @@
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-p2-repository-plugin</artifactId>
-				<configuration>
-					<includeAllDependencies>true</includeAllDependencies>
-				</configuration>
 			</plugin>
 		</plugins>
 		
