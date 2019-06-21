@@ -246,27 +246,20 @@
 			</plugin>
 			
 			<plugin>
-				<groupId>org.reficio</groupId>
-				<artifactId>p2-maven-plugin</artifactId>
-				<version>1.3.0</version>
+				<artifactId>maven-assembly-plugin</artifactId>
 				<executions>
 					<execution>
-						<id>jdt</id>
-						<configuration>
-							<artifacts>
-								<!-- specify your depencies here -->
-								<!-- groupId:artifactId:version -->
-								<artifact><id>org.eclipse.jdt:org.eclipse.jdt.core.manipulation:1.11.100</id></artifact>
-								<artifact><id>org.eclipse.jdt:org.eclipse.jdt.debug:3.12.200</id></artifact>
-								<artifact><id>org.eclipse.jdt:org.eclipse.jdt.debug.ui:3.10.200</id></artifact>
-								<artifact><id>org.eclipse.jdt:org.eclipse.jdt.junit:3.11.300</id></artifact>
-								<artifact><id>org.eclipse.jdt:org.eclipse.jdt.junit.core:3.10.200</id></artifact>
-								<artifact><id>org.eclipse.jdt:org.eclipse.jdt.launching:3.13.0</id></artifact>
-								<artifact><id>org.eclipse.jdt:org.eclipse.jdt.ui:3.17.0</id></artifact>
-							</artifacts>
-						</configuration>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
 					</execution>
 				</executions>
+				<configuration>
+					<descriptorRefs>
+						<descriptorRef>dependencies</descriptorRef>
+					</descriptorRefs>
+				</configuration>
 			</plugin>
 		</plugins>
 		
@@ -353,11 +346,4 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-	
-	<pluginRepositories>
-		<pluginRepository>
-			<id>reficio</id>
-			<url>http://repo.reficio.org/maven/</url>
-		</pluginRepository>
-	</pluginRepositories>
 </project>
