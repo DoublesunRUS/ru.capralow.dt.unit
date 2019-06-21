@@ -35,6 +35,7 @@ import com._1c.g5.v8.dt.internal.launching.ui.LaunchingUiPlugin;
 import com._1c.g5.v8.dt.internal.launching.ui.launchconfigurations.AbstractRuntimeClientTab;
 import com._1c.g5.v8.dt.launching.core.ILaunchConfigurationAttributes;
 import com._1c.g5.v8.dt.metadata.mdclass.CommonModule;
+import com._1c.g5.v8.dt.metadata.mdclass.impl.ExternalDataProcessorImpl;
 import com._1c.g5.v8.dt.platform.services.ui.AutoCompleteComboViewer;
 import com.google.inject.Inject;
 
@@ -196,7 +197,7 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 					"ФреймворкТестирования"); //$NON-NLS-1$
 			configuration.setAttribute(IDebugConfigurationAttributes.EXTERNAL_OBJECT_NAME, "VanessaAutomationsingle"); //$NON-NLS-1$
 			configuration.setAttribute(IDebugConfigurationAttributes.EXTERNAL_OBJECT_TYPE,
-					"com._1c.g5.v8.dt.metadata.mdclass.impl.ExternalDataProcessorImpl"); //$NON-NLS-1$
+					ExternalDataProcessorImpl.class.getName());
 
 		}
 

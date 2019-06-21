@@ -9,8 +9,10 @@ Bundle-Localization: fragment
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
-Import-Package: com.google.common.io,
+Import-Package: com._1c.g5.v8.dt.metadata.mdclass.impl,
+ com.google.common.io,
  ru.capralow.dt.unit.launcher.plugin.core,
  ru.capralow.dt.unit.launcher.plugin.core.frameworks,
  ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model
-Export-Package: ru.capralow.dt.internal.launching.ui.launchconfigurations;x-internal:=true
+Export-Package: ru.capralow.dt.internal.launching.ui.launchconfigurations;x-internal:=true,
+ ru.capralow.dt.internal.launching.ui.launchconfigurations.shortcuts;x-internal:=true
