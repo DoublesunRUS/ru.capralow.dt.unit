@@ -13,7 +13,6 @@ import com._1c.g5.v8.dt.core.platform.IV8Project;
 import com._1c.g5.v8.dt.debug.core.IDebugConfigurationAttributes;
 import com._1c.g5.v8.dt.internal.launching.ui.launchconfigurations.shortcuts.AbstractRuntimeClientLaunchShortcut;
 import com._1c.g5.v8.dt.launching.core.ILaunchConfigurationAttributes;
-import com._1c.g5.v8.dt.metadata.mdclass.impl.ExternalDataProcessorImpl;
 import com.google.common.base.Strings;
 
 import ru.capralow.dt.unit.launcher.plugin.core.UnitTestLaunchConfigurationAttributes;
@@ -33,19 +32,17 @@ public class UnitTestLaunchShortcut extends AbstractRuntimeClientLaunchShortcut 
 			throw new NullPointerException(Messages.UnitTestLaunchShortcut_No_frameworks_exception);
 
 		String framework = ((TestFramework) frameworks.toArray()[0]).getName();
-		configuration.setAttribute(UnitTestLaunchConfigurationAttributes.FRAMEWORK, framework);
 
 		String paramsFilePathName = FrameworkUtils.getConfigurationFilesPath(configuration);
 
-		configuration.setAttribute(UnitTestLaunchConfigurationAttributes.FRAMEWORK, framework);
 		String startupOption = "StartFeaturePlayer;VBParams=$StartupOptionsPath$"; //$NON-NLS-1$
-		startupOption = startupOption.replace("$StartupOptionsPath$", paramsFilePathName + "params.json"); //$NON-NLS-1$ //$NON-NLS-2$
+		startupOption = startupOption.replace("$StartupOptionsPath$", //$NON-NLS-1$
+				paramsFilePathName + FrameworkUtils.PARAMS_FILE_NAME);
 
+		configuration.setAttribute(UnitTestLaunchConfigurationAttributes.FRAMEWORK, framework);
 		configuration.setAttribute(ILaunchConfigurationAttributes.STARTUP_OPTION, startupOption);
-		configuration.setAttribute(IDebugConfigurationAttributes.EXTERNAL_OBJECT_PROJECT_NAME, "ФреймворкТестирования"); //$NON-NLS-1$
-		configuration.setAttribute(IDebugConfigurationAttributes.EXTERNAL_OBJECT_NAME, "VanessaAutomationsingle"); //$NON-NLS-1$
-		configuration.setAttribute(IDebugConfigurationAttributes.EXTERNAL_OBJECT_TYPE,
-				ExternalDataProcessorImpl.class.getName());
+		configuration.setAttribute(UnitTestLaunchConfigurationAttributes.EXTERNAL_OBJECT_DUMP_PATH,
+				paramsFilePathName + FrameworkUtils.FRAMEWORK_FILE_NAME);
 	}
 
 	@Override

@@ -30,12 +30,10 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 
 import com._1c.g5.v8.dt.core.platform.IV8ProjectManager;
-import com._1c.g5.v8.dt.debug.core.IDebugConfigurationAttributes;
 import com._1c.g5.v8.dt.internal.launching.ui.LaunchingUiPlugin;
 import com._1c.g5.v8.dt.internal.launching.ui.launchconfigurations.AbstractRuntimeClientTab;
 import com._1c.g5.v8.dt.launching.core.ILaunchConfigurationAttributes;
 import com._1c.g5.v8.dt.metadata.mdclass.CommonModule;
-import com._1c.g5.v8.dt.metadata.mdclass.impl.ExternalDataProcessorImpl;
 import com._1c.g5.v8.dt.platform.services.ui.AutoCompleteComboViewer;
 import com.google.inject.Inject;
 
@@ -180,24 +178,18 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 		if (framework == null) {
 			configuration.setAttribute(UnitTestLaunchConfigurationAttributes.FRAMEWORK, (String) null);
 			configuration.setAttribute(ILaunchConfigurationAttributes.STARTUP_OPTION, (String) null);
-			configuration.setAttribute(IDebugConfigurationAttributes.EXTERNAL_OBJECT_PROJECT_NAME, (String) null);
-			configuration.setAttribute(IDebugConfigurationAttributes.EXTERNAL_OBJECT_NAME, (String) null);
-			configuration.setAttribute(IDebugConfigurationAttributes.EXTERNAL_OBJECT_TYPE, (String) null);
+			configuration.setAttribute(UnitTestLaunchConfigurationAttributes.EXTERNAL_OBJECT_DUMP_PATH, (String) null);
 
 		} else {
 			String paramsFilePathName = FrameworkUtils.getConfigurationFilesPath(configuration);
 
-			configuration.setAttribute(UnitTestLaunchConfigurationAttributes.FRAMEWORK, framework.getName());
 			String startupOption = "StartFeaturePlayer;VBParams=$StartupOptionsPath$"; //$NON-NLS-1$
 			startupOption = startupOption.replace("$StartupOptionsPath$", paramsFilePathName + "params.json"); //$NON-NLS-1$ //$NON-NLS-2$
 
+			configuration.setAttribute(UnitTestLaunchConfigurationAttributes.FRAMEWORK, framework.getName());
 			configuration.setAttribute(ILaunchConfigurationAttributes.STARTUP_OPTION, startupOption);
-
-			configuration.setAttribute(IDebugConfigurationAttributes.EXTERNAL_OBJECT_PROJECT_NAME,
-					"ФреймворкТестирования"); //$NON-NLS-1$
-			configuration.setAttribute(IDebugConfigurationAttributes.EXTERNAL_OBJECT_NAME, "VanessaAutomationsingle"); //$NON-NLS-1$
-			configuration.setAttribute(IDebugConfigurationAttributes.EXTERNAL_OBJECT_TYPE,
-					ExternalDataProcessorImpl.class.getName());
+			configuration.setAttribute(UnitTestLaunchConfigurationAttributes.EXTERNAL_OBJECT_DUMP_PATH,
+					paramsFilePathName + "framework.epf"); //$NON-NLS-1$
 
 		}
 
@@ -357,9 +349,6 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 		});
 		frameworkViewer.setComparator(new ViewerComparator());
 		frameworkViewer.addSelectionChangedListener(this);
-
-		framework.setVisible(false);
-		frameworkViewer.getControl().setVisible(false);
 	}
 
 	private IProject getSelectedExtensionProject() {

@@ -36,6 +36,9 @@ import ru.capralow.dt.unit.launcher.plugin.internal.core.UnitLauncherCorePlugin;
 public class FrameworkUtils {
 	private static final String FRAMEWORK_PLUGIN = "ru.capralow.dt.unit.launcher.plugin.core"; //$NON-NLS-1$
 
+	public static final String PARAMS_FILE_NAME = "params.json"; //$NON-NLS-1$
+	public static final String FRAMEWORK_FILE_NAME = "framework.epf"; //$NON-NLS-1$
+
 	public static String getConfigurationFilesPath(ILaunchConfiguration configuration) {
 		Bundle bundle = getFrameworkBundle();
 		IPath resourcePath = Platform.getStateLocation(bundle);
