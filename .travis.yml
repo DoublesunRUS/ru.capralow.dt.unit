@@ -15,7 +15,7 @@ env:
   - PLUGIN_VERSION="0.2.0"
 
 script: 
-- mvn clean test verify assembly:assembly -f build/pom.xml -s build/settings.xml 
+- mvn clean test verify assembly:single -f build/pom.xml -s build/settings.xml 
 - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -f build/pom.xml -s build/settings.xml -Dsonar.projectKey=$SONAR_PROJECT_KEY
 
 cache:
