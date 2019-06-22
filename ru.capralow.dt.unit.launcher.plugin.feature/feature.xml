@@ -45,6 +45,12 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
    </license>
 
+   <includes
+         id="ru.capralow.thirdparty.jdt"
+         version="0.0.0"
+         optional="true"
+         search-location="both"/>
+
    <plugin
          id="ru.capralow.dt.unit.launcher.plugin.ui"
          download-size="0"
