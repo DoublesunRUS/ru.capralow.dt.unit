@@ -216,6 +216,8 @@
 						<addMavenDescriptor>false</addMavenDescriptor>
 					</archive>
 					<excludes>
+						<plugin id="org.eclipse.jdt.junit"/>
+						<plugin id="org.eclipse.jdt.junit.core"/>
 						<feature id="ru.capralow.thirdparty.jdt"/>
 					</excludes>
 				</configuration>
