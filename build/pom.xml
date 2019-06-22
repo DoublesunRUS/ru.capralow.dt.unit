@@ -208,6 +208,27 @@
 			</plugin>
 			
 			<plugin>
+				<groupId>org.eclipse.tycho.extras</groupId>
+				<artifactId>tycho-source-feature-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>source-feature</id>
+						<phase>package</phase>
+						<goals>
+							<goal>source-feature</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<excludes>
+						<plugin id="org.eclipse.jdt.junit"/>
+						<plugin id="org.eclipse.jdt.junit.core"/>
+						<feature id="ru.capralow.thirdparty.jdt"/>
+					</excludes>
+				</configuration>
+			</plugin>
+			
+			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-source-plugin</artifactId>
 				<version>${tycho.version}</version>
@@ -215,11 +236,6 @@
 					<archive>
 						<addMavenDescriptor>false</addMavenDescriptor>
 					</archive>
-					<excludes>
-						<plugin id="org.eclipse.jdt.junit"/>
-						<plugin id="org.eclipse.jdt.junit.core"/>
-						<feature id="ru.capralow.thirdparty.jdt"/>
-					</excludes>
 				</configuration>
 				<executions>
 					<execution>
