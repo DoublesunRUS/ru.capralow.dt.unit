@@ -215,6 +215,9 @@
 					<archive>
 						<addMavenDescriptor>false</addMavenDescriptor>
 					</archive>
+					<excludes>
+						<feature id="ru.capralow.thirdparty.jdt"/>
+					</excludes>
 				</configuration>
 				<executions>
 					<execution>
@@ -244,14 +247,6 @@
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-eclipse-plugin</artifactId>
-				<configuration>
-					<downloadSources>true</downloadSources>
-				</configuration>
 			</plugin>
 		</plugins>
 		
