@@ -6,7 +6,7 @@
       provider-name="%providerName">
 
    <description>
-      Запуск модульных тестов для EDT
+      Опциональный JDT
    </description>
 
    <copyright>

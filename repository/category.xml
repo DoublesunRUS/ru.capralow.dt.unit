@@ -3,6 +3,9 @@
    <feature url="features/ru.capralow.dt.unit.launcher_0.2.0.qualifier.jar" id="ru.capralow.dt.unit.launcher" version="0.2.0.qualifier">
       <category name="ru.capralow.dt.plugin.category.public"/>
    </feature>
+   <feature url="features/ru.capralow.thirdparty.jdt_0.2.0.qualifier.jar" id="ru.capralow.thirdparty.jdt" version="0.2.0.qualifier">
+      <category name="ru.capralow.dt.plugin.category.public"/>
+   </feature>
    <category-def name="ru.capralow.dt.plugin.category.public" label="Плагины для EDT"/>
    <repository-reference location="http://download.eclipse.org/releases/2019-03/" enabled="true" />
 </site>
