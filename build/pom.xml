@@ -39,6 +39,7 @@
 		<module>../ru.capralow.dt.unit.launcher.plugin.ui</module>
 		<module>../ru.capralow.dt.unit.launcher.plugin.ui.tests</module>
 		<module>../ru.capralow.dt.unit.launcher.plugin.feature</module>
+		<module>../ru.capralow.thirdparty.jdt.feature</module>
 		<module>../repository</module>
 	</modules>
 
