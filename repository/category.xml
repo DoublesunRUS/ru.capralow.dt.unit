@@ -4,4 +4,5 @@
       <category name="ru.capralow.dt.plugin.category.public"/>
    </feature>
    <category-def name="ru.capralow.dt.plugin.category.public" label="Плагины для EDT"/>
+   <repository-reference location="http://download.eclipse.org/releases/2019-03/" enabled="true" />
 </site>
