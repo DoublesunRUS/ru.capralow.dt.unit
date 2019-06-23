@@ -85,11 +85,14 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 				fileText.append(System.lineSeparator());
 				fileText.append(System.lineSeparator());
 				fileText.append(String.join(System.lineSeparator(),
+						"&OnServer",
 						String.format("Сценарий: %1$s (сервер): %2$s", moduleName, methodName), //$NON-NLS-1$
 						"	И я выполняю код встроенного языка на сервере")); //$NON-NLS-1$
 				fileText.append(System.lineSeparator());
 				fileText.append(String.format("	| '%1$s.%2$s(Объект());' |", moduleName, methodName)); //$NON-NLS-1$
 			}
+		}
+		for (String methodName : methodsNames) {
 			if (forClient) {
 				fileText.append(System.lineSeparator());
 				fileText.append(System.lineSeparator());
