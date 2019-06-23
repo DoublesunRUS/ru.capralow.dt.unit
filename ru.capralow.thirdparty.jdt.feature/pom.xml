@@ -10,10 +10,22 @@
 		<version>0.2.0-SNAPSHOT</version>
 		<relativePath>../build/pom.xml</relativePath>
 	</parent>
-	<artifactId>org.eclipse.jdt.debug</artifactId>
+	<artifactId>ru.capralow.thirdparty.jdt</artifactId>
 	<packaging>eclipse-feature</packaging>
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho.extras</groupId>
+				<artifactId>tycho-source-feature-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>source-feature</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-p2-plugin</artifactId>
@@ -28,5 +40,5 @@
 			</plugin>
 		</plugins>
 	</build>
-	<groupId>org.eclipse.jdt.debug.feature</groupId>
+	<groupId>ru.capralow.thirdparty.jdt.feature</groupId>
 </project>
