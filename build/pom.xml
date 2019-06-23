@@ -32,14 +32,24 @@
 
 	<modules>
 		<module>../target</module>
+		
 		<module>../ru.capralow.dt.launching.core</module>
 		<module>../ru.capralow.dt.launching.ui</module>
 		<module>../ru.capralow.dt.unit.launcher.plugin.core</module>
 		<module>../ru.capralow.dt.unit.launcher.plugin.core.tests</module>
 		<module>../ru.capralow.dt.unit.launcher.plugin.ui</module>
 		<module>../ru.capralow.dt.unit.launcher.plugin.ui.tests</module>
-		<module>../ru.capralow.thirdparty.jdt.feature</module>
 		<module>../ru.capralow.dt.unit.launcher.plugin.feature</module>
+		
+		<module>../org.eclipse.jdt.core.manipulation</module>
+		<module>../org.eclipse.jdt.debug</module>
+		<module>../org.eclipse.jdt.debug.ui</module>
+		<module>../org.eclipse.jdt.junit</module>
+		<module>../org.eclipse.jdt.junit.core</module>
+		<module>../org.eclipse.jdt.junit.runtime</module>
+		<module>../org.eclipse.jdt.launching</module>
+		<module>../org.eclipse.jdt.ui</module>
+		
 		<module>../repository</module>
 	</modules>
 
@@ -204,32 +214,6 @@
 							<arch>x86_64</arch>
 						</environment>
 					</environments>
-				</configuration>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.eclipse.tycho.extras</groupId>
-				<artifactId>tycho-source-feature-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>source-feature</id>
-						<phase>package</phase>
-						<goals>
-							<goal>source-feature</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<excludes>
-						<plugin id="org.eclipse.jdt.core.manipulation"/>
-						<plugin id="org.eclipse.jdt.debug"/>
-						<plugin id="org.eclipse.jdt.debug.ui"/>
-						<plugin id="org.eclipse.jdt.junit"/>
-						<plugin id="org.eclipse.jdt.junit.core"/>
-						<plugin id="org.eclipse.jdt.junit.runtime"/>
-						<plugin id="org.eclipse.jdt.launching"/>
-						<plugin id="org.eclipse.jdt.ui"/>
-					</excludes>
 				</configuration>
 			</plugin>
 			

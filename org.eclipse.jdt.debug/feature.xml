@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.eclipse.jdt.debug"
+      label="%pluginName"
+      version="3.11.50.v20170920-1717"
+      provider-name="%providerName">
+
+   <description>
+      %pluginName
+   </description>
+
+   <copyright>
+      %providerName
+   </copyright>
+
+   <plugin
+         id="org.eclipse.jdt.debug"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>

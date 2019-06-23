@@ -1,12 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/ru.capralow.dt.unit.launcher_0.2.0.qualifier.jar" id="ru.capralow.dt.unit.launcher" version="0.2.0.qualifier">
-      <category name="ru.capralow.dt.plugin.category.public"/>
-   </feature>
-   <feature url="features/ru.capralow.thirdparty.jdt_0.2.0.qualifier.jar" id="ru.capralow.thirdparty.jdt" version="0.2.0.qualifier">
-      <category name="ru.capralow.thirdparty.category.optional"/>
-   </feature>
-   <category-def name="ru.capralow.dt.plugin.category.public" label="Плагины для EDT"/>
-   <category-def name="ru.capralow.thirdparty.category.optional" label="Сторонние компоненты, необходимые для работы плагинов"/>
-   <repository-reference location="http://download.eclipse.org/releases/2019-03/" enabled="true" />
+	<feature url="features/ru.capralow.dt.unit.launcher_0.2.0.qualifier.jar" id="ru.capralow.dt.unit.launcher" version="0.2.0.qualifier">
+		<category name="ru.capralow.dt.plugin.category.public"/>
+	</feature>
+	
+	<feature url="features/org.eclipse.jdt.core.manipulation_1.9.100.v20180321-0831.jar" id="org.eclipse.jdt.core.manipulation" version="1.9.100.v20180321-0831">
+		<category name="ru.capralow.thirdparty.category.optional"/>
+	</feature>
+		<feature url="features/org.eclipse.jdt.debug_3.11.50.v20170920-1717.jar" id="org.eclipse.jdt.debug" version="3.11.50.v20170920-1717">
+	<category name="ru.capralow.thirdparty.category.optional"/>
+		</feature>
+	<feature url="features/org.eclipse.jdt.debug.ui_3.8.100.v20180322-1256.jar" id="org.eclipse.jdt.debug.ui" version="3.8.100.v20180322-1256">
+		<category name="ru.capralow.thirdparty.category.optional"/>
+	</feature>
+	<feature url="features/org.eclipse.jdt.junit_3.10.75.v20180322-1731.jar" id="org.eclipse.jdt.junit" version="3.10.75.v20180322-1731">
+		<category name="ru.capralow.thirdparty.category.optional"/>
+	</feature>
+	<feature url="features/org.eclipse.jdt.junit.core_3.9.100.v20180321-0831.jar" id="org.eclipse.jdt.junit.core" version="3.9.100.v20180321-0831">
+		<category name="ru.capralow.thirdparty.category.optional"/>
+	</feature>
+	<feature url="features/org.eclipse.jdt.junit.runtime_3.4.651.v20171130-0906.jar" id="org.eclipse.jdt.junit.runtime" version="3.4.651.v20171130-0906">
+		<category name="ru.capralow.thirdparty.category.optional"/>
+	</feature>
+	<feature url="features/org.eclipse.jdt.launching_3.9.100.v20180323-1351.jar" id="org.eclipse.jdt.launching" version="3.9.100.v20180323-1351">
+		<category name="ru.capralow.thirdparty.category.optional"/>
+	</feature>
+	<feature url="features/org.eclipse.jdt.ui_3.13.100.v20180330-0726.jar" id="org.eclipse.jdt.ui" version="3.13.100.v20180330-0726">
+		<category name="ru.capralow.thirdparty.category.optional"/>
+	</feature>
+	
+	<category-def name="ru.capralow.dt.plugin.category.public" label="Плагины для EDT"/>
+	<category-def name="ru.capralow.thirdparty.category.optional" label="Сторонние компоненты, необходимые для работы плагинов"/>
+	
+	<repository-reference location="http://download.eclipse.org/releases/2019-03/" enabled="true" />
 </site>

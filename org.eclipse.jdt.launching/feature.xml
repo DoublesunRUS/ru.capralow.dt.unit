@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.eclipse.jdt.launching"
+      label="%pluginName"
+      version="3.9.100.v20180323-1351"
+      provider-name="%providerName">
+
+   <description>
+      %pluginName
+   </description>
+
+   <copyright>
+      %providerName
+   </copyright>
+
+   <plugin
+         id="org.eclipse.jdt.launching"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>
