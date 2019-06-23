@@ -29,6 +29,14 @@
 				<configuration>
 					<excludes>
 						<feature id="ru.capralow.thirdparty.jdt"/>
+						<plugin id="org.eclipse.jdt.core.manipulation"/>
+						<plugin id="org.eclipse.jdt.debug"/>
+						<plugin id="org.eclipse.jdt.debug.ui"/>
+						<plugin id="org.eclipse.jdt.junit"/>
+						<plugin id="org.eclipse.jdt.junit.core"/>
+						<plugin id="org.eclipse.jdt.junit.runtime"/>
+						<plugin id="org.eclipse.jdt.launching"/>
+						<plugin id="org.eclipse.jdt.ui"/>
 					</excludes>
 				</configuration>
 			</plugin>
