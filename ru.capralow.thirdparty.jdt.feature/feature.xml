@@ -6,7 +6,7 @@
       provider-name="%providerName">
 
    <description>
-      Eclipse Java Development Tools
+      Java Development Tools JUnit support
    </description>
 
    <copyright>
