@@ -2,11 +2,11 @@
 <feature
       id="ru.capralow.thirdparty.jdt"
       label="%featureName"
-      version="0.2.0.qualifier"
+      version="3.17.0.qualifier"
       provider-name="%providerName">
 
    <description>
-      Java Development Tools JUnit support
+      Eclipse Java Development Tools
    </description>
 
    <copyright>

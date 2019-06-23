@@ -208,32 +208,6 @@
 			</plugin>
 			
 			<plugin>
-				<groupId>org.eclipse.tycho.extras</groupId>
-				<artifactId>tycho-source-feature-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>source-feature</id>
-						<phase>package</phase>
-						<goals>
-							<goal>source-feature</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<excludes>
-						<plugin id="org.eclipse.jdt.core.manipulation"/>
-						<plugin id="org.eclipse.jdt.debug"/>
-						<plugin id="org.eclipse.jdt.debug.ui"/>
-						<plugin id="org.eclipse.jdt.junit"/>
-						<plugin id="org.eclipse.jdt.junit.core"/>
-						<plugin id="org.eclipse.jdt.junit.runtime"/>
-						<plugin id="org.eclipse.jdt.launching"/>
-						<plugin id="org.eclipse.jdt.ui"/>
-					</excludes>
-				</configuration>
-			</plugin>
-			
-			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-source-plugin</artifactId>
 				<version>${tycho.version}</version>
