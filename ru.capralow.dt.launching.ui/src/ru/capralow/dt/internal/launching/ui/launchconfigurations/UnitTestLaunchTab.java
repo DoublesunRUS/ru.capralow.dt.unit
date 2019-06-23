@@ -39,7 +39,8 @@ import com.google.inject.Inject;
 
 import ru.capralow.dt.unit.launcher.plugin.core.UnitTestLaunchConfigurationAttributes;
 import ru.capralow.dt.unit.launcher.plugin.core.frameworks.FrameworkUtils;
-import ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.TestFramework;
+import ru.capralow.dt.unit.launcher.plugin.core.frameworks.gson.FrameworkSettings;
+import ru.capralow.dt.unit.launcher.plugin.core.model.tf.TestFramework;
 
 public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 		implements SelectionListener, ISelectionChangedListener {
@@ -183,8 +184,8 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 		} else {
 			String paramsFilePathName = FrameworkUtils.getConfigurationFilesPath(configuration);
 
-			String startupOption = "StartFeaturePlayer;VBParams=$StartupOptionsPath$"; //$NON-NLS-1$
-			startupOption = startupOption.replace("$StartupOptionsPath$", paramsFilePathName + "params.json"); //$NON-NLS-1$ //$NON-NLS-2$
+			FrameworkSettings frameworkSettings = FrameworkUtils.getFrameworkSettings(framework);
+			String startupOption = FrameworkUtils.getFrameworkStartupOptions(frameworkSettings, paramsFilePathName);
 
 			configuration.setAttribute(UnitTestLaunchConfigurationAttributes.FRAMEWORK, framework.getName());
 			configuration.setAttribute(ILaunchConfigurationAttributes.STARTUP_OPTION, startupOption);

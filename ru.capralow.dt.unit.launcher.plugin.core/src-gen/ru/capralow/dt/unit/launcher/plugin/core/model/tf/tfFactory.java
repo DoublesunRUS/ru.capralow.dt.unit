@@ -1,6 +1,6 @@
 /**
  */
-package ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model;
+package ru.capralow.dt.unit.launcher.plugin.core.model.tf;
 
 import org.eclipse.emf.ecore.EFactory;
 
@@ -9,17 +9,17 @@ import org.eclipse.emf.ecore.EFactory;
  * The <b>Factory</b> for the model.
  * It provides a create method for each non-abstract class of the model.
  * <!-- end-user-doc -->
- * @see ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.ulPackage
+ * @see ru.capralow.dt.unit.launcher.plugin.core.model.tf.tfPackage
  * @generated
  */
-public interface ulFactory extends EFactory {
+public interface tfFactory extends EFactory {
 	/**
 	 * The singleton instance of the factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	ulFactory eINSTANCE = ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.impl.ulFactoryImpl.init();
+	tfFactory eINSTANCE = ru.capralow.dt.unit.launcher.plugin.core.model.tf.impl.tfFactoryImpl.init();
 
 	/**
 	 * Returns a new object of class '<em>Test Framework</em>'.
@@ -37,6 +37,6 @@ public interface ulFactory extends EFactory {
 	 * @return the package supported by this factory.
 	 * @generated
 	 */
-	ulPackage getulPackage();
+	tfPackage gettfPackage();
 
-} //ulFactory
+} //tfFactory

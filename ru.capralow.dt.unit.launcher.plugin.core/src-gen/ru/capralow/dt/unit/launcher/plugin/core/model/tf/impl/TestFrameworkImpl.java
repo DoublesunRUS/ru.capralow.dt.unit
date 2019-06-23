@@ -1,6 +1,6 @@
 /**
  */
-package ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.impl;
+package ru.capralow.dt.unit.launcher.plugin.core.model.tf.impl;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -13,8 +13,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.TestFramework;
-import ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.ulPackage;
+import ru.capralow.dt.unit.launcher.plugin.core.model.tf.TestFramework;
+import ru.capralow.dt.unit.launcher.plugin.core.model.tf.tfPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,10 +24,10 @@ import ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.ulPac
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.impl.TestFrameworkImpl#getName <em>Name</em>}</li>
- *   <li>{@link ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.impl.TestFrameworkImpl#getVersion <em>Version</em>}</li>
- *   <li>{@link ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.impl.TestFrameworkImpl#getResourcePath <em>Resource Path</em>}</li>
- *   <li>{@link ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.impl.TestFrameworkImpl#getEpfName <em>Epf Name</em>}</li>
+ *   <li>{@link ru.capralow.dt.unit.launcher.plugin.core.model.tf.impl.TestFrameworkImpl#getName <em>Name</em>}</li>
+ *   <li>{@link ru.capralow.dt.unit.launcher.plugin.core.model.tf.impl.TestFrameworkImpl#getVersion <em>Version</em>}</li>
+ *   <li>{@link ru.capralow.dt.unit.launcher.plugin.core.model.tf.impl.TestFrameworkImpl#getResourcePath <em>Resource Path</em>}</li>
+ *   <li>{@link ru.capralow.dt.unit.launcher.plugin.core.model.tf.impl.TestFrameworkImpl#getEpfName <em>Epf Name</em>}</li>
  * </ul>
  *
  * @generated
@@ -129,7 +129,7 @@ public class TestFrameworkImpl extends MinimalEObjectImpl.Container implements T
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ulPackage.Literals.TEST_FRAMEWORK;
+		return tfPackage.Literals.TEST_FRAMEWORK;
 	}
 
 	/**
@@ -152,7 +152,7 @@ public class TestFrameworkImpl extends MinimalEObjectImpl.Container implements T
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ulPackage.TEST_FRAMEWORK__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, tfPackage.TEST_FRAMEWORK__NAME, oldName, name));
 	}
 
 	/**
@@ -175,7 +175,7 @@ public class TestFrameworkImpl extends MinimalEObjectImpl.Container implements T
 		String oldVersion = version;
 		version = newVersion;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ulPackage.TEST_FRAMEWORK__VERSION, oldVersion, version));
+			eNotify(new ENotificationImpl(this, Notification.SET, tfPackage.TEST_FRAMEWORK__VERSION, oldVersion, version));
 	}
 
 	/**
@@ -198,7 +198,7 @@ public class TestFrameworkImpl extends MinimalEObjectImpl.Container implements T
 		String oldResourcePath = resourcePath;
 		resourcePath = newResourcePath;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ulPackage.TEST_FRAMEWORK__RESOURCE_PATH, oldResourcePath, resourcePath));
+			eNotify(new ENotificationImpl(this, Notification.SET, tfPackage.TEST_FRAMEWORK__RESOURCE_PATH, oldResourcePath, resourcePath));
 	}
 
 	/**
@@ -221,7 +221,7 @@ public class TestFrameworkImpl extends MinimalEObjectImpl.Container implements T
 		String oldEpfName = epfName;
 		epfName = newEpfName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ulPackage.TEST_FRAMEWORK__EPF_NAME, oldEpfName, epfName));
+			eNotify(new ENotificationImpl(this, Notification.SET, tfPackage.TEST_FRAMEWORK__EPF_NAME, oldEpfName, epfName));
 	}
 
 	/**
@@ -245,13 +245,13 @@ public class TestFrameworkImpl extends MinimalEObjectImpl.Container implements T
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ulPackage.TEST_FRAMEWORK__NAME:
+			case tfPackage.TEST_FRAMEWORK__NAME:
 				return getName();
-			case ulPackage.TEST_FRAMEWORK__VERSION:
+			case tfPackage.TEST_FRAMEWORK__VERSION:
 				return getVersion();
-			case ulPackage.TEST_FRAMEWORK__RESOURCE_PATH:
+			case tfPackage.TEST_FRAMEWORK__RESOURCE_PATH:
 				return getResourcePath();
-			case ulPackage.TEST_FRAMEWORK__EPF_NAME:
+			case tfPackage.TEST_FRAMEWORK__EPF_NAME:
 				return getEpfName();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -265,16 +265,16 @@ public class TestFrameworkImpl extends MinimalEObjectImpl.Container implements T
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ulPackage.TEST_FRAMEWORK__NAME:
+			case tfPackage.TEST_FRAMEWORK__NAME:
 				setName((String)newValue);
 				return;
-			case ulPackage.TEST_FRAMEWORK__VERSION:
+			case tfPackage.TEST_FRAMEWORK__VERSION:
 				setVersion((String)newValue);
 				return;
-			case ulPackage.TEST_FRAMEWORK__RESOURCE_PATH:
+			case tfPackage.TEST_FRAMEWORK__RESOURCE_PATH:
 				setResourcePath((String)newValue);
 				return;
-			case ulPackage.TEST_FRAMEWORK__EPF_NAME:
+			case tfPackage.TEST_FRAMEWORK__EPF_NAME:
 				setEpfName((String)newValue);
 				return;
 		}
@@ -289,16 +289,16 @@ public class TestFrameworkImpl extends MinimalEObjectImpl.Container implements T
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ulPackage.TEST_FRAMEWORK__NAME:
+			case tfPackage.TEST_FRAMEWORK__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case ulPackage.TEST_FRAMEWORK__VERSION:
+			case tfPackage.TEST_FRAMEWORK__VERSION:
 				setVersion(VERSION_EDEFAULT);
 				return;
-			case ulPackage.TEST_FRAMEWORK__RESOURCE_PATH:
+			case tfPackage.TEST_FRAMEWORK__RESOURCE_PATH:
 				setResourcePath(RESOURCE_PATH_EDEFAULT);
 				return;
-			case ulPackage.TEST_FRAMEWORK__EPF_NAME:
+			case tfPackage.TEST_FRAMEWORK__EPF_NAME:
 				setEpfName(EPF_NAME_EDEFAULT);
 				return;
 		}
@@ -313,13 +313,13 @@ public class TestFrameworkImpl extends MinimalEObjectImpl.Container implements T
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ulPackage.TEST_FRAMEWORK__NAME:
+			case tfPackage.TEST_FRAMEWORK__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case ulPackage.TEST_FRAMEWORK__VERSION:
+			case tfPackage.TEST_FRAMEWORK__VERSION:
 				return VERSION_EDEFAULT == null ? version != null : !VERSION_EDEFAULT.equals(version);
-			case ulPackage.TEST_FRAMEWORK__RESOURCE_PATH:
+			case tfPackage.TEST_FRAMEWORK__RESOURCE_PATH:
 				return RESOURCE_PATH_EDEFAULT == null ? resourcePath != null : !RESOURCE_PATH_EDEFAULT.equals(resourcePath);
-			case ulPackage.TEST_FRAMEWORK__EPF_NAME:
+			case tfPackage.TEST_FRAMEWORK__EPF_NAME:
 				return EPF_NAME_EDEFAULT == null ? epfName != null : !EPF_NAME_EDEFAULT.equals(epfName);
 		}
 		return super.eIsSet(featureID);
@@ -333,7 +333,7 @@ public class TestFrameworkImpl extends MinimalEObjectImpl.Container implements T
 	@Override
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case ulPackage.TEST_FRAMEWORK___TO_STRING:
+			case tfPackage.TEST_FRAMEWORK___TO_STRING:
 				return toString();
 		}
 		return super.eInvoke(operationID, arguments);

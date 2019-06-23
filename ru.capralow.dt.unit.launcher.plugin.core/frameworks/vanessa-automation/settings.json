@@ -1,20 +1,3 @@
 {
-	"ПараметрыЗапуска": "StartFeaturePlayer;VBParams=$StartupOptionsPath$",
-	"ВыполнятьВсеСерверныеВызовыРаньшеКлиентских": "true",
-	"Фичи": [
-		{
-			"lang": "ru",
-			"server-script": "И я выполняю код встроенного языка на сервере",
-			"server-param": "Объект()",
-			"client-script": "И я выполняю код встроенного языка",
-			"client-param": "Ванесса"
-		},
-		{
-			"lang": "en",
-			"server-script": "И я выполняю код встроенного языка на сервере",
-			"server-param": "Объект()",
-			"client-script": "И я выполняю код встроенного языка",
-			"client-param": "Ванесса"
-		}
-	]
+	"startupOptions": "StartFeaturePlayer;VBParams=$ParamsFilePathName$"
 }

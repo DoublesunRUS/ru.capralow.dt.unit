@@ -84,7 +84,7 @@ import com.google.inject.Inject;
 
 import ru.capralow.dt.unit.launcher.plugin.core.UnitTestLaunchConfigurationAttributes;
 import ru.capralow.dt.unit.launcher.plugin.core.frameworks.FrameworkUtils;
-import ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.TestFramework;
+import ru.capralow.dt.unit.launcher.plugin.core.model.tf.TestFramework;
 
 public class RuntimeUnitLauncherLaunchDelegate extends RuntimeClientLaunchDelegate {
 
@@ -406,6 +406,8 @@ public class RuntimeUnitLauncherLaunchDelegate extends RuntimeClientLaunchDelega
 	private String getFeaturesPath(ILaunchConfiguration configuration, IV8ProjectManager projectManager) {
 		String featuresPath = ""; //$NON-NLS-1$
 		try {
+			Boolean runExtensionTests = configuration
+					.getAttribute(UnitTestLaunchConfigurationAttributes.RUN_EXTENSION_TESTS, false);
 			Boolean runModuleTests = configuration.getAttribute(UnitTestLaunchConfigurationAttributes.RUN_MODULE_TESTS,
 					false);
 			Boolean runTagTests = configuration.getAttribute(UnitTestLaunchConfigurationAttributes.RUN_TAG_TESTS,
@@ -415,8 +417,10 @@ public class RuntimeUnitLauncherLaunchDelegate extends RuntimeClientLaunchDelega
 			String tag = FrameworkUtils.getConfigurationTag(configuration, projectManager);
 
 			featuresPath = project.getLocation() + "/features/"; //$NON-NLS-1$
-			if (runModuleTests)
-				featuresPath += commonModule.getName() + ".feature"; //$NON-NLS-1$
+			if (runExtensionTests)
+				featuresPath += "all/"; //$NON-NLS-1$
+			else if (runModuleTests)
+				featuresPath += "all/" + commonModule.getName() + ".feature"; //$NON-NLS-1$
 			else if (runTagTests)
 				featuresPath += tag + "/"; //$NON-NLS-1$
 
@@ -610,15 +614,17 @@ public class RuntimeUnitLauncherLaunchDelegate extends RuntimeClientLaunchDelega
 
 		Bundle bundle = FrameworkUtils.getFrameworkBundle();
 		try {
-			URL frameworkParamsBundleURL = FileLocator
-					.find(bundle, new Path(framework.getResourcePath() + framework.getEpfName()), null);
+			URL frameworkParamsBundleURL = FileLocator.find(bundle,
+					new Path(FrameworkUtils.FRAMEWORKS_COMMON_PATH + framework.getResourcePath()
+							+ framework.getEpfName()),
+					null);
 			URL frameworkParamsURL = FileLocator.toFileURL(frameworkParamsBundleURL);
 
 			if (frameworkParamsURL == null) {
 				String msg = MessageFormat.format(
 						Messages.RuntimeUnitLauncherLaunchDelegate_Failed_to_get_framework_from_bundle_0_1,
 						bundle.getSymbolicName(),
-						framework.getResourcePath() + framework.getEpfName());
+						FrameworkUtils.FRAMEWORKS_COMMON_PATH + framework.getResourcePath() + framework.getEpfName());
 				LaunchingPlugin.log(LaunchingPlugin.createErrorStatus(msg, new IOException()));
 				return;
 			}
@@ -636,7 +642,8 @@ public class RuntimeUnitLauncherLaunchDelegate extends RuntimeClientLaunchDelega
 
 		} catch (IOException | URISyntaxException e) {
 			String msg = MessageFormat.format(Messages.RuntimeUnitLauncherLaunchDelegate_Failed_to_save_framework_0,
-					framework.getResourcePath() + FrameworkUtils.FRAMEWORK_FILE_NAME);
+					FrameworkUtils.FRAMEWORKS_COMMON_PATH + framework.getResourcePath()
+							+ FrameworkUtils.FRAMEWORK_FILE_NAME);
 			LaunchingPlugin.log(LaunchingPlugin.createErrorStatus(msg, e));
 
 		}
@@ -649,15 +656,18 @@ public class RuntimeUnitLauncherLaunchDelegate extends RuntimeClientLaunchDelega
 
 		Bundle bundle = FrameworkUtils.getFrameworkBundle();
 		try {
-			URL frameworkParamsBundleURL = FileLocator
-					.find(bundle, new Path(framework.getResourcePath() + FrameworkUtils.PARAMS_FILE_NAME), null);
+			URL frameworkParamsBundleURL = FileLocator.find(bundle,
+					new Path(FrameworkUtils.FRAMEWORKS_COMMON_PATH + framework.getResourcePath()
+							+ FrameworkUtils.PARAMS_FILE_NAME),
+					null);
 			URL frameworkParamsURL = FileLocator.toFileURL(frameworkParamsBundleURL);
 
 			if (frameworkParamsURL == null) {
 				String msg = MessageFormat.format(
 						Messages.RuntimeUnitLauncherLaunchDelegate_Failed_to_get_framework_params_from_bundle_0_1,
 						bundle.getSymbolicName(),
-						framework.getResourcePath() + FrameworkUtils.PARAMS_FILE_NAME);
+						FrameworkUtils.FRAMEWORKS_COMMON_PATH + framework.getResourcePath()
+								+ FrameworkUtils.PARAMS_FILE_NAME);
 				LaunchingPlugin.log(LaunchingPlugin.createErrorStatus(msg, new IOException()));
 				return;
 			}
@@ -676,7 +686,8 @@ public class RuntimeUnitLauncherLaunchDelegate extends RuntimeClientLaunchDelega
 		} catch (IOException | URISyntaxException e) {
 			String msg = MessageFormat.format(
 					Messages.RuntimeUnitLauncherLaunchDelegate_Failed_to_save_framework_params_0,
-					framework.getResourcePath() + FrameworkUtils.PARAMS_FILE_NAME);
+					FrameworkUtils.FRAMEWORKS_COMMON_PATH + framework.getResourcePath()
+							+ FrameworkUtils.PARAMS_FILE_NAME);
 			LaunchingPlugin.log(LaunchingPlugin.createErrorStatus(msg, e));
 
 		}

@@ -17,7 +17,8 @@ import com.google.common.base.Strings;
 
 import ru.capralow.dt.unit.launcher.plugin.core.UnitTestLaunchConfigurationAttributes;
 import ru.capralow.dt.unit.launcher.plugin.core.frameworks.FrameworkUtils;
-import ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.TestFramework;
+import ru.capralow.dt.unit.launcher.plugin.core.frameworks.gson.FrameworkSettings;
+import ru.capralow.dt.unit.launcher.plugin.core.model.tf.TestFramework;
 
 public class UnitTestLaunchShortcut extends AbstractRuntimeClientLaunchShortcut {
 
@@ -31,15 +32,14 @@ public class UnitTestLaunchShortcut extends AbstractRuntimeClientLaunchShortcut 
 		if (frameworks == null)
 			throw new NullPointerException(Messages.UnitTestLaunchShortcut_No_frameworks_exception);
 
-		String framework = ((TestFramework) frameworks.toArray()[0]).getName();
+		TestFramework framework = ((TestFramework) frameworks.toArray()[0]);
 
 		String paramsFilePathName = FrameworkUtils.getConfigurationFilesPath(configuration);
 
-		String startupOption = "StartFeaturePlayer;VBParams=$StartupOptionsPath$"; //$NON-NLS-1$
-		startupOption = startupOption.replace("$StartupOptionsPath$", //$NON-NLS-1$
-				paramsFilePathName + FrameworkUtils.PARAMS_FILE_NAME);
+		FrameworkSettings frameworkSettings = FrameworkUtils.getFrameworkSettings(framework);
+		String startupOption = FrameworkUtils.getFrameworkStartupOptions(frameworkSettings, paramsFilePathName);
 
-		configuration.setAttribute(UnitTestLaunchConfigurationAttributes.FRAMEWORK, framework);
+		configuration.setAttribute(UnitTestLaunchConfigurationAttributes.FRAMEWORK, framework.getName());
 		configuration.setAttribute(ILaunchConfigurationAttributes.STARTUP_OPTION, startupOption);
 		configuration.setAttribute(UnitTestLaunchConfigurationAttributes.EXTERNAL_OBJECT_DUMP_PATH,
 				paramsFilePathName + FrameworkUtils.FRAMEWORK_FILE_NAME);
@@ -61,6 +61,7 @@ public class UnitTestLaunchShortcut extends AbstractRuntimeClientLaunchShortcut 
 		return workingCopy;
 	}
 
+	@Override
 	protected String getLaunchConfigurationSelectionTitle() {
 		return Messages.UnitTestLaunchShortcut_Title;
 	}

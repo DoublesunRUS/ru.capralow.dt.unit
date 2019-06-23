@@ -1,0 +1,54 @@
+{
+	"feature-format": [
+		{
+			"lang": "ru",
+			"desc": [
+				"# language: ru",
+				"",
+				"@tree",
+				"@classname=ModuleExceptionPath",
+				"",
+				"Функционал: $ModuleSynonym$",
+				"	Как Разработчик",
+				"	Я Хочу чтобы возвращаемое значение метода совпадало с эталонным",
+				"	Чтобы я мог гарантировать работоспособность метода"
+			],
+			"server-script": [
+				"&OnServer",
+				"Сценарий: $ModuleName$ (сервер): $MethodName$",
+				"	И я выполняю код встроенного языка на сервере",
+				"	| '$ModuleName$.$MethodName$(Объект());' |"
+			],
+			"client-script": [
+				"Сценарий: $ModuleName$ (клиент): $MethodName$",
+				"	И я выполняю код встроенного языка",
+				"	| '$ModuleName$.$MethodName$(Ванесса);' |"
+			]
+		},
+		{
+			"lang": "en",
+			"desc": [
+				"# language: en",
+				"",
+				"@tree",
+				"@classname=ModuleExceptionPath",
+				"",
+				"Feature: $ModuleSynonym$",
+				"	As Developer",
+				"	I want the returns value to be equal to expected value",
+				"	That I can guarantee the execution of the method"
+			],
+			"server-script": [
+				"&OnServer",
+				"Scenario: $ModuleName$ (server): $MethodName$",
+				"	And I execute the script at server",
+				"	| '$ModuleName$.$MethodName$(Object());' |"
+			],
+			"client-script": [
+				"Scenario: $ModuleName$ (client): $MethodName$",
+				"	And I execute the script",
+				"	| '$ModuleName$.$MethodName$(Vanessa);' |"
+			]
+		}
+	]
+}

@@ -1,6 +1,6 @@
 /**
  */
-package ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.impl;
+package ru.capralow.dt.unit.launcher.plugin.core.model.tf.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.*;
+import ru.capralow.dt.unit.launcher.plugin.core.model.tf.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -18,24 +18,24 @@ import ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.*;
  * <!-- end-user-doc -->
  * @generated
  */
-public class ulFactoryImpl extends EFactoryImpl implements ulFactory {
+public class tfFactoryImpl extends EFactoryImpl implements tfFactory {
 	/**
 	 * Creates the default factory implementation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static ulFactory init() {
+	public static tfFactory init() {
 		try {
-			ulFactory theulFactory = (ulFactory)EPackage.Registry.INSTANCE.getEFactory(ulPackage.eNS_URI);
-			if (theulFactory != null) {
-				return theulFactory;
+			tfFactory thetfFactory = (tfFactory)EPackage.Registry.INSTANCE.getEFactory(tfPackage.eNS_URI);
+			if (thetfFactory != null) {
+				return thetfFactory;
 			}
 		}
 		catch (Exception exception) {
 			EcorePlugin.INSTANCE.log(exception);
 		}
-		return new ulFactoryImpl();
+		return new tfFactoryImpl();
 	}
 
 	/**
@@ -44,7 +44,7 @@ public class ulFactoryImpl extends EFactoryImpl implements ulFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ulFactoryImpl() {
+	public tfFactoryImpl() {
 		super();
 	}
 
@@ -56,7 +56,7 @@ public class ulFactoryImpl extends EFactoryImpl implements ulFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case ulPackage.TEST_FRAMEWORK: return createTestFramework();
+			case tfPackage.TEST_FRAMEWORK: return createTestFramework();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
@@ -79,8 +79,8 @@ public class ulFactoryImpl extends EFactoryImpl implements ulFactory {
 	 * @generated
 	 */
 	@Override
-	public ulPackage getulPackage() {
-		return (ulPackage)getEPackage();
+	public tfPackage gettfPackage() {
+		return (tfPackage)getEPackage();
 	}
 
 	/**
@@ -90,8 +90,8 @@ public class ulFactoryImpl extends EFactoryImpl implements ulFactory {
 	 * @generated
 	 */
 	@Deprecated
-	public static ulPackage getPackage() {
-		return ulPackage.eINSTANCE;
+	public static tfPackage getPackage() {
+		return tfPackage.eINSTANCE;
 	}
 
-} //ulFactoryImpl
+} //tfFactoryImpl

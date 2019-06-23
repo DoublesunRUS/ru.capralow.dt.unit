@@ -6,8 +6,8 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated frameworks -->
       <package
-            uri="http://ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model"
-            class="ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.ulPackage"
+            uri="http://ru.capralow.dt.unit.launcher.plugin.core.model"
+            class="ru.capralow.dt.unit.launcher.plugin.core.model.tf.tfPackage"
             genModel="model/frameworks.xcore"/>
    </extension>
 

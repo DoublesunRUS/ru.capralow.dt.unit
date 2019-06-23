@@ -27,15 +27,20 @@ import com._1c.g5.v8.dt.metadata.mdclass.CommonModule;
 import com.google.common.io.CharSource;
 import com.google.common.io.CharStreams;
 import com.google.common.io.Resources;
+import com.google.gson.Gson;
 
 import ru.capralow.dt.unit.launcher.plugin.core.UnitTestLaunchConfigurationAttributes;
-import ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.TestFramework;
-import ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.ulFactory;
+import ru.capralow.dt.unit.launcher.plugin.core.frameworks.gson.FeatureFormat;
+import ru.capralow.dt.unit.launcher.plugin.core.frameworks.gson.FeatureSettings;
+import ru.capralow.dt.unit.launcher.plugin.core.frameworks.gson.FrameworkSettings;
+import ru.capralow.dt.unit.launcher.plugin.core.model.tf.TestFramework;
+import ru.capralow.dt.unit.launcher.plugin.core.model.tf.tfFactory;
 import ru.capralow.dt.unit.launcher.plugin.internal.core.UnitLauncherCorePlugin;
 
 public class FrameworkUtils {
 	private static final String FRAMEWORK_PLUGIN = "ru.capralow.dt.unit.launcher.plugin.core"; //$NON-NLS-1$
 
+	public static final String FRAMEWORKS_COMMON_PATH = "/frameworks/"; //$NON-NLS-1$
 	public static final String PARAMS_FILE_NAME = "params.json"; //$NON-NLS-1$
 	public static final String FRAMEWORK_FILE_NAME = "framework.epf"; //$NON-NLS-1$
 
@@ -177,6 +182,50 @@ public class FrameworkUtils {
 				.collect(Collectors.toList());
 	}
 
+	public static List<String> getFeatureClientScript(FeatureSettings featureSettings, String lang, String moduleName,
+			String methodName) {
+		FeatureFormat frameworkFeature = featureSettings.getFeature(lang);
+
+		List<String> elements = new ArrayList<>();
+		for (String element : frameworkFeature.getClientScript())
+			elements.add(element.replace("$ModuleName$", moduleName).replace("$MethodName$", methodName)); //$NON-NLS-1$ //$NON-NLS-2$
+
+		return elements;
+	}
+
+	public static List<String> getFeatureDescription(FeatureSettings featureSettings, String lang,
+			String moduleSynonym) {
+		FeatureFormat frameworkFeature = featureSettings.getFeature(lang);
+
+		List<String> elements = new ArrayList<>();
+		for (String element : frameworkFeature.getDescription())
+			elements.add(element.replace("$ModuleSynonym$", moduleSynonym)); //$NON-NLS-1$
+
+		return elements;
+	}
+
+	public static List<String> getFeatureServerScript(FeatureSettings featureSettings, String lang, String moduleName,
+			String methodName) {
+		FeatureFormat frameworkFeature = featureSettings.getFeature(lang);
+
+		List<String> elements = new ArrayList<>();
+		for (String element : frameworkFeature.getServerScript())
+			elements.add(element.replace("$ModuleName$", moduleName).replace("$MethodName$", methodName)); //$NON-NLS-1$ //$NON-NLS-2$
+
+		return elements;
+	}
+
+	public static FeatureSettings getFeatureSettings() {
+		String jsonContent = readContents(getFileInputSupplier("feature.json")); //$NON-NLS-1$
+
+		FeatureSettings featureSettings = new Gson().fromJson(jsonContent, FeatureSettings.class);
+
+		for (FeatureFormat feature : featureSettings.getFeatureFormat())
+			featureSettings.setFeature(feature.getLang(), feature);
+
+		return featureSettings;
+	}
+
 	public static Bundle getFrameworkBundle() {
 		return Platform.getBundle(FRAMEWORK_PLUGIN);
 	}
@@ -189,16 +238,27 @@ public class FrameworkUtils {
 		for (String frameworkString : frameworksContents.split(System.lineSeparator())) {
 			String[] frameworkList = frameworkString.split("[,]"); //$NON-NLS-1$
 
-			TestFramework framework = ulFactory.eINSTANCE.createTestFramework();
+			TestFramework framework = tfFactory.eINSTANCE.createTestFramework();
 			framework.setName(frameworkList[0]);
 			framework.setVersion(frameworkList[1]);
-			framework.setResourcePath("frameworks" + File.separator + frameworkList[2] + File.separator); //$NON-NLS-1$
+			framework.setResourcePath(frameworkList[2] + File.separator); // $NON-NLS-1$
 			framework.setEpfName(frameworkList[3]);
 
 			newFrameworks.add(framework);
 		}
 
 		return newFrameworks.stream().collect(Collectors.toList());
+	}
+
+	public static FrameworkSettings getFrameworkSettings(TestFramework framework) {
+		String jsonContent = readContents(getFileInputSupplier(framework.getResourcePath() + "settings.json")); //$NON-NLS-1$
+
+		return new Gson().fromJson(jsonContent, FrameworkSettings.class);
+	}
+
+	public static String getFrameworkStartupOptions(FrameworkSettings frameworkSettings, String paramsFilePathName) {
+		String startupOptions = frameworkSettings.getStartupOptions();
+		return startupOptions.replace("$ParamsFilePathName$", paramsFilePathName + PARAMS_FILE_NAME); //$NON-NLS-1$
 	}
 
 	public static List<CommonModule> getModulesForProject(IProject project, IV8ProjectManager projectManager) {
@@ -241,7 +301,7 @@ public class FrameworkUtils {
 
 	private static CharSource getFileInputSupplier(String partName) {
 		return Resources.asCharSource(
-				UnitTestLaunchConfigurationAttributes.class.getResource("/frameworks/" + partName), //$NON-NLS-1$
+				UnitTestLaunchConfigurationAttributes.class.getResource(FRAMEWORKS_COMMON_PATH + partName),
 				StandardCharsets.UTF_8);
 	}
 

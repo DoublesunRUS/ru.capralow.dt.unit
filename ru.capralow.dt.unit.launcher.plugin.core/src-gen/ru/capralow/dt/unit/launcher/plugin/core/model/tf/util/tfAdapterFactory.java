@@ -1,6 +1,6 @@
 /**
  */
-package ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.util;
+package ru.capralow.dt.unit.launcher.plugin.core.model.tf.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
@@ -9,24 +9,24 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
 
-import ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.*;
+import ru.capralow.dt.unit.launcher.plugin.core.model.tf.*;
 
 /**
  * <!-- begin-user-doc -->
  * The <b>Adapter Factory</b> for the model.
  * It provides an adapter <code>createXXX</code> method for each class of the model.
  * <!-- end-user-doc -->
- * @see ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.ulPackage
+ * @see ru.capralow.dt.unit.launcher.plugin.core.model.tf.tfPackage
  * @generated
  */
-public class ulAdapterFactory extends AdapterFactoryImpl {
+public class tfAdapterFactory extends AdapterFactoryImpl {
 	/**
 	 * The cached model package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected static ulPackage modelPackage;
+	protected static tfPackage modelPackage;
 
 	/**
 	 * Creates an instance of the adapter factory.
@@ -34,9 +34,9 @@ public class ulAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ulAdapterFactory() {
+	public tfAdapterFactory() {
 		if (modelPackage == null) {
-			modelPackage = ulPackage.eINSTANCE;
+			modelPackage = tfPackage.eINSTANCE;
 		}
 	}
 
@@ -65,8 +65,8 @@ public class ulAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ulSwitch<Adapter> modelSwitch =
-		new ulSwitch<Adapter>() {
+	protected tfSwitch<Adapter> modelSwitch =
+		new tfSwitch<Adapter>() {
 			@Override
 			public Adapter caseTestFramework(TestFramework object) {
 				return createTestFrameworkAdapter();
@@ -92,13 +92,13 @@ public class ulAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.TestFramework <em>Test Framework</em>}'.
+	 * Creates a new adapter for an object of class '{@link ru.capralow.dt.unit.launcher.plugin.core.model.tf.TestFramework <em>Test Framework</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.TestFramework
+	 * @see ru.capralow.dt.unit.launcher.plugin.core.model.tf.TestFramework
 	 * @generated
 	 */
 	public Adapter createTestFrameworkAdapter() {
@@ -117,4 +117,4 @@ public class ulAdapterFactory extends AdapterFactoryImpl {
 		return null;
 	}
 
-} //ulAdapterFactory
+} //tfAdapterFactory

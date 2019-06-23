@@ -1,6 +1,6 @@
 /**
  */
-package ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.impl;
+package ru.capralow.dt.unit.launcher.plugin.core.model.tf.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -10,9 +10,9 @@ import org.eclipse.emf.ecore.EcorePackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.TestFramework;
-import ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.ulFactory;
-import ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.ulPackage;
+import ru.capralow.dt.unit.launcher.plugin.core.model.tf.TestFramework;
+import ru.capralow.dt.unit.launcher.plugin.core.model.tf.tfFactory;
+import ru.capralow.dt.unit.launcher.plugin.core.model.tf.tfPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -20,7 +20,7 @@ import ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.ulPac
  * <!-- end-user-doc -->
  * @generated
  */
-public class ulPackageImpl extends EPackageImpl implements ulPackage {
+public class tfPackageImpl extends EPackageImpl implements tfPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -39,12 +39,12 @@ public class ulPackageImpl extends EPackageImpl implements ulPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.ulPackage#eNS_URI
+	 * @see ru.capralow.dt.unit.launcher.plugin.core.model.tf.tfPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */
-	private ulPackageImpl() {
-		super(eNS_URI, ulFactory.eINSTANCE);
+	private tfPackageImpl() {
+		super(eNS_URI, tfFactory.eINSTANCE);
 	}
 
 	/**
@@ -57,7 +57,7 @@ public class ulPackageImpl extends EPackageImpl implements ulPackage {
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
 	 *
-	 * <p>This method is used to initialize {@link ulPackage#eINSTANCE} when that field is accessed.
+	 * <p>This method is used to initialize {@link tfPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -66,12 +66,12 @@ public class ulPackageImpl extends EPackageImpl implements ulPackage {
 	 * @see #initializePackageContents()
 	 * @generated
 	 */
-	public static ulPackage init() {
-		if (isInited) return (ulPackage)EPackage.Registry.INSTANCE.getEPackage(ulPackage.eNS_URI);
+	public static tfPackage init() {
+		if (isInited) return (tfPackage)EPackage.Registry.INSTANCE.getEPackage(tfPackage.eNS_URI);
 
 		// Obtain or create and register package
-		Object registeredulPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
-		ulPackageImpl theulPackage = registeredulPackage instanceof ulPackageImpl ? (ulPackageImpl)registeredulPackage : new ulPackageImpl();
+		Object registeredtfPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		tfPackageImpl thetfPackage = registeredtfPackage instanceof tfPackageImpl ? (tfPackageImpl)registeredtfPackage : new tfPackageImpl();
 
 		isInited = true;
 
@@ -79,17 +79,17 @@ public class ulPackageImpl extends EPackageImpl implements ulPackage {
 		EcorePackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
-		theulPackage.createPackageContents();
+		thetfPackage.createPackageContents();
 
 		// Initialize created meta-data
-		theulPackage.initializePackageContents();
+		thetfPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
-		theulPackage.freeze();
+		thetfPackage.freeze();
 
 		// Update the registry and return the package
-		EPackage.Registry.INSTANCE.put(ulPackage.eNS_URI, theulPackage);
-		return theulPackage;
+		EPackage.Registry.INSTANCE.put(tfPackage.eNS_URI, thetfPackage);
+		return thetfPackage;
 	}
 
 	/**
@@ -158,8 +158,8 @@ public class ulPackageImpl extends EPackageImpl implements ulPackage {
 	 * @generated
 	 */
 	@Override
-	public ulFactory getulFactory() {
-		return (ulFactory)getEFactoryInstance();
+	public tfFactory gettfFactory() {
+		return (tfFactory)getEFactoryInstance();
 	}
 
 	/**
@@ -234,4 +234,4 @@ public class ulPackageImpl extends EPackageImpl implements ulPackage {
 		createResource(eNS_URI);
 	}
 
-} //ulPackageImpl
+} //tfPackageImpl

@@ -1,13 +1,13 @@
 /**
  */
-package ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.util;
+package ru.capralow.dt.unit.launcher.plugin.core.model.tf.util;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.Switch;
 
-import ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.*;
+import ru.capralow.dt.unit.launcher.plugin.core.model.tf.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -19,17 +19,17 @@ import ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.*;
  * until a non-null result is returned,
  * which is the result of the switch.
  * <!-- end-user-doc -->
- * @see ru.capralow.dt.unit.launcher.plugin.core.launchconfigurations.model.ulPackage
+ * @see ru.capralow.dt.unit.launcher.plugin.core.model.tf.tfPackage
  * @generated
  */
-public class ulSwitch<T> extends Switch<T> {
+public class tfSwitch<T> extends Switch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected static ulPackage modelPackage;
+	protected static tfPackage modelPackage;
 
 	/**
 	 * Creates an instance of the switch.
@@ -37,9 +37,9 @@ public class ulSwitch<T> extends Switch<T> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ulSwitch() {
+	public tfSwitch() {
 		if (modelPackage == null) {
-			modelPackage = ulPackage.eINSTANCE;
+			modelPackage = tfPackage.eINSTANCE;
 		}
 	}
 
@@ -66,7 +66,7 @@ public class ulSwitch<T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case ulPackage.TEST_FRAMEWORK: {
+			case tfPackage.TEST_FRAMEWORK: {
 				TestFramework testFramework = (TestFramework)theEObject;
 				T result = caseTestFramework(testFramework);
 				if (result == null) result = defaultCase(theEObject);
@@ -107,4 +107,4 @@ public class ulSwitch<T> extends Switch<T> {
 		return null;
 	}
 
-} //ulSwitch
+} //tfSwitch

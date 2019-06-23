@@ -41,13 +41,44 @@ import com._1c.g5.v8.dt.core.platform.IV8ProjectManager;
 import com._1c.g5.v8.dt.mcore.util.Environment;
 import com._1c.g5.v8.dt.metadata.mdclass.CommonModule;
 import com._1c.g5.v8.dt.metadata.mdclass.Configuration;
+import com._1c.g5.v8.dt.metadata.mdclass.ScriptVariant;
 import com.google.inject.Inject;
 
+import ru.capralow.dt.unit.launcher.plugin.core.frameworks.FrameworkUtils;
+import ru.capralow.dt.unit.launcher.plugin.core.frameworks.gson.FeatureSettings;
 import ru.capralow.dt.unit.launcher.plugin.internal.ui.UnitLauncherUiPlugin;
 
 public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.builder.IXtextBuilderParticipant {
+	private static final String DEFAULT_FEATURE_FOLDER_NAME = "all"; //$NON-NLS-1$
+
 	public static String getFeaturesLocation(IPath projectLocation) {
 		return projectLocation + "/features/"; //$NON-NLS-1$
+	}
+
+	public static StringBuilder getFeatureText(FeatureSettings featureSettings, String lang, String moduleName,
+			String moduleSynonym, List<String> methodsNames, Boolean forServer, Boolean forClient) {
+		List<String> frameworkDescription = FrameworkUtils.getFeatureDescription(featureSettings, lang, moduleSynonym);
+
+		StringBuilder fileText = new StringBuilder();
+		fileText.append(String.join(System.lineSeparator(), frameworkDescription));
+		for (String methodName : methodsNames) {
+			if (forServer) {
+				fileText.append(System.lineSeparator());
+				fileText.append(System.lineSeparator());
+				fileText.append(String.join(System.lineSeparator(),
+						FrameworkUtils.getFeatureServerScript(featureSettings, lang, moduleName, methodName)));
+			}
+		}
+		for (String methodName : methodsNames) {
+			if (forClient) {
+				fileText.append(System.lineSeparator());
+				fileText.append(System.lineSeparator());
+				fileText.append(String.join(System.lineSeparator(),
+						FrameworkUtils.getFeatureClientScript(featureSettings, lang, moduleName, methodName)));
+			}
+		}
+
+		return fileText;
 	}
 
 	public static String getUnitTestKeyFromMethodText(String methodText) {
@@ -67,42 +98,8 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 		return null;
 	}
 
-	public static void saveFeatures(String keyName, List<String> methodsNames, IPath projectLocation, String moduleName,
-			String moduleSynonym, Boolean forServer, Boolean forClient) {
-		StringBuilder fileText = new StringBuilder();
-		fileText.append(String.join(System.lineSeparator(),
-				"# language: ru", //$NON-NLS-1$
-				"", //$NON-NLS-1$
-				"@tree", //$NON-NLS-1$
-				"@classname=ModuleExceptionPath", //$NON-NLS-1$
-				"", //$NON-NLS-1$
-				String.format("Функционал: %1$s", moduleSynonym), //$NON-NLS-1$
-				"	Как Разработчик", //$NON-NLS-1$
-				"	Я Хочу чтобы возвращаемое значение метода совпадало с эталонным", //$NON-NLS-1$
-				"	Чтобы я мог гарантировать работоспособность метода")); //$NON-NLS-1$
-		for (String methodName : methodsNames) {
-			if (forServer) {
-				fileText.append(System.lineSeparator());
-				fileText.append(System.lineSeparator());
-				fileText.append(String.join(System.lineSeparator(),
-						"&OnServer",
-						String.format("Сценарий: %1$s (сервер): %2$s", moduleName, methodName), //$NON-NLS-1$
-						"	И я выполняю код встроенного языка на сервере")); //$NON-NLS-1$
-				fileText.append(System.lineSeparator());
-				fileText.append(String.format("	| '%1$s.%2$s(Объект());' |", moduleName, methodName)); //$NON-NLS-1$
-			}
-		}
-		for (String methodName : methodsNames) {
-			if (forClient) {
-				fileText.append(System.lineSeparator());
-				fileText.append(System.lineSeparator());
-				fileText.append(String.join(System.lineSeparator(),
-						String.format("Сценарий: %1$s (клиент): %2$s", moduleName, methodName), //$NON-NLS-1$
-						"	И я выполняю код встроенного языка")); //$NON-NLS-1$
-				fileText.append(System.lineSeparator());
-				fileText.append(String.format("	| '%1$s.%2$s(Ванесса);' |", moduleName, methodName)); //$NON-NLS-1$
-			}
-		}
+	public static void saveFeatures(String keyName, IPath projectLocation, String moduleName,
+			StringBuilder featureTest) {
 
 		String featuresPathName = getFeaturesLocation(projectLocation);
 		if (!keyName.isEmpty())
@@ -119,7 +116,7 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 				BufferedWriter bufferedWriter = new BufferedWriter(outputStreamWriter);)
 
 		{
-			bufferedWriter.write(fileText.toString());
+			bufferedWriter.write(featureTest.toString());
 
 		} catch (IOException e) {
 			String msg = MessageFormat
@@ -184,18 +181,7 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 			if (module == null)
 				continue;
 
-			Map<String, List<String>> units = new HashMap<>();
-			for (Method method : module.allMethods()) {
-				String keyName = getUnitTestKeyFromMethodText(NodeModelUtils.findActualNodeFor(method).getText());
-				if (keyName == null)
-					continue;
-
-				List<String> methodsNames = units.get(keyName);
-				if (methodsNames == null)
-					methodsNames = new ArrayList<>();
-				methodsNames.add(method.getName());
-				units.put(keyName, methodsNames);
-			}
+			Map<String, List<String>> units = getUnits(module);
 
 			Boolean forServer = module.getEnvironments().contains(Environment.SERVER);
 			Boolean forClient = module.getEnvironments().contains(Environment.THIN_CLIENT);
@@ -203,16 +189,24 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 			CommonModule commonModule = (CommonModule) module.getOwner();
 
 			String moduleName = commonModule.getName();
-			String moduleSynonym = commonModule.getSynonym().get("ru"); //$NON-NLS-1$
+			String lang = configuration.getScriptVariant().equals(ScriptVariant.RUSSIAN) ? "ru" : "en"; //$NON-NLS-1$ //$NON-NLS-2$
+			String moduleSynonym = commonModule.getSynonym().get(lang);
+			if (moduleSynonym == null)
+				moduleSynonym = commonModule.getName();
+
+			FeatureSettings featureSettings = FrameworkUtils.getFeatureSettings();
+
 			deleteModuleFeatures(project.getLocation(), moduleName);
-			for (Entry<String, List<String>> entry : units.entrySet())
-				saveFeatures(entry.getKey(),
-						entry.getValue(),
-						project.getLocation(),
+			for (Entry<String, List<String>> entry : units.entrySet()) {
+				StringBuilder featureText = getFeatureText(featureSettings,
+						lang,
 						moduleName,
 						moduleSynonym,
+						entry.getValue(),
 						forServer,
 						forClient);
+				saveFeatures(entry.getKey(), project.getLocation(), moduleName, featureText);
+			}
 		}
 		deleteEmptyDirs(project.getLocation());
 
@@ -290,6 +284,32 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 		}
 
 		return configuration;
+	}
+
+	private Map<String, List<String>> getUnits(Module module) {
+		Map<String, List<String>> units = new HashMap<>();
+		for (Method method : module.allMethods()) {
+			String keyName = getUnitTestKeyFromMethodText(NodeModelUtils.findActualNodeFor(method).getText());
+			if (keyName == null)
+				continue;
+
+			List<String> methodsNames = units.get(DEFAULT_FEATURE_FOLDER_NAME);
+			if (methodsNames == null)
+				methodsNames = new ArrayList<>();
+			methodsNames.add(method.getName());
+			units.put(DEFAULT_FEATURE_FOLDER_NAME, methodsNames);
+
+			if (!keyName.isEmpty()) {
+				methodsNames = units.get(keyName);
+				if (methodsNames == null)
+					methodsNames = new ArrayList<>();
+				methodsNames.add(method.getName());
+				units.put(DEFAULT_FEATURE_FOLDER_NAME, methodsNames);
+				units.put(keyName, methodsNames);
+			}
+		}
+
+		return units;
 	}
 
 }
