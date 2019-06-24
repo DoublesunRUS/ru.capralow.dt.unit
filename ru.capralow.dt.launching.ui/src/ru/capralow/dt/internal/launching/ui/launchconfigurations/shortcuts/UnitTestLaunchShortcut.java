@@ -8,7 +8,6 @@ import org.eclipse.emf.ecore.EObject;
 
 import com._1c.g5.v8.dt.core.platform.IExtensionProject;
 import com._1c.g5.v8.dt.core.platform.IV8Project;
-import com._1c.g5.v8.dt.debug.core.IDebugConfigurationAttributes;
 import com._1c.g5.v8.dt.internal.launching.ui.launchconfigurations.shortcuts.AbstractRuntimeClientLaunchShortcut;
 import com._1c.g5.v8.dt.launching.core.ILaunchConfigurationAttributes;
 import com.google.common.base.Strings;
@@ -30,7 +29,8 @@ public class UnitTestLaunchShortcut extends AbstractRuntimeClientLaunchShortcut 
 		FrameworkSettings frameworkSettings = FrameworkUtils.getFrameworkSettings();
 		String startupOption = FrameworkUtils.getFrameworkStartupOptions(frameworkSettings, paramsFilePathName);
 
-		configuration.setAttribute(ILaunchConfigurationAttributes.STARTUP_OPTION, startupOption);
+		configuration.setAttribute(UnitTestLaunchConfigurationAttributes.EXTERNAL_OBJECT_STARTUP_OPTIONS,
+				startupOption);
 		configuration.setAttribute(UnitTestLaunchConfigurationAttributes.EXTERNAL_OBJECT_DUMP_PATH,
 				paramsFilePathName + FrameworkUtils.FRAMEWORK_FILE_NAME);
 	}
@@ -73,13 +73,21 @@ public class UnitTestLaunchShortcut extends AbstractRuntimeClientLaunchShortcut 
 
 	@Override
 	protected boolean isValid(ILaunchConfiguration configuration, String mode) throws CoreException {
-		boolean isProjectValid = configuration.getAttribute(IDebugConfigurationAttributes.PROJECT_NAME,
-				(String) null) != null;
-		String runtime = configuration.getAttribute(IDebugConfigurationAttributes.RUNTIME_INSTALLATION, (String) null);
 		String launchUrl = configuration.getAttribute(ILaunchConfigurationAttributes.LAUNCH_URL, (String) null);
-		boolean isRuntimeValid = runtime != null && resolvableRuntimeInstallationManager.deserialize(runtime) != null;
 		boolean isLaunchUrlValid = !Strings.isNullOrEmpty(launchUrl);
 
-		return isProjectValid && isRuntimeValid && (isInfobaseValid(configuration, mode) || isLaunchUrlValid);
+		String extensionProjectToTest = configuration
+				.getAttribute(UnitTestLaunchConfigurationAttributes.EXTENSION_PROJECT_TO_TEST, (String) null);
+		Boolean isExtensionValid = !Strings.isNullOrEmpty(extensionProjectToTest);
+
+		String externalObjectDumpPath = configuration
+				.getAttribute(UnitTestLaunchConfigurationAttributes.EXTERNAL_OBJECT_DUMP_PATH, (String) null);
+		String externalObjectStartupOptions = configuration
+				.getAttribute(UnitTestLaunchConfigurationAttributes.EXTERNAL_OBJECT_STARTUP_OPTIONS, (String) null);
+		Boolean isExternalObjectValid = !Strings.isNullOrEmpty(externalObjectDumpPath)
+				&& !Strings.isNullOrEmpty(externalObjectStartupOptions);
+
+		return isExtensionValid && isExternalObjectValid && (isInfobaseValid(configuration, mode) || isLaunchUrlValid)
+				&& super.isValid(configuration, mode);
 	}
 }

@@ -31,9 +31,9 @@ import org.eclipse.ui.model.WorkbenchLabelProvider;
 import com._1c.g5.v8.dt.core.platform.IV8ProjectManager;
 import com._1c.g5.v8.dt.internal.launching.ui.LaunchingUiPlugin;
 import com._1c.g5.v8.dt.internal.launching.ui.launchconfigurations.AbstractRuntimeClientTab;
-import com._1c.g5.v8.dt.launching.core.ILaunchConfigurationAttributes;
 import com._1c.g5.v8.dt.metadata.mdclass.CommonModule;
 import com._1c.g5.v8.dt.platform.services.ui.AutoCompleteComboViewer;
+import com.google.common.base.Strings;
 import com.google.inject.Inject;
 
 import ru.capralow.dt.unit.launcher.plugin.core.UnitTestLaunchConfigurationAttributes;
@@ -139,6 +139,33 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 	}
 
 	@Override
+	public boolean isValid(ILaunchConfiguration configuration) {
+		try {
+			Boolean isExtensionValid = getSelectedExtensionProject() != null;
+
+			Boolean isModuleValid = getSelectedModule() != null || !runModuleTests.getSelection();
+
+			Boolean isTagValid = getSelectedTag() != null || !runTagTests.getSelection();
+
+			String externalObjectDumpPath = configuration
+					.getAttribute(UnitTestLaunchConfigurationAttributes.EXTERNAL_OBJECT_DUMP_PATH, (String) null);
+			String externalObjectStartupOptions = configuration
+					.getAttribute(UnitTestLaunchConfigurationAttributes.EXTERNAL_OBJECT_STARTUP_OPTIONS, (String) null);
+			Boolean isExternalObjectValid = !Strings.isNullOrEmpty(externalObjectDumpPath)
+					&& !Strings.isNullOrEmpty(externalObjectStartupOptions);
+
+			return isExtensionValid && isModuleValid && isTagValid && isExternalObjectValid
+					&& super.isValid(configuration);
+
+		} catch (CoreException e) {
+			LaunchingUiPlugin.log(e);
+
+		}
+
+		return false;
+	}
+
+	@Override
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
 		configuration.setAttribute(UnitTestLaunchConfigurationAttributes.RUN_EXTENSION_TESTS,
 				runExtensionTests.getSelection());
@@ -163,13 +190,14 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 		FrameworkSettings frameworkSettings = FrameworkUtils.getFrameworkSettings();
 		String startupOption = FrameworkUtils.getFrameworkStartupOptions(frameworkSettings, paramsFilePathName);
 
-		configuration.setAttribute(ILaunchConfigurationAttributes.STARTUP_OPTION, startupOption);
+		configuration.setAttribute(UnitTestLaunchConfigurationAttributes.EXTERNAL_OBJECT_STARTUP_OPTIONS,
+				startupOption);
 		configuration.setAttribute(UnitTestLaunchConfigurationAttributes.EXTERNAL_OBJECT_DUMP_PATH,
 				paramsFilePathName + "framework.epf"); //$NON-NLS-1$
 	}
 
 	@Override
-	public void selectionChanged(SelectionChangedEvent arg0) {
+	public void selectionChanged(SelectionChangedEvent event) {
 		updateLaunchConfigurationDialog();
 	}
 

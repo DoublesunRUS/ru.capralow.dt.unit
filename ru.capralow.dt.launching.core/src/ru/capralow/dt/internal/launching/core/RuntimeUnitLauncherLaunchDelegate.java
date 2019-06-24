@@ -45,6 +45,7 @@ import com._1c.g5.v8.dt.debug.core.model.IRuntimeDebugClientTarget;
 import com._1c.g5.v8.dt.internal.launching.core.LaunchingPlugin;
 import com._1c.g5.v8.dt.internal.launching.core.launchconfigurations.RuntimeClientLaunchDelegate;
 import com._1c.g5.v8.dt.launching.core.DebugSessionAlreadyStartedResponse;
+import com._1c.g5.v8.dt.launching.core.ILaunchConfigurationAttributes;
 import com._1c.g5.v8.dt.launching.core.PublicationResult;
 import com._1c.g5.v8.dt.launching.core.launchconfigurations.ClientTypeSelectionSupport;
 import com._1c.g5.v8.dt.launching.core.launchconfigurations.ExternalObjectHelper;
@@ -75,6 +76,7 @@ import com._1c.g5.v8.dt.platform.services.model.Publication;
 import com._1c.g5.v8.dt.platform.services.model.RuntimeInstallation;
 import com._1c.g5.v8.dt.platform.services.model.WebServerConnectionString;
 import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
 import com.google.common.io.CharSource;
 import com.google.common.io.CharStreams;
@@ -236,6 +238,16 @@ public class RuntimeUnitLauncherLaunchDelegate extends RuntimeClientLaunchDelega
 			File file = new File(externalObjectDumpPath);
 			arguments.setExternalObjectDumpPath(file.toPath());
 		}
+
+		final String externalObjectStartupOptions = configuration
+				.getAttribute(UnitTestLaunchConfigurationAttributes.EXTERNAL_OBJECT_STARTUP_OPTIONS, (String) null);
+		String startupOptions = configuration.getAttribute(ILaunchConfigurationAttributes.STARTUP_OPTION,
+				(String) null);
+		if (Strings.isNullOrEmpty(startupOptions))
+			startupOptions = externalObjectStartupOptions;
+		else
+			startupOptions = externalObjectStartupOptions + ";" + startupOptions; //$NON-NLS-1$
+		arguments.setStartupOption(startupOptions);
 
 		return arguments;
 	}
@@ -693,7 +705,33 @@ public class RuntimeUnitLauncherLaunchDelegate extends RuntimeClientLaunchDelega
 
 	@Override
 	protected IStatus isValid(ILaunchConfiguration configuration, String mode) throws CoreException {
+		IStatus parentStatus = super.isValid(configuration, mode);
+		if (parentStatus != Status.OK_STATUS)
+			return parentStatus;
 
-		return super.isValid(configuration, mode);
+		String extensionProjectToTest = configuration
+				.getAttribute(UnitTestLaunchConfigurationAttributes.EXTENSION_PROJECT_TO_TEST, (String) null);
+		Boolean isExtensionValid = !Strings.isNullOrEmpty(extensionProjectToTest);
+
+		String extensionModuleToTest = configuration
+				.getAttribute(UnitTestLaunchConfigurationAttributes.EXTENSION_MODULE_TO_TEST, (String) null);
+		Boolean runModuleTests = configuration.getAttribute(UnitTestLaunchConfigurationAttributes.RUN_MODULE_TESTS,
+				false);
+		Boolean isModuleValid = !Strings.isNullOrEmpty(extensionModuleToTest) || !runModuleTests;
+
+		String extensionTagToTest = configuration
+				.getAttribute(UnitTestLaunchConfigurationAttributes.EXTENSION_TAG_TO_TEST, (String) null);
+		Boolean runTagTests = configuration.getAttribute(UnitTestLaunchConfigurationAttributes.RUN_TAG_TESTS, false);
+		Boolean isTagValid = !Strings.isNullOrEmpty(extensionTagToTest) || !runTagTests;
+
+		String externalObjectDumpPath = configuration
+				.getAttribute(UnitTestLaunchConfigurationAttributes.EXTERNAL_OBJECT_DUMP_PATH, (String) null);
+		String externalObjectStartupOptions = configuration
+				.getAttribute(UnitTestLaunchConfigurationAttributes.EXTERNAL_OBJECT_STARTUP_OPTIONS, (String) null);
+		Boolean isExternalObjectValid = !Strings.isNullOrEmpty(externalObjectDumpPath)
+				&& !Strings.isNullOrEmpty(externalObjectStartupOptions);
+
+		return isExtensionValid && isModuleValid && isTagValid && isExternalObjectValid ? Status.OK_STATUS
+				: Status.CANCEL_STATUS;
 	}
 }
