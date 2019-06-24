@@ -14,7 +14,7 @@
 				"	Чтобы я мог гарантировать работоспособность метода"
 			],
 			"server-script": [
-				"&OnServer",
+				"@OnServer",
 				"Сценарий: $ModuleName$ (сервер): $MethodName$",
 				"	И я выполняю код встроенного языка на сервере",
 				"	| '$ModuleName$.$MethodName$(Объект());' |"
@@ -39,7 +39,7 @@
 				"	That I can guarantee the execution of the method"
 			],
 			"server-script": [
-				"&OnServer",
+				"@OnServer",
 				"Scenario: $ModuleName$ (server): $MethodName$",
 				"	And I execute the script at server",
 				"	| '$ModuleName$.$MethodName$(Object());' |"
