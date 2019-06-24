@@ -3,8 +3,6 @@ package ru.capralow.dt.internal.launching.ui.launchconfigurations;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.core.resources.IProject;
-import org.eclipse.debug.ui.AbstractLaunchConfigurationTabGroup;
 import org.eclipse.debug.ui.CommonTab;
 import org.eclipse.debug.ui.ILaunchConfigurationDialog;
 import org.eclipse.debug.ui.ILaunchConfigurationTab;
@@ -12,16 +10,14 @@ import org.eclipse.debug.ui.ILaunchConfigurationTab;
 import com._1c.g5.v8.dt.debug.ui.launchconfigurations.DebugConnectionTab;
 import com._1c.g5.v8.dt.debug.ui.launchconfigurations.UnsupportedLaunchTab;
 import com._1c.g5.v8.dt.internal.launching.ui.launchconfigurations.ArgumentsTab;
-import com._1c.g5.v8.dt.internal.launching.ui.launchconfigurations.IRuntimeClientChangeListener;
 import com._1c.g5.v8.dt.internal.launching.ui.launchconfigurations.IRuntimeClientChangeNotifier;
 import com._1c.g5.v8.dt.internal.launching.ui.launchconfigurations.RuntimeClientMainTab;
+import com._1c.g5.v8.dt.internal.launching.ui.launchconfigurations.RuntimeClientTabGroup;
 import com._1c.g5.v8.dt.platform.services.core.infobases.IInfobaseManager;
-import com._1c.g5.v8.dt.platform.services.model.InfobaseReference;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class UnitTestLaunchTabGroup extends AbstractLaunchConfigurationTabGroup
-		implements IRuntimeClientChangeNotifier {
+public class UnitTestLaunchTabGroup extends RuntimeClientTabGroup implements IRuntimeClientChangeNotifier {
 	@Inject
 	private IInfobaseManager infobaseManager;
 	@Inject
@@ -43,7 +39,7 @@ public class UnitTestLaunchTabGroup extends AbstractLaunchConfigurationTabGroup
 
 			tabs.add(unitTestLaunchTabProvider.get());
 
-			tabs.add((ILaunchConfigurationTab) argumentsTabProvider.get());
+			tabs.add(argumentsTabProvider.get());
 			if ("debug".equals(mode)) //$NON-NLS-1$
 				tabs.add(debugConnectionTabProvider.get());
 
@@ -55,49 +51,5 @@ public class UnitTestLaunchTabGroup extends AbstractLaunchConfigurationTabGroup
 		}
 
 		setTabs(tabs.toArray(new ILaunchConfigurationTab[tabs.size()]));
-	}
-
-	@Override
-	public void notifyClientAutoSelect() {
-		ILaunchConfigurationTab[] tabs = getTabs();
-		for (int length = tabs.length, i = 0; i < length; ++i) {
-			final ILaunchConfigurationTab tab = tabs[i];
-			if (tab instanceof IRuntimeClientChangeListener) {
-				((IRuntimeClientChangeListener) tab).runtimeClientAutoSelected();
-			}
-		}
-	}
-
-	@Override
-	public void notifyClientChange(String componentTypeId) {
-		ILaunchConfigurationTab[] tabs = getTabs();
-		for (int length = tabs.length, i = 0; i < length; ++i) {
-			final ILaunchConfigurationTab tab = tabs[i];
-			if (tab instanceof IRuntimeClientChangeListener) {
-				((IRuntimeClientChangeListener) tab).runtimeClientChanged(componentTypeId);
-			}
-		}
-	}
-
-	@Override
-	public void notifyInfobaseChange(final InfobaseReference infobase) {
-		ILaunchConfigurationTab[] tabs = getTabs();
-		for (int length = tabs.length, i = 0; i < length; ++i) {
-			final ILaunchConfigurationTab tab = tabs[i];
-			if (tab instanceof IRuntimeClientChangeListener) {
-				((IRuntimeClientChangeListener) tab).infobaseChanged(infobase);
-			}
-		}
-	}
-
-	@Override
-	public void notifyPorjectChange(final IProject project) {
-		ILaunchConfigurationTab[] tabs = getTabs();
-		for (int length = tabs.length, i = 0; i < length; ++i) {
-			final ILaunchConfigurationTab tab = tabs[i];
-			if (tab instanceof IRuntimeClientChangeListener) {
-				((IRuntimeClientChangeListener) tab).projectChanged(project);
-			}
-		}
 	}
 }
