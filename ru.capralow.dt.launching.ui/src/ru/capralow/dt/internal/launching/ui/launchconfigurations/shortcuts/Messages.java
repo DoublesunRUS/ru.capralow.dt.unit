@@ -9,7 +9,6 @@ final class Messages extends NLS {
 	public static String UnitTestLaunchShortcut_Name_suffix;
 
 	public static String UnitTestLaunchShortcut_Wrong_project_exception;
-	public static String UnitTestLaunchShortcut_No_frameworks_exception;
 
 	static {
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);

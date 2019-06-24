@@ -1,7 +1,5 @@
 package ru.capralow.dt.internal.launching.ui.launchconfigurations.shortcuts;
 
-import java.util.Collection;
-
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
@@ -18,7 +16,6 @@ import com.google.common.base.Strings;
 import ru.capralow.dt.unit.launcher.plugin.core.UnitTestLaunchConfigurationAttributes;
 import ru.capralow.dt.unit.launcher.plugin.core.frameworks.FrameworkUtils;
 import ru.capralow.dt.unit.launcher.plugin.core.frameworks.gson.FrameworkSettings;
-import ru.capralow.dt.unit.launcher.plugin.core.model.tf.TestFramework;
 
 public class UnitTestLaunchShortcut extends AbstractRuntimeClientLaunchShortcut {
 
@@ -28,18 +25,11 @@ public class UnitTestLaunchShortcut extends AbstractRuntimeClientLaunchShortcut 
 		configuration.setAttribute(UnitTestLaunchConfigurationAttributes.EXTENSION_PROJECT_TO_TEST,
 				v8Project.getProject().getName());
 
-		Collection<TestFramework> frameworks = FrameworkUtils.getFrameworks();
-		if (frameworks == null)
-			throw new NullPointerException(Messages.UnitTestLaunchShortcut_No_frameworks_exception);
-
-		TestFramework framework = ((TestFramework) frameworks.toArray()[0]);
-
 		String paramsFilePathName = FrameworkUtils.getConfigurationFilesPath(configuration);
 
-		FrameworkSettings frameworkSettings = FrameworkUtils.getFrameworkSettings(framework);
+		FrameworkSettings frameworkSettings = FrameworkUtils.getFrameworkSettings();
 		String startupOption = FrameworkUtils.getFrameworkStartupOptions(frameworkSettings, paramsFilePathName);
 
-		configuration.setAttribute(UnitTestLaunchConfigurationAttributes.FRAMEWORK, framework.getName());
 		configuration.setAttribute(ILaunchConfigurationAttributes.STARTUP_OPTION, startupOption);
 		configuration.setAttribute(UnitTestLaunchConfigurationAttributes.EXTERNAL_OBJECT_DUMP_PATH,
 				paramsFilePathName + FrameworkUtils.FRAMEWORK_FILE_NAME);

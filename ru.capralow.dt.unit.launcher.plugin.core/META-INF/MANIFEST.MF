@@ -18,9 +18,6 @@ Bundle-Vendor: %providerName
 Export-Package: ru.capralow.dt.unit.launcher.plugin.core,
  ru.capralow.dt.unit.launcher.plugin.core.frameworks,
  ru.capralow.dt.unit.launcher.plugin.core.frameworks.gson,
- ru.capralow.dt.unit.launcher.plugin.core.model.tf,
- ru.capralow.dt.unit.launcher.plugin.core.model.tf.impl;x-internal:=true,
- ru.capralow.dt.unit.launcher.plugin.core.model.tf.util;x-internal:=true,
  ru.capralow.dt.unit.launcher.plugin.internal.core;x-internal:=true
 Import-Package: com._1c.g5.v8.dt.core.platform,
  com._1c.g5.v8.dt.metadata.mdclass,

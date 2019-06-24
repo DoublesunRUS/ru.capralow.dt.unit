@@ -13,7 +13,6 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
-import ru.capralow.dt.unit.launcher.plugin.core.UnitTestLaunchConfigurationAttributes;
 import ru.capralow.dt.unit.launcher.plugin.core.frameworks.FrameworkUtils;
 import ru.capralow.dt.unit.launcher.plugin.internal.ui.UnitLauncherUiPlugin;
 
@@ -24,11 +23,6 @@ public class UnitTestLaunch {
 			return;
 
 		try {
-			String frameworkName = process.getLaunch().getLaunchConfiguration()
-					.getAttribute(UnitTestLaunchConfigurationAttributes.FRAMEWORK, ""); //$NON-NLS-1$
-			if (frameworkName.isEmpty())
-				return;
-
 			ILaunchConfiguration configuration = process.getLaunch().getLaunchConfiguration();
 
 			String paramsFilePathName = FrameworkUtils.getConfigurationFilesPath(configuration);

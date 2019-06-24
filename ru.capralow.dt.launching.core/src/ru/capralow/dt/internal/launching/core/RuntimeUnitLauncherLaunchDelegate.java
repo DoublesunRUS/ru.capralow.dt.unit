@@ -84,7 +84,7 @@ import com.google.inject.Inject;
 
 import ru.capralow.dt.unit.launcher.plugin.core.UnitTestLaunchConfigurationAttributes;
 import ru.capralow.dt.unit.launcher.plugin.core.frameworks.FrameworkUtils;
-import ru.capralow.dt.unit.launcher.plugin.core.model.tf.TestFramework;
+import ru.capralow.dt.unit.launcher.plugin.core.frameworks.gson.TestFramework;
 
 public class RuntimeUnitLauncherLaunchDelegate extends RuntimeClientLaunchDelegate {
 
@@ -134,8 +134,11 @@ public class RuntimeUnitLauncherLaunchDelegate extends RuntimeClientLaunchDelega
 	public void doLaunch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor)
 			throws CoreException {
 
-		saveParamsToFile(configuration, projectManager);
-		saveFrameworkToFile(configuration, projectManager);
+		if (!saveParamsToFile(configuration, projectManager))
+			return;
+
+		if (!saveFrameworkToFile(configuration))
+			return;
 
 		doSuperLaunch(configuration, mode, launch, monitor);
 	}
@@ -607,26 +610,22 @@ public class RuntimeUnitLauncherLaunchDelegate extends RuntimeClientLaunchDelega
 		}
 	}
 
-	private void saveFrameworkToFile(ILaunchConfiguration configuration, IV8ProjectManager projectManager)
-			throws CoreException {
-		TestFramework framework = FrameworkUtils.getConfigurationFramework(configuration,
-				FrameworkUtils.getFrameworks());
+	private Boolean saveFrameworkToFile(ILaunchConfiguration configuration) {
+		TestFramework framework = FrameworkUtils.getCurrentFramework();
 
 		Bundle bundle = FrameworkUtils.getFrameworkBundle();
 		try {
-			URL frameworkParamsBundleURL = FileLocator.find(bundle,
-					new Path(FrameworkUtils.FRAMEWORKS_COMMON_PATH + framework.getResourcePath()
-							+ framework.getEpfName()),
-					null);
+			URL frameworkParamsBundleURL = FileLocator
+					.find(bundle, new Path(framework.getResourcePath() + framework.getEpfName()), null);
 			URL frameworkParamsURL = FileLocator.toFileURL(frameworkParamsBundleURL);
 
 			if (frameworkParamsURL == null) {
 				String msg = MessageFormat.format(
 						Messages.RuntimeUnitLauncherLaunchDelegate_Failed_to_get_framework_from_bundle_0_1,
 						bundle.getSymbolicName(),
-						FrameworkUtils.FRAMEWORKS_COMMON_PATH + framework.getResourcePath() + framework.getEpfName());
+						framework.getResourcePath() + framework.getEpfName());
 				LaunchingPlugin.log(LaunchingPlugin.createErrorStatus(msg, new IOException()));
-				return;
+				return false;
 			}
 			File file = URIUtil.toFile(URIUtil.toURI(frameworkParamsURL));
 
@@ -634,7 +633,7 @@ public class RuntimeUnitLauncherLaunchDelegate extends RuntimeClientLaunchDelega
 				String msg = MessageFormat.format(Messages.RuntimeUnitLauncherLaunchDelegate_Failed_to_read_framework_0,
 						file.toString());
 				LaunchingPlugin.log(LaunchingPlugin.createErrorStatus(msg, new IOException()));
-				return;
+				return false;
 			}
 
 			String frameworkFilePathName = FrameworkUtils.getConfigurationFilesPath(configuration);
@@ -642,34 +641,31 @@ public class RuntimeUnitLauncherLaunchDelegate extends RuntimeClientLaunchDelega
 
 		} catch (IOException | URISyntaxException e) {
 			String msg = MessageFormat.format(Messages.RuntimeUnitLauncherLaunchDelegate_Failed_to_save_framework_0,
-					FrameworkUtils.FRAMEWORKS_COMMON_PATH + framework.getResourcePath()
-							+ FrameworkUtils.FRAMEWORK_FILE_NAME);
+					framework.getResourcePath() + FrameworkUtils.FRAMEWORK_FILE_NAME);
 			LaunchingPlugin.log(LaunchingPlugin.createErrorStatus(msg, e));
+			return false;
 
 		}
+
+		return true;
 	}
 
-	private void saveParamsToFile(ILaunchConfiguration configuration, IV8ProjectManager projectManager)
-			throws CoreException {
-		TestFramework framework = FrameworkUtils.getConfigurationFramework(configuration,
-				FrameworkUtils.getFrameworks());
+	private Boolean saveParamsToFile(ILaunchConfiguration configuration, IV8ProjectManager projectManager) {
+		TestFramework framework = FrameworkUtils.getCurrentFramework();
 
 		Bundle bundle = FrameworkUtils.getFrameworkBundle();
 		try {
-			URL frameworkParamsBundleURL = FileLocator.find(bundle,
-					new Path(FrameworkUtils.FRAMEWORKS_COMMON_PATH + framework.getResourcePath()
-							+ FrameworkUtils.PARAMS_FILE_NAME),
-					null);
+			URL frameworkParamsBundleURL = FileLocator
+					.find(bundle, new Path(framework.getResourcePath() + FrameworkUtils.PARAMS_FILE_NAME), null);
 			URL frameworkParamsURL = FileLocator.toFileURL(frameworkParamsBundleURL);
 
 			if (frameworkParamsURL == null) {
 				String msg = MessageFormat.format(
 						Messages.RuntimeUnitLauncherLaunchDelegate_Failed_to_get_framework_params_from_bundle_0_1,
 						bundle.getSymbolicName(),
-						FrameworkUtils.FRAMEWORKS_COMMON_PATH + framework.getResourcePath()
-								+ FrameworkUtils.PARAMS_FILE_NAME);
+						framework.getResourcePath() + FrameworkUtils.PARAMS_FILE_NAME);
 				LaunchingPlugin.log(LaunchingPlugin.createErrorStatus(msg, new IOException()));
-				return;
+				return false;
 			}
 			File file = URIUtil.toFile(URIUtil.toURI(frameworkParamsURL));
 
@@ -678,7 +674,7 @@ public class RuntimeUnitLauncherLaunchDelegate extends RuntimeClientLaunchDelega
 						Messages.RuntimeUnitLauncherLaunchDelegate_Failed_to_read_framework_params_0,
 						file.toString());
 				LaunchingPlugin.log(LaunchingPlugin.createErrorStatus(msg, new IOException()));
-				return;
+				return false;
 			}
 
 			parseParamsTemplate(frameworkParamsURL, configuration, projectManager);
@@ -686,11 +682,13 @@ public class RuntimeUnitLauncherLaunchDelegate extends RuntimeClientLaunchDelega
 		} catch (IOException | URISyntaxException e) {
 			String msg = MessageFormat.format(
 					Messages.RuntimeUnitLauncherLaunchDelegate_Failed_to_save_framework_params_0,
-					FrameworkUtils.FRAMEWORKS_COMMON_PATH + framework.getResourcePath()
-							+ FrameworkUtils.PARAMS_FILE_NAME);
+					framework.getResourcePath() + FrameworkUtils.PARAMS_FILE_NAME);
 			LaunchingPlugin.log(LaunchingPlugin.createErrorStatus(msg, e));
+			return false;
 
 		}
+
+		return true;
 	}
 
 	@Override

@@ -14,7 +14,6 @@ import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.ViewerComparator;
@@ -40,7 +39,6 @@ import com.google.inject.Inject;
 import ru.capralow.dt.unit.launcher.plugin.core.UnitTestLaunchConfigurationAttributes;
 import ru.capralow.dt.unit.launcher.plugin.core.frameworks.FrameworkUtils;
 import ru.capralow.dt.unit.launcher.plugin.core.frameworks.gson.FrameworkSettings;
-import ru.capralow.dt.unit.launcher.plugin.core.model.tf.TestFramework;
 
 public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 		implements SelectionListener, ISelectionChangedListener {
@@ -48,12 +46,9 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 	@Inject
 	private IV8ProjectManager projectManager;
 
-	private Collection<TestFramework> frameworks;
-
 	private ComboViewer extensionProjectViewer;
 	private ComboViewer extensionModuleViewer;
 	private ComboViewer extensionTagViewer;
-	private ComboViewer frameworkViewer;
 
 	private Button runExtensionTests;
 	private Button runModuleTests;
@@ -72,7 +67,6 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 		composite.setFont(parent.getFont());
 
 		createFeaturesSettings(composite);
-		createFrameworkSettings(composite);
 
 		updateLaunchConfigurationDialog();
 	}
@@ -96,15 +90,9 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 			String extensionTagName = configuration
 					.getAttribute(UnitTestLaunchConfigurationAttributes.EXTENSION_TAG_TO_TEST, (String) null);
 
-			String frameworkName = configuration.getAttribute(UnitTestLaunchConfigurationAttributes.FRAMEWORK,
-					(String) null);
-
 			Collection<IProject> projects = FrameworkUtils.getExtensionProjects(projectManager);
 			if (projects != null)
 				extensionProjectViewer.setInput(projects);
-
-			frameworks = FrameworkUtils.getFrameworks();
-			frameworkViewer.setInput(frameworks);
 
 			IProject project = FrameworkUtils.getConfigurationProject(extensionProjectName, projectManager);
 			extensionProjectViewer
@@ -123,10 +111,6 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 
 			extensionTagViewer.setSelection(
 					extensionTagName == null ? StructuredSelection.EMPTY : new StructuredSelection(extensionTagName));
-
-			TestFramework framework = FrameworkUtils.getConfigurationFramework(frameworkName, frameworks);
-			frameworkViewer
-					.setSelection(framework == null ? StructuredSelection.EMPTY : new StructuredSelection(framework));
 
 		} catch (CoreException e) {
 			LaunchingUiPlugin.log(e);
@@ -174,26 +158,14 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 		configuration.setAttribute(UnitTestLaunchConfigurationAttributes.EXTENSION_TAG_TO_TEST,
 				tag == null ? null : tag);
 
-		TestFramework framework = getSelectedFramework();
+		String paramsFilePathName = FrameworkUtils.getConfigurationFilesPath(configuration);
 
-		if (framework == null) {
-			configuration.setAttribute(UnitTestLaunchConfigurationAttributes.FRAMEWORK, (String) null);
-			configuration.setAttribute(ILaunchConfigurationAttributes.STARTUP_OPTION, (String) null);
-			configuration.setAttribute(UnitTestLaunchConfigurationAttributes.EXTERNAL_OBJECT_DUMP_PATH, (String) null);
+		FrameworkSettings frameworkSettings = FrameworkUtils.getFrameworkSettings();
+		String startupOption = FrameworkUtils.getFrameworkStartupOptions(frameworkSettings, paramsFilePathName);
 
-		} else {
-			String paramsFilePathName = FrameworkUtils.getConfigurationFilesPath(configuration);
-
-			FrameworkSettings frameworkSettings = FrameworkUtils.getFrameworkSettings(framework);
-			String startupOption = FrameworkUtils.getFrameworkStartupOptions(frameworkSettings, paramsFilePathName);
-
-			configuration.setAttribute(UnitTestLaunchConfigurationAttributes.FRAMEWORK, framework.getName());
-			configuration.setAttribute(ILaunchConfigurationAttributes.STARTUP_OPTION, startupOption);
-			configuration.setAttribute(UnitTestLaunchConfigurationAttributes.EXTERNAL_OBJECT_DUMP_PATH,
-					paramsFilePathName + "framework.epf"); //$NON-NLS-1$
-
-		}
-
+		configuration.setAttribute(ILaunchConfigurationAttributes.STARTUP_OPTION, startupOption);
+		configuration.setAttribute(UnitTestLaunchConfigurationAttributes.EXTERNAL_OBJECT_DUMP_PATH,
+				paramsFilePathName + "framework.epf"); //$NON-NLS-1$
 	}
 
 	@Override
@@ -206,12 +178,6 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 		configuration.setAttribute(UnitTestLaunchConfigurationAttributes.RUN_EXTENSION_TESTS, true);
 		configuration.setAttribute(UnitTestLaunchConfigurationAttributes.RUN_MODULE_TESTS, false);
 		configuration.setAttribute(UnitTestLaunchConfigurationAttributes.RUN_TAG_TESTS, false);
-
-		frameworks = FrameworkUtils.getFrameworks();
-		if (frameworks != null) {
-			String framework = ((TestFramework) frameworks.toArray()[0]).getName();
-			configuration.setAttribute(UnitTestLaunchConfigurationAttributes.FRAMEWORK, framework);
-		}
 	}
 
 	@Override
@@ -327,42 +293,10 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 		extensionTagViewer.addSelectionChangedListener(this);
 	}
 
-	private void createFrameworkSettings(Composite parent) {
-		Composite composite = new Composite(parent, SWT.NONE);
-		GridDataFactory.fillDefaults().grab(true, false).applyTo(composite);
-		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(composite);
-
-		// 1.1
-		Label framework = new Label(composite, SWT.NONE);
-		framework.setText(Messages.UnitTestLaunchTab_Framework);
-		// 1.2
-		frameworkViewer = new AutoCompleteComboViewer(composite);
-		GridDataFactory.fillDefaults().align(4, 16777216).grab(true, false).hint(200, -1)
-				.applyTo(frameworkViewer.getControl());
-		frameworkViewer.setContentProvider(ArrayContentProvider.getInstance());
-		frameworkViewer.setLabelProvider(new LabelProvider() {
-			@Override
-			public String getText(Object element) {
-				if (element == null)
-					return ""; //$NON-NLS-1$
-				return element.toString();
-			}
-		});
-		frameworkViewer.setComparator(new ViewerComparator());
-		frameworkViewer.addSelectionChangedListener(this);
-	}
-
 	private IProject getSelectedExtensionProject() {
 		IStructuredSelection selection = extensionProjectViewer.getStructuredSelection();
 		return !selection.isEmpty() && selection.getFirstElement() instanceof IProject
 				? (IProject) selection.getFirstElement()
-				: null;
-	}
-
-	private TestFramework getSelectedFramework() {
-		IStructuredSelection selection = frameworkViewer.getStructuredSelection();
-		return !selection.isEmpty() && selection.getFirstElement() instanceof TestFramework
-				? (TestFramework) selection.getFirstElement()
 				: null;
 	}
 

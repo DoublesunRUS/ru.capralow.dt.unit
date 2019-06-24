@@ -33,14 +33,13 @@ import ru.capralow.dt.unit.launcher.plugin.core.UnitTestLaunchConfigurationAttri
 import ru.capralow.dt.unit.launcher.plugin.core.frameworks.gson.FeatureFormat;
 import ru.capralow.dt.unit.launcher.plugin.core.frameworks.gson.FeatureSettings;
 import ru.capralow.dt.unit.launcher.plugin.core.frameworks.gson.FrameworkSettings;
-import ru.capralow.dt.unit.launcher.plugin.core.model.tf.TestFramework;
-import ru.capralow.dt.unit.launcher.plugin.core.model.tf.tfFactory;
+import ru.capralow.dt.unit.launcher.plugin.core.frameworks.gson.FrameworksList;
+import ru.capralow.dt.unit.launcher.plugin.core.frameworks.gson.TestFramework;
 import ru.capralow.dt.unit.launcher.plugin.internal.core.UnitLauncherCorePlugin;
 
 public class FrameworkUtils {
 	private static final String FRAMEWORK_PLUGIN = "ru.capralow.dt.unit.launcher.plugin.core"; //$NON-NLS-1$
 
-	public static final String FRAMEWORKS_COMMON_PATH = "/frameworks/"; //$NON-NLS-1$
 	public static final String PARAMS_FILE_NAME = "params.json"; //$NON-NLS-1$
 	public static final String FRAMEWORK_FILE_NAME = "framework.epf"; //$NON-NLS-1$
 
@@ -48,38 +47,6 @@ public class FrameworkUtils {
 		Bundle bundle = getFrameworkBundle();
 		IPath resourcePath = Platform.getStateLocation(bundle);
 		return resourcePath + "/" + configuration.getName() + "/"; //$NON-NLS-1$ //$NON-NLS-2$
-	}
-
-	public static TestFramework getConfigurationFramework(ILaunchConfiguration configuration,
-			Collection<TestFramework> frameworks) throws CoreException {
-		if (frameworks == null)
-			return null;
-
-		String frameworkName = configuration.getAttribute(UnitTestLaunchConfigurationAttributes.FRAMEWORK,
-				(String) null);
-
-		Iterator<TestFramework> itrFrameworks = frameworks.iterator();
-		while (itrFrameworks.hasNext()) {
-			TestFramework candidate = itrFrameworks.next();
-			if (candidate.getName().equals(frameworkName))
-				return candidate;
-		}
-
-		return null;
-	}
-
-	public static TestFramework getConfigurationFramework(String frameworkName, Collection<TestFramework> frameworks) {
-		if (frameworks == null)
-			return null;
-
-		Iterator<TestFramework> itrFrameworks = frameworks.iterator();
-		while (itrFrameworks.hasNext()) {
-			TestFramework candidate = itrFrameworks.next();
-			if (candidate.getName().equals(frameworkName))
-				return candidate;
-		}
-
-		return null;
 	}
 
 	public static CommonModule getConfigurationModule(ILaunchConfiguration configuration,
@@ -177,6 +144,12 @@ public class FrameworkUtils {
 		return null;
 	}
 
+	public static TestFramework getCurrentFramework() {
+		FrameworksList frameworks = getFrameworks();
+
+		return frameworks.getList()[0];
+	}
+
 	public static Collection<IProject> getExtensionProjects(IV8ProjectManager projectManager) {
 		return projectManager.getProjects(IExtensionProject.class).stream().map(IV8Project::getProject)
 				.collect(Collectors.toList());
@@ -216,7 +189,8 @@ public class FrameworkUtils {
 	}
 
 	public static FeatureSettings getFeatureSettings() {
-		String jsonContent = readContents(getFileInputSupplier("feature.json")); //$NON-NLS-1$
+		TestFramework framework = getCurrentFramework();
+		String jsonContent = readContents(getFileInputSupplier(framework.getResourcePath() + "feature.json")); //$NON-NLS-1$
 
 		FeatureSettings featureSettings = new Gson().fromJson(jsonContent, FeatureSettings.class);
 
@@ -230,27 +204,14 @@ public class FrameworkUtils {
 		return Platform.getBundle(FRAMEWORK_PLUGIN);
 	}
 
-	public static Collection<TestFramework> getFrameworks() {
-		ArrayList<TestFramework> newFrameworks = new ArrayList<>();
+	public static FrameworksList getFrameworks() {
+		String jsonContent = readContents(getFileInputSupplier("/frameworks/frameworks.json")); //$NON-NLS-1$
 
-		String frameworksContents = readContents(getFileInputSupplier("frameworks.txt")); //$NON-NLS-1$
-
-		for (String frameworkString : frameworksContents.split(System.lineSeparator())) {
-			String[] frameworkList = frameworkString.split("[,]"); //$NON-NLS-1$
-
-			TestFramework framework = tfFactory.eINSTANCE.createTestFramework();
-			framework.setName(frameworkList[0]);
-			framework.setVersion(frameworkList[1]);
-			framework.setResourcePath(frameworkList[2] + File.separator); // $NON-NLS-1$
-			framework.setEpfName(frameworkList[3]);
-
-			newFrameworks.add(framework);
-		}
-
-		return newFrameworks.stream().collect(Collectors.toList());
+		return new Gson().fromJson(jsonContent, FrameworksList.class);
 	}
 
-	public static FrameworkSettings getFrameworkSettings(TestFramework framework) {
+	public static FrameworkSettings getFrameworkSettings() {
+		TestFramework framework = getCurrentFramework();
 		String jsonContent = readContents(getFileInputSupplier(framework.getResourcePath() + "settings.json")); //$NON-NLS-1$
 
 		return new Gson().fromJson(jsonContent, FrameworkSettings.class);
@@ -300,8 +261,7 @@ public class FrameworkUtils {
 	}
 
 	private static CharSource getFileInputSupplier(String partName) {
-		return Resources.asCharSource(
-				UnitTestLaunchConfigurationAttributes.class.getResource(FRAMEWORKS_COMMON_PATH + partName),
+		return Resources.asCharSource(UnitTestLaunchConfigurationAttributes.class.getResource(partName),
 				StandardCharsets.UTF_8);
 	}
 

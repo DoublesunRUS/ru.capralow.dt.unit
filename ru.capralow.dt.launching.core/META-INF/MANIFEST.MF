@@ -14,4 +14,4 @@ Import-Package: org.antlr.stringtemplate,
  org.eclipse.core.runtime,
  ru.capralow.dt.unit.launcher.plugin.core,
  ru.capralow.dt.unit.launcher.plugin.core.frameworks,
- ru.capralow.dt.unit.launcher.plugin.core.model.tf
+ ru.capralow.dt.unit.launcher.plugin.core.frameworks.gson
