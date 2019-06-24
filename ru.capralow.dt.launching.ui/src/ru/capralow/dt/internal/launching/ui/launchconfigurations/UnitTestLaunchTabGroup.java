@@ -11,6 +11,7 @@ import org.eclipse.debug.ui.ILaunchConfigurationTab;
 
 import com._1c.g5.v8.dt.debug.ui.launchconfigurations.DebugConnectionTab;
 import com._1c.g5.v8.dt.debug.ui.launchconfigurations.UnsupportedLaunchTab;
+import com._1c.g5.v8.dt.internal.launching.ui.launchconfigurations.ArgumentsTab;
 import com._1c.g5.v8.dt.internal.launching.ui.launchconfigurations.IRuntimeClientChangeListener;
 import com._1c.g5.v8.dt.internal.launching.ui.launchconfigurations.IRuntimeClientChangeNotifier;
 import com._1c.g5.v8.dt.internal.launching.ui.launchconfigurations.RuntimeClientMainTab;
@@ -26,6 +27,8 @@ public class UnitTestLaunchTabGroup extends AbstractLaunchConfigurationTabGroup
 	@Inject
 	private Provider<UnitTestLaunchTab> unitTestLaunchTabProvider;
 	@Inject
+	private Provider<ArgumentsTab> argumentsTabProvider;
+	@Inject
 	private Provider<RuntimeClientMainTab> runtimeClientMainTabProvider;
 	@Inject
 	private Provider<DebugConnectionTab> debugConnectionTabProvider;
@@ -38,10 +41,11 @@ public class UnitTestLaunchTabGroup extends AbstractLaunchConfigurationTabGroup
 			mainTab.setRuntimeClientChangeNotifier(this);
 			tabs.add(mainTab);
 
-			tabs.add((ILaunchConfigurationTab) unitTestLaunchTabProvider.get());
+			tabs.add(unitTestLaunchTabProvider.get());
 
+			tabs.add((ILaunchConfigurationTab) argumentsTabProvider.get());
 			if ("debug".equals(mode)) //$NON-NLS-1$
-				tabs.add((ILaunchConfigurationTab) debugConnectionTabProvider.get());
+				tabs.add(debugConnectionTabProvider.get());
 
 			tabs.add(new CommonTab());
 
@@ -50,9 +54,10 @@ public class UnitTestLaunchTabGroup extends AbstractLaunchConfigurationTabGroup
 
 		}
 
-		setTabs((ILaunchConfigurationTab[]) tabs.toArray(new ILaunchConfigurationTab[tabs.size()]));
+		setTabs(tabs.toArray(new ILaunchConfigurationTab[tabs.size()]));
 	}
 
+	@Override
 	public void notifyClientAutoSelect() {
 		ILaunchConfigurationTab[] tabs = getTabs();
 		for (int length = tabs.length, i = 0; i < length; ++i) {
@@ -63,6 +68,7 @@ public class UnitTestLaunchTabGroup extends AbstractLaunchConfigurationTabGroup
 		}
 	}
 
+	@Override
 	public void notifyClientChange(String componentTypeId) {
 		ILaunchConfigurationTab[] tabs = getTabs();
 		for (int length = tabs.length, i = 0; i < length; ++i) {
@@ -73,6 +79,7 @@ public class UnitTestLaunchTabGroup extends AbstractLaunchConfigurationTabGroup
 		}
 	}
 
+	@Override
 	public void notifyInfobaseChange(final InfobaseReference infobase) {
 		ILaunchConfigurationTab[] tabs = getTabs();
 		for (int length = tabs.length, i = 0; i < length; ++i) {
@@ -83,6 +90,7 @@ public class UnitTestLaunchTabGroup extends AbstractLaunchConfigurationTabGroup
 		}
 	}
 
+	@Override
 	public void notifyPorjectChange(final IProject project) {
 		ILaunchConfigurationTab[] tabs = getTabs();
 		for (int length = tabs.length, i = 0; i < length; ++i) {
