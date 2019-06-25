@@ -13,6 +13,9 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
+import com.google.common.base.Strings;
+
+import ru.capralow.dt.unit.launcher.plugin.core.UnitTestLaunchConfigurationAttributes;
 import ru.capralow.dt.unit.launcher.plugin.core.frameworks.FrameworkUtils;
 import ru.capralow.dt.unit.launcher.plugin.internal.ui.UnitLauncherUiPlugin;
 
@@ -24,6 +27,11 @@ public class UnitTestLaunch {
 
 		try {
 			ILaunchConfiguration configuration = process.getLaunch().getLaunchConfiguration();
+
+			String extensionProjectName = configuration
+					.getAttribute(UnitTestLaunchConfigurationAttributes.EXTENSION_PROJECT_TO_TEST, (String) null);
+			if (Strings.isNullOrEmpty(extensionProjectName))
+				return;
 
 			String paramsFilePathName = FrameworkUtils.getConfigurationFilesPath(configuration);
 
