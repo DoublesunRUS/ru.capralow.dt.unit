@@ -33,11 +33,11 @@ public class UnitTestLaunchTabGroup extends RuntimeClientTabGroup implements IRu
 	public void createTabs(ILaunchConfigurationDialog dialog, String mode) {
 		List<ILaunchConfigurationTab> tabs = new ArrayList<>();
 		if (infobaseManager.isPersistenceSupported()) {
+			tabs.add(unitTestLaunchTabProvider.get());
+
 			RuntimeClientMainTab mainTab = runtimeClientMainTabProvider.get();
 			mainTab.setRuntimeClientChangeNotifier(this);
 			tabs.add(mainTab);
-
-			tabs.add(unitTestLaunchTabProvider.get());
 
 			tabs.add(argumentsTabProvider.get());
 			if ("debug".equals(mode)) //$NON-NLS-1$
