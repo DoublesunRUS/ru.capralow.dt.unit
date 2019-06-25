@@ -435,7 +435,7 @@ public class RuntimeUnitLauncherLaunchDelegate extends RuntimeClientLaunchDelega
 			if (runExtensionTests)
 				featuresPath += "all/"; //$NON-NLS-1$
 			else if (runModuleTests)
-				featuresPath += "all/" + commonModule.getName() + ".feature"; //$NON-NLS-1$
+				featuresPath += "all/" + commonModule.getName() + ".feature"; //$NON-NLS-1$ //$NON-NLS-2$
 			else if (runTagTests)
 				featuresPath += tag + "/"; //$NON-NLS-1$
 

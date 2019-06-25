@@ -52,8 +52,6 @@ public class FrameworkUtils {
 	public static CommonModule getConfigurationModule(ILaunchConfiguration configuration,
 			IV8ProjectManager projectManager) throws CoreException {
 		IProject project = getConfigurationProject(configuration, projectManager);
-		if (project == null)
-			return null;
 
 		List<CommonModule> modules = getModulesForProject(project, projectManager);
 		if (modules.isEmpty())
@@ -105,7 +103,8 @@ public class FrameworkUtils {
 				return candidate;
 		}
 
-		return null;
+		String msg = MessageFormat.format(Messages.FrameworkUtils_Extension_project_not_found_0, extensionProjectName);
+		throw new CoreException(UnitLauncherCorePlugin.createErrorStatus(msg));
 	}
 
 	public static IProject getConfigurationProject(String extensionProjectName, IV8ProjectManager projectManager) {
@@ -124,8 +123,6 @@ public class FrameworkUtils {
 	public static String getConfigurationTag(ILaunchConfiguration configuration, IV8ProjectManager projectManager)
 			throws CoreException {
 		IProject project = getConfigurationProject(configuration, projectManager);
-		if (project == null)
-			return null;
 
 		List<String> tags = getTagsForProject(project, projectManager);
 		if (tags.isEmpty())

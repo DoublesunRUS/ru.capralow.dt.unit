@@ -11,6 +11,8 @@ final class Messages extends NLS {
 
 	public static String FrameworkUtils_Internal_class;
 
+	public static String FrameworkUtils_Extension_project_not_found_0;
+
 	static {
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);
 	}
