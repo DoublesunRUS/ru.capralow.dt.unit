@@ -241,6 +241,8 @@ public class FrameworkUtils {
 		String featuresPath = projectLocation + "/features/all/"; //$NON-NLS-1$
 		File featuresDir = new File(featuresPath);
 		File[] featureFiles = featuresDir.listFiles((dir1, name) -> name.endsWith(FEATURE_EXTENSION)); // $NON-NLS-1$
+		if (featureFiles == null)
+			return new ArrayList<>();
 
 		List<String> modulesList = new ArrayList<>();
 
@@ -259,6 +261,8 @@ public class FrameworkUtils {
 		File featuresDir = new File(featuresPath);
 		File[] featureFiles = featuresDir
 				.listFiles((dir1, name) -> dir1.isDirectory() && !name.equalsIgnoreCase("all")); //$NON-NLS-1$
+		if (featureFiles == null)
+			return new ArrayList<>();
 
 		List<String> tagsList = new ArrayList<>();
 
