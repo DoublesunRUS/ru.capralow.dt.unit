@@ -235,6 +235,9 @@ public class FrameworkUtils {
 	}
 
 	public static List<String> getTestModules(IPath projectLocation) {
+		if (projectLocation == null)
+			return new ArrayList<>();
+
 		String featuresPath = projectLocation + "/features/all/"; //$NON-NLS-1$
 		File featuresDir = new File(featuresPath);
 		File[] featureFiles = featuresDir.listFiles((dir1, name) -> name.endsWith(FEATURE_EXTENSION)); // $NON-NLS-1$
@@ -248,6 +251,9 @@ public class FrameworkUtils {
 	}
 
 	public static List<String> getTestTags(IPath projectLocation) {
+		if (projectLocation == null)
+			return new ArrayList<>();
+
 		String featuresPath = projectLocation + "/features/"; //$NON-NLS-1$
 
 		File featuresDir = new File(featuresPath);
