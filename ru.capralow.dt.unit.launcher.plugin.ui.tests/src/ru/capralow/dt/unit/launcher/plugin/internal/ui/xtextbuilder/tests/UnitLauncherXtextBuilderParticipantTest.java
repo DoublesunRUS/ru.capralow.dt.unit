@@ -10,6 +10,16 @@ public class UnitLauncherXtextBuilderParticipantTest {
 	private static final String UNIT_TEST = "// @unit-test"; //$NON-NLS-1$
 
 	@Test
+	public void testGetUnitTestKeyFromMethodTextDefaultKey() {
+
+		String methodText = "// @unit-test:all"; //$NON-NLS-1$
+
+		String keyName = UnitLauncherXtextBuilderParticipant.getUnitTestKeyFromMethodText(methodText);
+
+		assertEquals("Ключ теста: ключ по умолчанию", "", keyName); //$NON-NLS-1$ //$NON-NLS-2$
+	}
+
+	@Test
 	public void testGetUnitTestKeyFromMethodTextEmpty() {
 
 		String keyName = UnitLauncherXtextBuilderParticipant.getUnitTestKeyFromMethodText(""); //$NON-NLS-1$

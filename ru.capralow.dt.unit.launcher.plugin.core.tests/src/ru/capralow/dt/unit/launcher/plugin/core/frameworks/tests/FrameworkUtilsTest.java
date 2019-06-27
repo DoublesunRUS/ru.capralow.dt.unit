@@ -7,22 +7,20 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com._1c.g5.v8.dt.metadata.mdclass.CommonModule;
-
 import ru.capralow.dt.unit.launcher.plugin.core.frameworks.FrameworkUtils;
 
 public class FrameworkUtilsTest {
 
 	@Test
 	public void testGetModulesForProjectEmpty() {
-		List<CommonModule> modules = FrameworkUtils.getModulesForProject(null, null);
+		List<String> modules = FrameworkUtils.getTestModules(null);
 
-		assertEquals("Список модулей: пустой", new ArrayList<CommonModule>(), modules); //$NON-NLS-1$
+		assertEquals("Список модулей: пустой", new ArrayList<String>(), modules); //$NON-NLS-1$
 	}
 
 	@Test
 	public void testGetTagsForProjectEmpty() {
-		List<String> tags = FrameworkUtils.getTagsForProject(null, null);
+		List<String> tags = FrameworkUtils.getTestTags(null);
 
 		assertEquals("Список тегов: пустой", new ArrayList<String>(), tags); //$NON-NLS-1$
 	}

@@ -49,7 +49,6 @@ import com._1c.g5.v8.dt.launching.core.ILaunchConfigurationAttributes;
 import com._1c.g5.v8.dt.launching.core.PublicationResult;
 import com._1c.g5.v8.dt.launching.core.launchconfigurations.ClientTypeSelectionSupport;
 import com._1c.g5.v8.dt.launching.core.launchconfigurations.ExternalObjectHelper;
-import com._1c.g5.v8.dt.metadata.mdclass.CommonModule;
 import com._1c.g5.v8.dt.platform.services.core.dump.IExternalObjectDumpSupport;
 import com._1c.g5.v8.dt.platform.services.core.infobases.IInfobaseAccessManager;
 import com._1c.g5.v8.dt.platform.services.core.infobases.IInfobaseAccessSettings;
@@ -428,14 +427,14 @@ public class RuntimeUnitLauncherLaunchDelegate extends RuntimeClientLaunchDelega
 			Boolean runTagTests = configuration.getAttribute(UnitTestLaunchConfigurationAttributes.RUN_TAG_TESTS,
 					false);
 			IProject project = FrameworkUtils.getConfigurationProject(configuration, projectManager);
-			CommonModule commonModule = FrameworkUtils.getConfigurationModule(configuration, projectManager);
-			String tag = FrameworkUtils.getConfigurationTag(configuration, projectManager);
+			String commonModule = FrameworkUtils.getModuleFromConfiguration(configuration, projectManager);
+			String tag = FrameworkUtils.getTagFromConfiguration(configuration, projectManager);
 
 			featuresPath = project.getLocation() + "/features/"; //$NON-NLS-1$
 			if (runExtensionTests)
 				featuresPath += "all/"; //$NON-NLS-1$
 			else if (runModuleTests)
-				featuresPath += "all/" + commonModule.getName() + ".feature"; //$NON-NLS-1$ //$NON-NLS-2$
+				featuresPath += "all/" + commonModule + ".feature"; //$NON-NLS-1$ //$NON-NLS-2$
 			else if (runTagTests)
 				featuresPath += tag + "/"; //$NON-NLS-1$
 

@@ -86,7 +86,7 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 		for (String methodLine : methodLines) {
 			if (methodLine.toLowerCase().contains("@unit-test")) { //$NON-NLS-1$
 				String keyName = methodLine.substring(methodLine.toLowerCase().indexOf("@unit-test") + 10); //$NON-NLS-1$
-				if (!keyName.isEmpty() && keyName.startsWith(":")) //$NON-NLS-1$
+				if (!keyName.isEmpty() && keyName.startsWith(":") && !keyName.equalsIgnoreCase(":all")) //$NON-NLS-1$ //$NON-NLS-2$
 					keyName = keyName.substring(1).split("[ ]")[0]; //$NON-NLS-1$
 				else
 					keyName = ""; //$NON-NLS-1$
@@ -304,7 +304,6 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 				if (methodsNames == null)
 					methodsNames = new ArrayList<>();
 				methodsNames.add(method.getName());
-				units.put(DEFAULT_FEATURE_FOLDER_NAME, methodsNames);
 				units.put(keyName, methodsNames);
 			}
 		}

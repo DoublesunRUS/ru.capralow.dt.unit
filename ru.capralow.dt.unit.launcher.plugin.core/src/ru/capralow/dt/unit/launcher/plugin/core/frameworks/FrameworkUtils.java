@@ -23,7 +23,6 @@ import org.osgi.framework.Bundle;
 import com._1c.g5.v8.dt.core.platform.IExtensionProject;
 import com._1c.g5.v8.dt.core.platform.IV8Project;
 import com._1c.g5.v8.dt.core.platform.IV8ProjectManager;
-import com._1c.g5.v8.dt.metadata.mdclass.CommonModule;
 import com.google.common.io.CharSource;
 import com.google.common.io.CharStreams;
 import com.google.common.io.Resources;
@@ -43,50 +42,12 @@ public class FrameworkUtils {
 	public static final String PARAMS_FILE_NAME = "params.json"; //$NON-NLS-1$
 	public static final String FRAMEWORK_FILE_NAME = "framework.epf"; //$NON-NLS-1$
 
+	public static final String FEATURE_EXTENSION = ".feature"; //$NON-NLS-1$
+
 	public static String getConfigurationFilesPath(ILaunchConfiguration configuration) {
 		Bundle bundle = getFrameworkBundle();
 		IPath resourcePath = Platform.getStateLocation(bundle);
 		return resourcePath + "/" + configuration.getName() + "/"; //$NON-NLS-1$ //$NON-NLS-2$
-	}
-
-	public static CommonModule getConfigurationModule(ILaunchConfiguration configuration,
-			IV8ProjectManager projectManager) throws CoreException {
-		IProject project = getConfigurationProject(configuration, projectManager);
-
-		List<CommonModule> modules = getModulesForProject(project, projectManager);
-		if (modules.isEmpty())
-			return null;
-
-		String extensionModuleName = configuration
-				.getAttribute(UnitTestLaunchConfigurationAttributes.EXTENSION_MODULE_TO_TEST, (String) null);
-
-		Iterator<CommonModule> itrModules = modules.iterator();
-		while (itrModules.hasNext()) {
-			CommonModule candidate = itrModules.next();
-			if (candidate.getName().equals(extensionModuleName))
-				return candidate;
-		}
-
-		return null;
-	}
-
-	public static CommonModule getConfigurationModule(String extensionModuleName, IProject project,
-			IV8ProjectManager projectManager) {
-		if (project == null)
-			return null;
-
-		List<CommonModule> modules = getModulesForProject(project, projectManager);
-		if (modules.isEmpty())
-			return null;
-
-		Iterator<CommonModule> itrModules = modules.iterator();
-		while (itrModules.hasNext()) {
-			CommonModule candidate = itrModules.next();
-			if (candidate.getName().equals(extensionModuleName))
-				return candidate;
-		}
-
-		return null;
 	}
 
 	public static IProject getConfigurationProject(ILaunchConfiguration configuration, IV8ProjectManager projectManager)
@@ -120,31 +81,23 @@ public class FrameworkUtils {
 		return null;
 	}
 
-	public static String getConfigurationTag(ILaunchConfiguration configuration, IV8ProjectManager projectManager)
-			throws CoreException {
-		IProject project = getConfigurationProject(configuration, projectManager);
-
-		List<String> tags = getTagsForProject(project, projectManager);
-		if (tags.isEmpty())
-			return null;
-
-		String extensionTagName = configuration
-				.getAttribute(UnitTestLaunchConfigurationAttributes.EXTENSION_TAG_TO_TEST, (String) null);
-
-		Iterator<String> itrTags = tags.iterator();
-		while (itrTags.hasNext()) {
-			String candidate = itrTags.next();
-			if (candidate.equals(extensionTagName))
-				return candidate;
-		}
-
-		return null;
-	}
-
 	public static TestFramework getCurrentFramework() {
 		FrameworksList frameworks = getFrameworks();
 
 		return frameworks.getList()[0];
+	}
+
+	public static IPath getExtensionProjectLocation(IProject project, IV8ProjectManager projectManager) {
+		if (project == null || projectManager == null)
+			return null;
+
+		IV8Project v8Project = projectManager.getProject(project);
+		if (!(v8Project instanceof IExtensionProject)) {
+			String msg = MessageFormat.format(Messages.FrameworkUtils_Wrong_project_class_0, v8Project.getClass());
+			throw new NullPointerException(msg);
+		}
+
+		return project.getLocation();
 	}
 
 	public static Collection<IProject> getExtensionProjects(IV8ProjectManager projectManager) {
@@ -219,19 +172,32 @@ public class FrameworkUtils {
 		return startupOptions.replace("$ParamsFilePathName$", paramsFilePathName + PARAMS_FILE_NAME); //$NON-NLS-1$
 	}
 
-	public static List<CommonModule> getModulesForProject(IProject project, IV8ProjectManager projectManager) {
-		if (project == null || projectManager == null)
-			return new ArrayList<>();
+	public static String getModuleByName(String extensionModuleName, IProject project,
+			IV8ProjectManager projectManager) {
+		if (project == null)
+			return null;
 
-		IV8Project v8Project = projectManager.getProject(project);
-		if (!(v8Project instanceof IExtensionProject)) {
-			String msg = MessageFormat.format(Messages.FrameworkUtils_Wrong_project_class_0, v8Project.getClass());
-			throw new NullPointerException(msg);
-		}
+		IPath projectLocation = getExtensionProjectLocation(project, projectManager);
 
-		IExtensionProject extensionProject = (IExtensionProject) v8Project;
+		List<String> modules = getTestModules(projectLocation);
+		if (modules.isEmpty())
+			return null;
 
-		return extensionProject.getConfiguration().getCommonModules().stream().collect(Collectors.toList());
+		if (modules.contains(extensionModuleName))
+			return modules.get(modules.indexOf(extensionModuleName));
+
+		return null;
+	}
+
+	public static String getModuleFromConfiguration(ILaunchConfiguration configuration,
+			IV8ProjectManager projectManager) throws CoreException {
+
+		IProject project = getConfigurationProject(configuration, projectManager);
+
+		String extensionModuleName = configuration
+				.getAttribute(UnitTestLaunchConfigurationAttributes.EXTENSION_MODULE_TO_TEST, (String) null);
+
+		return getModuleByName(extensionModuleName, project, projectManager);
 	}
 
 	public static URI getResourceURIforPlugin(String fileName) {
@@ -242,19 +208,58 @@ public class FrameworkUtils {
 		return URI.createFileURI(file.getPath());
 	}
 
-	public static List<String> getTagsForProject(IProject project, IV8ProjectManager projectManager) {
-		if (project == null || projectManager == null)
-			return new ArrayList<>();
+	public static String getTagByName(String extensionTagName, IProject project, IV8ProjectManager projectManager) {
+		if (project == null)
+			return null;
 
-		IV8Project v8Project = projectManager.getProject(project);
-		if (!(v8Project instanceof IExtensionProject)) {
-			String msg = MessageFormat.format(Messages.FrameworkUtils_Wrong_project_class_0, v8Project.getClass());
-			throw new NullPointerException(msg);
-		}
+		IPath projectLocation = getExtensionProjectLocation(project, projectManager);
 
-		IExtensionProject extensionProject = (IExtensionProject) v8Project;
+		List<String> tags = getTestTags(projectLocation);
+		if (tags.isEmpty())
+			return null;
 
-		return new ArrayList<>();
+		if (tags.contains(extensionTagName))
+			return tags.get(tags.indexOf(extensionTagName));
+
+		return null;
+	}
+
+	public static String getTagFromConfiguration(ILaunchConfiguration configuration, IV8ProjectManager projectManager)
+			throws CoreException {
+		IProject project = getConfigurationProject(configuration, projectManager);
+
+		String extensionTagName = configuration
+				.getAttribute(UnitTestLaunchConfigurationAttributes.EXTENSION_TAG_TO_TEST, (String) null);
+
+		return getTagByName(extensionTagName, project, projectManager);
+	}
+
+	public static List<String> getTestModules(IPath projectLocation) {
+		String featuresPath = projectLocation + "/features/all/"; //$NON-NLS-1$
+		File featuresDir = new File(featuresPath);
+		File[] featureFiles = featuresDir.listFiles((dir1, name) -> name.endsWith(FEATURE_EXTENSION)); // $NON-NLS-1$
+
+		List<String> modulesList = new ArrayList<>();
+
+		for (File featureFile : featureFiles)
+			modulesList.add(featureFile.getName().substring(0, featureFile.getName().lastIndexOf(FEATURE_EXTENSION)));
+
+		return modulesList;
+	}
+
+	public static List<String> getTestTags(IPath projectLocation) {
+		String featuresPath = projectLocation + "/features/"; //$NON-NLS-1$
+
+		File featuresDir = new File(featuresPath);
+		File[] featureFiles = featuresDir
+				.listFiles((dir1, name) -> dir1.isDirectory() && !name.equalsIgnoreCase("all")); //$NON-NLS-1$
+
+		List<String> tagsList = new ArrayList<>();
+
+		for (File featureFile : featureFiles)
+			tagsList.add(featureFile.getName());
+
+		return tagsList;
 	}
 
 	private static CharSource getFileInputSupplier(String partName) {
