@@ -2,7 +2,7 @@
 	"list": [
 		{
 			"name": "Vanessa-Automation",
-			"version": "1.2.025-b3",
+			"version": "1.2.025-b4",
 			"resource-path": "vanessa-automation",
 			"epf-name": "vanessa-automation-single.epf"
 		}
