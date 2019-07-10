@@ -1,33 +1,75 @@
 package ru.capralow.dt.unit.launcher.plugin.internal.ui;
 
+import java.util.List;
+
 import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.IDebugEventSetListener;
 import org.eclipse.debug.core.model.IProcess;
 
+import com._1c.g5.v8.dt.profiling.core.IProfileTarget;
+import com._1c.g5.v8.dt.profiling.core.IProfilingResult;
+import com._1c.g5.v8.dt.profiling.core.IProfilingResultListener;
+import com._1c.g5.v8.dt.profiling.core.IProfilingService;
 import com._1c.g5.wiring.IManagedService;
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 import ru.capralow.dt.unit.launcher.plugin.internal.ui.launchconfigurations.UnitTestLaunch;
 
 @Singleton
-public class UnitLauncherManager implements IManagedService, IDebugEventSetListener {
+public class UnitLauncherManager implements IManagedService, IDebugEventSetListener, IProfilingResultListener {
 
+	@Inject
+	private IProfilingService profilingService;
+
+	@Override
 	public void activate() {
 		DebugPlugin.getDefault().addDebugEventListener(this);
+		profilingService.activate();
+		profilingService.addProfilingResultsListener(this);
 	}
 
+	@Override
 	public void deactivate() {
 		DebugPlugin.getDefault().removeDebugEventListener(this);
+		profilingService.removeProfilingResultsListener(this);
+		profilingService.deactivate();
 	}
 
 	@Override
 	public void handleDebugEvents(DebugEvent[] events) {
 		for (DebugEvent event : events) {
 			Object source = event.getSource();
-			if (source instanceof IProcess && event.getKind() == DebugEvent.TERMINATE)
-				UnitTestLaunch.showJUnitResult((IProcess) source);
+			if (event.getKind() == DebugEvent.TERMINATE) {
+				if (source instanceof IProcess)
+					UnitTestLaunch.showJUnitResult((IProcess) source);
+
+				else if (source instanceof IProfileTarget) {
+					List<IProfilingResult> profilingResults = profilingService.getResults();
+
+					boolean canProfile = ((IProfileTarget) source).canProfile();
+
+					continue;
+				}
+			}
 		}
+	}
+
+	@Override
+	public void resultRenamed(IProfilingResult result, String name) {
+		return;
+	}
+
+	@Override
+	public void resultsCleared() {
+		return;
+
+	}
+
+	@Override
+	public void resultsUpdated(IProfilingResult result) {
+		return;
 	}
 
 }
