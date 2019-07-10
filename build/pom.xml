@@ -6,7 +6,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>ru.capralow.dt.unit.launcher</groupId>
 	<artifactId>build</artifactId>
-	<version>0.2.0-SNAPSHOT</version>
+	<version>0.3.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>Запуск модульных тестов для EDT</name>
@@ -184,7 +184,7 @@
 						<artifact>
 							<groupId>ru.capralow.dt.unit.launcher.target</groupId>
 							<artifactId>default</artifactId>
-							<version>0.2.0-SNAPSHOT</version>
+							<version>0.3.0-SNAPSHOT</version>
 						</artifact>
 					</target>
 					<environments>

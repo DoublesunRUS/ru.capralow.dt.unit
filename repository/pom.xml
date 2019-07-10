@@ -8,7 +8,7 @@
 	<parent>
 		<groupId>ru.capralow.dt.unit.launcher</groupId>
 		<artifactId>build</artifactId>
-		<version>0.2.0-SNAPSHOT</version>
+		<version>0.3.0-SNAPSHOT</version>
 		<relativePath>../build/pom.xml</relativePath>
 	</parent>
 

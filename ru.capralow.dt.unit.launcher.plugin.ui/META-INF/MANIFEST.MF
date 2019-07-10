@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: ru.capralow.dt.unit.launcher.plugin.ui;singleton:=true
-Bundle-Version: 0.2.0.qualifier
+Bundle-Version: 0.3.0.qualifier
 Bundle-Vendor: %providerName
 Require-Bundle: org.eclipse.core.runtime,
  com._1c.g5.v8.dt.product.application;bundle-version="1.10.2",
@@ -14,23 +14,34 @@ Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Automatic-Module-Name: dt.unit.launcher.plugin.ui
 Bundle-ActivationPolicy: lazy
-Import-Package: com._1c.g5.v8.dt.bsl.model,
+Import-Package: com._1c.g5.modeling.xtext.scoping,
+ com._1c.g5.v8.dt.bsl.model,
+ com._1c.g5.v8.dt.bsl.typesystem,
+ com._1c.g5.v8.dt.bsl.ui,
+ com._1c.g5.v8.dt.bsl.ui.contentassist.stringliteral,
  com._1c.g5.v8.dt.core.platform,
  com._1c.g5.v8.dt.debug.core,
+ com._1c.g5.v8.dt.debug.model.measure,
  com._1c.g5.v8.dt.mcore,
  com._1c.g5.v8.dt.mcore.util,
  com._1c.g5.v8.dt.metadata.mdclass,
+ com._1c.g5.v8.dt.profiling.core,
  com._1c.g5.wiring,
  com._1c.g5.wiring.binder,
  com.google.common.base,
+ com.google.common.collect,
  com.google.inject,
  org.eclipse.emf.common.util,
  org.eclipse.emf.ecore,
  org.eclipse.emf.ecore.util,
  org.eclipse.xtext.builder,
+ org.eclipse.xtext.naming,
  org.eclipse.xtext.nodemodel,
  org.eclipse.xtext.nodemodel.util,
  org.eclipse.xtext.resource,
+ org.eclipse.xtext.scoping,
+ org.eclipse.xtext.ui.editor.hyperlinking,
+ org.eclipse.xtext.util,
  ru.capralow.dt.unit.launcher.plugin.core,
  ru.capralow.dt.unit.launcher.plugin.core.frameworks,
  ru.capralow.dt.unit.launcher.plugin.core.frameworks.gson
