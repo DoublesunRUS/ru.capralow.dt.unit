@@ -14,8 +14,8 @@ public class ExternalDependenciesModule extends AbstractServiceAwareModule {
 
 	@Override
 	protected void doConfigure() {
-		bind(IV8ProjectManager.class).toService();
 		bind(IProfilingService.class).toService();
+		bind(IV8ProjectManager.class).toService();
 	}
 
 }

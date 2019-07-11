@@ -1,5 +1,6 @@
-package ru.capralow.dt.unit.launcher.plugin.internal.ui.bsl.typesystem;
+package ru.capralow.dt.unit.launcher.plugin.internal.ui.typesystem;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -18,7 +19,7 @@ public class StringLiteralProposalProviderFramework extends AbstractStringLitera
 	public List<Triple<String, String, IBslStringLiteralProposalImageProvider>> computeProposals(
 			Triple<EObject, List<Expression>, Integer> context, String content, IScopeProvider scopeProvider,
 			IIndexSlicePredicateService slicePredicateService, boolean isRussian) {
-		return null;
+		return Collections.emptyList();
 	}
 
 	@Override
@@ -30,7 +31,7 @@ public class StringLiteralProposalProviderFramework extends AbstractStringLitera
 	@Override
 	public List<IReferenceDescription> getReferenceDescriptions(Triple<EObject, List<Expression>, Integer> context,
 			IScopeProvider scopeProvider) {
-		return null;
+		return Collections.emptyList();
 	}
 
 	@Override

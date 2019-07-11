@@ -1,4 +1,4 @@
-package ru.capralow.dt.unit.launcher.plugin.internal.ui.bsl.typesystem;
+package ru.capralow.dt.unit.launcher.plugin.internal.ui.typesystem;
 
 import java.util.Set;
 

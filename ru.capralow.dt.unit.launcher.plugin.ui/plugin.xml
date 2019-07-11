@@ -10,19 +10,19 @@
 	
 	<extension point="com._1c.g5.v8.dt.bsl.dynamicContextDefProvider">
 		<dynamicContextDefProvider
-			class="ru.capralow.dt.unit.launcher.plugin.internal.ui.ExecutableExtensionFactory:ru.capralow.dt.unit.launcher.plugin.internal.ui.bsl.typesystem.FrameworkContextDefProvider">
+			class="ru.capralow.dt.unit.launcher.plugin.internal.ui.ExecutableExtensionFactory:ru.capralow.dt.unit.launcher.plugin.internal.ui.typesystem.FrameworkContextDefProvider">
 		</dynamicContextDefProvider>
 	</extension>
 	<extension point="com._1c.g5.v8.dt.bsl.invocationTypesComputerExtension">
 		<computers
-			computer="ru.capralow.dt.unit.launcher.plugin.internal.ui.ExecutableExtensionFactory:ru.capralow.dt.unit.launcher.plugin.internal.ui.bsl.typesystem.FrameworkInvocationTypesComputer"
+			computer="ru.capralow.dt.unit.launcher.plugin.internal.ui.ExecutableExtensionFactory:ru.capralow.dt.unit.launcher.plugin.internal.ui.typesystem.FrameworkInvocationTypesComputer"
 			name="TestFramework"
 			nameRu="ФреймворкТестирования">
 		</computers>
 	</extension>
 	<extension point="com._1c.g5.v8.dt.bsl.stringLiteralProposals">
 		<stringLiteralProposals
-			class="ru.capralow.dt.unit.launcher.plugin.internal.ui.bsl.typesystem.StringLiteralProposalProviderFramework">
+			class="ru.capralow.dt.unit.launcher.plugin.internal.ui.typesystem.StringLiteralProposalProviderFramework">
 		</stringLiteralProposals>
 	</extension>
 	
