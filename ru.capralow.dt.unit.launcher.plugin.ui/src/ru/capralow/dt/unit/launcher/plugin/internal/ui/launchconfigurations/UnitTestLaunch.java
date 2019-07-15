@@ -37,8 +37,9 @@ public class UnitTestLaunch {
 
 			File file = new File(paramsFilePathName + File.separator + "junit.xml"); //$NON-NLS-1$
 			if (!file.exists()) {
-				UnitLauncherUiPlugin.log(
-						UnitLauncherUiPlugin.createErrorStatus(Messages.UnitTestLaunch_Unable_to_get_framework_path));
+				String msg = MessageFormat.format(Messages.UnitTestLaunch_Unable_to_find_junit_xml_file_0,
+						file.getPath());
+				UnitLauncherUiPlugin.log(UnitLauncherUiPlugin.createErrorStatus(msg));
 				return;
 			}
 
