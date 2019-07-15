@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="ru.capralow.thirdparty.eclemma"
+      label="%featureName"
+      version="0.3.0.qualifier"
+      provider-name="%providerName">
+
+   <description>
+      Java Code Coverage for Eclipse
+   </description>
+
+   <copyright>
+      Eclipse EclEmma
+   </copyright>
+
+   <plugin
+         id="com.mountainminds.eclemma.core"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.mountainminds.eclemma.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>
