@@ -28,7 +28,11 @@
 				</executions>
 				<configuration>
 					<excludes>
-						<feature id="com.mountainminds.eclemma.feature"/>
+						<plugin id="com.mountainminds.eclemma.core"/>
+						<plugin id="com.mountainminds.eclemma.ui"/>
+						<plugin id="org.jacoco.agent"/>
+						<plugin id="org.jacoco.core"/>
+						<plugin id="org.jacoco.report"/>
 					</excludes>
 				</configuration>
 			</plugin>
