@@ -28,12 +28,7 @@
 				</executions>
 				<configuration>
 					<excludes>
-						<feature id="ru.capralow.thirdparty.eclemma"/>
-						<plugin id="com.mountainminds.eclemma.core"/>
-						<plugin id="com.mountainminds.eclemma.ui"/>
-						<plugin id="org.jacoco.agent"/>
-						<plugin id="org.jacoco.core"/>
-						<plugin id="org.jacoco.report"/>
+						<feature id="com.mountainminds.eclemma.feature"/>
 					</excludes>
 				</configuration>
 			</plugin>
