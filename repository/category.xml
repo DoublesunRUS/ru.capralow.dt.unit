@@ -3,9 +3,6 @@
 	<feature url="features/ru.capralow.dt.unit.launcher_0.3.0.qualifier.jar" id="ru.capralow.dt.unit.launcher" version="0.3.0.qualifier">
 		<category name="ru.capralow.dt.plugin.category.public"/>
 	</feature>
-	<feature url="features/ru.capralow.thirdparty.eclemma_0.3.0.qualifier.jar" id="ru.capralow.thirdparty.eclemma" version="0.3.0.qualifier">
-		<category name="ru.capralow.thirdparty.category.optional"/>
-	</feature>
 	<feature url="features/ru.capralow.thirdparty.jdt_0.3.0.qualifier.jar" id="ru.capralow.thirdparty.jdt" version="0.3.0.qualifier">
 		<category name="ru.capralow.thirdparty.category.optional"/>
 	</feature>

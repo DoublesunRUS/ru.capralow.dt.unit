@@ -33,6 +33,7 @@
 						<plugin id="org.jacoco.agent"/>
 						<plugin id="org.jacoco.core"/>
 						<plugin id="org.jacoco.report"/>
+						<plugin id="org.objectweb.asm"/>
 					</excludes>
 				</configuration>
 			</plugin>

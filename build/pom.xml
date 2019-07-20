@@ -38,7 +38,6 @@
 		<module>../ru.capralow.dt.unit.launcher.plugin.core.tests</module>
 		<module>../ru.capralow.dt.unit.launcher.plugin.ui</module>
 		<module>../ru.capralow.dt.unit.launcher.plugin.ui.tests</module>
-		<module>../ru.capralow.thirdparty.eclemma.feature</module>
 		<module>../ru.capralow.thirdparty.jdt.feature</module>
 		<module>../ru.capralow.dt.unit.launcher.plugin.feature</module>
 		<module>../repository</module>

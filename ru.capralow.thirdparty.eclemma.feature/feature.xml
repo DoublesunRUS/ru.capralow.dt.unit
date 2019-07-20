@@ -106,10 +106,6 @@ This Agreement is governed by the laws of the State of New York and the intellec
       <update label="EclEmma Updates" url="http://update.eclemma.org/"/>
    </url>
 
-   <requires>
-      <import plugin="org.objectweb.asm"/>
-   </requires>
-
    <plugin
          id="com.mountainminds.eclemma.core"
          download-size="0"
@@ -140,6 +136,13 @@ This Agreement is governed by the laws of the State of New York and the intellec
 
    <plugin
          id="org.jacoco.report"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.objectweb.asm"
          download-size="0"
          install-size="0"
          version="0.0.0"

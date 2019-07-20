@@ -19,12 +19,18 @@
 				<artifactId>tycho-source-feature-plugin</artifactId>
 				<executions>
 					<execution>
+						<id>source-feature</id>
 						<phase>package</phase>
 						<goals>
 							<goal>source-feature</goal>
 						</goals>
 					</execution>
 				</executions>
+				<configuration>
+					<excludes>
+						<feature id="com.mountainminds.eclemma.feature"/>
+					</excludes>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
