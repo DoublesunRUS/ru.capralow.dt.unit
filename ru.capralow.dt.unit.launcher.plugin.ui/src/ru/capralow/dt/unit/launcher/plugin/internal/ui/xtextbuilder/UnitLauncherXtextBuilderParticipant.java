@@ -126,6 +126,62 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 		}
 	}
 
+	private static void deleteEmptyDirs(IPath projectLocation) {
+		Path pathToBeDeleted = Paths.get(getFeaturesLocation(projectLocation));
+		if (!pathToBeDeleted.toFile().exists())
+			return;
+
+		try (Stream<Path> files = Files.walk(pathToBeDeleted);) {
+			files.sorted(Comparator.reverseOrder()).map(Path::toFile).forEach(file -> {
+				if (file.exists() && file.isDirectory() && file.list().length == 0)
+					try {
+						Files.delete(file.toPath());
+					} catch (IOException e) {
+						String msg = MessageFormat.format(
+								Messages.UnitLauncherXtextBuilderParticipant_Unable_to_delete_empty_folder_0,
+								file.toPath());
+						UnitLauncherUiPlugin.log(UnitLauncherUiPlugin.createErrorStatus(msg, e));
+					}
+			});
+
+		} catch (IOException e) {
+			String msg = MessageFormat.format(
+					Messages.UnitLauncherXtextBuilderParticipant_Unable_to_delete_empty_folders_for_project_0,
+					pathToBeDeleted);
+			UnitLauncherUiPlugin.log(UnitLauncherUiPlugin.createErrorStatus(msg, e));
+
+		}
+	}
+
+	private static void deleteModuleFeatures(IPath projectLocation, String moduleName) {
+		Path dirPath = Paths.get(getFeaturesLocation(projectLocation));
+		if (!dirPath.toFile().exists())
+			return;
+
+		try (Stream<Path> files = Files.walk(dirPath);) {
+			files.map(Path::toFile).sorted(Comparator.comparing(File::isDirectory)).forEach(file -> {
+				String fileName = moduleName + ".feature"; //$NON-NLS-1$
+				if (file.exists() && file.getName().endsWith(fileName))
+					try {
+						Files.delete(file.toPath());
+					} catch (IOException e) {
+						String msg = MessageFormat.format(
+								Messages.UnitLauncherXtextBuilderParticipant_Unable_to_delete_feature_file_0,
+								fileName);
+						UnitLauncherUiPlugin.log(UnitLauncherUiPlugin.createErrorStatus(msg, e));
+					}
+			});
+
+		} catch (IOException e) {
+			String msg = MessageFormat.format(
+					Messages.UnitLauncherXtextBuilderParticipant_Unable_to_delete_feature_files_for_module_0,
+					moduleName);
+			UnitLauncherUiPlugin.log(UnitLauncherUiPlugin.createErrorStatus(msg, e));
+
+		}
+
+	}
+
 	private static Module getCommonModule(Delta delta, Configuration configuration) {
 		EObject object = null;
 
@@ -155,6 +211,49 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 			return null;
 
 		return module;
+	}
+
+	private static Configuration getConfigurationFromProject(IV8Project v8Project) {
+		Configuration configuration = null;
+		if (v8Project instanceof IConfigurationProject) {
+			configuration = ((IConfigurationProject) v8Project).getConfiguration();
+
+		} else if (v8Project instanceof IExtensionProject) {
+			configuration = ((IExtensionProject) v8Project).getConfiguration();
+
+		} else if (v8Project instanceof IExternalObjectProject) {
+			IConfigurationProject parent = ((IExternalObjectProject) v8Project).getParent();
+			if (parent == null)
+				return null;
+			configuration = parent.getConfiguration();
+		}
+
+		return configuration;
+	}
+
+	private static Map<String, List<String>> getUnits(Module module) {
+		Map<String, List<String>> units = new HashMap<>();
+		for (Method method : module.allMethods()) {
+			String keyName = getUnitTestKeyFromMethodText(NodeModelUtils.findActualNodeFor(method).getText());
+			if (keyName == null)
+				continue;
+
+			List<String> methodsNames = units.get(DEFAULT_FEATURE_FOLDER_NAME);
+			if (methodsNames == null)
+				methodsNames = new ArrayList<>();
+			methodsNames.add(method.getName());
+			units.put(DEFAULT_FEATURE_FOLDER_NAME, methodsNames);
+
+			if (!keyName.isEmpty()) {
+				methodsNames = units.get(keyName);
+				if (methodsNames == null)
+					methodsNames = new ArrayList<>();
+				methodsNames.add(method.getName());
+				units.put(keyName, methodsNames);
+			}
+		}
+
+		return units;
 	}
 
 	@Inject
@@ -210,105 +309,6 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 		}
 		deleteEmptyDirs(project.getLocation());
 
-	}
-
-	private void deleteEmptyDirs(IPath projectLocation) {
-		Path pathToBeDeleted = Paths.get(getFeaturesLocation(projectLocation));
-		if (!pathToBeDeleted.toFile().exists())
-			return;
-
-		try (Stream<Path> files = Files.walk(pathToBeDeleted);) {
-			files.sorted(Comparator.reverseOrder()).map(Path::toFile).forEach(file -> {
-				if (file.exists() && file.isDirectory() && file.list().length == 0)
-					try {
-						Files.delete(file.toPath());
-					} catch (IOException e) {
-						String msg = MessageFormat.format(
-								Messages.UnitLauncherXtextBuilderParticipant_Unable_to_delete_empty_folder_0,
-								file.toPath());
-						UnitLauncherUiPlugin.log(UnitLauncherUiPlugin.createErrorStatus(msg, e));
-					}
-			});
-
-		} catch (IOException e) {
-			String msg = MessageFormat.format(
-					Messages.UnitLauncherXtextBuilderParticipant_Unable_to_delete_empty_folders_for_project_0,
-					pathToBeDeleted);
-			UnitLauncherUiPlugin.log(UnitLauncherUiPlugin.createErrorStatus(msg, e));
-
-		}
-	}
-
-	private void deleteModuleFeatures(IPath projectLocation, String moduleName) {
-		Path dirPath = Paths.get(getFeaturesLocation(projectLocation));
-		if (!dirPath.toFile().exists())
-			return;
-
-		try (Stream<Path> files = Files.walk(dirPath);) {
-			files.map(Path::toFile).sorted(Comparator.comparing(File::isDirectory)).forEach(file -> {
-				String fileName = moduleName + ".feature"; //$NON-NLS-1$
-				if (file.exists() && file.getName().endsWith(fileName))
-					try {
-						Files.delete(file.toPath());
-					} catch (IOException e) {
-						String msg = MessageFormat.format(
-								Messages.UnitLauncherXtextBuilderParticipant_Unable_to_delete_feature_file_0,
-								fileName);
-						UnitLauncherUiPlugin.log(UnitLauncherUiPlugin.createErrorStatus(msg, e));
-					}
-			});
-
-		} catch (IOException e) {
-			String msg = MessageFormat.format(
-					Messages.UnitLauncherXtextBuilderParticipant_Unable_to_delete_feature_files_for_module_0,
-					moduleName);
-			UnitLauncherUiPlugin.log(UnitLauncherUiPlugin.createErrorStatus(msg, e));
-
-		}
-
-	}
-
-	private Configuration getConfigurationFromProject(IV8Project v8Project) {
-		Configuration configuration = null;
-		if (v8Project instanceof IConfigurationProject) {
-			configuration = ((IConfigurationProject) v8Project).getConfiguration();
-
-		} else if (v8Project instanceof IExtensionProject) {
-			configuration = ((IExtensionProject) v8Project).getConfiguration();
-
-		} else if (v8Project instanceof IExternalObjectProject) {
-			IConfigurationProject parent = ((IExternalObjectProject) v8Project).getParent();
-			if (parent == null)
-				return null;
-			configuration = parent.getConfiguration();
-		}
-
-		return configuration;
-	}
-
-	private Map<String, List<String>> getUnits(Module module) {
-		Map<String, List<String>> units = new HashMap<>();
-		for (Method method : module.allMethods()) {
-			String keyName = getUnitTestKeyFromMethodText(NodeModelUtils.findActualNodeFor(method).getText());
-			if (keyName == null)
-				continue;
-
-			List<String> methodsNames = units.get(DEFAULT_FEATURE_FOLDER_NAME);
-			if (methodsNames == null)
-				methodsNames = new ArrayList<>();
-			methodsNames.add(method.getName());
-			units.put(DEFAULT_FEATURE_FOLDER_NAME, methodsNames);
-
-			if (!keyName.isEmpty()) {
-				methodsNames = units.get(keyName);
-				if (methodsNames == null)
-					methodsNames = new ArrayList<>();
-				methodsNames.add(method.getName());
-				units.put(keyName, methodsNames);
-			}
-		}
-
-		return units;
 	}
 
 }

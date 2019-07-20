@@ -18,17 +18,7 @@ public class FrameworkContextDefProvider implements IDynamicContextDefProvider {
 		SUPPORTED_TYPES = (Set) ImmutableSet.builder().add("TestFramework").build();
 	}
 
-	@Override
-	public Type computeDynamicType(EObject semanticObject, Type computeType, Environments envs) {
-		return null;
-	}
-
-	@Override
-	public boolean hasDynamicContext(EObject semanticObject, Type computeType, Environments envs) {
-		return isFramework(semanticObject, computeType);
-	}
-
-	private boolean isFramework(EObject semanticObject, Type computeType) {
+	private static boolean isFramework(EObject semanticObject, Type computeType) {
 		if (!(semanticObject instanceof OperatorStyleCreator))
 			return false;
 
@@ -37,6 +27,16 @@ public class FrameworkContextDefProvider implements IDynamicContextDefProvider {
 
 		String typeName = McoreUtil.getTypeName(computeType);
 		return FrameworkContextDefProvider.SUPPORTED_TYPES.contains(typeName);
+	}
+
+	@Override
+	public Type computeDynamicType(EObject semanticObject, Type computeType, Environments envs) {
+		return null;
+	}
+
+	@Override
+	public boolean hasDynamicContext(EObject semanticObject, Type computeType, Environments envs) {
+		return isFramework(semanticObject, computeType);
 	}
 
 }

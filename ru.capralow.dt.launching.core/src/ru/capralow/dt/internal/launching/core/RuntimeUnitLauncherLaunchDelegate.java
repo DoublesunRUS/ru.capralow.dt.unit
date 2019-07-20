@@ -113,6 +113,61 @@ public class RuntimeUnitLauncherLaunchDelegate extends RuntimeClientLaunchDelega
 		}
 	}
 
+	private static CharSource getFileInputSupplier(URL resourceURL) {
+		return Resources.asCharSource(resourceURL, StandardCharsets.UTF_8);
+	}
+
+	private static String readContents(CharSource source) {
+		try (Reader reader = source.openBufferedStream()) {
+			return CharStreams.toString(reader);
+
+		} catch (IOException | NullPointerException e) {
+			LaunchingPlugin.log(LaunchingPlugin.createErrorStatus(e.getMessage(), e));
+			return ""; //$NON-NLS-1$
+
+		}
+	}
+
+	private static Boolean saveFrameworkToFile(ILaunchConfiguration configuration) {
+		TestFramework framework = FrameworkUtils.getCurrentFramework();
+
+		Bundle bundle = FrameworkUtils.getFrameworkBundle();
+		try {
+			URL frameworkParamsBundleURL = FileLocator
+					.find(bundle, new Path(framework.getResourcePath() + framework.getEpfName()), null);
+			URL frameworkParamsURL = FileLocator.toFileURL(frameworkParamsBundleURL);
+
+			if (frameworkParamsURL == null) {
+				String msg = MessageFormat.format(
+						Messages.RuntimeUnitLauncherLaunchDelegate_Failed_to_get_framework_from_bundle_0_1,
+						bundle.getSymbolicName(),
+						framework.getResourcePath() + framework.getEpfName());
+				LaunchingPlugin.log(LaunchingPlugin.createErrorStatus(msg, new IOException()));
+				return false;
+			}
+			File file = URIUtil.toFile(URIUtil.toURI(frameworkParamsURL));
+
+			if (!file.exists()) {
+				String msg = MessageFormat.format(Messages.RuntimeUnitLauncherLaunchDelegate_Failed_to_read_framework_0,
+						file.toString());
+				LaunchingPlugin.log(LaunchingPlugin.createErrorStatus(msg, new IOException()));
+				return false;
+			}
+
+			String frameworkFilePathName = FrameworkUtils.getConfigurationFilesPath(configuration);
+			Files.copy(file, new File(frameworkFilePathName + FrameworkUtils.FRAMEWORK_FILE_NAME));
+
+		} catch (IOException | URISyntaxException e) {
+			String msg = MessageFormat.format(Messages.RuntimeUnitLauncherLaunchDelegate_Failed_to_save_framework_0,
+					framework.getResourcePath() + FrameworkUtils.FRAMEWORK_FILE_NAME);
+			LaunchingPlugin.log(LaunchingPlugin.createErrorStatus(msg, e));
+			return false;
+
+		}
+
+		return true;
+	}
+
 	@Inject
 	private IV8ProjectManager projectManager;
 
@@ -135,7 +190,7 @@ public class RuntimeUnitLauncherLaunchDelegate extends RuntimeClientLaunchDelega
 	public void doLaunch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor)
 			throws CoreException {
 
-		if (!saveParamsToFile(configuration, projectManager))
+		if (!saveParamsToFile(configuration))
 			return;
 
 		if (!saveFrameworkToFile(configuration))
@@ -417,7 +472,7 @@ public class RuntimeUnitLauncherLaunchDelegate extends RuntimeClientLaunchDelega
 		return intRepresentedDouble / 100.0;
 	}
 
-	private String getFeaturesPath(ILaunchConfiguration configuration, IV8ProjectManager projectManager) {
+	private String getFeaturesPath(ILaunchConfiguration configuration) {
 		String featuresPath = ""; //$NON-NLS-1$
 		try {
 			Boolean runExtensionTests = configuration
@@ -445,10 +500,6 @@ public class RuntimeUnitLauncherLaunchDelegate extends RuntimeClientLaunchDelega
 		}
 
 		return featuresPath;
-	}
-
-	private CharSource getFileInputSupplier(URL resourceURL) {
-		return Resources.asCharSource(resourceURL, StandardCharsets.UTF_8);
 	}
 
 	private IResolvableRuntimeInstallation getInstallation(final ILaunchConfiguration configuration)
@@ -512,7 +563,7 @@ public class RuntimeUnitLauncherLaunchDelegate extends RuntimeClientLaunchDelega
 					Messages.RuntimeClientLaunchDelegate_Platform__0__has_no__1__component_installed,
 					resolvable,
 					componentType.getName());
-			throw new CoreException(LaunchingPlugin.createErrorStatus(message, 1000, (Throwable) null));
+			throw new CoreException(LaunchingPlugin.createErrorStatus(message, 1000, e));
 		}
 	}
 
@@ -585,10 +636,9 @@ public class RuntimeUnitLauncherLaunchDelegate extends RuntimeClientLaunchDelega
 				&& (infobaseArch != AppArch.X86_64 || installationArch == Arch.X86_64);
 	}
 
-	private void parseParamsTemplate(URL frameworkParamsURL, ILaunchConfiguration configuration,
-			IV8ProjectManager projectManager) throws IOException {
+	private void parseParamsTemplate(URL frameworkParamsURL, ILaunchConfiguration configuration) throws IOException {
 		String paramsFilePathName = FrameworkUtils.getConfigurationFilesPath(configuration);
-		String featuresPath = getFeaturesPath(configuration, projectManager);
+		String featuresPath = getFeaturesPath(configuration);
 
 		String templateContent = readContents(getFileInputSupplier(frameworkParamsURL));
 		StringTemplate template = new StringTemplate(templateContent);
@@ -610,58 +660,7 @@ public class RuntimeUnitLauncherLaunchDelegate extends RuntimeClientLaunchDelega
 
 	}
 
-	private String readContents(CharSource source) {
-		try (Reader reader = source.openBufferedStream()) {
-			return CharStreams.toString(reader);
-
-		} catch (IOException | NullPointerException e) {
-			LaunchingPlugin.log(LaunchingPlugin.createErrorStatus(e.getMessage(), e));
-			return ""; //$NON-NLS-1$
-
-		}
-	}
-
-	private Boolean saveFrameworkToFile(ILaunchConfiguration configuration) {
-		TestFramework framework = FrameworkUtils.getCurrentFramework();
-
-		Bundle bundle = FrameworkUtils.getFrameworkBundle();
-		try {
-			URL frameworkParamsBundleURL = FileLocator
-					.find(bundle, new Path(framework.getResourcePath() + framework.getEpfName()), null);
-			URL frameworkParamsURL = FileLocator.toFileURL(frameworkParamsBundleURL);
-
-			if (frameworkParamsURL == null) {
-				String msg = MessageFormat.format(
-						Messages.RuntimeUnitLauncherLaunchDelegate_Failed_to_get_framework_from_bundle_0_1,
-						bundle.getSymbolicName(),
-						framework.getResourcePath() + framework.getEpfName());
-				LaunchingPlugin.log(LaunchingPlugin.createErrorStatus(msg, new IOException()));
-				return false;
-			}
-			File file = URIUtil.toFile(URIUtil.toURI(frameworkParamsURL));
-
-			if (!file.exists()) {
-				String msg = MessageFormat.format(Messages.RuntimeUnitLauncherLaunchDelegate_Failed_to_read_framework_0,
-						file.toString());
-				LaunchingPlugin.log(LaunchingPlugin.createErrorStatus(msg, new IOException()));
-				return false;
-			}
-
-			String frameworkFilePathName = FrameworkUtils.getConfigurationFilesPath(configuration);
-			Files.copy(file, new File(frameworkFilePathName + FrameworkUtils.FRAMEWORK_FILE_NAME));
-
-		} catch (IOException | URISyntaxException e) {
-			String msg = MessageFormat.format(Messages.RuntimeUnitLauncherLaunchDelegate_Failed_to_save_framework_0,
-					framework.getResourcePath() + FrameworkUtils.FRAMEWORK_FILE_NAME);
-			LaunchingPlugin.log(LaunchingPlugin.createErrorStatus(msg, e));
-			return false;
-
-		}
-
-		return true;
-	}
-
-	private Boolean saveParamsToFile(ILaunchConfiguration configuration, IV8ProjectManager projectManager) {
+	private Boolean saveParamsToFile(ILaunchConfiguration configuration) {
 		TestFramework framework = FrameworkUtils.getCurrentFramework();
 
 		Bundle bundle = FrameworkUtils.getFrameworkBundle();
@@ -688,7 +687,7 @@ public class RuntimeUnitLauncherLaunchDelegate extends RuntimeClientLaunchDelega
 				return false;
 			}
 
-			parseParamsTemplate(frameworkParamsURL, configuration, projectManager);
+			parseParamsTemplate(frameworkParamsURL, configuration);
 
 		} catch (IOException | URISyntaxException e) {
 			String msg = MessageFormat.format(

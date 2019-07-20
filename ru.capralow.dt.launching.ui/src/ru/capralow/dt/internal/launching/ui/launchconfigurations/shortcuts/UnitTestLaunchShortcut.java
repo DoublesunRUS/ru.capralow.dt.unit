@@ -18,7 +18,7 @@ import ru.capralow.dt.unit.launcher.plugin.core.frameworks.gson.FrameworkSetting
 
 public class UnitTestLaunchShortcut extends AbstractRuntimeClientLaunchShortcut {
 
-	private void setUnitTestSettings(ILaunchConfigurationWorkingCopy configuration, IV8Project v8Project) {
+	private static void setUnitTestSettings(ILaunchConfigurationWorkingCopy configuration, IV8Project v8Project) {
 		configuration.setAttribute(UnitTestLaunchConfigurationAttributes.RUN_EXTENSION_TESTS, true);
 
 		configuration.setAttribute(UnitTestLaunchConfigurationAttributes.EXTENSION_PROJECT_TO_TEST,
@@ -43,9 +43,9 @@ public class UnitTestLaunchShortcut extends AbstractRuntimeClientLaunchShortcut 
 		if (!(v8Project instanceof IExtensionProject))
 			throw new NullPointerException(Messages.UnitTestLaunchShortcut_Wrong_project_exception);
 
-		project = getAppropriateBaseProject(v8Project);
+		IProject baseProject = getAppropriateBaseProject(v8Project);
 
-		ILaunchConfigurationWorkingCopy workingCopy = super.createLaunchConfiguration(project, object, mode);
+		ILaunchConfigurationWorkingCopy workingCopy = super.createLaunchConfiguration(baseProject, object, mode);
 		setUnitTestSettings(workingCopy, v8Project);
 
 		return workingCopy;
