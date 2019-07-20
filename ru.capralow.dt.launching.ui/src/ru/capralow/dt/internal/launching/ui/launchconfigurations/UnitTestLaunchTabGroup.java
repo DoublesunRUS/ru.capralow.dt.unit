@@ -10,14 +10,13 @@ import org.eclipse.debug.ui.ILaunchConfigurationTab;
 import com._1c.g5.v8.dt.debug.ui.launchconfigurations.DebugConnectionTab;
 import com._1c.g5.v8.dt.debug.ui.launchconfigurations.UnsupportedLaunchTab;
 import com._1c.g5.v8.dt.internal.launching.ui.launchconfigurations.ArgumentsTab;
-import com._1c.g5.v8.dt.internal.launching.ui.launchconfigurations.IRuntimeClientChangeNotifier;
 import com._1c.g5.v8.dt.internal.launching.ui.launchconfigurations.RuntimeClientMainTab;
 import com._1c.g5.v8.dt.internal.launching.ui.launchconfigurations.RuntimeClientTabGroup;
 import com._1c.g5.v8.dt.platform.services.core.infobases.IInfobaseManager;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class UnitTestLaunchTabGroup extends RuntimeClientTabGroup implements IRuntimeClientChangeNotifier {
+public class UnitTestLaunchTabGroup extends RuntimeClientTabGroup {
 	@Inject
 	private IInfobaseManager infobaseManager;
 	@Inject
