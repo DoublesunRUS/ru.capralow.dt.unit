@@ -43,7 +43,16 @@
     </extension>
     <languageCode>ru</languageCode>
   </languages>
-  <commonModules>CommonModule.Тест_ОбщийМодуль</commonModules>
-  <commonModules>CommonModule.Тест_ОбщийМодульКлиент</commonModules>
-  <commonModules>CommonModule.Тест_ОбщийМодульКлиентСервер</commonModules>
+  <commonModules>CommonModule.Тест_ВызватьИсключение</commonModules>
+  <commonModules>CommonModule.Тест_Булево</commonModules>
+  <commonModules>CommonModule.Тест_Дата</commonModules>
+  <commonModules>CommonModule.Тест_Строка</commonModules>
+  <commonModules>CommonModule.Тест_Число</commonModules>
+  <commonModules>CommonModule.Тест_Выполнить</commonModules>
+  <commonModules>CommonModule.Тест_ЗначениеЗаполнено</commonModules>
+  <commonModules>CommonModule.Тест_Тип</commonModules>
+  <commonModules>CommonModule.Тест_Коллекции</commonModules>
+  <commonModules>CommonModule.Тест_АсинхронныеВызовыКлиент</commonModules>
+  <commonModules>CommonModule.Тест_АсинхронныеВызовыСервер</commonModules>
+  <commonModules>CommonModule.Тест_АсинхронныеВызовыВызовСервера</commonModules>
 </mdclass:Configuration>
