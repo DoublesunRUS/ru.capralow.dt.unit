@@ -1,5 +1,0 @@
-#
-# Properties
-#
-JavaElementProperties.name   Name
-JavaElementProperties.name2= Name is {0}

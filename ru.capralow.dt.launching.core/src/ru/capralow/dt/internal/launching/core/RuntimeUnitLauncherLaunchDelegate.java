@@ -41,6 +41,7 @@ import com._1c.g5.v8.dt.common.Pair;
 import com._1c.g5.v8.dt.core.platform.IExternalObjectProject;
 import com._1c.g5.v8.dt.core.platform.IV8Project;
 import com._1c.g5.v8.dt.core.platform.IV8ProjectManager;
+import com._1c.g5.v8.dt.debug.core.IDebugConfigurationAttributes;
 import com._1c.g5.v8.dt.debug.core.model.IRuntimeDebugClientTarget;
 import com._1c.g5.v8.dt.internal.launching.core.LaunchingPlugin;
 import com._1c.g5.v8.dt.internal.launching.core.launchconfigurations.RuntimeClientLaunchDelegate;
@@ -113,504 +114,38 @@ public class RuntimeUnitLauncherLaunchDelegate extends RuntimeClientLaunchDelega
 		}
 	}
 
-	@Inject
-	private IV8ProjectManager projectManager;
+	private static final String DEBUG = "debug"; //$NON-NLS-1$
 
-	@Inject
-	private IResolvableRuntimeInstallationManager resolvableRuntimeInstallationManager;
-
-	@Inject
-	private IRuntimeComponentManager runtimeComponentManager;
-
-	@Inject
-	private IInfobaseAccessManager infobaseAccessManager;
-
-	@Inject
-	private IPublicationManager publicationManager;
-
-	@Inject
-	private IExternalObjectDumpSupport externalObjectDumpSupport;
-
-	@Override
-	public void doLaunch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor)
+	private static Map<String, String> buildProcessArguments(final ILaunchConfiguration configuration)
 			throws CoreException {
-
-		if (!saveParamsToFile(configuration, projectManager))
-			return;
-
-		if (!saveFrameworkToFile(configuration))
-			return;
-
-		doSuperLaunch(configuration, mode, launch, monitor);
-	}
-
-	private RuntimeExecutionArguments buildExecutionArguments(final ILaunchConfiguration configuration,
-			final InfobaseReference infobase, final IProgressMonitor monitor) throws CoreException {
-		final RuntimeExecutionArguments arguments = new RuntimeExecutionArguments();
-		final boolean useInfobaseAccessUser = configuration
-				.getAttribute("com._1c.g5.v8.dt.launching.core.ATTR_LAUNCH_USER_USE_INFOBASE_ACCESS", false);
-		if (useInfobaseAccessUser && infobase != null) {
-			final IInfobaseAccessSettings settings = infobaseAccessManager.getSettings(infobase);
-			arguments.setAccess(settings.access());
-			arguments.setUsername(settings.userName());
-			arguments.setPassword(settings.password());
-		} else {
-			final InfobaseAccess access = configuration
-					.getAttribute("com._1c.g5.v8.dt.launching.core.ATTR_LAUNCH_OS_INFOBASE_ACCESS", true)
-							? InfobaseAccess.OS
-							: InfobaseAccess.INFOBASE;
-			arguments.setAccess(access);
-			if (access == InfobaseAccess.INFOBASE) {
-				arguments.setUsername(configuration
-						.getAttribute("com._1c.g5.v8.dt.launching.core.ATTR_LAUNCH_USER_NAME", (String) null));
-				arguments.setPassword(configuration
-						.getAttribute("com._1c.g5.v8.dt.launching.core.ATTR_LAUNCH_USER_PASSWORD", (String) null));
-			}
-		}
-		arguments.setDataSeparation(
-				configuration.getAttribute("com._1c.g5.v8.dt.launching.core.ATTR_DATA_SEPARATION", (String) null));
-		arguments.setStartupOption(
-				configuration.getAttribute("com._1c.g5.v8.dt.launching.core.ATTR_STARTUP_OPTION", (String) null));
-		arguments.setSlowConnection(
-				configuration.getAttribute("com._1c.g5.v8.dt.launching.core.ATTR_SLOW_CONNECTION", false));
-		arguments.setEmulateDelay(
-				configuration.getAttribute("com._1c.g5.v8.dt.launching.core.ATTR_EMULATE_DELAY", false));
-		arguments.setCallDelay(
-				getDouble(configuration.getAttribute("com._1c.g5.v8.dt.launching.core.ATTR_CALL_DELAY", 0)));
-		arguments.setDataSendingDelay(
-				getDouble(configuration.getAttribute("com._1c.g5.v8.dt.launching.core.ATTR_DATA_SENDING_DELAY", 0)));
-		arguments.setDataReceivingDelay(
-				getDouble(configuration.getAttribute("com._1c.g5.v8.dt.launching.core.ATTR_DATA_RECEIVING_DELAY", 0)));
-		arguments.setDisableStartupMessages(
-				configuration.getAttribute("com._1c.g5.v8.dt.launching.core.ATTR_DO_NOT_DISPLAY_WARNINGS", false));
-		arguments.setDisplayPerformance(
-				configuration.getAttribute("com._1c.g5.v8.dt.launching.core.ATTR_SHOW_PERFORMANCE", false));
-		arguments.setDisplayAllFunctions(
-				configuration.getAttribute("com._1c.g5.v8.dt.launching.core.ATTR_SHOW_ALL_FUNCTIONS", false));
-		final String logFile = configuration.getAttribute("com._1c.g5.v8.dt.launching.core.ATTR_LOG_FILE",
-				(String) null);
-		if (logFile != null) {
-			arguments.setLogFile(new File(logFile));
-		}
-		arguments.setClear(configuration.getAttribute("com._1c.g5.v8.dt.launching.core.ATTR_DO_NOT_CLEAR_LOG", false));
-		final String sessionLocale = configuration.getAttribute("com._1c.g5.v8.dt.launching.core.ATTR_SESSION_LOCALE",
-				(String) null);
-		if (sessionLocale != null) {
-			arguments.setSessionLocale(LocaleUtil.createLocale(sessionLocale));
-		}
-		final String interfaceLanguage = configuration
-				.getAttribute("com._1c.g5.v8.dt.launching.core.ATTR_INTERFACE_LANGUAGE", (String) null);
-		if (interfaceLanguage != null) {
-			arguments.setInterfaceLanguage(interfaceLanguage);
-		}
-		final String externalObjectProjectName = configuration
-				.getAttribute("com._1c.g5.v8.dt.debug.core.ATTR_EXTERNAL_OBJECT_PROJECT_NAME", (String) null);
-		final IV8Project v8project = (externalObjectProjectName == null) ? null : getProject(externalObjectProjectName);
-		if (v8project instanceof IExternalObjectProject) {
-			final IExternalObjectProject externalObjectProject = (IExternalObjectProject) v8project;
-			if (externalObjectDumpSupport.isEnabled(externalObjectProject.getProject())) {
-				final String externalObjectName = configuration
-						.getAttribute("com._1c.g5.v8.dt.debug.core.ATTR_EXTERNAL_OBJECT_NAME", (String) null);
-				final String externalObjectType = configuration
-						.getAttribute("com._1c.g5.v8.dt.debug.core.ATTR_EXTERNAL_OBJECT_TYPE", (String) null);
-				final EObject externalObject = ExternalObjectHelper
-						.getExternalObject(externalObjectProject, externalObjectName, externalObjectType);
-				if (externalObject != null) {
-					arguments.setExternalObjectDumpPath(externalObjectDumpSupport
-							.getDump(externalObjectProject.getProject(), externalObject, true, monitor));
-				} else {
-					LaunchingPlugin.log(LaunchingPlugin.createErrorStatus(MessageFormat.format(
-							Messages.RuntimeClientLaunchDelegate_External_object_with_name__0__not_found_in_project__1,
-							externalObjectName,
-							externalObjectProjectName)));
-				}
-			} else {
-				LaunchingPlugin.log(LaunchingPlugin.createErrorStatus(MessageFormat.format(
-						Messages.RuntimeClientLaunchDelegate_External_dump_generation_is_disabled_for_project__0,
-						externalObjectProjectName)));
-			}
-		}
-
-		final String externalObjectDumpPath = configuration
-				.getAttribute(UnitTestLaunchConfigurationAttributes.EXTERNAL_OBJECT_DUMP_PATH, (String) null);
-		if (externalObjectDumpPath != null) {
-			File file = new File(externalObjectDumpPath);
-			arguments.setExternalObjectDumpPath(file.toPath());
-		}
-
-		final String externalObjectStartupOptions = configuration
-				.getAttribute(UnitTestLaunchConfigurationAttributes.EXTERNAL_OBJECT_STARTUP_OPTIONS, (String) null);
-		String startupOptions = configuration.getAttribute(ILaunchConfigurationAttributes.STARTUP_OPTION,
-				(String) null);
-		if (Strings.isNullOrEmpty(startupOptions))
-			startupOptions = externalObjectStartupOptions;
-		else
-			startupOptions = externalObjectStartupOptions + ";" + startupOptions; //$NON-NLS-1$
-		arguments.setStartupOption(startupOptions);
-
-		return arguments;
-	}
-
-	private Map<String, String> buildProcessArguments(final ILaunchConfiguration configuration) throws CoreException {
 		return Maps.transformValues(configuration.getAttributes(), input -> input.toString());
 	}
 
-	private IStatus checkDebugSession(final IProject project, final ILaunch launch,
-			final ILaunchConfiguration configuration) throws CoreException {
-		final List<ILaunch> sameProject = new ArrayList<>();
-		ILaunch[] launches;
-		for (int length = (launches = DebugPlugin.getDefault().getLaunchManager()
-				.getLaunches()).length, i = 0; i < length; ++i) {
-			final ILaunch candidate = launches[i];
-			if (candidate != launch && !candidate.isTerminated() && "debug".equals(candidate.getLaunchMode())) {
-				final IDebugTarget debugTarget = candidate.getDebugTarget();
-				if (debugTarget instanceof IRuntimeDebugClientTarget
-						&& Objects.equals(project, debugTarget.getAdapter((Class) IProject.class))) {
-					sameProject.add(candidate);
-				}
-			}
-		}
-		if (sameProject.isEmpty()) {
-			return Status.OK_STATUS;
-		}
-		final IStatus debugSessionAlreadyStarted = LaunchingPlugin
-				.createErrorStatus(Messages.RuntimeClientLaunchDelegate_Debug_session_already_started, 1003);
-		final DebugSessionAlreadyStartedResponse response = (DebugSessionAlreadyStartedResponse) handleStatus(
-				debugSessionAlreadyStarted,
-				(Object) project);
-		switch (response) {
-		case RESTART_APPLICATION: {
-			for (final ILaunch candidate2 : sameProject) {
-				if (!candidate2.isTerminated()) {
-					try {
-						candidate2.terminate();
-					} catch (DebugException e) {
-						LaunchingPlugin.log(LaunchingPlugin.createErrorStatus(e.getMessage(), e));
-					}
-				}
-			}
-			return Status.OK_STATUS;
-		}
-		case LAUNCH_ANYWAY: {
-			return Status.OK_STATUS;
-		}
-		case CANCEL: {
-			return Status.CANCEL_STATUS;
-		}
-		default: {
-			throw new IllegalStateException(MessageFormat.format("Unexpected result \"{0}\"", response));
-		}
-		}
-	}
-
-	private void doSuperLaunch(final ILaunchConfiguration configuration, final String mode, final ILaunch launch,
-			final IProgressMonitor monitor) throws CoreException {
-		final IProject project = getProject(configuration).getProject();
-		final String launchUrl = getLaunchUrl(configuration);
-		final InfobaseReference infobase = getInfobase(configuration);
-		final IResolvableRuntimeInstallation resolvable = getInstallation(configuration);
-		final boolean deployBeforeLaunch = configuration
-				.getAttribute("com._1c.g5.v8.dt.launching.core.ATTR_DEPLOY_BEFORE_LAUNCH", true);
-		final boolean deployFull = configuration
-				.getAttribute("com._1c.g5.v8.dt.launching.core.ATTR_DEPLOY_FULL_CONFIGURATION", false);
-		final boolean associateAfterDeploy = configuration
-				.getAttribute("com._1c.g5.v8.dt.launching.core.ATTR_ASSOCIATE_AFTER_DEPLOY", false);
-		final SubMonitor subMonitor = SubMonitor.convert(monitor, "debug".equals(mode) ? 60 : 50);
-		if (launchUrl == null) {
-			if ("debug".equals(mode)) {
-				final IStatus checkDebugSessionStatus = checkDebugSession(project, launch, configuration);
-				if (!checkDebugSessionStatus.isOK()) {
-					handleErrorStatus(checkDebugSessionStatus, subMonitor.newChild(1), launch);
-					return;
-				}
-			}
-			final IStatus infobaseExistenceStatus = checkInfobaseExistence(infobase, subMonitor.newChild(1));
-			if (!infobaseExistenceStatus.isOK()) {
-				handleErrorStatus(infobaseExistenceStatus, subMonitor.newChild(1), launch);
-				return;
-			}
-			if (deployBeforeLaunch) {
-				final IStatus infobaseUpdateStatus = updateInfobaseDatabase(project,
-						infobase,
-						deployFull,
-						associateAfterDeploy,
-						subMonitor.newChild(30));
-				if (!infobaseUpdateStatus.isOK()) {
-					handleErrorStatus(infobaseUpdateStatus, subMonitor.newChild(1), launch);
-					return;
-				}
-			}
-			if (monitor.isCanceled()) {
-				return;
-			}
-			Publication publication = null;
-			final boolean needPublication = configuration
-					.getAttribute("com._1c.g5.v8.dt.launching.core.ATTR_NEED_INFOBASE_PUBLICATION", false);
-			if (needPublication) {
-				final PublicationResult publishResult = publishInfobase(infobase, resolvable, subMonitor.newChild(10));
-				final IStatus publishStatus = publishResult.getStatus();
-				publication = publishResult.getPublication();
-				if (!publishStatus.isOK()) {
-					handleErrorStatus(publishStatus, subMonitor.newChild(1), launch);
-					return;
-				}
-			}
-			if (monitor.isCanceled()) {
-				return;
-			}
-			final RuntimeExecutionArguments arguments = buildExecutionArguments(configuration,
-					infobase,
-					subMonitor.newChild(1));
-			if ("debug".equals(mode)) {
-				final String debugServerUrl = attachDebugTarget(configuration,
-						launch,
-						resolvable,
-						subMonitor.newChild(10));
-				arguments.setDebugServerUrl(debugServerUrl);
-			}
-			final IStatus launchStatus = launchInfobaseClient(configuration,
-					launch,
-					infobase,
-					resolvable,
-					arguments,
-					publication);
-			if (!launchStatus.isOK()) {
-				handleErrorStatus(launchStatus, subMonitor.newChild(1), launch);
-				return;
-			}
-			if (associateAfterDeploy) {
-				associate(project, infobase, deployBeforeLaunch);
-			}
-		} else {
-			final RuntimeExecutionArguments arguments2 = buildExecutionArguments(configuration,
-					infobase,
-					subMonitor.newChild(1));
-			if ("debug".equals(mode)) {
-				final IStatus checkDebugSessionStatus2 = checkDebugSession(project, launch, configuration);
-				if (!checkDebugSessionStatus2.isOK()) {
-					return;
-				}
-				final String debugServerUrl2 = attachDebugTarget(configuration,
-						launch,
-						resolvable,
-						subMonitor.newChild(10));
-				arguments2.setDebugServerUrl(debugServerUrl2);
-			}
-			final IStatus launchStatus2 = launchUrlConnectionClient(configuration,
-					launch,
-					launchUrl,
-					resolvable,
-					infobase,
-					arguments2);
-			if (!launchStatus2.isOK()) {
-				handleErrorStatus(launchStatus2, subMonitor.newChild(1), launch);
-			}
-		}
-	}
-
-	private String formatProcessName(final String processName) {
+	private static String formatProcessName(final String processName) {
 		final String timestamp = DateFormat.getDateTimeInstance(2, 2).format(new Date());
-		return String.format("%s (%s)", processName, timestamp);
+		return String.format("%s (%s)", processName, timestamp); //$NON-NLS-1$
 	}
 
-	private double getDouble(final int intRepresentedDouble) {
+	private static double getDouble(final int intRepresentedDouble) {
 		return intRepresentedDouble / 100.0;
 	}
 
-	private String getFeaturesPath(ILaunchConfiguration configuration, IV8ProjectManager projectManager) {
-		String featuresPath = ""; //$NON-NLS-1$
-		try {
-			Boolean runExtensionTests = configuration
-					.getAttribute(UnitTestLaunchConfigurationAttributes.RUN_EXTENSION_TESTS, false);
-			Boolean runModuleTests = configuration.getAttribute(UnitTestLaunchConfigurationAttributes.RUN_MODULE_TESTS,
-					false);
-			Boolean runTagTests = configuration.getAttribute(UnitTestLaunchConfigurationAttributes.RUN_TAG_TESTS,
-					false);
-			IProject project = FrameworkUtils.getConfigurationProject(configuration, projectManager);
-			String commonModule = FrameworkUtils.getModuleFromConfiguration(configuration, projectManager);
-			String tag = FrameworkUtils.getTagFromConfiguration(configuration, projectManager);
-
-			featuresPath = project.getLocation() + "/features/"; //$NON-NLS-1$
-			if (runExtensionTests)
-				featuresPath += "all/"; //$NON-NLS-1$
-			else if (runModuleTests)
-				featuresPath += "all/" + commonModule + ".feature"; //$NON-NLS-1$ //$NON-NLS-2$
-			else if (runTagTests)
-				featuresPath += tag + "/"; //$NON-NLS-1$
-
-		} catch (CoreException e) {
-			LaunchingPlugin.log(LaunchingPlugin
-					.createErrorStatus(Messages.RuntimeUnitLauncherLaunchDelegate_Incorrect_launch_configuration, e));
-
-		}
-
-		return featuresPath;
-	}
-
-	private CharSource getFileInputSupplier(URL resourceURL) {
+	private static CharSource getFileInputSupplier(URL resourceURL) {
 		return Resources.asCharSource(resourceURL, StandardCharsets.UTF_8);
 	}
 
-	private IResolvableRuntimeInstallation getInstallation(final ILaunchConfiguration configuration)
-			throws CoreException {
-		final String resolvableAsString = configuration
-				.getAttribute("com._1c.g5.v8.dt.debug.core.ATTR_RUNTIME_INSTALLATION", (String) null);
-		return (resolvableAsString == null) ? null
-				: resolvableRuntimeInstallationManager.deserialize(resolvableAsString);
+	private static String getLaunchUrl(final ILaunchConfiguration configuration) throws CoreException {
+		return configuration.getAttribute(ILaunchConfigurationAttributes.LAUNCH_URL, (String) null);
 	}
 
-	private String getLaunchUrl(final ILaunchConfiguration configuration) throws CoreException {
-		return configuration.getAttribute("com._1c.g5.v8.dt.launching.core.ATTR_LAUNCH_URL", (String) null);
-	}
-
-	private String getLaunchUrl(final InfobaseReference infobase, final Publication publication) throws CoreException {
-		if (infobase.getInfobaseType() == InfobaseType.WEB) {
-			final WebServerConnectionString connectionString = (WebServerConnectionString) infobase
-					.getConnectionString();
-			return connectionString.getUrl();
-		}
-		if (publication != null) {
-			try {
-				return publicationManager.getPublicationUrl(publication.getWebServer(), publication.getName());
-			} catch (WebServerAccessException e) {
-				throw new CoreException(LaunchingPlugin
-						.createErrorStatus(Messages.RuntimeClientLaunchDelegate_Error_while_launching, e));
-			}
-		}
-		throw new CoreException(LaunchingPlugin.createErrorStatus("Publication not provided for web client launch"));
-	}
-
-	private <C extends IRuntimeComponent, E extends IRuntimeComponentExecutor> Pair<C, E> getRuntimeClientComponent(
-			final IResolvableRuntimeInstallation resolvable, final InfobaseReference infobase,
-			final String clientTypeId) throws CoreException {
-		final IRuntimeComponentType componentType = runtimeComponentManager.getType(clientTypeId);
-		if (componentType == null) {
-			throw new IllegalArgumentException(
-					MessageFormat.format("1C:Enterprise runtime component with id {0} not found", clientTypeId));
-		}
-		try {
-			final RuntimeInstallation installation = resolvable
-					.get(candidate -> runtimeComponentManager.hasComponent(candidate, new String[] { clientTypeId })
-							&& matchesByArch(candidate, infobase), new ArchPriorityComparator(infobase));
-			if (!runtimeComponentManager.supportsExecution(installation, clientTypeId)) {
-				final String message = MessageFormat.format(
-						Messages.RuntimeClientLaunchDelegate_Platform__0__has_no__1__component_installed,
-						installation.getName(),
-						componentType.getName());
-				throw new CoreException(LaunchingPlugin.createErrorStatus(message, 1000, (Throwable) null));
-			}
-			final Pair<C, E> componentExecutor = (Pair<C, E>) runtimeComponentManager
-					.getComponentAndExecutor(installation, clientTypeId);
-			if (componentExecutor == null) {
-				throw new IllegalStateException(MessageFormat.format(
-						"No 1C:Enterprise runtime component executor with component type \"{0}\" is registered",
-						clientTypeId));
-			}
-			return componentExecutor;
-		} catch (MatchingRuntimeNotFound e) {
-			final String message = MessageFormat.format(
-					Messages.RuntimeClientLaunchDelegate_Platform__0__has_no__1__component_installed,
-					resolvable,
-					componentType.getName());
-			throw new CoreException(LaunchingPlugin.createErrorStatus(message, 1000, (Throwable) null));
-		}
-	}
-
-	private IStatus launchInfobaseClient(final ILaunchConfiguration configuration, final ILaunch launch,
-			final InfobaseReference infobase, final IResolvableRuntimeInstallation installation,
-			final RuntimeExecutionArguments arguments, final Publication publication) throws CoreException {
-		final String clientTypeId = ClientTypeSelectionSupport
-				.getExecutionClientTypeId(configuration, installation, infobase, runtimeComponentManager);
-		final boolean canRunRuntimeClient = runtimeComponentManager.getTypes(IRuntimeClientLauncher.class).stream()
-				.anyMatch(type -> clientTypeId.equals(type.getId()));
-		try {
-			if (!canRunRuntimeClient) {
-				return launchUrlConnectionClient(configuration,
-						launch,
-						getLaunchUrl(infobase, publication),
-						installation,
-						infobase,
-						arguments);
-			}
-			final Pair<ILaunchableRuntimeComponent, IRuntimeClientLauncher> runtimeClient = getRuntimeClientComponent(
-					installation,
-					infobase,
-					clientTypeId);
-			final Pair<String, Process> clientProcess = runtimeClient.second
-					.runClient(runtimeClient.first, infobase, arguments);
-			DebugPlugin.newProcess(launch,
-					clientProcess.second,
-					formatProcessName(clientProcess.first),
-					buildProcessArguments(configuration));
-		} catch (CoreException e) {
-			return e.getStatus();
-		} catch (RuntimeExecutionException e2) {
-			return LaunchingPlugin.createErrorStatus(Messages.RuntimeClientLaunchDelegate_Error_while_launching, e2);
-		}
-		return Status.OK_STATUS;
-	}
-
-	private IStatus launchUrlConnectionClient(final ILaunchConfiguration configuration, final ILaunch launch,
-			final String launchUrl, final IResolvableRuntimeInstallation installation, final InfobaseReference infobase,
-			final RuntimeExecutionArguments arguments) throws CoreException {
-		final String clientTypeId = ClientTypeSelectionSupport.getExecutionClientTypeId(configuration,
-				installation,
-				(InfobaseReference) null,
-				runtimeComponentManager);
-		try {
-			final Pair<IRuntimeComponent, IUrlOpenClientLauncher> uriOpenClient = getRuntimeComponent(installation,
-					clientTypeId);
-			final Pair<String, Process> clientProcess = uriOpenClient.second
-					.runClient(uriOpenClient.first, launchUrl, infobase, arguments);
-			if (clientProcess != null) {
-				DebugPlugin.newProcess(launch,
-						clientProcess.second,
-						formatProcessName(clientProcess.first),
-						buildProcessArguments(configuration));
-			} else {
-				removeLaunch(launch);
-			}
-		} catch (CoreException e) {
-			return e.getStatus();
-		} catch (RuntimeExecutionException e2) {
-			return LaunchingPlugin.createErrorStatus(Messages.RuntimeClientLaunchDelegate_Error_while_launching, e2);
-		}
-		return Status.OK_STATUS;
-	}
-
-	private boolean matchesByArch(final RuntimeInstallation installation, final InfobaseReference infobase) {
+	private static boolean matchesByArch(final RuntimeInstallation installation, final InfobaseReference infobase) {
 		final AppArch infobaseArch = infobase.getAppArch();
 		final Arch installationArch = installation.getArch();
 		return (infobaseArch != AppArch.X86 || installationArch != Arch.X86_64)
 				&& (infobaseArch != AppArch.X86_64 || installationArch == Arch.X86_64);
 	}
 
-	private void parseParamsTemplate(URL frameworkParamsURL, ILaunchConfiguration configuration,
-			IV8ProjectManager projectManager) throws IOException {
-		String paramsFilePathName = FrameworkUtils.getConfigurationFilesPath(configuration);
-		String featuresPath = getFeaturesPath(configuration, projectManager);
-
-		String templateContent = readContents(getFileInputSupplier(frameworkParamsURL));
-		StringTemplate template = new StringTemplate(templateContent);
-		template.setAttribute("FeaturesPath", featuresPath); //$NON-NLS-1$
-		template.setAttribute("JUnitPath", paramsFilePathName); //$NON-NLS-1$
-
-		File paramsFilePath = new File(paramsFilePathName);
-		if (!paramsFilePath.exists())
-			paramsFilePath.mkdirs();
-
-		try (FileOutputStream outputStream = new FileOutputStream(paramsFilePathName + FrameworkUtils.PARAMS_FILE_NAME);
-				OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream, StandardCharsets.UTF_8);
-				BufferedWriter bufferedWriter = new BufferedWriter(outputStreamWriter);)
-
-		{
-			bufferedWriter.write(template.toString());
-
-		}
-
-	}
-
-	private String readContents(CharSource source) {
+	private static String readContents(CharSource source) {
 		try (Reader reader = source.openBufferedStream()) {
 			return CharStreams.toString(reader);
 
@@ -621,7 +156,7 @@ public class RuntimeUnitLauncherLaunchDelegate extends RuntimeClientLaunchDelega
 		}
 	}
 
-	private Boolean saveFrameworkToFile(ILaunchConfiguration configuration) {
+	private static Boolean saveFrameworkToFile(ILaunchConfiguration configuration) {
 		TestFramework framework = FrameworkUtils.getCurrentFramework();
 
 		Bundle bundle = FrameworkUtils.getFrameworkBundle();
@@ -661,7 +196,467 @@ public class RuntimeUnitLauncherLaunchDelegate extends RuntimeClientLaunchDelega
 		return true;
 	}
 
-	private Boolean saveParamsToFile(ILaunchConfiguration configuration, IV8ProjectManager projectManager) {
+	@Inject
+	private IV8ProjectManager projectManager;
+
+	@Inject
+	private IResolvableRuntimeInstallationManager resolvableRuntimeInstallationManager;
+
+	@Inject
+	private IRuntimeComponentManager runtimeComponentManager;
+
+	@Inject
+	private IInfobaseAccessManager infobaseAccessManager;
+
+	@Inject
+	private IPublicationManager publicationManager;
+
+	@Inject
+	private IExternalObjectDumpSupport externalObjectDumpSupport;
+
+	@Override
+	public void doLaunch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor)
+			throws CoreException {
+
+		if (!saveParamsToFile(configuration))
+			return;
+
+		if (!saveFrameworkToFile(configuration))
+			return;
+
+		doSuperLaunch(configuration, mode, launch, monitor);
+	}
+
+	private RuntimeExecutionArguments buildExecutionArgumentsEx(final ILaunchConfiguration configuration,
+			final InfobaseReference infobase, final IProgressMonitor monitor) throws CoreException {
+		final RuntimeExecutionArguments arguments = new RuntimeExecutionArguments();
+		final boolean useInfobaseAccessUser = configuration
+				.getAttribute(ILaunchConfigurationAttributes.LAUNCH_USER_USE_INFOBASE_ACCESS, false);
+		if (useInfobaseAccessUser && infobase != null) {
+			final IInfobaseAccessSettings settings = infobaseAccessManager.getSettings(infobase);
+			arguments.setAccess(settings.access());
+			arguments.setUsername(settings.userName());
+			arguments.setPassword(settings.password());
+		} else {
+			final InfobaseAccess access = configuration
+					.getAttribute(ILaunchConfigurationAttributes.LAUNCH_OS_INFOBASE_ACCESS, true) ? InfobaseAccess.OS
+							: InfobaseAccess.INFOBASE;
+			arguments.setAccess(access);
+			if (access == InfobaseAccess.INFOBASE) {
+				arguments.setUsername(
+						configuration.getAttribute(ILaunchConfigurationAttributes.LAUNCH_USER_NAME, (String) null));
+				arguments.setPassword(
+						configuration.getAttribute(ILaunchConfigurationAttributes.LAUNCH_USER_PASSWORD, (String) null));
+			}
+		}
+		arguments.setDataSeparation(
+				configuration.getAttribute(ILaunchConfigurationAttributes.DATA_SEPARATION, (String) null));
+		arguments.setStartupOption(
+				configuration.getAttribute(ILaunchConfigurationAttributes.STARTUP_OPTION, (String) null));
+		arguments.setSlowConnection(configuration.getAttribute(ILaunchConfigurationAttributes.SLOW_CONNECTION, false));
+		arguments.setEmulateDelay(configuration.getAttribute(ILaunchConfigurationAttributes.EMULATE_DELAY, false));
+		arguments.setCallDelay(getDouble(configuration.getAttribute(ILaunchConfigurationAttributes.CALL_DELAY, 0)));
+		arguments.setDataSendingDelay(
+				getDouble(configuration.getAttribute(ILaunchConfigurationAttributes.DATA_SENDING_DELAY, 0)));
+		arguments.setDataReceivingDelay(
+				getDouble(configuration.getAttribute(ILaunchConfigurationAttributes.DATA_RECEIVING_DELAY, 0)));
+		arguments.setDisableStartupMessages(
+				configuration.getAttribute(ILaunchConfigurationAttributes.DO_NOT_DISPLAY_WARNINGS, false));
+		arguments.setDisplayPerformance(
+				configuration.getAttribute(ILaunchConfigurationAttributes.SHOW_PERFORMANCE, false));
+		arguments.setDisplayAllFunctions(
+				configuration.getAttribute(ILaunchConfigurationAttributes.SHOW_ALL_FUNCTIONS, false));
+		final String logFile = configuration.getAttribute(ILaunchConfigurationAttributes.LOG_FILE, (String) null);
+		if (logFile != null) {
+			arguments.setLogFile(new File(logFile));
+		}
+		arguments.setClear(configuration.getAttribute(ILaunchConfigurationAttributes.DO_NOT_CLEAR_LOG, false));
+		final String sessionLocale = configuration.getAttribute(ILaunchConfigurationAttributes.SESSION_LOCALE,
+				(String) null);
+		if (sessionLocale != null) {
+			arguments.setSessionLocale(LocaleUtil.createLocale(sessionLocale));
+		}
+		final String interfaceLanguage = configuration.getAttribute(ILaunchConfigurationAttributes.INTERFACE_LANGUAGE,
+				(String) null);
+		if (interfaceLanguage != null) {
+			arguments.setInterfaceLanguage(interfaceLanguage);
+		}
+		final String externalObjectProjectName = configuration
+				.getAttribute(IDebugConfigurationAttributes.EXTERNAL_OBJECT_PROJECT_NAME, (String) null);
+		final IV8Project v8project = (externalObjectProjectName == null) ? null : getProject(externalObjectProjectName);
+		if (v8project instanceof IExternalObjectProject) {
+			final IExternalObjectProject externalObjectProject = (IExternalObjectProject) v8project;
+			if (externalObjectDumpSupport.isEnabled(externalObjectProject.getProject())) {
+				final String externalObjectName = configuration
+						.getAttribute(IDebugConfigurationAttributes.EXTERNAL_OBJECT_NAME, (String) null);
+				final String externalObjectType = configuration
+						.getAttribute(IDebugConfigurationAttributes.EXTERNAL_OBJECT_TYPE, (String) null);
+				final EObject externalObject = ExternalObjectHelper
+						.getExternalObject(externalObjectProject, externalObjectName, externalObjectType);
+				if (externalObject != null) {
+					arguments.setExternalObjectDumpPath(externalObjectDumpSupport
+							.getDump(externalObjectProject.getProject(), externalObject, true, monitor));
+				} else {
+					LaunchingPlugin.log(LaunchingPlugin.createErrorStatus(MessageFormat.format(
+							Messages.RuntimeClientLaunchDelegate_External_object_with_name__0__not_found_in_project__1,
+							externalObjectName,
+							externalObjectProjectName)));
+				}
+			} else {
+				LaunchingPlugin.log(LaunchingPlugin.createErrorStatus(MessageFormat.format(
+						Messages.RuntimeClientLaunchDelegate_External_dump_generation_is_disabled_for_project__0,
+						externalObjectProjectName)));
+			}
+		}
+
+		final String externalObjectDumpPath = configuration
+				.getAttribute(UnitTestLaunchConfigurationAttributes.EXTERNAL_OBJECT_DUMP_PATH, (String) null);
+		if (externalObjectDumpPath != null) {
+			File file = new File(externalObjectDumpPath);
+			arguments.setExternalObjectDumpPath(file.toPath());
+		}
+
+		final String externalObjectStartupOptions = configuration
+				.getAttribute(UnitTestLaunchConfigurationAttributes.EXTERNAL_OBJECT_STARTUP_OPTIONS, (String) null);
+		String startupOptions = configuration.getAttribute(ILaunchConfigurationAttributes.STARTUP_OPTION,
+				(String) null);
+		if (Strings.isNullOrEmpty(startupOptions))
+			startupOptions = externalObjectStartupOptions;
+		else
+			startupOptions = externalObjectStartupOptions + ";" + startupOptions; //$NON-NLS-1$
+		arguments.setStartupOption(startupOptions);
+
+		return arguments;
+	}
+
+	private IStatus checkDebugSessionEx(final IProject project, final ILaunch launch) throws CoreException {
+		final List<ILaunch> sameProject = new ArrayList<>();
+		ILaunch[] launches = DebugPlugin.getDefault().getLaunchManager().getLaunches();
+		for (int length = launches.length, i = 0; i < length; ++i) {
+			final ILaunch candidate = launches[i];
+			if (candidate != launch && !candidate.isTerminated() && DEBUG.equals(candidate.getLaunchMode())) {
+				final IDebugTarget debugTarget = candidate.getDebugTarget();
+				if (debugTarget instanceof IRuntimeDebugClientTarget
+						&& Objects.equals(project, debugTarget.getAdapter(IProject.class))) {
+					sameProject.add(candidate);
+				}
+			}
+		}
+		if (sameProject.isEmpty()) {
+			return Status.OK_STATUS;
+		}
+		final IStatus debugSessionAlreadyStarted = LaunchingPlugin
+				.createErrorStatus(Messages.RuntimeClientLaunchDelegate_Debug_session_already_started, 1003);
+		final DebugSessionAlreadyStartedResponse response = handleStatus(debugSessionAlreadyStarted, (Object) project);
+		switch (response) {
+		case RESTART_APPLICATION: {
+			for (final ILaunch candidate2 : sameProject) {
+				if (!candidate2.isTerminated()) {
+					try {
+						candidate2.terminate();
+					} catch (DebugException e) {
+						LaunchingPlugin.log(LaunchingPlugin.createErrorStatus(e.getMessage(), e));
+					}
+				}
+			}
+			return Status.OK_STATUS;
+		}
+		case LAUNCH_ANYWAY: {
+			return Status.OK_STATUS;
+		}
+		case CANCEL: {
+			return Status.CANCEL_STATUS;
+		}
+		default: {
+			throw new IllegalStateException(MessageFormat.format("Unexpected result \"{0}\"", response)); //$NON-NLS-1$
+		}
+		}
+	}
+
+	private void doSuperLaunch(final ILaunchConfiguration configuration, final String mode, final ILaunch launch,
+			final IProgressMonitor monitor) throws CoreException {
+		final IProject project = getProject(configuration).getProject();
+		final String launchUrl = getLaunchUrl(configuration);
+		final InfobaseReference infobase = getInfobase(configuration);
+		final IResolvableRuntimeInstallation resolvable = getInstallationEx(configuration);
+		final boolean deployBeforeLaunch = configuration
+				.getAttribute(ILaunchConfigurationAttributes.DEPLOY_BEFORE_LAUNCH, true);
+		final boolean deployFull = configuration.getAttribute(ILaunchConfigurationAttributes.DEPLOY_FULL_CONFIGURATION,
+				false);
+		final boolean associateAfterDeploy = configuration
+				.getAttribute(ILaunchConfigurationAttributes.ASSOCIATE_AFTER_DEPLOY, false);
+		final SubMonitor subMonitor = SubMonitor.convert(monitor, DEBUG.equals(mode) ? 60 : 50);
+		if (launchUrl == null) {
+			if (DEBUG.equals(mode)) {
+				final IStatus checkDebugSessionStatus = checkDebugSessionEx(project, launch);
+				if (!checkDebugSessionStatus.isOK()) {
+					handleErrorStatus(checkDebugSessionStatus, subMonitor.newChild(1), launch);
+					return;
+				}
+			}
+			final IStatus infobaseExistenceStatus = checkInfobaseExistence(infobase, subMonitor.newChild(1));
+			if (!infobaseExistenceStatus.isOK()) {
+				handleErrorStatus(infobaseExistenceStatus, subMonitor.newChild(1), launch);
+				return;
+			}
+			if (deployBeforeLaunch) {
+				final IStatus infobaseUpdateStatus = updateInfobaseDatabase(project,
+						infobase,
+						deployFull,
+						associateAfterDeploy,
+						subMonitor.newChild(30));
+				if (!infobaseUpdateStatus.isOK()) {
+					handleErrorStatus(infobaseUpdateStatus, subMonitor.newChild(1), launch);
+					return;
+				}
+			}
+			if (monitor.isCanceled()) {
+				return;
+			}
+			Publication publication = null;
+			final boolean needPublication = configuration
+					.getAttribute(ILaunchConfigurationAttributes.NEED_INFOBASE_PUBLICATION, false);
+			if (needPublication) {
+				final PublicationResult publishResult = publishInfobase(infobase, resolvable, subMonitor.newChild(10));
+				final IStatus publishStatus = publishResult.getStatus();
+				publication = publishResult.getPublication();
+				if (!publishStatus.isOK()) {
+					handleErrorStatus(publishStatus, subMonitor.newChild(1), launch);
+					return;
+				}
+			}
+			if (monitor.isCanceled()) {
+				return;
+			}
+			final RuntimeExecutionArguments arguments = buildExecutionArgumentsEx(configuration,
+					infobase,
+					subMonitor.newChild(1));
+			if (DEBUG.equals(mode)) {
+				final String debugServerUrl = attachDebugTarget(configuration,
+						launch,
+						resolvable,
+						subMonitor.newChild(10));
+				arguments.setDebugServerUrl(debugServerUrl);
+			}
+			final IStatus launchStatus = launchInfobaseClientEx(configuration,
+					launch,
+					infobase,
+					resolvable,
+					arguments,
+					publication);
+			if (!launchStatus.isOK()) {
+				handleErrorStatus(launchStatus, subMonitor.newChild(1), launch);
+				return;
+			}
+			if (associateAfterDeploy) {
+				associate(project, infobase, deployBeforeLaunch);
+			}
+		} else {
+			final RuntimeExecutionArguments arguments2 = buildExecutionArgumentsEx(configuration,
+					infobase,
+					subMonitor.newChild(1));
+			if (DEBUG.equals(mode)) {
+				final IStatus checkDebugSessionStatus2 = checkDebugSessionEx(project, launch);
+				if (!checkDebugSessionStatus2.isOK()) {
+					return;
+				}
+				final String debugServerUrl2 = attachDebugTarget(configuration,
+						launch,
+						resolvable,
+						subMonitor.newChild(10));
+				arguments2.setDebugServerUrl(debugServerUrl2);
+			}
+			final IStatus launchStatus2 = launchUrlConnectionClientEx(configuration,
+					launch,
+					launchUrl,
+					resolvable,
+					infobase,
+					arguments2);
+			if (!launchStatus2.isOK()) {
+				handleErrorStatus(launchStatus2, subMonitor.newChild(1), launch);
+			}
+		}
+	}
+
+	private String getFeaturesPath(ILaunchConfiguration configuration) {
+		String featuresPath = ""; //$NON-NLS-1$
+		try {
+			Boolean runExtensionTests = configuration
+					.getAttribute(UnitTestLaunchConfigurationAttributes.RUN_EXTENSION_TESTS, false);
+			Boolean runModuleTests = configuration.getAttribute(UnitTestLaunchConfigurationAttributes.RUN_MODULE_TESTS,
+					false);
+			Boolean runTagTests = configuration.getAttribute(UnitTestLaunchConfigurationAttributes.RUN_TAG_TESTS,
+					false);
+			IProject project = FrameworkUtils.getConfigurationProject(configuration, projectManager);
+			String commonModule = FrameworkUtils.getModuleFromConfiguration(configuration, projectManager);
+			String tag = FrameworkUtils.getTagFromConfiguration(configuration, projectManager);
+
+			featuresPath = project.getLocation() + "/features/"; //$NON-NLS-1$
+			if (runExtensionTests)
+				featuresPath += "all/"; //$NON-NLS-1$
+			else if (runModuleTests)
+				featuresPath += "all/" + commonModule + ".feature"; //$NON-NLS-1$ //$NON-NLS-2$
+			else if (runTagTests)
+				featuresPath += tag + "/"; //$NON-NLS-1$
+
+		} catch (CoreException e) {
+			LaunchingPlugin.log(LaunchingPlugin
+					.createErrorStatus(Messages.RuntimeUnitLauncherLaunchDelegate_Incorrect_launch_configuration, e));
+
+		}
+
+		return featuresPath;
+	}
+
+	private IResolvableRuntimeInstallation getInstallationEx(final ILaunchConfiguration configuration)
+			throws CoreException {
+		final String resolvableAsString = configuration.getAttribute(IDebugConfigurationAttributes.RUNTIME_INSTALLATION,
+				(String) null);
+		return (resolvableAsString == null) ? null
+				: resolvableRuntimeInstallationManager.deserialize(resolvableAsString);
+	}
+
+	private String getLaunchUrlEx(final InfobaseReference infobase, final Publication publication)
+			throws CoreException {
+		if (infobase.getInfobaseType() == InfobaseType.WEB) {
+			final WebServerConnectionString connectionString = (WebServerConnectionString) infobase
+					.getConnectionString();
+			return connectionString.getUrl();
+		}
+		if (publication != null) {
+			try {
+				return publicationManager.getPublicationUrl(publication.getWebServer(), publication.getName());
+			} catch (WebServerAccessException e) {
+				throw new CoreException(LaunchingPlugin
+						.createErrorStatus(Messages.RuntimeClientLaunchDelegate_Error_while_launching, e));
+			}
+		}
+		throw new CoreException(LaunchingPlugin.createErrorStatus("Publication not provided for web client launch")); //$NON-NLS-1$
+	}
+
+	private <C extends IRuntimeComponent, E extends IRuntimeComponentExecutor> Pair<C, E> getRuntimeClientComponentEx(
+			final IResolvableRuntimeInstallation resolvable, final InfobaseReference infobase,
+			final String clientTypeId) throws CoreException {
+		final IRuntimeComponentType componentType = runtimeComponentManager.getType(clientTypeId);
+		if (componentType == null) {
+			throw new IllegalArgumentException(
+					MessageFormat.format("1C:Enterprise runtime component with id {0} not found", clientTypeId)); //$NON-NLS-1$
+		}
+		try {
+			final RuntimeInstallation installation = resolvable
+					.get(candidate -> runtimeComponentManager.hasComponent(candidate, new String[] { clientTypeId })
+							&& matchesByArch(candidate, infobase), new ArchPriorityComparator(infobase));
+			if (!runtimeComponentManager.supportsExecution(installation, clientTypeId)) {
+				final String message = MessageFormat.format(
+						Messages.RuntimeClientLaunchDelegate_Platform__0__has_no__1__component_installed,
+						installation.getName(),
+						componentType.getName());
+				throw new CoreException(LaunchingPlugin.createErrorStatus(message, 1000, (Throwable) null));
+			}
+			final Pair<C, E> componentExecutor = runtimeComponentManager.getComponentAndExecutor(installation,
+					clientTypeId);
+			if (componentExecutor == null) {
+				throw new IllegalStateException(MessageFormat.format(
+						"No 1C:Enterprise runtime component executor with component type \"{0}\" is registered", //$NON-NLS-1$
+						clientTypeId));
+			}
+			return componentExecutor;
+		} catch (MatchingRuntimeNotFound e) {
+			final String message = MessageFormat.format(
+					Messages.RuntimeClientLaunchDelegate_Platform__0__has_no__1__component_installed,
+					resolvable,
+					componentType.getName());
+			throw new CoreException(LaunchingPlugin.createErrorStatus(message, 1000, e));
+		}
+	}
+
+	private IStatus launchInfobaseClientEx(final ILaunchConfiguration configuration, final ILaunch launch,
+			final InfobaseReference infobase, final IResolvableRuntimeInstallation installation,
+			final RuntimeExecutionArguments arguments, final Publication publication) throws CoreException {
+		final String clientTypeId = ClientTypeSelectionSupport
+				.getExecutionClientTypeId(configuration, installation, infobase, runtimeComponentManager);
+		final boolean canRunRuntimeClient = runtimeComponentManager.getTypes(IRuntimeClientLauncher.class).stream()
+				.anyMatch(type -> clientTypeId.equals(type.getId()));
+		try {
+			if (!canRunRuntimeClient) {
+				return launchUrlConnectionClientEx(configuration,
+						launch,
+						getLaunchUrlEx(infobase, publication),
+						installation,
+						infobase,
+						arguments);
+			}
+			final Pair<ILaunchableRuntimeComponent, IRuntimeClientLauncher> runtimeClient = getRuntimeClientComponentEx(
+					installation,
+					infobase,
+					clientTypeId);
+			final Pair<String, Process> clientProcess = runtimeClient.second
+					.runClient(runtimeClient.first, infobase, arguments);
+			DebugPlugin.newProcess(launch,
+					clientProcess.second,
+					formatProcessName(clientProcess.first),
+					buildProcessArguments(configuration));
+		} catch (CoreException e) {
+			return e.getStatus();
+		} catch (RuntimeExecutionException e2) {
+			return LaunchingPlugin.createErrorStatus(Messages.RuntimeClientLaunchDelegate_Error_while_launching, e2);
+		}
+		return Status.OK_STATUS;
+	}
+
+	private IStatus launchUrlConnectionClientEx(final ILaunchConfiguration configuration, final ILaunch launch,
+			final String launchUrl, final IResolvableRuntimeInstallation installation, final InfobaseReference infobase,
+			final RuntimeExecutionArguments arguments) throws CoreException {
+		final String clientTypeId = ClientTypeSelectionSupport.getExecutionClientTypeId(configuration,
+				installation,
+				(InfobaseReference) null,
+				runtimeComponentManager);
+		try {
+			final Pair<IRuntimeComponent, IUrlOpenClientLauncher> uriOpenClient = getRuntimeComponent(installation,
+					clientTypeId);
+			final Pair<String, Process> clientProcess = uriOpenClient.second
+					.runClient(uriOpenClient.first, launchUrl, infobase, arguments);
+			if (clientProcess != null) {
+				DebugPlugin.newProcess(launch,
+						clientProcess.second,
+						formatProcessName(clientProcess.first),
+						buildProcessArguments(configuration));
+			} else {
+				removeLaunch(launch);
+			}
+		} catch (CoreException e) {
+			return e.getStatus();
+		} catch (RuntimeExecutionException e2) {
+			return LaunchingPlugin.createErrorStatus(Messages.RuntimeClientLaunchDelegate_Error_while_launching, e2);
+		}
+		return Status.OK_STATUS;
+	}
+
+	private void parseParamsTemplate(URL frameworkParamsURL, ILaunchConfiguration configuration) throws IOException {
+		String paramsFilePathName = FrameworkUtils.getConfigurationFilesPath(configuration);
+		String featuresPath = getFeaturesPath(configuration);
+
+		String templateContent = readContents(getFileInputSupplier(frameworkParamsURL));
+		StringTemplate template = new StringTemplate(templateContent);
+		template.setAttribute("FeaturesPath", featuresPath); //$NON-NLS-1$
+		template.setAttribute("JUnitPath", paramsFilePathName); //$NON-NLS-1$
+
+		File paramsFilePath = new File(paramsFilePathName);
+		if (!paramsFilePath.exists())
+			paramsFilePath.mkdirs();
+
+		try (FileOutputStream outputStream = new FileOutputStream(paramsFilePathName + FrameworkUtils.PARAMS_FILE_NAME);
+				OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream, StandardCharsets.UTF_8);
+				BufferedWriter bufferedWriter = new BufferedWriter(outputStreamWriter);)
+
+		{
+			bufferedWriter.write(template.toString());
+
+		}
+
+	}
+
+	private Boolean saveParamsToFile(ILaunchConfiguration configuration) {
 		TestFramework framework = FrameworkUtils.getCurrentFramework();
 
 		Bundle bundle = FrameworkUtils.getFrameworkBundle();
@@ -688,7 +683,7 @@ public class RuntimeUnitLauncherLaunchDelegate extends RuntimeClientLaunchDelega
 				return false;
 			}
 
-			parseParamsTemplate(frameworkParamsURL, configuration, projectManager);
+			parseParamsTemplate(frameworkParamsURL, configuration);
 
 		} catch (IOException | URISyntaxException e) {
 			String msg = MessageFormat.format(

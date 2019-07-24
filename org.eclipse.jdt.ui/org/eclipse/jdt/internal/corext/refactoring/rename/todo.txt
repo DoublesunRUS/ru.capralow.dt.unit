@@ -1,3 +1,0 @@
-- TextUpdating is currently commented out.
-- File problems with RenameSupport that is API. Currently commented out.
-- questionable if the rename refactoring should return its processor ?

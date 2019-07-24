@@ -11,14 +11,14 @@ import com.google.common.collect.Lists;
 
 public class FrameworkInvocationTypesComputer implements IInvocationTypesComputerExtension {
 
-	@Override
-	public List<TypeItem> getTypes(Invocation inv) {
-		return computeTypes(inv);
-	}
-
-	private List<TypeItem> computeTypes(Invocation inv) {
+	private static List<TypeItem> computeTypes(Invocation inv) {
 		TypeDescription typeDescription = MdTypeUtil.newTypeDescription();
 		TypeItem newType = MdTypeUtil.getSingleType(typeDescription);
 		return Lists.newArrayList(new TypeItem[] { newType });
+	}
+
+	@Override
+	public List<TypeItem> getTypes(Invocation inv) {
+		return computeTypes(inv);
 	}
 }
