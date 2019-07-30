@@ -5,9 +5,18 @@
 	<extension point="org.eclipse.debug.core.launchDelegates">
 		<launchDelegate
 			delegate="com.mountainminds.eclemma.core.launching.JavaApplicationLauncher"
-			id="com.mountainminds.eclemma.core.javaApplicationLauncher"
+			id="com.mountainminds.eclemma.core.bslApplicationLauncher"
 			modes="coverage"
-			name="%UnitTestDelegateName"
+			name="%bslDelegateName"
+			type="com._1c.g5.v8.dt.launching.core.RuntimeClient"/>
+	</extension>
+	
+	<extension point="org.eclipse.debug.core.launchDelegates">
+		<launchDelegate
+			delegate="com.mountainminds.eclemma.core.launching.JavaApplicationLauncher"
+			id="com.mountainminds.eclemma.core.UnitTestApplicationLauncher"
+			modes="coverage"
+			name="%unitTestDelegateName"
 			type="ru.capralow.dt.unit.launcher.plugin.ui.UnitTestLaunch"/>
 	</extension>
 	

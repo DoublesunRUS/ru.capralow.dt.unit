@@ -16,8 +16,7 @@
 			id="ru.capralow.dt.unit.launcher.plugin.ui.UnitTestCoverageTabGroup"
 			type="ru.capralow.dt.unit.launcher.plugin.ui.UnitTestLaunch">
 			<launchMode
-				description="%UnitTestLaunchTabGroupDescription.coverage"
-				 mode="coverage"/>
+				mode="coverage"/>
 		</launchConfigurationTabGroup>
 	</extension>
 	
