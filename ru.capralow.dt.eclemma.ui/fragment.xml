@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<fragment>
+	
+	<extension point="org.eclipse.ui.perspectiveExtensions">
+		<perspectiveExtension targetID="com._1c.g5.v8.dt.ui2.perspective">
+			<actionSet id="com.mountainminds.eclemma.ui.CoverageActionSet"/>
+			<showInPart id="com.mountainminds.eclemma.ui.CoverageView"/>
+		</perspectiveExtension>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+		<launchConfigurationTabGroup
+			class="com.mountainminds.eclemma.ui.launching.CoverageTabGroup"
+			helpContextId="com.mountainminds.eclemma.ui.coverage_launch_tab_context"
+			id="ru.capralow.dt.unit.launcher.plugin.ui.UnitTestCoverageTabGroup"
+			type="ru.capralow.dt.unit.launcher.plugin.ui.UnitTestLaunch">
+			<launchMode
+				description="%UnitTestLaunchTabGroupDescription.coverage"
+				 mode="coverage"/>
+		</launchConfigurationTabGroup>
+	</extension>
+	
+</fragment>
