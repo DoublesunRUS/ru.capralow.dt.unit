@@ -8,3 +8,11 @@ Automatic-Module-Name: ru.capralow.dt.eclemma.core
 Bundle-Localization: fragment
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Vendor: %providerName
+Import-Package: com._1c.g5.v8.dt.core.platform,
+ com._1c.g5.wiring,
+ com._1c.g5.wiring.binder,
+ com.google.inject,
+ ru.capralow.dt.unit.launcher.plugin.core.frameworks
+Export-Package: ru.capralow.dt.eclemma.core.launching,
+ ru.capralow.dt.eclemma.internal.core;x-internal:=true
+Require-Bundle: org.eclipse.ui
