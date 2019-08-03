@@ -15,7 +15,7 @@ import com._1c.g5.v8.dt.core.platform.IV8ProjectManager;
 import com._1c.g5.v8.dt.metadata.mdclass.Configuration;
 import com.google.inject.Inject;
 
-public class OpenFeaturesDirectoryHandler extends AbstractHandler {
+public class OpenFeaturesFolderHandler extends AbstractHandler {
 
 	@Inject
 	private IV8ProjectManager projectManager;
