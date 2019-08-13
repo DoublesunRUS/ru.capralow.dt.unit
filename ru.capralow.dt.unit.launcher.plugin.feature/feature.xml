@@ -58,7 +58,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
          search-location="both"/>
 
    <requires>
-      <import plugin="com._1c.g5.v8.dt.product.application" version="1.11.0" match="greaterOrEqual"/>
+      <import plugin="com._1c.g5.v8.dt.product.application" version="1.12.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
