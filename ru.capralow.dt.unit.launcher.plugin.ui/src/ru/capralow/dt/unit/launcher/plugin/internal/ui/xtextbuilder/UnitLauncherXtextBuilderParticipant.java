@@ -55,9 +55,10 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 		return projectLocation + "/features/"; //$NON-NLS-1$
 	}
 
-	public static StringBuilder getFeatureText(FeatureSettings featureSettings, String lang, String moduleName,
-			String moduleSynonym, List<String> methodsNames, Boolean forServer, Boolean forClient) {
-		List<String> frameworkDescription = FrameworkUtils.getFeatureDescription(featureSettings, lang, moduleSynonym);
+	public static StringBuilder getFeatureText(FeatureSettings featureSettings, String lang, String projectName,
+			String moduleName, List<String> methodsNames, Boolean forServer, Boolean forClient) {
+		List<String> frameworkDescription = FrameworkUtils
+				.getFeatureDescription(featureSettings, lang, projectName, moduleName);
 
 		StringBuilder fileText = new StringBuilder();
 		fileText.append(String.join(System.lineSeparator(), frameworkDescription));
@@ -289,9 +290,6 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 
 			String moduleName = commonModule.getName();
 			String lang = configuration.getScriptVariant().equals(ScriptVariant.RUSSIAN) ? "ru" : "en"; //$NON-NLS-1$ //$NON-NLS-2$
-			String moduleSynonym = commonModule.getSynonym().get(lang);
-			if (moduleSynonym == null)
-				moduleSynonym = commonModule.getName();
 
 			FeatureSettings featureSettings = FrameworkUtils.getFeatureSettings();
 
@@ -299,8 +297,8 @@ public class UnitLauncherXtextBuilderParticipant implements org.eclipse.xtext.bu
 			for (Entry<String, List<String>> entry : units.entrySet()) {
 				StringBuilder featureText = getFeatureText(featureSettings,
 						lang,
+						project.getName(),
 						moduleName,
-						moduleSynonym,
 						entry.getValue(),
 						forServer,
 						forClient);

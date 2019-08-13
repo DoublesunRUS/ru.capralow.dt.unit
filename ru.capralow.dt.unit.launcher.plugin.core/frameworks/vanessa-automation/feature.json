@@ -8,19 +8,19 @@
 				"@tree",
 				"@classname=ModuleExceptionPath",
 				"",
-				"Функционал: $ModuleSynonym$",
+				"Функционал: $ProjectName$.$ModuleName$",
 				"	Как Разработчик",
 				"	Я Хочу чтобы возвращаемое значение метода совпадало с эталонным",
 				"	Чтобы я мог гарантировать работоспособность метода"
 			],
 			"server-script": [
 				"@OnServer",
-				"Сценарий: $ModuleName$ (сервер): $MethodName$",
+				"Сценарий: $MethodName$",
 				"	И я выполняю код встроенного языка на сервере",
 				"	| '$ModuleName$.$MethodName$(Контекст());' |"
 			],
 			"client-script": [
-				"Сценарий: $ModuleName$ (клиент): $MethodName$",
+				"Сценарий: $MethodName$",
 				"	И я выполняю код встроенного языка",
 				"	| '$ModuleName$.$MethodName$(Контекст());' |"
 			]
@@ -33,19 +33,19 @@
 				"@tree",
 				"@classname=ModuleExceptionPath",
 				"",
-				"Feature: $ModuleSynonym$",
+				"Feature: $ProjectName$.$ModuleName$",
 				"	As Developer",
 				"	I want the returns value to be equal to expected value",
 				"	That I can guarantee the execution of the method"
 			],
 			"server-script": [
 				"@OnServer",
-				"Scenario: $ModuleName$ (server): $MethodName$",
+				"Scenario: $MethodName$",
 				"	And I execute 1C:Enterprise script at server",
 				"	| '$ModuleName$.$MethodName$(Context());' |"
 			],
 			"client-script": [
-				"Scenario: $ModuleName$ (client): $MethodName$",
+				"Scenario: $MethodName$",
 				"	And I execute 1C:Enterprise script",
 				"	| '$ModuleName$.$MethodName$(Context());' |"
 			]

@@ -1,61 +1,93 @@
 package ru.capralow.dt.unit.launcher.plugin.internal.ui;
 
-import java.util.List;
+import java.lang.reflect.Field;
 
-import org.eclipse.debug.core.DebugEvent;
+import org.apache.commons.lang.reflect.FieldUtils;
 import org.eclipse.debug.core.DebugPlugin;
-import org.eclipse.debug.core.IDebugEventSetListener;
-import org.eclipse.debug.core.model.IProcess;
+import org.eclipse.jdt.internal.junit.ui.TestRunnerViewPart;
+import org.eclipse.jdt.internal.junit.ui.TestViewer;
+import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.Tree;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.PlatformUI;
 
-import com._1c.g5.v8.dt.profiling.core.IProfileTarget;
-import com._1c.g5.v8.dt.profiling.core.IProfilingResult;
+import com._1c.g5.v8.dt.bm.index.emf.IBmEmfIndexManager;
+import com._1c.g5.v8.dt.core.platform.IResourceLookup;
+import com._1c.g5.v8.dt.core.platform.IV8ProjectManager;
 import com._1c.g5.v8.dt.profiling.core.IProfilingService;
 import com._1c.g5.wiring.IManagedService;
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 
-import ru.capralow.dt.unit.launcher.plugin.internal.ui.launchconfigurations.UnitTestLaunch;
+import ru.capralow.dt.unit.launcher.plugin.internal.ui.junit.ShowCoverageResult;
+import ru.capralow.dt.unit.launcher.plugin.internal.ui.junit.ShowJUnitResult;
+import ru.capralow.dt.unit.launcher.plugin.internal.ui.junit.TestCaseListener;
 
-@Singleton
-public class UnitLauncherManager implements IManagedService, IDebugEventSetListener {
+public class UnitLauncherManager implements IManagedService {
 
 	@Inject
+	private IBmEmfIndexManager bmEmfIndexManager;
+	@Inject
 	private IProfilingService profilingService;
+	@Inject
+	private IResourceLookup resourceLookup;
+
+	@Inject
+	private IV8ProjectManager projectManager;
+
+	private ShowJUnitResult showJUnitResult;
+	private TestCaseListener testCaseListener;
+
+	private Tree junitPanelTree;
+
+	private ShowCoverageResult showCoverageResult;
 
 	@Override
 	public void activate() {
-		DebugPlugin.getDefault().addDebugEventListener(this);
-		profilingService.toggleTargetWaitingState(true);
+		showJUnitResult = new ShowJUnitResult();
+		DebugPlugin.getDefault().addDebugEventListener(showJUnitResult);
+
+		showCoverageResult = new ShowCoverageResult();
+		DebugPlugin.getDefault().addDebugEventListener(showCoverageResult);
+
+		Display.getDefault().asyncExec(() -> {
+			testCaseListener = new TestCaseListener(bmEmfIndexManager, resourceLookup, projectManager);
+			IWorkbenchPage activePage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+
+			TestRunnerViewPart junitViewPart = (TestRunnerViewPart) activePage.findView(ShowJUnitResult.JUNIT_PANEL_ID);
+			try {
+				Field testViewerField = FieldUtils.getField(TestRunnerViewPart.class, "fTestViewer", true); //$NON-NLS-1$
+				TestViewer testViewer = (TestViewer) FieldUtils.readField(testViewerField, junitViewPart, true);
+
+				Field treeViewerField = FieldUtils.getField(TestViewer.class, "fTreeViewer", true);
+				TreeViewer junitPanelViewer = (TreeViewer) FieldUtils.readField(treeViewerField, testViewer, true);
+
+				junitPanelTree = junitPanelViewer.getTree();
+				for (Listener listener : junitPanelTree.getListeners(SWT.DefaultSelection))
+					junitPanelTree.removeListener(SWT.DefaultSelection, listener);
+
+				junitPanelTree.addSelectionListener(testCaseListener);
+
+			} catch (IllegalAccessException e) {
+				UnitLauncherUiPlugin.createErrorStatus(Messages.UnitLauncherManager_Unable_to_add_doubleclick_listener,
+						e);
+
+			}
+		});
+
+		// profilingService.toggleTargetWaitingState(true);
 	}
 
 	@Override
 	public void deactivate() {
-		profilingService.toggleTargetWaitingState(false);
-		DebugPlugin.getDefault().removeDebugEventListener(this);
-	}
+		// profilingService.toggleTargetWaitingState(false);
+		junitPanelTree.removeSelectionListener(testCaseListener);
 
-	@Override
-	public void handleDebugEvents(DebugEvent[] events) {
-		for (DebugEvent event : events) {
-			Object source = event.getSource();
-			if (event.getKind() == DebugEvent.TERMINATE) {
-				if (source instanceof IProcess) {
-					UnitTestLaunch.showJUnitResult((IProcess) source);
+		DebugPlugin.getDefault().removeDebugEventListener(showCoverageResult);
 
-				} else if (source instanceof IProfileTarget) {
-					List<IProfilingResult> profilingResults = profilingService.getResults();
-
-					try {
-						UnitTestLaunch.showCoverageResult(profilingResults);
-					} catch (Exception e) {
-						// TODO Автоматически созданный блок catch
-						e.printStackTrace();
-					}
-
-				}
-
-			}
-		}
+		DebugPlugin.getDefault().removeDebugEventListener(showJUnitResult);
 	}
 
 }

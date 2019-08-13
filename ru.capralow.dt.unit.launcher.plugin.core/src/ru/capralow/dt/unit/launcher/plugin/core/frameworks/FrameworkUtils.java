@@ -44,6 +44,8 @@ public class FrameworkUtils {
 
 	public static final String FEATURE_EXTENSION = ".feature"; //$NON-NLS-1$
 
+	public static final String MODULE_NAME = "$ModuleName$"; //$NON-NLS-1$
+
 	public static String getConfigurationFilesPath(ILaunchConfiguration configuration) {
 		Bundle bundle = getFrameworkBundle();
 		IPath resourcePath = Platform.getStateLocation(bundle);
@@ -111,18 +113,18 @@ public class FrameworkUtils {
 
 		List<String> elements = new ArrayList<>();
 		for (String element : frameworkFeature.getClientScript())
-			elements.add(element.replace("$ModuleName$", moduleName).replace("$MethodName$", methodName)); //$NON-NLS-1$ //$NON-NLS-2$
+			elements.add(element.replace(MODULE_NAME, moduleName).replace("$MethodName$", methodName)); //$NON-NLS-1$
 
 		return elements;
 	}
 
-	public static List<String> getFeatureDescription(FeatureSettings featureSettings, String lang,
-			String moduleSynonym) {
+	public static List<String> getFeatureDescription(FeatureSettings featureSettings, String lang, String projectName,
+			String moduleName) {
 		FeatureFormat frameworkFeature = featureSettings.getFeature(lang);
 
 		List<String> elements = new ArrayList<>();
 		for (String element : frameworkFeature.getDescription())
-			elements.add(element.replace("$ModuleSynonym$", moduleSynonym)); //$NON-NLS-1$
+			elements.add(element.replace("$ProjectName$", projectName).replace(MODULE_NAME, moduleName)); //$NON-NLS-1$
 
 		return elements;
 	}
@@ -133,7 +135,7 @@ public class FrameworkUtils {
 
 		List<String> elements = new ArrayList<>();
 		for (String element : frameworkFeature.getServerScript())
-			elements.add(element.replace("$ModuleName$", moduleName).replace("$MethodName$", methodName)); //$NON-NLS-1$ //$NON-NLS-2$
+			elements.add(element.replace(MODULE_NAME, moduleName).replace("$MethodName$", methodName)); //$NON-NLS-1$
 
 		return elements;
 	}

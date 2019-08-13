@@ -2,12 +2,6 @@
 <?eclipse version="3.4"?>
 <plugin>
 	
-	<extension point="com._1c.g5.wiring.serviceProvider">
-		<bundle
-			symbolicName="ru.capralow.dt.unit.launcher.plugin.ui">
-		</bundle>
-	</extension>
-	
 	<extension point="com._1c.g5.v8.dt.bsl.dynamicContextDefProvider">
 		<dynamicContextDefProvider
 			class="ru.capralow.dt.unit.launcher.plugin.internal.ui.ExecutableExtensionFactory:ru.capralow.dt.unit.launcher.plugin.internal.ui.typesystem.FrameworkContextDefProvider">
