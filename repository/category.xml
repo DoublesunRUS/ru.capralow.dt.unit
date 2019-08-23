@@ -6,6 +6,24 @@
    <feature url="features/org.eclipse.jdt_3.17.0.v20190307-0500.jar" id="org.eclipse.jdt" version="3.17.0.v20190307-0500">
       <category name="ru.capralow.thirdparty.category.optional"/>
    </feature>
+   <bundle id="org.objectweb.asm">
+      <category name="ru.capralow.thirdparty.category.optional"/>
+   </bundle>
+   <bundle id="org.objectweb.asm.commons">
+      <category name="ru.capralow.thirdparty.category.optional"/>
+   </bundle>
+   <bundle id="org.objectweb.asm.tree">
+      <category name="ru.capralow.thirdparty.category.optional"/>
+   </bundle>
+   <bundle id="org.jacoco.agent">
+      <category name="ru.capralow.thirdparty.category.optional"/>
+   </bundle>
+   <bundle id="org.jacoco.core">
+      <category name="ru.capralow.thirdparty.category.optional"/>
+   </bundle>
+   <bundle id="org.jacoco.report">
+      <category name="ru.capralow.thirdparty.category.optional"/>
+   </bundle>
    <bundle id="org.eclipse.eclemma.core">
       <category name="ru.capralow.thirdparty.category.optional"/>
    </bundle>

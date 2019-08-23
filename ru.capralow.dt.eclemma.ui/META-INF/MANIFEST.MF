@@ -8,4 +8,4 @@ Automatic-Module-Name: ru.capralow.dt.eclemma.ui
 Bundle-Localization: fragment
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Vendor: %providerName
-Export-Package: com.mountainminds.eclemma.internal.ui;x-internal:=true
+Export-Package: org.eclipse.eclemma.internal.ui;x-internal:=true

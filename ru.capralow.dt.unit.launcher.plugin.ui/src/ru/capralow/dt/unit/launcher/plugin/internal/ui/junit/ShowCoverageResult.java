@@ -163,7 +163,7 @@ public class ShowCoverageResult implements IDebugEventSetListener {
 		sessionManager.activateSession(sessionManager.getActiveSession());
 
 		Display.getDefault().asyncExec(() -> {
-			String panelId = "com.mountainminds.eclemma.ui.CoverageView"; //$NON-NLS-1$
+			String panelId = "org.eclipse.eclemma.ui.CoverageView"; //$NON-NLS-1$
 			try {
 				PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(panelId);
 

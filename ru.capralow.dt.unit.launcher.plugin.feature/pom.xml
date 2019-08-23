@@ -29,7 +29,6 @@
 				<configuration>
 					<excludes>
 						<feature id="org.eclipse.jdt"/>
-						<feature id="com.mountainminds.eclemma.feature"/>
 					</excludes>
 				</configuration>
 			</plugin>
