@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><?pde version="3.8"?><target name="1C:EDT Topaz Platform" sequenceNumber="1">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.8"?>
+<target name="1C:EDT Topaz Platform" sequenceNumber="1">
 <locations>
 	<!-- EDT -->
 	<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
@@ -95,7 +97,7 @@
 		<unit id="org.eclipse.xsd.edit.feature.group" version="0.0.0"/>
 		<unit id="org.eclipse.xsd.feature.group" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.xbase.lib.feature.group" version="0.0.0"/>
-		<repository id="dt_repository" location="https://edt.1c.ru/releases/topaz/1.12.0/"/>
+		<repository id="dt_repository" location="https://edt.1c.ru/releases/topaz/1.13.0/"/>
 	</location>
 	<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
 	<!-- Plug-in Spy -->

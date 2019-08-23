@@ -34,11 +34,11 @@
 <stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.pde.ui.workbenchClasspathProvider"/>
 <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-ea&#13;&#10;-Xms80m&#13;&#10;-Dlog4j.configuration=platform:/plugin/com._1c.g5.v8.dt.logging/log4j.properties&#13;&#10;-Dosgi.framework.extensions=org.eclipse.fx.osgi&#13;&#10;-Dosgi.module.lock.timeout=240&#13;&#10;-Xmx8g"/>
 <stringAttribute key="pde.version" value="3.3"/>
-<stringAttribute key="product" value="org.eclipse.platform.ide"/>
+<stringAttribute key="product" value="com._1c.g5.v8.dt.product.application.rcp"/>
 <booleanAttribute key="run_in_ui_thread" value="true"/>
 <booleanAttribute key="show_selected_only" value="false"/>
 <stringAttribute key="templateConfig" value="${target_home}\configuration\config.ini"/>
-<stringAttribute key="timestamp" value="1560506375157"/>
+<stringAttribute key="timestamp" value="1564870529973"/>
 <booleanAttribute key="tracing" value="false"/>
 <booleanAttribute key="useCustomFeatures" value="false"/>
 <booleanAttribute key="useDefaultConfig" value="true"/>
