@@ -3,12 +3,15 @@
    <feature url="features/ru.capralow.dt.unit.launcher_0.3.0.qualifier.jar" id="ru.capralow.dt.unit.launcher" version="0.3.0.qualifier">
       <category name="ru.capralow.dt.plugin.category.public"/>
    </feature>
-   <feature url="features/com.mountainminds.eclemma.feature_2.3.4.201602232005.jar" id="com.mountainminds.eclemma.feature" version="2.3.4.201602232005">
-      <category name="ru.capralow.thirdparty.category.optional"/>
-   </feature>
    <feature url="features/org.eclipse.jdt_3.17.0.v20190307-0500.jar" id="org.eclipse.jdt" version="3.17.0.v20190307-0500">
       <category name="ru.capralow.thirdparty.category.optional"/>
    </feature>
+   <bundle id="org.eclipse.eclemma.core">
+      <category name="ru.capralow.thirdparty.category.optional"/>
+   </bundle>
+   <bundle id="org.eclipse.eclemma.ui">
+      <category name="ru.capralow.thirdparty.category.optional"/>
+   </bundle>
    <category-def name="ru.capralow.dt.plugin.category.public" label="Плагины для EDT"/>
    <category-def name="ru.capralow.thirdparty.category.optional" label="Сторонние компоненты"/>
 </site>

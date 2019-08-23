@@ -8,10 +8,10 @@ import javax.inject.Inject;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
+import org.eclipse.eclemma.core.launching.CoverageLauncher;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 
 import com._1c.g5.v8.dt.core.platform.IV8ProjectManager;
-import com.mountainminds.eclemma.core.launching.CoverageLauncher;
 
 import ru.capralow.dt.unit.launcher.plugin.core.frameworks.FrameworkUtils;
 

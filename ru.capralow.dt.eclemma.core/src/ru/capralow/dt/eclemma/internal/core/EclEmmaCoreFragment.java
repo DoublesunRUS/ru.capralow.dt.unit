@@ -4,10 +4,10 @@ import java.text.MessageFormat;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.eclemma.internal.core.EclEmmaCorePlugin;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.mountainminds.eclemma.internal.core.EclEmmaCorePlugin;
 
 public class EclEmmaCoreFragment {
 	public static final String ID = "ru.capralow.dt.eclemma.core"; //$NON-NLS-1$

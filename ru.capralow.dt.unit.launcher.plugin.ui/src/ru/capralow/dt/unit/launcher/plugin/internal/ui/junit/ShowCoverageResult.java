@@ -12,6 +12,10 @@ import java.util.Set;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.IDebugEventSetListener;
+import org.eclipse.eclemma.core.CoverageTools;
+import org.eclipse.eclemma.core.ISessionImporter;
+import org.eclipse.eclemma.core.ISessionManager;
+import org.eclipse.eclemma.core.URLExecutionDataSource;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
@@ -34,10 +38,6 @@ import com._1c.g5.v8.dt.profiling.core.IProfileTarget;
 import com._1c.g5.v8.dt.profiling.core.IProfilingResult;
 import com._1c.g5.v8.dt.profiling.core.IProfilingService;
 import com.google.inject.Inject;
-import com.mountainminds.eclemma.core.CoverageTools;
-import com.mountainminds.eclemma.core.ISessionImporter;
-import com.mountainminds.eclemma.core.ISessionManager;
-import com.mountainminds.eclemma.core.URLExecutionDataSource;
 
 import ru.capralow.dt.unit.launcher.plugin.internal.ui.UnitLauncherUiPlugin;
 

@@ -25,7 +25,7 @@
 <stringAttribute key="product" value="com._1c.g5.v8.dt.product.application.rcp"/>
 <booleanAttribute key="show_selected_only" value="false"/>
 <stringAttribute key="templateConfig" value="${target_home}\configuration\config.ini"/>
-<stringAttribute key="timestamp" value="1565721317747"/>
+<stringAttribute key="timestamp" value="1566558315304"/>
 <booleanAttribute key="tracing" value="false"/>
 <booleanAttribute key="useCustomFeatures" value="false"/>
 <booleanAttribute key="useDefaultConfig" value="true"/>
