@@ -54,14 +54,14 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
    </requires>
 
    <plugin
-         id="ru.capralow.dt.unit.launcher.plugin.ui"
+         id="ru.capralow.dt.unit.launcher.plugin.core"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="ru.capralow.dt.unit.launcher.plugin.core"
+         id="ru.capralow.dt.unit.launcher.plugin.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -77,6 +77,22 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
    <plugin
          id="ru.capralow.dt.launching.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         fragment="true"
+         unpack="false"/>
+
+   <plugin
+         id="ru.capralow.dt.eclemma.core"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         fragment="true"
+         unpack="false"/>
+
+   <plugin
+         id="ru.capralow.dt.eclemma.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"
