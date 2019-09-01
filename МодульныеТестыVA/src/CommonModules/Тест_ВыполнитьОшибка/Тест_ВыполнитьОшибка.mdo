@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="02ee2f04-ec44-4aa0-b9d8-8f64c4467a62">
+  <name>Тест_ВыполнитьОшибка</name>
+  <synonym>
+    <key>ru</key>
+    <value>Тест: Выполнить (ошибка)</value>
+  </synonym>
+  <clientManagedApplication>true</clientManagedApplication>
+  <server>true</server>
+  <externalConnection>true</externalConnection>
+  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+</mdclass:CommonModule>

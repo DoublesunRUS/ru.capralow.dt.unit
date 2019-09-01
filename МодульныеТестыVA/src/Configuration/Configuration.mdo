@@ -44,15 +44,23 @@
     <languageCode>ru</languageCode>
   </languages>
   <commonModules>CommonModule.Тест_ВызватьИсключение</commonModules>
-  <commonModules>CommonModule.Тест_Булево</commonModules>
-  <commonModules>CommonModule.Тест_Дата</commonModules>
-  <commonModules>CommonModule.Тест_Строка</commonModules>
-  <commonModules>CommonModule.Тест_Число</commonModules>
-  <commonModules>CommonModule.Тест_Выполнить</commonModules>
-  <commonModules>CommonModule.Тест_ЗначениеЗаполнено</commonModules>
-  <commonModules>CommonModule.Тест_Тип</commonModules>
-  <commonModules>CommonModule.Тест_Коллекции</commonModules>
   <commonModules>CommonModule.Тест_АсинхронныеВызовыКлиент</commonModules>
   <commonModules>CommonModule.Тест_АсинхронныеВызовыСервер</commonModules>
   <commonModules>CommonModule.Тест_АсинхронныеВызовыВызовСервера</commonModules>
+  <commonModules>CommonModule.Тест_БулевоУспех</commonModules>
+  <commonModules>CommonModule.Тест_ДатаУспех</commonModules>
+  <commonModules>CommonModule.Тест_СтрокаУспех</commonModules>
+  <commonModules>CommonModule.Тест_ЧислоУспех</commonModules>
+  <commonModules>CommonModule.Тест_ВыполнитьУспех</commonModules>
+  <commonModules>CommonModule.Тест_ЗначениеЗаполненоУспех</commonModules>
+  <commonModules>CommonModule.Тест_ТипУспех</commonModules>
+  <commonModules>CommonModule.Тест_КоллекцииУспех</commonModules>
+  <commonModules>CommonModule.Тест_БулевоОшибка</commonModules>
+  <commonModules>CommonModule.Тест_ДатаОшибка</commonModules>
+  <commonModules>CommonModule.Тест_СтрокаОшибка</commonModules>
+  <commonModules>CommonModule.Тест_ЧислоОшибка</commonModules>
+  <commonModules>CommonModule.Тест_ВыполнитьОшибка</commonModules>
+  <commonModules>CommonModule.Тест_ЗначениеЗаполненоОшибка</commonModules>
+  <commonModules>CommonModule.Тест_ТипУспехОшибка</commonModules>
+  <commonModules>CommonModule.Тест_КоллекцииОшибка</commonModules>
 </mdclass:Configuration>
