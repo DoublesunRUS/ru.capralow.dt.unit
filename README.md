@@ -5,12 +5,12 @@
 
 Минимальная версия EDT: 1.13.0
 
-Текущий релиз в ветке [master: 0.3.0](https://github.com/DoublesunRUS/ru.capralow.dt.unit.launcher/tree/master).<br>
+Текущий релиз в ветке [master: 0.2.0](https://github.com/DoublesunRUS/ru.capralow.dt.unit.launcher/tree/master).<br>
 Разработка ведется в ветке [dev](https://github.com/DoublesunRUS/ru.capralow.dt.unit.launcher/tree/dev).<br>
 
 В данном репозитории хранятся только исходники.<br>
 
-Плагин можно установить в EDT через пункт "Установить новое ПО" указав сайт обновления http://capralow.ru/edt/unit.launcher/latest/ . Для установки может потребоваться запуск EDT под правами администратора.<br>
+Плагин можно установить в EDT через пункт "Установить новое ПО" указав сайт обновления http://capralow.ru/edt/unit.launcher/0.3.0/ . Для установки может потребоваться запуск EDT под правами администратора.<br>
 Для самостоятельной сборки плагина необходимо иметь доступ к сайту https://releases.1c.ru и настроить соответствующим образом Maven. Подробности настройки написаны [здесь](https://github.com/1C-Company/dt-example-plugins/blob/master/simple-plugin/README.md).
 
 ### Возможности
