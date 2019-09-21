@@ -40,8 +40,6 @@ public class UnitLauncherManager implements IManagedService {
 	private ShowJUnitResult showJUnitResult;
 	private TestCaseListener testCaseListener;
 
-	private Tree junitPanelTree;
-
 	private ShowCoverageResult showCoverageResult;
 
 	@Override
@@ -64,7 +62,7 @@ public class UnitLauncherManager implements IManagedService {
 				Field treeViewerField = FieldUtils.getField(TestViewer.class, "fTreeViewer", true);
 				TreeViewer junitPanelViewer = (TreeViewer) FieldUtils.readField(treeViewerField, testViewer, true);
 
-				junitPanelTree = junitPanelViewer.getTree();
+				Tree junitPanelTree = junitPanelViewer.getTree();
 				for (Listener listener : junitPanelTree.getListeners(SWT.DefaultSelection))
 					junitPanelTree.removeListener(SWT.DefaultSelection, listener);
 
@@ -83,7 +81,6 @@ public class UnitLauncherManager implements IManagedService {
 	@Override
 	public void deactivate() {
 		// profilingService.toggleTargetWaitingState(false);
-		junitPanelTree.removeSelectionListener(testCaseListener);
 
 		DebugPlugin.getDefault().removeDebugEventListener(showCoverageResult);
 
