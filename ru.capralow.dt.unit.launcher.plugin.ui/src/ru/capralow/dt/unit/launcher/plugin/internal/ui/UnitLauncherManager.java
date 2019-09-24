@@ -68,7 +68,7 @@ public class UnitLauncherManager implements IManagedService {
 
 				junitPanelTree.addSelectionListener(testCaseListener);
 
-			} catch (IllegalAccessException e) {
+			} catch (IllegalAccessException | NullPointerException e) {
 				UnitLauncherUiPlugin.createErrorStatus(Messages.UnitLauncherManager_Unable_to_add_doubleclick_listener,
 						e);
 
