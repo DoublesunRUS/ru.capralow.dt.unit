@@ -62,5 +62,4 @@ Bundle-ClassPath: .
 Bundle-Activator: ru.capralow.dt.unit.launcher.plugin.internal.ui.UnitLauncherUiPlugin
 Export-Package: ru.capralow.dt.unit.launcher.plugin.internal.ui;x-internal:=true,
  ru.capralow.dt.unit.launcher.plugin.internal.ui.junit;x-internal:=true,
- ru.capralow.dt.unit.launcher.plugin.internal.ui.typesystem;x-internal:=true,
  ru.capralow.dt.unit.launcher.plugin.internal.ui.xtextbuilder;x-internal:=true
