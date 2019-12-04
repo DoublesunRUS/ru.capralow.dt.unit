@@ -6,7 +6,7 @@ Bundle-Version: 0.3.0.qualifier
 Fragment-Host: com._1c.g5.v8.dt.launching.core
 Automatic-Module-Name: ru.capralow.dt.launching.core
 Bundle-Localization: fragment
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Bundle-Vendor: %providerName
 Bundle-ClassPath: .
 Export-Package: ru.capralow.dt.internal.launching.core;x-internal:=true

@@ -11,7 +11,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.jdt.junit.core;bundle-version="[3.6.0,4.0.0)",
  org.jacoco.core;bundle-version="0.8.3"
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: dt.unit.launcher.plugin.ui
 Bundle-ActivationPolicy: lazy
 Import-Package: com._1c.g5.modeling.xtext.scoping,

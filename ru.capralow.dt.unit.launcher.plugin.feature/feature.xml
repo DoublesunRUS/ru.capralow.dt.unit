@@ -46,7 +46,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
    </license>
 
    <requires>
-      <import plugin="com._1c.g5.v8.dt.product.application" version="1.13.0" match="greaterOrEqual"/>
+      <import plugin="com._1c.g5.v8.dt.product.application" version="1.16.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.jdt.junit"/>
       <import plugin="org.eclipse.jdt.junit.core"/>
       <import plugin="org.eclipse.eclemma.core"/>

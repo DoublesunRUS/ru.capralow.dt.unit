@@ -6,7 +6,7 @@ Bundle-Version: 0.3.0.qualifier
 Fragment-Host: org.eclipse.eclemma.core
 Automatic-Module-Name: ru.capralow.dt.eclemma.core
 Bundle-Localization: fragment
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Bundle-Vendor: %providerName
 Import-Package: com._1c.g5.v8.dt.core.platform,
  com._1c.g5.wiring,
