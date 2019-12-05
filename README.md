@@ -1,9 +1,9 @@
 ﻿# 1Unit [![Build Status](https://travis-ci.com/DoublesunRUS/ru.capralow.dt.unit.launcher.svg)](https://travis-ci.com/DoublesunRUS/ru.capralow.dt.unit.launcher) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=DoublesunRUS_ru.capralow.dt.unit.launcher&metric=alert_status)](https://sonarcloud.io/dashboard?id=DoublesunRUS_ru.capralow.dt.unit.launcher) [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=DoublesunRUS_ru.capralow.dt.unit.launcher&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=DoublesunRUS_ru.capralow.dt.unit.launcher) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=DoublesunRUS_ru.capralow.dt.unit.launcher&metric=coverage)](https://sonarcloud.io/dashboard?id=DoublesunRUS_ru.capralow.dt.unit.launcher)
 
 
-## Запуск модульных тестов для [1C:Enterprise Development Tools](http://v8.1c.ru/overview/IDE/) 1.13
+## Запуск модульных тестов для [1C:Enterprise Development Tools](http://v8.1c.ru/overview/IDE/) 1.16
 
-Минимальная версия EDT: 1.13.0
+Минимальная версия EDT: 1.16.0
 
 Текущий релиз в ветке [master: 0.2.0](https://github.com/DoublesunRUS/ru.capralow.dt.unit.launcher/tree/master).<br>
 Разработка ведется в ветке [dev](https://github.com/DoublesunRUS/ru.capralow.dt.unit.launcher/tree/dev).<br>
