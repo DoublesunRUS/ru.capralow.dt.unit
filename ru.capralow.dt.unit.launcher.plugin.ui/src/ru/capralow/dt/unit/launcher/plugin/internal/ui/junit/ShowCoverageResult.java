@@ -12,12 +12,7 @@ import java.util.Set;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.IDebugEventSetListener;
-import org.eclipse.eclemma.core.CoverageTools;
-import org.eclipse.eclemma.core.ISessionImporter;
-import org.eclipse.eclemma.core.ISessionManager;
-import org.eclipse.eclemma.core.URLExecutionDataSource;
 import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PartInitException;
@@ -32,13 +27,17 @@ import org.jacoco.core.runtime.IRuntime;
 import org.jacoco.core.runtime.LoggerRuntime;
 import org.jacoco.core.runtime.RuntimeData;
 
+import com._1c.g5.v8.dt.bsl.model.Module;
 import com._1c.g5.v8.dt.debug.model.base.data.BSLModuleType;
 import com._1c.g5.v8.dt.profiling.core.ILineProfilingResult;
 import com._1c.g5.v8.dt.profiling.core.IProfileTarget;
 import com._1c.g5.v8.dt.profiling.core.IProfilingResult;
 import com._1c.g5.v8.dt.profiling.core.IProfilingService;
-import com.google.inject.Inject;
 
+import ru.capralow.dt.coverage.core.CoverageTools;
+import ru.capralow.dt.coverage.core.ISessionImporter;
+import ru.capralow.dt.coverage.core.ISessionManager;
+import ru.capralow.dt.coverage.core.URLExecutionDataSource;
 import ru.capralow.dt.unit.launcher.plugin.internal.ui.UnitLauncherUiPlugin;
 
 public class ShowCoverageResult implements IDebugEventSetListener {
@@ -73,7 +72,7 @@ public class ShowCoverageResult implements IDebugEventSetListener {
 	private static PrintStream out;
 
 	public static void showCoverageResult(List<IProfilingResult> profilingResults) throws Exception {
-		Set<IPackageFragmentRoot> scope = new HashSet<>();
+		Set<Module> scope = new HashSet<>();
 
 		for (IProfilingResult profilingResult : profilingResults) {
 			for (ILineProfilingResult result : profilingResult.getProfilingResults()) {
@@ -163,7 +162,7 @@ public class ShowCoverageResult implements IDebugEventSetListener {
 		sessionManager.activateSession(sessionManager.getActiveSession());
 
 		Display.getDefault().asyncExec(() -> {
-			String panelId = "org.eclipse.eclemma.ui.CoverageView"; //$NON-NLS-1$
+			String panelId = "ru.capralow.dt.coverage.ui.CoverageView"; //$NON-NLS-1$
 			try {
 				PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(panelId);
 
@@ -198,18 +197,21 @@ public class ShowCoverageResult implements IDebugEventSetListener {
 		out.printf("%s of %s %s missed%n", missed, total, unit);
 	}
 
-	@Inject
 	private IProfilingService profilingService;
+
+	public ShowCoverageResult(IProfilingService profilingService) {
+		this.profilingService = profilingService;
+	}
 
 	@Override
 	public void handleDebugEvents(DebugEvent[] events) {
 		for (DebugEvent event : events) {
 			Object source = event.getSource();
 			if (event.getKind() == DebugEvent.TERMINATE && source instanceof IProfileTarget) {
-				// List<IProfilingResult> profilingResults = profilingService.getResults();
+				List<IProfilingResult> profilingResults = profilingService.getResults();
 
 				try {
-					// UnitTestLaunch.showCoverageResult(profilingResults);
+					showCoverageResult(profilingResults);
 				} catch (Exception e) {
 					// TODO Автоматически созданный блок catch
 					e.printStackTrace();

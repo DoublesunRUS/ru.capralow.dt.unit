@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: 1Unit Coverage Core Tests
+Bundle-SymbolicName: ru.capralow.dt.coverage.core.test
+Bundle-Version: 0.3.0.qualifier
+Bundle-Vendor: 1Unit Coverage
+Fragment-Host: ru.capralow.dt.coverage.core
+Require-Bundle: org.junit;bundle-version="4.0.0",
+ org.hamcrest.core
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Automatic-Module-Name: dt.coverage.core.test
+Export-Package: ru.capralow.dt.coverage.core;x-internal:=true,
+ ru.capralow.dt.coverage.core.launching;x-internal:=true,
+ ru.capralow.dt.coverage.internal.core;x-internal:=true,
+ ru.capralow.dt.coverage.internal.core.analysis;x-internal:=true,
+ ru.capralow.dt.coverage.internal.core.launching;x-internal:=true

@@ -24,12 +24,6 @@
    <bundle id="org.jacoco.report">
       <category name="ru.capralow.thirdparty.category.optional"/>
    </bundle>
-   <bundle id="org.eclipse.eclemma.core">
-      <category name="ru.capralow.thirdparty.category.optional"/>
-   </bundle>
-   <bundle id="org.eclipse.eclemma.ui">
-      <category name="ru.capralow.thirdparty.category.optional"/>
-   </bundle>
    <category-def name="ru.capralow.dt.plugin.category.public" label="Плагины для EDT"/>
    <category-def name="ru.capralow.thirdparty.category.optional" label="Сторонние компоненты"/>
 </site>

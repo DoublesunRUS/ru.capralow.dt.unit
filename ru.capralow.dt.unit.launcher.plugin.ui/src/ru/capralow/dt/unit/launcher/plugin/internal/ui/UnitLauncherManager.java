@@ -47,8 +47,8 @@ public class UnitLauncherManager implements IManagedService {
 		showJUnitResult = new ShowJUnitResult();
 		DebugPlugin.getDefault().addDebugEventListener(showJUnitResult);
 
-		showCoverageResult = new ShowCoverageResult();
-		DebugPlugin.getDefault().addDebugEventListener(showCoverageResult);
+		// showCoverageResult = new ShowCoverageResult(profilingService);
+		// DebugPlugin.getDefault().addDebugEventListener(showCoverageResult);
 
 		Display.getDefault().asyncExec(() -> {
 			testCaseListener = new TestCaseListener(bmEmfIndexManager, resourceLookup, projectManager);
@@ -81,8 +81,8 @@ public class UnitLauncherManager implements IManagedService {
 	@Override
 	public void deactivate() {
 		// profilingService.toggleTargetWaitingState(false);
-
-		DebugPlugin.getDefault().removeDebugEventListener(showCoverageResult);
+		//
+		// DebugPlugin.getDefault().removeDebugEventListener(showCoverageResult);
 
 		DebugPlugin.getDefault().removeDebugEventListener(showJUnitResult);
 	}

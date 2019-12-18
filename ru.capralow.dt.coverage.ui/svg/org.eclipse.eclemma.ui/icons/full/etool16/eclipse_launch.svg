@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="16"
+   height="16"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="eclipse_launch.svg"
+   inkscape:export-filename="/home/tmccrary/git/eclipse-svg/eclipse-svg/src/main/resources/org.eclipse.ant.ui/icons/full/obj16/eclipse_obj2.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="25.224357"
+     inkscape:cx="5.8045734"
+     inkscape:cy="7.9706008"
+     inkscape:document-units="px"
+     inkscape:current-layer="g4926"
+     showgrid="true"
+     inkscape:window-width="2111"
+     inkscape:window-height="1225"
+     inkscape:window-x="323"
+     inkscape:window-y="132"
+     inkscape:window-maximized="0"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:snap-bbox="true"
+     inkscape:bbox-nodes="true">
+    <inkscape:grid
+       type="xygrid"
+       id="grid4025" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     style="display:inline"
+     transform="translate(0,-1036.3622)">
+    <g
+       id="g4926">
+      <image
+         y="1036.3622"
+         x="17"
+         id="image7231"
+         xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAS1JREFU
+OI1j/P//PwMlgIki3QwMDCy4JO7duvT/2tW3DP///WdgZWNi0NQSZpBX1mVEV8eI7oX7dy7/X7Pi
+BsOFc69QncrEyGBhLcUQGKLGICWrxYjVgHu3Lv3v6zrN8P7dD5xOlpblZSgoMYEbghIGSxdexauZ
+gYGB4enjzwzr19xCuAzGOHPi1P8b19/h1QwDJ44+Y7hz4+J/uBdK2j+QHZfwMJjav+H/scNPidbo
+G6DCEBHnzkg9F+zfdfj/nBmXiNZYUWvBoGtozAgPREc3W0ZRUS6iNKuoCTLoGhpjRmNcsg4DMwv+
+1M3FzcoQGasJ52OkxMvnz/5fNO8Kw7OnX7DaHB2nxaCmZYA9JSKDA3uO/H/88DPDp08/GYSEOBjk
+FPgZrO0tCecFUgEA0pl9dX8WntMAAAAASUVORK5CYII=
+"
+         style="image-rendering:optimizeSpeed"
+         preserveAspectRatio="none"
+         height="16"
+         width="16" />
+      <circle
+         id="path4880"
+         style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#5a5194;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.44999999;marker:none;enable-background:accumulate"
+         cx="8.375"
+         cy="1044.9872"
+         r="6.625" />
+      <rect
+         y="1043.3622"
+         x="0.96875"
+         height="1.09375"
+         width="15.03125"
+         id="rect4882"
+         style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#7386ef;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.44999999;marker:none;enable-background:accumulate" />
+      <rect
+         y="1045.3622"
+         x="0.96875"
+         height="1.09375"
+         width="15.03125"
+         id="rect4882-2"
+         style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#7386ef;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.44999999;marker:none;enable-background:accumulate" />
+    </g>
+  </g>
+</svg>

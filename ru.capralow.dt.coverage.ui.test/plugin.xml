@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+	<extension point="org.eclipse.debug.ui.launchShortcuts">
+		<shortcut
+			class="ru.capralow.dt.coverage.ui.ContextualLaunchableTesterTest$FakeLaunchShortcut"
+			id="ru.capralow.dt.coverage.ui.ContextualLaunchableTesterTest.fakeShortcut"
+			label="label"
+			modes="run,debug">
+			<contextualLaunch>
+				<enablement>
+					<with variable="selection">
+						<iterate>
+							<test
+								property="org.eclipse.core.resources.name"
+								value="ContextualLaunchableTesterTest" />
+							<test
+								property="ru.capralow.dt.coverage.unknownProperty" />
+						</iterate>
+					</with>
+				</enablement>
+			</contextualLaunch>
+		</shortcut>
+		<shortcut
+			class="ru.capralow.dt.coverage.ui.launching.CoverageLaunchShortcut:ru.capralow.dt.coverage.ui.ContextualLaunchableTesterTest.fakeShortcut"
+			id="ru.capralow.dt.coverage.ui.ContextualLaunchableTesterTest.fakeCoverageShortcut"
+			label="label"
+			modes="coverage">
+			<contextualLaunch>
+				<enablement>
+					<with variable="selection">
+						<test
+							property="ru.capralow.dt.coverage.ui.launchable"
+							args="ru.capralow.dt.coverage.ui.ContextualLaunchableTesterTest.fakeShortcut" />
+					</with>
+				</enablement>
+			</contextualLaunch>
+		</shortcut>
+	</extension>
+</plugin>

@@ -1,0 +1,5 @@
+# Enable trace output for performance (time/memory)
+ru.capralow.dt.coverage.core/debug/performance=true
+
+# Enable trace output for coverage analysis
+ru.capralow.dt.coverage.core/debug/analysis=true
