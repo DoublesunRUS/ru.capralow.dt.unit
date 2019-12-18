@@ -30,6 +30,9 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 
+import com._1c.g5.v8.dt.core.platform.IResourceLookup;
+import com._1c.g5.v8.dt.core.platform.IV8ProjectManager;
+
 import ru.capralow.dt.coverage.core.ScopeUtils;
 import ru.capralow.dt.coverage.core.launching.ICoverageLaunchConfigurationConstants;
 import ru.capralow.dt.coverage.internal.ui.ContextHelp;
@@ -44,7 +47,12 @@ public class CoverageTab extends AbstractLaunchConfigurationTab {
 
 	private ScopeViewer classesviewer;
 
-	public CoverageTab() {
+	private IV8ProjectManager projectManager;
+	private IResourceLookup resourceLookup;
+
+	public CoverageTab(IV8ProjectManager projectManager, IResourceLookup resourceLookup) {
+		this.projectManager = projectManager;
+		this.resourceLookup = resourceLookup;
 	}
 
 	public void createControl(Composite parent) {
@@ -64,7 +72,7 @@ public class CoverageTab extends AbstractLaunchConfigurationTab {
 		GridLayout layout = new GridLayout();
 		layout.numColumns = 2;
 		group.setLayout(layout);
-		classesviewer = new ScopeViewer(group, SWT.BORDER);
+		classesviewer = new ScopeViewer(group, SWT.BORDER, projectManager, resourceLookup);
 		GridData gd = new GridData(GridData.FILL_BOTH);
 		gd.horizontalSpan = 2;
 		classesviewer.getTable().setLayoutData(gd);
@@ -103,7 +111,6 @@ public class CoverageTab extends AbstractLaunchConfigurationTab {
 
 	public void initializeFrom(ILaunchConfiguration configuration) {
 		try {
-			classesviewer.setIncludeBinaries(true);
 			classesviewer.setInput(ScopeUtils.getOverallScope(configuration));
 			classesviewer.setSelectedScope(ScopeUtils.getConfiguredScope(configuration));
 		} catch (CoreException e) {

@@ -42,7 +42,7 @@ import ru.capralow.dt.unit.launcher.plugin.core.frameworks.FrameworkUtils;
 public class BslApplicationLauncher extends CoverageLauncher {
 
 	@Inject
-	IV8ProjectManager projectManager;
+	private IV8ProjectManager projectManager;
 
 	public Set<Module> getOverallScope(ILaunchConfiguration configuration) throws CoreException {
 

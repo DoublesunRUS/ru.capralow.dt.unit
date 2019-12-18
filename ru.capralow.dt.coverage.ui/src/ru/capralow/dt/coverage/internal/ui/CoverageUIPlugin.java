@@ -13,6 +13,7 @@
 package ru.capralow.dt.coverage.internal.ui;
 
 import java.net.URL;
+import java.text.MessageFormat;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -26,6 +27,9 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
+
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 
 import ru.capralow.dt.coverage.core.CoverageTools;
 import ru.capralow.dt.coverage.core.ICoverageSession;
@@ -75,7 +79,37 @@ public class CoverageUIPlugin extends AbstractUIPlugin {
 
 	private static CoverageUIPlugin instance;
 
+	private static Injector injector;
+
 	private EditorTracker editorTracker;
+
+	public static synchronized Injector getInjector() {
+		if (injector == null)
+			injector = createInjector();
+
+		return injector;
+	}
+
+	public static IStatus createErrorStatus(String message, Throwable throwable) {
+		return new Status(IStatus.ERROR, ID, 0, message, throwable);
+	}
+
+	private static Injector createInjector() {
+		try {
+			return Guice.createInjector(new ExternalDependenciesModule(getInstance()));
+
+		} catch (Exception e) {
+			String msg = MessageFormat.format(UIMessages.Failed_to_create_injector_for_0,
+					getInstance().getBundle().getSymbolicName());
+			log(createErrorStatus(msg, e));
+			return null;
+
+		}
+	}
+
+	public static void log(IStatus status) {
+		getInstance().getLog().log(status);
+	}
 
 	private ISessionListener sessionListener = new ISessionListener() {
 		public void sessionAdded(ICoverageSession addedSession) {

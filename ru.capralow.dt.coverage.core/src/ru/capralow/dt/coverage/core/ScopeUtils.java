@@ -71,13 +71,13 @@ public final class ScopeUtils {
 	 * Writes a coverage scope as a list of ids.
 	 *
 	 * @param scope
-	 *            Scope as {@link IPackageFragmentRoot} collection
+	 *            Scope as {@link Module} collection
 	 * @return List of ids
 	 */
-	public static List<String> writeScope(Set<IPackageFragmentRoot> scope) {
+	public static List<String> writeScope(Set<Module> scope) {
 		final List<String> ids = new ArrayList<>();
-		for (final IPackageFragmentRoot root : scope) {
-			ids.add(root.getHandleIdentifier());
+		for (final Module root : scope) {
+			ids.add(root.getUniqueName());
 		}
 		return ids;
 	}
@@ -132,7 +132,7 @@ public final class ScopeUtils {
 		for (IJavaProject p : model.getJavaProjects()) {
 			scope.addAll(Arrays.asList(p.getPackageFragmentRoots()));
 		}
-		return filterJREEntries(scope);
+		return filterUnsupportedEntries(scope);
 	}
 
 	/**
@@ -142,7 +142,7 @@ public final class ScopeUtils {
 	 *            set to filter
 	 * @return filtered set without JRE runtime entries
 	 */
-	public static Set<Module> filterJREEntries(Collection<Module> scope) throws JavaModelException {
+	public static Set<Module> filterUnsupportedEntries(Collection<Module> scope) throws JavaModelException {
 		final Set<Module> filtered = new HashSet<>();
 		for (final Module root : scope) {
 			final IClasspathEntry entry = root.getRawClasspathEntry();

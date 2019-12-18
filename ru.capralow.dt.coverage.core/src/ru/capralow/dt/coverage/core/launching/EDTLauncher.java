@@ -32,9 +32,9 @@ import ru.capralow.dt.coverage.core.ScopeUtils;
 /**
  * Laucher for the Eclipse runtime workbench.
  */
-public class EclipseLauncher extends CoverageLauncher {
+public class EDTLauncher extends CoverageLauncher {
 
-	protected static final String PLUGIN_NATURE = "org.eclipse.pde.PluginNature"; //$NON-NLS-1$
+	protected static final String EDT_NATURE = "com._1c.g5.v8.dt.core.V8ConfigurationNature"; //$NON-NLS-1$
 
 	/*
 	 * The overall scope are all plug-in projects in the workspace.
@@ -43,11 +43,11 @@ public class EclipseLauncher extends CoverageLauncher {
 		final IJavaModel model = JavaCore.create(ResourcesPlugin.getWorkspace().getRoot());
 		final Set<Module> result = new HashSet<>();
 		for (final IJavaProject project : model.getJavaProjects()) {
-			if (project.getProject().hasNature(PLUGIN_NATURE)) {
+			if (project.getProject().hasNature(EDT_NATURE)) {
 				result.addAll(Arrays.asList(project.getPackageFragmentRoots()));
 			}
 		}
-		return ScopeUtils.filterJREEntries(result);
+		return ScopeUtils.filterUnsupportedEntries(result);
 	}
 
 }

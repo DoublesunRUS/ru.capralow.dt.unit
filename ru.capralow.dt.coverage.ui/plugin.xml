@@ -569,7 +569,7 @@
    <extension
          point="org.eclipse.debug.ui.launchConfigurationTabGroups">
 		<launchConfigurationTabGroup
-			class="ru.capralow.dt.coverage.ui.launching.CoverageTabGroup"
+			class="ru.capralow.dt.coverage.internal.ui.ExecutableExtensionFactory:ru.capralow.dt.coverage.ui.launching.CoverageTabGroup"
 			helpContextId="ru.capralow.dt.coverage.ui.coverage_launch_tab_context"
 			id="ru.capralow.dt.unit.launcher.plugin.ui.UnitTestCoverageTabGroup"
 			type="ru.capralow.dt.unit.launcher.plugin.ui.UnitTestLaunch">

@@ -162,6 +162,8 @@ public class UIMessages extends NLS {
 	public static String ExecutionDataEditorExecutedClassesPageRefreshing_task;
 	public static String ExecutionDataEditorOpeningError_message;
 
+	public static String Failed_to_create_injector_for_0;
+
 	static {
 		NLS.initializeMessages(BUNDLE_NAME, UIMessages.class);
 	}
