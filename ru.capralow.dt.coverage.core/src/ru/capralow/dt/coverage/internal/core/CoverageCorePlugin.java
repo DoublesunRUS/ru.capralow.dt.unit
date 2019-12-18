@@ -32,7 +32,7 @@ import org.osgi.framework.BundleContext;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
-import ru.capralow.dt.coverage.core.EclEmmaStatus;
+import ru.capralow.dt.coverage.core.CoverageStatus;
 import ru.capralow.dt.coverage.core.ICorePreferences;
 import ru.capralow.dt.coverage.core.ISessionManager;
 import ru.capralow.dt.coverage.internal.core.launching.CoverageLaunch;
@@ -144,7 +144,7 @@ public class CoverageCorePlugin extends Plugin {
 		private void checkExecutionData(CoverageLaunch launch) {
 			if (!launch.getAgentServer().hasDataReceived()) {
 				try {
-					showPrompt(EclEmmaStatus.NO_COVERAGE_DATA_ERROR.getStatus(), launch);
+					showPrompt(CoverageStatus.NO_COVERAGE_DATA_ERROR.getStatus(), launch);
 				} catch (CoreException e) {
 					getLog().log(e.getStatus());
 				}

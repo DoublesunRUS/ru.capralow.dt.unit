@@ -23,18 +23,17 @@ import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
 import com._1c.g5.v8.dt.bsl.model.Module;
+import com._1c.g5.v8.dt.core.platform.IConfigurationProject;
 import com._1c.g5.v8.dt.core.platform.IExtensionProject;
 import com._1c.g5.v8.dt.core.platform.IV8Project;
 import com._1c.g5.v8.dt.core.platform.IV8ProjectManager;
+import com._1c.g5.v8.dt.debug.core.IDebugConfigurationAttributes;
 import com._1c.g5.v8.dt.metadata.mdclass.CommonModule;
 import com._1c.g5.v8.dt.metadata.mdclass.Configuration;
-
-import ru.capralow.dt.unit.launcher.plugin.core.frameworks.FrameworkUtils;
 
 /**
  * Launcher for local Java applications.
@@ -46,14 +45,18 @@ public class BslApplicationLauncher extends CoverageLauncher {
 
 	public Set<Module> getOverallScope(ILaunchConfiguration configuration) throws CoreException {
 
-		IProject project = FrameworkUtils.getConfigurationProject(configuration, projectManager);
-		if (project == null)
+		String configurationProjectName = configuration.getAttribute(IDebugConfigurationAttributes.PROJECT_NAME,
+				(String) null);
+
+		IV8Project v8Project = projectManager.getProject(configurationProjectName);
+
+		if (v8Project == null)
 			return Collections.emptySet();
 
-		IV8Project v8Project = projectManager.getProject(project);
-
 		Configuration v8Configuration = null;
-		if (v8Project instanceof IExtensionProject)
+		if (v8Project instanceof IConfigurationProject)
+			v8Configuration = ((IConfigurationProject) v8Project).getConfiguration();
+		else if (v8Project instanceof IExtensionProject)
 			v8Configuration = ((IExtensionProject) v8Project).getConfiguration();
 
 		if (v8Configuration == null)
@@ -61,9 +64,18 @@ public class BslApplicationLauncher extends CoverageLauncher {
 
 		List<Module> modules = new ArrayList<>();
 
-		for (CommonModule commonModule : v8Configuration.getCommonModules()) {
+		for (CommonModule commonModule : v8Configuration.getCommonModules())
 			modules.add(commonModule.getModule());
-		}
+
+		if (v8Project instanceof IConfigurationProject)
+			for (IExtensionProject extensionProject : projectManager.getProjects(IExtensionProject.class)) {
+				if (extensionProject.getParent().equals(v8Project)) {
+					Configuration extensionConfiguration = extensionProject.getConfiguration();
+					for (CommonModule commonModule : extensionConfiguration.getCommonModules())
+						modules.add(commonModule.getModule());
+				}
+			}
+
 		return modules.stream().collect(Collectors.toSet());
 	}
 

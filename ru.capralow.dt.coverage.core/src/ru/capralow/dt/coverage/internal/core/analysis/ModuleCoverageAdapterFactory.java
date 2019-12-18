@@ -19,7 +19,7 @@ import org.jacoco.core.analysis.ICoverageNode;
 import org.jacoco.core.analysis.ISourceNode;
 
 import ru.capralow.dt.coverage.core.CoverageTools;
-import ru.capralow.dt.coverage.core.analysis.IJavaModelCoverage;
+import ru.capralow.dt.coverage.core.analysis.IBslModelCoverage;
 
 /**
  * This factory adapts IResource and IJavaElement objects to the corresponding
@@ -27,7 +27,7 @@ import ru.capralow.dt.coverage.core.analysis.IJavaModelCoverage;
  * workbench through the extension point
  * <code>org.eclipse.core.runtime.adapters</code>.
  */
-public class JavaElementCoverageAdapterFactory implements IAdapterFactory {
+public class ModuleCoverageAdapterFactory implements IAdapterFactory {
 
 	public Object getAdapter(Object object, @SuppressWarnings("rawtypes") Class adapterType) {
 		// if the object is a IResource find the corresponding IJavaElement
@@ -38,7 +38,7 @@ public class JavaElementCoverageAdapterFactory implements IAdapterFactory {
 			}
 		}
 		// then find the coverage information from the current session
-		IJavaModelCoverage mc = CoverageTools.getJavaModelCoverage();
+		IBslModelCoverage mc = CoverageTools.getJavaModelCoverage();
 		if (mc == null) {
 			return null;
 		} else {

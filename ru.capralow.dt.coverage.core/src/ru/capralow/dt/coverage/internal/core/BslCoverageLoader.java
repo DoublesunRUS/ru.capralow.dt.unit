@@ -22,24 +22,24 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.osgi.util.NLS;
 
-import ru.capralow.dt.coverage.core.EclEmmaStatus;
+import ru.capralow.dt.coverage.core.CoverageStatus;
 import ru.capralow.dt.coverage.core.ICoverageSession;
 import ru.capralow.dt.coverage.core.ISessionListener;
 import ru.capralow.dt.coverage.core.ISessionManager;
 import ru.capralow.dt.coverage.core.analysis.IJavaCoverageListener;
-import ru.capralow.dt.coverage.core.analysis.IJavaModelCoverage;
+import ru.capralow.dt.coverage.core.analysis.IBslModelCoverage;
 import ru.capralow.dt.coverage.internal.core.analysis.SessionAnalyzer;
 
 /**
  * Internal utility class that loads the coverage data asynchronously, holds the
- * current {@link IJavaModelCoverage} object and sends out events in case of
+ * current {@link IBslModelCoverage} object and sends out events in case of
  * changed coverage information.
  */
 public class BslCoverageLoader {
 
 	private final ISessionManager sessionManager;
 
-	private IJavaModelCoverage coverage;
+	private IBslModelCoverage coverage;
 
 	private final List<IJavaCoverageListener> listeners = new ArrayList<IJavaCoverageListener>();
 
@@ -51,7 +51,7 @@ public class BslCoverageLoader {
 				coverage = null;
 				fireCoverageChanged();
 			} else {
-				coverage = IJavaModelCoverage.LOADING;
+				coverage = IBslModelCoverage.LOADING;
 				fireCoverageChanged();
 				new LoadSessionJob(session).schedule();
 			}
@@ -77,11 +77,11 @@ public class BslCoverageLoader {
 		}
 
 		protected IStatus run(IProgressMonitor monitor) {
-			final IJavaModelCoverage c;
+			final IBslModelCoverage c;
 			try {
 				c = new SessionAnalyzer().processSession(session, monitor);
 			} catch (CoreException e) {
-				return EclEmmaStatus.SESSION_LOAD_ERROR.getStatus(e);
+				return CoverageStatus.SESSION_LOAD_ERROR.getStatus(e);
 			}
 			coverage = monitor.isCanceled() ? null : c;
 			fireCoverageChanged();
@@ -120,7 +120,7 @@ public class BslCoverageLoader {
 		}
 	}
 
-	public IJavaModelCoverage getJavaModelCoverage() {
+	public IBslModelCoverage getJavaModelCoverage() {
 		return coverage;
 	}
 

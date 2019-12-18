@@ -21,7 +21,7 @@ import org.eclipse.debug.core.ILaunch;
 import org.jacoco.core.analysis.ICoverageNode;
 
 import ru.capralow.dt.coverage.core.analysis.IJavaCoverageListener;
-import ru.capralow.dt.coverage.core.analysis.IJavaModelCoverage;
+import ru.capralow.dt.coverage.core.analysis.IBslModelCoverage;
 import ru.capralow.dt.coverage.core.launching.ICoverageLaunch;
 import ru.capralow.dt.coverage.internal.core.CoverageCorePlugin;
 import ru.capralow.dt.coverage.internal.core.SessionExporter;
@@ -63,7 +63,7 @@ public final class CoverageTools {
 		}
 	}
 
-	public static IJavaModelCoverage getJavaModelCoverage() {
+	public static IBslModelCoverage getJavaModelCoverage() {
 		return CoverageCorePlugin.getInstance().getBslCoverageLoader().getJavaModelCoverage();
 	}
 

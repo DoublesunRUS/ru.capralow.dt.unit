@@ -23,7 +23,7 @@ import org.jacoco.core.analysis.Analyzer;
 import org.jacoco.core.analysis.CoverageBuilder;
 import org.jacoco.core.data.ExecutionDataStore;
 
-import ru.capralow.dt.coverage.core.EclEmmaStatus;
+import ru.capralow.dt.coverage.core.CoverageStatus;
 import ru.capralow.dt.coverage.internal.core.DebugOptions;
 import ru.capralow.dt.coverage.internal.core.DebugOptions.ITracer;
 
@@ -75,7 +75,7 @@ final class PackageFragementRootAnalyzer {
 			cache.put(location, nodes);
 			return nodes;
 		} catch (Exception e) {
-			throw new CoreException(EclEmmaStatus.BUNDLE_ANALYSIS_ERROR.getStatus(root.getElementName(), location, e));
+			throw new CoreException(CoverageStatus.BUNDLE_ANALYSIS_ERROR.getStatus(root.getElementName(), location, e));
 		}
 	}
 
@@ -96,7 +96,7 @@ final class PackageFragementRootAnalyzer {
 			cache.put(location, nodes);
 			return nodes;
 		} catch (Exception e) {
-			throw new CoreException(EclEmmaStatus.BUNDLE_ANALYSIS_ERROR.getStatus(root.getElementName(), location, e));
+			throw new CoreException(CoverageStatus.BUNDLE_ANALYSIS_ERROR.getStatus(root.getElementName(), location, e));
 		}
 	}
 

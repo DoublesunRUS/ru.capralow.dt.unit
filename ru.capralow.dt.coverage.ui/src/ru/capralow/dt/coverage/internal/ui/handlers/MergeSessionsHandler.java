@@ -29,7 +29,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import ru.capralow.dt.coverage.core.CoverageTools;
-import ru.capralow.dt.coverage.core.EclEmmaStatus;
+import ru.capralow.dt.coverage.core.CoverageStatus;
 import ru.capralow.dt.coverage.core.ICoverageSession;
 import ru.capralow.dt.coverage.core.ISessionManager;
 import ru.capralow.dt.coverage.internal.ui.UIMessages;
@@ -71,7 +71,7 @@ public class MergeSessionsHandler extends AbstractSessionManagerHandler {
 				try {
 					sm.mergeSessions(sessions, description, monitor);
 				} catch (CoreException e) {
-					return EclEmmaStatus.MERGE_SESSIONS_ERROR.getStatus(e);
+					return CoverageStatus.MERGE_SESSIONS_ERROR.getStatus(e);
 				}
 				return Status.OK_STATUS;
 			}

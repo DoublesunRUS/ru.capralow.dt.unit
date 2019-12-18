@@ -30,10 +30,12 @@ import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
 import org.eclipse.debug.core.model.ILaunchConfigurationDelegate2;
 import org.eclipse.osgi.util.NLS;
 
-import ru.capralow.dt.coverage.core.EclEmmaStatus;
+import com._1c.g5.v8.dt.profiling.core.IProfilingService;
+import com.google.inject.Inject;
+
+import ru.capralow.dt.coverage.core.CoverageStatus;
 import ru.capralow.dt.coverage.core.ScopeUtils;
 import ru.capralow.dt.coverage.internal.core.CoreMessages;
-import ru.capralow.dt.coverage.internal.core.launching.AgentArgumentSupport;
 import ru.capralow.dt.coverage.internal.core.launching.AgentServer;
 import ru.capralow.dt.coverage.internal.core.launching.CoverageLaunch;
 
@@ -51,6 +53,9 @@ public abstract class CoverageLauncher implements ICoverageLauncher, IExecutable
 
 	protected ILaunchConfigurationDelegate2 launchdelegate2;
 
+	@Inject
+	private IProfilingService profilingService;
+
 	// IExecutableExtension interface:
 
 	public void setInitializationData(IConfigurationElement config, String propertyName, Object data)
@@ -66,7 +71,7 @@ public abstract class CoverageLauncher implements ICoverageLauncher, IExecutable
 		ILaunchConfigurationType type = DebugPlugin.getDefault().getLaunchManager()
 				.getLaunchConfigurationType(launchtype);
 		if (type == null) {
-			throw new CoreException(EclEmmaStatus.UNKOWN_LAUNCH_TYPE_ERROR.getStatus(launchtype));
+			throw new CoreException(CoverageStatus.UNKOWN_LAUNCH_TYPE_ERROR.getStatus(launchtype));
 		}
 		return type.getDelegates(Collections.singleton(DELEGATELAUNCHMODE))[0].getDelegate();
 	}
@@ -86,9 +91,10 @@ public abstract class CoverageLauncher implements ICoverageLauncher, IExecutable
 		server.start();
 
 		// Delegate to run mode launcher
-		final AgentArgumentSupport argSupport = new AgentArgumentSupport();
-		final ILaunchConfiguration adjusted = argSupport.addArgument(server.getPort(), configuration);
-		launchdelegate.launch(adjusted, DELEGATELAUNCHMODE, launch, new SubProgressMonitor(monitor, 1));
+		// final AgentArgumentSupport argSupport = new AgentArgumentSupport();
+		// final ILaunchConfiguration adjusted =
+		// argSupport.addArgument(server.getPort(), configuration);
+		launchdelegate.launch(configuration, DELEGATELAUNCHMODE, launch, new SubProgressMonitor(monitor, 1));
 
 		monitor.done();
 	}
@@ -96,7 +102,7 @@ public abstract class CoverageLauncher implements ICoverageLauncher, IExecutable
 	// ILaunchConfigurationDelegate2 interface:
 
 	public ILaunch getLaunch(ILaunchConfiguration configuration, String mode) throws CoreException {
-		return new CoverageLaunch(configuration, ScopeUtils.getConfiguredScope(configuration));
+		return new CoverageLaunch(configuration, ScopeUtils.getConfiguredScope(configuration), profilingService);
 	}
 
 	public boolean buildForLaunch(ILaunchConfiguration configuration, String mode, IProgressMonitor monitor)

@@ -29,7 +29,7 @@
             id="ru.capralow.dt.coverage.ui.propertyTester.contextualLaunchable"
             namespace="ru.capralow.dt.coverage.ui"
             properties="launchable"
-            type="java.lang.Object"/>
+            type="com._1c.g5.v8.dt.metadata.mdclass.MdObject"/>
    </extension>
    
    <extension
@@ -60,120 +60,6 @@
                <test property="ru.capralow.dt.coverage.ui.launchable" args="org.eclipse.jdt.junit.junitShortcut"/>
              </with>
            </enablement>
-         </contextualLaunch>
-      </shortcut>
-      <shortcut
-            class="ru.capralow.dt.coverage.ui.launching.CoverageLaunchShortcut:org.testng.eclipse.shortcut"
-            icon="$nl$/icons/full/etool16/testng_launch.gif"
-            id="ru.capralow.dt.coverage.ui.testNgShortcut"
-            label="%TestNgShortcut.label"
-            modes="coverage">
-         <contextualLaunch>
-            <enablement>
-               <with
-                     variable="selection">
-                  <test
-                        args="org.testng.eclipse.shortcut"
-                        property="ru.capralow.dt.coverage.ui.launchable">
-                  </test>
-               </with>
-            </enablement>
-         </contextualLaunch>
-      </shortcut>
-      <shortcut
-            class="ru.capralow.dt.coverage.ui.launching.CoverageLaunchShortcut:org.testng.eclipse.shortcut.testngSuite"
-            icon="$nl$/icons/full/etool16/testng_launch.gif"
-            id="ru.capralow.dt.coverage.ui.testNgSuiteShortcut"
-            label="%TestNgSuiteShortcut.label"
-            modes="coverage">
-         <contextualLaunch>
-            <enablement>
-               <with
-                     variable="selection">
-                  <test
-                        args="org.testng.eclipse.shortcut.testngSuite"
-                        property="ru.capralow.dt.coverage.ui.launchable">
-                  </test>
-               </with>
-            </enablement>
-         </contextualLaunch>
-      </shortcut>
-      <shortcut
-            label="%EclipseApplicationShortcut.label"
-            icon="$nl$/icons/full/etool16/eclipse_launch.png"
-            modes="coverage"
-            class="ru.capralow.dt.coverage.ui.launching.CoverageLaunchShortcut:org.eclipse.pde.ui.runtimeWorkbenchShortcut"
-            id="ru.capralow.dt.coverage.ui.workbenchShortcut">
-         <contextualLaunch>
-           <enablement>
-             <with variable="selection">
-               <test property="ru.capralow.dt.coverage.ui.launchable" args="org.eclipse.pde.ui.runtimeWorkbenchShortcut"/>
-             </with>
-           </enablement>
-         </contextualLaunch>
-      </shortcut>
-      <shortcut
-            label="%JUnitPluginTestShortcut.label"
-            icon="$nl$/icons/full/etool16/junitplugin_launch.png"
-            modes="coverage"
-            class="ru.capralow.dt.coverage.ui.launching.CoverageLaunchShortcut:org.eclipse.pde.ui.junitWorkbenchShortcut"
-            id="ru.capralow.dt.coverage.ui.junitPluginShortcut">
-         <contextualLaunch>
-           <enablement>
-             <with variable="selection">
-               <test property="ru.capralow.dt.coverage.ui.launchable" args="org.eclipse.pde.ui.junitWorkbenchShortcut"/>
-             </with>
-           </enablement>
-         </contextualLaunch>
-      </shortcut>
-      <shortcut
-            label="%JUnitRAPTestShortcut.label "
-            icon="$nl$/icons/full/etool16/junitplugin_launch.png"
-            modes="coverage"
-            class="ru.capralow.dt.coverage.ui.launching.CoverageLaunchShortcut:org.eclipse.rap.ui.launch.RAPJUnitLaunchShortcut"
-            id="ru.capralow.dt.coverage.ui.RAPJUnitLaunchShortcut">
-         <contextualLaunch>
-            <enablement>
-               <with variable="selection">
-                  <test property="ru.capralow.dt.coverage.ui.launchable" args="org.eclipse.rap.ui.launch.RAPJUnitLaunchShortcut"/>
-               </with>
-            </enablement>
-         </contextualLaunch>
-      </shortcut>
-      <shortcut
-            class="ru.capralow.dt.coverage.ui.launching.CoverageLaunchShortcut:org.eclipse.swtbot.eclipse.ui.junitShortcut"
-            icon="$nl$/icons/full/etool16/swtbot_launch.png"
-            id="ru.capralow.dt.coverage.ui.SWTBotJUnitShortcut"
-            label="%SWTBotJUnitShortcut.label"
-            modes="coverage">
-         <contextualLaunch>
-            <enablement>
-               <with
-                     variable="selection">
-                  <test
-                        args="org.eclipse.swtbot.eclipse.ui.junitShortcut"
-                        property="ru.capralow.dt.coverage.ui.launchable">
-                  </test>
-               </with>
-            </enablement>
-         </contextualLaunch>
-      </shortcut>
-      <shortcut
-            class="ru.capralow.dt.coverage.ui.launching.CoverageLaunchShortcut:org.eclipse.shortcut.scala"
-            icon="$nl$/icons/full/etool16/scala_launch.png"
-            id="ru.capralow.dt.coverage.ui.scalaShortcut"
-            label="%ScalaApplicationShortcut.label"
-            modes="coverage">
-         <contextualLaunch>
-            <enablement>
-               <with
-                     variable="selection">
-                  <test
-                        args="org.eclipse.shortcut.scala"
-                        property="ru.capralow.dt.coverage.ui.launchable">
-                  </test>
-               </with>
-            </enablement>
          </contextualLaunch>
       </shortcut>
    </extension>
@@ -257,44 +143,6 @@
             description="%CoverageJUnitTestCommand.description"
             id="ru.capralow.dt.coverage.ui.junitShortcut.coverage"
             name="%CoverageJUnitTestCommand.name"/>
-      <command
-            categoryId="org.eclipse.debug.ui.category.run"
-            description="%CoverageTestNGCommand.description"
-            id="ru.capralow.dt.coverage.ui.testNgShortcut.coverage"
-            name="%CoverageTestNGCommand.name"/>
-      <command
-            categoryId="org.eclipse.debug.ui.category.run"
-            description="%CoverageTestNGSuiteCommand.description"
-            id="ru.capralow.dt.coverage.ui.testNgSuiteShortcut.coverage"
-            name="%CoverageTestNGSuiteCommand.name"/>
-      <command
-            categoryId="org.eclipse.debug.ui.category.run"
-            description="%CoverageEclipseApplicationCommand.description"
-            id="ru.capralow.dt.coverage.ui.workbenchShortcut.coverage"
-            name="%CoverageEclipseApplicationCommand.name"/>
-      <command
-            categoryId="org.eclipse.debug.ui.category.run"
-            description="%CoverageJUnitPluginTestCommand.description"
-            id="ru.capralow.dt.coverage.ui.junitPluginShortcut.coverage"
-            name="%CoverageJUnitPluginTestCommand.name"/>
-      <command
-            categoryId="org.eclipse.debug.ui.category.run"
-            description="%CoverageJUnitRAPTestCommand.description"
-            id="ru.capralow.dt.coverage.ui.junitRAPShortcut.coverage"
-            name="%CoverageJUnitRAPTestCommand.name">
-      </command>
-      <command
-            categoryId="org.eclipse.debug.ui.category.run"
-            description="%CoverageSWTBotJUnitCommand.description"
-            id="ru.capralow.dt.coverage.ui.swtBotJunitShortcut.coverage"
-            name="%CoverageSWTBotJUnitCommand.name">
-      </command>
-      <command
-            categoryId="org.eclipse.debug.ui.category.run"
-            description="%CoverageScalaApplicationCommand.description"
-            id="ru.capralow.dt.coverage.ui.scalaShortcut.coverage"
-            name="%CoverageScalaApplicationCommand.name">
-      </command>
       <command
             categoryId="ru.capralow.dt.coverage.ui"
             id="ru.capralow.dt.coverage.ui.selectRootElements"
@@ -395,49 +243,15 @@
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="M3+M2+E J"/>
       <key
-            commandId="ru.capralow.dt.coverage.ui.scalaShortcut.coverage"
-            contextId="org.eclipse.ui.globalScope"
-            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
-            sequence="M3+M2+E L">
-      </key>
-      <key
             commandId="ru.capralow.dt.coverage.ui.junitShortcut.coverage"
             contextId="org.eclipse.ui.globalScope"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="M3+M2+E T"/>
       <key
-            commandId="ru.capralow.dt.coverage.ui.testNgShortcut.coverage"
-            contextId="org.eclipse.ui.globalScope"
-            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
-            sequence="M3+M2+E N">
-      </key>
-      <key
-            commandId="ru.capralow.dt.coverage.ui.testNgSuiteShortcut.coverage"
-            contextId="org.eclipse.ui.globalScope"
-            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
-            sequence="M3+M2+E G">
-      </key>
-      <key
             commandId="ru.capralow.dt.coverage.ui.workbenchShortcut.coverage"
             contextId="org.eclipse.ui.globalScope"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="M3+M2+E E"/>
-      <key
-            commandId="ru.capralow.dt.coverage.ui.junitPluginShortcut.coverage"
-            contextId="org.eclipse.ui.globalScope"
-            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
-            sequence="M3+M2+E P"/>
-      <key
-            commandId="ru.capralow.dt.coverage.ui.junitRAPShortcut.coverage"
-            contextId="org.eclipse.ui.globalScope"
-            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
-            sequence="M3+M2+E R"/>
-      <key
-            commandId="ru.capralow.dt.coverage.ui.swtBotJunitShortcut.coverage"
-            contextId="org.eclipse.ui.globalScope"
-            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
-            sequence="M3+M2+E S">
-      </key>
       <key
             commandId="ru.capralow.dt.coverage.ui.commands.CoverageLast"
             contextId="org.eclipse.ui.contexts.window"

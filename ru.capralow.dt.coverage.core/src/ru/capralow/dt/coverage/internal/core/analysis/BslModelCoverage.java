@@ -9,6 +9,8 @@
  * Contributors:
  *    Marc R. Hoffmann - initial API and implementation
  *
+ * Adapted by Alexander Kapralov
+ *
  ******************************************************************************/
 package ru.capralow.dt.coverage.internal.core.analysis;
 
@@ -32,15 +34,15 @@ import org.jacoco.core.analysis.IClassCoverage;
 import org.jacoco.core.analysis.ICoverageNode;
 import org.jacoco.core.analysis.IMethodCoverage;
 
-import ru.capralow.dt.coverage.core.analysis.IJavaModelCoverage;
+import ru.capralow.dt.coverage.core.analysis.IBslModelCoverage;
 import ru.capralow.dt.coverage.internal.core.DebugOptions;
 import ru.capralow.dt.coverage.internal.core.DebugOptions.ITracer;
 
 /**
- * The IJavaModelCoverage implementation maps Java elements to its corresponding
+ * The IBslModelCoverage implementation maps Bsl elements to its corresponding
  * coverage data objects.
  */
-public class JavaModelCoverage extends CoverageNodeImpl implements IJavaModelCoverage {
+public class BslModelCoverage extends CoverageNodeImpl implements IBslModelCoverage {
 
 	private static final ITracer TRACER = DebugOptions.ANALYSISTRACER;
 
@@ -59,7 +61,7 @@ public class JavaModelCoverage extends CoverageNodeImpl implements IJavaModelCov
 	/** List of all IType objects with coverage information */
 	private final List<IType> types = new ArrayList<IType>();
 
-	public JavaModelCoverage() {
+	public BslModelCoverage() {
 		super(ElementType.GROUP, "JavaModel"); //$NON-NLS-1$
 	}
 

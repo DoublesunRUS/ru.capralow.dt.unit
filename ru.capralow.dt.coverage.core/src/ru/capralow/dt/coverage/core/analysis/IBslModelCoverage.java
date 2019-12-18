@@ -9,6 +9,8 @@
  * Contributors:
  *    Marc R. Hoffmann - initial API and implementation
  *
+ * Adapted by Alexander Kapralov
+ *
  ******************************************************************************/
 package ru.capralow.dt.coverage.core.analysis;
 
@@ -26,13 +28,13 @@ import org.jacoco.core.internal.analysis.CounterImpl;
  * to retrieve coverage information for any Java model element and holds lists
  * of entry points.
  */
-public interface IJavaModelCoverage extends ICoverageNode {
+public interface IBslModelCoverage extends ICoverageNode {
 
 	/**
 	 * This instance is used to indicate that a coverage session is currently
 	 * loading.
 	 */
-	public static final IJavaModelCoverage LOADING = new IJavaModelCoverage() {
+	public static final IBslModelCoverage LOADING = new IBslModelCoverage() {
 
 		public ElementType getElementType() {
 			return ElementType.GROUP;

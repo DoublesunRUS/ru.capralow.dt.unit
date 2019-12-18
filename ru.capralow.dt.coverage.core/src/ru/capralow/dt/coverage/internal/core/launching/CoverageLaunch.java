@@ -21,6 +21,7 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.Launch;
 
 import com._1c.g5.v8.dt.bsl.model.Module;
+import com._1c.g5.v8.dt.profiling.core.IProfilingService;
 
 import ru.capralow.dt.coverage.core.CoverageTools;
 import ru.capralow.dt.coverage.core.launching.ICoverageLaunch;
@@ -34,14 +35,16 @@ public class CoverageLaunch extends Launch implements ICoverageLaunch {
 	private final Set<Module> scope;
 	private final AgentServer agentServer;
 
-	public CoverageLaunch(ILaunchConfiguration launchConfiguration, Set<Module> scope) {
+	public CoverageLaunch(ILaunchConfiguration launchConfiguration, Set<Module> scope,
+			IProfilingService profilingService) {
 		super(launchConfiguration, CoverageTools.LAUNCH_MODE, null);
 		this.scope = scope;
 		final CoverageCorePlugin plugin = CoverageCorePlugin.getInstance();
 		this.agentServer = new AgentServer(this,
 				plugin.getSessionManager(),
 				plugin.getExecutionDataFiles(),
-				plugin.getPreferences());
+				plugin.getPreferences(),
+				profilingService);
 	}
 
 	public AgentServer getAgentServer() {

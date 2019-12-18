@@ -45,10 +45,10 @@ import org.jacoco.report.csv.CSVFormatter;
 import org.jacoco.report.html.HTMLFormatter;
 import org.jacoco.report.xml.XMLFormatter;
 
-import ru.capralow.dt.coverage.core.EclEmmaStatus;
+import ru.capralow.dt.coverage.core.CoverageStatus;
 import ru.capralow.dt.coverage.core.ICoverageSession;
 import ru.capralow.dt.coverage.core.ISessionExporter;
-import ru.capralow.dt.coverage.core.analysis.IJavaModelCoverage;
+import ru.capralow.dt.coverage.core.analysis.IBslModelCoverage;
 import ru.capralow.dt.coverage.internal.core.analysis.SessionAnalyzer;
 
 /**
@@ -80,7 +80,7 @@ public class SessionExporter implements ISessionExporter {
 				createReport(monitor);
 			}
 		} catch (IOException e) {
-			throw new CoreException(EclEmmaStatus.EXPORT_ERROR.getStatus(e));
+			throw new CoreException(CoverageStatus.EXPORT_ERROR.getStatus(e));
 		}
 	}
 
@@ -97,7 +97,7 @@ public class SessionExporter implements ISessionExporter {
 		final int work = session.getScope().size();
 		monitor.beginTask(NLS.bind(CoreMessages.ExportingSession_task, session.getDescription()), work * 2);
 		final SessionAnalyzer analyzer = new SessionAnalyzer();
-		final IJavaModelCoverage modelCoverage = analyzer.processSession(session,
+		final IBslModelCoverage modelCoverage = analyzer.processSession(session,
 				new SubProgressMonitor(monitor, work));
 		final IReportVisitor formatter = createFormatter();
 		formatter.visitInfo(analyzer.getSessionInfos(), analyzer.getExecutionData());

@@ -23,7 +23,7 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import org.jacoco.agent.AgentJar;
 import org.jacoco.core.runtime.AgentOptions;
 
-import ru.capralow.dt.coverage.core.EclEmmaStatus;
+import ru.capralow.dt.coverage.core.CoverageStatus;
 import ru.capralow.dt.coverage.core.ICorePreferences;
 import ru.capralow.dt.coverage.internal.core.CoverageCorePlugin;
 
@@ -71,7 +71,7 @@ public class AgentArgumentSupport {
 			final URL agentfileurl = FileLocator.toFileURL(AgentJar.getResource());
 			return new Path(agentfileurl.getPath()).toFile();
 		} catch (IOException e) {
-			throw new CoreException(EclEmmaStatus.NO_LOCAL_AGENTJAR_ERROR.getStatus(e));
+			throw new CoreException(CoverageStatus.NO_LOCAL_AGENTJAR_ERROR.getStatus(e));
 		}
 	}
 

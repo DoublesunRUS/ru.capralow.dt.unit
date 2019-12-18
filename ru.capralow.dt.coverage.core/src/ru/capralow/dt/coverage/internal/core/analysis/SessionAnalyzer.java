@@ -43,7 +43,7 @@ import org.jacoco.core.internal.analysis.BundleCoverageImpl;
 import com._1c.g5.v8.dt.bsl.model.Module;
 
 import ru.capralow.dt.coverage.core.ICoverageSession;
-import ru.capralow.dt.coverage.core.analysis.IJavaModelCoverage;
+import ru.capralow.dt.coverage.core.analysis.IBslModelCoverage;
 import ru.capralow.dt.coverage.internal.core.CoreMessages;
 import ru.capralow.dt.coverage.internal.core.DebugOptions;
 import ru.capralow.dt.coverage.internal.core.DebugOptions.ITracer;
@@ -55,16 +55,16 @@ public class SessionAnalyzer {
 
 	private static final ITracer PERFORMANCE = DebugOptions.PERFORMANCETRACER;
 
-	private JavaModelCoverage modelcoverage;
+	private BslModelCoverage modelcoverage;
 
 	private ExecutionDataStore executiondatastore;
 
 	private SessionInfoStore sessioninfostore;
 
-	public IJavaModelCoverage processSession(ICoverageSession session, IProgressMonitor monitor) throws CoreException {
+	public IBslModelCoverage processSession(ICoverageSession session, IProgressMonitor monitor) throws CoreException {
 		PERFORMANCE.startTimer();
 		PERFORMANCE.startMemoryUsage();
-		modelcoverage = new JavaModelCoverage();
+		modelcoverage = new BslModelCoverage();
 		final Collection<Module> roots = session.getScope();
 		monitor.beginTask(NLS.bind(CoreMessages.AnalyzingCoverageSession_task, session.getDescription()),
 				1 + roots.size());

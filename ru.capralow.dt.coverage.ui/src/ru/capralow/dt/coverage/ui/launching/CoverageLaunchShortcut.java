@@ -9,6 +9,8 @@
  * Contributors:
  *    Marc R. Hoffmann - initial API and implementation
  *
+ * Adapted by Alexander Kapralov
+ *
  ******************************************************************************/
 package ru.capralow.dt.coverage.ui.launching;
 
@@ -71,16 +73,16 @@ public class CoverageLaunchShortcut implements ILaunchShortcut, IExecutableExten
 	// ILaunchShortcut interface:
 
 	public void launch(ISelection selection, String mode) {
-		ILaunchShortcut delegate = getDelegate();
-		if (delegate != null) {
-			delegate.launch(selection, CoverageTools.LAUNCH_MODE);
+		ILaunchShortcut launchDelegate = getDelegate();
+		if (launchDelegate != null) {
+			launchDelegate.launch(selection, CoverageTools.LAUNCH_MODE);
 		}
 	}
 
 	public void launch(IEditorPart editor, String mode) {
-		ILaunchShortcut delegate = getDelegate();
-		if (delegate != null) {
-			delegate.launch(editor, CoverageTools.LAUNCH_MODE);
+		ILaunchShortcut launchDelegate = getDelegate();
+		if (launchDelegate != null) {
+			launchDelegate.launch(editor, CoverageTools.LAUNCH_MODE);
 		}
 	}
 

@@ -9,39 +9,36 @@
  * Contributors:
  *    Marc R. Hoffmann - initial API and implementation
  *
+ * Adapted by Alexander Kapralov
+ *
  ******************************************************************************/
 package ru.capralow.dt.coverage.internal.core.launching;
 
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.ServerSocket;
-import java.net.Socket;
 import java.text.MessageFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.Job;
-import org.jacoco.core.runtime.RemoteControlReader;
 import org.jacoco.core.runtime.RemoteControlWriter;
 
-import ru.capralow.dt.coverage.core.EclEmmaStatus;
+import com._1c.g5.v8.dt.profiling.core.IProfilingResult;
+import com._1c.g5.v8.dt.profiling.core.IProfilingService;
+
+import ru.capralow.dt.coverage.core.CoverageStatus;
 import ru.capralow.dt.coverage.core.ICorePreferences;
 import ru.capralow.dt.coverage.core.ISessionManager;
 import ru.capralow.dt.coverage.core.launching.ICoverageLaunch;
 import ru.capralow.dt.coverage.internal.core.CoreMessages;
-import ru.capralow.dt.coverage.internal.core.CoverageCorePlugin;
 import ru.capralow.dt.coverage.internal.core.CoverageSession;
 import ru.capralow.dt.coverage.internal.core.ExecutionDataFiles;
-import ru.capralow.dt.coverage.internal.core.MemoryExecutionDataSource;
 
 /**
  * Internal TCP/IP server for the JaCoCo agent to connect to.
  *
  */
-public class AgentServer extends Job {
+public class AgentServer {
 
 	private final ICoverageLaunch launch;
 	private final ISessionManager sessionManager;
@@ -52,25 +49,22 @@ public class AgentServer extends Job {
 	private RemoteControlWriter writer;
 	private boolean dataReceived;
 
+	private IProfilingService profilingService;
+
 	AgentServer(ICoverageLaunch launch, ISessionManager sessionManager, ExecutionDataFiles files,
-			ICorePreferences preferences) {
-		super(AgentServer.class.getName());
+			ICorePreferences preferences, IProfilingService profilingService) {
+		// super(AgentServer.class.getName());
 		this.preferences = preferences;
-		setSystem(true);
+		// setSystem(true);
 		this.launch = launch;
 		this.sessionManager = sessionManager;
 		this.files = files;
 		this.dataReceived = false;
+		this.profilingService = profilingService;
 	}
 
-	public void start() throws CoreException {
-		try {
-			// Bind an available port on the loopback interface:
-			serverSocket = new ServerSocket(0, 0, InetAddress.getByName(null));
-		} catch (IOException e) {
-			throw new CoreException(EclEmmaStatus.AGENTSERVER_START_ERROR.getStatus(e));
-		}
-		schedule();
+	public void start() {
+		profilingService.toggleTargetWaitingState(true);
 	}
 
 	public void requestDump(boolean reset) throws CoreException {
@@ -78,19 +72,25 @@ public class AgentServer extends Job {
 			try {
 				writer.visitDumpCommand(true, reset);
 			} catch (IOException e) {
-				throw new CoreException(EclEmmaStatus.DUMP_REQUEST_ERROR.getStatus(e));
+				throw new CoreException(CoverageStatus.DUMP_REQUEST_ERROR.getStatus(e));
 			}
 		}
 	}
 
 	public void stop() {
-		writer = null;
-		try {
-			serverSocket.close();
-		} catch (IOException e) {
-			CoverageCorePlugin.getInstance().getLog().log(EclEmmaStatus.AGENTSERVER_STOP_ERROR.getStatus(e));
-		}
-		cancel();
+		profilingService.toggleTargetWaitingState(false);
+
+		List<IProfilingResult> profilingResults = profilingService.getResults();
+		if (profilingResults.isEmpty())
+			return;
+
+		dataReceived = true;
+		final CoverageSession session = new CoverageSession(createDescription(),
+				launch.getScope(),
+				profilingResults,
+				// files.newFile(null),
+				launch.getLaunchConfiguration());
+		sessionManager.addSession(session, preferences.getActivateNewSessions(), launch);
 	}
 
 	public boolean hasDataReceived() {
@@ -99,32 +99,6 @@ public class AgentServer extends Job {
 
 	public int getPort() {
 		return serverSocket.getLocalPort();
-	}
-
-	@Override
-	protected IStatus run(IProgressMonitor monitor) {
-		try {
-			final Socket socket = serverSocket.accept();
-			writer = new RemoteControlWriter(socket.getOutputStream());
-			final RemoteControlReader reader = new RemoteControlReader(socket.getInputStream());
-			while (true) {
-				final MemoryExecutionDataSource memory = new MemoryExecutionDataSource();
-				memory.readFrom(reader);
-				if (memory.isEmpty()) {
-					return Status.OK_STATUS;
-				}
-				dataReceived = true;
-				final CoverageSession session = new CoverageSession(createDescription(),
-						launch.getScope(),
-						files.newFile(memory),
-						launch.getLaunchConfiguration());
-				sessionManager.addSession(session, preferences.getActivateNewSessions(), launch);
-			}
-		} catch (IOException e) {
-			return EclEmmaStatus.EXECDATA_DUMP_ERROR.getStatus(e);
-		} catch (CoreException e) {
-			return EclEmmaStatus.EXECDATA_DUMP_ERROR.getStatus(e);
-		}
 	}
 
 	private String createDescription() {

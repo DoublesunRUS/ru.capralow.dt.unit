@@ -49,7 +49,7 @@ public class AgentExecutionDataSource implements IExecutionDataSource {
 			reader.read();
 			socket.close();
 		} catch (IOException e) {
-			throw new CoreException(EclEmmaStatus.AGENT_CONNECT_ERROR.getStatus(address, Integer.valueOf(port), e));
+			throw new CoreException(CoverageStatus.AGENT_CONNECT_ERROR.getStatus(address, Integer.valueOf(port), e));
 		}
 	}
 

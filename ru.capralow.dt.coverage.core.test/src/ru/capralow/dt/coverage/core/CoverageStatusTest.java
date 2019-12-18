@@ -19,41 +19,41 @@ import org.eclipse.core.runtime.IStatus;
 import org.junit.Test;
 
 /**
- * Tests for {@link EclEmmaStatus}.
+ * Tests for {@link CoverageStatus}.
  */
-public class EclEmmaStatusTest {
+public class CoverageStatusTest {
 
 	@Test
 	public void testCode1() {
-		EclEmmaStatus estatus = EclEmmaStatus.NO_LOCAL_AGENTJAR_ERROR;
+		CoverageStatus estatus = CoverageStatus.NO_LOCAL_AGENTJAR_ERROR;
 		IStatus status = estatus.getStatus();
 		assertEquals(estatus.code, status.getCode());
 	}
 
 	@Test
 	public void testSeverity1() {
-		EclEmmaStatus estatus = EclEmmaStatus.NO_LOCAL_AGENTJAR_ERROR;
+		CoverageStatus estatus = CoverageStatus.NO_LOCAL_AGENTJAR_ERROR;
 		IStatus status = estatus.getStatus();
 		assertEquals(estatus.severity, status.getSeverity());
 	}
 
 	@Test
 	public void testMessage1() {
-		EclEmmaStatus estatus = EclEmmaStatus.NO_LOCAL_AGENTJAR_ERROR;
+		CoverageStatus estatus = CoverageStatus.NO_LOCAL_AGENTJAR_ERROR;
 		IStatus status = estatus.getStatus();
 		assertEquals("Local agent jar can not be obtained (code 5000).", status.getMessage());
 	}
 
 	@Test
 	public void testMessage2() {
-		EclEmmaStatus estatus = EclEmmaStatus.UNKOWN_LAUNCH_TYPE_ERROR;
+		CoverageStatus estatus = CoverageStatus.UNKOWN_LAUNCH_TYPE_ERROR;
 		IStatus status = estatus.getStatus("abcdef");
 		assertEquals("Unknown launch type abcdef (code 5002).", status.getMessage());
 	}
 
 	@Test
 	public void testThrowable1() {
-		EclEmmaStatus estatus = EclEmmaStatus.NO_LOCAL_AGENTJAR_ERROR;
+		CoverageStatus estatus = CoverageStatus.NO_LOCAL_AGENTJAR_ERROR;
 		Throwable t = new Exception();
 		IStatus status = estatus.getStatus(t);
 		assertSame(t, status.getException());

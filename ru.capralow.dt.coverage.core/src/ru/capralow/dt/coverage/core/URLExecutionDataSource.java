@@ -44,7 +44,7 @@ public class URLExecutionDataSource implements IExecutionDataSource {
 			reader.read();
 			in.close();
 		} catch (IOException e) {
-			throw new CoreException(EclEmmaStatus.EXEC_FILE_READ_ERROR.getStatus(url, e));
+			throw new CoreException(CoverageStatus.EXEC_FILE_READ_ERROR.getStatus(url, e));
 		}
 	}
 

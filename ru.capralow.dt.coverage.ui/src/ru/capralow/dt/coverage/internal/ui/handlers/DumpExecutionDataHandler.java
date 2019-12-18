@@ -36,7 +36,7 @@ import org.eclipse.ui.dialogs.ListDialog;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import ru.capralow.dt.coverage.core.CoverageTools;
-import ru.capralow.dt.coverage.core.EclEmmaStatus;
+import ru.capralow.dt.coverage.core.CoverageStatus;
 import ru.capralow.dt.coverage.core.launching.ICoverageLaunch;
 import ru.capralow.dt.coverage.internal.ui.ContextHelp;
 import ru.capralow.dt.coverage.internal.ui.CoverageUIPlugin;
@@ -120,7 +120,7 @@ public class DumpExecutionDataHandler extends AbstractHandler {
 							.getBoolean(UIPreferences.PREF_RESET_ON_DUMP);
 					launch.requestDump(reset);
 				} catch (CoreException e) {
-					return EclEmmaStatus.DUMP_REQUEST_ERROR.getStatus(e);
+					return CoverageStatus.DUMP_REQUEST_ERROR.getStatus(e);
 				}
 				return Status.OK_STATUS;
 			}

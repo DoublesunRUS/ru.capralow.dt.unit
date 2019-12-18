@@ -14,7 +14,7 @@ package ru.capralow.dt.coverage.internal.ui.coverageview;
 
 import org.eclipse.ui.model.WorkbenchContentProvider;
 
-import ru.capralow.dt.coverage.core.analysis.IJavaModelCoverage;
+import ru.capralow.dt.coverage.core.analysis.IBslModelCoverage;
 
 /**
  * Specialized workbench content provider that selects entry elements depending
@@ -30,8 +30,8 @@ class CoveredElementsContentProvider extends WorkbenchContentProvider {
 
 	@Override
 	public Object[] getElements(Object element) {
-		IJavaModelCoverage coverage = (IJavaModelCoverage) element;
-		if (coverage == IJavaModelCoverage.LOADING) {
+		IBslModelCoverage coverage = (IBslModelCoverage) element;
+		if (coverage == IBslModelCoverage.LOADING) {
 			return new Object[] { CoverageView.LOADING_ELEMENT };
 		}
 		if (coverage != null) {

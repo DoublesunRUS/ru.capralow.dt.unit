@@ -24,10 +24,11 @@ Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: dt.coverage.core
 Import-Package: com._1c.g5.v8.dt.bsl.model,
  com._1c.g5.v8.dt.core.platform,
+ com._1c.g5.v8.dt.debug.core,
  com._1c.g5.v8.dt.metadata.mdclass,
+ com._1c.g5.v8.dt.profiling.core,
  com._1c.g5.wiring,
  com._1c.g5.wiring.binder,
  com.google.inject,
  org.eclipse.emf.common.util,
- org.eclipse.emf.ecore,
- ru.capralow.dt.unit.launcher.plugin.core.frameworks
+ org.eclipse.emf.ecore

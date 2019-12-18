@@ -22,7 +22,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.jacoco.core.data.ExecutionDataWriter;
 
-import ru.capralow.dt.coverage.core.EclEmmaStatus;
+import ru.capralow.dt.coverage.core.CoverageStatus;
 import ru.capralow.dt.coverage.core.IExecutionDataSource;
 import ru.capralow.dt.coverage.core.URLExecutionDataSource;
 
@@ -67,7 +67,7 @@ public final class ExecutionDataFiles {
 			out.close();
 			return new URLExecutionDataSource(file.toURL());
 		} catch (IOException e) {
-			throw new CoreException(EclEmmaStatus.EXEC_FILE_CREATE_ERROR.getStatus(e));
+			throw new CoreException(CoverageStatus.EXEC_FILE_CREATE_ERROR.getStatus(e));
 		}
 	}
 

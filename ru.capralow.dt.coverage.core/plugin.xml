@@ -6,13 +6,13 @@
          point="org.eclipse.core.runtime.adapters">
       <factory
             adaptableType="org.eclipse.jdt.core.IJavaElement"
-            class="ru.capralow.dt.coverage.internal.core.analysis.JavaElementCoverageAdapterFactory">
+            class="ru.capralow.dt.coverage.internal.core.analysis.ModuleCoverageAdapterFactory">
          <adapter type="org.jacoco.core.analysis.ICoverageNode"/>
          <adapter type="org.jacoco.core.analysis.ISourceNode"/>
       </factory>
       <factory
             adaptableType="org.eclipse.core.resources.IResource"
-            class="ru.capralow.dt.coverage.internal.core.analysis.JavaElementCoverageAdapterFactory">
+            class="ru.capralow.dt.coverage.internal.core.analysis.ModuleCoverageAdapterFactory">
          <adapter type="org.jacoco.core.analysis.ICoverageNode"/>
          <adapter type="org.jacoco.core.analysis.ISourceNode"/>
       </factory>
