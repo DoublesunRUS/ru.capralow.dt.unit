@@ -24,6 +24,11 @@ import com._1c.g5.v8.dt.platform.version.Version;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
+import ru.capralow.dt.unit.launcher.plugin.core.frameworks.FrameworkUtils;
+import ru.capralow.dt.unit.launcher.plugin.core.frameworks.gson.AssertMethod;
+import ru.capralow.dt.unit.launcher.plugin.core.frameworks.gson.AssertMethodParameter;
+import ru.capralow.dt.unit.launcher.plugin.core.frameworks.gson.Asserts;
+
 public class FrameworkMetaTypesProvider implements IExternalMetaTypesProvider {
 
 	@Inject
@@ -32,29 +37,45 @@ public class FrameworkMetaTypesProvider implements IExternalMetaTypesProvider {
 	@Override
 	public Collection<Type> getExternalTypes(Resource context) {
 		Type type = McoreFactory.eINSTANCE.createType();
+
 		type.setEnvironments(new Environments(Environment.SERVER, Environment.CLIENT, Environment.THIN_CLIENT));
+
 		type.setName("TestFramework"); //$NON-NLS-1$
 		type.setNameRu("ФреймворкТестирования"); //$NON-NLS-1$
+
 		type.setContextDef(createContextDef(context));
+
 		return Lists.newArrayList(type);
 	}
 
 	private ContextDef createContextDef(Resource context) {
 		ContextDef contextDef = McoreFactory.eINSTANCE.createContextDef();
 
-		Method newMethod = createMethod("TrueCheck", "ПроверитьИстину", context); //$NON-NLS-1$ //$NON-NLS-2$
-		contextDef.getMethods().add(newMethod);
+		Asserts asserts = FrameworkUtils.getAsserts();
+		for (AssertMethod assertMethod : asserts.list) {
+			ParamSet paramSet = McoreFactory.eINSTANCE.createParamSet();
+			paramSet.setMinParams(assertMethod.params.length);
+			paramSet.setMaxParams(assertMethod.params.length);
 
-		newMethod = createMethod("FalseCheck", "ПроверитьЛожь", context); //$NON-NLS-1$ //$NON-NLS-2$
-		contextDef.getMethods().add(newMethod);
+			for (AssertMethodParameter assertParam : assertMethod.params) {
+				paramSet.getParams()
+						.add(createParameter(assertParam.nameEn,
+								assertParam.nameRu,
+								assertParam.getTypes(),
+								assertParam.defaultValue,
+								context));
+			}
 
-		// contextDef.getProperties().add(createProperty("InTypeProperty",
-		// "СвойстваВнутриТипа", context)); //$NON-NLS-1$ //$NON-NLS-2$
+			Method newMethod = createMethod(assertMethod.nameEn, assertMethod.nameRu, paramSet);
+			contextDef.getMethods().add(newMethod);
+		}
+
 		return contextDef;
 	}
 
-	private Method createMethod(String name, String nameRu, Resource context) {
+	private Method createMethod(String name, String nameRu, ParamSet paramSet) {
 		Method method = McoreFactory.eINSTANCE.createMethod();
+
 		method.setName(name);
 		method.setNameRu(nameRu);
 		// Type type = getTypeByName("Number", context); //$NON-NLS-1$
@@ -62,12 +83,8 @@ public class FrameworkMetaTypesProvider implements IExternalMetaTypesProvider {
 		// method.setRetVal(true);
 		// method.getRetValType().add(type);
 		// }
-		ParamSet set = McoreFactory.eINSTANCE.createParamSet();
-		set.setMinParams(2);
-		set.setMaxParams(2);
-		method.getParamSet().add(set);
-		set.getParams().add(createParameter("_True", "_Истина", "Boolean", context)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		set.getParams().add(createParameter("DopMessage", "ДопСообщениеОшибки", "String", context)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		method.getParamSet().add(paramSet);
+
 		return method;
 	}
 
@@ -86,14 +103,20 @@ public class FrameworkMetaTypesProvider implements IExternalMetaTypesProvider {
 		return property;
 	}
 
-	private Parameter createParameter(String name, String nameRu, String typeName, Resource context) {
+	private Parameter createParameter(String name, String nameRu, String[] typeNames, String defaultValue,
+			Resource context) {
 		Parameter parameter = McoreFactory.eINSTANCE.createParameter();
+
 		parameter.setName(name);
 		parameter.setNameRu(nameRu);
-		Type type = getTypeByName(typeName, context);
-		if (type != null) {
-			parameter.getType().add(type);
+
+		for (String typeName : typeNames) {
+			Type type = getTypeByName(typeName, context);
+			if (type != null) {
+				parameter.getType().add(type);
+			}
 		}
+
 		return parameter;
 	}
 

@@ -29,6 +29,7 @@ import com.google.common.io.Resources;
 import com.google.gson.Gson;
 
 import ru.capralow.dt.unit.launcher.plugin.core.UnitTestLaunchConfigurationAttributes;
+import ru.capralow.dt.unit.launcher.plugin.core.frameworks.gson.Asserts;
 import ru.capralow.dt.unit.launcher.plugin.core.frameworks.gson.FeatureFormat;
 import ru.capralow.dt.unit.launcher.plugin.core.frameworks.gson.FeatureSettings;
 import ru.capralow.dt.unit.launcher.plugin.core.frameworks.gson.FrameworkSettings;
@@ -167,6 +168,13 @@ public class FrameworkUtils {
 		String jsonContent = readContents(getFileInputSupplier(framework.getResourcePath() + "settings.json")); //$NON-NLS-1$
 
 		return new Gson().fromJson(jsonContent, FrameworkSettings.class);
+	}
+
+	public static Asserts getAsserts() {
+		TestFramework framework = getCurrentFramework();
+		String jsonContent = readContents(getFileInputSupplier(framework.getResourcePath() + "asserts.json")); //$NON-NLS-1$
+
+		return new Gson().fromJson(jsonContent, Asserts.class);
 	}
 
 	public static String getFrameworkStartupOptions(FrameworkSettings frameworkSettings, String paramsFilePathName) {
