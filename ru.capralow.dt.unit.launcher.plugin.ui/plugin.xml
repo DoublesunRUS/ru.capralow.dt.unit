@@ -15,12 +15,14 @@
 			name="%OpenFeaturesFolder_label">
 		</command>
 	</extension>
+	
 	<extension point="org.eclipse.ui.handlers">
 		<handler
 			commandId="ru.capralow.dt.unit.launcher.plugin.ui.commands.OpenFeaturesFolder"
 			class="ru.capralow.dt.unit.launcher.plugin.internal.ui.ExecutableExtensionFactory:ru.capralow.dt.unit.launcher.plugin.internal.ui.xtextbuilder.OpenFeaturesFolderHandler">
 		</handler>
 	</extension>
+	
 	<extension point="org.eclipse.ui.menus">
 		<menuContribution
 			locationURI="popup:com._1c.g5.v8.dt.navigator.ui.navigator.popup">
@@ -39,6 +41,12 @@
 				</visibleWhen>
 			</command>
 		</menuContribution>
+	</extension>
+	
+	<extension point="com._1c.g5.v8.dt.bsl.externalMetaTypesExtension">
+		<bslExternalMetaTypes
+			class="ru.capralow.dt.unit.launcher.plugin.internal.ui.ExecutableExtensionFactory:ru.capralow.dt.unit.launcher.plugin.internal.ui.metatypes.FrameworkMetaTypesProvider">
+		</bslExternalMetaTypes>
 	</extension>
 	
 </plugin>
