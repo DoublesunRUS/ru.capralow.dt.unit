@@ -13,6 +13,6 @@ public final class UnitTestLaunchConfigurationAttributes {
 	public static final String EXTERNAL_OBJECT_STARTUP_OPTIONS = "ru.capralow.dt.launching.core.ATTR_EXTERNAL_OBJECT_STARTUP_OPTIONS"; //$NON-NLS-1$
 
 	private UnitTestLaunchConfigurationAttributes() {
-		throw new IllegalStateException(Messages.UnitTestLaunchConfigurationAttributes_Internal_class);
+		throw new IllegalStateException(Messages.Internal_class);
 	}
 }
