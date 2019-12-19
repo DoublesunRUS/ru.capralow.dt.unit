@@ -2,7 +2,7 @@ package ru.capralow.dt.unit.launcher.plugin.core.frameworks.gson;
 
 import com.google.gson.annotations.SerializedName;
 
-public class AssertMethodParameter {
+public class FrameworkMethodParameter {
 	@SerializedName("name-en")
 	public String nameEn = ""; //$NON-NLS-1$
 
@@ -13,13 +13,13 @@ public class AssertMethodParameter {
 	private String type = ""; //$NON-NLS-1$
 
 	@SerializedName("types")
-	private String[] types;
+	private String[] types = {};
 
 	@SerializedName("isOut")
 	public Boolean isOut = false;
 
-	@SerializedName("defaultValue")
-	public String defaultValue = ""; //$NON-NLS-1$
+	@SerializedName("isDefaultValue")
+	public Boolean isDefaultValue = false; // $NON-NLS-1$
 
 	public String[] getTypes() {
 		if (type.isEmpty() && types != null) {
@@ -27,6 +27,5 @@ public class AssertMethodParameter {
 		}
 
 		return new String[] { type };
-
 	}
 }

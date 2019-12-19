@@ -1,0 +1,510 @@
+{
+	"methods": [
+		{
+			"name-en": "ПроверитьИстину",
+			"name-ru": "ПроверитьИстину",
+			"params": [
+				{
+					"name-en": "_Истина",
+					"name-ru": "_Истина",
+					"type": "Boolean"
+				},
+				{
+					"name-en": "ДопСообщениеОшибки",
+					"name-ru": "ДопСообщениеОшибки",
+					"type": "String",
+					"isDefaultValue": true
+				}
+			]
+		},
+		{
+			"name-en": "ПроверитьЛожь",
+			"name-ru": "ПроверитьЛожь",
+			"params": [
+				{
+					"name-en": "_Ложь",
+					"name-ru": "_Ложь",
+					"type": "Boolean"
+				},
+				{
+					"name-en": "ДопСообщениеОшибки",
+					"name-ru": "ДопСообщениеОшибки",
+					"type": "String",
+					"isDefaultValue": true
+				}
+			],
+			"returnedValue": "Structure"
+		},
+		{
+			"name-en": "ПроверитьДату",
+			"name-ru": "ПроверитьДату",
+			"params": [
+				{
+					"name-en": "_Период",
+					"name-ru": "_Период",
+					"type": "Date"
+				},
+				{
+					"name-en": "_Дата",
+					"name-ru": "_Дата",
+					"type": "Date"
+				},
+				{
+					"name-en": "ДопСообщениеОшибки",
+					"name-ru": "ДопСообщениеОшибки",
+					"type": "String",
+					"isDefaultValue": true
+				}
+			],
+			"returnedValue": "Structure"
+		},
+		{
+			"name-en": "ПроверитьРавенствоДатСТочностью2Секунды",
+			"name-ru": "ПроверитьРавенствоДатСТочностью2Секунды",
+			"params": [
+				{
+					"name-en": "_Дата2",
+					"name-ru": "_Дата2",
+					"type": "Date"
+				},
+				{
+					"name-en": "_Дата",
+					"name-ru": "_Дата",
+					"type": "Date"
+				},
+				{
+					"name-en": "ДопСообщениеОшибки",
+					"name-ru": "ДопСообщениеОшибки",
+					"type": "String",
+					"isDefaultValue": true
+				}
+			],
+			"returnedValue": "Structure"
+		},
+		{
+			"name-en": "ПроверитьРавенство",
+			"name-ru": "ПроверитьРавенство",
+			"params": [
+				{
+					"name-en": "_1",
+					"name-ru": "_1"
+				},
+				{
+					"name-en": "_2",
+					"name-ru": "_2"
+				},
+				{
+					"name-en": "ДопСообщениеОшибки",
+					"name-ru": "ДопСообщениеОшибки",
+					"type": "String",
+					"isDefaultValue": true
+				}
+			],
+			"returnedValue": "Structure"
+		},
+		{
+			"name-en": "ПроверитьНеРавенство",
+			"name-ru": "ПроверитьНеРавенство",
+			"params": [
+				{
+					"name-en": "_1",
+					"name-ru": "_1"
+				},
+				{
+					"name-en": "_2",
+					"name-ru": "_2"
+				},
+				{
+					"name-en": "ДопСообщениеОшибки",
+					"name-ru": "ДопСообщениеОшибки",
+					"type": "String",
+					"isDefaultValue": true
+				}
+			],
+			"returnedValue": "Structure"
+		},
+		{
+			"name-en": "ПроверитьБольше",
+			"name-ru": "ПроверитьБольше",
+			"params": [
+				{
+					"name-en": "ЭталонноеЧисло",
+					"name-ru": "ЭталонноеЧисло",
+					"type": "Number"
+				},
+				{
+					"name-en": "ПроверяемоеЧисло",
+					"name-ru": "ПроверяемоеЧисло",
+					"type": "Number"
+				},
+				{
+					"name-en": "ДопСообщениеОшибки",
+					"name-ru": "ДопСообщениеОшибки",
+					"type": "String",
+					"isDefaultValue": true
+				}
+			],
+			"returnedValue": "Structure"
+		},
+		{
+			"name-en": "ПроверитьБольшеИлиРавно",
+			"name-ru": "ПроверитьБольшеИлиРавно",
+			"params": [
+				{
+					"name-en": "ЭталонноеЧисло",
+					"name-ru": "ЭталонноеЧисло",
+					"type": "Number"
+				},
+				{
+					"name-en": "ПроверяемоеЧисло",
+					"name-ru": "ПроверяемоеЧисло",
+					"type": "Number"
+				},
+				{
+					"name-en": "ДопСообщениеОшибки",
+					"name-ru": "ДопСообщениеОшибки",
+					"type": "String",
+					"isDefaultValue": true
+				}
+			],
+			"returnedValue": "Structure"
+		},
+		{
+			"name-en": "ПроверитьМеньше",
+			"name-ru": "ПроверитьМеньше",
+			"params": [
+				{
+					"name-en": "ЭталонноеЧисло",
+					"name-ru": "ЭталонноеЧисло",
+					"type": "Number"
+				},
+				{
+					"name-en": "ПроверяемоеЧисло",
+					"name-ru": "ПроверяемоеЧисло",
+					"type": "Number"
+				},
+				{
+					"name-en": "ДопСообщениеОшибки",
+					"name-ru": "ДопСообщениеОшибки",
+					"type": "String",
+					"isDefaultValue": true
+				}
+			],
+			"returnedValue": "Structure"
+		},
+		{
+			"name-en": "ПроверитьМеньшеИлиРавно",
+			"name-ru": "ПроверитьМеньшеИлиРавно",
+			"params": [
+				{
+					"name-en": "ЭталонноеЧисло",
+					"name-ru": "ЭталонноеЧисло",
+					"type": "Number"
+				},
+				{
+					"name-en": "ПроверяемоеЧисло",
+					"name-ru": "ПроверяемоеЧисло",
+					"type": "Number"
+				},
+				{
+					"name-en": "ДопСообщениеОшибки",
+					"name-ru": "ДопСообщениеОшибки",
+					"type": "String",
+					"isDefaultValue": true
+				}
+			],
+			"returnedValue": "Structure"
+		},
+		{
+			"name-en": "ПроверитьВыполнилось",
+			"name-ru": "ПроверитьВыполнилось",
+			"params": [
+				{
+					"name-en": "СтрокаАлгоритм",
+					"name-ru": "СтрокаАлгоритм",
+					"type": "String",
+					"isOut": true
+				},
+				{
+					"name-en": "ПараметрыИлиДопСообщениеОшибки",
+					"name-ru": "ПараметрыИлиДопСообщениеОшибки",
+					"types": ["Structure", "String"],
+					"isDefaultValue": true
+				},
+				{
+					"name-en": "ДопСообщениеОшибки",
+					"name-ru": "ДопСообщениеОшибки",
+					"type": "String",
+					"isOut": true,
+					"isDefaultValue": true
+				}
+			],
+			"returnedValue": "Structure"
+		},
+		{
+			"name-en": "ПроверитьМетодВыполнился",
+			"name-ru": "ПроверитьМетодВыполнился",
+			"params": [
+				{
+					"name-en": "Объект",
+					"name-ru": "Объект"
+				},
+				{
+					"name-en": "ИмяМетода",
+					"name-ru": "ИмяМетода",
+					"type": "String",
+					"isOut": true
+				},
+				{
+					"name-en": "ПараметрыИлиДопСообщениеОшибки",
+					"name-ru": "ПараметрыИлиДопСообщениеОшибки",
+					"types": ["Array", "String"],
+					"isDefaultValue": true
+				},
+				{
+					"name-en": "ДопСообщениеОшибки",
+					"name-ru": "ДопСообщениеОшибки",
+					"type": "String",
+					"isOut": true,
+					"isDefaultValue": true
+				}
+			],
+			"returnedValue": "Structure"
+		},
+		{
+			"name-en": "ПроверитьНеВыполнилось",
+			"name-ru": "ПроверитьНеВыполнилось",
+			"params": [
+				{
+					"name-en": "СтрокаАлгоритм",
+					"name-ru": "СтрокаАлгоритм",
+					"type": "String",
+					"isOut": true
+				},
+				{
+					"name-en": "ПараметрыИлиОжидаемоеОписаниеОшибки",
+					"name-ru": "ПараметрыИлиОжидаемоеОписаниеОшибки",
+					"types": ["Structure", "String"],
+					"isDefaultValue": true
+				},
+				{
+					"name-en": "ОжидаемоеОписаниеОшибкиИлиДопСообщениеОшибки",
+					"name-ru": "ОжидаемоеОписаниеОшибкиИлиДопСообщениеОшибки",
+					"type": "String",
+					"isOut": true,
+					"isDefaultValue": true
+				},
+				{
+					"name-en": "ДопСообщениеОшибки",
+					"name-ru": "ДопСообщениеОшибки",
+					"type": "String",
+					"isOut": true,
+					"isDefaultValue": true
+				}
+			],
+			"returnedValue": "Structure"
+		},
+		{
+			"name-en": "ПроверитьМетодНеВыполнился",
+			"name-ru": "ПроверитьМетодНеВыполнился",
+			"params": [
+				{
+					"name-en": "Объект",
+					"name-ru": "Объект"
+				},
+				{
+					"name-en": "ИмяМетода",
+					"name-ru": "ИмяМетода",
+					"type": "String"
+				},
+				{
+					"name-en": "ПараметрыИлиОжидаемоеОписаниеОшибки",
+					"name-ru": "ПараметрыИлиОжидаемоеОписаниеОшибки",
+					"types": ["Array", "String"],
+					"isDefaultValue": true
+				},
+				{
+					"name-en": "ОжидаемоеОписаниеОшибкиИлиДопСообщениеОшибки",
+					"name-ru": "ОжидаемоеОписаниеОшибкиИлиДопСообщениеОшибки",
+					"type": "String",
+					"isOut": true,
+					"isDefaultValue": true
+				},
+				{
+					"name-en": "ДопСообщениеОшибки",
+					"name-ru": "ДопСообщениеОшибки",
+					"type": "String",
+					"isOut": true,
+					"isDefaultValue": true
+				}
+			],
+			"returnedValue": "Structure"
+		},
+		{
+			"name-en": "ПроверитьЗаполненность",
+			"name-ru": "ПроверитьЗаполненность",
+			"params": [
+				{
+					"name-en": "ПроверяемоеЗначение",
+					"name-ru": "ПроверяемоеЗначение"
+				},
+				{
+					"name-en": "ДопСообщениеОшибки",
+					"name-ru": "ДопСообщениеОшибки",
+					"type": "String",
+					"isDefaultValue": true
+				}
+			],
+			"returnedValue": "Structure"
+		},
+		{
+			"name-en": "ПроверитьНеЗаполненность",
+			"name-ru": "ПроверитьНеЗаполненность",
+			"params": [
+				{
+					"name-en": "ПроверяемоеЗначение",
+					"name-ru": "ПроверяемоеЗначение"
+				},
+				{
+					"name-en": "ДопСообщениеОшибки",
+					"name-ru": "ДопСообщениеОшибки",
+					"type": "String",
+					"isDefaultValue": true
+				}
+			],
+			"returnedValue": "Structure"
+		},
+		{
+			"name-en": "ПроверитьТип",
+			"name-ru": "ПроверитьТип",
+			"params": [
+				{
+					"name-en": "значение",
+					"name-ru": "значение"
+				},
+				{
+					"name-en": "ТипИлиИмяТипа",
+					"name-ru": "ТипИлиИмяТипа",
+					"types": ["Type", "String"]
+				},
+				{
+					"name-en": "ДопСообщениеОшибки",
+					"name-ru": "ДопСообщениеОшибки",
+					"type": "String",
+					"isDefaultValue": true
+				}
+			],
+			"returnedValue": "Structure"
+		},
+		{
+			"name-en": "ПроверитьВхождение",
+			"name-ru": "ПроверитьВхождение",
+			"params": [
+				{
+					"name-en": "строка",
+					"name-ru": "строка",
+					"type": "String"
+				},
+				{
+					"name-en": "подстрокаПоиска",
+					"name-ru": "подстрокаПоиска",
+					"type": "String"
+				},
+				{
+					"name-en": "ДопСообщениеОшибки",
+					"name-ru": "ДопСообщениеОшибки",
+					"type": "String",
+					"isDefaultValue": true
+				}
+			],
+			"returnedValue": "Structure"
+		},
+		{
+			"name-en": "ПроверитьВхождениеВКоллекцию",
+			"name-ru": "ПроверитьВхождениеВКоллекцию",
+			"params": [
+				{
+					"name-en": "Элемент",
+					"name-ru": "Элемент"
+				},
+				{
+					"name-en": "Коллекция",
+					"name-ru": "Коллекция",
+					"types": ["Array", "FixedArray", "Structure", "FixedStructure", "ReferenceValue", "FixedReferenceValue", "TypedValueList"]
+				},
+				{
+					"name-en": "ДопСообщениеОшибки",
+					"name-ru": "ДопСообщениеОшибки",
+					"type": "String",
+					"isDefaultValue": true
+				}
+			],
+			"returnedValue": "Structure"
+		},
+		{
+			"name-en": "ПроверитьРавенствоТаблиц",
+			"name-ru": "ПроверитьРавенствоТаблиц",
+			"params": [
+				{
+					"name-en": "Таб1",
+					"name-ru": "Таб1",
+					"type": "TableValueList"
+				},
+				{
+					"name-en": "Таб2",
+					"name-ru": "Таб2",
+					"type": "TableValueList"
+				},
+				{
+					"name-en": "ДопСообщениеОшибки",
+					"name-ru": "ДопСообщениеОшибки",
+					"type": "String",
+					"isDefaultValue": true
+				},
+				{
+					"name-en": "ДопПараметры",
+					"name-ru": "ДопПараметры",
+					"type": "Structure"
+				}
+			]
+		},
+		{
+			"name-en": "ПолучитьСостояниеVanessaAutomation",
+			"name-ru": "ПолучитьСостояниеVanessaAutomation",
+			"returnedValue": "Structure"
+		},
+		{
+			"name-en": "ЗапретитьВыполнениеШагов",
+			"name-ru": "ЗапретитьВыполнениеШагов"
+		},
+		{
+			"name-en": "ПродолжитьВыполнениеШагов",
+			"name-ru": "ПродолжитьВыполнениеШагов",
+			"params": [
+				{
+					"name-en": "ШагУпал",
+					"name-ru": "ШагУпал",
+					"type": "Boolean",
+					"isDefaultValue": true
+				},
+				{
+					"name-en": "ОписаниеОшибки",
+					"name-ru": "ОписаниеОшибки",
+					"type": "String",
+					"isDefaultValue": true
+				}
+			]
+		},
+		{
+			"name-en": "ДобавитьОшибкуСценария",
+			"name-ru": "ДобавитьОшибкуСценария",
+			"params": [
+				{
+					"name-en": "ТекстОшибки",
+					"name-ru": "ТекстОшибки",
+					"type": "String"
+				}
+			]
+		}
+	]
+}

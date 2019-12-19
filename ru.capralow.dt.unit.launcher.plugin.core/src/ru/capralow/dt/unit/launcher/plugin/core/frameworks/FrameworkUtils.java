@@ -29,9 +29,9 @@ import com.google.common.io.Resources;
 import com.google.gson.Gson;
 
 import ru.capralow.dt.unit.launcher.plugin.core.UnitTestLaunchConfigurationAttributes;
-import ru.capralow.dt.unit.launcher.plugin.core.frameworks.gson.Asserts;
 import ru.capralow.dt.unit.launcher.plugin.core.frameworks.gson.FeatureFormat;
 import ru.capralow.dt.unit.launcher.plugin.core.frameworks.gson.FeatureSettings;
+import ru.capralow.dt.unit.launcher.plugin.core.frameworks.gson.FrameworkMetaTypes;
 import ru.capralow.dt.unit.launcher.plugin.core.frameworks.gson.FrameworkSettings;
 import ru.capralow.dt.unit.launcher.plugin.core.frameworks.gson.FrameworksList;
 import ru.capralow.dt.unit.launcher.plugin.core.frameworks.gson.TestFramework;
@@ -157,6 +157,13 @@ public class FrameworkUtils {
 		return Platform.getBundle(FRAMEWORK_PLUGIN);
 	}
 
+	public static FrameworkMetaTypes getFrameworkMetaTypes() {
+		TestFramework framework = getCurrentFramework();
+		String jsonContent = readContents(getFileInputSupplier(framework.getResourcePath() + "metaTypes.json")); //$NON-NLS-1$
+
+		return new Gson().fromJson(jsonContent, FrameworkMetaTypes.class);
+	}
+
 	public static FrameworksList getFrameworks() {
 		String jsonContent = readContents(getFileInputSupplier("/frameworks/frameworks.json")); //$NON-NLS-1$
 
@@ -168,13 +175,6 @@ public class FrameworkUtils {
 		String jsonContent = readContents(getFileInputSupplier(framework.getResourcePath() + "settings.json")); //$NON-NLS-1$
 
 		return new Gson().fromJson(jsonContent, FrameworkSettings.class);
-	}
-
-	public static Asserts getAsserts() {
-		TestFramework framework = getCurrentFramework();
-		String jsonContent = readContents(getFileInputSupplier(framework.getResourcePath() + "asserts.json")); //$NON-NLS-1$
-
-		return new Gson().fromJson(jsonContent, Asserts.class);
 	}
 
 	public static String getFrameworkStartupOptions(FrameworkSettings frameworkSettings, String paramsFilePathName) {
