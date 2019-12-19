@@ -26,7 +26,7 @@ import ru.capralow.dt.coverage.core.CoverageStatus;
 import ru.capralow.dt.coverage.core.ICoverageSession;
 import ru.capralow.dt.coverage.core.ISessionListener;
 import ru.capralow.dt.coverage.core.ISessionManager;
-import ru.capralow.dt.coverage.core.analysis.IJavaCoverageListener;
+import ru.capralow.dt.coverage.core.analysis.IBslCoverageListener;
 import ru.capralow.dt.coverage.core.analysis.IBslModelCoverage;
 import ru.capralow.dt.coverage.internal.core.analysis.SessionAnalyzer;
 
@@ -41,7 +41,7 @@ public class BslCoverageLoader {
 
 	private IBslModelCoverage coverage;
 
-	private final List<IJavaCoverageListener> listeners = new ArrayList<IJavaCoverageListener>();
+	private final List<IBslCoverageListener> listeners = new ArrayList<IBslCoverageListener>();
 
 	private ISessionListener sessionListener = new ISessionListener() {
 
@@ -100,7 +100,7 @@ public class BslCoverageLoader {
 		sessionManager.addSessionListener(sessionListener);
 	}
 
-	public void addJavaCoverageListener(IJavaCoverageListener l) {
+	public void addJavaCoverageListener(IBslCoverageListener l) {
 		if (l == null) {
 			throw new IllegalArgumentException();
 		}
@@ -109,13 +109,13 @@ public class BslCoverageLoader {
 		}
 	}
 
-	public void removeJavaCoverageListener(IJavaCoverageListener l) {
+	public void removeJavaCoverageListener(IBslCoverageListener l) {
 		listeners.remove(l);
 	}
 
 	protected void fireCoverageChanged() {
 		// avoid concurrent modification issues
-		for (IJavaCoverageListener l : new ArrayList<IJavaCoverageListener>(listeners)) {
+		for (IBslCoverageListener l : new ArrayList<IBslCoverageListener>(listeners)) {
 			l.coverageChanged();
 		}
 	}

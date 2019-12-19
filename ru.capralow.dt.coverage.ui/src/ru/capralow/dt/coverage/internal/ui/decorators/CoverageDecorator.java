@@ -25,7 +25,7 @@ import org.jacoco.core.analysis.ICounter;
 import org.jacoco.core.analysis.ICoverageNode;
 
 import ru.capralow.dt.coverage.core.CoverageTools;
-import ru.capralow.dt.coverage.core.analysis.IJavaCoverageListener;
+import ru.capralow.dt.coverage.core.analysis.IBslCoverageListener;
 import ru.capralow.dt.coverage.internal.ui.CoverageUIPlugin;
 import ru.capralow.dt.coverage.internal.ui.UIMessages;
 
@@ -36,11 +36,11 @@ public class CoverageDecorator extends BaseLabelProvider implements ILightweight
 
 	private static final Format SUFFIX_FORMAT = new DecimalFormat(UIMessages.CoverageDecoratorSuffix_label);
 
-	private final IJavaCoverageListener coverageListener;
+	private final IBslCoverageListener coverageListener;
 
 	public CoverageDecorator() {
 		super();
-		coverageListener = new IJavaCoverageListener() {
+		coverageListener = new IBslCoverageListener() {
 			public void coverageChanged() {
 				final Display display = CoverageUIPlugin.getInstance().getWorkbench().getDisplay();
 				display.asyncExec(new Runnable() {

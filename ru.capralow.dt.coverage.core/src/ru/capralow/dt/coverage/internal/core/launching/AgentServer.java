@@ -14,30 +14,23 @@
  ******************************************************************************/
 package ru.capralow.dt.coverage.internal.core.launching;
 
-import java.io.IOException;
-import java.net.ServerSocket;
 import java.text.MessageFormat;
 import java.util.Date;
 import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
-import org.jacoco.core.runtime.RemoteControlWriter;
 
 import com._1c.g5.v8.dt.profiling.core.IProfilingResult;
 import com._1c.g5.v8.dt.profiling.core.IProfilingService;
 
-import ru.capralow.dt.coverage.core.CoverageStatus;
 import ru.capralow.dt.coverage.core.ICorePreferences;
 import ru.capralow.dt.coverage.core.ISessionManager;
 import ru.capralow.dt.coverage.core.launching.ICoverageLaunch;
 import ru.capralow.dt.coverage.internal.core.CoreMessages;
 import ru.capralow.dt.coverage.internal.core.CoverageSession;
 import ru.capralow.dt.coverage.internal.core.ExecutionDataFiles;
+import ru.capralow.dt.coverage.internal.core.ProfilingResultsDataSource;
 
-/**
- * Internal TCP/IP server for the JaCoCo agent to connect to.
- *
- */
 public class AgentServer {
 
 	private final ICoverageLaunch launch;
@@ -45,13 +38,11 @@ public class AgentServer {
 	private final ExecutionDataFiles files;
 	private final ICorePreferences preferences;
 
-	private ServerSocket serverSocket;
-	private RemoteControlWriter writer;
 	private boolean dataReceived;
 
 	private IProfilingService profilingService;
 
-	AgentServer(ICoverageLaunch launch, ISessionManager sessionManager, ExecutionDataFiles files,
+	public AgentServer(ICoverageLaunch launch, ISessionManager sessionManager, ExecutionDataFiles files,
 			ICorePreferences preferences, IProfilingService profilingService) {
 		// super(AgentServer.class.getName());
 		this.preferences = preferences;
@@ -68,13 +59,13 @@ public class AgentServer {
 	}
 
 	public void requestDump(boolean reset) throws CoreException {
-		if (writer != null) {
-			try {
-				writer.visitDumpCommand(true, reset);
-			} catch (IOException e) {
-				throw new CoreException(CoverageStatus.DUMP_REQUEST_ERROR.getStatus(e));
-			}
-		}
+		// if (writer != null) {
+		// try {
+		// writer.visitDumpCommand(true, reset);
+		// } catch (IOException e) {
+		// throw new CoreException(CoverageStatus.DUMP_REQUEST_ERROR.getStatus(e));
+		// }
+		// }
 	}
 
 	public void stop() {
@@ -84,21 +75,19 @@ public class AgentServer {
 		if (profilingResults.isEmpty())
 			return;
 
+		ProfilingResultsDataSource dataSource = new ProfilingResultsDataSource();
+		dataSource.readFrom(profilingResults);
+
 		dataReceived = true;
 		final CoverageSession session = new CoverageSession(createDescription(),
 				launch.getScope(),
-				profilingResults,
-				// files.newFile(null),
+				dataSource,
 				launch.getLaunchConfiguration());
 		sessionManager.addSession(session, preferences.getActivateNewSessions(), launch);
 	}
 
 	public boolean hasDataReceived() {
 		return dataReceived;
-	}
-
-	public int getPort() {
-		return serverSocket.getLocalPort();
 	}
 
 	private String createDescription() {

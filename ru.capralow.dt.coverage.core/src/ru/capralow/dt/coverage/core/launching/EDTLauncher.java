@@ -14,7 +14,6 @@
  ******************************************************************************/
 package ru.capralow.dt.coverage.core.launching;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -44,7 +43,7 @@ public class EDTLauncher extends CoverageLauncher {
 		final Set<Module> result = new HashSet<>();
 		for (final IJavaProject project : model.getJavaProjects()) {
 			if (project.getProject().hasNature(EDT_NATURE)) {
-				result.addAll(Arrays.asList(project.getPackageFragmentRoots()));
+				// result.addAll(Arrays.asList(project.getPackageFragmentRoots()));
 			}
 		}
 		return ScopeUtils.filterUnsupportedEntries(result);

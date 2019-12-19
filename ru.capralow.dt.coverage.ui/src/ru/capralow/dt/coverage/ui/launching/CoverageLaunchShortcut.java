@@ -56,7 +56,7 @@ public class CoverageLaunchShortcut implements ILaunchShortcut, IExecutableExten
 				}
 			}
 			if (delegate == null) {
-				String msg = "ILaunchShortcut declaration not found: " + delegateId; //$NON-NLS-1$
+				String msg = "ILaunchShortcut declaration not found: " + delegateId;
 				CoverageUIPlugin.getInstance().getLog().log(CoverageUIPlugin.errorStatus(msg, null));
 			}
 		}

@@ -20,13 +20,10 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.jdt.core.IClassFile;
 import org.eclipse.jdt.core.ICompilationUnit;
-import org.eclipse.jdt.core.IPackageFragment;
-import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.osgi.util.NLS;
@@ -108,20 +105,21 @@ public class SessionAnalyzer {
 	}
 
 	// package private for testing
-	String getName(IPackageFragmentRoot root) {
-		IPath path = root.getPath();
-		if (!root.isExternal() && path.segmentCount() > 1) {
-			return path.removeFirstSegments(1).toString();
-		} else {
-			return path.lastSegment();
-		}
+	String getName(Module root) {
+		return null;
+		// IPath path = root.getPath();
+		// if (!root.isExternal() && path.segmentCount() > 1) {
+		// return path.removeFirstSegments(1).toString();
+		// } else {
+		// return path.lastSegment();
+		// }
 	}
 
-	private void putPackages(Collection<IPackageCoverage> packages, IPackageFragmentRoot root) {
+	private void putPackages(Collection<IPackageCoverage> packages, Module root) {
 		for (IPackageCoverage c : packages) {
 			final String name = c.getName().replace('/', '.');
-			final IPackageFragment fragment = root.getPackageFragment(name);
-			modelcoverage.putFragment(fragment, c);
+			// final IPackageFragment fragment = root.getPackageFragment(name);
+			// modelcoverage.putFragment(fragment, c);
 		}
 	}
 
@@ -134,8 +132,8 @@ public class SessionAnalyzer {
 
 		TypeVisitor(AnalyzedNodes nodes) {
 			this.nodes = nodes;
-			this.classes = new HashSet<IClassCoverage>();
-			this.sources = new HashSet<ISourceFileCoverage>();
+			this.classes = new HashSet<>();
+			this.sources = new HashSet<>();
 		}
 
 		Collection<IClassCoverage> getClasses() {

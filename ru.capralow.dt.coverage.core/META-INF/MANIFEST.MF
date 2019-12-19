@@ -22,13 +22,18 @@ Bundle-Activator: ru.capralow.dt.coverage.internal.core.CoverageCorePlugin
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: dt.coverage.core
-Import-Package: com._1c.g5.v8.dt.bsl.model,
+Import-Package: com._1c.g5.v8.bm.integration,
+ com._1c.g5.v8.dt.bm.index.emf,
+ com._1c.g5.v8.dt.bsl.model,
  com._1c.g5.v8.dt.core.platform,
  com._1c.g5.v8.dt.debug.core,
+ com._1c.g5.v8.dt.debug.model.base.data,
  com._1c.g5.v8.dt.metadata.mdclass,
  com._1c.g5.v8.dt.profiling.core,
  com._1c.g5.wiring,
  com._1c.g5.wiring.binder,
  com.google.inject,
  org.eclipse.emf.common.util,
- org.eclipse.emf.ecore
+ org.eclipse.emf.ecore,
+ org.eclipse.xtext.naming,
+ org.eclipse.xtext.resource

@@ -12,28 +12,31 @@
  ******************************************************************************/
 package ru.capralow.dt.coverage.internal.core;
 
-import java.io.IOException;
+import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
 import org.jacoco.core.data.ExecutionData;
-import org.jacoco.core.data.ExecutionDataReader;
 import org.jacoco.core.data.ExecutionDataStore;
 import org.jacoco.core.data.IExecutionDataVisitor;
 import org.jacoco.core.data.ISessionInfoVisitor;
 import org.jacoco.core.data.SessionInfo;
 import org.jacoco.core.data.SessionInfoStore;
 
+import com._1c.g5.v8.dt.debug.model.base.data.BSLModuleType;
+import com._1c.g5.v8.dt.profiling.core.ILineProfilingResult;
+import com._1c.g5.v8.dt.profiling.core.IProfilingResult;
+
 import ru.capralow.dt.coverage.core.IExecutionDataSource;
 
 /**
  * In-memory {@link IExecutionDataSource} implementation.
  */
-public class MemoryExecutionDataSource implements IExecutionDataSource, ISessionInfoVisitor, IExecutionDataVisitor {
+public class ProfilingResultsDataSource implements IExecutionDataSource, ISessionInfoVisitor, IExecutionDataVisitor {
 
 	private final SessionInfoStore sessionInfoStore;
 	private ExecutionDataStore executionDataStore;
 
-	public MemoryExecutionDataSource() {
+	public ProfilingResultsDataSource() {
 		sessionInfoStore = new SessionInfoStore();
 		executionDataStore = new ExecutionDataStore();
 	}
@@ -59,13 +62,21 @@ public class MemoryExecutionDataSource implements IExecutionDataSource, ISession
 	/**
 	 * Collects execution data from the given reader.
 	 *
-	 * @param reader
+	 * @param profilingResults
 	 *            reader to read execution data from
 	 */
-	public void readFrom(ExecutionDataReader reader) throws IOException {
-		reader.setSessionInfoVisitor(sessionInfoStore);
-		reader.setExecutionDataVisitor(executionDataStore);
-		reader.read();
+	public void readFrom(List<IProfilingResult> profilingResults) {
+		for (IProfilingResult profilingResult : profilingResults) {
+			for (ILineProfilingResult result : profilingResult.getProfilingResults()) {
+				if (result.getModuleID().getType() == BSLModuleType.EXT_MD_MODULE)
+					continue;
+
+				sessionInfoStore.visitSessionInfo(new SessionInfo("id", 1, 2));
+				executionDataStore.visitClassExecution(new ExecutionData(123, "MyClass", 15));
+
+				result.getLine();
+			}
+		}
 	}
 
 }

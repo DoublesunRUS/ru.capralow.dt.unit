@@ -56,7 +56,7 @@ import org.jacoco.core.analysis.ICoverageNode;
 import ru.capralow.dt.coverage.core.CoverageTools;
 import ru.capralow.dt.coverage.core.ICoverageSession;
 import ru.capralow.dt.coverage.core.ISessionListener;
-import ru.capralow.dt.coverage.core.analysis.IJavaCoverageListener;
+import ru.capralow.dt.coverage.core.analysis.IBslCoverageListener;
 import ru.capralow.dt.coverage.internal.ui.ContextHelp;
 import ru.capralow.dt.coverage.internal.ui.RedGreenBar;
 import ru.capralow.dt.coverage.internal.ui.UIMessages;
@@ -114,7 +114,7 @@ public class CoverageView extends ViewPart implements IShowInTarget {
 		}
 	};
 
-	private final IJavaCoverageListener coverageListener = new IJavaCoverageListener() {
+	private final IBslCoverageListener coverageListener = new IBslCoverageListener() {
 		public void coverageChanged() {
 			getSite().getShell().getDisplay().asyncExec(new Runnable() {
 				public void run() {

@@ -15,26 +15,29 @@
 package ru.capralow.dt.coverage.core;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
-import org.eclipse.jdt.core.IClasspathContainer;
-import org.eclipse.jdt.core.IClasspathEntry;
-import org.eclipse.jdt.core.IJavaElement;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJavaModel;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 
+import com._1c.g5.v8.dt.bm.index.emf.IBmEmfIndexManager;
+import com._1c.g5.v8.dt.bm.index.emf.IBmEmfIndexProvider;
 import com._1c.g5.v8.dt.bsl.model.Module;
+import com._1c.g5.v8.dt.core.platform.IV8ProjectManager;
+import com._1c.g5.v8.dt.metadata.mdclass.CommonModule;
+import com._1c.g5.v8.dt.metadata.mdclass.MdObject;
 
 import ru.capralow.dt.coverage.core.launching.ICoverageLaunchConfigurationConstants;
 import ru.capralow.dt.coverage.core.launching.ICoverageLauncher;
@@ -56,12 +59,21 @@ public final class ScopeUtils {
 	 *            List of {@link String} ids
 	 * @return scope as {@link IPackageFragmentRoot} collection
 	 */
-	public static Set<Module> readScope(Collection<?> ids) {
+	public static Set<Module> readScope(Collection<?> ids, IBmEmfIndexManager bmEmfIndexManager) {
 		final Set<Module> scope = new HashSet<>();
 		for (final Object handle : ids) {
-			final IJavaElement element = JavaCore.create((String) handle);
-			if (element instanceof Module) {
-				scope.add((Module) element);
+			URI moduleURI = URI.createURI((String) handle);
+
+			IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(moduleURI.segment(1));
+
+			IBmEmfIndexProvider bmEmfIndexProvider = bmEmfIndexManager.getEmfIndexProvider(project);
+
+			MdObject object = MdUtils.getConfigurationObject(
+					moduleURI.segment(3).concat(".").concat(moduleURI.segment(4)), //$NON-NLS-1$
+					bmEmfIndexProvider);
+
+			if (object instanceof CommonModule) {
+				scope.add(((CommonModule) object).getModule());
 			}
 		}
 		return scope;
@@ -107,7 +119,8 @@ public final class ScopeUtils {
 	 *
 	 * @return configured scope
 	 */
-	public static Set<Module> getConfiguredScope(final ILaunchConfiguration configuration) throws CoreException {
+	public static Set<Module> getConfiguredScope(final ILaunchConfiguration configuration,
+			IBmEmfIndexManager bmEmfIndexManager, IV8ProjectManager projectManager) throws CoreException {
 		final Set<Module> all = getOverallScope(configuration);
 		@SuppressWarnings("rawtypes")
 		final List<?> selection = configuration.getAttribute(ICoverageLaunchConfigurationConstants.ATTR_SCOPE_IDS,
@@ -116,7 +129,7 @@ public final class ScopeUtils {
 			final DefaultScopeFilter filter = new DefaultScopeFilter(CoverageCorePlugin.getInstance().getPreferences());
 			return filter.filter(all, configuration);
 		} else {
-			all.retainAll(readScope(selection));
+			all.retainAll(readScope(selection, bmEmfIndexManager));
 			return all;
 		}
 	}
@@ -130,7 +143,7 @@ public final class ScopeUtils {
 		final Set<Module> scope = new HashSet<>();
 		final IJavaModel model = JavaCore.create(ResourcesPlugin.getWorkspace().getRoot());
 		for (IJavaProject p : model.getJavaProjects()) {
-			scope.addAll(Arrays.asList(p.getPackageFragmentRoots()));
+			// scope.addAll(Arrays.asList(p.getPackageFragmentRoots()));
 		}
 		return filterUnsupportedEntries(scope);
 	}
@@ -145,20 +158,22 @@ public final class ScopeUtils {
 	public static Set<Module> filterUnsupportedEntries(Collection<Module> scope) throws JavaModelException {
 		final Set<Module> filtered = new HashSet<>();
 		for (final Module root : scope) {
-			final IClasspathEntry entry = root.getRawClasspathEntry();
-			switch (entry.getEntryKind()) {
-			case IClasspathEntry.CPE_SOURCE:
-			case IClasspathEntry.CPE_LIBRARY:
-			case IClasspathEntry.CPE_VARIABLE:
-				filtered.add(root);
-				break;
-			case IClasspathEntry.CPE_CONTAINER:
-				IClasspathContainer container = JavaCore.getClasspathContainer(entry.getPath(), root.getJavaProject());
-				if (container != null && container.getKind() == IClasspathContainer.K_APPLICATION) {
-					filtered.add(root);
-				}
-				break;
-			}
+			// final IClasspathEntry entry = root.getRawClasspathEntry();
+			// switch (entry.getEntryKind()) {
+			// case IClasspathEntry.CPE_SOURCE:
+			// case IClasspathEntry.CPE_LIBRARY:
+			// case IClasspathEntry.CPE_VARIABLE:
+			// filtered.add(root);
+			// break;
+			// case IClasspathEntry.CPE_CONTAINER:
+			// IClasspathContainer container =
+			// JavaCore.getClasspathContainer(entry.getPath(), root.getJavaProject());
+			// if (container != null && container.getKind() ==
+			// IClasspathContainer.K_APPLICATION) {
+			// filtered.add(root);
+			// }
+			// break;
+			// }
 		}
 		return filtered;
 	}

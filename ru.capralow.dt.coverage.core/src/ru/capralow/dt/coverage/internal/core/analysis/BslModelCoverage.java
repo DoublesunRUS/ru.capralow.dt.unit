@@ -34,6 +34,8 @@ import org.jacoco.core.analysis.IClassCoverage;
 import org.jacoco.core.analysis.ICoverageNode;
 import org.jacoco.core.analysis.IMethodCoverage;
 
+import com._1c.g5.v8.dt.bsl.model.Module;
+
 import ru.capralow.dt.coverage.core.analysis.IBslModelCoverage;
 import ru.capralow.dt.coverage.internal.core.DebugOptions;
 import ru.capralow.dt.coverage.internal.core.DebugOptions.ITracer;
@@ -65,10 +67,10 @@ public class BslModelCoverage extends CoverageNodeImpl implements IBslModelCover
 		super(ElementType.GROUP, "JavaModel"); //$NON-NLS-1$
 	}
 
-	public void putFragmentRoot(IPackageFragmentRoot fragmentroot, IBundleCoverage coverage) {
-		coveragemap.put(fragmentroot, coverage);
-		fragmentroots.add(fragmentroot);
-		getProjectCoverage(fragmentroot.getJavaProject()).increment(coverage);
+	public void putFragmentRoot(Module root, IBundleCoverage coverage) {
+		// coveragemap.put(root, coverage);
+		// fragmentroots.add(root);
+		// getProjectCoverage(root.getJavaProject()).increment(coverage);
 	}
 
 	private CoverageNodeImpl getProjectCoverage(IJavaProject project) {

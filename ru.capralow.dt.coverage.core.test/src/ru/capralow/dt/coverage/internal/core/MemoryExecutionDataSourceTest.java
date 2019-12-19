@@ -30,15 +30,15 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Tests for {@link MemoryExecutionDataSource}.
+ * Tests for {@link ProfilingResultsDataSource}.
  */
 public class MemoryExecutionDataSourceTest {
 
-	private MemoryExecutionDataSource source;
+	private ProfilingResultsDataSource source;
 
 	@Before
 	public void setup() {
-		source = new MemoryExecutionDataSource();
+		source = new ProfilingResultsDataSource();
 	}
 
 	@Test

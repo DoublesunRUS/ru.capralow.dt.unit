@@ -9,21 +9,22 @@
  * Contributors:
  *    Marc R. Hoffmann - initial API and implementation
  *
+ * Adapted by Alexander Kapralov
+ *
  ******************************************************************************/
 package ru.capralow.dt.coverage.internal.core.analysis;
 
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.jdt.core.IClassFile;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IJavaElement;
-import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IMember;
 import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
+
+import com._1c.g5.v8.dt.bsl.model.Module;
 
 import ru.capralow.dt.coverage.internal.core.DebugOptions;
 import ru.capralow.dt.coverage.internal.core.DebugOptions.ITracer;
@@ -36,16 +37,16 @@ public class TypeTraverser {
 
 	private static final ITracer TRACER = DebugOptions.ANALYSISTRACER;
 
-	private final IPackageFragmentRoot root;
+	private final Module root;
 
 	/**
 	 * Creates a traverser for the given package fragment root.
 	 *
-	 * @param root
+	 * @param root2
 	 *            package fragment root for traversal
 	 */
-	public TypeTraverser(IPackageFragmentRoot root) {
-		this.root = root;
+	public TypeTraverser(Module root2) {
+		this.root = root2;
 	}
 
 	/**
@@ -60,21 +61,21 @@ public class TypeTraverser {
 	 *             thrown by the underlying Java model
 	 */
 	public void process(ITypeVisitor visitor, IProgressMonitor monitor) throws JavaModelException {
-		if (isOnClasspath(root)) {
-			IJavaElement[] children = root.getChildren();
-			monitor.beginTask("", children.length); //$NON-NLS-1$
-			for (final IJavaElement element : children) {
-				if (monitor.isCanceled()) {
-					break;
-				}
-				IProgressMonitor submonitor = new SubProgressMonitor(monitor, 1);
-				processPackageFragment(visitor, (IPackageFragment) element, submonitor);
-			}
-		} else {
-			TRACER.trace("Package fragment root {0} not on classpath.", //$NON-NLS-1$
-					root.getPath());
-		}
-		monitor.done();
+		// if (isOnClasspath(root)) {
+		// IJavaElement[] children = root.getChildren();
+		// monitor.beginTask("", children.length); //$NON-NLS-1$
+		// for (final IJavaElement element : children) {
+		// if (monitor.isCanceled()) {
+		// break;
+		// }
+		// IProgressMonitor submonitor = new SubProgressMonitor(monitor, 1);
+		// processPackageFragment(visitor, (IPackageFragment) element, submonitor);
+		// }
+		// } else {
+		// TRACER.trace("Package fragment root {0} not on classpath.", //$NON-NLS-1$
+		// root.getPath());
+		// }
+		// monitor.done();
 	}
 
 	/**
@@ -82,15 +83,16 @@ public class TypeTraverser {
 	 * classpath. This check is required as the user might change the classpath and
 	 * old coverage sessions afterwards (SF #1836551).
 	 *
-	 * @param root
+	 * @param root2
 	 *            package fragment root
 	 * @return true, if the classpath entry still exists
 	 * @throws JavaModelException
 	 */
-	private boolean isOnClasspath(IPackageFragmentRoot root) throws JavaModelException {
-		IPath path = root.getPath();
-		IJavaProject project = root.getJavaProject();
-		return project.findPackageFragmentRoot(path) != null;
+	private boolean isOnClasspath(Module root2) throws JavaModelException {
+		return false;
+		// IPath path = root2.getPath();
+		// IJavaProject project = root2.getJavaProject();
+		// return project.findPackageFragmentRoot(path) != null;
 	}
 
 	private void processPackageFragment(ITypeVisitor visitor, IPackageFragment fragment, IProgressMonitor monitor)

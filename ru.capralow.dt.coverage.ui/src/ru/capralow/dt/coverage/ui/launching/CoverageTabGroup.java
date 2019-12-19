@@ -25,6 +25,7 @@ import org.eclipse.debug.ui.ILaunchConfigurationDialog;
 import org.eclipse.debug.ui.ILaunchConfigurationTab;
 import org.eclipse.debug.ui.ILaunchConfigurationTabGroup;
 
+import com._1c.g5.v8.dt.bm.index.emf.IBmEmfIndexManager;
 import com._1c.g5.v8.dt.core.platform.IResourceLookup;
 import com._1c.g5.v8.dt.core.platform.IV8ProjectManager;
 import com.google.inject.Inject;
@@ -44,6 +45,8 @@ public class CoverageTabGroup implements ILaunchConfigurationTabGroup, IExecutab
 	private ILaunchConfigurationTabGroup tabGroupDelegate;
 	private ILaunchConfigurationTab coverageTab;
 
+	@Inject
+	private IBmEmfIndexManager bmEmfIndexManager;
 	@Inject
 	private IV8ProjectManager projectManager;
 	@Inject
@@ -90,7 +93,7 @@ public class CoverageTabGroup implements ILaunchConfigurationTabGroup, IExecutab
 	}
 
 	protected ILaunchConfigurationTab createCoverageTab(ILaunchConfigurationDialog dialog, String mode) {
-		return new CoverageTab(projectManager, resourceLookup);
+		return new CoverageTab(bmEmfIndexManager, projectManager, resourceLookup);
 	}
 
 	public ILaunchConfigurationTab[] getTabs() {

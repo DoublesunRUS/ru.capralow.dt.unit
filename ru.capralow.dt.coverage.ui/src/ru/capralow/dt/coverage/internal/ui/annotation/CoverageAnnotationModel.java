@@ -40,7 +40,7 @@ import org.jacoco.core.analysis.ILine;
 import org.jacoco.core.analysis.ISourceNode;
 
 import ru.capralow.dt.coverage.core.CoverageTools;
-import ru.capralow.dt.coverage.core.analysis.IJavaCoverageListener;
+import ru.capralow.dt.coverage.core.analysis.IBslCoverageListener;
 import ru.capralow.dt.coverage.internal.ui.CoverageUIPlugin;
 
 /**
@@ -62,7 +62,7 @@ public final class CoverageAnnotationModel implements IAnnotationModel {
 	private int openConnections = 0;
 	private boolean annotated = false;
 
-	private IJavaCoverageListener coverageListener = new IJavaCoverageListener() {
+	private IBslCoverageListener coverageListener = new IBslCoverageListener() {
 		public void coverageChanged() {
 			updateAnnotations(true);
 		}

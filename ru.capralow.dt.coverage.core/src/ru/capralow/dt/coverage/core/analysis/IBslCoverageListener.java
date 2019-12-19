@@ -16,7 +16,7 @@ package ru.capralow.dt.coverage.core.analysis;
  * Callback interface implemented by clients that want to be informed, when the
  * current Java model coverage has changes.
  */
-public interface IJavaCoverageListener {
+public interface IBslCoverageListener {
 
 	/**
 	 * Called when the current coverage data has changed.

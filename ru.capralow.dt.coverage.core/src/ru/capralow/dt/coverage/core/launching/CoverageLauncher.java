@@ -30,6 +30,8 @@ import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
 import org.eclipse.debug.core.model.ILaunchConfigurationDelegate2;
 import org.eclipse.osgi.util.NLS;
 
+import com._1c.g5.v8.dt.bm.index.emf.IBmEmfIndexManager;
+import com._1c.g5.v8.dt.core.platform.IV8ProjectManager;
 import com._1c.g5.v8.dt.profiling.core.IProfilingService;
 import com.google.inject.Inject;
 
@@ -54,7 +56,11 @@ public abstract class CoverageLauncher implements ICoverageLauncher, IExecutable
 	protected ILaunchConfigurationDelegate2 launchdelegate2;
 
 	@Inject
+	private IBmEmfIndexManager bmEmfIndexManager;
+	@Inject
 	private IProfilingService profilingService;
+	@Inject
+	private IV8ProjectManager projectManager;
 
 	// IExecutableExtension interface:
 
@@ -102,7 +108,9 @@ public abstract class CoverageLauncher implements ICoverageLauncher, IExecutable
 	// ILaunchConfigurationDelegate2 interface:
 
 	public ILaunch getLaunch(ILaunchConfiguration configuration, String mode) throws CoreException {
-		return new CoverageLaunch(configuration, ScopeUtils.getConfiguredScope(configuration), profilingService);
+		return new CoverageLaunch(configuration,
+				ScopeUtils.getConfiguredScope(configuration, bmEmfIndexManager, projectManager),
+				profilingService);
 	}
 
 	public boolean buildForLaunch(ILaunchConfiguration configuration, String mode, IProgressMonitor monitor)

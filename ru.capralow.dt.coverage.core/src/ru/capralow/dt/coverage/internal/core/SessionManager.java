@@ -170,7 +170,7 @@ public class SessionManager implements ISessionManager {
 		// Merge all sessions
 		final Set<Module> scope = new HashSet<>();
 		final Set<ILaunchConfiguration> launches = new HashSet<ILaunchConfiguration>();
-		final MemoryExecutionDataSource memory = new MemoryExecutionDataSource();
+		final ProfilingResultsDataSource memory = new ProfilingResultsDataSource();
 		for (ICoverageSession session : sessions) {
 			scope.addAll(session.getScope());
 			if (session.getLaunchConfiguration() != null) {

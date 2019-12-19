@@ -13,11 +13,9 @@
 package ru.capralow.dt.coverage.internal.ui.wizards;
 
 import java.text.MessageFormat;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.Set;
 
-import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -34,6 +32,12 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
+
+import com._1c.g5.v8.dt.bm.index.emf.IBmEmfIndexManager;
+import com._1c.g5.v8.dt.bsl.model.Module;
+import com._1c.g5.v8.dt.core.platform.IResourceLookup;
+import com._1c.g5.v8.dt.core.platform.IV8ProjectManager;
+import com.google.inject.Inject;
 
 import ru.capralow.dt.coverage.core.ScopeUtils;
 import ru.capralow.dt.coverage.internal.ui.ContextHelp;
@@ -56,6 +60,13 @@ public class SessionImportPage2 extends WizardPage {
 	private Text descriptiontext;
 	private ScopeViewer scopeviewer;
 	private Button binariescheck;
+
+	@Inject
+	private IBmEmfIndexManager bmEmfIndexManager;
+	@Inject
+	private IV8ProjectManager projectManager;
+	@Inject
+	private IResourceLookup resourceLookup;
 
 	protected SessionImportPage2() {
 		super(ID);
@@ -97,7 +108,7 @@ public class SessionImportPage2 extends WizardPage {
 	}
 
 	private void createScopeBlock(Composite parent) {
-		scopeviewer = new ScopeViewer(parent, SWT.BORDER);
+		scopeviewer = new ScopeViewer(parent, SWT.BORDER, projectManager, resourceLookup);
 		try {
 			scopeviewer.setInput(ScopeUtils.getWorkspaceScope());
 		} catch (JavaModelException e) {
@@ -126,7 +137,7 @@ public class SessionImportPage2 extends WizardPage {
 		binariescheck.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				scopeviewer.setIncludeBinaries(binariescheck.getSelection());
+				// scopeviewer.setIncludeBinaries(binariescheck.getSelection());
 				update();
 			}
 		});
@@ -174,11 +185,12 @@ public class SessionImportPage2 extends WizardPage {
 		descriptiontext.setText(MessageFormat.format(descr, arg));
 		IDialogSettings settings = getDialogSettings();
 		boolean binaries = settings.getBoolean(STORE_BINARIES);
-		scopeviewer.setIncludeBinaries(binaries);
+		// scopeviewer.setIncludeBinaries(binaries);
 		binariescheck.setSelection(binaries);
 		String[] classes = settings.getArray(STORE_SCOPE);
 		if (classes != null) {
-			scopeviewer.setSelectedScope(ScopeUtils.readScope(Arrays.asList(classes)));
+			// scopeviewer.setSelectedScope(ScopeUtils.readScope(Arrays.asList(classes),
+			// bmEmfIndexManager));
 		}
 	}
 
@@ -192,7 +204,7 @@ public class SessionImportPage2 extends WizardPage {
 		return descriptiontext.getText().trim();
 	}
 
-	public Set<IPackageFragmentRoot> getScope() {
+	public Set<Module> getScope() {
 		return scopeviewer.getSelectedScope();
 	}
 
