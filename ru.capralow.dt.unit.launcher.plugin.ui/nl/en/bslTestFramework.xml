@@ -1,33 +1,33 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <contexts>
 
-	<context id="v8_3_8$TestFramework#ПроверитьИстину" title="ПроверитьИстину">
+	<context id="v8_3_8$TestFramework#ПроверитьИстину2" title="ПроверитьИстину">
 		<description>Проверить истину</description>
-		<topic href="html/TestFramework.ПроверитьИстину.htm" label="ПроверитьИстину"/>
+		<topic href="html/TestFramework.ПроверитьИстину2.htm" label="ПроверитьИстину"/>
 	</context>
-	<context id="v8_3_9$TestFramework#ПроверитьИстину" title="ПроверитьИстину">
+	<context id="v8_3_9$TestFramework#ПроверитьИстину2" title="ПроверитьИстину">
 		<description>Проверить истину</description>
-		<topic href="html/TestFramework.ПроверитьИстину.htm" label="ПроверитьИстину"/>
+		<topic href="html/TestFramework.ПроверитьИстину2.htm" label="ПроверитьИстину"/>
 	</context>
-	<context id="v8_3_10$TestFramework#ПроверитьИстину" title="ПроверитьИстину">
+	<context id="v8_3_10$TestFramework#ПроверитьИстину2" title="ПроверитьИстину">
 		<description>Проверить истину</description>
-		<topic href="html/TestFramework.ПроверитьИстину.htm" label="ПроверитьИстину"/>
+		<topic href="html/TestFramework.ПроверитьИстину2.htm" label="ПроверитьИстину"/>
 	</context>
-	<context id="v8_3_11$TestFramework#ПроверитьИстину" title="ПроверитьИстину">
+	<context id="v8_3_11$TestFramework#ПроверитьИстину2" title="ПроверитьИстину">
 		<description>Проверить истину</description>
-		<topic href="html/TestFramework.ПроверитьИстину.htm" label="ПроверитьИстину"/>
+		<topic href="html/TestFramework.ПроверитьИстину2.htm" label="ПроверитьИстину"/>
 	</context>
-	<context id="v8_3_12$TestFramework#ПроверитьИстину" title="ПроверитьИстину">
+	<context id="v8_3_12$TestFramework#ПроверитьИстину2" title="ПроверитьИстину">
 		<description>Проверить истину</description>
-		<topic href="html/TestFramework.ПроверитьИстину.htm" label="ПроверитьИстину"/>
+		<topic href="html/TestFramework.ПроверитьИстину2.htm" label="ПроверитьИстину"/>
 	</context>
-	<context id="v8_3_13$TestFramework#ПроверитьИстину" title="ПроверитьИстину">
+	<context id="v8_3_13$TestFramework#ПроверитьИстину2" title="ПроверитьИстину">
 		<description>Проверить истину</description>
-		<topic href="html/TestFramework.ПроверитьИстину.htm" label="ПроверитьИстину"/>
+		<topic href="html/TestFramework.ПроверитьИстину2.htm" label="ПроверитьИстину"/>
 	</context>
-	<context id="v8_3_14$TestFramework#ПроверитьИстину" title="ПроверитьИстину">
+	<context id="v8_3_14$TestFramework#ПроверитьИстину2" title="ПроверитьИстину">
 		<description>Проверить истину</description>
-		<topic href="html/TestFramework.ПроверитьИстину.htm" label="ПроверитьИстину"/>
+		<topic href="html/TestFramework.ПроверитьИстину2.htm" label="ПроверитьИстину"/>
 	</context>
 
 </contexts>

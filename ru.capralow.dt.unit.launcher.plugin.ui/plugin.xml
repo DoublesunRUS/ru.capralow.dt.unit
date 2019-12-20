@@ -51,7 +51,6 @@
 	
 	<extension point="org.eclipse.help.contexts">
 		<contexts file="bslTestFramework.xml"/>
-		<contexts file="nl/ru/bslTestFramework.xml"/>
 	</extension>
 	
 </plugin>
