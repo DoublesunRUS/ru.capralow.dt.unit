@@ -1,16 +1,16 @@
 {
 	"methods": [
 		{
-			"name-en": "ПроверитьИстину",
+			"name-en": "AssertTrue",
 			"name-ru": "ПроверитьИстину",
 			"params": [
 				{
-					"name-en": "_Истина",
+					"name-en": "Condition",
 					"name-ru": "_Истина",
 					"type": "Boolean"
 				},
 				{
-					"name-en": "ДопСообщениеОшибки",
+					"name-en": "Message",
 					"name-ru": "ДопСообщениеОшибки",
 					"type": "String",
 					"isDefaultValue": true
@@ -18,16 +18,16 @@
 			]
 		},
 		{
-			"name-en": "ПроверитьЛожь",
+			"name-en": "AssertFalse",
 			"name-ru": "ПроверитьЛожь",
 			"params": [
 				{
-					"name-en": "_Ложь",
+					"name-en": "Condition",
 					"name-ru": "_Ложь",
 					"type": "Boolean"
 				},
 				{
-					"name-en": "ДопСообщениеОшибки",
+					"name-en": "Message",
 					"name-ru": "ДопСообщениеОшибки",
 					"type": "String",
 					"isDefaultValue": true
@@ -36,21 +36,21 @@
 			"returnedValue": "Structure"
 		},
 		{
-			"name-en": "ПроверитьДату",
+			"name-en": "AssertDate",
 			"name-ru": "ПроверитьДату",
 			"params": [
 				{
-					"name-en": "_Период",
+					"name-en": "Period",
 					"name-ru": "_Период",
 					"type": "Date"
 				},
 				{
-					"name-en": "_Дата",
+					"name-en": "Date",
 					"name-ru": "_Дата",
 					"type": "Date"
 				},
 				{
-					"name-en": "ДопСообщениеОшибки",
+					"name-en": "Message",
 					"name-ru": "ДопСообщениеОшибки",
 					"type": "String",
 					"isDefaultValue": true
@@ -59,21 +59,21 @@
 			"returnedValue": "Structure"
 		},
 		{
-			"name-en": "ПроверитьРавенствоДатСТочностью2Секунды",
+			"name-en": "AssertDateWithin2Seconds",
 			"name-ru": "ПроверитьРавенствоДатСТочностью2Секунды",
 			"params": [
 				{
-					"name-en": "_Дата2",
+					"name-en": "ExpectedDate",
 					"name-ru": "_Дата2",
 					"type": "Date"
 				},
 				{
-					"name-en": "_Дата",
+					"name-en": "ActualDate",
 					"name-ru": "_Дата",
 					"type": "Date"
 				},
 				{
-					"name-en": "ДопСообщениеОшибки",
+					"name-en": "Message",
 					"name-ru": "ДопСообщениеОшибки",
 					"type": "String",
 					"isDefaultValue": true
@@ -82,19 +82,19 @@
 			"returnedValue": "Structure"
 		},
 		{
-			"name-en": "ПроверитьРавенство",
+			"name-en": "AssertEqual",
 			"name-ru": "ПроверитьРавенство",
 			"params": [
 				{
-					"name-en": "_1",
+					"name-en": "Expected",
 					"name-ru": "_1"
 				},
 				{
-					"name-en": "_2",
+					"name-en": "Actual",
 					"name-ru": "_2"
 				},
 				{
-					"name-en": "ДопСообщениеОшибки",
+					"name-en": "Message",
 					"name-ru": "ДопСообщениеОшибки",
 					"type": "String",
 					"isDefaultValue": true
@@ -103,19 +103,19 @@
 			"returnedValue": "Structure"
 		},
 		{
-			"name-en": "ПроверитьНеРавенство",
+			"name-en": "AssertNotEqual",
 			"name-ru": "ПроверитьНеРавенство",
 			"params": [
 				{
-					"name-en": "_1",
+					"name-en": "NotExpected",
 					"name-ru": "_1"
 				},
 				{
-					"name-en": "_2",
+					"name-en": "Actual",
 					"name-ru": "_2"
 				},
 				{
-					"name-en": "ДопСообщениеОшибки",
+					"name-en": "Message",
 					"name-ru": "ДопСообщениеОшибки",
 					"type": "String",
 					"isDefaultValue": true
@@ -124,21 +124,21 @@
 			"returnedValue": "Structure"
 		},
 		{
-			"name-en": "ПроверитьБольше",
+			"name-en": "AssertGreater",
 			"name-ru": "ПроверитьБольше",
 			"params": [
 				{
-					"name-en": "ЭталонноеЧисло",
+					"name-en": "ExpectedNumber",
 					"name-ru": "ЭталонноеЧисло",
 					"type": "Number"
 				},
 				{
-					"name-en": "ПроверяемоеЧисло",
+					"name-en": "ActualNumber",
 					"name-ru": "ПроверяемоеЧисло",
 					"type": "Number"
 				},
 				{
-					"name-en": "ДопСообщениеОшибки",
+					"name-en": "Message",
 					"name-ru": "ДопСообщениеОшибки",
 					"type": "String",
 					"isDefaultValue": true
@@ -147,21 +147,21 @@
 			"returnedValue": "Structure"
 		},
 		{
-			"name-en": "ПроверитьБольшеИлиРавно",
+			"name-en": "AssertGreaterOrEqual",
 			"name-ru": "ПроверитьБольшеИлиРавно",
 			"params": [
 				{
-					"name-en": "ЭталонноеЧисло",
+					"name-en": "ExpectedNumber",
 					"name-ru": "ЭталонноеЧисло",
 					"type": "Number"
 				},
 				{
-					"name-en": "ПроверяемоеЧисло",
+					"name-en": "ActualNumber",
 					"name-ru": "ПроверяемоеЧисло",
 					"type": "Number"
 				},
 				{
-					"name-en": "ДопСообщениеОшибки",
+					"name-en": "Message",
 					"name-ru": "ДопСообщениеОшибки",
 					"type": "String",
 					"isDefaultValue": true
@@ -170,21 +170,21 @@
 			"returnedValue": "Structure"
 		},
 		{
-			"name-en": "ПроверитьМеньше",
+			"name-en": "AssertLess",
 			"name-ru": "ПроверитьМеньше",
 			"params": [
 				{
-					"name-en": "ЭталонноеЧисло",
+					"name-en": "ExpectedNumber",
 					"name-ru": "ЭталонноеЧисло",
 					"type": "Number"
 				},
 				{
-					"name-en": "ПроверяемоеЧисло",
+					"name-en": "ActualNumber",
 					"name-ru": "ПроверяемоеЧисло",
 					"type": "Number"
 				},
 				{
-					"name-en": "ДопСообщениеОшибки",
+					"name-en": "Message",
 					"name-ru": "ДопСообщениеОшибки",
 					"type": "String",
 					"isDefaultValue": true
@@ -193,21 +193,21 @@
 			"returnedValue": "Structure"
 		},
 		{
-			"name-en": "ПроверитьМеньшеИлиРавно",
+			"name-en": "AssertLessOrEqual",
 			"name-ru": "ПроверитьМеньшеИлиРавно",
 			"params": [
 				{
-					"name-en": "ЭталонноеЧисло",
+					"name-en": "ExpectedNumber",
 					"name-ru": "ЭталонноеЧисло",
 					"type": "Number"
 				},
 				{
-					"name-en": "ПроверяемоеЧисло",
+					"name-en": "ActualNumber",
 					"name-ru": "ПроверяемоеЧисло",
 					"type": "Number"
 				},
 				{
-					"name-en": "ДопСообщениеОшибки",
+					"name-en": "Message",
 					"name-ru": "ДопСообщениеОшибки",
 					"type": "String",
 					"isDefaultValue": true
@@ -216,23 +216,23 @@
 			"returnedValue": "Structure"
 		},
 		{
-			"name-en": "ПроверитьВыполнилось",
+			"name-en": "AssertExecuted",
 			"name-ru": "ПроверитьВыполнилось",
 			"params": [
 				{
-					"name-en": "СтрокаАлгоритм",
+					"name-en": "Algorithm",
 					"name-ru": "СтрокаАлгоритм",
 					"type": "String",
 					"isOut": true
 				},
 				{
-					"name-en": "ПараметрыИлиДопСообщениеОшибки",
+					"name-en": "ArgsOrMessage",
 					"name-ru": "ПараметрыИлиДопСообщениеОшибки",
 					"types": ["Structure", "String"],
 					"isDefaultValue": true
 				},
 				{
-					"name-en": "ДопСообщениеОшибки",
+					"name-en": "Message",
 					"name-ru": "ДопСообщениеОшибки",
 					"type": "String",
 					"isOut": true,
@@ -242,27 +242,27 @@
 			"returnedValue": "Structure"
 		},
 		{
-			"name-en": "ПроверитьМетодВыполнился",
+			"name-en": "AssertMethodExecuted",
 			"name-ru": "ПроверитьМетодВыполнился",
 			"params": [
 				{
-					"name-en": "Объект",
+					"name-en": "Object",
 					"name-ru": "Объект"
 				},
 				{
-					"name-en": "ИмяМетода",
+					"name-en": "MethodName",
 					"name-ru": "ИмяМетода",
 					"type": "String",
 					"isOut": true
 				},
 				{
-					"name-en": "ПараметрыИлиДопСообщениеОшибки",
+					"name-en": "ArgsOrMessage",
 					"name-ru": "ПараметрыИлиДопСообщениеОшибки",
 					"types": ["Array", "String"],
 					"isDefaultValue": true
 				},
 				{
-					"name-en": "ДопСообщениеОшибки",
+					"name-en": "Message",
 					"name-ru": "ДопСообщениеОшибки",
 					"type": "String",
 					"isOut": true,
@@ -272,30 +272,30 @@
 			"returnedValue": "Structure"
 		},
 		{
-			"name-en": "ПроверитьНеВыполнилось",
+			"name-en": "AssertNotExecuted",
 			"name-ru": "ПроверитьНеВыполнилось",
 			"params": [
 				{
-					"name-en": "СтрокаАлгоритм",
+					"name-en": "Algorithm",
 					"name-ru": "СтрокаАлгоритм",
 					"type": "String",
 					"isOut": true
 				},
 				{
-					"name-en": "ПараметрыИлиОжидаемоеОписаниеОшибки",
+					"name-en": "ArgsOrThrowsException",
 					"name-ru": "ПараметрыИлиОжидаемоеОписаниеОшибки",
 					"types": ["Structure", "String"],
 					"isDefaultValue": true
 				},
 				{
-					"name-en": "ОжидаемоеОписаниеОшибкиИлиДопСообщениеОшибки",
+					"name-en": "ThrowsExceptionOrMessage",
 					"name-ru": "ОжидаемоеОписаниеОшибкиИлиДопСообщениеОшибки",
 					"type": "String",
 					"isOut": true,
 					"isDefaultValue": true
 				},
 				{
-					"name-en": "ДопСообщениеОшибки",
+					"name-en": "Message",
 					"name-ru": "ДопСообщениеОшибки",
 					"type": "String",
 					"isOut": true,
@@ -305,33 +305,33 @@
 			"returnedValue": "Structure"
 		},
 		{
-			"name-en": "ПроверитьМетодНеВыполнился",
+			"name-en": "AssertMethodNotExecuted",
 			"name-ru": "ПроверитьМетодНеВыполнился",
 			"params": [
 				{
-					"name-en": "Объект",
+					"name-en": "Object",
 					"name-ru": "Объект"
 				},
 				{
-					"name-en": "ИмяМетода",
+					"name-en": "MethodName",
 					"name-ru": "ИмяМетода",
 					"type": "String"
 				},
 				{
-					"name-en": "ПараметрыИлиОжидаемоеОписаниеОшибки",
+					"name-en": "ArgsOrThrowsException",
 					"name-ru": "ПараметрыИлиОжидаемоеОписаниеОшибки",
 					"types": ["Array", "String"],
 					"isDefaultValue": true
 				},
 				{
-					"name-en": "ОжидаемоеОписаниеОшибкиИлиДопСообщениеОшибки",
+					"name-en": "ThrowsExceptionOrMessage",
 					"name-ru": "ОжидаемоеОписаниеОшибкиИлиДопСообщениеОшибки",
 					"type": "String",
 					"isOut": true,
 					"isDefaultValue": true
 				},
 				{
-					"name-en": "ДопСообщениеОшибки",
+					"name-en": "Message",
 					"name-ru": "ДопСообщениеОшибки",
 					"type": "String",
 					"isOut": true,
@@ -341,15 +341,15 @@
 			"returnedValue": "Structure"
 		},
 		{
-			"name-en": "ПроверитьЗаполненность",
+			"name-en": "AssertFilled",
 			"name-ru": "ПроверитьЗаполненность",
 			"params": [
 				{
-					"name-en": "ПроверяемоеЗначение",
+					"name-en": "Value",
 					"name-ru": "ПроверяемоеЗначение"
 				},
 				{
-					"name-en": "ДопСообщениеОшибки",
+					"name-en": "Message",
 					"name-ru": "ДопСообщениеОшибки",
 					"type": "String",
 					"isDefaultValue": true
@@ -358,15 +358,15 @@
 			"returnedValue": "Structure"
 		},
 		{
-			"name-en": "ПроверитьНеЗаполненность",
+			"name-en": "AssertNotFilled",
 			"name-ru": "ПроверитьНеЗаполненность",
 			"params": [
 				{
-					"name-en": "ПроверяемоеЗначение",
+					"name-en": "Value",
 					"name-ru": "ПроверяемоеЗначение"
 				},
 				{
-					"name-en": "ДопСообщениеОшибки",
+					"name-en": "Message",
 					"name-ru": "ДопСообщениеОшибки",
 					"type": "String",
 					"isDefaultValue": true
@@ -375,20 +375,20 @@
 			"returnedValue": "Structure"
 		},
 		{
-			"name-en": "ПроверитьТип",
+			"name-en": "AssertType",
 			"name-ru": "ПроверитьТип",
 			"params": [
 				{
-					"name-en": "значение",
+					"name-en": "Value",
 					"name-ru": "значение"
 				},
 				{
-					"name-en": "ТипИлиИмяТипа",
+					"name-en": "TypeOrTypeName",
 					"name-ru": "ТипИлиИмяТипа",
 					"types": ["Type", "String"]
 				},
 				{
-					"name-en": "ДопСообщениеОшибки",
+					"name-en": "Message",
 					"name-ru": "ДопСообщениеОшибки",
 					"type": "String",
 					"isDefaultValue": true
@@ -397,21 +397,21 @@
 			"returnedValue": "Structure"
 		},
 		{
-			"name-en": "ПроверитьВхождение",
+			"name-en": "AssertStringContains",
 			"name-ru": "ПроверитьВхождение",
 			"params": [
 				{
-					"name-en": "строка",
+					"name-en": "String",
 					"name-ru": "строка",
 					"type": "String"
 				},
 				{
-					"name-en": "подстрокаПоиска",
+					"name-en": "Substring",
 					"name-ru": "подстрокаПоиска",
 					"type": "String"
 				},
 				{
-					"name-en": "ДопСообщениеОшибки",
+					"name-en": "Message",
 					"name-ru": "ДопСообщениеОшибки",
 					"type": "String",
 					"isDefaultValue": true
@@ -420,20 +420,20 @@
 			"returnedValue": "Structure"
 		},
 		{
-			"name-en": "ПроверитьВхождениеВКоллекцию",
+			"name-en": "AssertCollectionContains",
 			"name-ru": "ПроверитьВхождениеВКоллекцию",
 			"params": [
 				{
-					"name-en": "Элемент",
-					"name-ru": "Элемент"
-				},
-				{
-					"name-en": "Коллекция",
+					"name-en": "Collection",
 					"name-ru": "Коллекция",
 					"types": ["Array", "FixedArray", "Structure", "FixedStructure", "ReferenceValue", "FixedReferenceValue", "TypedValueList"]
 				},
 				{
-					"name-en": "ДопСообщениеОшибки",
+					"name-en": "Item",
+					"name-ru": "Элемент"
+				},
+				{
+					"name-en": "Message",
 					"name-ru": "ДопСообщениеОшибки",
 					"type": "String",
 					"isDefaultValue": true
@@ -442,53 +442,53 @@
 			"returnedValue": "Structure"
 		},
 		{
-			"name-en": "ПроверитьРавенствоТаблиц",
+			"name-en": "AssertEqualValueTable",
 			"name-ru": "ПроверитьРавенствоТаблиц",
 			"params": [
 				{
-					"name-en": "Таб1",
+					"name-en": "ExpectedValueTable",
 					"name-ru": "Таб1",
 					"type": "TableValueList"
 				},
 				{
-					"name-en": "Таб2",
+					"name-en": "ActualValueTable",
 					"name-ru": "Таб2",
 					"type": "TableValueList"
 				},
 				{
-					"name-en": "ДопСообщениеОшибки",
+					"name-en": "Message",
 					"name-ru": "ДопСообщениеОшибки",
 					"type": "String",
 					"isDefaultValue": true
 				},
 				{
-					"name-en": "ДопПараметры",
+					"name-en": "Params",
 					"name-ru": "ДопПараметры",
 					"type": "Structure"
 				}
 			]
 		},
 		{
-			"name-en": "ПолучитьСостояниеVanessaAutomation",
+			"name-en": "GetVanessaAutomationState",
 			"name-ru": "ПолучитьСостояниеVanessaAutomation",
 			"returnedValue": "Structure"
 		},
 		{
-			"name-en": "ЗапретитьВыполнениеШагов",
+			"name-en": "StopRunning",
 			"name-ru": "ЗапретитьВыполнениеШагов"
 		},
 		{
-			"name-en": "ПродолжитьВыполнениеШагов",
+			"name-en": "ContinueRunning",
 			"name-ru": "ПродолжитьВыполнениеШагов",
 			"params": [
 				{
-					"name-en": "ШагУпал",
+					"name-en": "IsError",
 					"name-ru": "ШагУпал",
 					"type": "Boolean",
 					"isDefaultValue": true
 				},
 				{
-					"name-en": "ОписаниеОшибки",
+					"name-en": "ErrorDescription",
 					"name-ru": "ОписаниеОшибки",
 					"type": "String",
 					"isDefaultValue": true
@@ -496,11 +496,11 @@
 			]
 		},
 		{
-			"name-en": "ДобавитьОшибкуСценария",
+			"name-en": "AddError",
 			"name-ru": "ДобавитьОшибкуСценария",
 			"params": [
 				{
-					"name-en": "ТекстОшибки",
+					"name-en": "ErrorDescription",
 					"name-ru": "ТекстОшибки",
 					"type": "String"
 				}
