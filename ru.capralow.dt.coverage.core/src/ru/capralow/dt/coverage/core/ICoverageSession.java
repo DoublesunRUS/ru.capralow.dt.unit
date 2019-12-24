@@ -18,9 +18,8 @@ import java.util.Set;
 
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.debug.core.ILaunchConfiguration;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
-
-import com._1c.g5.v8.dt.bsl.model.Module;
 
 /**
  * A coverage session is the result of a coverage run (or multiple merged runs)
@@ -52,7 +51,7 @@ public interface ICoverageSession extends IAdaptable, IExecutionDataSource {
 	 *
 	 * @return session scope as set of {@link IPackageFragmentRoot}
 	 */
-	public Set<Module> getScope();
+	public Set<URI> getScope();
 
 	/**
 	 * If this session was the result of a Eclipse launch this method returns the

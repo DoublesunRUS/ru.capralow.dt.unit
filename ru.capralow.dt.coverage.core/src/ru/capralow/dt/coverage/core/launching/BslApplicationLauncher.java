@@ -25,8 +25,10 @@ import javax.inject.Inject;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import com._1c.g5.v8.dt.bsl.model.Module;
 import com._1c.g5.v8.dt.core.platform.IConfigurationProject;
 import com._1c.g5.v8.dt.core.platform.IExtensionProject;
 import com._1c.g5.v8.dt.core.platform.IV8Project;
@@ -43,7 +45,7 @@ public class BslApplicationLauncher extends CoverageLauncher {
 	@Inject
 	private IV8ProjectManager projectManager;
 
-	public Set<Module> getOverallScope(ILaunchConfiguration configuration) throws CoreException {
+	public Set<URI> getOverallScope(ILaunchConfiguration configuration) throws CoreException {
 
 		String configurationProjectName = configuration.getAttribute(IDebugConfigurationAttributes.PROJECT_NAME,
 				(String) null);
@@ -62,17 +64,17 @@ public class BslApplicationLauncher extends CoverageLauncher {
 		if (v8Configuration == null)
 			return Collections.emptySet();
 
-		List<Module> modules = new ArrayList<>();
+		List<URI> modules = new ArrayList<>();
 
 		for (CommonModule commonModule : v8Configuration.getCommonModules())
-			modules.add(commonModule.getModule());
+			modules.add((EcoreUtil.getURI((EObject) commonModule.getModule())));
 
 		if (v8Project instanceof IConfigurationProject)
 			for (IExtensionProject extensionProject : projectManager.getProjects(IExtensionProject.class)) {
 				if (extensionProject.getParent().equals(v8Project)) {
 					Configuration extensionConfiguration = extensionProject.getConfiguration();
 					for (CommonModule commonModule : extensionConfiguration.getCommonModules())
-						modules.add(commonModule.getModule());
+						modules.add((EcoreUtil.getURI((EObject) commonModule.getModule())));
 				}
 			}
 

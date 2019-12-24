@@ -15,7 +15,6 @@
 package ru.capralow.dt.coverage.internal.ui;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
@@ -24,7 +23,7 @@ import java.util.stream.Collectors;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.CheckboxTableViewer;
@@ -46,7 +45,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 
-import com._1c.g5.v8.dt.bsl.model.Module;
 import com._1c.g5.v8.dt.core.platform.IResourceLookup;
 import com._1c.g5.v8.dt.core.platform.IV8ProjectManager;
 
@@ -55,14 +53,14 @@ import com._1c.g5.v8.dt.core.platform.IV8ProjectManager;
  */
 public class ScopeViewer implements ISelectionProvider {
 
-	private static class ModuleLabelProvider extends LabelProvider {
+	private static class URILabelProvider extends LabelProvider {
 
 		private ILabelProvider delegate = new WorkbenchLabelProvider();
 
 		private IResourceLookup resourceLookup;
 		private IV8ProjectManager projectManager;
 
-		public ModuleLabelProvider(IV8ProjectManager projectManager, IResourceLookup resourceLookup) {
+		public URILabelProvider(IV8ProjectManager projectManager, IResourceLookup resourceLookup) {
 			this.projectManager = projectManager;
 			this.resourceLookup = resourceLookup;
 		}
@@ -74,7 +72,7 @@ public class ScopeViewer implements ISelectionProvider {
 
 		@Override
 		public String getText(Object element) {
-			EObject root = (EObject) element;
+			URI root = (URI) element;
 			String projectname = projectManager.getProject(root).getProject().getName();
 			String path = getPathLabel(root, resourceLookup);
 			if (path.length() > 0) {
@@ -105,8 +103,8 @@ public class ScopeViewer implements ISelectionProvider {
 
 		@Override
 		public int compare(Viewer viewer, Object e1, Object e2) {
-			EObject root1 = (EObject) e1;
-			EObject root2 = (EObject) e2;
+			URI root1 = (URI) e1;
+			URI root2 = (URI) e2;
 			@SuppressWarnings("rawtypes")
 			final Comparator comparator = getComparator();
 			return comparator.compare(getPathLabel(root1, resourceLookup), getPathLabel(root2, resourceLookup));
@@ -123,7 +121,7 @@ public class ScopeViewer implements ISelectionProvider {
 	 *            package fragment root
 	 * @return label for the class path entry
 	 */
-	private static String getPathLabel(EObject root, IResourceLookup resourceLookup) {
+	private static String getPathLabel(URI root, IResourceLookup resourceLookup) {
 		IFile moduleFile = resourceLookup.getPlatformResource(root);
 
 		final IPath path = moduleFile.getFullPath();
@@ -132,7 +130,7 @@ public class ScopeViewer implements ISelectionProvider {
 
 	private final Table table;
 	private final CheckboxTableViewer viewer;
-	private final List<ISelectionChangedListener> listeners = new ArrayList<ISelectionChangedListener>();
+	private final List<ISelectionChangedListener> listeners = new ArrayList<>();
 
 	/**
 	 * Creates a new viewer within the given parent.
@@ -156,12 +154,12 @@ public class ScopeViewer implements ISelectionProvider {
 		this.table = table;
 		viewer = new CheckboxTableViewer(table);
 		viewer.setContentProvider(ArrayContentProvider.getInstance());
-		viewer.setLabelProvider(new ModuleLabelProvider(projectManager, resourceLookup));
+		viewer.setLabelProvider(new URILabelProvider(projectManager, resourceLookup));
 		viewer.setSorter(new ModuleSorter(resourceLookup));
 		viewer.addFilter(new ViewerFilter() {
 			@Override
 			public boolean select(Viewer viewer, Object parentElement, Object element) {
-				return element instanceof Module;
+				return element instanceof URI;
 			}
 		});
 		viewer.addCheckStateListener(event -> fireSelectionEvent());
@@ -179,11 +177,11 @@ public class ScopeViewer implements ISelectionProvider {
 	/**
 	 * Sets the input for this viewer.
 	 *
-	 * @param input
+	 * @param set
 	 *            list of {@link IPackageFragmentRoot}s the user can select from
 	 */
-	public void setInput(Collection<Module> input) {
-		viewer.setInput(input);
+	public void setInput(Set<URI> set) {
+		viewer.setInput(set);
 	}
 
 	/**
@@ -192,7 +190,7 @@ public class ScopeViewer implements ISelectionProvider {
 	 * @param set
 	 *            list of package fragment roots that should be checked
 	 */
-	public void setSelectedScope(final Set<Module> set) {
+	public void setSelectedScope(final Set<URI> set) {
 		viewer.setCheckedElements(set.toArray());
 	}
 
@@ -211,10 +209,10 @@ public class ScopeViewer implements ISelectionProvider {
 	 *
 	 * @return list of package fragment roots that are currently checked
 	 */
-	public Set<Module> getSelectedScope() {
-		Set<Module> scope = new HashSet<>();
+	public Set<URI> getSelectedScope() {
+		Set<URI> scope = new HashSet<>();
 		for (final Object element : viewer.getCheckedElements()) {
-			scope.add((Module) element);
+			scope.add((URI) element);
 		}
 		return scope;
 	}
@@ -255,9 +253,9 @@ public class ScopeViewer implements ISelectionProvider {
 	}
 
 	public void setSelection(ISelection selection) {
-		List<Module> scope = new ArrayList<>();
+		List<URI> scope = new ArrayList<>();
 		for (final Object obj : ((IStructuredSelection) selection).toArray()) {
-			scope.add((Module) obj);
+			scope.add((URI) obj);
 		}
 		setSelectedScope(scope.stream().collect(Collectors.toSet()));
 	}

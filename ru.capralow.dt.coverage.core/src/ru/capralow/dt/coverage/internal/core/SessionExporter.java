@@ -9,6 +9,8 @@
  * Contributors:
  *    Marc R. Hoffmann - initial API and implementation
  *
+ * Adapted by Alexander Kapralov
+ *
  ******************************************************************************/
 package ru.capralow.dt.coverage.internal.core;
 
@@ -45,6 +47,8 @@ import org.jacoco.report.csv.CSVFormatter;
 import org.jacoco.report.html.HTMLFormatter;
 import org.jacoco.report.xml.XMLFormatter;
 
+import com._1c.g5.v8.dt.core.platform.IResourceLookup;
+
 import ru.capralow.dt.coverage.core.CoverageStatus;
 import ru.capralow.dt.coverage.core.ICoverageSession;
 import ru.capralow.dt.coverage.core.ISessionExporter;
@@ -60,8 +64,11 @@ public class SessionExporter implements ISessionExporter {
 	private ExportFormat format;
 	private String destination;
 
-	public SessionExporter(ICoverageSession session) {
+	private IResourceLookup resourceLookup;
+
+	public SessionExporter(ICoverageSession session, IResourceLookup resourceLookup) {
 		this.session = session;
+		this.resourceLookup = resourceLookup;
 	}
 
 	public void setFormat(ExportFormat format) {
@@ -97,8 +104,8 @@ public class SessionExporter implements ISessionExporter {
 		final int work = session.getScope().size();
 		monitor.beginTask(NLS.bind(CoreMessages.ExportingSession_task, session.getDescription()), work * 2);
 		final SessionAnalyzer analyzer = new SessionAnalyzer();
-		final IBslModelCoverage modelCoverage = analyzer.processSession(session,
-				new SubProgressMonitor(monitor, work));
+		final IBslModelCoverage modelCoverage = analyzer
+				.processSession(session, new SubProgressMonitor(monitor, work), resourceLookup);
 		final IReportVisitor formatter = createFormatter();
 		formatter.visitInfo(analyzer.getSessionInfos(), analyzer.getExecutionData());
 		final IReportGroupVisitor modelgroup = formatter.visitGroup(session.getDescription());

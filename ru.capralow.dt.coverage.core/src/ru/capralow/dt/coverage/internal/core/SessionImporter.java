@@ -18,8 +18,7 @@ import java.util.Set;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-
-import com._1c.g5.v8.dt.bsl.model.Module;
+import org.eclipse.emf.common.util.URI;
 
 import ru.capralow.dt.coverage.core.IExecutionDataSource;
 import ru.capralow.dt.coverage.core.ISessionImporter;
@@ -35,7 +34,7 @@ public class SessionImporter implements ISessionImporter {
 
 	private String description;
 	private IExecutionDataSource dataSource;
-	private Set<Module> scope;
+	private Set<URI> scope;
 	private boolean copy;
 
 	public SessionImporter(ISessionManager sessionManager, ExecutionDataFiles executionDataFiles) {
@@ -51,7 +50,7 @@ public class SessionImporter implements ISessionImporter {
 		this.dataSource = source;
 	}
 
-	public void setScope(Set<Module> scope) {
+	public void setScope(Set<URI> scope) {
 		this.scope = scope;
 	}
 

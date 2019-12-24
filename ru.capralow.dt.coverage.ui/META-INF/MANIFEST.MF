@@ -40,4 +40,5 @@ Import-Package: com._1c.g5.v8.dt.bm.index.emf,
  com._1c.g5.wiring.binder,
  com.google.inject,
  org.eclipse.emf.common.notify,
+ org.eclipse.emf.common.util,
  org.eclipse.emf.ecore

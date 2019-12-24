@@ -20,11 +20,10 @@ import java.util.Set;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJavaModel;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
-
-import com._1c.g5.v8.dt.bsl.model.Module;
 
 import ru.capralow.dt.coverage.core.ScopeUtils;
 
@@ -38,9 +37,9 @@ public class EDTLauncher extends CoverageLauncher {
 	/*
 	 * The overall scope are all plug-in projects in the workspace.
 	 */
-	public Set<Module> getOverallScope(ILaunchConfiguration configuration) throws CoreException {
+	public Set<URI> getOverallScope(ILaunchConfiguration configuration) throws CoreException {
 		final IJavaModel model = JavaCore.create(ResourcesPlugin.getWorkspace().getRoot());
-		final Set<Module> result = new HashSet<>();
+		final Set<URI> result = new HashSet<>();
 		for (final IJavaProject project : model.getJavaProjects()) {
 			if (project.getProject().hasNature(EDT_NATURE)) {
 				// result.addAll(Arrays.asList(project.getPackageFragmentRoots()));

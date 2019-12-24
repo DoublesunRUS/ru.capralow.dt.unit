@@ -15,6 +15,7 @@
 package ru.capralow.dt.coverage.internal.core.analysis;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IClassFile;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IJavaElement;
@@ -23,8 +24,6 @@ import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
-
-import com._1c.g5.v8.dt.bsl.model.Module;
 
 import ru.capralow.dt.coverage.internal.core.DebugOptions;
 import ru.capralow.dt.coverage.internal.core.DebugOptions.ITracer;
@@ -37,7 +36,7 @@ public class TypeTraverser {
 
 	private static final ITracer TRACER = DebugOptions.ANALYSISTRACER;
 
-	private final Module root;
+	private final URI root;
 
 	/**
 	 * Creates a traverser for the given package fragment root.
@@ -45,7 +44,7 @@ public class TypeTraverser {
 	 * @param root2
 	 *            package fragment root for traversal
 	 */
-	public TypeTraverser(Module root2) {
+	public TypeTraverser(URI root2) {
 		this.root = root2;
 	}
 
@@ -88,7 +87,7 @@ public class TypeTraverser {
 	 * @return true, if the classpath entry still exists
 	 * @throws JavaModelException
 	 */
-	private boolean isOnClasspath(Module root2) throws JavaModelException {
+	private boolean isOnClasspath(URI root2) throws JavaModelException {
 		return false;
 		// IPath path = root2.getPath();
 		// IJavaProject project = root2.getJavaProject();

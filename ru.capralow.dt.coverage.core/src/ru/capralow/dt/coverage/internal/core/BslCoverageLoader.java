@@ -9,6 +9,8 @@
  * Contributors:
  *    Marc R. Hoffmann - initial API and implementation
  *
+ * Adapted by Alexander Kapralov
+ *
  ******************************************************************************/
 package ru.capralow.dt.coverage.internal.core;
 
@@ -21,6 +23,8 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.osgi.util.NLS;
+
+import com._1c.g5.v8.dt.core.platform.IResourceLookup;
 
 import ru.capralow.dt.coverage.core.CoverageStatus;
 import ru.capralow.dt.coverage.core.ICoverageSession;
@@ -41,7 +45,9 @@ public class BslCoverageLoader {
 
 	private IBslModelCoverage coverage;
 
-	private final List<IBslCoverageListener> listeners = new ArrayList<IBslCoverageListener>();
+	private final List<IBslCoverageListener> listeners = new ArrayList<>();
+
+	private IResourceLookup resourceLookup;
 
 	private ISessionListener sessionListener = new ISessionListener() {
 
@@ -53,7 +59,7 @@ public class BslCoverageLoader {
 			} else {
 				coverage = IBslModelCoverage.LOADING;
 				fireCoverageChanged();
-				new LoadSessionJob(session).schedule();
+				new LoadSessionJob(session, resourceLookup).schedule();
 			}
 		}
 
@@ -71,15 +77,18 @@ public class BslCoverageLoader {
 
 		private final ICoverageSession session;
 
-		public LoadSessionJob(ICoverageSession session) {
+		private IResourceLookup resourceLookup;
+
+		public LoadSessionJob(ICoverageSession session, IResourceLookup resourceLookup) {
 			super(NLS.bind(CoreMessages.AnalyzingCoverageSession_task, session.getDescription()));
 			this.session = session;
+			this.resourceLookup = resourceLookup;
 		}
 
 		protected IStatus run(IProgressMonitor monitor) {
 			final IBslModelCoverage c;
 			try {
-				c = new SessionAnalyzer().processSession(session, monitor);
+				c = new SessionAnalyzer().processSession(session, monitor, resourceLookup);
 			} catch (CoreException e) {
 				return CoverageStatus.SESSION_LOAD_ERROR.getStatus(e);
 			}
@@ -95,8 +104,9 @@ public class BslCoverageLoader {
 
 	}
 
-	public BslCoverageLoader(ISessionManager sessionManager) {
+	public BslCoverageLoader(ISessionManager sessionManager, IResourceLookup resourceLookup) {
 		this.sessionManager = sessionManager;
+		this.resourceLookup = resourceLookup;
 		sessionManager.addSessionListener(sessionListener);
 	}
 

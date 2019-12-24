@@ -18,8 +18,7 @@ import java.util.Set;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-
-import com._1c.g5.v8.dt.bsl.model.Module;
+import org.eclipse.emf.common.util.URI;
 
 /**
  * API for importing sessions. This interface is not intended to be implemented
@@ -50,7 +49,7 @@ public interface ISessionImporter {
 	 * @param scope
 	 *            scope for analysis
 	 */
-	public void setScope(Set<Module> scope);
+	public void setScope(Set<URI> scope);
 
 	/**
 	 * Specifies whether the original file should be copied while importing.

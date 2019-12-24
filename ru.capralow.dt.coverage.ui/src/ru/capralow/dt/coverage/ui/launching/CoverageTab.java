@@ -30,7 +30,6 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 
-import com._1c.g5.v8.dt.bm.index.emf.IBmEmfIndexManager;
 import com._1c.g5.v8.dt.core.platform.IResourceLookup;
 import com._1c.g5.v8.dt.core.platform.IV8ProjectManager;
 
@@ -48,13 +47,10 @@ public class CoverageTab extends AbstractLaunchConfigurationTab {
 
 	private ScopeViewer classesviewer;
 
-	private IBmEmfIndexManager bmEmfIndexManager;
 	private IV8ProjectManager projectManager;
 	private IResourceLookup resourceLookup;
 
-	public CoverageTab(IBmEmfIndexManager bmEmfIndexManager, IV8ProjectManager projectManager,
-			IResourceLookup resourceLookup) {
-		this.bmEmfIndexManager = bmEmfIndexManager;
+	public CoverageTab(IV8ProjectManager projectManager, IResourceLookup resourceLookup) {
 		this.projectManager = projectManager;
 		this.resourceLookup = resourceLookup;
 	}
@@ -116,8 +112,7 @@ public class CoverageTab extends AbstractLaunchConfigurationTab {
 	public void initializeFrom(ILaunchConfiguration configuration) {
 		try {
 			classesviewer.setInput(ScopeUtils.getOverallScope(configuration));
-			classesviewer
-					.setSelectedScope(ScopeUtils.getConfiguredScope(configuration, bmEmfIndexManager, projectManager));
+			classesviewer.setSelectedScope(ScopeUtils.getConfiguredScope(configuration));
 		} catch (CoreException e) {
 			CoverageUIPlugin.log(e);
 		}

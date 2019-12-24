@@ -27,8 +27,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
-
-import com._1c.g5.v8.dt.bsl.model.Module;
+import org.eclipse.emf.common.util.URI;
 
 import ru.capralow.dt.coverage.core.ICoverageSession;
 import ru.capralow.dt.coverage.core.IExecutionDataSource;
@@ -168,7 +167,7 @@ public class SessionManager implements ISessionManager {
 		monitor.beginTask(CoreMessages.MergingCoverageSessions_task, sessions.size());
 
 		// Merge all sessions
-		final Set<Module> scope = new HashSet<>();
+		final Set<URI> scope = new HashSet<>();
 		final Set<ILaunchConfiguration> launches = new HashSet<ILaunchConfiguration>();
 		final ProfilingResultsDataSource memory = new ProfilingResultsDataSource();
 		for (ICoverageSession session : sessions) {

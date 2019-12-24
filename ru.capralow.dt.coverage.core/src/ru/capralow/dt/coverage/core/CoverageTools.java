@@ -20,6 +20,8 @@ import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.jacoco.core.analysis.ICoverageNode;
 
+import com._1c.g5.v8.dt.core.platform.IResourceLookup;
+
 import ru.capralow.dt.coverage.core.analysis.IBslCoverageListener;
 import ru.capralow.dt.coverage.core.analysis.IBslModelCoverage;
 import ru.capralow.dt.coverage.core.launching.ICoverageLaunch;
@@ -75,8 +77,8 @@ public final class CoverageTools {
 		CoverageCorePlugin.getInstance().getBslCoverageLoader().removeJavaCoverageListener(l);
 	}
 
-	public static ISessionExporter getExporter(ICoverageSession session) {
-		return new SessionExporter(session);
+	public static ISessionExporter getExporter(ICoverageSession session, IResourceLookup resourceLookup) {
+		return new SessionExporter(session, resourceLookup);
 	}
 
 	public static ISessionImporter getImporter() {

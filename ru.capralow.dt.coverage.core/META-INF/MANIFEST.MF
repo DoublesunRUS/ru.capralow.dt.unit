@@ -24,6 +24,7 @@ Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: dt.coverage.core
 Import-Package: com._1c.g5.v8.bm.integration,
  com._1c.g5.v8.dt.bm.index.emf,
+ com._1c.g5.v8.dt.bm.xtext,
  com._1c.g5.v8.dt.bsl.model,
  com._1c.g5.v8.dt.core.platform,
  com._1c.g5.v8.dt.debug.core,
@@ -35,5 +36,8 @@ Import-Package: com._1c.g5.v8.bm.integration,
  com.google.inject,
  org.eclipse.emf.common.util,
  org.eclipse.emf.ecore,
+ org.eclipse.emf.ecore.resource,
+ org.eclipse.emf.ecore.util,
  org.eclipse.xtext.naming,
- org.eclipse.xtext.resource
+ org.eclipse.xtext.resource,
+ org.eclipse.xtext.ui.resource

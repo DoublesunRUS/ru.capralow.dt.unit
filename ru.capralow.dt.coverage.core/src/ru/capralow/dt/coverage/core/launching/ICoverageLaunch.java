@@ -18,9 +18,8 @@ import java.util.Set;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunch;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
-
-import com._1c.g5.v8.dt.bsl.model.Module;
 
 /**
  * Extension of the {@link ILaunch} interface to keep specific information for
@@ -34,7 +33,7 @@ public interface ICoverageLaunch extends ILaunch {
 	 *
 	 * @return package fragment roots for this launch
 	 */
-	public Set<Module> getScope();
+	public Set<URI> getScope();
 
 	/**
 	 * Requests a new for this launch resulting in a new coverage session.

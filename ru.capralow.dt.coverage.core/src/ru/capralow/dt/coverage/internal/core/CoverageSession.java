@@ -14,7 +14,6 @@
  ******************************************************************************/
 package ru.capralow.dt.coverage.internal.core;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -22,10 +21,9 @@ import java.util.Set;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.PlatformObject;
 import org.eclipse.debug.core.ILaunchConfiguration;
+import org.eclipse.emf.common.util.URI;
 import org.jacoco.core.data.IExecutionDataVisitor;
 import org.jacoco.core.data.ISessionInfoVisitor;
-
-import com._1c.g5.v8.dt.bsl.model.Module;
 
 import ru.capralow.dt.coverage.core.ICoverageSession;
 import ru.capralow.dt.coverage.core.IExecutionDataSource;
@@ -36,16 +34,16 @@ import ru.capralow.dt.coverage.core.IExecutionDataSource;
 public class CoverageSession extends PlatformObject implements ICoverageSession {
 
 	private final String description;
-	private final Set<Module> scope;
+	private final Set<URI> scope;
 	private final IExecutionDataSource executionDataSource;
-	private final ILaunchConfiguration launchconfiguration;
+	private final ILaunchConfiguration launchConfiguration;
 
-	public CoverageSession(String description, Collection<Module> scope, IExecutionDataSource executionDataSource,
-			ILaunchConfiguration launchconfiguration) {
+	public CoverageSession(String description, Set<URI> set, IExecutionDataSource executionDataSource,
+			ILaunchConfiguration launchConfiguration) {
 		this.description = description;
-		this.scope = Collections.unmodifiableSet(new HashSet<Module>(scope));
+		this.scope = Collections.unmodifiableSet(new HashSet<URI>(set));
 		this.executionDataSource = executionDataSource;
-		this.launchconfiguration = launchconfiguration;
+		this.launchConfiguration = launchConfiguration;
 	}
 
 	// ICoverageSession implementation
@@ -54,12 +52,12 @@ public class CoverageSession extends PlatformObject implements ICoverageSession 
 		return description;
 	}
 
-	public Set<Module> getScope() {
+	public Set<URI> getScope() {
 		return scope;
 	}
 
 	public ILaunchConfiguration getLaunchConfiguration() {
-		return launchconfiguration;
+		return launchConfiguration;
 	}
 
 	public void accept(IExecutionDataVisitor executionDataVisitor, ISessionInfoVisitor sessionInfoVisitor)

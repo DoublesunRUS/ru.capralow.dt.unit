@@ -19,9 +19,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubProgressMonitor;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IClassFile;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IType;
@@ -37,7 +40,7 @@ import org.jacoco.core.data.SessionInfo;
 import org.jacoco.core.data.SessionInfoStore;
 import org.jacoco.core.internal.analysis.BundleCoverageImpl;
 
-import com._1c.g5.v8.dt.bsl.model.Module;
+import com._1c.g5.v8.dt.core.platform.IResourceLookup;
 
 import ru.capralow.dt.coverage.core.ICoverageSession;
 import ru.capralow.dt.coverage.core.analysis.IBslModelCoverage;
@@ -52,27 +55,33 @@ public class SessionAnalyzer {
 
 	private static final ITracer PERFORMANCE = DebugOptions.PERFORMANCETRACER;
 
-	private BslModelCoverage modelcoverage;
+	private BslModelCoverage modelCoverage;
 
-	private ExecutionDataStore executiondatastore;
+	private ExecutionDataStore executionDataStore;
 
-	private SessionInfoStore sessioninfostore;
+	private SessionInfoStore sessionInfoStore;
 
-	public IBslModelCoverage processSession(ICoverageSession session, IProgressMonitor monitor) throws CoreException {
+	private IResourceLookup resourceLookup;
+
+	public IBslModelCoverage processSession(ICoverageSession session, IProgressMonitor monitor,
+			IResourceLookup resourceLookup) throws CoreException {
 		PERFORMANCE.startTimer();
 		PERFORMANCE.startMemoryUsage();
-		modelcoverage = new BslModelCoverage();
-		final Collection<Module> roots = session.getScope();
+
+		this.resourceLookup = resourceLookup;
+
+		modelCoverage = new BslModelCoverage();
+		final Collection<URI> roots = session.getScope();
 		monitor.beginTask(NLS.bind(CoreMessages.AnalyzingCoverageSession_task, session.getDescription()),
 				1 + roots.size());
-		executiondatastore = new ExecutionDataStore();
-		sessioninfostore = new SessionInfoStore();
-		session.accept(executiondatastore, sessioninfostore);
+		executionDataStore = new ExecutionDataStore();
+		sessionInfoStore = new SessionInfoStore();
+		session.accept(executionDataStore, sessionInfoStore);
 		monitor.worked(1);
 
-		final PackageFragementRootAnalyzer analyzer = new PackageFragementRootAnalyzer(executiondatastore);
+		final PackageFragementRootAnalyzer analyzer = new PackageFragementRootAnalyzer(executionDataStore);
 
-		for (final Module root : roots) {
+		for (final URI root : roots) {
 			if (monitor.isCanceled()) {
 				break;
 			}
@@ -81,41 +90,38 @@ public class SessionAnalyzer {
 		monitor.done();
 		PERFORMANCE.stopTimer("loading " + session.getDescription()); //$NON-NLS-1$
 		PERFORMANCE.stopMemoryUsage("loading " + session.getDescription()); //$NON-NLS-1$
-		return modelcoverage;
+		return modelCoverage;
 	}
 
 	public List<SessionInfo> getSessionInfos() {
-		return sessioninfostore.getInfos();
+		return sessionInfoStore.getInfos();
 	}
 
 	public Collection<ExecutionData> getExecutionData() {
-		return executiondatastore.getContents();
+		return executionDataStore.getContents();
 	}
 
-	private void processPackageFragmentRoot(Module root, PackageFragementRootAnalyzer analyzer,
-			IProgressMonitor monitor) throws CoreException {
+	private void processPackageFragmentRoot(URI root, PackageFragementRootAnalyzer analyzer, IProgressMonitor monitor)
+			throws CoreException {
 		final TypeVisitor visitor = new TypeVisitor(analyzer.analyze(root));
 		new TypeTraverser(root).process(visitor, monitor);
 
 		final IBundleCoverage bundle = new BundleCoverageImpl(getName(root),
 				visitor.getClasses(),
 				visitor.getSources());
-		modelcoverage.putFragmentRoot(root, bundle);
+		modelCoverage.putFragmentRoot(root, bundle);
 		putPackages(bundle.getPackages(), root);
 	}
 
 	// package private for testing
-	String getName(Module root) {
-		return null;
-		// IPath path = root.getPath();
-		// if (!root.isExternal() && path.segmentCount() > 1) {
-		// return path.removeFirstSegments(1).toString();
-		// } else {
-		// return path.lastSegment();
-		// }
+	String getName(URI root) {
+		IFile moduleFile = resourceLookup.getPlatformResource(root);
+		IPath path = moduleFile.getFullPath();
+
+		return path.toString();
 	}
 
-	private void putPackages(Collection<IPackageCoverage> packages, Module root) {
+	private void putPackages(Collection<IPackageCoverage> packages, URI root) {
 		for (IPackageCoverage c : packages) {
 			final String name = c.getName().replace('/', '.');
 			// final IPackageFragment fragment = root.getPackageFragment(name);
@@ -148,7 +154,7 @@ public class SessionAnalyzer {
 			final IClassCoverage coverage = nodes.getClassCoverage(vmname);
 			if (coverage != null) {
 				classes.add(coverage);
-				modelcoverage.putType(type, coverage);
+				modelCoverage.putType(type, coverage);
 			}
 		}
 
@@ -156,7 +162,7 @@ public class SessionAnalyzer {
 			final String vmname = classfile.getType().getFullyQualifiedName().replace('.', '/');
 			final IClassCoverage coverage = nodes.getClassCoverage(vmname);
 			if (coverage != null) {
-				modelcoverage.putClassFile(classfile, coverage);
+				modelCoverage.putClassFile(classfile, coverage);
 				// Add source file coverage manually in case of binary roots
 				// as we will not see compilation units:
 				final ISourceFileCoverage source = nodes.getSourceFileCoverage(coverage.getPackageName(),
@@ -172,7 +178,7 @@ public class SessionAnalyzer {
 			final ISourceFileCoverage coverage = nodes.getSourceFileCoverage(vmpackagename, unit.getElementName());
 			if (coverage != null) {
 				sources.add(coverage);
-				modelcoverage.putCompilationUnit(unit, coverage);
+				modelCoverage.putCompilationUnit(unit, coverage);
 			}
 		}
 

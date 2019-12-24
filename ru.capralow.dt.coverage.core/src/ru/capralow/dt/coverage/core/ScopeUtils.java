@@ -21,7 +21,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
@@ -32,12 +31,7 @@ import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 
-import com._1c.g5.v8.dt.bm.index.emf.IBmEmfIndexManager;
-import com._1c.g5.v8.dt.bm.index.emf.IBmEmfIndexProvider;
 import com._1c.g5.v8.dt.bsl.model.Module;
-import com._1c.g5.v8.dt.core.platform.IV8ProjectManager;
-import com._1c.g5.v8.dt.metadata.mdclass.CommonModule;
-import com._1c.g5.v8.dt.metadata.mdclass.MdObject;
 
 import ru.capralow.dt.coverage.core.launching.ICoverageLaunchConfigurationConstants;
 import ru.capralow.dt.coverage.core.launching.ICoverageLauncher;
@@ -57,24 +51,13 @@ public final class ScopeUtils {
 	 *
 	 * @param ids
 	 *            List of {@link String} ids
-	 * @return scope as {@link IPackageFragmentRoot} collection
+	 * @return scope as {@link URI} collection
 	 */
-	public static Set<Module> readScope(Collection<?> ids, IBmEmfIndexManager bmEmfIndexManager) {
-		final Set<Module> scope = new HashSet<>();
+	public static Set<URI> readScope(Collection<?> ids) {
+		final Set<URI> scope = new HashSet<>();
 		for (final Object handle : ids) {
 			URI moduleURI = URI.createURI((String) handle);
-
-			IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(moduleURI.segment(1));
-
-			IBmEmfIndexProvider bmEmfIndexProvider = bmEmfIndexManager.getEmfIndexProvider(project);
-
-			MdObject object = MdUtils.getConfigurationObject(
-					moduleURI.segment(3).concat(".").concat(moduleURI.segment(4)), //$NON-NLS-1$
-					bmEmfIndexProvider);
-
-			if (object instanceof CommonModule) {
-				scope.add(((CommonModule) object).getModule());
-			}
+			scope.add(moduleURI);
 		}
 		return scope;
 	}
@@ -86,10 +69,10 @@ public final class ScopeUtils {
 	 *            Scope as {@link Module} collection
 	 * @return List of ids
 	 */
-	public static List<String> writeScope(Set<Module> scope) {
+	public static List<String> writeScope(Set<URI> scope) {
 		final List<String> ids = new ArrayList<>();
-		for (final Module root : scope) {
-			ids.add(root.getUniqueName());
+		for (final URI root : scope) {
+			ids.add(root.toPlatformString(true));
 		}
 		return ids;
 	}
@@ -103,7 +86,7 @@ public final class ScopeUtils {
 	 *
 	 * @return overall scope
 	 */
-	public static Set<Module> getOverallScope(ILaunchConfiguration configuration) throws CoreException {
+	public static Set<URI> getOverallScope(ILaunchConfiguration configuration) throws CoreException {
 		ICoverageLauncher launcher = (ICoverageLauncher) configuration.getType()
 				.getDelegates(Collections.singleton(CoverageTools.LAUNCH_MODE))[0].getDelegate();
 		return launcher.getOverallScope(configuration);
@@ -119,9 +102,8 @@ public final class ScopeUtils {
 	 *
 	 * @return configured scope
 	 */
-	public static Set<Module> getConfiguredScope(final ILaunchConfiguration configuration,
-			IBmEmfIndexManager bmEmfIndexManager, IV8ProjectManager projectManager) throws CoreException {
-		final Set<Module> all = getOverallScope(configuration);
+	public static Set<URI> getConfiguredScope(final ILaunchConfiguration configuration) throws CoreException {
+		final Set<URI> all = getOverallScope(configuration);
 		@SuppressWarnings("rawtypes")
 		final List<?> selection = configuration.getAttribute(ICoverageLaunchConfigurationConstants.ATTR_SCOPE_IDS,
 				(List) null);
@@ -129,7 +111,7 @@ public final class ScopeUtils {
 			final DefaultScopeFilter filter = new DefaultScopeFilter(CoverageCorePlugin.getInstance().getPreferences());
 			return filter.filter(all, configuration);
 		} else {
-			all.retainAll(readScope(selection, bmEmfIndexManager));
+			all.retainAll(readScope(selection));
 			return all;
 		}
 	}
@@ -139,8 +121,8 @@ public final class ScopeUtils {
 	 *
 	 * @return all package fragment roots
 	 */
-	public static Set<Module> getWorkspaceScope() throws JavaModelException {
-		final Set<Module> scope = new HashSet<>();
+	public static Set<URI> getWorkspaceScope() throws JavaModelException {
+		final Set<URI> scope = new HashSet<>();
 		final IJavaModel model = JavaCore.create(ResourcesPlugin.getWorkspace().getRoot());
 		for (IJavaProject p : model.getJavaProjects()) {
 			// scope.addAll(Arrays.asList(p.getPackageFragmentRoots()));
@@ -155,9 +137,9 @@ public final class ScopeUtils {
 	 *            set to filter
 	 * @return filtered set without JRE runtime entries
 	 */
-	public static Set<Module> filterUnsupportedEntries(Collection<Module> scope) throws JavaModelException {
-		final Set<Module> filtered = new HashSet<>();
-		for (final Module root : scope) {
+	public static Set<URI> filterUnsupportedEntries(Collection<URI> scope) throws JavaModelException {
+		final Set<URI> filtered = new HashSet<>();
+		for (final URI root : scope) {
 			// final IClasspathEntry entry = root.getRawClasspathEntry();
 			// switch (entry.getEntryKind()) {
 			// case IClasspathEntry.CPE_SOURCE:

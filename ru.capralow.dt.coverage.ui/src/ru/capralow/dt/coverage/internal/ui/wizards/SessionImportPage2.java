@@ -16,6 +16,7 @@ import java.text.MessageFormat;
 import java.util.Date;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -34,7 +35,6 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
 import com._1c.g5.v8.dt.bm.index.emf.IBmEmfIndexManager;
-import com._1c.g5.v8.dt.bsl.model.Module;
 import com._1c.g5.v8.dt.core.platform.IResourceLookup;
 import com._1c.g5.v8.dt.core.platform.IV8ProjectManager;
 import com.google.inject.Inject;
@@ -204,7 +204,7 @@ public class SessionImportPage2 extends WizardPage {
 		return descriptiontext.getText().trim();
 	}
 
-	public Set<Module> getScope() {
+	public Set<URI> getScope() {
 		return scopeviewer.getSelectedScope();
 	}
 

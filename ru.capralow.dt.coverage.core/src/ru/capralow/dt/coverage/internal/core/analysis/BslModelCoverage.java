@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IClassFile;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IJavaElement;
@@ -33,8 +34,6 @@ import org.jacoco.core.analysis.IBundleCoverage;
 import org.jacoco.core.analysis.IClassCoverage;
 import org.jacoco.core.analysis.ICoverageNode;
 import org.jacoco.core.analysis.IMethodCoverage;
-
-import com._1c.g5.v8.dt.bsl.model.Module;
 
 import ru.capralow.dt.coverage.core.analysis.IBslModelCoverage;
 import ru.capralow.dt.coverage.internal.core.DebugOptions;
@@ -67,7 +66,7 @@ public class BslModelCoverage extends CoverageNodeImpl implements IBslModelCover
 		super(ElementType.GROUP, "JavaModel"); //$NON-NLS-1$
 	}
 
-	public void putFragmentRoot(Module root, IBundleCoverage coverage) {
+	public void putFragmentRoot(URI root, IBundleCoverage coverage) {
 		// coveragemap.put(root, coverage);
 		// fragmentroots.add(root);
 		// getProjectCoverage(root.getJavaProject()).increment(coverage);

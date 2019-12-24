@@ -19,8 +19,8 @@ import java.util.Set;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.Launch;
+import org.eclipse.emf.common.util.URI;
 
-import com._1c.g5.v8.dt.bsl.model.Module;
 import com._1c.g5.v8.dt.profiling.core.IProfilingService;
 
 import ru.capralow.dt.coverage.core.CoverageTools;
@@ -32,13 +32,12 @@ import ru.capralow.dt.coverage.internal.core.CoverageCorePlugin;
  */
 public class CoverageLaunch extends Launch implements ICoverageLaunch {
 
-	private final Set<Module> scope;
+	private final Set<URI> scope;
 	private final AgentServer agentServer;
 
-	public CoverageLaunch(ILaunchConfiguration launchConfiguration, Set<Module> scope,
-			IProfilingService profilingService) {
+	public CoverageLaunch(ILaunchConfiguration launchConfiguration, Set<URI> set, IProfilingService profilingService) {
 		super(launchConfiguration, CoverageTools.LAUNCH_MODE, null);
-		this.scope = scope;
+		this.scope = set;
 		final CoverageCorePlugin plugin = CoverageCorePlugin.getInstance();
 		this.agentServer = new AgentServer(this,
 				plugin.getSessionManager(),
@@ -53,7 +52,7 @@ public class CoverageLaunch extends Launch implements ICoverageLaunch {
 
 	// ICoverageLaunch interface
 
-	public Set<Module> getScope() {
+	public Set<URI> getScope() {
 		return scope;
 	}
 

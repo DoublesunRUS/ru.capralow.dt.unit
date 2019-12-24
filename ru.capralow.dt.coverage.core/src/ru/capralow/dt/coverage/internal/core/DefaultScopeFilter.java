@@ -19,8 +19,7 @@ import java.util.Set;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
-
-import com._1c.g5.v8.dt.bsl.model.Module;
+import org.eclipse.emf.common.util.URI;
 
 import ru.capralow.dt.coverage.core.ICorePreferences;
 
@@ -52,8 +51,8 @@ public class DefaultScopeFilter {
 	 * @throws CoreException
 	 *             may occur when accessing the Java model
 	 */
-	public Set<Module> filter(final Set<Module> all, final ILaunchConfiguration configuration) throws CoreException {
-		final Set<Module> filtered = new HashSet<>(all);
+	public Set<URI> filter(final Set<URI> all, final ILaunchConfiguration configuration) throws CoreException {
+		final Set<URI> filtered = new HashSet<>(all);
 		// if (preferences.getDefaultScopeSameProjectOnly()) {
 		// sameProjectOnly(filtered, configuration);
 		// }

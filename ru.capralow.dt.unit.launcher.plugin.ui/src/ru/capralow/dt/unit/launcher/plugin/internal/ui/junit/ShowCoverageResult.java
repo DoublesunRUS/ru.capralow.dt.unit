@@ -12,6 +12,7 @@ import java.util.Set;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.IDebugEventSetListener;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.swt.widgets.Display;
@@ -27,7 +28,6 @@ import org.jacoco.core.runtime.IRuntime;
 import org.jacoco.core.runtime.LoggerRuntime;
 import org.jacoco.core.runtime.RuntimeData;
 
-import com._1c.g5.v8.dt.bsl.model.Module;
 import com._1c.g5.v8.dt.debug.model.base.data.BSLModuleType;
 import com._1c.g5.v8.dt.profiling.core.ILineProfilingResult;
 import com._1c.g5.v8.dt.profiling.core.IProfileTarget;
@@ -72,7 +72,7 @@ public class ShowCoverageResult implements IDebugEventSetListener {
 	private static PrintStream out;
 
 	public static void showCoverageResult(List<IProfilingResult> profilingResults) throws Exception {
-		Set<Module> scope = new HashSet<>();
+		Set<URI> scope = new HashSet<>();
 
 		for (IProfilingResult profilingResult : profilingResults) {
 			for (ILineProfilingResult result : profilingResult.getProfilingResults()) {
