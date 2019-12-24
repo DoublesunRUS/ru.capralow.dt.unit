@@ -79,7 +79,7 @@ public class CoverageCorePlugin extends Plugin {
 			String msg = MessageFormat.format(CoreMessages.Failed_to_create_injector_for_0,
 					getInstance().getBundle().getSymbolicName());
 			log(createErrorStatus(msg, e));
-			return null;
+			return injector;
 
 		}
 	}
@@ -161,7 +161,7 @@ public class CoverageCorePlugin extends Plugin {
 		executionDataFiles.deleteTemporaryFiles();
 		sessionManager = new SessionManager(executionDataFiles);
 
-		IResourceLookup resourceLookup = getInjector().getBinding(IResourceLookup.class).getProvider().get();
+		IResourceLookup resourceLookup = getInjector().getInstance(IResourceLookup.class);
 		coverageLoader = new BslCoverageLoader(sessionManager, resourceLookup);
 
 		DebugPlugin.getDefault().getLaunchManager().addLaunchListener(launchListener);
