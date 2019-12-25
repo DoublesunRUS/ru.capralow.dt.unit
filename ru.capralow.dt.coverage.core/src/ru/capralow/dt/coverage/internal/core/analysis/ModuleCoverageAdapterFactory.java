@@ -9,20 +9,23 @@
  * Contributors:
  *    Marc R. Hoffmann - initial API and implementation
  *
+ * Adapted by Alexander Kapralov
+ *
  ******************************************************************************/
 package ru.capralow.dt.coverage.internal.core.analysis;
 
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IAdapterFactory;
-import org.eclipse.jdt.core.IJavaElement;
 import org.jacoco.core.analysis.ICoverageNode;
 import org.jacoco.core.analysis.ISourceNode;
+
+import com._1c.g5.v8.dt.bsl.model.Module;
 
 import ru.capralow.dt.coverage.core.CoverageTools;
 import ru.capralow.dt.coverage.core.analysis.IBslModelCoverage;
 
 /**
- * This factory adapts IResource and IJavaElement objects to the corresponding
+ * This factory adapts IResource and Module objects to the corresponding
  * coverage information of the current session. The factory is hooked into the
  * workbench through the extension point
  * <code>org.eclipse.core.runtime.adapters</code>.
@@ -30,9 +33,9 @@ import ru.capralow.dt.coverage.core.analysis.IBslModelCoverage;
 public class ModuleCoverageAdapterFactory implements IAdapterFactory {
 
 	public Object getAdapter(Object object, @SuppressWarnings("rawtypes") Class adapterType) {
-		// if the object is a IResource find the corresponding IJavaElement
+		// if the object is a IResource find the corresponding Module
 		if (object instanceof IResource) {
-			object = ((IResource) object).getAdapter(IJavaElement.class);
+			object = ((IResource) object).getAdapter(Module.class);
 			if (object == null) {
 				return null;
 			}
@@ -42,7 +45,7 @@ public class ModuleCoverageAdapterFactory implements IAdapterFactory {
 		if (mc == null) {
 			return null;
 		} else {
-			ICoverageNode coverage = mc.getCoverageFor((IJavaElement) object);
+			ICoverageNode coverage = mc.getCoverageFor((Module) object);
 			if (adapterType.isInstance(coverage)) {
 				return coverage;
 			} else {

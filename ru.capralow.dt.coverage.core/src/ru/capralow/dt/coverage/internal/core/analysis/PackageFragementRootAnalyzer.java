@@ -17,15 +17,8 @@ package ru.capralow.dt.coverage.internal.core.analysis;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.resource.XtextResource;
 import org.jacoco.core.analysis.Analyzer;
 import org.jacoco.core.analysis.CoverageBuilder;
 import org.jacoco.core.data.ExecutionDataStore;
@@ -61,21 +54,8 @@ final class PackageFragementRootAnalyzer {
 	}
 
 	public AnalyzedNodes analyze(final URI root) throws CoreException {
-		IResource location = null;
-
 		try {
-			location = getClassfilesLocation(root);
-
-			if (location == null) {
-				IFile moduleFile = resourceLookup.getPlatformResource(root);
-				IPath path = moduleFile.getFullPath();
-
-				TRACER.trace("No class files found for package fragment root {0}", //$NON-NLS-1$
-						path);
-				return AnalyzedNodes.EMPTY;
-			}
-
-			AnalyzedNodes nodes = cache.get(location);
+			AnalyzedNodes nodes = cache.get(root);
 			if (nodes != null) {
 				return nodes;
 			}
@@ -84,28 +64,16 @@ final class PackageFragementRootAnalyzer {
 
 			final Analyzer analyzer = new Analyzer(executionData, builder);
 
-			new ResourceTreeWalker(analyzer).walk(location);
-
 			nodes = new AnalyzedNodes(builder.getClasses(), builder.getSourceFiles());
 
-			cache.put(location, nodes);
+			cache.put(root, nodes);
 
 			return nodes;
 
 		} catch (Exception e) {
 			throw new CoreException(
-					CoverageStatus.BUNDLE_ANALYSIS_ERROR.getStatus(root.toPlatformString(true), location, e));
+					CoverageStatus.BUNDLE_ANALYSIS_ERROR.getStatus(root.toPlatformString(true), root, e));
 
 		}
 	}
-
-	private IResource getClassfilesLocation(URI root) {
-		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(root.segment(1));
-
-		ResourceSet resourceSet = resourceSetProvider.get(project);
-		XtextResource bslModuleResource = (XtextResource) resourceSet.getResource(root, true);
-
-		return (IResource) bslModuleResource;
-	}
-
 }

@@ -24,16 +24,10 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IClassFile;
 import org.eclipse.jdt.core.ICompilationUnit;
-import org.eclipse.jdt.core.IJavaElement;
-import org.eclipse.jdt.core.IMethod;
-import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.IType;
-import org.eclipse.jdt.core.JavaModelException;
 import org.jacoco.core.analysis.CoverageNodeImpl;
 import org.jacoco.core.analysis.IBundleCoverage;
-import org.jacoco.core.analysis.IClassCoverage;
 import org.jacoco.core.analysis.ICoverageNode;
-import org.jacoco.core.analysis.IMethodCoverage;
 
 import com._1c.g5.v8.dt.bm.index.emf.IBmEmfIndexManager;
 import com._1c.g5.v8.dt.bm.index.emf.IBmEmfIndexProvider;
@@ -65,7 +59,7 @@ public class BslModelCoverage extends CoverageNodeImpl implements IBslModelCover
 	private final List<Module> fragmentRoots = new ArrayList<>();
 
 	/** List of all IPackageFragment objects with coverage information */
-	private final List<URI> fragments = new ArrayList<>();
+	private final List<Module> fragments = new ArrayList<>();
 
 	/** List of all IType objects with coverage information */
 	private final List<URI> types = new ArrayList<>();
@@ -102,8 +96,15 @@ public class BslModelCoverage extends CoverageNodeImpl implements IBslModelCover
 	}
 
 	public void putFragment(URI element, ICoverageNode coverage) {
-		// coverageMap.put(element, coverage);
-		// fragments.add(element);
+		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(element.segment(1));
+		IBmEmfIndexProvider bmEmfIndexProvider = bmEmfIndexManager.getEmfIndexProvider(project);
+
+		Module module = ((CommonModule) MdUtils
+				.getConfigurationObject(element.segment(3).concat(".").concat(element.segment(4)), bmEmfIndexProvider))
+						.getModule();
+
+		coverageMap.put(module, coverage);
+		fragments.add(module);
 	}
 
 	public void putType(URI element, ICoverageNode coverage) {
@@ -131,8 +132,8 @@ public class BslModelCoverage extends CoverageNodeImpl implements IBslModelCover
 		return fragmentRoots.toArray(arr);
 	}
 
-	public IPackageFragment[] getPackageFragments() {
-		IPackageFragment[] arr = new IPackageFragment[fragments.size()];
+	public Module[] getPackageFragments() {
+		Module[] arr = new Module[fragments.size()];
 		return fragments.toArray(arr);
 	}
 
@@ -141,38 +142,40 @@ public class BslModelCoverage extends CoverageNodeImpl implements IBslModelCover
 		return types.toArray(arr);
 	}
 
-	public ICoverageNode getCoverageFor(IJavaElement element) {
+	public ICoverageNode getCoverageFor(Module element) {
 		final ICoverageNode coverage = coverageMap.get(element);
-		if (coverage != null) {
+		if (coverage != null)
 			return coverage;
-		}
-		if (IJavaElement.METHOD == element.getElementType()) {
-			resolveMethods((IType) element.getParent());
-			return coverageMap.get(element);
-		}
+
+		// if (IJavaElement.METHOD == element.getElementType()) {
+		// resolveMethods((IType) element.getParent());
+		// return coverageMap.get(element);
+		// }
 		return null;
 	}
 
 	private void resolveMethods(final IType type) {
-		IClassCoverage classCoverage = (IClassCoverage) getCoverageFor(type);
-		if (classCoverage == null) {
-			return;
-		}
-		try {
-			MethodLocator locator = new MethodLocator(type);
-			for (IMethodCoverage methodCoverage : classCoverage.getMethods()) {
-				final IMethod method = locator.findMethod(methodCoverage.getName(), methodCoverage.getDesc());
-				if (method != null) {
-					// coveragemap.put(method, methodCoverage);
-				} else {
-					TRACER.trace("Method not found in Java model: {0}.{1}{2}",
-							type.getFullyQualifiedName(),
-							methodCoverage.getName(),
-							methodCoverage.getDesc());
-				}
-			}
-		} catch (JavaModelException e) {
-			TRACER.trace("Error while creating method locator for {0}: {1}", type.getFullyQualifiedName(), e);
-		}
+		// IClassCoverage classCoverage = (IClassCoverage) getCoverageFor(type);
+		// if (classCoverage == null) {
+		// return;
+		// }
+		// try {
+		// MethodLocator locator = new MethodLocator(type);
+		// for (IMethodCoverage methodCoverage : classCoverage.getMethods()) {
+		// final IMethod method = locator.findMethod(methodCoverage.getName(),
+		// methodCoverage.getDesc());
+		// if (method != null) {
+		// // coveragemap.put(method, methodCoverage);
+		// } else {
+		// TRACER.trace("Method not found in Java model: {0}.{1}{2}",
+		// type.getFullyQualifiedName(),
+		// methodCoverage.getName(),
+		// methodCoverage.getDesc());
+		// }
+		// }
+		// } catch (JavaModelException e) {
+		// TRACER.trace("Error while creating method locator for {0}: {1}",
+		// type.getFullyQualifiedName(), e);
+		// }
 	}
 }

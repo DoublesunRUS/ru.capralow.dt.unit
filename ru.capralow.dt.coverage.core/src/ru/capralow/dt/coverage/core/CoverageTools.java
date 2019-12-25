@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.core.runtime.IAdapterManager;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.jacoco.core.analysis.ICoverageNode;
@@ -60,8 +62,11 @@ public final class CoverageTools {
 	public static ICoverageNode getCoverageInfo(Object object) {
 		if (object instanceof IAdaptable) {
 			return ((IAdaptable) object).getAdapter(ICoverageNode.class);
+
 		} else {
-			return null;
+			IAdapterManager manager = Platform.getAdapterManager();
+			return manager.getAdapter(object, ICoverageNode.class);
+
 		}
 	}
 

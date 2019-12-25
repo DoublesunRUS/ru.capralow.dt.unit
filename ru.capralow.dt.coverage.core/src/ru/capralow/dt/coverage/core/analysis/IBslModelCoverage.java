@@ -14,8 +14,6 @@
  ******************************************************************************/
 package ru.capralow.dt.coverage.core.analysis;
 
-import org.eclipse.jdt.core.IJavaElement;
-import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.IType;
 import org.jacoco.core.analysis.ICounter;
 import org.jacoco.core.analysis.ICoverageNode;
@@ -85,15 +83,15 @@ public interface IBslModelCoverage extends ICoverageNode {
 			return new Module[0];
 		}
 
-		public IPackageFragment[] getPackageFragments() {
-			return new IPackageFragment[0];
+		public Module[] getPackageFragments() {
+			return new Module[0];
 		}
 
 		public IType[] getTypes() {
 			return new IType[0];
 		}
 
-		public ICoverageNode getCoverageFor(IJavaElement element) {
+		public ICoverageNode getCoverageFor(Module element) {
 			return null;
 		}
 
@@ -122,7 +120,7 @@ public interface IBslModelCoverage extends ICoverageNode {
 	 *
 	 * @return list of package fragments
 	 */
-	public IPackageFragment[] getPackageFragments();
+	public Module[] getPackageFragments();
 
 	/**
 	 * Returns all Java types where coverage information is available for.
@@ -139,6 +137,6 @@ public interface IBslModelCoverage extends ICoverageNode {
 	 *            Java element to look for coverage information
 	 * @return associated coverage information of null
 	 */
-	public ICoverageNode getCoverageFor(IJavaElement element);
+	public ICoverageNode getCoverageFor(Module element);
 
 }

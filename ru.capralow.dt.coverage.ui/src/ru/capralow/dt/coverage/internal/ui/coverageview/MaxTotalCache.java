@@ -9,6 +9,8 @@
  * Contributors:
  *    Marc R. Hoffmann - initial API and implementation
  *
+ * Adapted by Alexander Kapralov
+ *
  ******************************************************************************/
 package ru.capralow.dt.coverage.internal.ui.coverageview;
 
@@ -20,6 +22,8 @@ import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.ui.model.WorkbenchContentProvider;
 import org.jacoco.core.analysis.ICoverageNode;
 
+import com._1c.g5.v8.dt.bsl.model.Module;
+
 import ru.capralow.dt.coverage.core.CoverageTools;
 
 /**
@@ -30,22 +34,23 @@ class MaxTotalCache {
 	private final ViewSettings settings;
 	private final ITreeContentProvider contentProvider;
 
-	private Map<IJavaElement, Integer> maxTotals;
+	private Map<Module, Integer> maxTotals;
 
 	MaxTotalCache(ViewSettings settings) {
 		this.settings = settings;
 		this.contentProvider = new WorkbenchContentProvider();
-		this.maxTotals = new HashMap<IJavaElement, Integer>();
+		this.maxTotals = new HashMap<>();
 	}
 
 	int getMaxTotal(Object element) {
-		final IJavaElement parent = ((IJavaElement) element).getParent();
-		Integer max = maxTotals.get(parent);
-		if (max == null) {
-			max = Integer.valueOf(calculateMaxTotal(parent));
-			maxTotals.put(parent, max);
-		}
-		return max.intValue();
+		return 0;
+		// final IJavaElement parent = ((IJavaElement) element).getParent();
+		// Integer max = maxTotals.get(parent);
+		// if (max == null) {
+		// max = Integer.valueOf(calculateMaxTotal(parent));
+		// maxTotals.put(parent, max);
+		// }
+		// return max.intValue();
 	}
 
 	private int calculateMaxTotal(IJavaElement parent) {

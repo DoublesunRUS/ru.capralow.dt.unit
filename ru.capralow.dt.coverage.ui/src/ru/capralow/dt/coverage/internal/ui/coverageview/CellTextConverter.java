@@ -9,18 +9,24 @@
  * Contributors:
  *    Marc R. Hoffmann - initial API and implementation
  *
+ * Adapted by Alexander Kapralov
+ *
  ******************************************************************************/
 package ru.capralow.dt.coverage.internal.ui.coverageview;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
-import org.eclipse.jdt.core.IPackageFragmentRoot;
-import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 import org.jacoco.core.analysis.ICounter;
 import org.jacoco.core.analysis.ICoverageNode.ElementType;
+
+import com._1c.g5.v8.dt.bsl.model.Module;
+import com._1c.g5.v8.dt.core.platform.IV8Project;
+import com._1c.g5.v8.dt.core.platform.IV8ProjectManager;
+import com._1c.g5.v8.dt.metadata.mdclass.CommonModule;
 
 import ru.capralow.dt.coverage.core.CoverageTools;
 import ru.capralow.dt.coverage.internal.ui.CoverageUIPlugin;
@@ -38,36 +44,32 @@ class CellTextConverter {
 	private final ViewSettings settings;
 	private final ILabelProvider workbenchLabelProvider;
 
+	private IV8ProjectManager v8ProjectManager;
+
 	CellTextConverter(ViewSettings settings) {
 		this.settings = settings;
 		this.workbenchLabelProvider = new WorkbenchLabelProvider();
+		this.v8ProjectManager = CoverageUIPlugin.getInjector().getInstance(IV8ProjectManager.class);
 	}
 
 	String getElementName(Object element) {
-		String text = getSimpleTextForJavaElement(element);
-		if (element instanceof IPackageFragmentRoot && ElementType.BUNDLE.equals(settings.getRootType())) {
+		String text = getSimpleTextForModuleElement(element);
+		if (element instanceof Module && ElementType.BUNDLE.equals(settings.getRootType())) {
+			IV8Project project = v8ProjectManager.getProject((EObject) element);
 			text += " - " //$NON-NLS-1$
-					+ getElementName(((IPackageFragmentRoot) element).getJavaProject());
+					+ getElementName(project.getProject().getName());
 		}
 		return text;
 	}
 
-	private String getSimpleTextForJavaElement(Object element) {
-		if (element instanceof IPackageFragmentRoot) {
-			final IPackageFragmentRoot root = (IPackageFragmentRoot) element;
-			// tweak label if the package fragment root is the project itself:
-			if (root.getElementName().length() == 0) {
-				element = root.getJavaProject();
-			}
-			// shorten JAR references
-			try {
-				if (root.getKind() == IPackageFragmentRoot.K_BINARY) {
-					return root.getPath().lastSegment();
-				}
-			} catch (JavaModelException e) {
-				CoverageUIPlugin.log(e);
-			}
+	private String getSimpleTextForModuleElement(Object element) {
+		if (element instanceof Module) {
+			final Module root = (Module) element;
+
+			return ((CommonModule) root.getOwner()).getName();
+
 		}
+
 		return workbenchLabelProvider.getText(element);
 	}
 

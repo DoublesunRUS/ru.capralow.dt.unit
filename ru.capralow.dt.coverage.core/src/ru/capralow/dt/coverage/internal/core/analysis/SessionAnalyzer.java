@@ -29,8 +29,10 @@ import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.osgi.util.NLS;
+import org.jacoco.core.analysis.CoverageNodeImpl;
 import org.jacoco.core.analysis.IBundleCoverage;
 import org.jacoco.core.analysis.IClassCoverage;
+import org.jacoco.core.analysis.ICoverageNode.ElementType;
 import org.jacoco.core.analysis.IPackageCoverage;
 import org.jacoco.core.analysis.ISourceFileCoverage;
 import org.jacoco.core.data.ExecutionData;
@@ -38,6 +40,9 @@ import org.jacoco.core.data.ExecutionDataStore;
 import org.jacoco.core.data.SessionInfo;
 import org.jacoco.core.data.SessionInfoStore;
 import org.jacoco.core.internal.analysis.BundleCoverageImpl;
+import org.jacoco.core.internal.analysis.ClassCoverageImpl;
+import org.jacoco.core.internal.analysis.CounterImpl;
+import org.jacoco.core.internal.analysis.MethodCoverageImpl;
 
 import com._1c.g5.v8.dt.core.platform.IResourceLookup;
 
@@ -78,18 +83,27 @@ public class SessionAnalyzer {
 		session.accept(executionDataStore, sessionInfoStore);
 		monitor.worked(1);
 
-		// final PackageFragementRootAnalyzer analyzer = new
-		// PackageFragementRootAnalyzer(executionDataStore);
-		//
+		final PackageFragementRootAnalyzer analyzer = new PackageFragementRootAnalyzer(executionDataStore);
+
 		for (final URI root : roots) {
 			if (monitor.isCanceled())
 				break;
 
-			final Set<IClassCoverage> classes = new HashSet<>();
-			final Set<ISourceFileCoverage> sources = new HashSet<>();
+			// AnalyzedNodes analyzedNodes = analyzer.analyze(root);
 
-			final IBundleCoverage bundle = new BundleCoverageImpl(getName(root), classes, sources);
-			modelCoverage.putFragmentRoot(root, bundle);
+			final ClassCoverageImpl classCoverage = new ClassCoverageImpl(getName(root), 0, false);
+
+			final MethodCoverageImpl methodCoverage = new MethodCoverageImpl("name", "desc", "sign"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+
+			final CoverageNodeImpl nodeCoverage = new CoverageNodeImpl(ElementType.METHOD, "string"); //$NON-NLS-1$
+
+			final CounterImpl nodeCounter = ((CounterImpl) nodeCoverage.getInstructionCounter()).increment(5, 3);
+
+			methodCoverage.increment(nodeCounter, nodeCounter, 1);
+
+			classCoverage.addMethod(methodCoverage);
+
+			modelCoverage.putFragment(root, classCoverage);
 
 			// processPackageFragmentRoot(root, analyzer, new SubProgressMonitor(monitor,
 			// 1));
