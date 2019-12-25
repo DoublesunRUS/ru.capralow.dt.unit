@@ -9,6 +9,8 @@
  * Contributors:
  *    Marc R. Hoffmann - initial API and implementation
  *
+ * Adapted by Alexander Kapralov
+ *
  ******************************************************************************/
 package ru.capralow.dt.coverage.internal.ui.coverageview;
 
@@ -50,7 +52,7 @@ class SelectCountersHandler extends AbstractHandler implements IElementUpdater {
 		element.setChecked(settings.getCounters().equals(type));
 	}
 
-	private CounterEntity getType(Map<?, ?> parameters) {
+	private static CounterEntity getType(Map<?, ?> parameters) {
 		return CounterEntity.valueOf((String) parameters.get(TYPE_PARAMETER));
 	}
 

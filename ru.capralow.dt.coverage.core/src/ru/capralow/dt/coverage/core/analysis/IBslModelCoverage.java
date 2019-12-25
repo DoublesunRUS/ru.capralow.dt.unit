@@ -15,13 +15,14 @@
 package ru.capralow.dt.coverage.core.analysis;
 
 import org.eclipse.jdt.core.IJavaElement;
-import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragment;
-import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.IType;
 import org.jacoco.core.analysis.ICounter;
 import org.jacoco.core.analysis.ICoverageNode;
 import org.jacoco.core.internal.analysis.CounterImpl;
+
+import com._1c.g5.v8.dt.bsl.model.Module;
+import com._1c.g5.v8.dt.core.platform.IV8Project;
 
 /**
  * The interface for coverage information attached to the Java model. It allows
@@ -76,12 +77,12 @@ public interface IBslModelCoverage extends ICoverageNode {
 			return this;
 		}
 
-		public IJavaProject[] getProjects() {
-			return new IJavaProject[0];
+		public IV8Project[] getProjects() {
+			return new IV8Project[0];
 		}
 
-		public IPackageFragmentRoot[] getPackageFragmentRoots() {
-			return new IPackageFragmentRoot[0];
+		public Module[] getPackageFragmentRoots() {
+			return new Module[0];
 		}
 
 		public IPackageFragment[] getPackageFragments() {
@@ -106,7 +107,7 @@ public interface IBslModelCoverage extends ICoverageNode {
 	 *
 	 * @return list of Java projects
 	 */
-	public IJavaProject[] getProjects();
+	public IV8Project[] getProjects();
 
 	/**
 	 * Returns all package fragment roots where coverage information is available
@@ -114,7 +115,7 @@ public interface IBslModelCoverage extends ICoverageNode {
 	 *
 	 * @return list of package fragment roots.
 	 */
-	public IPackageFragmentRoot[] getPackageFragmentRoots();
+	public Module[] getPackageFragmentRoots();
 
 	/**
 	 * Returns all package fragments where coverage information is available for.

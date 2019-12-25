@@ -9,6 +9,8 @@
  * Contributors:
  *    Marc R. Hoffmann - initial API and implementation
  *
+ * Adapted by Alexander Kapralov
+ *
  ******************************************************************************/
 package ru.capralow.dt.coverage.internal.ui.coverageview;
 
@@ -50,7 +52,7 @@ class SelectRootElementsHandler extends AbstractHandler implements IElementUpdat
 		element.setChecked(settings.getRootType().equals(type));
 	}
 
-	private ElementType getType(Map<?, ?> parameters) {
+	private static ElementType getType(Map<?, ?> parameters) {
 		return ElementType.valueOf((String) parameters.get(TYPE_PARAMETER));
 	}
 

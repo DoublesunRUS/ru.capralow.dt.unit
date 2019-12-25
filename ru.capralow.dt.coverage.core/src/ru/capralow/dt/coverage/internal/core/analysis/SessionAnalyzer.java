@@ -81,13 +81,19 @@ public class SessionAnalyzer {
 		// final PackageFragementRootAnalyzer analyzer = new
 		// PackageFragementRootAnalyzer(executionDataStore);
 		//
-		// for (final URI root : roots) {
-		// if (monitor.isCanceled()) {
-		// break;
-		// }
-		// processPackageFragmentRoot(root, analyzer, new SubProgressMonitor(monitor,
-		// 1));
-		// }
+		for (final URI root : roots) {
+			if (monitor.isCanceled())
+				break;
+
+			final Set<IClassCoverage> classes = new HashSet<>();
+			final Set<ISourceFileCoverage> sources = new HashSet<>();
+
+			final IBundleCoverage bundle = new BundleCoverageImpl(getName(root), classes, sources);
+			modelCoverage.putFragmentRoot(root, bundle);
+
+			// processPackageFragmentRoot(root, analyzer, new SubProgressMonitor(monitor,
+			// 1));
+		}
 		monitor.done();
 		PERFORMANCE.stopTimer("loading " + session.getDescription()); //$NON-NLS-1$
 		PERFORMANCE.stopMemoryUsage("loading " + session.getDescription()); //$NON-NLS-1$

@@ -19,14 +19,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IClassFile;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IJavaElement;
-import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.IPackageFragment;
-import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
 import org.jacoco.core.analysis.CoverageNodeImpl;
@@ -35,9 +35,15 @@ import org.jacoco.core.analysis.IClassCoverage;
 import org.jacoco.core.analysis.ICoverageNode;
 import org.jacoco.core.analysis.IMethodCoverage;
 
+import com._1c.g5.v8.dt.bm.index.emf.IBmEmfIndexManager;
+import com._1c.g5.v8.dt.bm.index.emf.IBmEmfIndexProvider;
+import com._1c.g5.v8.dt.bsl.model.Module;
 import com._1c.g5.v8.dt.core.platform.IV8Project;
+import com._1c.g5.v8.dt.metadata.mdclass.CommonModule;
 
+import ru.capralow.dt.coverage.core.MdUtils;
 import ru.capralow.dt.coverage.core.analysis.IBslModelCoverage;
+import ru.capralow.dt.coverage.internal.core.CoverageCorePlugin;
 import ru.capralow.dt.coverage.internal.core.DebugOptions;
 import ru.capralow.dt.coverage.internal.core.DebugOptions.ITracer;
 
@@ -50,13 +56,13 @@ public class BslModelCoverage extends CoverageNodeImpl implements IBslModelCover
 	private static final ITracer TRACER = DebugOptions.ANALYSISTRACER;
 
 	/** Maps Bsl elements to coverage objects */
-	private final Map<URI, ICoverageNode> coveragemap = new HashMap<>();
+	private final Map<Module, ICoverageNode> coverageMap = new HashMap<>();
 
 	/** List of all IV8Project objects with coverage information attached */
 	private final List<IV8Project> projects = new ArrayList<>();
 
-	/** List of all IPackageFragmentRoot objects with coverage information */
-	private final List<URI> fragmentroots = new ArrayList<>();
+	/** List of all Module objects with coverage information */
+	private final List<Module> fragmentRoots = new ArrayList<>();
 
 	/** List of all IPackageFragment objects with coverage information */
 	private final List<URI> fragments = new ArrayList<>();
@@ -64,18 +70,29 @@ public class BslModelCoverage extends CoverageNodeImpl implements IBslModelCover
 	/** List of all IType objects with coverage information */
 	private final List<URI> types = new ArrayList<>();
 
+	private IBmEmfIndexManager bmEmfIndexManager;
+
 	public BslModelCoverage() {
 		super(ElementType.GROUP, "BslModel"); //$NON-NLS-1$
+
+		this.bmEmfIndexManager = CoverageCorePlugin.getInjector().getInstance(IBmEmfIndexManager.class);
 	}
 
 	public void putFragmentRoot(URI root, IBundleCoverage coverage) {
-		coveragemap.put(root, coverage);
-		fragmentroots.add(root);
+		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(root.segment(1));
+		IBmEmfIndexProvider bmEmfIndexProvider = bmEmfIndexManager.getEmfIndexProvider(project);
+
+		Module module = ((CommonModule) MdUtils
+				.getConfigurationObject(root.segment(3).concat(".").concat(root.segment(4)), bmEmfIndexProvider))
+						.getModule();
+
+		coverageMap.put(module, coverage);
+		fragmentRoots.add(module);
 		// getProjectCoverage(root.getJavaProject()).increment(coverage);
 	}
 
 	private CoverageNodeImpl getProjectCoverage(IV8Project project) {
-		CoverageNodeImpl coverage = (CoverageNodeImpl) coveragemap.get(project);
+		CoverageNodeImpl coverage = (CoverageNodeImpl) coverageMap.get(project);
 		if (coverage == null) {
 			// coverage = new CoverageNodeImpl(ElementType.GROUP, project.getElementName());
 			// coveragemap.put(project, coverage);
@@ -85,13 +102,13 @@ public class BslModelCoverage extends CoverageNodeImpl implements IBslModelCover
 	}
 
 	public void putFragment(URI element, ICoverageNode coverage) {
-		coveragemap.put(element, coverage);
-		fragments.add(element);
+		// coverageMap.put(element, coverage);
+		// fragments.add(element);
 	}
 
 	public void putType(URI element, ICoverageNode coverage) {
-		coveragemap.put(element, coverage);
-		types.add(element);
+		// coverageMap.put(element, coverage);
+		// types.add(element);
 	}
 
 	public void putClassFile(IClassFile element, ICoverageNode coverage) {
@@ -104,14 +121,14 @@ public class BslModelCoverage extends CoverageNodeImpl implements IBslModelCover
 
 	// IJavaModelCoverage interface
 
-	public IJavaProject[] getProjects() {
-		IJavaProject[] arr = new IJavaProject[projects.size()];
+	public IV8Project[] getProjects() {
+		IV8Project[] arr = new IV8Project[projects.size()];
 		return projects.toArray(arr);
 	}
 
-	public IPackageFragmentRoot[] getPackageFragmentRoots() {
-		IPackageFragmentRoot[] arr = new IPackageFragmentRoot[fragmentroots.size()];
-		return fragmentroots.toArray(arr);
+	public Module[] getPackageFragmentRoots() {
+		Module[] arr = new Module[fragmentRoots.size()];
+		return fragmentRoots.toArray(arr);
 	}
 
 	public IPackageFragment[] getPackageFragments() {
@@ -125,13 +142,13 @@ public class BslModelCoverage extends CoverageNodeImpl implements IBslModelCover
 	}
 
 	public ICoverageNode getCoverageFor(IJavaElement element) {
-		final ICoverageNode coverage = coveragemap.get(element);
+		final ICoverageNode coverage = coverageMap.get(element);
 		if (coverage != null) {
 			return coverage;
 		}
 		if (IJavaElement.METHOD == element.getElementType()) {
 			resolveMethods((IType) element.getParent());
-			return coveragemap.get(element);
+			return coverageMap.get(element);
 		}
 		return null;
 	}

@@ -29,14 +29,12 @@ import java.util.Map;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubProgressMonitor;
-import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.ISourceReference;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.formatter.IndentManipulation;
 import org.eclipse.osgi.util.NLS;
-import org.jacoco.core.analysis.IBundleCoverage;
 import org.jacoco.core.data.ExecutionDataWriter;
 import org.jacoco.report.FileMultiReportOutput;
 import org.jacoco.report.IReportGroupVisitor;
@@ -46,6 +44,8 @@ import org.jacoco.report.ZipMultiReportOutput;
 import org.jacoco.report.csv.CSVFormatter;
 import org.jacoco.report.html.HTMLFormatter;
 import org.jacoco.report.xml.XMLFormatter;
+
+import com._1c.g5.v8.dt.core.platform.IV8Project;
 
 import ru.capralow.dt.coverage.core.CoverageStatus;
 import ru.capralow.dt.coverage.core.ICoverageSession;
@@ -103,15 +103,17 @@ public class SessionExporter implements ISessionExporter {
 		final IReportVisitor formatter = createFormatter();
 		formatter.visitInfo(analyzer.getSessionInfos(), analyzer.getExecutionData());
 		final IReportGroupVisitor modelgroup = formatter.visitGroup(session.getDescription());
-		for (IJavaProject project : modelCoverage.getProjects()) {
-			final IReportGroupVisitor projectgroup = modelgroup.visitGroup(project.getElementName());
-			for (IPackageFragmentRoot root : project.getPackageFragmentRoots()) {
-				final IBundleCoverage coverage = (IBundleCoverage) modelCoverage.getCoverageFor(root);
-				if (coverage != null) {
-					projectgroup.visitBundle(coverage, createSourceFileLocator(root));
-					monitor.worked(1);
-				}
-			}
+		for (IV8Project project : modelCoverage.getProjects()) {
+			// final IReportGroupVisitor projectgroup =
+			// modelgroup.visitGroup(project.getElementName());
+			// for (IPackageFragmentRoot root : project.getPackageFragmentRoots()) {
+			// final IBundleCoverage coverage = (IBundleCoverage)
+			// modelCoverage.getCoverageFor(root);
+			// if (coverage != null) {
+			// projectgroup.visitBundle(coverage, createSourceFileLocator(root));
+			// monitor.worked(1);
+			// }
+			// }
 		}
 		formatter.visitEnd();
 		monitor.done();

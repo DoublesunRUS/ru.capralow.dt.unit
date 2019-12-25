@@ -51,9 +51,9 @@ public class SessionManager implements ISessionManager {
 	public SessionManager(ExecutionDataFiles executiondatafiles) {
 		this.executiondatafiles = executiondatafiles;
 		this.lock = new Object();
-		this.listeners = new ArrayList<ISessionListener>();
-		this.sessions = new ArrayList<ICoverageSession>();
-		this.launchmap = new HashMap<Object, List<ICoverageSession>>();
+		this.listeners = new ArrayList<>();
+		this.sessions = new ArrayList<>();
+		this.launchmap = new HashMap<>();
 		this.activeSession = null;
 	}
 
@@ -67,7 +67,7 @@ public class SessionManager implements ISessionManager {
 				if (launch != null) {
 					List<ICoverageSession> l = launchmap.get(launch);
 					if (l == null) {
-						l = new ArrayList<ICoverageSession>();
+						l = new ArrayList<>();
 						launchmap.put(launch, l);
 					}
 					l.add(session);
@@ -104,10 +104,10 @@ public class SessionManager implements ISessionManager {
 
 	private void removeSessions(Collection<ICoverageSession> sessionsToRemove) {
 		// Clone as in some scenarios we're modifying the caller's instance
-		sessionsToRemove = new ArrayList<ICoverageSession>(sessionsToRemove);
+		sessionsToRemove = new ArrayList<>(sessionsToRemove);
 
 		// Remove Sessions
-		List<ICoverageSession> removedSessions = new ArrayList<ICoverageSession>();
+		List<ICoverageSession> removedSessions = new ArrayList<>();
 		for (final ICoverageSession s : sessionsToRemove) {
 			if (sessions.remove(s)) {
 				removedSessions.add(s);
@@ -135,7 +135,7 @@ public class SessionManager implements ISessionManager {
 
 	public List<ICoverageSession> getSessions() {
 		synchronized (lock) {
-			return new ArrayList<ICoverageSession>(sessions);
+			return new ArrayList<>(sessions);
 		}
 	}
 
@@ -168,7 +168,7 @@ public class SessionManager implements ISessionManager {
 
 		// Merge all sessions
 		final Set<URI> scope = new HashSet<>();
-		final Set<ILaunchConfiguration> launches = new HashSet<ILaunchConfiguration>();
+		final Set<ILaunchConfiguration> launches = new HashSet<>();
 		final ProfilingResultsDataSource memory = new ProfilingResultsDataSource();
 		for (ICoverageSession session : sessions) {
 			scope.addAll(session.getScope());

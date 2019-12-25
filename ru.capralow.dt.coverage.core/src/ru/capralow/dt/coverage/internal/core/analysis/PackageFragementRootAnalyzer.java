@@ -58,7 +58,6 @@ final class PackageFragementRootAnalyzer {
 		this.cache = new HashMap<>();
 		this.resourceLookup = CoverageCorePlugin.getInjector().getInstance(IResourceLookup.class);
 		this.resourceSetProvider = CoverageCorePlugin.getInjector().getInstance(BmAwareResourceSetProvider.class);
-
 	}
 
 	public AnalyzedNodes analyze(final URI root) throws CoreException {

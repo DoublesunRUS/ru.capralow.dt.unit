@@ -54,7 +54,7 @@ final class AnalyzedNodes {
 		return sourcemap.get(sourceKey(vmpackagename, filename));
 	}
 
-	private String sourceKey(final String vmpackagename, final String filename) {
+	private static String sourceKey(final String vmpackagename, final String filename) {
 		return vmpackagename + '/' + filename;
 	}
 
