@@ -424,13 +424,13 @@
 			"name-ru": "ПроверитьВхождениеВКоллекцию",
 			"params": [
 				{
+					"name-en": "Item",
+					"name-ru": "Элемент"
+				},
+				{
 					"name-en": "Collection",
 					"name-ru": "Коллекция",
 					"types": ["Array", "FixedArray", "Structure", "FixedStructure", "ReferenceValue", "FixedReferenceValue", "TypedValueList"]
-				},
-				{
-					"name-en": "Item",
-					"name-ru": "Элемент"
 				},
 				{
 					"name-en": "Message",
