@@ -9,6 +9,8 @@
  * Contributors:
  *    Marc R. Hoffmann - initial API and implementation
  *
+ * Adapted by Alexander Kapralov
+ *
  ******************************************************************************/
 package ru.capralow.dt.coverage.core;
 
@@ -19,8 +21,6 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.jacoco.core.analysis.ICoverageNode;
-
-import com._1c.g5.v8.dt.core.platform.IResourceLookup;
 
 import ru.capralow.dt.coverage.core.analysis.IBslCoverageListener;
 import ru.capralow.dt.coverage.core.analysis.IBslModelCoverage;
@@ -59,26 +59,26 @@ public final class CoverageTools {
 	 */
 	public static ICoverageNode getCoverageInfo(Object object) {
 		if (object instanceof IAdaptable) {
-			return (ICoverageNode) ((IAdaptable) object).getAdapter(ICoverageNode.class);
+			return ((IAdaptable) object).getAdapter(ICoverageNode.class);
 		} else {
 			return null;
 		}
 	}
 
-	public static IBslModelCoverage getJavaModelCoverage() {
-		return CoverageCorePlugin.getInstance().getBslCoverageLoader().getJavaModelCoverage();
+	public static IBslModelCoverage getBslModelCoverage() {
+		return CoverageCorePlugin.getInstance().getBslCoverageLoader().getBslModelCoverage();
 	}
 
-	public static void addJavaCoverageListener(IBslCoverageListener l) {
-		CoverageCorePlugin.getInstance().getBslCoverageLoader().addJavaCoverageListener(l);
+	public static void addBslCoverageListener(IBslCoverageListener l) {
+		CoverageCorePlugin.getInstance().getBslCoverageLoader().addBslCoverageListener(l);
 	}
 
-	public static void removeJavaCoverageListener(IBslCoverageListener l) {
-		CoverageCorePlugin.getInstance().getBslCoverageLoader().removeJavaCoverageListener(l);
+	public static void removeBslCoverageListener(IBslCoverageListener l) {
+		CoverageCorePlugin.getInstance().getBslCoverageLoader().removeBslCoverageListener(l);
 	}
 
-	public static ISessionExporter getExporter(ICoverageSession session, IResourceLookup resourceLookup) {
-		return new SessionExporter(session, resourceLookup);
+	public static ISessionExporter getExporter(ICoverageSession session) {
+		return new SessionExporter(session);
 	}
 
 	public static ISessionImporter getImporter() {
@@ -102,7 +102,7 @@ public final class CoverageTools {
 	 * @return list of running coverage launches
 	 */
 	public static List<ICoverageLaunch> getRunningCoverageLaunches() {
-		final List<ICoverageLaunch> result = new ArrayList<ICoverageLaunch>();
+		final List<ICoverageLaunch> result = new ArrayList<>();
 		for (final ILaunch launch : DebugPlugin.getDefault().getLaunchManager().getLaunches()) {
 			if (launch instanceof ICoverageLaunch && !launch.isTerminated()) {
 				result.add((ICoverageLaunch) launch);

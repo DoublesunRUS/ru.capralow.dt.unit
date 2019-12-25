@@ -9,6 +9,8 @@
  * Contributors:
  *    Marc R. Hoffmann - initial API and implementation
  *
+ * Adapted by Alexander Kapralov
+ *
  ******************************************************************************/
 package ru.capralow.dt.coverage.internal.core.analysis;
 
@@ -33,11 +35,11 @@ final class AnalyzedNodes {
 	private final Map<String, ISourceFileCoverage> sourcemap;
 
 	AnalyzedNodes(final Collection<IClassCoverage> classes, final Collection<ISourceFileCoverage> sourcefiles) {
-		this.classmap = new HashMap<String, IClassCoverage>();
+		this.classmap = new HashMap<>();
 		for (final IClassCoverage c : classes) {
 			classmap.put(c.getName(), c);
 		}
-		this.sourcemap = new HashMap<String, ISourceFileCoverage>();
+		this.sourcemap = new HashMap<>();
 		for (final ISourceFileCoverage s : sourcefiles) {
 			final String key = sourceKey(s.getPackageName(), s.getName());
 			sourcemap.put(key, s);

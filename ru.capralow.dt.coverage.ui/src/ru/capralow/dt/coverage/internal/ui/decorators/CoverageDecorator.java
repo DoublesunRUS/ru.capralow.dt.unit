@@ -50,7 +50,7 @@ public class CoverageDecorator extends BaseLabelProvider implements ILightweight
 				});
 			}
 		};
-		CoverageTools.addJavaCoverageListener(coverageListener);
+		CoverageTools.addBslCoverageListener(coverageListener);
 	}
 
 	public void decorate(Object element, IDecoration decoration) {
@@ -74,7 +74,7 @@ public class CoverageDecorator extends BaseLabelProvider implements ILightweight
 
 	@Override
 	public void dispose() {
-		CoverageTools.removeJavaCoverageListener(coverageListener);
+		CoverageTools.removeBslCoverageListener(coverageListener);
 	}
 
 }

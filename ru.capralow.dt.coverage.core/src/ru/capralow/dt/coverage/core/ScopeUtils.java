@@ -27,7 +27,6 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJavaModel;
 import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 
@@ -72,14 +71,14 @@ public final class ScopeUtils {
 	public static List<String> writeScope(Set<URI> scope) {
 		final List<String> ids = new ArrayList<>();
 		for (final URI root : scope) {
-			ids.add(root.toPlatformString(true));
+			ids.add(root.toString());
 		}
 		return ids;
 	}
 
 	/**
-	 * Determines all {@link IPackageFragmentRoot}s that potentially referenced by a
-	 * given launch configuration.
+	 * Determines all {@link URI}s that potentially referenced by a given launch
+	 * configuration.
 	 *
 	 * @param configuration
 	 *            launch configuration to determine overall scope

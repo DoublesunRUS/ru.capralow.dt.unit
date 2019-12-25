@@ -25,9 +25,6 @@ import org.eclipse.osgi.util.NLS;
 import org.eclipse.ui.IExportWizard;
 import org.eclipse.ui.IWorkbench;
 
-import com._1c.g5.v8.dt.core.platform.IResourceLookup;
-import com.google.inject.Inject;
-
 import ru.capralow.dt.coverage.core.CoverageTools;
 import ru.capralow.dt.coverage.core.ICoverageSession;
 import ru.capralow.dt.coverage.core.ISessionExporter;
@@ -44,9 +41,6 @@ public class SessionExportWizard extends Wizard implements IExportWizard {
 	private static final String SETTINGSID = "SessionExportWizard"; //$NON-NLS-1$
 
 	private SessionExportPage1 page1;
-
-	@Inject
-	private IResourceLookup resourceLookup;
 
 	public SessionExportWizard() {
 		super();
@@ -78,7 +72,7 @@ public class SessionExportWizard extends Wizard implements IExportWizard {
 
 	private boolean createReport() {
 		final ICoverageSession session = page1.getSelectedSession();
-		final ISessionExporter exporter = CoverageTools.getExporter(session, resourceLookup);
+		final ISessionExporter exporter = CoverageTools.getExporter(session);
 		exporter.setFormat(page1.getExportFormat());
 		exporter.setDestination(page1.getDestination());
 		final IRunnableWithProgress op = new IRunnableWithProgress() {

@@ -38,7 +38,7 @@ public class ModuleCoverageAdapterFactory implements IAdapterFactory {
 			}
 		}
 		// then find the coverage information from the current session
-		IBslModelCoverage mc = CoverageTools.getJavaModelCoverage();
+		IBslModelCoverage mc = CoverageTools.getBslModelCoverage();
 		if (mc == null) {
 			return null;
 		} else {

@@ -29,7 +29,6 @@ import org.eclipse.debug.core.IStatusHandler;
 import org.eclipse.debug.core.model.IProcess;
 import org.osgi.framework.BundleContext;
 
-import com._1c.g5.v8.dt.core.platform.IResourceLookup;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
@@ -157,12 +156,13 @@ public class CoverageCorePlugin extends Plugin {
 	public void start(BundleContext context) throws Exception {
 		instance = this;
 		super.start(context);
+
 		executionDataFiles = new ExecutionDataFiles(getStateLocation());
 		executionDataFiles.deleteTemporaryFiles();
+
 		sessionManager = new SessionManager(executionDataFiles);
 
-		IResourceLookup resourceLookup = getInjector().getInstance(IResourceLookup.class);
-		coverageLoader = new BslCoverageLoader(sessionManager, resourceLookup);
+		coverageLoader = new BslCoverageLoader(sessionManager);
 
 		DebugPlugin.getDefault().getLaunchManager().addLaunchListener(launchListener);
 		DebugPlugin.getDefault().addDebugEventListener(debugListener);
@@ -171,12 +171,17 @@ public class CoverageCorePlugin extends Plugin {
 	@Override
 	public void stop(BundleContext context) throws Exception {
 		executionDataFiles.deleteTemporaryFiles();
+
 		DebugPlugin.getDefault().removeDebugEventListener(debugListener);
 		DebugPlugin.getDefault().getLaunchManager().removeLaunchListener(launchListener);
+
 		executionDataFiles = null;
+
 		coverageLoader.dispose();
 		coverageLoader = null;
+
 		sessionManager = null;
+
 		super.stop(context);
 		instance = null;
 	}

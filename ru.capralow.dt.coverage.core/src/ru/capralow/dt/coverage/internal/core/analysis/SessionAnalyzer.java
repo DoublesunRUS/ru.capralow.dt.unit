@@ -23,7 +23,6 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IClassFile;
 import org.eclipse.jdt.core.ICompilationUnit;
@@ -45,6 +44,7 @@ import com._1c.g5.v8.dt.core.platform.IResourceLookup;
 import ru.capralow.dt.coverage.core.ICoverageSession;
 import ru.capralow.dt.coverage.core.analysis.IBslModelCoverage;
 import ru.capralow.dt.coverage.internal.core.CoreMessages;
+import ru.capralow.dt.coverage.internal.core.CoverageCorePlugin;
 import ru.capralow.dt.coverage.internal.core.DebugOptions;
 import ru.capralow.dt.coverage.internal.core.DebugOptions.ITracer;
 
@@ -63,12 +63,11 @@ public class SessionAnalyzer {
 
 	private IResourceLookup resourceLookup;
 
-	public IBslModelCoverage processSession(ICoverageSession session, IProgressMonitor monitor,
-			IResourceLookup resourceLookup) throws CoreException {
+	public IBslModelCoverage processSession(ICoverageSession session, IProgressMonitor monitor) throws CoreException {
 		PERFORMANCE.startTimer();
 		PERFORMANCE.startMemoryUsage();
 
-		this.resourceLookup = resourceLookup;
+		this.resourceLookup = CoverageCorePlugin.getInjector().getInstance(IResourceLookup.class);
 
 		modelCoverage = new BslModelCoverage();
 		final Collection<URI> roots = session.getScope();
@@ -79,14 +78,16 @@ public class SessionAnalyzer {
 		session.accept(executionDataStore, sessionInfoStore);
 		monitor.worked(1);
 
-		final PackageFragementRootAnalyzer analyzer = new PackageFragementRootAnalyzer(executionDataStore);
-
-		for (final URI root : roots) {
-			if (monitor.isCanceled()) {
-				break;
-			}
-			processPackageFragmentRoot(root, analyzer, new SubProgressMonitor(monitor, 1));
-		}
+		// final PackageFragementRootAnalyzer analyzer = new
+		// PackageFragementRootAnalyzer(executionDataStore);
+		//
+		// for (final URI root : roots) {
+		// if (monitor.isCanceled()) {
+		// break;
+		// }
+		// processPackageFragmentRoot(root, analyzer, new SubProgressMonitor(monitor,
+		// 1));
+		// }
 		monitor.done();
 		PERFORMANCE.stopTimer("loading " + session.getDescription()); //$NON-NLS-1$
 		PERFORMANCE.stopMemoryUsage("loading " + session.getDescription()); //$NON-NLS-1$
@@ -125,7 +126,7 @@ public class SessionAnalyzer {
 		for (IPackageCoverage c : packages) {
 			final String name = c.getName().replace('/', '.');
 			// final IPackageFragment fragment = root.getPackageFragment(name);
-			// modelcoverage.putFragment(fragment, c);
+			// modelCoverage.putFragment(fragment, c);
 		}
 	}
 
@@ -154,7 +155,7 @@ public class SessionAnalyzer {
 			final IClassCoverage coverage = nodes.getClassCoverage(vmname);
 			if (coverage != null) {
 				classes.add(coverage);
-				modelCoverage.putType(type, coverage);
+				// modelCoverage.putType(type, coverage);
 			}
 		}
 

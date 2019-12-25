@@ -33,6 +33,8 @@ import org.jacoco.core.data.ExecutionDataStore;
 import com._1c.g5.v8.dt.bm.xtext.BmAwareResourceSetProvider;
 import com._1c.g5.v8.dt.core.platform.IResourceLookup;
 
+import ru.capralow.dt.coverage.core.CoverageStatus;
+import ru.capralow.dt.coverage.internal.core.CoverageCorePlugin;
 import ru.capralow.dt.coverage.internal.core.DebugOptions;
 import ru.capralow.dt.coverage.internal.core.DebugOptions.ITracer;
 
@@ -54,6 +56,9 @@ final class PackageFragementRootAnalyzer {
 	public PackageFragementRootAnalyzer(final ExecutionDataStore executionData) {
 		this.executionData = executionData;
 		this.cache = new HashMap<>();
+		this.resourceLookup = CoverageCorePlugin.getInjector().getInstance(IResourceLookup.class);
+		this.resourceSetProvider = CoverageCorePlugin.getInjector().getInstance(BmAwareResourceSetProvider.class);
+
 	}
 
 	public AnalyzedNodes analyze(final URI root) throws CoreException {
@@ -89,13 +94,10 @@ final class PackageFragementRootAnalyzer {
 			return nodes;
 
 		} catch (Exception e) {
-			// throw new
-			//
-			// CoreException(CoverageStatus.BUNDLE_ANALYSIS_ERROR.getStatus(root.getElementName(),
-			// location, e));
-		}
+			throw new CoreException(
+					CoverageStatus.BUNDLE_ANALYSIS_ERROR.getStatus(root.toPlatformString(true), location, e));
 
-		return null;
+		}
 	}
 
 	private IResource getClassfilesLocation(URI root) {

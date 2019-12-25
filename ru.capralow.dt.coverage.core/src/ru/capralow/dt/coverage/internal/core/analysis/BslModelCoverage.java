@@ -35,6 +35,8 @@ import org.jacoco.core.analysis.IClassCoverage;
 import org.jacoco.core.analysis.ICoverageNode;
 import org.jacoco.core.analysis.IMethodCoverage;
 
+import com._1c.g5.v8.dt.core.platform.IV8Project;
+
 import ru.capralow.dt.coverage.core.analysis.IBslModelCoverage;
 import ru.capralow.dt.coverage.internal.core.DebugOptions;
 import ru.capralow.dt.coverage.internal.core.DebugOptions.ITracer;
@@ -47,57 +49,57 @@ public class BslModelCoverage extends CoverageNodeImpl implements IBslModelCover
 
 	private static final ITracer TRACER = DebugOptions.ANALYSISTRACER;
 
-	/** Maps Java elements to coverage objects */
-	private final Map<IJavaElement, ICoverageNode> coveragemap = new HashMap<IJavaElement, ICoverageNode>();
+	/** Maps Bsl elements to coverage objects */
+	private final Map<URI, ICoverageNode> coveragemap = new HashMap<>();
 
-	/** List of all IJavaProject objects with coverage information attached */
-	private final List<IJavaProject> projects = new ArrayList<IJavaProject>();
+	/** List of all IV8Project objects with coverage information attached */
+	private final List<IV8Project> projects = new ArrayList<>();
 
 	/** List of all IPackageFragmentRoot objects with coverage information */
-	private final List<IPackageFragmentRoot> fragmentroots = new ArrayList<IPackageFragmentRoot>();
+	private final List<URI> fragmentroots = new ArrayList<>();
 
 	/** List of all IPackageFragment objects with coverage information */
-	private final List<IPackageFragment> fragments = new ArrayList<IPackageFragment>();
+	private final List<URI> fragments = new ArrayList<>();
 
 	/** List of all IType objects with coverage information */
-	private final List<IType> types = new ArrayList<IType>();
+	private final List<URI> types = new ArrayList<>();
 
 	public BslModelCoverage() {
-		super(ElementType.GROUP, "JavaModel"); //$NON-NLS-1$
+		super(ElementType.GROUP, "BslModel"); //$NON-NLS-1$
 	}
 
 	public void putFragmentRoot(URI root, IBundleCoverage coverage) {
-		// coveragemap.put(root, coverage);
-		// fragmentroots.add(root);
+		coveragemap.put(root, coverage);
+		fragmentroots.add(root);
 		// getProjectCoverage(root.getJavaProject()).increment(coverage);
 	}
 
-	private CoverageNodeImpl getProjectCoverage(IJavaProject project) {
+	private CoverageNodeImpl getProjectCoverage(IV8Project project) {
 		CoverageNodeImpl coverage = (CoverageNodeImpl) coveragemap.get(project);
 		if (coverage == null) {
-			coverage = new CoverageNodeImpl(ElementType.GROUP, project.getElementName());
-			coveragemap.put(project, coverage);
+			// coverage = new CoverageNodeImpl(ElementType.GROUP, project.getElementName());
+			// coveragemap.put(project, coverage);
 			projects.add(project);
 		}
 		return coverage;
 	}
 
-	public void putFragment(IPackageFragment element, ICoverageNode coverage) {
+	public void putFragment(URI element, ICoverageNode coverage) {
 		coveragemap.put(element, coverage);
 		fragments.add(element);
 	}
 
-	public void putType(IType element, ICoverageNode coverage) {
+	public void putType(URI element, ICoverageNode coverage) {
 		coveragemap.put(element, coverage);
 		types.add(element);
 	}
 
 	public void putClassFile(IClassFile element, ICoverageNode coverage) {
-		coveragemap.put(element, coverage);
+		// coveragemap.put(element, coverage);
 	}
 
 	public void putCompilationUnit(ICompilationUnit element, ICoverageNode coverage) {
-		coveragemap.put(element, coverage);
+		// coveragemap.put(element, coverage);
 	}
 
 	// IJavaModelCoverage interface
@@ -144,18 +146,16 @@ public class BslModelCoverage extends CoverageNodeImpl implements IBslModelCover
 			for (IMethodCoverage methodCoverage : classCoverage.getMethods()) {
 				final IMethod method = locator.findMethod(methodCoverage.getName(), methodCoverage.getDesc());
 				if (method != null) {
-					coveragemap.put(method, methodCoverage);
+					// coveragemap.put(method, methodCoverage);
 				} else {
-					TRACER.trace("Method not found in Java model: {0}.{1}{2}", //$NON-NLS-1$
+					TRACER.trace("Method not found in Java model: {0}.{1}{2}",
 							type.getFullyQualifiedName(),
 							methodCoverage.getName(),
 							methodCoverage.getDesc());
 				}
 			}
 		} catch (JavaModelException e) {
-			TRACER.trace("Error while creating method locator for {0}: {1}", //$NON-NLS-1$
-					type.getFullyQualifiedName(),
-					e);
+			TRACER.trace("Error while creating method locator for {0}: {1}", type.getFullyQualifiedName(), e);
 		}
 	}
 }

@@ -24,8 +24,6 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.osgi.util.NLS;
 
-import com._1c.g5.v8.dt.core.platform.IResourceLookup;
-
 import ru.capralow.dt.coverage.core.CoverageStatus;
 import ru.capralow.dt.coverage.core.ICoverageSession;
 import ru.capralow.dt.coverage.core.ISessionListener;
@@ -47,8 +45,6 @@ public class BslCoverageLoader {
 
 	private final List<IBslCoverageListener> listeners = new ArrayList<>();
 
-	private IResourceLookup resourceLookup;
-
 	private ISessionListener sessionListener = new ISessionListener() {
 
 		public void sessionActivated(ICoverageSession session) {
@@ -59,7 +55,7 @@ public class BslCoverageLoader {
 			} else {
 				coverage = IBslModelCoverage.LOADING;
 				fireCoverageChanged();
-				new LoadSessionJob(session, resourceLookup).schedule();
+				new LoadSessionJob(session).schedule();
 			}
 		}
 
@@ -77,18 +73,15 @@ public class BslCoverageLoader {
 
 		private final ICoverageSession session;
 
-		private IResourceLookup resourceLookup;
-
-		public LoadSessionJob(ICoverageSession session, IResourceLookup resourceLookup) {
+		public LoadSessionJob(ICoverageSession session) {
 			super(NLS.bind(CoreMessages.AnalyzingCoverageSession_task, session.getDescription()));
 			this.session = session;
-			this.resourceLookup = resourceLookup;
 		}
 
 		protected IStatus run(IProgressMonitor monitor) {
 			final IBslModelCoverage c;
 			try {
-				c = new SessionAnalyzer().processSession(session, monitor, resourceLookup);
+				c = new SessionAnalyzer().processSession(session, monitor);
 			} catch (CoreException e) {
 				return CoverageStatus.SESSION_LOAD_ERROR.getStatus(e);
 			}
@@ -104,13 +97,12 @@ public class BslCoverageLoader {
 
 	}
 
-	public BslCoverageLoader(ISessionManager sessionManager, IResourceLookup resourceLookup) {
+	public BslCoverageLoader(ISessionManager sessionManager) {
 		this.sessionManager = sessionManager;
-		this.resourceLookup = resourceLookup;
 		sessionManager.addSessionListener(sessionListener);
 	}
 
-	public void addJavaCoverageListener(IBslCoverageListener l) {
+	public void addBslCoverageListener(IBslCoverageListener l) {
 		if (l == null) {
 			throw new IllegalArgumentException();
 		}
@@ -119,7 +111,7 @@ public class BslCoverageLoader {
 		}
 	}
 
-	public void removeJavaCoverageListener(IBslCoverageListener l) {
+	public void removeBslCoverageListener(IBslCoverageListener l) {
 		listeners.remove(l);
 	}
 
@@ -130,7 +122,7 @@ public class BslCoverageLoader {
 		}
 	}
 
-	public IBslModelCoverage getJavaModelCoverage() {
+	public IBslModelCoverage getBslModelCoverage() {
 		return coverage;
 	}
 

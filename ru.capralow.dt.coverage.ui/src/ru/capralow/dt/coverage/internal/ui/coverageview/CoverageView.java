@@ -10,6 +10,8 @@
  *    Marc R. Hoffmann - initial API and implementation
  *    Brock Janiczak - link with selection option (SF #1774547)
  *
+ * Adapted by Alexander Kapralov
+ *
  ******************************************************************************/
 package ru.capralow.dt.coverage.internal.ui.coverageview;
 
@@ -90,7 +92,7 @@ public class CoverageView extends ViewPart implements IShowInTarget {
 	// Actions
 	private OpenAction openAction;
 
-	private final List<IHandler> handlers = new ArrayList<IHandler>();
+	private final List<IHandler> handlers = new ArrayList<>();
 
 	private SelectionTracker selectiontracker;
 	private CoverageViewSorter sorter = new CoverageViewSorter(settings, this);
@@ -119,7 +121,7 @@ public class CoverageView extends ViewPart implements IShowInTarget {
 			getSite().getShell().getDisplay().asyncExec(new Runnable() {
 				public void run() {
 					maxTotalCache.reset();
-					viewer.setInput(CoverageTools.getJavaModelCoverage());
+					viewer.setInput(CoverageTools.getBslModelCoverage());
 				}
 			});
 		}
@@ -263,7 +265,7 @@ public class CoverageView extends ViewPart implements IShowInTarget {
 		settings.restoreColumnWidth(viewer);
 		viewer.setComparator(sorter);
 		viewer.setContentProvider(new CoveredElementsContentProvider(settings));
-		viewer.setInput(CoverageTools.getJavaModelCoverage());
+		viewer.setInput(CoverageTools.getBslModelCoverage());
 		getSite().setSelectionProvider(viewer);
 
 		selectiontracker = new SelectionTracker(this, viewer);
@@ -283,7 +285,7 @@ public class CoverageView extends ViewPart implements IShowInTarget {
 		getSite().registerContextMenu(menuMgr, viewer);
 
 		CoverageTools.getSessionManager().addSessionListener(descriptionUpdater);
-		CoverageTools.addJavaCoverageListener(coverageListener);
+		CoverageTools.addBslCoverageListener(coverageListener);
 	}
 
 	/**
@@ -302,7 +304,7 @@ public class CoverageView extends ViewPart implements IShowInTarget {
 	}
 
 	private void activateHandler(String id, IHandler handler) {
-		final IHandlerService hs = (IHandlerService) getSite().getService(IHandlerService.class);
+		final IHandlerService hs = getSite().getService(IHandlerService.class);
 		hs.activateHandler(id, handler);
 		handlers.add(handler);
 	}
@@ -336,7 +338,7 @@ public class CoverageView extends ViewPart implements IShowInTarget {
 			h.dispose();
 		}
 		handlers.clear();
-		CoverageTools.removeJavaCoverageListener(coverageListener);
+		CoverageTools.removeBslCoverageListener(coverageListener);
 		CoverageTools.getSessionManager().removeSessionListener(descriptionUpdater);
 		selectiontracker.dispose();
 		super.dispose();

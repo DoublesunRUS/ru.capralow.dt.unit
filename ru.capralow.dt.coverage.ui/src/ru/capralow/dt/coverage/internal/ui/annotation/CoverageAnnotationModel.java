@@ -248,7 +248,7 @@ public final class CoverageAnnotationModel implements IAnnotationModel {
 			}
 		}
 		if (openConnections++ == 0) {
-			CoverageTools.addJavaCoverageListener(coverageListener);
+			CoverageTools.addBslCoverageListener(coverageListener);
 			document.addDocumentListener(documentListener);
 		}
 	}
@@ -261,7 +261,7 @@ public final class CoverageAnnotationModel implements IAnnotationModel {
 			document.removePosition(ca.getPosition());
 		}
 		if (--openConnections == 0) {
-			CoverageTools.removeJavaCoverageListener(coverageListener);
+			CoverageTools.removeBslCoverageListener(coverageListener);
 			document.removeDocumentListener(documentListener);
 		}
 	}
