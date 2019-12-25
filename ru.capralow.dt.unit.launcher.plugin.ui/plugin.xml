@@ -48,9 +48,5 @@
 			class="ru.capralow.dt.unit.launcher.plugin.internal.ui.ExecutableExtensionFactory:ru.capralow.dt.unit.launcher.plugin.internal.ui.metatypes.FrameworkMetaTypesProvider">
 		</bslExternalMetaTypes>
 	</extension>
-	
-	<extension point="org.eclipse.help.contexts">
-		<contexts file="bslTestFramework.xml"/>
-	</extension>
-	
+
 </plugin>

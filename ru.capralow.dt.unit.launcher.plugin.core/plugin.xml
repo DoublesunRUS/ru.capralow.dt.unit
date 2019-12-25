@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+	
+	<extension point="org.eclipse.help.contexts">
+		<contexts file="bslTestFramework.xml" plugin="com._1c.g5.v8.dt.platform.doc_v8_3_8"/>
+		<contexts file="bslTestFramework.xml" plugin="com._1c.g5.v8.dt.platform.doc_v8_3_9"/>
+		<contexts file="bslTestFramework.xml" plugin="com._1c.g5.v8.dt.platform.doc_v8_3_10"/>
+		<contexts file="bslTestFramework.xml" plugin="com._1c.g5.v8.dt.platform.doc_v8_3_11"/>
+		<contexts file="bslTestFramework.xml" plugin="com._1c.g5.v8.dt.platform.doc_v8_3_12"/>
+		<contexts file="bslTestFramework.xml" plugin="com._1c.g5.v8.dt.platform.doc_v8_3_13"/>
+		<contexts file="bslTestFramework.xml" plugin="com._1c.g5.v8.dt.platform.doc_v8_3_14"/>
+	</extension>
+	
+</plugin>
