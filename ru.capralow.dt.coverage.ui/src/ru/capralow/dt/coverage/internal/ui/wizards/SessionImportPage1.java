@@ -15,15 +15,10 @@ package ru.capralow.dt.coverage.internal.ui.wizards;
 import static ru.capralow.dt.coverage.internal.ui.UIMessages.BrowseAction_label;
 import static ru.capralow.dt.coverage.internal.ui.UIMessages.ImportSessionPage1BrowseDialog_title;
 import static ru.capralow.dt.coverage.internal.ui.UIMessages.ImportSessionPage1Copy_label;
-import static ru.capralow.dt.coverage.internal.ui.UIMessages.ImportSessionPage1ExecutionDataAddress_label;
 import static ru.capralow.dt.coverage.internal.ui.UIMessages.ImportSessionPage1ExecutionDataFile_label;
-import static ru.capralow.dt.coverage.internal.ui.UIMessages.ImportSessionPage1ExecutionDataPort_label;
-import static ru.capralow.dt.coverage.internal.ui.UIMessages.ImportSessionPage1ExecutionDataReset_label;
 import static ru.capralow.dt.coverage.internal.ui.UIMessages.ImportSessionPage1ExecutionDataUrl_label;
 import static ru.capralow.dt.coverage.internal.ui.UIMessages.ImportSessionPage1ModeGroup_label;
-import static ru.capralow.dt.coverage.internal.ui.UIMessages.ImportSessionPage1NoExecutionDataAddress_message;
 import static ru.capralow.dt.coverage.internal.ui.UIMessages.ImportSessionPage1NoExecutionDataFile_message;
-import static ru.capralow.dt.coverage.internal.ui.UIMessages.ImportSessionPage1NoExecutionDataPort_message;
 import static ru.capralow.dt.coverage.internal.ui.UIMessages.ImportSessionPage1NoExecutionDataUrl_message;
 import static ru.capralow.dt.coverage.internal.ui.UIMessages.ImportSessionPage1Reference_label;
 import static ru.capralow.dt.coverage.internal.ui.UIMessages.ImportSessionPage1_description;
@@ -50,11 +45,9 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.jacoco.core.runtime.AgentOptions;
 
-import ru.capralow.dt.coverage.core.AgentExecutionDataSource;
 import ru.capralow.dt.coverage.core.IExecutionDataSource;
 import ru.capralow.dt.coverage.core.URLExecutionDataSource;
 import ru.capralow.dt.coverage.internal.ui.ContextHelp;
@@ -102,7 +95,6 @@ public class SessionImportPage1 extends WizardPage {
 		GridLayoutFactory.swtDefaults().numColumns(5).applyTo(sourceGroup);
 		createFileBlock(sourceGroup);
 		createUrlBlock(sourceGroup);
-		createAgentBlock(sourceGroup);
 		createOptionsBlock(parent);
 		setControl(parent);
 		ContextHelp.setHelp(parent, ContextHelp.SESSION_IMPORT);
@@ -159,40 +151,6 @@ public class SessionImportPage1 extends WizardPage {
 		GridDataFactory.swtDefaults().span(4, 1).align(SWT.FILL, SWT.CENTER).applyTo(urlcombo);
 	}
 
-	private void createAgentBlock(Composite parent) {
-		agentradio = new Button(parent, SWT.RADIO);
-		agentradio.setText(ImportSessionPage1ExecutionDataAddress_label);
-		agentradio.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				updateStatus();
-				updateEnablement();
-			}
-		});
-		addresstext = new Text(parent, SWT.BORDER);
-		addresstext.addModifyListener(new ModifyListener() {
-			public void modifyText(ModifyEvent e) {
-				updateStatus();
-			}
-		});
-		GridDataFactory.swtDefaults().grab(true, false).align(SWT.FILL, SWT.CENTER).applyTo(addresstext);
-		new Label(parent, SWT.NONE).setText(ImportSessionPage1ExecutionDataPort_label);
-		porttext = new Text(parent, SWT.BORDER);
-		porttext.addModifyListener(new ModifyListener() {
-			public void modifyText(ModifyEvent e) {
-				updateStatus();
-			}
-		});
-		resetcheck = new Button(parent, SWT.CHECK);
-		resetcheck.setText(ImportSessionPage1ExecutionDataReset_label);
-		resetcheck.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				updateStatus();
-			}
-		});
-	}
-
 	private void createOptionsBlock(Composite parent) {
 		parent.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		Group group = new Group(parent, SWT.NONE);
@@ -247,22 +205,6 @@ public class SessionImportPage1 extends WizardPage {
 				dataSource = new URLExecutionDataSource(new URL(urlcombo.getText()));
 			} catch (MalformedURLException e) {
 				setErrorMessage(ImportSessionPage1NoExecutionDataUrl_message);
-				setPageComplete(false);
-				return;
-			}
-		}
-		if (agentradio.getSelection()) {
-			final String address = addresstext.getText();
-			if (address.length() == 0) {
-				setErrorMessage(ImportSessionPage1NoExecutionDataAddress_message);
-				setPageComplete(false);
-				return;
-			}
-			try {
-				int port = Integer.parseInt(porttext.getText());
-				dataSource = new AgentExecutionDataSource(address, port, resetcheck.getSelection());
-			} catch (NumberFormatException e) {
-				setErrorMessage(ImportSessionPage1NoExecutionDataPort_message);
 				setPageComplete(false);
 				return;
 			}

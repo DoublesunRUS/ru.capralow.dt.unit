@@ -30,7 +30,6 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.emf.common.util.URI;
 
 import ru.capralow.dt.coverage.core.ICoverageSession;
-import ru.capralow.dt.coverage.core.IExecutionDataSource;
 import ru.capralow.dt.coverage.core.ISessionListener;
 import ru.capralow.dt.coverage.core.ISessionManager;
 
@@ -39,8 +38,6 @@ import ru.capralow.dt.coverage.core.ISessionManager;
  */
 public class SessionManager implements ISessionManager {
 
-	private final ExecutionDataFiles executiondatafiles;
-
 	private final Object lock;
 	private final List<ISessionListener> listeners;
 
@@ -48,8 +45,7 @@ public class SessionManager implements ISessionManager {
 	private final Map<Object, List<ICoverageSession>> launchmap;
 	private ICoverageSession activeSession;
 
-	public SessionManager(ExecutionDataFiles executiondatafiles) {
-		this.executiondatafiles = executiondatafiles;
+	public SessionManager() {
 		this.lock = new Object();
 		this.listeners = new ArrayList<>();
 		this.sessions = new ArrayList<>();
@@ -178,14 +174,10 @@ public class SessionManager implements ISessionManager {
 			session.accept(memory, memory);
 			monitor.worked(1);
 		}
-		final IExecutionDataSource executionDataSource = executiondatafiles.newFile(memory);
 
 		// Adopt launch configuration only if there is exactly one
 		final ILaunchConfiguration launchconfiguration = launches.size() == 1 ? launches.iterator().next() : null;
-		final ICoverageSession merged = new CoverageSession(description,
-				scope,
-				executionDataSource,
-				launchconfiguration);
+		final ICoverageSession merged = new CoverageSession(description, scope, memory, launchconfiguration);
 
 		// Update session list
 		synchronized (lock) {

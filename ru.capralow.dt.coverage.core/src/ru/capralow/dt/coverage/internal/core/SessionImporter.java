@@ -30,16 +30,13 @@ import ru.capralow.dt.coverage.core.ISessionManager;
 public class SessionImporter implements ISessionImporter {
 
 	private final ISessionManager sessionManager;
-	private final ExecutionDataFiles executionDataFiles;
 
 	private String description;
 	private IExecutionDataSource dataSource;
 	private Set<URI> scope;
-	private boolean copy;
 
-	public SessionImporter(ISessionManager sessionManager, ExecutionDataFiles executionDataFiles) {
+	public SessionImporter(ISessionManager sessionManager) {
 		this.sessionManager = sessionManager;
-		this.executionDataFiles = executionDataFiles;
 	}
 
 	public void setDescription(String description) {
@@ -54,20 +51,10 @@ public class SessionImporter implements ISessionImporter {
 		this.scope = scope;
 	}
 
-	public void setCopy(boolean copy) {
-		this.copy = copy;
-	}
-
 	public void importSession(IProgressMonitor monitor) throws CoreException {
 		monitor.beginTask(CoreMessages.ImportingSession_task, 2);
-		final IExecutionDataSource source;
-		if (this.copy) {
-			source = this.executionDataFiles.newFile(dataSource);
-		} else {
-			source = dataSource;
-		}
 		monitor.worked(1);
-		final CoverageSession session = new CoverageSession(description, scope, source, null);
+		final CoverageSession session = new CoverageSession(description, scope, dataSource, null);
 		sessionManager.addSession(session, true, null);
 		monitor.done();
 	}

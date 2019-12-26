@@ -18,8 +18,6 @@ import java.text.MessageFormat;
 import java.util.Date;
 import java.util.List;
 
-import org.eclipse.core.runtime.CoreException;
-
 import com._1c.g5.v8.dt.profiling.core.IProfilingResult;
 import com._1c.g5.v8.dt.profiling.core.IProfilingService;
 
@@ -28,44 +26,29 @@ import ru.capralow.dt.coverage.core.ISessionManager;
 import ru.capralow.dt.coverage.core.launching.ICoverageLaunch;
 import ru.capralow.dt.coverage.internal.core.CoreMessages;
 import ru.capralow.dt.coverage.internal.core.CoverageSession;
-import ru.capralow.dt.coverage.internal.core.ExecutionDataFiles;
 import ru.capralow.dt.coverage.internal.core.ProfilingResultsDataSource;
 
 public class AgentServer {
 
 	private final ICoverageLaunch launch;
 	private final ISessionManager sessionManager;
-	private final ExecutionDataFiles files;
 	private final ICorePreferences preferences;
 
 	private boolean dataReceived;
 
 	private IProfilingService profilingService;
 
-	public AgentServer(ICoverageLaunch launch, ISessionManager sessionManager, ExecutionDataFiles files,
-			ICorePreferences preferences, IProfilingService profilingService) {
-		// super(AgentServer.class.getName());
+	public AgentServer(ICoverageLaunch launch, ISessionManager sessionManager, ICorePreferences preferences,
+			IProfilingService profilingService) {
 		this.preferences = preferences;
-		// setSystem(true);
 		this.launch = launch;
 		this.sessionManager = sessionManager;
-		this.files = files;
 		this.dataReceived = false;
 		this.profilingService = profilingService;
 	}
 
 	public void start() {
 		profilingService.toggleTargetWaitingState(true);
-	}
-
-	public void requestDump(boolean reset) throws CoreException {
-		// if (writer != null) {
-		// try {
-		// writer.visitDumpCommand(true, reset);
-		// } catch (IOException e) {
-		// throw new CoreException(CoverageStatus.DUMP_REQUEST_ERROR.getStatus(e));
-		// }
-		// }
 	}
 
 	public void stop() {

@@ -17,11 +17,9 @@ import org.eclipse.ui.PlatformUI;
 import com._1c.g5.v8.dt.bm.index.emf.IBmEmfIndexManager;
 import com._1c.g5.v8.dt.core.platform.IResourceLookup;
 import com._1c.g5.v8.dt.core.platform.IV8ProjectManager;
-import com._1c.g5.v8.dt.profiling.core.IProfilingService;
 import com._1c.g5.wiring.IManagedService;
 import com.google.inject.Inject;
 
-import ru.capralow.dt.unit.launcher.plugin.internal.ui.junit.ShowCoverageResult;
 import ru.capralow.dt.unit.launcher.plugin.internal.ui.junit.ShowJUnitResult;
 import ru.capralow.dt.unit.launcher.plugin.internal.ui.junit.TestCaseListener;
 
@@ -29,8 +27,7 @@ public class UnitLauncherManager implements IManagedService {
 
 	@Inject
 	private IBmEmfIndexManager bmEmfIndexManager;
-	@Inject
-	private IProfilingService profilingService;
+
 	@Inject
 	private IResourceLookup resourceLookup;
 
@@ -40,15 +37,10 @@ public class UnitLauncherManager implements IManagedService {
 	private ShowJUnitResult showJUnitResult;
 	private TestCaseListener testCaseListener;
 
-	private ShowCoverageResult showCoverageResult;
-
 	@Override
 	public void activate() {
 		showJUnitResult = new ShowJUnitResult();
 		DebugPlugin.getDefault().addDebugEventListener(showJUnitResult);
-
-		// showCoverageResult = new ShowCoverageResult(profilingService);
-		// DebugPlugin.getDefault().addDebugEventListener(showCoverageResult);
 
 		Display.getDefault().asyncExec(() -> {
 			testCaseListener = new TestCaseListener(bmEmfIndexManager, resourceLookup, projectManager);
@@ -74,16 +66,10 @@ public class UnitLauncherManager implements IManagedService {
 
 			}
 		});
-
-		// profilingService.toggleTargetWaitingState(true);
 	}
 
 	@Override
 	public void deactivate() {
-		// profilingService.toggleTargetWaitingState(false);
-		//
-		// DebugPlugin.getDefault().removeDebugEventListener(showCoverageResult);
-
 		DebugPlugin.getDefault().removeDebugEventListener(showJUnitResult);
 	}
 

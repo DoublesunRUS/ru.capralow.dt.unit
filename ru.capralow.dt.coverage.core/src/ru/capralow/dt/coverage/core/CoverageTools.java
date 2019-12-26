@@ -87,7 +87,7 @@ public final class CoverageTools {
 	}
 
 	public static ISessionImporter getImporter() {
-		return new SessionImporter(getSessionManager(), CoverageCorePlugin.getInstance().getExecutionDataFiles());
+		return new SessionImporter(getSessionManager());
 	}
 
 	/**

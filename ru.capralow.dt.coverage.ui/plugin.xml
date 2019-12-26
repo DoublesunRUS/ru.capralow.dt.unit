@@ -221,18 +221,6 @@
             id="ru.capralow.dt.coverage.ui.openSessionExecutionData"
             name="%OpenSessionExecutionData.name">
       </command>
-      <command
-            categoryId="ru.capralow.dt.coverage.ui"
-            defaultHandler="ru.capralow.dt.coverage.internal.ui.handlers.DumpExecutionDataHandler"
-            id="ru.capralow.dt.coverage.ui.dumpExecutionData"
-            name="%DumpExecutionData.name">
-      </command>
-      <command
-            categoryId="ru.capralow.dt.coverage.ui"
-            defaultHandler="ru.capralow.dt.coverage.internal.ui.handlers.ResetOnDumpHandler"
-            id="ru.capralow.dt.coverage.ui.resetOnDump"
-            name="%ResetOnDump.name">
-      </command>
    </extension>
 
    <extension

@@ -38,7 +38,7 @@ import com._1c.g5.v8.dt.metadata.mdclass.CommonModule;
 import com._1c.g5.v8.dt.metadata.mdclass.Configuration;
 
 /**
- * Launcher for local Java applications.
+ * Launcher for local Bsl applications.
  */
 public class BslApplicationLauncher extends CoverageLauncher {
 

@@ -12,6 +12,7 @@
  ******************************************************************************/
 package ru.capralow.dt.coverage.internal.core;
 
+import java.time.temporal.ChronoField;
 import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
@@ -67,11 +68,15 @@ public class ProfilingResultsDataSource implements IExecutionDataSource, ISessio
 	 */
 	public void readFrom(List<IProfilingResult> profilingResults) {
 		for (IProfilingResult profilingResult : profilingResults) {
+
+			sessionInfoStore.visitSessionInfo(new SessionInfo(profilingResult.getName(),
+					profilingResult.getDateOfSession().getLong(ChronoField.EPOCH_DAY),
+					System.currentTimeMillis()));
+
 			for (ILineProfilingResult result : profilingResult.getProfilingResults()) {
 				if (result.getModuleID().getType() == BSLModuleType.EXT_MD_MODULE)
 					continue;
 
-				sessionInfoStore.visitSessionInfo(new SessionInfo("id", 1, 2));
 				executionDataStore.visitClassExecution(new ExecutionData(123, "MyClass", 15));
 
 				result.getLine();

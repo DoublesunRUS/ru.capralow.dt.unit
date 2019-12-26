@@ -78,7 +78,6 @@ public class SessionImportWizard extends Wizard implements IImportWizard {
 		importer.setDescription(page2.getSessionDescription());
 		importer.setExecutionDataSource(page1.getExecutionDataSource());
 		importer.setScope(page2.getScope());
-		importer.setCopy(page1.getCreateCopy());
 		IRunnableWithProgress op = new IRunnableWithProgress() {
 			public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
 				try {

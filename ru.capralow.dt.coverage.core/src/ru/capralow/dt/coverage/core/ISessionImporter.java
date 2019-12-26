@@ -52,15 +52,6 @@ public interface ISessionImporter {
 	public void setScope(Set<URI> scope);
 
 	/**
-	 * Specifies whether the original file should be copied while importing.
-	 * Otherwise the coverage file a referenced only.
-	 *
-	 * @param copy
-	 *            flag, whether the coverage file should be copied
-	 */
-	public void setCopy(boolean copy);
-
-	/**
 	 * A call to this method triggers the actual import process.
 	 *
 	 * @param monitor

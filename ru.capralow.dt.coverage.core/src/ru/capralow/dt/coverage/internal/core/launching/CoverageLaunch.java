@@ -16,7 +16,6 @@ package ru.capralow.dt.coverage.internal.core.launching;
 
 import java.util.Set;
 
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.Launch;
 import org.eclipse.emf.common.util.URI;
@@ -39,11 +38,7 @@ public class CoverageLaunch extends Launch implements ICoverageLaunch {
 		super(launchConfiguration, CoverageTools.LAUNCH_MODE, null);
 		this.scope = set;
 		final CoverageCorePlugin plugin = CoverageCorePlugin.getInstance();
-		this.agentServer = new AgentServer(this,
-				plugin.getSessionManager(),
-				plugin.getExecutionDataFiles(),
-				plugin.getPreferences(),
-				profilingService);
+		this.agentServer = new AgentServer(this, plugin.getSessionManager(), plugin.getPreferences(), profilingService);
 	}
 
 	public AgentServer getAgentServer() {
@@ -54,10 +49,6 @@ public class CoverageLaunch extends Launch implements ICoverageLaunch {
 
 	public Set<URI> getScope() {
 		return scope;
-	}
-
-	public void requestDump(boolean reset) throws CoreException {
-		agentServer.requestDump(reset);
 	}
 
 }

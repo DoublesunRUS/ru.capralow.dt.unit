@@ -16,10 +16,8 @@ package ru.capralow.dt.coverage.core.launching;
 
 import java.util.Set;
 
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.jdt.core.IPackageFragmentRoot;
 
 /**
  * Extension of the {@link ILaunch} interface to keep specific information for
@@ -28,19 +26,10 @@ import org.eclipse.jdt.core.IPackageFragmentRoot;
 public interface ICoverageLaunch extends ILaunch {
 
 	/**
-	 * Returns the collection of {@link IPackageFragmentRoot} considered as the
-	 * scope for this launch.
+	 * Returns the collection of {@link URI} considered as the scope for this
+	 * launch.
 	 *
 	 * @return package fragment roots for this launch
 	 */
 	public Set<URI> getScope();
-
-	/**
-	 * Requests a new for this launch resulting in a new coverage session.
-	 *
-	 * @param reset
-	 *            if <code>true</code> execution data is reset for this launch
-	 */
-	public void requestDump(boolean reset) throws CoreException;
-
 }

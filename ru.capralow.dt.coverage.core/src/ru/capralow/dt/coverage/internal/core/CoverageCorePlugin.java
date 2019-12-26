@@ -57,8 +57,6 @@ public class CoverageCorePlugin extends Plugin {
 
 	private BslCoverageLoader coverageLoader;
 
-	private ExecutionDataFiles executionDataFiles;
-
 	public static synchronized Injector getInjector() {
 		if (injector == null)
 			injector = createInjector();
@@ -157,10 +155,7 @@ public class CoverageCorePlugin extends Plugin {
 		instance = this;
 		super.start(context);
 
-		executionDataFiles = new ExecutionDataFiles(getStateLocation());
-		executionDataFiles.deleteTemporaryFiles();
-
-		sessionManager = new SessionManager(executionDataFiles);
+		sessionManager = new SessionManager();
 
 		coverageLoader = new BslCoverageLoader(sessionManager);
 
@@ -170,12 +165,8 @@ public class CoverageCorePlugin extends Plugin {
 
 	@Override
 	public void stop(BundleContext context) throws Exception {
-		executionDataFiles.deleteTemporaryFiles();
-
 		DebugPlugin.getDefault().removeDebugEventListener(debugListener);
 		DebugPlugin.getDefault().getLaunchManager().removeLaunchListener(launchListener);
-
-		executionDataFiles = null;
 
 		coverageLoader.dispose();
 		coverageLoader = null;
@@ -205,9 +196,4 @@ public class CoverageCorePlugin extends Plugin {
 	public BslCoverageLoader getBslCoverageLoader() {
 		return coverageLoader;
 	}
-
-	public ExecutionDataFiles getExecutionDataFiles() {
-		return executionDataFiles;
-	}
-
 }
