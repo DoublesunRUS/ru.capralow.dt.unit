@@ -14,13 +14,14 @@
  ******************************************************************************/
 package ru.capralow.dt.coverage.core.analysis;
 
-import org.eclipse.jdt.core.IType;
 import org.jacoco.core.analysis.ICounter;
 import org.jacoco.core.analysis.ICoverageNode;
 import org.jacoco.core.internal.analysis.CounterImpl;
 
-import com._1c.g5.v8.dt.bsl.model.Module;
+import com._1c.g5.v8.dt.bsl.model.Method;
 import com._1c.g5.v8.dt.core.platform.IV8Project;
+import com._1c.g5.v8.dt.metadata.mdclass.MdObject;
+import com._1c.g5.v8.dt.metadata.mdclass.Subsystem;
 
 /**
  * The interface for coverage information attached to the Java model. It allows
@@ -79,19 +80,15 @@ public interface IBslModelCoverage extends ICoverageNode {
 			return new IV8Project[0];
 		}
 
-		public Module[] getPackageFragmentRoots() {
-			return new Module[0];
+		public Subsystem[] getSubsystems() {
+			return new Subsystem[0];
 		}
 
-		public Module[] getPackageFragments() {
-			return new Module[0];
+		public MdObject[] getMdObjects() {
+			return new MdObject[0];
 		}
 
-		public IType[] getTypes() {
-			return new IType[0];
-		}
-
-		public ICoverageNode getCoverageFor(Module element) {
+		public ICoverageNode getCoverageFor(Method element) {
 			return null;
 		}
 
@@ -100,43 +97,11 @@ public interface IBslModelCoverage extends ICoverageNode {
 		}
 	};
 
-	/**
-	 * Returns all Java projects where coverage information is available for.
-	 *
-	 * @return list of Java projects
-	 */
 	public IV8Project[] getProjects();
 
-	/**
-	 * Returns all package fragment roots where coverage information is available
-	 * for.
-	 *
-	 * @return list of package fragment roots.
-	 */
-	public Module[] getPackageFragmentRoots();
+	public Subsystem[] getSubsystems();
 
-	/**
-	 * Returns all package fragments where coverage information is available for.
-	 *
-	 * @return list of package fragments
-	 */
-	public Module[] getPackageFragments();
+	public MdObject[] getMdObjects();
 
-	/**
-	 * Returns all Java types where coverage information is available for.
-	 *
-	 * @return list of Java types
-	 */
-	public IType[] getTypes();
-
-	/**
-	 * Returns the coverage information associated with the given Java element. If
-	 * no information is available <code>null</code> is returned.
-	 *
-	 * @param element
-	 *            Java element to look for coverage information
-	 * @return associated coverage information of null
-	 */
-	public ICoverageNode getCoverageFor(Module element);
-
+	public ICoverageNode getCoverageFor(Method element);
 }

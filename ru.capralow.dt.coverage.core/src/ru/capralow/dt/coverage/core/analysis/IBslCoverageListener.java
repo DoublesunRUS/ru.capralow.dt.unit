@@ -9,12 +9,14 @@
  * Contributors:
  *    Marc R. Hoffmann - initial API and implementation
  *
+ * Adapted by Alexander Kapralov
+ *
  ******************************************************************************/
 package ru.capralow.dt.coverage.core.analysis;
 
 /**
  * Callback interface implemented by clients that want to be informed, when the
- * current Java model coverage has changes.
+ * current Bsl model coverage has changes.
  */
 public interface IBslCoverageListener {
 

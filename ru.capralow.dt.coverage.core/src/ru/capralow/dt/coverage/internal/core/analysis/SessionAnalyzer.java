@@ -15,31 +15,20 @@
 package ru.capralow.dt.coverage.internal.core.analysis;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.jdt.core.IClassFile;
-import org.eclipse.jdt.core.ICompilationUnit;
-import org.eclipse.jdt.core.IType;
-import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.osgi.util.NLS;
 import org.jacoco.core.analysis.CoverageNodeImpl;
-import org.jacoco.core.analysis.IBundleCoverage;
-import org.jacoco.core.analysis.IClassCoverage;
 import org.jacoco.core.analysis.ICoverageNode.ElementType;
-import org.jacoco.core.analysis.IPackageCoverage;
-import org.jacoco.core.analysis.ISourceFileCoverage;
 import org.jacoco.core.data.ExecutionData;
 import org.jacoco.core.data.ExecutionDataStore;
 import org.jacoco.core.data.SessionInfo;
 import org.jacoco.core.data.SessionInfoStore;
-import org.jacoco.core.internal.analysis.BundleCoverageImpl;
 import org.jacoco.core.internal.analysis.ClassCoverageImpl;
 import org.jacoco.core.internal.analysis.CounterImpl;
 import org.jacoco.core.internal.analysis.MethodCoverageImpl;
@@ -83,13 +72,9 @@ public class SessionAnalyzer {
 		session.accept(executionDataStore, sessionInfoStore);
 		monitor.worked(1);
 
-		final PackageFragementRootAnalyzer analyzer = new PackageFragementRootAnalyzer(executionDataStore);
-
 		for (final URI root : roots) {
 			if (monitor.isCanceled())
 				break;
-
-			// AnalyzedNodes analyzedNodes = analyzer.analyze(root);
 
 			final ClassCoverageImpl classCoverage = new ClassCoverageImpl(getName(root), 0, false);
 
@@ -103,10 +88,7 @@ public class SessionAnalyzer {
 
 			classCoverage.addMethod(methodCoverage);
 
-			modelCoverage.putFragment(root, classCoverage);
-
-			// processPackageFragmentRoot(root, analyzer, new SubProgressMonitor(monitor,
-			// 1));
+			modelCoverage.putMethod(root, root, classCoverage);
 		}
 		monitor.done();
 		PERFORMANCE.stopTimer("loading " + session.getDescription()); //$NON-NLS-1$
@@ -122,87 +104,11 @@ public class SessionAnalyzer {
 		return executionDataStore.getContents();
 	}
 
-	private void processPackageFragmentRoot(URI root, PackageFragementRootAnalyzer analyzer, IProgressMonitor monitor)
-			throws CoreException {
-		final TypeVisitor visitor = new TypeVisitor(analyzer.analyze(root));
-		new TypeTraverser(root).process(visitor, monitor);
-
-		final IBundleCoverage bundle = new BundleCoverageImpl(getName(root),
-				visitor.getClasses(),
-				visitor.getSources());
-		modelCoverage.putFragmentRoot(root, bundle);
-		putPackages(bundle.getPackages(), root);
-	}
-
-	// package private for testing
 	String getName(URI root) {
 		IFile moduleFile = resourceLookup.getPlatformResource(root);
 		IPath path = moduleFile.getFullPath();
 
 		return path.toString();
-	}
-
-	private void putPackages(Collection<IPackageCoverage> packages, URI root) {
-		for (IPackageCoverage c : packages) {
-			final String name = c.getName().replace('/', '.');
-			// final IPackageFragment fragment = root.getPackageFragment(name);
-			// modelCoverage.putFragment(fragment, c);
-		}
-	}
-
-	private class TypeVisitor implements ITypeVisitor {
-
-		private final AnalyzedNodes nodes;
-
-		private final Set<IClassCoverage> classes;
-		private final Set<ISourceFileCoverage> sources;
-
-		TypeVisitor(AnalyzedNodes nodes) {
-			this.nodes = nodes;
-			this.classes = new HashSet<>();
-			this.sources = new HashSet<>();
-		}
-
-		Collection<IClassCoverage> getClasses() {
-			return classes;
-		}
-
-		Collection<ISourceFileCoverage> getSources() {
-			return sources;
-		}
-
-		public void visit(IType type, String vmname) {
-			final IClassCoverage coverage = nodes.getClassCoverage(vmname);
-			if (coverage != null) {
-				classes.add(coverage);
-				// modelCoverage.putType(type, coverage);
-			}
-		}
-
-		public void visit(IClassFile classfile) throws JavaModelException {
-			final String vmname = classfile.getType().getFullyQualifiedName().replace('.', '/');
-			final IClassCoverage coverage = nodes.getClassCoverage(vmname);
-			if (coverage != null) {
-				modelCoverage.putClassFile(classfile, coverage);
-				// Add source file coverage manually in case of binary roots
-				// as we will not see compilation units:
-				final ISourceFileCoverage source = nodes.getSourceFileCoverage(coverage.getPackageName(),
-						coverage.getSourceFileName());
-				if (source != null) {
-					sources.add(source);
-				}
-			}
-		}
-
-		public void visit(ICompilationUnit unit) throws JavaModelException {
-			final String vmpackagename = unit.getParent().getElementName().replace('.', '/');
-			final ISourceFileCoverage coverage = nodes.getSourceFileCoverage(vmpackagename, unit.getElementName());
-			if (coverage != null) {
-				sources.add(coverage);
-				modelCoverage.putCompilationUnit(unit, coverage);
-			}
-		}
-
 	}
 
 }

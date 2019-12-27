@@ -19,37 +19,42 @@ import org.eclipse.core.runtime.IAdapterFactory;
 import org.jacoco.core.analysis.ICoverageNode;
 import org.jacoco.core.analysis.ISourceNode;
 
-import com._1c.g5.v8.dt.bsl.model.Module;
+import com._1c.g5.v8.dt.bsl.model.Method;
 
 import ru.capralow.dt.coverage.core.CoverageTools;
 import ru.capralow.dt.coverage.core.analysis.IBslModelCoverage;
 
 /**
- * This factory adapts IResource and Module objects to the corresponding
+ * This factory adapts IResource and Method objects to the corresponding
  * coverage information of the current session. The factory is hooked into the
  * workbench through the extension point
  * <code>org.eclipse.core.runtime.adapters</code>.
  */
 public class ModuleCoverageAdapterFactory implements IAdapterFactory {
 
-	public Object getAdapter(Object object, @SuppressWarnings("rawtypes") Class adapterType) {
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public Object getAdapter(Object object, Class adapterType) {
 		// if the object is a IResource find the corresponding Module
 		if (object instanceof IResource) {
-			object = ((IResource) object).getAdapter(Module.class);
-			if (object == null) {
+			object = ((IResource) object).getAdapter(Method.class);
+			if (object == null)
 				return null;
-			}
+
 		}
+
 		// then find the coverage information from the current session
 		IBslModelCoverage mc = CoverageTools.getBslModelCoverage();
 		if (mc == null) {
 			return null;
+
 		} else {
-			ICoverageNode coverage = mc.getCoverageFor((Module) object);
+			ICoverageNode coverage = mc.getCoverageFor((Method) object);
 			if (adapterType.isInstance(coverage)) {
 				return coverage;
+
 			} else {
 				return null;
+
 			}
 		}
 	}

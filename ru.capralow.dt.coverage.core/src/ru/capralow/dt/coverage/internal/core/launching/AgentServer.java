@@ -25,6 +25,7 @@ import ru.capralow.dt.coverage.core.ICorePreferences;
 import ru.capralow.dt.coverage.core.ISessionManager;
 import ru.capralow.dt.coverage.core.launching.ICoverageLaunch;
 import ru.capralow.dt.coverage.internal.core.CoreMessages;
+import ru.capralow.dt.coverage.internal.core.CoverageCorePlugin;
 import ru.capralow.dt.coverage.internal.core.CoverageSession;
 import ru.capralow.dt.coverage.internal.core.ProfilingResultsDataSource;
 
@@ -38,13 +39,12 @@ public class AgentServer {
 
 	private IProfilingService profilingService;
 
-	public AgentServer(ICoverageLaunch launch, ISessionManager sessionManager, ICorePreferences preferences,
-			IProfilingService profilingService) {
+	public AgentServer(ICoverageLaunch launch, ISessionManager sessionManager, ICorePreferences preferences) {
 		this.preferences = preferences;
 		this.launch = launch;
 		this.sessionManager = sessionManager;
 		this.dataReceived = false;
-		this.profilingService = profilingService;
+		this.profilingService = CoverageCorePlugin.getInjector().getInstance(IProfilingService.class);
 	}
 
 	public void start() {

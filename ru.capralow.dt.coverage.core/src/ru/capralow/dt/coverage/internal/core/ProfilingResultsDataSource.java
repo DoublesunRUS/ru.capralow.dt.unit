@@ -14,6 +14,7 @@ package ru.capralow.dt.coverage.internal.core;
 
 import java.time.temporal.ChronoField;
 import java.util.List;
+import java.util.UUID;
 
 import org.eclipse.core.runtime.CoreException;
 import org.jacoco.core.data.ExecutionData;
@@ -77,9 +78,16 @@ public class ProfilingResultsDataSource implements IExecutionDataSource, ISessio
 				if (result.getModuleID().getType() == BSLModuleType.EXT_MD_MODULE)
 					continue;
 
-				executionDataStore.visitClassExecution(new ExecutionData(123, "MyClass", 15));
+				long moduleID = UUID.fromString(result.getModuleID().getObjectID()).getMostSignificantBits()
+						& Long.MAX_VALUE;
 
-				result.getLine();
+				ExecutionData executionData = executionDataStore.get(moduleID);
+				if (executionData == null) {
+					executionData = new ExecutionData(moduleID, result.getMethodSignature(), 1000);
+					executionDataStore.visitClassExecution(executionData);
+				}
+
+				executionData.getProbes()[result.getLineNo() - 1] = true;
 			}
 		}
 	}

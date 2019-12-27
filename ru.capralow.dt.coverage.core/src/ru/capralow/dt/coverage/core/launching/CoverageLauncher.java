@@ -30,9 +30,6 @@ import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
 import org.eclipse.debug.core.model.ILaunchConfigurationDelegate2;
 import org.eclipse.osgi.util.NLS;
 
-import com._1c.g5.v8.dt.profiling.core.IProfilingService;
-import com.google.inject.Inject;
-
 import ru.capralow.dt.coverage.core.CoverageStatus;
 import ru.capralow.dt.coverage.core.ScopeUtils;
 import ru.capralow.dt.coverage.internal.core.CoreMessages;
@@ -52,9 +49,6 @@ public abstract class CoverageLauncher implements ICoverageLauncher, IExecutable
 	protected ILaunchConfigurationDelegate launchdelegate;
 
 	protected ILaunchConfigurationDelegate2 launchdelegate2;
-
-	@Inject
-	private IProfilingService profilingService;
 
 	// IExecutableExtension interface:
 
@@ -90,10 +84,6 @@ public abstract class CoverageLauncher implements ICoverageLauncher, IExecutable
 		final AgentServer server = coverageLaunch.getAgentServer();
 		server.start();
 
-		// Delegate to run mode launcher
-		// final AgentArgumentSupport argSupport = new AgentArgumentSupport();
-		// final ILaunchConfiguration adjusted =
-		// argSupport.addArgument(server.getPort(), configuration);
 		launchdelegate.launch(configuration, DELEGATELAUNCHMODE, launch, new SubProgressMonitor(monitor, 1));
 
 		monitor.done();
@@ -102,7 +92,7 @@ public abstract class CoverageLauncher implements ICoverageLauncher, IExecutable
 	// ILaunchConfigurationDelegate2 interface:
 
 	public ILaunch getLaunch(ILaunchConfiguration configuration, String mode) throws CoreException {
-		return new CoverageLaunch(configuration, ScopeUtils.getConfiguredScope(configuration), profilingService);
+		return new CoverageLaunch(configuration, ScopeUtils.getConfiguredScope(configuration));
 	}
 
 	public boolean buildForLaunch(ILaunchConfiguration configuration, String mode, IProgressMonitor monitor)

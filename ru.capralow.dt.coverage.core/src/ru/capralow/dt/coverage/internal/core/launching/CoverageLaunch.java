@@ -20,8 +20,6 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.Launch;
 import org.eclipse.emf.common.util.URI;
 
-import com._1c.g5.v8.dt.profiling.core.IProfilingService;
-
 import ru.capralow.dt.coverage.core.CoverageTools;
 import ru.capralow.dt.coverage.core.launching.ICoverageLaunch;
 import ru.capralow.dt.coverage.internal.core.CoverageCorePlugin;
@@ -34,11 +32,11 @@ public class CoverageLaunch extends Launch implements ICoverageLaunch {
 	private final Set<URI> scope;
 	private final AgentServer agentServer;
 
-	public CoverageLaunch(ILaunchConfiguration launchConfiguration, Set<URI> set, IProfilingService profilingService) {
+	public CoverageLaunch(ILaunchConfiguration launchConfiguration, Set<URI> set) {
 		super(launchConfiguration, CoverageTools.LAUNCH_MODE, null);
 		this.scope = set;
 		final CoverageCorePlugin plugin = CoverageCorePlugin.getInstance();
-		this.agentServer = new AgentServer(this, plugin.getSessionManager(), plugin.getPreferences(), profilingService);
+		this.agentServer = new AgentServer(this, plugin.getSessionManager(), plugin.getPreferences());
 	}
 
 	public AgentServer getAgentServer() {

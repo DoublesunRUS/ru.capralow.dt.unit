@@ -39,11 +39,9 @@ class CoveredElementsContentProvider extends WorkbenchContentProvider {
 			case GROUP:
 				return coverage.getProjects();
 			case BUNDLE:
-				return coverage.getPackageFragmentRoots();
-			case PACKAGE:
-				return coverage.getPackageFragments();
+				return coverage.getSubsystems();
 			case CLASS:
-				return coverage.getTypes();
+				return coverage.getMdObjects();
 			}
 		}
 		return new Object[0];
