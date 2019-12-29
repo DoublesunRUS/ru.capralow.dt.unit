@@ -14,11 +14,14 @@
  ******************************************************************************/
 package ru.capralow.dt.coverage.core;
 
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
+
+import com._1c.g5.v8.dt.profiling.core.IProfilingResult;
 
 /**
  * API for importing sessions. This interface is not intended to be implemented
@@ -38,9 +41,10 @@ public interface ISessionImporter {
 	 * Sets the source for execution data.
 	 *
 	 * @param source
-	 *            execution data source
+	 *            profiling results
 	 */
-	public void setExecutionDataSource(IExecutionDataSource source);
+
+	public void setProfilingResults(final List<IProfilingResult> source);
 
 	/**
 	 * Sets the set of package fragment roots that should be considered for coverage

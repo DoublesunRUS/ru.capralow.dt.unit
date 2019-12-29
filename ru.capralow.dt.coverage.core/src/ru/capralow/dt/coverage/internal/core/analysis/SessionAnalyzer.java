@@ -33,7 +33,12 @@ import org.jacoco.core.internal.analysis.ClassCoverageImpl;
 import org.jacoco.core.internal.analysis.CounterImpl;
 import org.jacoco.core.internal.analysis.MethodCoverageImpl;
 
+import com._1c.g5.v8.dt.bsl.model.Module;
 import com._1c.g5.v8.dt.core.platform.IResourceLookup;
+import com._1c.g5.v8.dt.debug.core.model.BslModuleReference;
+import com._1c.g5.v8.dt.debug.core.model.IBslModuleLocator;
+import com._1c.g5.v8.dt.profiling.core.ILineProfilingResult;
+import com._1c.g5.v8.dt.profiling.core.IProfilingResult;
 
 import ru.capralow.dt.coverage.core.ICoverageSession;
 import ru.capralow.dt.coverage.core.analysis.IBslModelCoverage;
@@ -63,33 +68,49 @@ public class SessionAnalyzer {
 
 		this.resourceLookup = CoverageCorePlugin.getInjector().getInstance(IResourceLookup.class);
 
+		IBslModuleLocator bslModuleLocator = CoverageCorePlugin.getInjector().getInstance(IBslModuleLocator.class);
+
 		modelCoverage = new BslModelCoverage();
 		final Collection<URI> roots = session.getScope();
 		monitor.beginTask(NLS.bind(CoreMessages.AnalyzingCoverageSession_task, session.getDescription()),
 				1 + roots.size());
-		executionDataStore = new ExecutionDataStore();
-		sessionInfoStore = new SessionInfoStore();
-		session.accept(executionDataStore, sessionInfoStore);
+		List<IProfilingResult> profilingResults = session.getProfilingResults();
 		monitor.worked(1);
 
-		for (final URI root : roots) {
+		for (IProfilingResult profilingResult : profilingResults) {
 			if (monitor.isCanceled())
 				break;
 
-			final ClassCoverageImpl classCoverage = new ClassCoverageImpl(getName(root), 0, false);
+			for (BslModuleReference moduleReference : profilingResult.getReferences()) {
+				if (monitor.isCanceled())
+					break;
 
-			final MethodCoverageImpl methodCoverage = new MethodCoverageImpl("name", "desc", "sign"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				if (moduleReference.getProject() == null)
+					continue;
 
-			final CoverageNodeImpl nodeCoverage = new CoverageNodeImpl(ElementType.METHOD, "string"); //$NON-NLS-1$
+				Module module = bslModuleLocator.getModule(moduleReference, true);
 
-			final CounterImpl nodeCounter = ((CounterImpl) nodeCoverage.getInstructionCounter()).increment(5, 3);
+				ClassCoverageImpl classCoverage = new ClassCoverageImpl(moduleReference.toString(), 0, false);
 
-			methodCoverage.increment(nodeCounter, nodeCounter, 1);
+				for (ILineProfilingResult profilingLine : profilingResult.getResultsForModule(moduleReference)) {
+					profilingLine.getLineNo();
+				}
 
-			classCoverage.addMethod(methodCoverage);
+				final MethodCoverageImpl methodCoverage = new MethodCoverageImpl("name", "desc", "sign"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
-			modelCoverage.putMethod(root, root, classCoverage);
+				final CoverageNodeImpl nodeCoverage = new CoverageNodeImpl(ElementType.METHOD, "string"); //$NON-NLS-1$
+
+				final CounterImpl nodeCounter = ((CounterImpl) nodeCoverage.getInstructionCounter()).increment(5, 3);
+
+				methodCoverage.increment(nodeCounter, nodeCounter, 1);
+
+				classCoverage.addMethod(methodCoverage);
+
+				// modelCoverage.putMethod(root, root, classCoverage);
+			}
+
 		}
+
 		monitor.done();
 		PERFORMANCE.stopTimer("loading " + session.getDescription()); //$NON-NLS-1$
 		PERFORMANCE.stopMemoryUsage("loading " + session.getDescription()); //$NON-NLS-1$

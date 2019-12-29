@@ -18,16 +18,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.debug.core.ILaunch;
-import org.eclipse.debug.core.ILaunchConfiguration;
-import org.eclipse.emf.common.util.URI;
 
 import ru.capralow.dt.coverage.core.ICoverageSession;
 import ru.capralow.dt.coverage.core.ISessionListener;
@@ -162,33 +158,36 @@ public class SessionManager implements ISessionManager {
 			IProgressMonitor monitor) throws CoreException {
 		monitor.beginTask(CoreMessages.MergingCoverageSessions_task, sessions.size());
 
-		// Merge all sessions
-		final Set<URI> scope = new HashSet<>();
-		final Set<ILaunchConfiguration> launches = new HashSet<>();
-		final ProfilingResultsDataSource memory = new ProfilingResultsDataSource();
-		for (ICoverageSession session : sessions) {
-			scope.addAll(session.getScope());
-			if (session.getLaunchConfiguration() != null) {
-				launches.add(session.getLaunchConfiguration());
-			}
-			session.accept(memory, memory);
-			monitor.worked(1);
-		}
-
-		// Adopt launch configuration only if there is exactly one
-		final ILaunchConfiguration launchconfiguration = launches.size() == 1 ? launches.iterator().next() : null;
-		final ICoverageSession merged = new CoverageSession(description, scope, memory, launchconfiguration);
-
-		// Update session list
-		synchronized (lock) {
-			addSession(merged, true, null);
-			for (ICoverageSession session : sessions) {
-				removeSession(session);
-			}
-		}
+		// // Merge all sessions
+		// final Set<URI> scope = new HashSet<>();
+		// final Set<ILaunchConfiguration> launches = new HashSet<>();
+		// final ProfilingResultsDataSource memory = new ProfilingResultsDataSource();
+		// for (ICoverageSession session : sessions) {
+		// scope.addAll(session.getScope());
+		// if (session.getLaunchConfiguration() != null) {
+		// launches.add(session.getLaunchConfiguration());
+		// }
+		// session.accept(memory, memory);
+		// monitor.worked(1);
+		// }
+		//
+		// // Adopt launch configuration only if there is exactly one
+		// final ILaunchConfiguration launchconfiguration = launches.size() == 1 ?
+		// launches.iterator().next() : null;
+		// final ICoverageSession merged = new CoverageSession(description, scope,
+		// memory, launchconfiguration);
+		//
+		// // Update session list
+		// synchronized (lock) {
+		// addSession(merged, true, null);
+		// for (ICoverageSession session : sessions) {
+		// removeSession(session);
+		// }
+		// }
 
 		monitor.done();
-		return merged;
+		// return merged;
+		return null;
 	}
 
 	public void addSessionListener(ISessionListener listener) {

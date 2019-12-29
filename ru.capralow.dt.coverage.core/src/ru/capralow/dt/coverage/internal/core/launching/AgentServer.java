@@ -27,7 +27,6 @@ import ru.capralow.dt.coverage.core.launching.ICoverageLaunch;
 import ru.capralow.dt.coverage.internal.core.CoreMessages;
 import ru.capralow.dt.coverage.internal.core.CoverageCorePlugin;
 import ru.capralow.dt.coverage.internal.core.CoverageSession;
-import ru.capralow.dt.coverage.internal.core.ProfilingResultsDataSource;
 
 public class AgentServer {
 
@@ -58,13 +57,10 @@ public class AgentServer {
 		if (profilingResults.isEmpty())
 			return;
 
-		ProfilingResultsDataSource dataSource = new ProfilingResultsDataSource();
-		dataSource.readFrom(profilingResults);
-
 		dataReceived = true;
 		final CoverageSession session = new CoverageSession(createDescription(),
 				launch.getScope(),
-				dataSource,
+				profilingResults,
 				launch.getLaunchConfiguration());
 		sessionManager.addSession(session, preferences.getActivateNewSessions(), launch);
 	}

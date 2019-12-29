@@ -16,6 +16,7 @@ package ru.capralow.dt.coverage.internal.core;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.runtime.CoreException;
@@ -25,8 +26,9 @@ import org.eclipse.emf.common.util.URI;
 import org.jacoco.core.data.IExecutionDataVisitor;
 import org.jacoco.core.data.ISessionInfoVisitor;
 
+import com._1c.g5.v8.dt.profiling.core.IProfilingResult;
+
 import ru.capralow.dt.coverage.core.ICoverageSession;
-import ru.capralow.dt.coverage.core.IExecutionDataSource;
 
 /**
  * A {@link ru.capralow.dt.coverage.core.ICoverageSession} implementation.
@@ -35,14 +37,14 @@ public class CoverageSession extends PlatformObject implements ICoverageSession 
 
 	private final String description;
 	private final Set<URI> scope;
-	private final IExecutionDataSource executionDataSource;
+	private final List<IProfilingResult> profilingResults;
 	private final ILaunchConfiguration launchConfiguration;
 
-	public CoverageSession(String description, Set<URI> set, IExecutionDataSource executionDataSource,
+	public CoverageSession(String description, Set<URI> set, List<IProfilingResult> profilingResults,
 			ILaunchConfiguration launchConfiguration) {
 		this.description = description;
 		this.scope = Collections.unmodifiableSet(new HashSet<URI>(set));
-		this.executionDataSource = executionDataSource;
+		this.profilingResults = profilingResults;
 		this.launchConfiguration = launchConfiguration;
 	}
 
@@ -56,13 +58,17 @@ public class CoverageSession extends PlatformObject implements ICoverageSession 
 		return scope;
 	}
 
+	public List<IProfilingResult> getProfilingResults() {
+		return profilingResults;
+	}
+
 	public ILaunchConfiguration getLaunchConfiguration() {
 		return launchConfiguration;
 	}
 
 	public void accept(IExecutionDataVisitor executionDataVisitor, ISessionInfoVisitor sessionInfoVisitor)
 			throws CoreException {
-		executionDataSource.accept(executionDataVisitor, sessionInfoVisitor);
+		// Нечего делать
 	}
 
 }
