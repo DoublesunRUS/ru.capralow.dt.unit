@@ -132,17 +132,24 @@ public class CoverageUIPlugin extends AbstractUIPlugin {
 	@Override
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
+
 		CoverageTools.setPreferences(UIPreferences.CORE_PREFERENCES);
+
 		CoverageTools.getSessionManager().addSessionListener(sessionListener);
+
 		editorTracker = new EditorTracker(getWorkbench());
+
 		instance = this;
 	}
 
 	@Override
 	public void stop(BundleContext context) throws Exception {
 		instance = null;
+
 		editorTracker.dispose();
+
 		CoverageTools.getSessionManager().removeSessionListener(sessionListener);
+
 		super.stop(context);
 	}
 

@@ -152,7 +152,6 @@ public class CoverageCorePlugin extends Plugin {
 
 	@Override
 	public void start(BundleContext context) throws Exception {
-		instance = this;
 		super.start(context);
 
 		sessionManager = new SessionManager();
@@ -161,10 +160,14 @@ public class CoverageCorePlugin extends Plugin {
 
 		DebugPlugin.getDefault().getLaunchManager().addLaunchListener(launchListener);
 		DebugPlugin.getDefault().addDebugEventListener(debugListener);
+
+		instance = this;
 	}
 
 	@Override
 	public void stop(BundleContext context) throws Exception {
+		instance = null;
+
 		DebugPlugin.getDefault().removeDebugEventListener(debugListener);
 		DebugPlugin.getDefault().getLaunchManager().removeLaunchListener(launchListener);
 
@@ -174,7 +177,6 @@ public class CoverageCorePlugin extends Plugin {
 		sessionManager = null;
 
 		super.stop(context);
-		instance = null;
 	}
 
 	public static CoverageCorePlugin getInstance() {

@@ -289,7 +289,7 @@ public class FrameworkUtils {
 
 	private static File getResourceFile(URI uri) {
 		String[] segments = uri.segments();
-		IPath resourcePath = UnitLauncherCorePlugin.getDefault().getStateLocation();
+		IPath resourcePath = UnitLauncherCorePlugin.getInstance().getStateLocation();
 		for (Integer i = 1; i < segments.length - 1; ++i) {
 			resourcePath = resourcePath.append(segments[i]);
 			File file = resourcePath.toFile();

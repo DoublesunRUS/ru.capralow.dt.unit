@@ -14,7 +14,8 @@ import com.google.inject.Injector;
 
 public class UnitLauncherUiPlugin extends AbstractUIPlugin {
 	public static final String ID = "ru.capralow.dt.unit.launcher.plugin.ui"; //$NON-NLS-1$
-	private static UnitLauncherUiPlugin plugin;
+
+	private static UnitLauncherUiPlugin instance;
 
 	public static IStatus createErrorStatus(String message) {
 		return new Status(IStatus.ERROR, ID, 0, message, (Throwable) null);
@@ -32,12 +33,12 @@ public class UnitLauncherUiPlugin extends AbstractUIPlugin {
 		return new Status(IStatus.ERROR, ID, 0, message, throwable);
 	}
 
-	public static UnitLauncherUiPlugin getDefault() {
-		return plugin;
+	public static UnitLauncherUiPlugin getInstance() {
+		return instance;
 	}
 
 	public static void log(IStatus status) {
-		getDefault().getLog().log(status);
+		getInstance().getLog().log(status);
 	}
 
 	private InjectorAwareServiceRegistrator registrator;
@@ -52,18 +53,23 @@ public class UnitLauncherUiPlugin extends AbstractUIPlugin {
 	}
 
 	@Override
-	public void start(BundleContext bundleContext) throws Exception {
-		plugin = this;
-		super.start(bundleContext);
-		registrator = new InjectorAwareServiceRegistrator(bundleContext, this::getInjector);
+	public void start(BundleContext сontext) throws Exception {
+		super.start(сontext);
+
+		registrator = new InjectorAwareServiceRegistrator(сontext, this::getInjector);
+
 		ServiceInitialization.schedule(() -> registrator.activateManagedService(UnitLauncherManager.class));
+
+		instance = this;
 	}
 
 	@Override
-	public void stop(BundleContext bundleContext) throws Exception {
+	public void stop(BundleContext сontext) throws Exception {
+		instance = null;
+
 		registrator.deactivateManagedServices(this);
-		super.stop(bundleContext);
-		plugin = null;
+
+		super.stop(сontext);
 	}
 
 	private Injector createInjector() {
