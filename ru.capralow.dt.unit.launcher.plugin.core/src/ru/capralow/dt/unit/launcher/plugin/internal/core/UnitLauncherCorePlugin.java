@@ -1,12 +1,12 @@
 package ru.capralow.dt.unit.launcher.plugin.internal.core;
 
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Plugin;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
-public class UnitLauncherCorePlugin extends AbstractUIPlugin {
-	public static final String ID = "ru.capralow.dt.unit.launcher.plugin.ui"; //$NON-NLS-1$
+public class UnitLauncherCorePlugin extends Plugin {
+	public static final String ID = "ru.capralow.dt.unit.launcher.plugin.core"; //$NON-NLS-1$
 
 	private static UnitLauncherCorePlugin instance;
 
@@ -35,17 +35,17 @@ public class UnitLauncherCorePlugin extends AbstractUIPlugin {
 	}
 
 	@Override
-	public void start(BundleContext сontext) throws Exception {
-		super.start(сontext);
+	public void start(BundleContext context) throws Exception {
+		super.start(context);
 
 		instance = this;
 	}
 
 	@Override
-	public void stop(BundleContext сontext) throws Exception {
+	public void stop(BundleContext context) throws Exception {
 		instance = null;
 
-		super.stop(сontext);
+		super.stop(context);
 	}
 
 }

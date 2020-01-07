@@ -29,13 +29,13 @@ import ru.capralow.dt.coverage.internal.core.CoverageCorePlugin;
  */
 public class CoverageLaunch extends Launch implements ICoverageLaunch {
 
-	private final Set<URI> scope;
-	private final AgentServer agentServer;
+	private Set<URI> scope;
+	private AgentServer agentServer;
 
 	public CoverageLaunch(ILaunchConfiguration launchConfiguration, Set<URI> set) {
 		super(launchConfiguration, CoverageTools.LAUNCH_MODE, null);
 		this.scope = set;
-		final CoverageCorePlugin plugin = CoverageCorePlugin.getInstance();
+		CoverageCorePlugin plugin = CoverageCorePlugin.getInstance();
 		this.agentServer = new AgentServer(this, plugin.getSessionManager(), plugin.getPreferences());
 	}
 

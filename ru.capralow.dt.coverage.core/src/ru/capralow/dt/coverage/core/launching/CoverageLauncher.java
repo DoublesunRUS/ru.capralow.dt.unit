@@ -80,8 +80,8 @@ public abstract class CoverageLauncher implements ICoverageLauncher, IExecutable
 		}
 
 		// Start agent server
-		final CoverageLaunch coverageLaunch = (CoverageLaunch) launch;
-		final AgentServer server = coverageLaunch.getAgentServer();
+		CoverageLaunch coverageLaunch = (CoverageLaunch) launch;
+		AgentServer server = coverageLaunch.getAgentServer();
 		server.start();
 
 		launchdelegate.launch(configuration, DELEGATELAUNCHMODE, launch, new SubProgressMonitor(monitor, 1));

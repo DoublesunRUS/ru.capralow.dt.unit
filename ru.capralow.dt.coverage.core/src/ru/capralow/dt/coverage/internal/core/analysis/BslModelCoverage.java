@@ -38,23 +38,23 @@ import ru.capralow.dt.coverage.internal.core.CoverageCorePlugin;
 public class BslModelCoverage extends CoverageNodeImpl implements IBslModelCoverage {
 
 	/** Maps Methods to coverage objects */
-	private final Map<Method, ICoverageNode> coverageMap = new HashMap<>();
+	private Map<Method, ICoverageNode> coverageMap = new HashMap<>();
 
 	/** List of all IV8Project objects with coverage information attached */
-	private final List<IV8Project> projects = new ArrayList<>();
+	private List<IV8Project> projects = new ArrayList<>();
 
 	/** List of all Subsystem objects with coverage information */
-	private final List<Subsystem> subsystems = new ArrayList<>();
+	private List<Subsystem> subsystems = new ArrayList<>();
 
 	/** List of all MdObject objects with coverage information */
-	private final List<MdObject> mdObjects = new ArrayList<>();
+	private List<MdObject> mdObjects = new ArrayList<>();
 
 	private IV8ProjectManager projectManager;
 
 	public BslModelCoverage() {
 		super(ElementType.GROUP, "BslModel"); //$NON-NLS-1$
 
-		this.projectManager = CoverageCorePlugin.getInjector().getInstance(IV8ProjectManager.class);
+		this.projectManager = CoverageCorePlugin.getInstance().getInjector().getInstance(IV8ProjectManager.class);
 	}
 
 	public void putMethod(Method method, MdObject mdObject, ICoverageNode coverage) {
@@ -79,7 +79,7 @@ public class BslModelCoverage extends CoverageNodeImpl implements IBslModelCover
 	}
 
 	public ICoverageNode getCoverageFor(Method element) {
-		final ICoverageNode coverage = coverageMap.get(element);
+		ICoverageNode coverage = coverageMap.get(element);
 		if (coverage != null) {
 			return coverage;
 		}

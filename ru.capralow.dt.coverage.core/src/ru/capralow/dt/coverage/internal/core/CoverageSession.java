@@ -35,10 +35,10 @@ import ru.capralow.dt.coverage.core.ICoverageSession;
  */
 public class CoverageSession extends PlatformObject implements ICoverageSession {
 
-	private final String description;
-	private final Set<URI> scope;
-	private final List<IProfilingResult> profilingResults;
-	private final ILaunchConfiguration launchConfiguration;
+	private String description;
+	private Set<URI> scope;
+	private List<IProfilingResult> profilingResults;
+	private ILaunchConfiguration launchConfiguration;
 
 	public CoverageSession(String description, Set<URI> set, List<IProfilingResult> profilingResults,
 			ILaunchConfiguration launchConfiguration) {

@@ -44,7 +44,7 @@ public interface ISessionImporter {
 	 *            profiling results
 	 */
 
-	public void setProfilingResults(final List<IProfilingResult> source);
+	public void setProfilingResults(List<IProfilingResult> source);
 
 	/**
 	 * Sets the set of package fragment roots that should be considered for coverage

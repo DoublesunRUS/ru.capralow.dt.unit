@@ -6,17 +6,14 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 
-import com._1c.g5.v8.dt.bm.index.emf.IBmEmfIndexManager;
-import com._1c.g5.v8.dt.core.platform.IResourceLookup;
-import com._1c.g5.v8.dt.core.platform.IV8ProjectManager;
+import ru.capralow.dt.unit.launcher.plugin.internal.ui.UnitLauncherUiPlugin;
 
 public class TestCaseListener extends SelectionAdapter {
 
 	OpenTestCaseAction action;
 
-	public TestCaseListener(IBmEmfIndexManager bmEmfIndexManager, IResourceLookup resourceLookup,
-			IV8ProjectManager projectManager) {
-		action = new OpenTestCaseAction(bmEmfIndexManager, resourceLookup, projectManager);
+	public TestCaseListener() {
+		action = UnitLauncherUiPlugin.getInstance().getInjector().getInstance(OpenTestCaseAction.class);
 	}
 
 	@Override

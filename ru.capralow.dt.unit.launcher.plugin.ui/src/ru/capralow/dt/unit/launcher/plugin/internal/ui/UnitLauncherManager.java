@@ -14,25 +14,13 @@ import org.eclipse.swt.widgets.Tree;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PlatformUI;
 
-import com._1c.g5.v8.dt.bm.index.emf.IBmEmfIndexManager;
-import com._1c.g5.v8.dt.core.platform.IResourceLookup;
-import com._1c.g5.v8.dt.core.platform.IV8ProjectManager;
 import com._1c.g5.wiring.IManagedService;
-import com.google.inject.Inject;
 
 import ru.capralow.dt.unit.launcher.plugin.internal.ui.junit.ShowJUnitResult;
 import ru.capralow.dt.unit.launcher.plugin.internal.ui.junit.TestCaseListener;
 
+@SuppressWarnings("restriction")
 public class UnitLauncherManager implements IManagedService {
-
-	@Inject
-	private IBmEmfIndexManager bmEmfIndexManager;
-
-	@Inject
-	private IResourceLookup resourceLookup;
-
-	@Inject
-	private IV8ProjectManager projectManager;
 
 	private ShowJUnitResult showJUnitResult;
 	private TestCaseListener testCaseListener;
@@ -43,7 +31,7 @@ public class UnitLauncherManager implements IManagedService {
 		DebugPlugin.getDefault().addDebugEventListener(showJUnitResult);
 
 		Display.getDefault().asyncExec(() -> {
-			testCaseListener = new TestCaseListener(bmEmfIndexManager, resourceLookup, projectManager);
+			testCaseListener = new TestCaseListener();
 			IWorkbenchPage activePage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 
 			TestRunnerViewPart junitViewPart = (TestRunnerViewPart) activePage.findView(ShowJUnitResult.JUNIT_PANEL_ID);
@@ -51,7 +39,7 @@ public class UnitLauncherManager implements IManagedService {
 				Field testViewerField = FieldUtils.getField(TestRunnerViewPart.class, "fTestViewer", true); //$NON-NLS-1$
 				TestViewer testViewer = (TestViewer) FieldUtils.readField(testViewerField, junitViewPart, true);
 
-				Field treeViewerField = FieldUtils.getField(TestViewer.class, "fTreeViewer", true);
+				Field treeViewerField = FieldUtils.getField(TestViewer.class, "fTreeViewer", true); //$NON-NLS-1$
 				TreeViewer junitPanelViewer = (TreeViewer) FieldUtils.readField(treeViewerField, testViewer, true);
 
 				Tree junitPanelTree = junitPanelViewer.getTree();

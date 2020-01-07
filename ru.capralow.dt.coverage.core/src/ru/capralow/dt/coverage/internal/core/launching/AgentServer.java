@@ -30,9 +30,9 @@ import ru.capralow.dt.coverage.internal.core.CoverageSession;
 
 public class AgentServer {
 
-	private final ICoverageLaunch launch;
-	private final ISessionManager sessionManager;
-	private final ICorePreferences preferences;
+	private ICoverageLaunch launch;
+	private ISessionManager sessionManager;
+	private ICorePreferences preferences;
 
 	private boolean dataReceived;
 
@@ -43,7 +43,7 @@ public class AgentServer {
 		this.launch = launch;
 		this.sessionManager = sessionManager;
 		this.dataReceived = false;
-		this.profilingService = CoverageCorePlugin.getInjector().getInstance(IProfilingService.class);
+		this.profilingService = CoverageCorePlugin.getInstance().getInjector().getInstance(IProfilingService.class);
 	}
 
 	public void start() {
@@ -58,10 +58,12 @@ public class AgentServer {
 			return;
 
 		dataReceived = true;
-		final CoverageSession session = new CoverageSession(createDescription(),
+
+		CoverageSession session = new CoverageSession(createDescription(),
 				launch.getScope(),
 				profilingResults,
 				launch.getLaunchConfiguration());
+
 		sessionManager.addSession(session, preferences.getActivateNewSessions(), launch);
 	}
 
@@ -70,7 +72,7 @@ public class AgentServer {
 	}
 
 	private String createDescription() {
-		final Object[] args = new Object[] { launch.getLaunchConfiguration().getName(), new Date() };
+		Object[] args = new Object[] { launch.getLaunchConfiguration().getName(), new Date() };
 		return MessageFormat.format(CoreMessages.LaunchSessionDescription_value, args);
 	}
 }

@@ -28,7 +28,7 @@ import ru.capralow.dt.coverage.core.ICorePreferences;
  */
 public class DefaultScopeFilter {
 
-	private final ICorePreferences preferences;
+	private ICorePreferences preferences;
 
 	/**
 	 * Creates a new filter based on the given preferences.
@@ -36,7 +36,7 @@ public class DefaultScopeFilter {
 	 * @param preferences
 	 *            call-back to retrieve current settings from.
 	 */
-	public DefaultScopeFilter(final ICorePreferences preferences) {
+	public DefaultScopeFilter(ICorePreferences preferences) {
 		this.preferences = preferences;
 	}
 
@@ -51,8 +51,8 @@ public class DefaultScopeFilter {
 	 * @throws CoreException
 	 *             may occur when accessing the Java model
 	 */
-	public Set<URI> filter(final Set<URI> all, final ILaunchConfiguration configuration) throws CoreException {
-		final Set<URI> filtered = new HashSet<>(all);
+	public Set<URI> filter(Set<URI> all, ILaunchConfiguration configuration) throws CoreException {
+		Set<URI> filtered = new HashSet<>(all);
 		// if (preferences.getDefaultScopeSameProjectOnly()) {
 		// sameProjectOnly(filtered, configuration);
 		// }

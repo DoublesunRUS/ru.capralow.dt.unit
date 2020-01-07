@@ -35,7 +35,7 @@ import ru.capralow.dt.coverage.internal.core.SessionImporter;
  * For central access to the tools provided by the coverage core plug-in this
  * class offers several static methods.
  */
-public final class CoverageTools {
+public class CoverageTools {
 
 	/**
 	 * The launch mode used for coverage sessions.
@@ -107,8 +107,8 @@ public final class CoverageTools {
 	 * @return list of running coverage launches
 	 */
 	public static List<ICoverageLaunch> getRunningCoverageLaunches() {
-		final List<ICoverageLaunch> result = new ArrayList<>();
-		for (final ILaunch launch : DebugPlugin.getDefault().getLaunchManager().getLaunches()) {
+		List<ICoverageLaunch> result = new ArrayList<>();
+		for (ILaunch launch : DebugPlugin.getDefault().getLaunchManager().getLaunches()) {
 			if (launch instanceof ICoverageLaunch && !launch.isTerminated()) {
 				result.add((ICoverageLaunch) launch);
 			}

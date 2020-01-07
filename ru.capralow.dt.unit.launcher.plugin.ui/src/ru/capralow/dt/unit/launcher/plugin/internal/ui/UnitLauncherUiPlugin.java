@@ -53,10 +53,10 @@ public class UnitLauncherUiPlugin extends AbstractUIPlugin {
 	}
 
 	@Override
-	public void start(BundleContext сontext) throws Exception {
-		super.start(сontext);
+	public void start(BundleContext context) throws Exception {
+		super.start(context);
 
-		registrator = new InjectorAwareServiceRegistrator(сontext, this::getInjector);
+		registrator = new InjectorAwareServiceRegistrator(context, this::getInjector);
 
 		ServiceInitialization.schedule(() -> registrator.activateManagedService(UnitLauncherManager.class));
 
@@ -64,12 +64,12 @@ public class UnitLauncherUiPlugin extends AbstractUIPlugin {
 	}
 
 	@Override
-	public void stop(BundleContext сontext) throws Exception {
+	public void stop(BundleContext context) throws Exception {
 		instance = null;
 
 		registrator.deactivateManagedServices(this);
 
-		super.stop(сontext);
+		super.stop(context);
 	}
 
 	private Injector createInjector() {

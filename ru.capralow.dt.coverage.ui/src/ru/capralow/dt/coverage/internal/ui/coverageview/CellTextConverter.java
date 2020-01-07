@@ -49,7 +49,7 @@ class CellTextConverter {
 	CellTextConverter(ViewSettings settings) {
 		this.settings = settings;
 		this.workbenchLabelProvider = new WorkbenchLabelProvider();
-		this.v8ProjectManager = CoverageUIPlugin.getInjector().getInstance(IV8ProjectManager.class);
+		this.v8ProjectManager = CoverageUIPlugin.getInstance().getInjector().getInstance(IV8ProjectManager.class);
 	}
 
 	String getElementName(Object element) {

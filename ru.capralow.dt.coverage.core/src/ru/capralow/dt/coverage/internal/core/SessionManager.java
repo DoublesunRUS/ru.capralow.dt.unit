@@ -34,11 +34,11 @@ import ru.capralow.dt.coverage.core.ISessionManager;
  */
 public class SessionManager implements ISessionManager {
 
-	private final Object lock;
-	private final List<ISessionListener> listeners;
+	private Object lock;
+	private List<ISessionListener> listeners;
 
-	private final List<ICoverageSession> sessions;
-	private final Map<Object, List<ICoverageSession>> launchmap;
+	private List<ICoverageSession> sessions;
+	private Map<Object, List<ICoverageSession>> launchmap;
 	private ICoverageSession activeSession;
 
 	public SessionManager() {
@@ -81,7 +81,7 @@ public class SessionManager implements ISessionManager {
 
 	public void removeSessionsFor(ILaunch launch) {
 		synchronized (lock) {
-			final List<ICoverageSession> sessionsToRemove = launchmap.get(launch);
+			List<ICoverageSession> sessionsToRemove = launchmap.get(launch);
 			if (sessionsToRemove != null) {
 				removeSessions(sessionsToRemove);
 			}
@@ -100,19 +100,19 @@ public class SessionManager implements ISessionManager {
 
 		// Remove Sessions
 		List<ICoverageSession> removedSessions = new ArrayList<>();
-		for (final ICoverageSession s : sessionsToRemove) {
+		for (ICoverageSession s : sessionsToRemove) {
 			if (sessions.remove(s)) {
 				removedSessions.add(s);
-				for (final List<ICoverageSession> mappedSessions : launchmap.values()) {
+				for (List<ICoverageSession> mappedSessions : launchmap.values()) {
 					mappedSessions.remove(s);
 				}
 			}
 		}
 
 		// Activate other session if active session was removed:
-		final boolean actived = sessionsToRemove.contains(activeSession);
+		boolean actived = sessionsToRemove.contains(activeSession);
 		if (actived) {
-			final int size = sessions.size();
+			int size = sessions.size();
 			activeSession = size == 0 ? null : sessions.get(size - 1);
 		}
 

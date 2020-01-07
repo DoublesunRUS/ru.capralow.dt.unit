@@ -14,7 +14,7 @@ public class ExecutableExtensionFactory extends AbstractGuiceAwareExecutableExte
 
 	@Override
 	protected Injector getInjector() {
-		return CoverageUIPlugin.getInjector();
+		return CoverageUIPlugin.getInstance().getInjector();
 	}
 
 }

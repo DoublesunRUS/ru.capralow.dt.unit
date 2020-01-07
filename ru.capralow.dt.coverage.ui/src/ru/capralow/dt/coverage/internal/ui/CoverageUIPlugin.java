@@ -79,11 +79,11 @@ public class CoverageUIPlugin extends AbstractUIPlugin {
 
 	private static CoverageUIPlugin instance;
 
-	private static Injector injector;
+	private Injector injector;
 
 	private EditorTracker editorTracker;
 
-	public static synchronized Injector getInjector() {
+	public synchronized Injector getInjector() {
 		if (injector == null)
 			injector = createInjector();
 

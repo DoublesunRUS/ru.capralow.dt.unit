@@ -40,7 +40,7 @@ import ru.capralow.dt.coverage.internal.core.DefaultScopeFilter;
 /**
  * Collection of utility methods to deal with analysis scope.
  */
-public final class ScopeUtils {
+public class ScopeUtils {
 
 	private ScopeUtils() {
 	}
@@ -53,8 +53,8 @@ public final class ScopeUtils {
 	 * @return scope as {@link URI} collection
 	 */
 	public static Set<URI> readScope(Collection<?> ids) {
-		final Set<URI> scope = new HashSet<>();
-		for (final Object handle : ids) {
+		Set<URI> scope = new HashSet<>();
+		for (Object handle : ids) {
 			URI moduleURI = URI.createURI((String) handle);
 			scope.add(moduleURI);
 		}
@@ -69,8 +69,8 @@ public final class ScopeUtils {
 	 * @return List of ids
 	 */
 	public static List<String> writeScope(Set<URI> scope) {
-		final List<String> ids = new ArrayList<>();
-		for (final URI root : scope) {
+		List<String> ids = new ArrayList<>();
+		for (URI root : scope) {
 			ids.add(root.toString());
 		}
 		return ids;
@@ -101,17 +101,19 @@ public final class ScopeUtils {
 	 *
 	 * @return configured scope
 	 */
-	public static Set<URI> getConfiguredScope(final ILaunchConfiguration configuration) throws CoreException {
-		final Set<URI> all = getOverallScope(configuration);
+	public static Set<URI> getConfiguredScope(ILaunchConfiguration configuration) throws CoreException {
+		Set<URI> all = getOverallScope(configuration);
 		@SuppressWarnings("rawtypes")
-		final List<?> selection = configuration.getAttribute(ICoverageLaunchConfigurationConstants.ATTR_SCOPE_IDS,
+		List<?> selection = configuration.getAttribute(ICoverageLaunchConfigurationConstants.ATTR_SCOPE_IDS,
 				(List) null);
 		if (selection == null) {
-			final DefaultScopeFilter filter = new DefaultScopeFilter(CoverageCorePlugin.getInstance().getPreferences());
+			DefaultScopeFilter filter = new DefaultScopeFilter(CoverageCorePlugin.getInstance().getPreferences());
 			return filter.filter(all, configuration);
+
 		} else {
 			all.retainAll(readScope(selection));
 			return all;
+
 		}
 	}
 
@@ -121,8 +123,8 @@ public final class ScopeUtils {
 	 * @return all package fragment roots
 	 */
 	public static Set<URI> getWorkspaceScope() throws JavaModelException {
-		final Set<URI> scope = new HashSet<>();
-		final IJavaModel model = JavaCore.create(ResourcesPlugin.getWorkspace().getRoot());
+		Set<URI> scope = new HashSet<>();
+		IJavaModel model = JavaCore.create(ResourcesPlugin.getWorkspace().getRoot());
 		for (IJavaProject p : model.getJavaProjects()) {
 			// scope.addAll(Arrays.asList(p.getPackageFragmentRoots()));
 		}
@@ -137,8 +139,8 @@ public final class ScopeUtils {
 	 * @return filtered set without JRE runtime entries
 	 */
 	public static Set<URI> filterUnsupportedEntries(Collection<URI> scope) throws JavaModelException {
-		final Set<URI> filtered = new HashSet<>();
-		for (final URI root : scope) {
+		Set<URI> filtered = new HashSet<>();
+		for (URI root : scope) {
 			// final IClasspathEntry entry = root.getRawClasspathEntry();
 			// switch (entry.getEntryKind()) {
 			// case IClasspathEntry.CPE_SOURCE:

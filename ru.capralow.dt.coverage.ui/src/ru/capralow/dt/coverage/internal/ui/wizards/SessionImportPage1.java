@@ -19,14 +19,11 @@ import static ru.capralow.dt.coverage.internal.ui.UIMessages.ImportSessionPage1E
 import static ru.capralow.dt.coverage.internal.ui.UIMessages.ImportSessionPage1ExecutionDataUrl_label;
 import static ru.capralow.dt.coverage.internal.ui.UIMessages.ImportSessionPage1ModeGroup_label;
 import static ru.capralow.dt.coverage.internal.ui.UIMessages.ImportSessionPage1NoExecutionDataFile_message;
-import static ru.capralow.dt.coverage.internal.ui.UIMessages.ImportSessionPage1NoExecutionDataUrl_message;
 import static ru.capralow.dt.coverage.internal.ui.UIMessages.ImportSessionPage1Reference_label;
 import static ru.capralow.dt.coverage.internal.ui.UIMessages.ImportSessionPage1_description;
 import static ru.capralow.dt.coverage.internal.ui.UIMessages.ImportSessionPage1_title;
 
 import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.IDialogSettings;
@@ -49,7 +46,6 @@ import org.eclipse.swt.widgets.Text;
 import org.jacoco.core.runtime.AgentOptions;
 
 import ru.capralow.dt.coverage.core.IExecutionDataSource;
-import ru.capralow.dt.coverage.core.URLExecutionDataSource;
 import ru.capralow.dt.coverage.internal.ui.ContextHelp;
 
 /**
@@ -189,22 +185,6 @@ public class SessionImportPage1 extends WizardPage {
 			File execfile = new File(filecombo.getText());
 			if (!execfile.exists() || !execfile.isFile()) {
 				setErrorMessage(ImportSessionPage1NoExecutionDataFile_message);
-				setPageComplete(false);
-				return;
-			}
-			try {
-				dataSource = new URLExecutionDataSource(execfile.toURL());
-			} catch (MalformedURLException e) {
-				setErrorMessage(ImportSessionPage1NoExecutionDataFile_message);
-				setPageComplete(false);
-				return;
-			}
-		}
-		if (urlradio.getSelection()) {
-			try {
-				dataSource = new URLExecutionDataSource(new URL(urlcombo.getText()));
-			} catch (MalformedURLException e) {
-				setErrorMessage(ImportSessionPage1NoExecutionDataUrl_message);
 				setPageComplete(false);
 				return;
 			}
