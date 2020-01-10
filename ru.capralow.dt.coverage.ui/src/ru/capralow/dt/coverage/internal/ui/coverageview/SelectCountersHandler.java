@@ -40,6 +40,7 @@ class SelectCountersHandler extends AbstractHandler implements IElementUpdater {
 		this.view = view;
 	}
 
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		final CounterEntity type = getType(event.getParameters());
 		settings.setCounters(type);
@@ -47,6 +48,7 @@ class SelectCountersHandler extends AbstractHandler implements IElementUpdater {
 		return null;
 	}
 
+	@Override
 	public void updateElement(UIElement element, @SuppressWarnings("rawtypes") Map parameters) {
 		final CounterEntity type = getType(parameters);
 		element.setChecked(settings.getCounters().equals(type));

@@ -37,6 +37,7 @@ class LinkWithSelectionHandler extends AbstractHandler implements IElementUpdate
 		this.tracker = tracker;
 	}
 
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		final boolean flag = !settings.isLinked();
 		settings.setLinked(flag);
@@ -44,6 +45,7 @@ class LinkWithSelectionHandler extends AbstractHandler implements IElementUpdate
 		return null;
 	}
 
+	@Override
 	public void updateElement(UIElement element, @SuppressWarnings("rawtypes") Map parameters) {
 		element.setChecked(settings.isLinked());
 	}

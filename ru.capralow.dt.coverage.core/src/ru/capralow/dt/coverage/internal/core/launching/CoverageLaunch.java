@@ -45,6 +45,7 @@ public class CoverageLaunch extends Launch implements ICoverageLaunch {
 
 	// ICoverageLaunch interface
 
+	@Override
 	public Set<URI> getScope() {
 		return scope;
 	}

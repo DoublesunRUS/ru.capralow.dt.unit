@@ -36,14 +36,17 @@ public class CoverageSessionInput extends PlatformObject implements IEditorInput
 		return session;
 	}
 
+	@Override
 	public ImageDescriptor getImageDescriptor() {
 		return CoverageUIPlugin.getImageDescriptor(CoverageUIPlugin.EVIEW_EXEC);
 	}
 
+	@Override
 	public String getName() {
 		return session.getDescription();
 	}
 
+	@Override
 	public String getToolTipText() {
 		return session.getDescription();
 	}
@@ -62,10 +65,12 @@ public class CoverageSessionInput extends PlatformObject implements IEditorInput
 		return session.equals(other.session);
 	}
 
+	@Override
 	public boolean exists() {
 		return false;
 	}
 
+	@Override
 	public IPersistableElement getPersistable() {
 		return null;
 	}

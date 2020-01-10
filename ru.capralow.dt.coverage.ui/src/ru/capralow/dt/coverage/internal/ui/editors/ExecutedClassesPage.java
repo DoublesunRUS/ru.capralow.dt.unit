@@ -31,8 +31,6 @@ import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.viewers.ViewerComparator;
 import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.ModifyEvent;
-import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
@@ -73,11 +71,7 @@ class ExecutedClassesPage extends FormPage {
 		body.setLayout(new org.eclipse.swt.layout.GridLayout(1, true));
 
 		filter = toolkit.createText(body, null, SWT.SINGLE | SWT.SEARCH | SWT.ICON_CANCEL);
-		filter.addModifyListener(new ModifyListener() {
-			public void modifyText(ModifyEvent e) {
-				triggerRefresh();
-			}
-		});
+		filter.addModifyListener(e -> triggerRefresh());
 		filter.setMessage(ExecutionDataEditorExecutedClassesPageFilter_message);
 		filter.setLayoutData(new GridData(SWT.FILL, 0, true, false));
 
@@ -121,8 +115,8 @@ class ExecutedClassesPage extends FormPage {
 		dataTableViewer.setComparator(new ViewerComparator());
 		dataTableViewer.setContentProvider(new AbstractExecutionDataContentProvider() {
 			@Override
-			public Object[] getElements(ExecutionDataContent content) {
-				return content.getExecutionData();
+			public Object[] getElements(ExecutionDataContent content2) {
+				return content2.getExecutionData();
 			}
 		});
 		dataTableViewer.setInput(content);

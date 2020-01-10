@@ -25,40 +25,48 @@ public interface ICorePreferences {
 	/**
 	 * Default behavior if no customization is set.
 	 */
-	public static final ICorePreferences DEFAULT = new ICorePreferences() {
+	ICorePreferences DEFAULT = new ICorePreferences() {
 
-		private AgentOptions AGENT_DEFAULTS = new AgentOptions();
+		private AgentOptions agentDefaults = new AgentOptions();
 
+		@Override
 		public boolean getActivateNewSessions() {
 			return true;
 		}
 
+		@Override
 		public boolean getAutoRemoveSessions() {
 			return false;
 		}
 
+		@Override
 		public boolean getDefaultScopeSourceFoldersOnly() {
 			return true;
 		}
 
+		@Override
 		public boolean getDefaultScopeSameProjectOnly() {
 			return false;
 		}
 
+		@Override
 		public String getDefaultScopeFilter() {
 			return "";//$NON-NLS-1$
 		}
 
+		@Override
 		public String getAgentIncludes() {
-			return AGENT_DEFAULTS.getIncludes();
+			return agentDefaults.getIncludes();
 		}
 
+		@Override
 		public String getAgentExcludes() {
-			return AGENT_DEFAULTS.getExcludes();
+			return agentDefaults.getExcludes();
 		}
 
+		@Override
 		public String getAgentExclClassloader() {
-			return AGENT_DEFAULTS.getExclClassloader();
+			return agentDefaults.getExclClassloader();
 		}
 
 	};
@@ -68,7 +76,7 @@ public interface ICorePreferences {
 	 *
 	 * @return <code>true</code>, if sessions should be activated
 	 */
-	public boolean getActivateNewSessions();
+	boolean getActivateNewSessions();
 
 	/**
 	 * Determines whether sessions should automatically be removed when their
@@ -76,7 +84,7 @@ public interface ICorePreferences {
 	 *
 	 * @return <code>true</code>, if sessions should be removed
 	 */
-	public boolean getAutoRemoveSessions();
+	boolean getAutoRemoveSessions();
 
 	/**
 	 * Specification of the default coverage scope behavior: Analyze source folders
@@ -85,7 +93,7 @@ public interface ICorePreferences {
 	 * @return <code>true</code>, if source folders only should be analyzed by
 	 *         default
 	 */
-	public boolean getDefaultScopeSourceFoldersOnly();
+	boolean getDefaultScopeSourceFoldersOnly();
 
 	/**
 	 * Specification of the default coverage scope behavior: Analyze code in the
@@ -95,7 +103,7 @@ public interface ICorePreferences {
 	 * @return <code>true</code>, if code in the same project should be analyzed
 	 *         only
 	 */
-	public boolean getDefaultScopeSameProjectOnly();
+	boolean getDefaultScopeSameProjectOnly();
 
 	/**
 	 * Returns a comma separated list of match strings that specifies patterns for
@@ -103,7 +111,7 @@ public interface ICorePreferences {
 	 *
 	 * @return List of match strings
 	 */
-	public String getDefaultScopeFilter();
+	String getDefaultScopeFilter();
 
 	/**
 	 * Returns the wildcard expression for classes to include.
@@ -111,7 +119,7 @@ public interface ICorePreferences {
 	 * @return wildcard expression for classes to include
 	 * @see org.jacoco.core.runtime.WildcardMatcher
 	 */
-	public String getAgentIncludes();
+	String getAgentIncludes();
 
 	/**
 	 * Returns the wildcard expression for classes to exclude.
@@ -119,7 +127,7 @@ public interface ICorePreferences {
 	 * @return wildcard expression for classes to exclude
 	 * @see org.jacoco.core.runtime.WildcardMatcher
 	 */
-	public String getAgentExcludes();
+	String getAgentExcludes();
 
 	/**
 	 * Returns the wildcard expression for excluded class loaders.
@@ -127,6 +135,6 @@ public interface ICorePreferences {
 	 * @return expression for excluded class loaders
 	 * @see org.jacoco.core.runtime.WildcardMatcher
 	 */
-	public String getAgentExclClassloader();
+	String getAgentExclClassloader();
 
 }

@@ -52,6 +52,7 @@ public abstract class CoverageLauncher implements ICoverageLauncher, IExecutable
 
 	// IExecutableExtension interface:
 
+	@Override
 	public void setInitializationData(IConfigurationElement config, String propertyName, Object data)
 			throws CoreException {
 		final String launchtype = config.getAttribute("type"); //$NON-NLS-1$
@@ -61,7 +62,7 @@ public abstract class CoverageLauncher implements ICoverageLauncher, IExecutable
 		}
 	}
 
-	private ILaunchConfigurationDelegate getLaunchDelegate(String launchtype) throws CoreException {
+	private static ILaunchConfigurationDelegate getLaunchDelegate(String launchtype) throws CoreException {
 		ILaunchConfigurationType type = DebugPlugin.getDefault().getLaunchManager()
 				.getLaunchConfigurationType(launchtype);
 		if (type == null) {
@@ -72,6 +73,7 @@ public abstract class CoverageLauncher implements ICoverageLauncher, IExecutable
 
 	// ILaunchConfigurationDelegate interface:
 
+	@Override
 	public void launch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor)
 			throws CoreException {
 		monitor.beginTask(NLS.bind(CoreMessages.Launching_task, configuration.getName()), 2);
@@ -91,35 +93,36 @@ public abstract class CoverageLauncher implements ICoverageLauncher, IExecutable
 
 	// ILaunchConfigurationDelegate2 interface:
 
+	@Override
 	public ILaunch getLaunch(ILaunchConfiguration configuration, String mode) throws CoreException {
 		return new CoverageLaunch(configuration, ScopeUtils.getConfiguredScope(configuration));
 	}
 
+	@Override
 	public boolean buildForLaunch(ILaunchConfiguration configuration, String mode, IProgressMonitor monitor)
 			throws CoreException {
-		if (launchdelegate2 == null) {
+		if (launchdelegate2 == null)
 			return true;
-		} else {
-			return launchdelegate2.buildForLaunch(configuration, DELEGATELAUNCHMODE, monitor);
-		}
+
+		return launchdelegate2.buildForLaunch(configuration, DELEGATELAUNCHMODE, monitor);
 	}
 
+	@Override
 	public boolean preLaunchCheck(ILaunchConfiguration configuration, String mode, IProgressMonitor monitor)
 			throws CoreException {
-		if (launchdelegate2 == null) {
+		if (launchdelegate2 == null)
 			return true;
-		} else {
-			return launchdelegate2.preLaunchCheck(configuration, DELEGATELAUNCHMODE, monitor);
-		}
+
+		return launchdelegate2.preLaunchCheck(configuration, DELEGATELAUNCHMODE, monitor);
 	}
 
+	@Override
 	public boolean finalLaunchCheck(ILaunchConfiguration configuration, String mode, IProgressMonitor monitor)
 			throws CoreException {
-		if (launchdelegate2 == null) {
+		if (launchdelegate2 == null)
 			return true;
-		} else {
-			return launchdelegate2.finalLaunchCheck(configuration, DELEGATELAUNCHMODE, monitor);
-		}
+
+		return launchdelegate2.finalLaunchCheck(configuration, DELEGATELAUNCHMODE, monitor);
 	}
 
 }

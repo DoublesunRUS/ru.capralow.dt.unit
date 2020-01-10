@@ -19,12 +19,8 @@ import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jface.dialogs.IDialogSettings;
-import org.eclipse.jface.viewers.ISelectionChangedListener;
-import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.ModifyEvent;
-import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
@@ -74,6 +70,7 @@ public class SessionImportPage2 extends WizardPage {
 		setDescription(UIMessages.ImportSessionPage1_description);
 	}
 
+	@Override
 	public void createControl(Composite parent) {
 		initializeDialogUnits(parent);
 		parent = new Composite(parent, SWT.NONE);
@@ -97,11 +94,7 @@ public class SessionImportPage2 extends WizardPage {
 		parent.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		new Label(parent, SWT.NONE).setText(UIMessages.ImportSessionPage1Description_label);
 		descriptiontext = new Text(parent, SWT.BORDER);
-		descriptiontext.addModifyListener(new ModifyListener() {
-			public void modifyText(ModifyEvent e) {
-				update();
-			}
-		});
+		descriptiontext.addModifyListener(e -> update());
 		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
 		gd.horizontalSpan = 2;
 		descriptiontext.setLayoutData(gd);
@@ -114,11 +107,7 @@ public class SessionImportPage2 extends WizardPage {
 		} catch (JavaModelException e) {
 			CoverageUIPlugin.log(e);
 		}
-		scopeviewer.addSelectionChangedListener(new ISelectionChangedListener() {
-			public void selectionChanged(SelectionChangedEvent event) {
-				update();
-			}
-		});
+		scopeviewer.addSelectionChangedListener(event -> update());
 		GridData gd = new GridData(GridData.FILL_BOTH);
 		gd.widthHint = convertHorizontalDLUsToPixels(120);
 		gd.heightHint = convertHeightInCharsToPixels(8);

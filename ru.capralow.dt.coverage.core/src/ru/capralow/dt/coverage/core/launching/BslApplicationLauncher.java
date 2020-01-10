@@ -45,6 +45,7 @@ public class BslApplicationLauncher extends CoverageLauncher {
 	@Inject
 	private IV8ProjectManager projectManager;
 
+	@Override
 	public Set<URI> getOverallScope(ILaunchConfiguration configuration) throws CoreException {
 
 		String configurationProjectName = configuration.getAttribute(IDebugConfigurationAttributes.PROJECT_NAME,

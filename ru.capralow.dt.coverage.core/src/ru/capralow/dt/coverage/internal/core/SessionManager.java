@@ -49,6 +49,7 @@ public class SessionManager implements ISessionManager {
 		this.activeSession = null;
 	}
 
+	@Override
 	public void addSession(ICoverageSession session, boolean activate, ILaunch launch) {
 		synchronized (lock) {
 			if (session == null) {
@@ -73,12 +74,14 @@ public class SessionManager implements ISessionManager {
 		}
 	}
 
+	@Override
 	public void removeSession(ICoverageSession session) {
 		synchronized (lock) {
 			removeSessions(Collections.singleton(session));
 		}
 	}
 
+	@Override
 	public void removeSessionsFor(ILaunch launch) {
 		synchronized (lock) {
 			List<ICoverageSession> sessionsToRemove = launchmap.get(launch);
@@ -88,6 +91,7 @@ public class SessionManager implements ISessionManager {
 		}
 	}
 
+	@Override
 	public void removeAllSessions() {
 		synchronized (lock) {
 			removeSessions(sessions);
@@ -125,12 +129,14 @@ public class SessionManager implements ISessionManager {
 		}
 	}
 
+	@Override
 	public List<ICoverageSession> getSessions() {
 		synchronized (lock) {
 			return new ArrayList<>(sessions);
 		}
 	}
 
+	@Override
 	public void activateSession(ICoverageSession session) {
 		synchronized (lock) {
 			if (sessions.contains(session) && !session.equals(activeSession)) {
@@ -140,12 +146,14 @@ public class SessionManager implements ISessionManager {
 		}
 	}
 
+	@Override
 	public ICoverageSession getActiveSession() {
 		synchronized (lock) {
 			return activeSession;
 		}
 	}
 
+	@Override
 	public void refreshActiveSession() {
 		synchronized (lock) {
 			if (activeSession != null) {
@@ -154,6 +162,7 @@ public class SessionManager implements ISessionManager {
 		}
 	}
 
+	@Override
 	public ICoverageSession mergeSessions(Collection<ICoverageSession> sessions, String description,
 			IProgressMonitor monitor) throws CoreException {
 		monitor.beginTask(CoreMessages.MergingCoverageSessions_task, sessions.size());
@@ -190,6 +199,7 @@ public class SessionManager implements ISessionManager {
 		return null;
 	}
 
+	@Override
 	public void addSessionListener(ISessionListener listener) {
 		if (listener == null) {
 			throw new IllegalArgumentException();
@@ -201,6 +211,7 @@ public class SessionManager implements ISessionManager {
 		}
 	}
 
+	@Override
 	public void removeSessionListener(ISessionListener listener) {
 		synchronized (lock) {
 			listeners.remove(listener);
@@ -209,21 +220,21 @@ public class SessionManager implements ISessionManager {
 
 	private void fireSessionAdded(ICoverageSession session) {
 		// copy to avoid concurrent modification issues
-		for (ISessionListener l : new ArrayList<ISessionListener>(listeners)) {
+		for (ISessionListener l : new ArrayList<>(listeners)) {
 			l.sessionAdded(session);
 		}
 	}
 
 	private void fireSessionRemoved(ICoverageSession session) {
 		// copy to avoid concurrent modification issues
-		for (ISessionListener l : new ArrayList<ISessionListener>(listeners)) {
+		for (ISessionListener l : new ArrayList<>(listeners)) {
 			l.sessionRemoved(session);
 		}
 	}
 
 	private void fireSessionActivated(ICoverageSession session) {
 		// copy to avoid concurrent modification issues
-		for (ISessionListener l : new ArrayList<ISessionListener>(listeners)) {
+		for (ISessionListener l : new ArrayList<>(listeners)) {
 			l.sessionActivated(session);
 		}
 	}

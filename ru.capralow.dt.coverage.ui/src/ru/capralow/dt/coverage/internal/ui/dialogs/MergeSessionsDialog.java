@@ -18,11 +18,7 @@ import java.util.List;
 
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.viewers.ArrayContentProvider;
-import org.eclipse.jface.viewers.CheckStateChangedEvent;
-import org.eclipse.jface.viewers.ICheckStateListener;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.ModifyEvent;
-import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
@@ -85,7 +81,7 @@ public class MergeSessionsDialog extends ListSelectionDialog {
 	 * @return selected sessions
 	 */
 	public Collection<ICoverageSession> getSessions() {
-		final Collection<ICoverageSession> sessions = new ArrayList<ICoverageSession>();
+		final Collection<ICoverageSession> sessions = new ArrayList<>();
 		for (Object s : getResult()) {
 			sessions.add((ICoverageSession) s);
 		}
@@ -108,11 +104,7 @@ public class MergeSessionsDialog extends ListSelectionDialog {
 		textdescr.setFont(composite.getFont());
 		textdescr.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		textdescr.setText(description);
-		textdescr.addModifyListener(new ModifyListener() {
-			public void modifyText(ModifyEvent e) {
-				updateButtonsEnableState();
-			}
-		});
+		textdescr.addModifyListener(e -> updateButtonsEnableState());
 
 		return super.createMessageArea(composite);
 	}
@@ -120,11 +112,7 @@ public class MergeSessionsDialog extends ListSelectionDialog {
 	@Override
 	protected Control createDialogArea(Composite parent) {
 		Control c = super.createDialogArea(parent);
-		getViewer().addCheckStateListener(new ICheckStateListener() {
-			public void checkStateChanged(CheckStateChangedEvent event) {
-				updateButtonsEnableState();
-			}
-		});
+		getViewer().addCheckStateListener(event -> updateButtonsEnableState());
 		Button b1 = getButton(IDialogConstants.SELECT_ALL_ID);
 		b1.addSelectionListener(new SelectionAdapter() {
 			@Override

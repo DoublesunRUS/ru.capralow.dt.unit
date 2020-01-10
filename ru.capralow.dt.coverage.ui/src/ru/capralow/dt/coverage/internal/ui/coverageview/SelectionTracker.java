@@ -42,6 +42,62 @@ class SelectionTracker {
 	private IJavaElement currentSelection = null;
 
 	private final ISelectionListener listener = new ISelectionListener() {
+		/**
+		 * Try to derive a java element handle from the given object.
+		 *
+		 * @param object
+		 *            base object
+		 * @return java element handle or <code>null</code>
+		 */
+		private IJavaElement getJavaElement(Object object) {
+			if (object instanceof IJavaElement) {
+				return (IJavaElement) object;
+			}
+			if (object instanceof IAdaptable) {
+				IAdaptable a = (IAdaptable) object;
+				return a.getAdapter(IJavaElement.class);
+			}
+			return null;
+		}
+
+		/**
+		 * Try to identify a nested java element of the given element from a textual
+		 * selection in its source code. This might be possible if the given element is
+		 * a compilation unit or class file.
+		 *
+		 * @param unit
+		 *            unit to search
+		 * @param selection
+		 *            selection within this unit
+		 * @return nested element or the unit itself
+		 */
+		private IJavaElement findElementAtCursor(IJavaElement unit, ISelection selection) {
+			int pos = -1;
+			if (selection instanceof ITextSelection) {
+				pos = ((ITextSelection) selection).getOffset();
+			}
+			if (selection instanceof IMarkSelection) {
+				pos = ((IMarkSelection) selection).getOffset();
+			}
+			if (pos == -1)
+				return unit;
+			IJavaElement element = null;
+			try {
+				switch (unit.getElementType()) {
+				case IJavaElement.COMPILATION_UNIT:
+					element = ((ICompilationUnit) unit).getElementAt(pos);
+					break;
+				case IJavaElement.CLASS_FILE:
+					element = ((IClassFile) unit).getElementAt(pos);
+					break;
+				}
+			} catch (JavaModelException e) {
+				// we ignore this
+			}
+			return element == null ? unit : element;
+		}
+
+		@Override
 		public void selectionChanged(IWorkbenchPart part, ISelection selection) {
 			if (part != targetview) {
 				if (selection instanceof IStructuredSelection) {
@@ -63,61 +119,6 @@ class SelectionTracker {
 			}
 		}
 	};
-
-	/**
-	 * Try to derive a java element handle from the given object.
-	 *
-	 * @param object
-	 *            base object
-	 * @return java element handle or <code>null</code>
-	 */
-	private IJavaElement getJavaElement(Object object) {
-		if (object instanceof IJavaElement) {
-			return (IJavaElement) object;
-		}
-		if (object instanceof IAdaptable) {
-			IAdaptable a = (IAdaptable) object;
-			return (IJavaElement) a.getAdapter(IJavaElement.class);
-		}
-		return null;
-	}
-
-	/**
-	 * Try to identify a nested java element of the given element from a textual
-	 * selection in its source code. This might be possible if the given element is
-	 * a compilation unit or class file.
-	 *
-	 * @param unit
-	 *            unit to search
-	 * @param selection
-	 *            selection within this unit
-	 * @return nested element or the unit itself
-	 */
-	private IJavaElement findElementAtCursor(IJavaElement unit, ISelection selection) {
-		int pos = -1;
-		if (selection instanceof ITextSelection) {
-			pos = ((ITextSelection) selection).getOffset();
-		}
-		if (selection instanceof IMarkSelection) {
-			pos = ((IMarkSelection) selection).getOffset();
-		}
-		if (pos == -1)
-			return unit;
-		IJavaElement element = null;
-		try {
-			switch (unit.getElementType()) {
-			case IJavaElement.COMPILATION_UNIT:
-				element = ((ICompilationUnit) unit).getElementAt(pos);
-				break;
-			case IJavaElement.CLASS_FILE:
-				element = ((IClassFile) unit).getElementAt(pos);
-				break;
-			}
-		} catch (JavaModelException e) {
-			// we ignore this
-		}
-		return element == null ? unit : element;
-	}
 
 	/**
 	 * Selects the given element in the taget viewer when the tracker is enabled and

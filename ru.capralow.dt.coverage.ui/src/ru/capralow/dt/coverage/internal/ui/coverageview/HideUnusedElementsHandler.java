@@ -35,12 +35,14 @@ class HideUnusedElementsHandler extends AbstractHandler implements IElementUpdat
 		this.view = view;
 	}
 
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		settings.setHideUnusedElements(!settings.getHideUnusedElements());
 		view.refreshViewer();
 		return null;
 	}
 
+	@Override
 	public void updateElement(UIElement element, @SuppressWarnings("rawtypes") Map parameters) {
 		element.setChecked(settings.getHideUnusedElements());
 	}

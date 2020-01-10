@@ -46,11 +46,12 @@ public class ExportSessionHandler extends AbstractSessionManagerHandler {
 		return !sessionManager.getSessions().isEmpty();
 	}
 
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 
 		final IWorkbenchSite site = HandlerUtil.getActiveSite(event);
-		final ICommandService cs = (ICommandService) site.getService(ICommandService.class);
-		final IHandlerService hs = (IHandlerService) site.getService(IHandlerService.class);
+		final ICommandService cs = site.getService(ICommandService.class);
+		final IHandlerService hs = site.getService(IHandlerService.class);
 		final Command command = cs.getCommand(IWorkbenchCommandConstants.FILE_EXPORT);
 
 		try {

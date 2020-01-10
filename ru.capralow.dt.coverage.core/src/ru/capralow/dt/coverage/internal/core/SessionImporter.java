@@ -41,18 +41,22 @@ public class SessionImporter implements ISessionImporter {
 		this.sessionManager = sessionManager;
 	}
 
+	@Override
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
+	@Override
 	public void setProfilingResults(final List<IProfilingResult> source) {
 		this.profilingResults = source;
 	}
 
+	@Override
 	public void setScope(Set<URI> scope) {
 		this.scope = scope;
 	}
 
+	@Override
 	public void importSession(IProgressMonitor monitor) throws CoreException {
 		monitor.beginTask(CoreMessages.ImportingSession_task, 2);
 		monitor.worked(1);

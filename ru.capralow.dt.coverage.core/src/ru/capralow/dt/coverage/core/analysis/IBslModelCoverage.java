@@ -34,74 +34,110 @@ public interface IBslModelCoverage extends ICoverageNode {
 	 * This instance is used to indicate that a coverage session is currently
 	 * loading.
 	 */
-	public static final IBslModelCoverage LOADING = new IBslModelCoverage() {
+	IBslModelCoverage LOADING = new IBslModelCoverage() {
 
+		@Override
 		public ElementType getElementType() {
 			return ElementType.GROUP;
 		}
 
+		@Override
 		public String getName() {
 			return "LOADING"; //$NON-NLS-1$
 		}
 
+		@Override
 		public ICounter getInstructionCounter() {
 			return CounterImpl.COUNTER_0_0;
 		}
 
+		@Override
 		public ICounter getBranchCounter() {
 			return CounterImpl.COUNTER_0_0;
 		}
 
+		@Override
 		public ICounter getLineCounter() {
 			return CounterImpl.COUNTER_0_0;
 		}
 
+		@Override
 		public ICounter getComplexityCounter() {
 			return CounterImpl.COUNTER_0_0;
 		}
 
+		@Override
 		public ICounter getMethodCounter() {
 			return CounterImpl.COUNTER_0_0;
 		}
 
+		@Override
 		public ICounter getClassCounter() {
 			return CounterImpl.COUNTER_0_0;
 		}
 
+		@Override
 		public ICounter getCounter(CounterEntity entity) {
 			return CounterImpl.COUNTER_0_0;
 		}
 
+		@Override
 		public ICoverageNode getPlainCopy() {
 			return this;
 		}
 
+		@Override
 		public IV8Project[] getProjects() {
 			return new IV8Project[0];
 		}
 
+		@Override
 		public Subsystem[] getSubsystems() {
 			return new Subsystem[0];
 		}
 
+		@Override
 		public MdObject[] getMdObjects() {
 			return new MdObject[0];
 		}
 
+		@Override
+		public ICoverageNode getCoverageFor(IV8Project element) {
+			return null;
+		}
+
+		@Override
+		public ICoverageNode getCoverageFor(Subsystem element) {
+			return null;
+		}
+
+		@Override
+		public ICoverageNode getCoverageFor(MdObject element) {
+			return null;
+		}
+
+		@Override
 		public ICoverageNode getCoverageFor(Method element) {
 			return null;
 		}
 
+		@Override
 		public boolean containsCode() {
 			return false;
 		}
 	};
 
-	public IV8Project[] getProjects();
+	IV8Project[] getProjects();
 
-	public Subsystem[] getSubsystems();
+	Subsystem[] getSubsystems();
 
-	public MdObject[] getMdObjects();
+	MdObject[] getMdObjects();
 
-	public ICoverageNode getCoverageFor(Method element);
+	ICoverageNode getCoverageFor(IV8Project element);
+
+	ICoverageNode getCoverageFor(Subsystem element);
+
+	ICoverageNode getCoverageFor(MdObject element);
+
+	ICoverageNode getCoverageFor(Method element);
 }

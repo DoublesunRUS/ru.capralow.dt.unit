@@ -35,6 +35,7 @@ public class RelaunchSessionHandler extends AbstractSessionManagerHandler {
 		return session != null && session.getLaunchConfiguration() != null;
 	}
 
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		final ICoverageSession session = sessionManager.getActiveSession();
 		final ILaunchConfiguration config = session.getLaunchConfiguration();

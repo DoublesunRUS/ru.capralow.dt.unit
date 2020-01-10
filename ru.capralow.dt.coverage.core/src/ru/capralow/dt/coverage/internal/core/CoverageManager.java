@@ -22,22 +22,26 @@ public class CoverageManager implements IManagedService {
 	private static final IStatus PROMPT_STATUS = new Status(IStatus.INFO, "org.eclipse.debug.ui", 200, "", null); //$NON-NLS-1$//$NON-NLS-2$
 
 	private ILaunchListener launchListener = new ILaunchListener() {
+		@Override
 		public void launchRemoved(ILaunch launch) {
 			if (CoverageCorePlugin.getInstance().getPreferences().getAutoRemoveSessions()) {
 				CoverageCorePlugin.getInstance().getSessionManager().removeSessionsFor(launch);
 			}
 		}
 
+		@Override
 		public void launchAdded(ILaunch launch) {
 			// Нечего делать
 		}
 
+		@Override
 		public void launchChanged(ILaunch launch) {
 			// Нечего делать
 		}
 	};
 
 	private IDebugEventSetListener debugListener = new IDebugEventSetListener() {
+		@Override
 		public void handleDebugEvents(DebugEvent[] events) {
 			for (DebugEvent e : events) {
 				if (e.getSource() instanceof IProcess && e.getKind() == DebugEvent.TERMINATE) {
@@ -69,12 +73,12 @@ public class CoverageManager implements IManagedService {
 			if (prompter == null) {
 				if (status.getSeverity() == IStatus.ERROR) {
 					throw new CoreException(status);
-				} else {
-					return true;
 				}
-			} else {
-				return ((Boolean) prompter.handleStatus(status, info)).booleanValue();
+
+				return true;
 			}
+
+			return ((Boolean) prompter.handleStatus(status, info)).booleanValue();
 		}
 
 		private void checkExecutionData(CoverageLaunch launch) {

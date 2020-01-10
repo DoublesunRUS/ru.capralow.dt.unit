@@ -66,14 +66,17 @@ public class SessionExporter implements ISessionExporter {
 		this.session = session;
 	}
 
+	@Override
 	public void setFormat(ExportFormat format) {
 		this.format = format;
 	}
 
+	@Override
 	public void setDestination(String filename) {
 		this.destination = filename;
 	}
 
+	@Override
 	public void export(IProgressMonitor monitor) throws CoreException {
 		try {
 			if (EXEC.equals(format)) {
@@ -144,15 +147,14 @@ public class SessionExporter implements ISessionExporter {
 		}
 	}
 
-	private ISourceFileLocator createSourceFileLocator(IPackageFragmentRoot root) throws JavaModelException {
-		if (root.getKind() == IPackageFragmentRoot.K_SOURCE) {
+	private static ISourceFileLocator createSourceFileLocator(IPackageFragmentRoot root) throws JavaModelException {
+		if (root.getKind() == IPackageFragmentRoot.K_SOURCE)
 			return new SourceFolderSourceFileLocator(root);
-		} else {
-			return new LibrarySourceFileLocator(root);
-		}
+
+		return new LibrarySourceFileLocator(root);
 	}
 
-	private static abstract class AbstractSourceFileLocator implements ISourceFileLocator {
+	private abstract static class AbstractSourceFileLocator implements ISourceFileLocator {
 
 		protected final IPackageFragmentRoot root;
 		private final int tabWidth;
@@ -163,20 +165,22 @@ public class SessionExporter implements ISessionExporter {
 			this.tabWidth = IndentManipulation.getTabWidth(options);
 		}
 
+		@Override
 		public final int getTabWidth() {
 			return tabWidth;
 		}
 
+		@Override
 		public final Reader getSourceFile(String packagename, String sourcename) throws IOException {
 			try {
 				packagename = packagename.replace('/', '.');
 				final IPackageFragment pkg = root.getPackageFragment(packagename);
 				final String source = getSourceReference(pkg, sourcename).getSource();
-				if (source != null) {
+				if (source != null)
 					return new StringReader(source);
-				} else {
-					return null;
-				}
+
+				return null;
+
 			} catch (CoreException e) {
 				final IOException ioException = new IOException(e.getMessage());
 				throw (IOException) ioException.initCause(e);

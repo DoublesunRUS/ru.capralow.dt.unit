@@ -26,6 +26,7 @@ import ru.capralow.dt.coverage.internal.ui.CoverageUIPlugin;
  */
 public class CoverageAnnotationImageProvider implements IAnnotationImageProvider {
 
+	@Override
 	public String getImageDescriptorId(Annotation annotation) {
 		if (annotation instanceof CoverageAnnotation) {
 			final ICounter branches = ((CoverageAnnotation) annotation).getLine().getBranchCounter();
@@ -41,10 +42,12 @@ public class CoverageAnnotationImageProvider implements IAnnotationImageProvider
 		return null;
 	}
 
+	@Override
 	public ImageDescriptor getImageDescriptor(String imageDescritporId) {
 		return CoverageUIPlugin.getImageDescriptor(imageDescritporId);
 	}
 
+	@Override
 	public Image getManagedImage(Annotation annotation) {
 		// we don't manage images ourself
 		return null;

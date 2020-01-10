@@ -24,13 +24,15 @@ abstract class AbstractExecutionDataContentProvider implements IStructuredConten
 
 	private Viewer viewer;
 
+	@Override
 	public final Object[] getElements(Object inputElement) {
 		final ExecutionDataContent content = (ExecutionDataContent) inputElement;
 		return getElements(content);
 	}
 
-	public final void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
-		this.viewer = viewer;
+	@Override
+	public final void inputChanged(Viewer viewer2, Object oldInput, Object newInput) {
+		this.viewer = viewer2;
 		if (oldInput != null) {
 			((ExecutionDataContent) oldInput).removePropertyListener(this);
 		}
@@ -39,9 +41,11 @@ abstract class AbstractExecutionDataContentProvider implements IStructuredConten
 		}
 	}
 
+	@Override
 	public final void dispose() {
 	}
 
+	@Override
 	public final void propertyChanged(Object source, int propId) {
 		viewer.refresh();
 	}

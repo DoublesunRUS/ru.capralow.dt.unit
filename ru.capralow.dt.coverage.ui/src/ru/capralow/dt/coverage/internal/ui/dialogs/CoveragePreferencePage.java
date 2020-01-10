@@ -138,7 +138,7 @@ public class CoveragePreferencePage extends FieldEditorPreferencePage implements
 		adjustGroupLayout(group);
 	}
 
-	private Group createGroup(final Composite parent, final String text) {
+	private static Group createGroup(final Composite parent, final String text) {
 		final Group group = new Group(parent, SWT.NONE);
 		group.setText(text);
 		group.setFont(parent.getFont());
@@ -147,7 +147,7 @@ public class CoveragePreferencePage extends FieldEditorPreferencePage implements
 		return group;
 	}
 
-	private void adjustGroupLayout(final Group group) {
+	private static void adjustGroupLayout(final Group group) {
 		// Unlike the top level controls we need margins for a control in a group:
 		GridLayout layout = (GridLayout) group.getLayout();
 		layout.marginWidth = 5;
@@ -164,6 +164,7 @@ public class CoveragePreferencePage extends FieldEditorPreferencePage implements
 		link.getControl().setLayoutData(new GridData());
 	}
 
+	@Override
 	public void init(IWorkbench workbench) {
 		// nothing to do here
 	}

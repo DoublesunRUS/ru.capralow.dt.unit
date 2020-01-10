@@ -32,6 +32,7 @@ public class RemoveActiveSessionHandler extends AbstractSessionManagerHandler {
 		return sessionManager.getActiveSession() != null;
 	}
 
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		final ICoverageSession session = sessionManager.getActiveSession();
 		sessionManager.removeSession(session);

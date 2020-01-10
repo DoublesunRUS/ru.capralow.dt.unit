@@ -50,7 +50,7 @@ public class CoveragePropertyPage extends PropertyPage {
 	private static final NumberFormat COVERAGE_VALUE = new DecimalFormat(
 			UIMessages.CoveragePropertyPageColumnCoverage_value);
 
-	private static final NumberFormat COUNTER_VALUE = DecimalFormat.getIntegerInstance();
+	private static final NumberFormat COUNTER_VALUE = NumberFormat.getIntegerInstance();
 
 	@Override
 	protected Control createContents(Composite parent) {
@@ -80,7 +80,7 @@ public class CoveragePropertyPage extends PropertyPage {
 		return parent;
 	}
 
-	private String getSessionDescription() {
+	private static String getSessionDescription() {
 		ICoverageSession session = CoverageTools.getSessionManager().getActiveSession();
 		return session == null ? UIMessages.CoveragePropertyPageNoSession_value : session.getDescription();
 	}
@@ -117,10 +117,12 @@ public class CoveragePropertyPage extends PropertyPage {
 
 					@Override
 					protected void erase(Event event, Object element) {
+						// Нечего делать
 					}
 
 					@Override
 					protected void measure(Event event, Object element) {
+						// Нечего делать
 					}
 				});
 		createColumn(viewer,
@@ -151,7 +153,7 @@ public class CoveragePropertyPage extends PropertyPage {
 		viewer.setContentProvider(ArrayContentProvider.getInstance());
 		viewer.addFilter(new ViewerFilter() {
 			@Override
-			public boolean select(Viewer viewer, Object parentElement, Object element) {
+			public boolean select(Viewer viewer2, Object parentElement, Object element) {
 				return ((Line) element).counter.getTotalCount() != 0;
 			}
 		});
@@ -169,17 +171,16 @@ public class CoveragePropertyPage extends PropertyPage {
 
 	private Line[] getLines() {
 		ICoverageNode c = CoverageTools.getCoverageInfo(getElement());
-		if (c == null) {
+		if (c == null)
 			return new Line[0];
-		} else {
-			return new Line[] {
-					new Line(UIMessages.CoveragePropertyPageInstructions_label, c.getInstructionCounter()),
-					new Line(UIMessages.CoveragePropertyPageBranches_label, c.getBranchCounter()),
-					new Line(UIMessages.CoveragePropertyPageLines_label, c.getLineCounter()),
-					new Line(UIMessages.CoveragePropertyPageMethods_label, c.getMethodCounter()),
-					new Line(UIMessages.CoveragePropertyPageTypes_label, c.getClassCounter()),
-					new Line(UIMessages.CoveragePropertyPageComplexity_label, c.getComplexityCounter()) };
-		}
+
+		return new Line[] {
+				new Line(UIMessages.CoveragePropertyPageInstructions_label, c.getInstructionCounter()),
+				new Line(UIMessages.CoveragePropertyPageBranches_label, c.getBranchCounter()),
+				new Line(UIMessages.CoveragePropertyPageLines_label, c.getLineCounter()),
+				new Line(UIMessages.CoveragePropertyPageMethods_label, c.getMethodCounter()),
+				new Line(UIMessages.CoveragePropertyPageTypes_label, c.getClassCounter()),
+				new Line(UIMessages.CoveragePropertyPageComplexity_label, c.getComplexityCounter()) };
 	}
 
 	private static class Line {

@@ -43,29 +43,34 @@ public class CoverageSession extends PlatformObject implements ICoverageSession 
 	public CoverageSession(String description, Set<URI> set, List<IProfilingResult> profilingResults,
 			ILaunchConfiguration launchConfiguration) {
 		this.description = description;
-		this.scope = Collections.unmodifiableSet(new HashSet<URI>(set));
+		this.scope = Collections.unmodifiableSet(new HashSet<>(set));
 		this.profilingResults = profilingResults;
 		this.launchConfiguration = launchConfiguration;
 	}
 
 	// ICoverageSession implementation
 
+	@Override
 	public String getDescription() {
 		return description;
 	}
 
+	@Override
 	public Set<URI> getScope() {
 		return scope;
 	}
 
+	@Override
 	public List<IProfilingResult> getProfilingResults() {
 		return profilingResults;
 	}
 
+	@Override
 	public ILaunchConfiguration getLaunchConfiguration() {
 		return launchConfiguration;
 	}
 
+	@Override
 	public void accept(IExecutionDataVisitor executionDataVisitor, ISessionInfoVisitor sessionInfoVisitor)
 			throws CoreException {
 		// Нечего делать

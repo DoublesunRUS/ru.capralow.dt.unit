@@ -60,14 +60,11 @@ public class CoverageTools {
 	 * @return adapter or <code>null</code>
 	 */
 	public static ICoverageNode getCoverageInfo(Object object) {
-		if (object instanceof IAdaptable) {
+		if (object instanceof IAdaptable)
 			return ((IAdaptable) object).getAdapter(ICoverageNode.class);
 
-		} else {
-			IAdapterManager manager = Platform.getAdapterManager();
-			return manager.getAdapter(object, ICoverageNode.class);
-
-		}
+		IAdapterManager manager = Platform.getAdapterManager();
+		return manager.getAdapter(object, ICoverageNode.class);
 	}
 
 	public static IBslModelCoverage getBslModelCoverage() {

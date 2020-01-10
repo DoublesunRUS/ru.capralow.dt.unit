@@ -42,6 +42,14 @@ class CoveredElementsContentProvider extends WorkbenchContentProvider {
 				return coverage.getSubsystems();
 			case CLASS:
 				return coverage.getMdObjects();
+			case METHOD:
+				break;
+			case PACKAGE:
+				break;
+			case SOURCEFILE:
+				break;
+			default:
+				break;
 			}
 		}
 		return new Object[0];

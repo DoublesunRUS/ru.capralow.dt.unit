@@ -51,6 +51,7 @@ class CopyHandler extends AbstractHandler implements ISelectionChangedListener {
 		return !selectionSource.getSelection().isEmpty();
 	}
 
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		final StringBuilder sb = new StringBuilder();
 
@@ -88,6 +89,7 @@ class CopyHandler extends AbstractHandler implements ISelectionChangedListener {
 		selectionSource.removeSelectionChangedListener(this);
 	}
 
+	@Override
 	public void selectionChanged(SelectionChangedEvent event) {
 		fireHandlerChanged(new HandlerEvent(this, true, false));
 	}

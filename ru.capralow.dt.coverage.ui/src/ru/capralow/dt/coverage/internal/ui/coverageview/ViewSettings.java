@@ -19,7 +19,6 @@ import java.util.Map;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.ui.IMemento;
-import org.jacoco.core.analysis.ICoverageNode;
 import org.jacoco.core.analysis.ICoverageNode.CounterEntity;
 import org.jacoco.core.analysis.ICoverageNode.ElementType;
 
@@ -43,7 +42,7 @@ public class ViewSettings {
 	private static final String KEY_COLUMN4 = "column4"; //$NON-NLS-1$
 	private static final String KEY_LINKED = "linked"; //$NON-NLS-1$
 
-	private static final Map<CounterEntity, String[]> COLUMNS_HEADERS = new HashMap<ICoverageNode.CounterEntity, String[]>();
+	private static final Map<CounterEntity, String[]> COLUMNS_HEADERS = new HashMap<>();
 
 	static {
 		COLUMNS_HEADERS.put(CounterEntity.INSTRUCTION,
@@ -203,41 +202,41 @@ public class ViewSettings {
 		memento.putBoolean(KEY_LINKED, linked);
 	}
 
-	private int getWidth(IMemento memento, String key, int preset) {
+	private static int getWidth(IMemento memento, String key, int preset) {
 		final int w = getInt(memento, key, preset);
 		return w == 0 ? preset : w;
 	}
 
-	private int getInt(IMemento memento, String key, int preset) {
-		if (memento == null) {
+	private static int getInt(IMemento memento, String key, int preset) {
+		if (memento == null)
 			return preset;
-		} else {
-			Integer i = memento.getInteger(key);
-			return i == null ? preset : i.intValue();
-		}
+
+		Integer i = memento.getInteger(key);
+		return i == null ? preset : i.intValue();
 	}
 
-	private boolean getBoolean(IMemento memento, String key, boolean preset) {
-		if (memento == null) {
+	private static boolean getBoolean(IMemento memento, String key, boolean preset) {
+		if (memento == null)
 			return preset;
-		} else {
-			Boolean b = memento.getBoolean(key);
-			return b == null ? preset : b.booleanValue();
-		}
+
+		Boolean b = memento.getBoolean(key);
+		return b == null ? preset : b.booleanValue();
 	}
 
-	private <T extends Enum<T>> T getEnum(IMemento memento, String key, Class<T> type, T preset) {
-		if (memento == null) {
+	private static <T extends Enum<T>> T getEnum(IMemento memento, String key, Class<T> type, T preset) {
+		if (memento == null)
 			return preset;
-		}
+
 		final String s = memento.getString(key);
-		if (s == null) {
+		if (s == null)
 			return preset;
-		}
+
 		try {
 			return Enum.valueOf(type, s);
+
 		} catch (IllegalArgumentException e) {
 			return preset;
+
 		}
 	}
 

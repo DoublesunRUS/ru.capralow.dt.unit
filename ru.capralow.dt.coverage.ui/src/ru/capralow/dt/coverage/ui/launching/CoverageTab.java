@@ -18,8 +18,6 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.ui.AbstractLaunchConfigurationTab;
-import org.eclipse.jface.viewers.ISelectionChangedListener;
-import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -55,6 +53,7 @@ public class CoverageTab extends AbstractLaunchConfigurationTab {
 		this.resourceLookup = resourceLookup;
 	}
 
+	@Override
 	public void createControl(Composite parent) {
 		parent = new Composite(parent, SWT.NONE);
 		ContextHelp.setHelp(parent, ContextHelp.COVERAGE_LAUNCH_TAB);
@@ -76,12 +75,10 @@ public class CoverageTab extends AbstractLaunchConfigurationTab {
 		GridData gd = new GridData(GridData.FILL_BOTH);
 		gd.horizontalSpan = 2;
 		classesviewer.getTable().setLayoutData(gd);
-		classesviewer.addSelectionChangedListener(new ISelectionChangedListener() {
-			public void selectionChanged(SelectionChangedEvent event) {
-				setDirty(true);
-				updateErrorStatus();
-				updateLaunchConfigurationDialog();
-			}
+		classesviewer.addSelectionChangedListener(event -> {
+			setDirty(true);
+			updateErrorStatus();
+			updateLaunchConfigurationDialog();
 		});
 
 		Button buttonSelectAll = createPushButton(group, UIMessages.SelectAllAction_label, null);
@@ -105,10 +102,12 @@ public class CoverageTab extends AbstractLaunchConfigurationTab {
 		});
 	}
 
+	@Override
 	public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
 		// nothing to do
 	}
 
+	@Override
 	public void initializeFrom(ILaunchConfiguration configuration) {
 		try {
 			classesviewer.setInput(ScopeUtils.getOverallScope(configuration));
@@ -120,6 +119,7 @@ public class CoverageTab extends AbstractLaunchConfigurationTab {
 		setDirty(false);
 	}
 
+	@Override
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
 		if (isDirty()) {
 			final List<String> ids = ScopeUtils.writeScope(classesviewer.getSelectedScope());
@@ -132,6 +132,7 @@ public class CoverageTab extends AbstractLaunchConfigurationTab {
 		return !classesviewer.getSelection().isEmpty();
 	}
 
+	@Override
 	public String getName() {
 		return UIMessages.CoverageTab_title;
 	}

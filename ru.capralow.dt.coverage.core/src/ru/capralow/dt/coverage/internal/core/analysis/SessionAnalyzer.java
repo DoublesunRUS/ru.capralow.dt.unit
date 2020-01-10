@@ -18,26 +18,27 @@ import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.osgi.util.NLS;
-import org.jacoco.core.analysis.CoverageNodeImpl;
 import org.jacoco.core.analysis.ICoverageNode.ElementType;
 import org.jacoco.core.data.ExecutionData;
 import org.jacoco.core.data.ExecutionDataStore;
 import org.jacoco.core.data.SessionInfo;
 import org.jacoco.core.data.SessionInfoStore;
-import org.jacoco.core.internal.analysis.ClassCoverageImpl;
-import org.jacoco.core.internal.analysis.CounterImpl;
-import org.jacoco.core.internal.analysis.MethodCoverageImpl;
 
 import com._1c.g5.v8.dt.bm.index.emf.IBmEmfIndexManager;
 import com._1c.g5.v8.dt.bm.index.emf.IBmEmfIndexProvider;
+import com._1c.g5.v8.dt.bsl.model.Method;
 import com._1c.g5.v8.dt.bsl.model.Module;
 import com._1c.g5.v8.dt.core.platform.IResourceLookup;
+import com._1c.g5.v8.dt.core.platform.IV8ProjectManager;
 import com._1c.g5.v8.dt.debug.core.model.BslModuleReference;
 import com._1c.g5.v8.dt.debug.core.model.IBslModuleLocator;
+import com._1c.g5.v8.dt.metadata.mdclass.MdObject;
 import com._1c.g5.v8.dt.profiling.core.ILineProfilingResult;
 import com._1c.g5.v8.dt.profiling.core.IProfilingResult;
 import com.google.inject.Inject;
@@ -59,15 +60,17 @@ public class SessionAnalyzer {
 	private SessionInfoStore sessionInfoStore;
 
 	@Inject
-	private IResourceLookup resourceLookup;
-
-	@Inject
 	private IBmEmfIndexManager bmEmfIndexManager;
 
 	@Inject
 	private IBslModuleLocator bslModuleLocator;
 
-	@SuppressWarnings("restriction")
+	@Inject
+	private IResourceLookup resourceLookup;
+
+	@Inject
+	private IV8ProjectManager projectManager;
+
 	public IBslModelCoverage processSession(ICoverageSession session, IProgressMonitor monitor) {
 		PERFORMANCE.startTimer();
 		PERFORMANCE.startMemoryUsage();
@@ -87,31 +90,37 @@ public class SessionAnalyzer {
 				if (monitor.isCanceled())
 					break;
 
-				if (moduleReference.getProject() == null)
+				IProject project = moduleReference.getProject();
+
+				if (project == null)
 					continue;
 
-				IBmEmfIndexProvider bmEmfIndexProvider = bmEmfIndexManager
-						.getEmfIndexProvider(moduleReference.getProject());
-
 				Module module = bslModuleLocator.getModule(moduleReference, true);
+				if (module == null)
+					continue;
 
-				ClassCoverageImpl classCoverage = new ClassCoverageImpl(moduleReference.toString(), 0, false);
+				EList<Method> moduleMethods = module.allMethods();
+				if (moduleMethods.isEmpty())
+					continue;
+
+				IBmEmfIndexProvider bmEmfIndexProvider = bmEmfIndexManager.getEmfIndexProvider(project);
+
+				ModuleNodeImpl projectCoverage = new ModuleNodeImpl(ElementType.GROUP, project.getName());
+
+				ModuleNodeImpl moduleCoverage = new ModuleNodeImpl(ElementType.CLASS, module.getUniqueName());
+
+				ModuleNodeImpl methodCoverage = new ModuleNodeImpl(ElementType.METHOD, moduleMethods.get(0).getName());
+
+				CounterImpl moduleCounter = CounterImpl.COUNTER_0_0;
 
 				for (ILineProfilingResult profilingLine : profilingResult.getResultsForModule(moduleReference)) {
+					moduleCounter = moduleCounter.increment(1, 1);
 					profilingLine.getLineNo();
 				}
 
-				MethodCoverageImpl methodCoverage = new MethodCoverageImpl("name", "desc", "sign"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				moduleCoverage.instructionCounter = moduleCounter;
 
-				CoverageNodeImpl nodeCoverage = new CoverageNodeImpl(ElementType.METHOD, "string"); //$NON-NLS-1$
-
-				CounterImpl nodeCounter = ((CounterImpl) nodeCoverage.getInstructionCounter()).increment(5, 3);
-
-				methodCoverage.increment(nodeCounter, nodeCounter, 1);
-
-				classCoverage.addMethod(methodCoverage);
-
-				// modelCoverage.putMethod(root, root, classCoverage);
+				modelCoverage.putMethod(moduleMethods.get(0), (MdObject) module.getOwner(), moduleCoverage);
 			}
 
 		}

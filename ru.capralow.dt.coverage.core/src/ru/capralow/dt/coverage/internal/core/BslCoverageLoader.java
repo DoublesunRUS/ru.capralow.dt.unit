@@ -45,8 +45,9 @@ public class BslCoverageLoader {
 
 	private ISessionListener sessionListener = new ISessionListener() {
 
+		@Override
 		public void sessionActivated(ICoverageSession session) {
-			Job.getJobManager().cancel(LOADJOB);
+			Job.getJobManager().cancel(loadJob);
 			if (session == null) {
 				coverage = null;
 				fireCoverageChanged();
@@ -60,15 +61,19 @@ public class BslCoverageLoader {
 			}
 		}
 
+		@Override
 		public void sessionAdded(ICoverageSession addedSession) {
+			// Нечего делать
 		}
 
+		@Override
 		public void sessionRemoved(ICoverageSession removedSession) {
+			// Нечего делать
 		}
 
 	};
 
-	private static Object LOADJOB = new Object();
+	private static Object loadJob = new Object();
 
 	private class LoadSessionJob extends Job {
 
@@ -79,6 +84,7 @@ public class BslCoverageLoader {
 			this.session = session;
 		}
 
+		@Override
 		protected IStatus run(IProgressMonitor monitor) {
 			SessionAnalyzer analyzer = CoverageCorePlugin.getInstance().getInjector()
 					.getInstance(SessionAnalyzer.class);
@@ -92,7 +98,7 @@ public class BslCoverageLoader {
 
 		@Override
 		public boolean belongsTo(Object family) {
-			return family == LOADJOB;
+			return family == loadJob;
 		}
 
 	}
@@ -117,7 +123,7 @@ public class BslCoverageLoader {
 
 	protected void fireCoverageChanged() {
 		// avoid concurrent modification issues
-		for (IBslCoverageListener l : new ArrayList<IBslCoverageListener>(listeners)) {
+		for (IBslCoverageListener l : new ArrayList<>(listeners)) {
 			l.coverageChanged();
 		}
 	}

@@ -44,7 +44,7 @@ class ExecutionDataContent {
 
 	public ExecutionDataContent() {
 		clear();
-		listeners = new ArrayList<IPropertyListener>();
+		listeners = new ArrayList<>();
 	}
 
 	public void load(IEditorInput input) {
@@ -62,15 +62,13 @@ class ExecutionDataContent {
 					// Do nothing
 				}
 			}
-		} catch (CoreException e) {
-			CoverageUIPlugin.log(e);
-		} catch (IOException e) {
+		} catch (CoreException | IOException e) {
 			CoverageUIPlugin.log(e);
 		}
 		fireChangedEvent();
 	}
 
-	private InputStream openStream(IEditorInput input) throws CoreException, IOException {
+	private static InputStream openStream(IEditorInput input) throws CoreException, IOException {
 		if (input instanceof IStorageEditorInput) {
 			final IStorage storage = ((IStorageEditorInput) input).getStorage();
 			return storage.getContents();

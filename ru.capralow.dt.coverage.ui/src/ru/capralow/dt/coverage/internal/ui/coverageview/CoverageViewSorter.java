@@ -45,18 +45,21 @@ class CoverageViewSorter extends ViewerComparator {
 			setSortColumnAndDirection(column, settings.isReverseSort());
 		}
 		column.addSelectionListener(new SelectionListener() {
+			@Override
 			public void widgetSelected(SelectionEvent e) {
 				settings.toggleSortColumn(columnidx);
 				setSortColumnAndDirection(column, settings.isReverseSort());
 				view.refreshViewer();
 			}
 
+			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {
+				// Нечего делать
 			}
 		});
 	}
 
-	private void setSortColumnAndDirection(TreeColumn sortColumn, boolean reverse) {
+	private static void setSortColumnAndDirection(TreeColumn sortColumn, boolean reverse) {
 		sortColumn.getParent().setSortColumn(sortColumn);
 		sortColumn.getParent().setSortDirection(reverse ? SWT.DOWN : SWT.UP);
 	}
@@ -75,13 +78,13 @@ class CoverageViewSorter extends ViewerComparator {
 			res = Double.compare(c1.getCoveredRatio(), c2.getCoveredRatio());
 			break;
 		case CoverageView.COLUMN_COVERED:
-			res = (int) (c1.getCoveredCount() - c2.getCoveredCount());
+			res = c1.getCoveredCount() - c2.getCoveredCount();
 			break;
 		case CoverageView.COLUMN_MISSED:
-			res = (int) (c1.getMissedCount() - c2.getMissedCount());
+			res = c1.getMissedCount() - c2.getMissedCount();
 			break;
 		case CoverageView.COLUMN_TOTAL:
-			res = (int) (c1.getTotalCount() - c2.getTotalCount());
+			res = c1.getTotalCount() - c2.getTotalCount();
 			break;
 		}
 		if (res == 0) {

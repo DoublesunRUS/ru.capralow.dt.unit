@@ -39,6 +39,7 @@ public class OpenSessionExecutionDataHandler extends AbstractSessionManagerHandl
 		return sessionManager.getActiveSession() != null;
 	}
 
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		final ICoverageSession session = sessionManager.getActiveSession();
 		final IEditorInput input = new CoverageSessionInput(session);

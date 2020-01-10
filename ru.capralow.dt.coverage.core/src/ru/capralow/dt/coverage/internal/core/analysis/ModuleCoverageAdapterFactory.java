@@ -14,12 +14,11 @@
  ******************************************************************************/
 package ru.capralow.dt.coverage.internal.core.analysis;
 
-import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IAdapterFactory;
 import org.jacoco.core.analysis.ICoverageNode;
 import org.jacoco.core.analysis.ISourceNode;
 
-import com._1c.g5.v8.dt.bsl.model.Method;
+import com._1c.g5.v8.dt.metadata.mdclass.MdObject;
 
 import ru.capralow.dt.coverage.core.CoverageTools;
 import ru.capralow.dt.coverage.core.analysis.IBslModelCoverage;
@@ -32,33 +31,21 @@ import ru.capralow.dt.coverage.core.analysis.IBslModelCoverage;
  */
 public class ModuleCoverageAdapterFactory implements IAdapterFactory {
 
+	@Override
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Object getAdapter(Object object, Class adapterType) {
-		// if the object is a IResource find the corresponding Module
-		if (object instanceof IResource) {
-			object = ((IResource) object).getAdapter(Method.class);
-			if (object == null)
-				return null;
-
-		}
-
-		// then find the coverage information from the current session
 		IBslModelCoverage mc = CoverageTools.getBslModelCoverage();
-		if (mc == null) {
+		if (mc == null)
 			return null;
 
-		} else {
-			ICoverageNode coverage = mc.getCoverageFor((Method) object);
-			if (adapterType.isInstance(coverage)) {
-				return coverage;
+		ICoverageNode coverage = mc.getCoverageFor((MdObject) object);
+		if (adapterType.isInstance(coverage))
+			return coverage;
 
-			} else {
-				return null;
-
-			}
-		}
+		return null;
 	}
 
+	@Override
 	public Class<?>[] getAdapterList() {
 		return new Class[] { ICoverageNode.class, ISourceNode.class };
 	}

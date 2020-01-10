@@ -27,8 +27,8 @@ import ru.capralow.dt.coverage.internal.ui.UIMessages;
  */
 public class NoCoverageDataHandler implements IStatusHandler {
 
+	@Override
 	public Object handleStatus(IStatus status, Object source) throws CoreException {
-
 		Shell parent = CoverageUIPlugin.getInstance().getShell();
 		String title = UIMessages.NoCoverageDataError_title;
 		String message = UIMessages.NoCoverageDataError_message;

@@ -112,21 +112,38 @@ public class CoverageUIPlugin extends AbstractUIPlugin {
 	}
 
 	private ISessionListener sessionListener = new ISessionListener() {
+		@Override
 		public void sessionAdded(ICoverageSession addedSession) {
 			if (getPreferenceStore().getBoolean(UIPreferences.PREF_SHOW_COVERAGE_VIEW)) {
-				getWorkbench().getDisplay().asyncExec(new Runnable() {
-					public void run() {
-						showCoverageView();
-					}
-				});
+				getWorkbench().getDisplay().asyncExec(() -> showCoverageView());
 			}
 		}
 
+		@Override
 		public void sessionRemoved(ICoverageSession removedSession) {
+			// Нечего делать
 		}
 
+		@Override
 		public void sessionActivated(ICoverageSession session) {
+			// Нечего делать
 		}
+
+		private void showCoverageView() {
+			IWorkbenchWindow window = getWorkbench().getActiveWorkbenchWindow();
+			if (window == null)
+				return;
+			IWorkbenchPage page = window.getActivePage();
+			if (page != null) {
+				try {
+					IViewPart view = page.showView(CoverageView.ID, null, IWorkbenchPage.VIEW_CREATE);
+					page.bringToTop(view);
+				} catch (PartInitException e) {
+					log(e);
+				}
+			}
+		}
+
 	};
 
 	@Override
@@ -155,21 +172,6 @@ public class CoverageUIPlugin extends AbstractUIPlugin {
 
 	public static CoverageUIPlugin getInstance() {
 		return instance;
-	}
-
-	private void showCoverageView() {
-		IWorkbenchWindow window = getWorkbench().getActiveWorkbenchWindow();
-		if (window == null)
-			return;
-		IWorkbenchPage page = window.getActivePage();
-		if (page != null) {
-			try {
-				IViewPart view = page.showView(CoverageView.ID, null, IWorkbenchPage.VIEW_CREATE);
-				page.bringToTop(view);
-			} catch (PartInitException e) {
-				log(e);
-			}
-		}
 	}
 
 	public Shell getShell() {

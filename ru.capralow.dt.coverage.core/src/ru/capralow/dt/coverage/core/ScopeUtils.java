@@ -110,11 +110,10 @@ public class ScopeUtils {
 			DefaultScopeFilter filter = new DefaultScopeFilter(CoverageCorePlugin.getInstance().getPreferences());
 			return filter.filter(all, configuration);
 
-		} else {
-			all.retainAll(readScope(selection));
-			return all;
-
 		}
+
+		all.retainAll(readScope(selection));
+		return all;
 	}
 
 	/**

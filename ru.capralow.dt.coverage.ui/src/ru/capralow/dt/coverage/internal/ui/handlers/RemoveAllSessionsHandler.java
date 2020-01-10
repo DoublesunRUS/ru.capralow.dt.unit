@@ -31,6 +31,7 @@ public class RemoveAllSessionsHandler extends AbstractSessionManagerHandler {
 		return !sessionManager.getSessions().isEmpty();
 	}
 
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		sessionManager.removeAllSessions();
 		return null;

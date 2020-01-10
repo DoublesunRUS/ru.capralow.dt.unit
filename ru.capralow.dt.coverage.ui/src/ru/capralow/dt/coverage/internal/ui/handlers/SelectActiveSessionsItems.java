@@ -46,8 +46,8 @@ public class SelectActiveSessionsItems extends ContributionItem {
 		}
 	}
 
-	private void createItem(final Menu parent, final int index, final ICoverageSession session, final boolean selected,
-			final int position, final ISessionManager sm) {
+	private static void createItem(final Menu parent, final int index, final ICoverageSession session,
+			final boolean selected, final int position, final ISessionManager sm) {
 		final MenuItem item = new MenuItem(parent, SWT.RADIO, index);
 		item.setImage(CoverageUIPlugin.getImage(CoverageUIPlugin.ELCL_SESSION));
 		item.setText(getLabel(session, position));
@@ -60,7 +60,7 @@ public class SelectActiveSessionsItems extends ContributionItem {
 		});
 	}
 
-	private String getLabel(ICoverageSession session, int idx) {
+	private static String getLabel(ICoverageSession session, int idx) {
 		return NLS.bind(UIMessages.CoverageViewSelectSessionMenu_label, Integer.valueOf(idx), session.getDescription());
 	}
 

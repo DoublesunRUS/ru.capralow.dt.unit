@@ -36,14 +36,17 @@ public abstract class AbstractSessionManagerHandler extends AbstractHandler impl
 		sessionManager.removeSessionListener(this);
 	}
 
+	@Override
 	public void sessionAdded(ICoverageSession addedSession) {
 		fireEnabledChanged();
 	}
 
+	@Override
 	public void sessionRemoved(ICoverageSession removedSession) {
 		fireEnabledChanged();
 	}
 
+	@Override
 	public void sessionActivated(ICoverageSession session) {
 		fireEnabledChanged();
 	}

@@ -17,17 +17,13 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ComboViewer;
-import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.LabelProvider;
-import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.ModifyEvent;
-import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
@@ -69,6 +65,7 @@ public class SessionExportPage1 extends WizardPage {
 		setDescription(UIMessages.ExportSessionPage1_description);
 	}
 
+	@Override
 	public void createControl(Composite parent) {
 		initializeDialogUnits(parent);
 		parent = new Composite(parent, SWT.NONE);
@@ -106,27 +103,21 @@ public class SessionExportPage1 extends WizardPage {
 			}
 		});
 		formatcombo.setInput(ExportFormat.values());
-		formatcombo.addSelectionChangedListener(new ISelectionChangedListener() {
-			public void selectionChanged(SelectionChangedEvent event) {
-				IPath path = Path.fromOSString(destinationcombo.getText());
-				path = path.removeFileExtension();
-				final ExportFormat format = getExportFormat();
-				if (!format.isFolderOutput()) {
-					path = path.addFileExtension(format.getFileExtension());
-				}
-				destinationcombo.setText(path.toOSString());
+		formatcombo.addSelectionChangedListener(event -> {
+			IPath path = Path.fromOSString(destinationcombo.getText());
+			path = path.removeFileExtension();
+			final ExportFormat format = getExportFormat();
+			if (!format.isFolderOutput()) {
+				path = path.addFileExtension(format.getFileExtension());
 			}
+			destinationcombo.setText(path.toOSString());
 		});
 		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
 		gd.horizontalSpan = 2;
 		formatcombo.getControl().setLayoutData(gd);
 		new Label(parent, SWT.NONE).setText(UIMessages.ExportSessionPage1Destination_label);
 		destinationcombo = new Combo(parent, SWT.BORDER);
-		destinationcombo.addModifyListener(new ModifyListener() {
-			public void modifyText(ModifyEvent e) {
-				update();
-			}
-		});
+		destinationcombo.addModifyListener(e -> update());
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		gd.widthHint = convertHorizontalDLUsToPixels(120);
 		destinationcombo.setLayoutData(gd);
@@ -203,7 +194,7 @@ public class SessionExportPage1 extends WizardPage {
 		WidgetHistory.restoreCombo(settings, STORE_DESTINATIONS, destinationcombo);
 	}
 
-	private ExportFormat readFormat(IDialogSettings settings) {
+	private static ExportFormat readFormat(IDialogSettings settings) {
 		final String format = settings.get(STORE_FORMAT);
 		if (format != null) {
 			try {

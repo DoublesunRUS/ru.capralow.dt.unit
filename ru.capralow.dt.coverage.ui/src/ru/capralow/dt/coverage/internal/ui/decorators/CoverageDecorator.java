@@ -40,19 +40,14 @@ public class CoverageDecorator extends BaseLabelProvider implements ILightweight
 
 	public CoverageDecorator() {
 		super();
-		coverageListener = new IBslCoverageListener() {
-			public void coverageChanged() {
-				final Display display = CoverageUIPlugin.getInstance().getWorkbench().getDisplay();
-				display.asyncExec(new Runnable() {
-					public void run() {
-						fireLabelProviderChanged(new LabelProviderChangedEvent(CoverageDecorator.this));
-					}
-				});
-			}
+		coverageListener = () -> {
+			final Display display = CoverageUIPlugin.getInstance().getWorkbench().getDisplay();
+			display.asyncExec(() -> fireLabelProviderChanged(new LabelProviderChangedEvent(CoverageDecorator.this)));
 		};
 		CoverageTools.addBslCoverageListener(coverageListener);
 	}
 
+	@Override
 	public void decorate(Object element, IDecoration decoration) {
 		final ICoverageNode coverage = CoverageTools.getCoverageInfo(element);
 		if (coverage == null) {

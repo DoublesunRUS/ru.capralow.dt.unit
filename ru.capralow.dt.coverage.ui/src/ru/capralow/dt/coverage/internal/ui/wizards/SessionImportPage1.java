@@ -31,8 +31,6 @@ import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.ModifyEvent;
-import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
@@ -65,13 +63,17 @@ public class SessionImportPage1 extends WizardPage {
 	private static final String STORE_RESET = STORE_PREFIX + "reset"; //$NON-NLS-1$
 	private static final String STORE_COPY = STORE_PREFIX + "copy"; //$NON-NLS-1$
 
-	private Button fileradio, urlradio, agentradio;
+	private Button fileradio;
+	private Button urlradio;
+	private Button agentradio;
 	private Combo filecombo;
 	private Button browsebutton;
 	private Combo urlcombo;
-	private Text addresstext, porttext;
+	private Text addresstext;
+	private Text porttext;
 	private Button resetcheck;
-	private Button referenceradio, copyradio;
+	private Button referenceradio;
+	private Button copyradio;
 
 	private IExecutionDataSource dataSource;
 
@@ -81,6 +83,7 @@ public class SessionImportPage1 extends WizardPage {
 		setDescription(ImportSessionPage1_description);
 	}
 
+	@Override
 	public void createControl(Composite parent) {
 		initializeDialogUnits(parent);
 		parent = new Composite(parent, SWT.NONE);
@@ -109,11 +112,7 @@ public class SessionImportPage1 extends WizardPage {
 			}
 		});
 		filecombo = new Combo(parent, SWT.BORDER);
-		filecombo.addModifyListener(new ModifyListener() {
-			public void modifyText(ModifyEvent e) {
-				updateStatus();
-			}
-		});
+		filecombo.addModifyListener(e -> updateStatus());
 		GridDataFactory.swtDefaults().span(3, 1).grab(true, false).align(SWT.FILL, SWT.CENTER)
 				.hint(convertHorizontalDLUsToPixels(80), SWT.DEFAULT).applyTo(filecombo);
 		browsebutton = new Button(parent, SWT.NONE);
@@ -139,11 +138,7 @@ public class SessionImportPage1 extends WizardPage {
 			}
 		});
 		urlcombo = new Combo(parent, SWT.BORDER);
-		urlcombo.addModifyListener(new ModifyListener() {
-			public void modifyText(ModifyEvent e) {
-				updateStatus();
-			}
-		});
+		urlcombo.addModifyListener(e -> updateStatus());
 		GridDataFactory.swtDefaults().span(4, 1).align(SWT.FILL, SWT.CENTER).applyTo(urlcombo);
 	}
 

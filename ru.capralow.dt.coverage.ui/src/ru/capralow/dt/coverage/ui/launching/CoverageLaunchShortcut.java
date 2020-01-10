@@ -65,6 +65,7 @@ public class CoverageLaunchShortcut implements ILaunchShortcut, IExecutableExten
 
 	// IExecutableExtension interface:
 
+	@Override
 	public void setInitializationData(IConfigurationElement config, String propertyName, Object data)
 			throws CoreException {
 		delegateId = String.valueOf(data);
@@ -72,6 +73,7 @@ public class CoverageLaunchShortcut implements ILaunchShortcut, IExecutableExten
 
 	// ILaunchShortcut interface:
 
+	@Override
 	public void launch(ISelection selection, String mode) {
 		ILaunchShortcut launchDelegate = getDelegate();
 		if (launchDelegate != null) {
@@ -79,6 +81,7 @@ public class CoverageLaunchShortcut implements ILaunchShortcut, IExecutableExten
 		}
 	}
 
+	@Override
 	public void launch(IEditorPart editor, String mode) {
 		ILaunchShortcut launchDelegate = getDelegate();
 		if (launchDelegate != null) {

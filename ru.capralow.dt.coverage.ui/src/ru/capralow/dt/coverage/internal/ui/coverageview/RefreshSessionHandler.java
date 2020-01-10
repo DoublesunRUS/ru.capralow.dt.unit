@@ -32,6 +32,7 @@ class RefreshSessionHandler extends AbstractSessionManagerHandler {
 		return sessionManager.getActiveSession() != null;
 	}
 
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		sessionManager.refreshActiveSession();
 		return null;

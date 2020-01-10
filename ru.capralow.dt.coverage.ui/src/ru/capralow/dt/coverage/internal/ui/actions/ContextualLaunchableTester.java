@@ -40,8 +40,9 @@ import ru.capralow.dt.coverage.internal.ui.CoverageUIPlugin;
 public class ContextualLaunchableTester extends PropertyTester {
 
 	/** Cache for expressions maps launch shortcut ids to Expression objects. */
-	private Map<String, Expression> expressions = new HashMap<String, Expression>();
+	private Map<String, Expression> expressions = new HashMap<>();
 
+	@Override
 	public boolean test(Object receiver, String property, Object[] args, Object expectedValue) {
 		String delegateShortcutID = (String) args[0];
 		Expression expr = expressions.get(delegateShortcutID);
@@ -59,13 +60,13 @@ public class ContextualLaunchableTester extends PropertyTester {
 		}
 	}
 
-	private IEvaluationContext createContext(Object selection) {
+	private static IEvaluationContext createContext(Object selection) {
 		IEvaluationContext context = new EvaluationContext(null, selection);
 		context.addVariable("selection", selection); //$NON-NLS-1$
 		return context;
 	}
 
-	private Expression createEnablementExpression(String delegateShortcutID) {
+	private static Expression createEnablementExpression(String delegateShortcutID) {
 		IConfigurationElement element = findEnablementConfiguration(delegateShortcutID);
 		if (element != null) {
 			try {
@@ -77,7 +78,7 @@ public class ContextualLaunchableTester extends PropertyTester {
 		return Expression.FALSE;
 	}
 
-	private IConfigurationElement findEnablementConfiguration(String delegateShortcutID) {
+	private static IConfigurationElement findEnablementConfiguration(String delegateShortcutID) {
 		IConfigurationElement[] configs = Platform.getExtensionRegistry()
 				.getConfigurationElementsFor("org.eclipse.debug.ui.launchShortcuts"); //$NON-NLS-1$
 		for (final IConfigurationElement config : configs) {

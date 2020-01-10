@@ -9,6 +9,8 @@
  * Contributors:
  *    Marc R. Hoffmann - initial API and implementation
  *
+ * Adapted by Alexander Kapralov
+ *
  ******************************************************************************/
 package ru.capralow.dt.coverage.internal.core;
 
@@ -33,7 +35,7 @@ public final class DebugOptions {
 		 *
 		 * @return <code>true</code> if the tracer is enabled
 		 */
-		public boolean isEnabled();
+		boolean isEnabled();
 
 		/**
 		 * Prints the given debug message if the tracer is enabled.
@@ -41,7 +43,7 @@ public final class DebugOptions {
 		 * @param message
 		 *            text message for trace output
 		 */
-		public void trace(String message);
+		void trace(String message);
 
 		/**
 		 * Prints the given debug message if the tracer is enabled. The parameter object
@@ -52,7 +54,7 @@ public final class DebugOptions {
 		 * @param param1
 		 *            parameter object for inserting
 		 */
-		public void trace(String message, Object param1);
+		void trace(String message, Object param1);
 
 		/**
 		 * Prints the given debug message if the tracer is enabled. The parameter object
@@ -65,7 +67,7 @@ public final class DebugOptions {
 		 * @param param2
 		 *            first parameter object for inserting
 		 */
-		public void trace(String message, Object param1, Object param2);
+		void trace(String message, Object param1, Object param2);
 
 		/**
 		 * Prints the given debug message if the tracer is enabled. The parameter object
@@ -80,12 +82,12 @@ public final class DebugOptions {
 		 * @param param3
 		 *            third parameter object for inserting
 		 */
-		public void trace(String message, Object param1, Object param2, Object param3);
+		void trace(String message, Object param1, Object param2, Object param3);
 
 		/**
 		 * Starts a timer for the calling thread.
 		 */
-		public void startTimer();
+		void startTimer();
 
 		/**
 		 * Prints out the elapsed time since starting the timer.
@@ -93,12 +95,12 @@ public final class DebugOptions {
 		 * @param message
 		 *            identification for the timed period
 		 */
-		public void stopTimer(String message);
+		void stopTimer(String message);
 
 		/**
 		 * Start measuring heap memory usage.
 		 */
-		public void startMemoryUsage();
+		void startMemoryUsage();
 
 		/**
 		 * Print out heap memory usage since starting measurement.
@@ -106,38 +108,55 @@ public final class DebugOptions {
 		 * @param message
 		 *            identification for this memory usage output
 		 */
-		public void stopMemoryUsage(String message);
+		void stopMemoryUsage(String message);
 
 	}
 
 	private static final ITracer NUL_TRACER = new ITracer() {
 
+		@Override
 		public boolean isEnabled() {
 			return false;
 		}
 
+		@Override
 		public void trace(String message) {
+			// Нечего делать
 		}
 
+		@Override
 		public void trace(String message, Object param1) {
+			// Нечего делать
 		}
 
+		@Override
 		public void trace(String message, Object param1, Object param2) {
+			// Нечего делать
 		}
 
+		@Override
 		public void trace(String message, Object param1, Object param2, Object param3) {
+			// Нечего делать
 		}
 
+		@Override
 		public void startTimer() {
+			// Нечего делать
 		}
 
+		@Override
 		public void stopTimer(String message) {
+			// Нечего делать
 		}
 
+		@Override
 		public void startMemoryUsage() {
+			// Нечего делать
 		}
 
+		@Override
 		public void stopMemoryUsage(String message) {
+			// Нечего делать
 		}
 	};
 
@@ -147,9 +166,9 @@ public final class DebugOptions {
 
 		private final String channel;
 
-		private final ThreadLocal<Long> starttime = new ThreadLocal<Long>();
+		private final ThreadLocal<Long> starttime = new ThreadLocal<>();
 
-		private final ThreadLocal<Long> heapsize = new ThreadLocal<Long>();
+		private final ThreadLocal<Long> heapsize = new ThreadLocal<>();
 
 		PrintStreamTracer(String channel) {
 			this(channel, System.out);
@@ -160,10 +179,12 @@ public final class DebugOptions {
 			this.out = out;
 		}
 
+		@Override
 		public boolean isEnabled() {
 			return true;
 		}
 
+		@Override
 		public void trace(String message) {
 			out.print("["); //$NON-NLS-1$
 			out.print(channel);
@@ -175,41 +196,48 @@ public final class DebugOptions {
 			trace(MessageFormat.format(message, params));
 		}
 
+		@Override
 		public void trace(String message, Object param1) {
 			trace(message, new Object[] { param1 });
 		}
 
+		@Override
 		public void trace(String message, Object param1, Object param2) {
 			trace(message, new Object[] { param1, param2 });
 		}
 
+		@Override
 		public void trace(String message, Object param1, Object param2, Object param3) {
 			trace(message, new Object[] { param1, param2, param3 });
 		}
 
+		@Override
 		public void startTimer() {
 			starttime.set(Long.valueOf(System.currentTimeMillis()));
 		}
 
+		@Override
 		public void stopTimer(String message) {
-			Long start = (Long) starttime.get();
+			Long start = starttime.get();
 			if (start == null) {
-				trace("Timer {0} not startet.", message); //$NON-NLS-1$
+				trace("Timer {0} not startet.", message);
 			} else {
 				long time = System.currentTimeMillis() - start.longValue();
 				trace("{0} ms for {1}", new Object[] { Long.valueOf(time), message }); //$NON-NLS-1$
 			}
 		}
 
+		@Override
 		public void startMemoryUsage() {
 			Runtime rt = Runtime.getRuntime();
 			heapsize.set(Long.valueOf(rt.totalMemory() - rt.freeMemory()));
 		}
 
+		@Override
 		public void stopMemoryUsage(String message) {
-			Long start = (Long) heapsize.get();
+			Long start = heapsize.get();
 			if (start == null) {
-				trace("Memory usage for {0} not started.", message); //$NON-NLS-1$
+				trace("Memory usage for {0} not started.", message);
 			} else {
 				Runtime rt = Runtime.getRuntime();
 				long bytes = rt.totalMemory() - rt.freeMemory() - start.longValue();
@@ -223,11 +251,10 @@ public final class DebugOptions {
 
 	private static ITracer getTracer(String channel) {
 		String key = KEYPREFIX_DEBUG + channel;
-		if (Boolean.valueOf(Platform.getDebugOption(key)).booleanValue()) {
+		if (Boolean.parseBoolean(Platform.getDebugOption(key)))
 			return new PrintStreamTracer(channel);
-		} else {
-			return NUL_TRACER;
-		}
+
+		return NUL_TRACER;
 	}
 
 	public static final ITracer PERFORMANCETRACER = getTracer("performance"); //$NON-NLS-1$

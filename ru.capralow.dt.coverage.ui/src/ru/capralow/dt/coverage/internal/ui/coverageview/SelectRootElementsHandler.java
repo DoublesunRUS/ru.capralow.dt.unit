@@ -40,6 +40,7 @@ class SelectRootElementsHandler extends AbstractHandler implements IElementUpdat
 		this.view = view;
 	}
 
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		final ElementType type = getType(event.getParameters());
 		settings.setRootType(type);
@@ -47,6 +48,7 @@ class SelectRootElementsHandler extends AbstractHandler implements IElementUpdat
 		return null;
 	}
 
+	@Override
 	public void updateElement(UIElement element, @SuppressWarnings("rawtypes") Map parameters) {
 		final ElementType type = getType(parameters);
 		element.setChecked(settings.getRootType().equals(type));

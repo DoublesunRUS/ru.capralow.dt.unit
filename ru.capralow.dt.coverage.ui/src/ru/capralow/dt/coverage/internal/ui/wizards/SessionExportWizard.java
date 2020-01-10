@@ -55,7 +55,9 @@ public class SessionExportWizard extends Wizard implements IExportWizard {
 		setNeedsProgressMonitor(true);
 	}
 
+	@Override
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
+		// Нечего делать
 	}
 
 	@Override
@@ -76,6 +78,7 @@ public class SessionExportWizard extends Wizard implements IExportWizard {
 		exporter.setFormat(page1.getExportFormat());
 		exporter.setDestination(page1.getDestination());
 		final IRunnableWithProgress op = new IRunnableWithProgress() {
+			@Override
 			public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
 				try {
 					exporter.export(monitor);

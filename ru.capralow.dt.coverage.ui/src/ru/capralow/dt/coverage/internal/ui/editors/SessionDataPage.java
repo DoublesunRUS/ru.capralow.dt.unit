@@ -91,8 +91,8 @@ class SessionDataPage extends FormPage {
 
 		sessionTableViewer.setContentProvider(new AbstractExecutionDataContentProvider() {
 			@Override
-			public Object[] getElements(ExecutionDataContent content) {
-				return content.getSessionInfos();
+			public Object[] getElements(ExecutionDataContent content2) {
+				return content2.getSessionInfos();
 			}
 		});
 		sessionTableViewer.setInput(content);

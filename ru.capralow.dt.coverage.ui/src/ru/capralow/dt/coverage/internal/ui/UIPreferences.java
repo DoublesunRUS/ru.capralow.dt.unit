@@ -45,34 +45,42 @@ public class UIPreferences extends AbstractPreferenceInitializer {
 	public static final String PREF_AGENT_EXCLCLASSLOADER = CoverageUIPlugin.ID + ".agent_exclclassloader"; //$NON-NLS-1$
 
 	public static final ICorePreferences CORE_PREFERENCES = new ICorePreferences() {
+		@Override
 		public boolean getActivateNewSessions() {
 			return getPreferenceStore().getBoolean(PREF_ACTICATE_NEW_SESSIONS);
 		}
 
+		@Override
 		public boolean getAutoRemoveSessions() {
 			return getPreferenceStore().getBoolean(PREF_AUTO_REMOVE_SESSIONS);
 		}
 
+		@Override
 		public boolean getDefaultScopeSourceFoldersOnly() {
 			return getPreferenceStore().getBoolean(PREF_DEFAULT_SCOPE_SOURCE_FOLDERS_ONLY);
 		}
 
+		@Override
 		public boolean getDefaultScopeSameProjectOnly() {
 			return getPreferenceStore().getBoolean(PREF_DEFAULT_SCOPE_SAME_PROJECT_ONLY);
 		}
 
+		@Override
 		public String getDefaultScopeFilter() {
 			return getPreferenceStore().getString(PREF_DEFAULT_SCOPE_FILTER);
 		}
 
+		@Override
 		public String getAgentIncludes() {
 			return getPreferenceStore().getString(PREF_AGENT_INCLUDES);
 		}
 
+		@Override
 		public String getAgentExcludes() {
 			return getPreferenceStore().getString(PREF_AGENT_EXCLUDES);
 		}
 
+		@Override
 		public String getAgentExclClassloader() {
 			return getPreferenceStore().getString(PREF_AGENT_EXCLCLASSLOADER);
 		}

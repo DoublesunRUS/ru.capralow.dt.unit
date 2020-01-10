@@ -25,10 +25,8 @@ import org.eclipse.jdt.ui.actions.OpenAction;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.viewers.CellLabelProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
-import org.eclipse.jface.viewers.IOpenListener;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.OpenEvent;
 import org.eclipse.jface.viewers.OwnerDrawLabelProvider;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.TreeViewerColumn;
@@ -98,34 +96,29 @@ public class CoverageView extends ViewPart implements IShowInTarget {
 	private CoverageViewSorter sorter = new CoverageViewSorter(settings, this);
 
 	private final ISessionListener descriptionUpdater = new ISessionListener() {
+		@Override
 		public void sessionActivated(ICoverageSession session) {
-			getViewSite().getShell().getDisplay().asyncExec(new Runnable() {
-				public void run() {
-					final ICoverageSession active = CoverageTools.getSessionManager().getActiveSession();
-					setContentDescription(active == null ? "" : active.getDescription()); //$NON-NLS-1$
-				}
+			getViewSite().getShell().getDisplay().asyncExec(() -> {
+				final ICoverageSession active = CoverageTools.getSessionManager().getActiveSession();
+				setContentDescription(active == null ? "" : active.getDescription()); //$NON-NLS-1$
 			});
 		}
 
+		@Override
 		public void sessionAdded(ICoverageSession addedSession) {
 			// Nothing to do
 		}
 
+		@Override
 		public void sessionRemoved(ICoverageSession removedSession) {
 			// Nothing to do
 		}
 	};
 
-	private final IBslCoverageListener coverageListener = new IBslCoverageListener() {
-		public void coverageChanged() {
-			getSite().getShell().getDisplay().asyncExec(new Runnable() {
-				public void run() {
-					maxTotalCache.reset();
-					viewer.setInput(CoverageTools.getBslModelCoverage());
-				}
-			});
-		}
-	};
+	private final IBslCoverageListener coverageListener = () -> getSite().getShell().getDisplay().asyncExec(() -> {
+		maxTotalCache.reset();
+		viewer.setInput(CoverageTools.getBslModelCoverage());
+	});
 
 	@Override
 	public void init(IViewSite site, IMemento memento) throws PartInitException {
@@ -180,10 +173,12 @@ public class CoverageView extends ViewPart implements IShowInTarget {
 
 			@Override
 			protected void erase(Event event, Object element) {
+				// Нечего делать
 			}
 
 			@Override
 			protected void measure(Event event, Object element) {
+				// Нечего делать
 			}
 
 			@Override
@@ -242,23 +237,22 @@ public class CoverageView extends ViewPart implements IShowInTarget {
 
 		viewer.addFilter(new ViewerFilter() {
 			@Override
-			public boolean select(Viewer viewer, Object parentElement, Object element) {
-				if (element == LOADING_ELEMENT) {
+			public boolean select(Viewer viewer2, Object parentElement, Object element) {
+				if (element == LOADING_ELEMENT)
 					return true;
-				} else {
-					final ICoverageNode c = CoverageTools.getCoverageInfo(element);
-					if (c == null) {
-						return false;
-					}
-					final ICounter instructions = c.getInstructionCounter();
-					if (instructions.getTotalCount() == 0) {
-						return false;
-					}
-					if (settings.getHideUnusedElements() && instructions.getCoveredCount() == 0) {
-						return false;
-					}
-					return true;
+
+				final ICoverageNode c = CoverageTools.getCoverageInfo(element);
+				if (c == null) {
+					return false;
 				}
+				final ICounter instructions = c.getInstructionCounter();
+				if (instructions.getTotalCount() == 0) {
+					return false;
+				}
+				if (settings.getHideUnusedElements() && instructions.getCoveredCount() == 0)
+					return false;
+
+				return true;
 			}
 		});
 		settings.updateColumnHeaders(viewer);
@@ -273,11 +267,7 @@ public class CoverageView extends ViewPart implements IShowInTarget {
 		createHandlers();
 		createActions();
 
-		viewer.addOpenListener(new IOpenListener() {
-			public void open(OpenEvent event) {
-				openAction.run((IStructuredSelection) event.getSelection());
-			}
-		});
+		viewer.addOpenListener(event -> openAction.run((IStructuredSelection) event.getSelection()));
 
 		MenuManager menuMgr = new MenuManager("#PopupMenu"); //$NON-NLS-1$
 		menuMgr.setRemoveAllWhenShown(true);
@@ -350,6 +340,7 @@ public class CoverageView extends ViewPart implements IShowInTarget {
 		viewer.refresh();
 	}
 
+	@Override
 	public boolean show(ShowInContext context) {
 		final ISelection selection = context.getSelection();
 		if (selection instanceof IStructuredSelection) {

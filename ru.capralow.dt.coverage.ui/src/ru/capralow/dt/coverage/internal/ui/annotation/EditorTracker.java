@@ -30,45 +30,66 @@ public class EditorTracker {
 	private final IWorkbench workbench;
 
 	private IWindowListener windowListener = new IWindowListener() {
+		@Override
 		public void windowOpened(IWorkbenchWindow window) {
 			window.getPartService().addPartListener(partListener);
 		}
 
+		@Override
 		public void windowClosed(IWorkbenchWindow window) {
 			window.getPartService().removePartListener(partListener);
 		}
 
+		@Override
 		public void windowActivated(IWorkbenchWindow window) {
+			// Нечего делать
 		}
 
+		@Override
 		public void windowDeactivated(IWorkbenchWindow window) {
+			// Нечего делать
 		}
 	};
 
 	private IPartListener2 partListener = new IPartListener2() {
+		@Override
 		public void partOpened(IWorkbenchPartReference partref) {
 			annotateEditor(partref);
 		}
 
+		@Override
 		public void partActivated(IWorkbenchPartReference partref) {
+			// Нечего делать
 		}
 
+		@Override
 		public void partBroughtToTop(IWorkbenchPartReference partref) {
+			// Нечего делать
 		}
 
+		@Override
 		public void partVisible(IWorkbenchPartReference partref) {
+			// Нечего делать
 		}
 
+		@Override
 		public void partInputChanged(IWorkbenchPartReference partref) {
+			// Нечего делать
 		}
 
+		@Override
 		public void partClosed(IWorkbenchPartReference partref) {
+			// Нечего делать
 		}
 
+		@Override
 		public void partDeactivated(IWorkbenchPartReference partref) {
+			// Нечего делать
 		}
 
+		@Override
 		public void partHidden(IWorkbenchPartReference partref) {
+			// Нечего делать
 		}
 	};
 
@@ -98,7 +119,7 @@ public class EditorTracker {
 		}
 	}
 
-	private void annotateEditor(IWorkbenchPartReference partref) {
+	private static void annotateEditor(IWorkbenchPartReference partref) {
 		IWorkbenchPart part = partref.getPart(false);
 		if (part instanceof ITextEditor) {
 			CoverageAnnotationModel.attach((ITextEditor) part);

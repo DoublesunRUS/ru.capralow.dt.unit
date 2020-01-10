@@ -54,6 +54,7 @@ public class SessionImportWizard extends Wizard implements IImportWizard {
 		setNeedsProgressMonitor(true);
 	}
 
+	@Override
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		// nothing to initialize
 	}
@@ -79,6 +80,7 @@ public class SessionImportWizard extends Wizard implements IImportWizard {
 		// importer.setExecutionDataSource(page1.getProfilingResults());
 		importer.setScope(page2.getScope());
 		IRunnableWithProgress op = new IRunnableWithProgress() {
+			@Override
 			public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
 				try {
 					importer.importSession(monitor);

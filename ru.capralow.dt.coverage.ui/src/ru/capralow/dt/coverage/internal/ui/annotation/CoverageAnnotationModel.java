@@ -52,28 +52,27 @@ public final class CoverageAnnotationModel implements IAnnotationModel {
 	private static final Object KEY = new Object();
 
 	/** List of current CoverageAnnotation objects */
-	private List<CoverageAnnotation> annotations = new ArrayList<CoverageAnnotation>(32);
+	private List<CoverageAnnotation> annotations = new ArrayList<>(32);
 
 	/** List of registered IAnnotationModelListener */
-	private List<IAnnotationModelListener> annotationModelListeners = new ArrayList<IAnnotationModelListener>(2);
+	private List<IAnnotationModelListener> annotationModelListeners = new ArrayList<>(2);
 
 	private final ITextEditor editor;
 	private final IDocument document;
 	private int openConnections = 0;
 	private boolean annotated = false;
 
-	private IBslCoverageListener coverageListener = new IBslCoverageListener() {
-		public void coverageChanged() {
-			updateAnnotations(true);
-		}
-	};
+	private IBslCoverageListener coverageListener = () -> updateAnnotations(true);
 
 	private IDocumentListener documentListener = new IDocumentListener() {
+		@Override
 		public void documentChanged(DocumentEvent event) {
 			updateAnnotations(false);
 		}
 
+		@Override
 		public void documentAboutToBeChanged(DocumentEvent event) {
+			// Нечего делать
 		}
 	};
 
@@ -158,7 +157,7 @@ public final class CoverageAnnotationModel implements IAnnotationModel {
 		return findSourceCoverageForElement(element);
 	}
 
-	private boolean hasSource(IJavaElement element) {
+	private static boolean hasSource(IJavaElement element) {
 		if (element instanceof ISourceReference) {
 			try {
 				return ((ISourceReference) element).getSourceRange() != null;
@@ -169,7 +168,7 @@ public final class CoverageAnnotationModel implements IAnnotationModel {
 		return false;
 	}
 
-	private ISourceNode findSourceCoverageForElement(Object element) {
+	private static ISourceNode findSourceCoverageForElement(Object element) {
 		// Do we have a coverage info for the editor input?
 		ICoverageNode coverage = CoverageTools.getCoverageInfo(element);
 		if (coverage instanceof ISourceNode) {
@@ -212,6 +211,7 @@ public final class CoverageAnnotationModel implements IAnnotationModel {
 		fireModelChanged(event);
 	}
 
+	@Override
 	public void addAnnotationModelListener(IAnnotationModelListener listener) {
 		if (!annotationModelListeners.contains(listener)) {
 			annotationModelListeners.add(listener);
@@ -219,6 +219,7 @@ public final class CoverageAnnotationModel implements IAnnotationModel {
 		}
 	}
 
+	@Override
 	public void removeAnnotationModelListener(IAnnotationModelListener listener) {
 		annotationModelListeners.remove(listener);
 	}
@@ -236,39 +237,42 @@ public final class CoverageAnnotationModel implements IAnnotationModel {
 		}
 	}
 
-	public void connect(IDocument document) {
-		if (this.document != document) {
+	@Override
+	public void connect(IDocument document2) {
+		if (this.document != document2) {
 			throw new IllegalArgumentException("Can't connect to different document."); //$NON-NLS-1$
 		}
 		for (final CoverageAnnotation ca : annotations) {
 			try {
-				document.addPosition(ca.getPosition());
+				document2.addPosition(ca.getPosition());
 			} catch (BadLocationException ex) {
 				CoverageUIPlugin.log(ex);
 			}
 		}
 		if (openConnections++ == 0) {
 			CoverageTools.addBslCoverageListener(coverageListener);
-			document.addDocumentListener(documentListener);
+			document2.addDocumentListener(documentListener);
 		}
 	}
 
-	public void disconnect(IDocument document) {
-		if (this.document != document) {
-			throw new IllegalArgumentException("Can't disconnect from different document."); //$NON-NLS-1$
+	@Override
+	public void disconnect(IDocument document2) {
+		if (this.document != document2) {
+			throw new IllegalArgumentException("Can't disconnect from different document.");
 		}
 		for (final CoverageAnnotation ca : annotations) {
-			document.removePosition(ca.getPosition());
+			document2.removePosition(ca.getPosition());
 		}
 		if (--openConnections == 0) {
 			CoverageTools.removeBslCoverageListener(coverageListener);
-			document.removeDocumentListener(documentListener);
+			document2.removeDocumentListener(documentListener);
 		}
 	}
 
 	/**
 	 * External modification is not supported.
 	 */
+	@Override
 	public void addAnnotation(Annotation annotation, Position position) {
 		throw new UnsupportedOperationException();
 	}
@@ -276,20 +280,22 @@ public final class CoverageAnnotationModel implements IAnnotationModel {
 	/**
 	 * External modification is not supported.
 	 */
+	@Override
 	public void removeAnnotation(Annotation annotation) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public Iterator getAnnotationIterator() {
 		return annotations.iterator();
 	}
 
+	@Override
 	public Position getPosition(Annotation annotation) {
-		if (annotation instanceof CoverageAnnotation) {
+		if (annotation instanceof CoverageAnnotation)
 			return ((CoverageAnnotation) annotation).getPosition();
-		} else {
-			return null;
-		}
+
+		return null;
 	}
 
 }

@@ -37,8 +37,8 @@ import ru.capralow.dt.coverage.internal.core.CoverageCorePlugin;
  */
 public class BslModelCoverage extends CoverageNodeImpl implements IBslModelCoverage {
 
-	/** Maps Methods to coverage objects */
-	private Map<Method, ICoverageNode> coverageMap = new HashMap<>();
+	/** Maps MdObject to coverage objects */
+	private Map<MdObject, ICoverageNode> coverageMap = new HashMap<>();
 
 	/** List of all IV8Project objects with coverage information attached */
 	private List<IV8Project> projects = new ArrayList<>();
@@ -58,26 +58,60 @@ public class BslModelCoverage extends CoverageNodeImpl implements IBslModelCover
 	}
 
 	public void putMethod(Method method, MdObject mdObject, ICoverageNode coverage) {
-		coverageMap.put(method, coverage);
+		coverageMap.put(mdObject, coverage);
 		mdObjects.add(mdObject);
 		projects.add(projectManager.getProject(mdObject));
 	}
 
+	@Override
 	public IV8Project[] getProjects() {
 		IV8Project[] arr = new IV8Project[projects.size()];
 		return projects.toArray(arr);
 	}
 
+	@Override
 	public Subsystem[] getSubsystems() {
 		Subsystem[] arr = new Subsystem[subsystems.size()];
 		return subsystems.toArray(arr);
 	}
 
+	@Override
 	public MdObject[] getMdObjects() {
 		MdObject[] arr = new MdObject[mdObjects.size()];
 		return mdObjects.toArray(arr);
 	}
 
+	@Override
+	public ICoverageNode getCoverageFor(MdObject element) {
+		ICoverageNode coverage = coverageMap.get(element);
+		if (coverage != null) {
+			return coverage;
+		}
+
+		return null;
+	}
+
+	@Override
+	public ICoverageNode getCoverageFor(IV8Project element) {
+		ICoverageNode coverage = coverageMap.get(element);
+		if (coverage != null) {
+			return coverage;
+		}
+
+		return null;
+	}
+
+	@Override
+	public ICoverageNode getCoverageFor(Subsystem element) {
+		ICoverageNode coverage = coverageMap.get(element);
+		if (coverage != null) {
+			return coverage;
+		}
+
+		return null;
+	}
+
+	@Override
 	public ICoverageNode getCoverageFor(Method element) {
 		ICoverageNode coverage = coverageMap.get(element);
 		if (coverage != null) {

@@ -16,9 +16,9 @@ import java.util.Collections;
 
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.LabelProvider;
+import org.eclipse.jface.window.Window;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.dialogs.ListDialog;
@@ -44,6 +44,7 @@ public class SelectActiveSessionHandler extends AbstractSessionManagerHandler {
 		return !sessionManager.getSessions().isEmpty();
 	}
 
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		final ListDialog dialog = new ListDialog(HandlerUtil.getActiveShell(event)) {
 			@Override
@@ -68,7 +69,7 @@ public class SelectActiveSessionHandler extends AbstractSessionManagerHandler {
 		});
 		dialog.setInitialElementSelections(Collections.singletonList(sessionManager.getActiveSession()));
 		dialog.setInput(sessionManager.getSessions());
-		if (dialog.open() == Dialog.OK) {
+		if (dialog.open() == Window.OK) {
 			final Object[] result = dialog.getResult();
 			if (result.length == 1) {
 				sessionManager.activateSession((ICoverageSession) result[0]);

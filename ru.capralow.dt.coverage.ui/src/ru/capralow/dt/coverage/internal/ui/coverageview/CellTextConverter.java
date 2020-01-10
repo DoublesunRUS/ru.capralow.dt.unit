@@ -39,7 +39,7 @@ class CellTextConverter {
 
 	private static final NumberFormat COVERAGE_VALUE = new DecimalFormat(UIMessages.CoverageView_columnCoverageValue);
 
-	private static final NumberFormat COUNTER_VALUE = DecimalFormat.getIntegerInstance();
+	private static final NumberFormat COUNTER_VALUE = NumberFormat.getIntegerInstance();
 
 	private final ViewSettings settings;
 	private final ILabelProvider workbenchLabelProvider;
@@ -75,11 +75,10 @@ class CellTextConverter {
 
 	String getRatio(Object element) {
 		ICounter counter = getCounter(element);
-		if (counter.getTotalCount() == 0) {
+		if (counter.getTotalCount() == 0)
 			return ""; //$NON-NLS-1$
-		} else {
-			return COVERAGE_VALUE.format(counter.getCoveredRatio());
-		}
+
+		return COVERAGE_VALUE.format(counter.getCoveredRatio());
 	}
 
 	String getCovered(Object element) {

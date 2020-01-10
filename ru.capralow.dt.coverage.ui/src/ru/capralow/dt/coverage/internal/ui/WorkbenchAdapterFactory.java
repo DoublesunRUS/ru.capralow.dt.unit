@@ -25,24 +25,29 @@ public class WorkbenchAdapterFactory implements IAdapterFactory {
 
 	private static final IWorkbenchAdapter SESSIONADAPTER = new IWorkbenchAdapter() {
 
+		@Override
 		public ImageDescriptor getImageDescriptor(Object object) {
 			return CoverageUIPlugin.getImageDescriptor(CoverageUIPlugin.OBJ_SESSION);
 		}
 
+		@Override
 		public String getLabel(Object o) {
 			return ((ICoverageSession) o).getDescription();
 		}
 
+		@Override
 		public Object[] getChildren(Object o) {
 			return new Object[0];
 		}
 
+		@Override
 		public Object getParent(Object o) {
 			return null;
 		}
 
 	};
 
+	@Override
 	public Object getAdapter(Object adaptableObject, @SuppressWarnings("rawtypes") Class adapterType) {
 		if (adaptableObject instanceof ICoverageSession) {
 			return SESSIONADAPTER;
@@ -50,6 +55,7 @@ public class WorkbenchAdapterFactory implements IAdapterFactory {
 		return null;
 	}
 
+	@Override
 	@SuppressWarnings("rawtypes")
 	public Class[] getAdapterList() {
 		return new Class[] { IWorkbenchAdapter.class };

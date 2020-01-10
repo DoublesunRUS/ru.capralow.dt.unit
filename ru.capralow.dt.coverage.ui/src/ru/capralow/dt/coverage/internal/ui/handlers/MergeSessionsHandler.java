@@ -28,8 +28,8 @@ import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.handlers.HandlerUtil;
 
-import ru.capralow.dt.coverage.core.CoverageTools;
 import ru.capralow.dt.coverage.core.CoverageStatus;
+import ru.capralow.dt.coverage.core.CoverageTools;
 import ru.capralow.dt.coverage.core.ICoverageSession;
 import ru.capralow.dt.coverage.core.ISessionManager;
 import ru.capralow.dt.coverage.internal.ui.UIMessages;
@@ -49,6 +49,7 @@ public class MergeSessionsHandler extends AbstractSessionManagerHandler {
 		return sessionManager.getSessions().size() > 1;
 	}
 
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		final Shell parentShell = HandlerUtil.getActiveShell(event);
 		final ISessionManager sm = CoverageTools.getSessionManager();
@@ -62,7 +63,7 @@ public class MergeSessionsHandler extends AbstractSessionManagerHandler {
 		return null;
 	}
 
-	private Job createJob(final ISessionManager sm, final Collection<ICoverageSession> sessions,
+	private static Job createJob(final ISessionManager sm, final Collection<ICoverageSession> sessions,
 			final String description) {
 		final Job job = new Job(UIMessages.MergingSessions_task) {
 
