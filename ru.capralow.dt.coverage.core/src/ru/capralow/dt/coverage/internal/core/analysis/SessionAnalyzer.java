@@ -53,8 +53,6 @@ public class SessionAnalyzer {
 
 	private static final ITracer PERFORMANCE = DebugOptions.PERFORMANCETRACER;
 
-	private BslModelCoverage modelCoverage;
-
 	private ExecutionDataStore executionDataStore;
 
 	private SessionInfoStore sessionInfoStore;
@@ -71,11 +69,19 @@ public class SessionAnalyzer {
 	@Inject
 	private IV8ProjectManager projectManager;
 
+	public Collection<ExecutionData> getExecutionData() {
+		return executionDataStore.getContents();
+	}
+
+	public List<SessionInfo> getSessionInfos() {
+		return sessionInfoStore.getInfos();
+	}
+
 	public IBslModelCoverage processSession(ICoverageSession session, IProgressMonitor monitor) {
 		PERFORMANCE.startTimer();
 		PERFORMANCE.startMemoryUsage();
 
-		modelCoverage = new BslModelCoverage();
+		BslModelCoverage modelCoverage = new BslModelCoverage();
 		Collection<URI> roots = session.getScope();
 		monitor.beginTask(NLS.bind(CoreMessages.AnalyzingCoverageSession_task, session.getDescription()),
 				1 + roots.size());
@@ -114,11 +120,9 @@ public class SessionAnalyzer {
 				CounterImpl moduleCounter = CounterImpl.COUNTER_0_0;
 
 				for (ILineProfilingResult profilingLine : profilingResult.getResultsForModule(moduleReference)) {
-					moduleCounter = moduleCounter.increment(1, 1);
-					profilingLine.getLineNo();
+					moduleCoverage
+							.increment(CounterImpl.COUNTER_0_1, CounterImpl.COUNTER_0_1, profilingLine.getLineNo());
 				}
-
-				moduleCoverage.instructionCounter = moduleCounter;
 
 				modelCoverage.putMethod(moduleMethods.get(0), (MdObject) module.getOwner(), moduleCoverage);
 			}
@@ -129,14 +133,6 @@ public class SessionAnalyzer {
 		PERFORMANCE.stopTimer("loading " + session.getDescription()); //$NON-NLS-1$
 		PERFORMANCE.stopMemoryUsage("loading " + session.getDescription()); //$NON-NLS-1$
 		return modelCoverage;
-	}
-
-	public List<SessionInfo> getSessionInfos() {
-		return sessionInfoStore.getInfos();
-	}
-
-	public Collection<ExecutionData> getExecutionData() {
-		return executionDataStore.getContents();
 	}
 
 	private String getName(URI root) {

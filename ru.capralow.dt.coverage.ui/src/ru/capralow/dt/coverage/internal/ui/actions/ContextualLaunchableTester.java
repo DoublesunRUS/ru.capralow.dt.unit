@@ -9,6 +9,8 @@
  * Contributors:
  *    Marc R. Hoffmann - initial API and implementation
  *
+ * Adapted by Alexander Kapralov
+ *
  ******************************************************************************/
 package ru.capralow.dt.coverage.internal.ui.actions;
 
@@ -35,30 +37,12 @@ import ru.capralow.dt.coverage.internal.ui.CoverageUIPlugin;
  * for the current selection. The expression defined for the shortcut enablement
  * has changed for different Eclipse versions. Therefore the implementation of
  * the property tester delegates to the expression defined for the corresponding
- * launch shortcut expression for the "run" mode.
+ * launch shortcut expression for the "debug" mode.
  */
 public class ContextualLaunchableTester extends PropertyTester {
 
-	/** Cache for expressions maps launch shortcut ids to Expression objects. */
-	private Map<String, Expression> expressions = new HashMap<>();
-
-	@Override
-	public boolean test(Object receiver, String property, Object[] args, Object expectedValue) {
-		String delegateShortcutID = (String) args[0];
-		Expression expr = expressions.get(delegateShortcutID);
-		if (expr == null) {
-			expr = createEnablementExpression(delegateShortcutID);
-			expressions.put(delegateShortcutID, expr);
-		}
-		try {
-			return expr.evaluate(createContext(receiver)) != EvaluationResult.FALSE;
-		} catch (CoreException ce) {
-			CoverageUIPlugin.getInstance().getLog().log(CoverageUIPlugin.errorStatus("Launch shortcut '" //$NON-NLS-1$
-					+ delegateShortcutID + "' enablement expression caused exception.", //$NON-NLS-1$
-					ce));
-			return false;
-		}
-	}
+	private static final String DELEGATE_LAUNCHMODE = ILaunchManager.DEBUG_MODE;
+	private static final String EXPOINT_SHORTCUT = "org.eclipse.debug.ui.launchShortcuts"; //$NON-NLS-1$
 
 	private static IEvaluationContext createContext(Object selection) {
 		IEvaluationContext context = new EvaluationContext(null, selection);
@@ -79,15 +63,14 @@ public class ContextualLaunchableTester extends PropertyTester {
 	}
 
 	private static IConfigurationElement findEnablementConfiguration(String delegateShortcutID) {
-		IConfigurationElement[] configs = Platform.getExtensionRegistry()
-				.getConfigurationElementsFor("org.eclipse.debug.ui.launchShortcuts"); //$NON-NLS-1$
+		IConfigurationElement[] configs = Platform.getExtensionRegistry().getConfigurationElementsFor(EXPOINT_SHORTCUT); // $NON-NLS-1$
 		for (final IConfigurationElement config : configs) {
 			if (!delegateShortcutID.equals(config.getAttribute("id"))) //$NON-NLS-1$
 				continue;
 			String modes = config.getAttribute("modes"); //$NON-NLS-1$
 			if (modes == null)
 				continue;
-			if (!Arrays.asList(modes.split("\\W")).contains(ILaunchManager.RUN_MODE)) //$NON-NLS-1$
+			if (!Arrays.asList(modes.split("\\W")).contains(DELEGATE_LAUNCHMODE)) //$NON-NLS-1$
 				continue;
 			IConfigurationElement[] launch = config.getChildren("contextualLaunch"); //$NON-NLS-1$
 			if (launch.length != 1)
@@ -97,6 +80,28 @@ public class ContextualLaunchableTester extends PropertyTester {
 				return enablement[0];
 		}
 		return null;
+	}
+
+	/** Cache for expressions maps launch shortcut ids to Expression objects. */
+	private Map<String, Expression> expressions = new HashMap<>();
+
+	@Override
+	public boolean test(Object receiver, String property, Object[] args, Object expectedValue) {
+		String delegateShortcutID = (String) args[0];
+		Expression expr = expressions.get(delegateShortcutID);
+		if (expr == null) {
+			expr = createEnablementExpression(delegateShortcutID);
+			expressions.put(delegateShortcutID, expr);
+		}
+		try {
+			return expr.evaluate(createContext(receiver)) != EvaluationResult.FALSE;
+		} catch (CoreException ce) {
+			CoverageUIPlugin.getInstance().getLog()
+					.log(CoverageUIPlugin.errorStatus(
+							"Launch shortcut '" + delegateShortcutID + "' enablement expression caused exception.",
+							ce));
+			return false;
+		}
 	}
 
 }

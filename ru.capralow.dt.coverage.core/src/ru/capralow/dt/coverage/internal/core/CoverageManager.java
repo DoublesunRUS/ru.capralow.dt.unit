@@ -23,13 +23,6 @@ public class CoverageManager implements IManagedService {
 
 	private ILaunchListener launchListener = new ILaunchListener() {
 		@Override
-		public void launchRemoved(ILaunch launch) {
-			if (CoverageCorePlugin.getInstance().getPreferences().getAutoRemoveSessions()) {
-				CoverageCorePlugin.getInstance().getSessionManager().removeSessionsFor(launch);
-			}
-		}
-
-		@Override
 		public void launchAdded(ILaunch launch) {
 			// Нечего делать
 		}
@@ -37,6 +30,13 @@ public class CoverageManager implements IManagedService {
 		@Override
 		public void launchChanged(ILaunch launch) {
 			// Нечего делать
+		}
+
+		@Override
+		public void launchRemoved(ILaunch launch) {
+			if (CoverageCorePlugin.getInstance().getPreferences().getAutoRemoveSessions()) {
+				CoverageCorePlugin.getInstance().getSessionManager().removeSessionsFor(launch);
+			}
 		}
 	};
 
@@ -52,6 +52,17 @@ public class CoverageManager implements IManagedService {
 						coverageLaunch.getAgentServer().stop();
 						checkExecutionData(coverageLaunch);
 					}
+
+				}
+			}
+		}
+
+		private void checkExecutionData(CoverageLaunch launch) {
+			if (!launch.getAgentServer().hasDataReceived()) {
+				try {
+					showPrompt(CoverageStatus.NO_COVERAGE_DATA_ERROR.getStatus(), launch);
+				} catch (CoreException e) {
+					CoverageCorePlugin.log(e.getStatus());
 				}
 			}
 		}
@@ -79,16 +90,6 @@ public class CoverageManager implements IManagedService {
 			}
 
 			return ((Boolean) prompter.handleStatus(status, info)).booleanValue();
-		}
-
-		private void checkExecutionData(CoverageLaunch launch) {
-			if (!launch.getAgentServer().hasDataReceived()) {
-				try {
-					showPrompt(CoverageStatus.NO_COVERAGE_DATA_ERROR.getStatus(), launch);
-				} catch (CoreException e) {
-					CoverageCorePlugin.log(e.getStatus());
-				}
-			}
 		}
 	};
 

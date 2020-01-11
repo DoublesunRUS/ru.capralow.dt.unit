@@ -18,6 +18,7 @@ import org.eclipse.core.runtime.IAdapterFactory;
 import org.jacoco.core.analysis.ICoverageNode;
 import org.jacoco.core.analysis.ISourceNode;
 
+import com._1c.g5.v8.dt.core.platform.IV8Project;
 import com._1c.g5.v8.dt.metadata.mdclass.MdObject;
 
 import ru.capralow.dt.coverage.core.CoverageTools;
@@ -38,7 +39,16 @@ public class ModuleCoverageAdapterFactory implements IAdapterFactory {
 		if (mc == null)
 			return null;
 
-		ICoverageNode coverage = mc.getCoverageFor((MdObject) object);
+		ICoverageNode coverage = null;
+		if (object instanceof IV8Project)
+			coverage = mc.getCoverageFor((IV8Project) object);
+
+		else if (object instanceof MdObject)
+			coverage = mc.getCoverageFor((MdObject) object);
+
+		if (coverage == null)
+			return null;
+
 		if (adapterType.isInstance(coverage))
 			return coverage;
 

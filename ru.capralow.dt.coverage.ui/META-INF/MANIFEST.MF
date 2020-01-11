@@ -35,10 +35,17 @@ Automatic-Module-Name: dt.coverage.ui
 Import-Package: com._1c.g5.v8.dt.bm.index.emf,
  com._1c.g5.v8.dt.bsl.model,
  com._1c.g5.v8.dt.core.platform,
+ com._1c.g5.v8.dt.md.ui.editor.base,
  com._1c.g5.v8.dt.metadata.mdclass,
+ com._1c.g5.v8.dt.ui.editor.input,
+ com._1c.g5.v8.dt.ui.util,
  com._1c.g5.wiring,
  com._1c.g5.wiring.binder,
  com.google.inject,
  org.eclipse.emf.common.notify,
  org.eclipse.emf.common.util,
- org.eclipse.emf.ecore
+ org.eclipse.emf.ecore,
+ org.eclipse.jdt.internal.core.manipulation.search,
+ org.eclipse.ui.texteditor,
+ org.eclipse.xtext.resource,
+ org.eclipse.xtext.ui.editor

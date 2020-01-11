@@ -9,6 +9,8 @@
  * Contributors:
  *    Marc R. Hoffmann - initial API and implementation
  *
+ * Adapted by Alexander Kapralov
+ *
  ******************************************************************************/
 package ru.capralow.dt.coverage.internal.ui.annotation;
 
@@ -16,9 +18,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.jdt.core.IJavaElement;
-import org.eclipse.jdt.core.ISourceReference;
-import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocument;
@@ -33,13 +35,18 @@ import org.eclipse.jface.text.source.IAnnotationModelListener;
 import org.eclipse.jface.text.source.IAnnotationModelListenerExtension;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.texteditor.IDocumentProvider;
-import org.eclipse.ui.texteditor.ITextEditor;
+import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.jacoco.core.analysis.ICounter;
 import org.jacoco.core.analysis.ICoverageNode;
 import org.jacoco.core.analysis.ILine;
 import org.jacoco.core.analysis.ISourceNode;
 
+import com._1c.g5.v8.dt.bm.index.emf.IBmEmfIndexManager;
+import com._1c.g5.v8.dt.bm.index.emf.IBmEmfIndexProvider;
+import com._1c.g5.v8.dt.metadata.mdclass.CommonModule;
+
 import ru.capralow.dt.coverage.core.CoverageTools;
+import ru.capralow.dt.coverage.core.MdUtils;
 import ru.capralow.dt.coverage.core.analysis.IBslCoverageListener;
 import ru.capralow.dt.coverage.internal.ui.CoverageUIPlugin;
 
@@ -51,37 +58,6 @@ public final class CoverageAnnotationModel implements IAnnotationModel {
 	/** Key used to piggyback our model to the editor's model. */
 	private static final Object KEY = new Object();
 
-	/** List of current CoverageAnnotation objects */
-	private List<CoverageAnnotation> annotations = new ArrayList<>(32);
-
-	/** List of registered IAnnotationModelListener */
-	private List<IAnnotationModelListener> annotationModelListeners = new ArrayList<>(2);
-
-	private final ITextEditor editor;
-	private final IDocument document;
-	private int openConnections = 0;
-	private boolean annotated = false;
-
-	private IBslCoverageListener coverageListener = () -> updateAnnotations(true);
-
-	private IDocumentListener documentListener = new IDocumentListener() {
-		@Override
-		public void documentChanged(DocumentEvent event) {
-			updateAnnotations(false);
-		}
-
-		@Override
-		public void documentAboutToBeChanged(DocumentEvent event) {
-			// Нечего делать
-		}
-	};
-
-	private CoverageAnnotationModel(ITextEditor editor, IDocument document) {
-		this.editor = editor;
-		this.document = document;
-		updateAnnotations(true);
-	}
-
 	/**
 	 * Attaches a coverage annotation model for the given editor if the editor can
 	 * be annotated. Does nothing if the model is already attached.
@@ -89,7 +65,7 @@ public final class CoverageAnnotationModel implements IAnnotationModel {
 	 * @param editor
 	 *            Editor to attach a annotation model to
 	 */
-	public static void attach(ITextEditor editor) {
+	public static void attach(XtextEditor editor) {
 		IDocumentProvider provider = editor.getDocumentProvider();
 		// there may be text editors without document providers (SF #1725100)
 		if (provider == null)
@@ -115,7 +91,7 @@ public final class CoverageAnnotationModel implements IAnnotationModel {
 	 * @param editor
 	 *            Editor to detach the annotation model from
 	 */
-	public static void detach(ITextEditor editor) {
+	public static void detach(XtextEditor editor) {
 		IDocumentProvider provider = editor.getDocumentProvider();
 		// there may be text editors without document providers (SF #1725100)
 		if (provider == null)
@@ -127,54 +103,129 @@ public final class CoverageAnnotationModel implements IAnnotationModel {
 		modelex.removeAnnotationModel(KEY);
 	}
 
-	private void updateAnnotations(boolean force) {
-		final ISourceNode coverage = findSourceCoverageForEditor();
-		if (coverage != null) {
-			if (!annotated || force) {
-				createAnnotations(coverage);
-				annotated = true;
-			}
-		} else {
-			if (annotated) {
-				clear();
-				annotated = false;
-			}
-		}
-	}
-
-	private ISourceNode findSourceCoverageForEditor() {
-		if (editor.isDirty()) {
-			return null;
-		}
-		final IEditorInput input = editor.getEditorInput();
-		if (input == null) {
-			return null;
-		}
-		final Object element = input.getAdapter(IJavaElement.class);
-		if (!hasSource((IJavaElement) element)) {
-			return null;
-		}
-		return findSourceCoverageForElement(element);
-	}
-
-	private static boolean hasSource(IJavaElement element) {
-		if (element instanceof ISourceReference) {
-			try {
-				return ((ISourceReference) element).getSourceRange() != null;
-			} catch (JavaModelException ex) {
-				// we ignore this, the resource seems to have problems
-			}
-		}
-		return false;
-	}
-
 	private static ISourceNode findSourceCoverageForElement(Object element) {
-		// Do we have a coverage info for the editor input?
-		ICoverageNode coverage = CoverageTools.getCoverageInfo(element);
+		IBmEmfIndexManager bmEmfIndexManager = CoverageUIPlugin.getInstance().getInjector()
+				.getInstance(IBmEmfIndexManager.class);
+		IProject project = ((IResource) element).getProject();
+		IBmEmfIndexProvider bmEmfIndexProvider = bmEmfIndexManager.getEmfIndexProvider(project);
+
+		IPath objectFullPath = ((IResource) element).getFullPath();
+		String objectFullName = objectFullPath.segment(2).concat(".").concat(objectFullPath.segment(3)); //$NON-NLS-1$
+
+		CommonModule module = (CommonModule) MdUtils.getConfigurationObject(objectFullName, bmEmfIndexProvider);
+
+		ICoverageNode coverage = CoverageTools.getCoverageInfo(module);
 		if (coverage instanceof ISourceNode) {
 			return (ISourceNode) coverage;
 		}
 		return null;
+	}
+
+	/** List of current CoverageAnnotation objects */
+	private List<CoverageAnnotation> annotations = new ArrayList<>(32);
+	/** List of registered IAnnotationModelListener */
+	private List<IAnnotationModelListener> annotationModelListeners = new ArrayList<>(2);
+
+	private final XtextEditor editor;
+
+	private final IDocument document;
+
+	private int openConnections = 0;
+
+	private boolean annotated = false;
+
+	private IBslCoverageListener coverageListener = () -> updateAnnotations(true);
+
+	private IDocumentListener documentListener = new IDocumentListener() {
+		@Override
+		public void documentAboutToBeChanged(DocumentEvent event) {
+			// Нечего делать
+		}
+
+		@Override
+		public void documentChanged(DocumentEvent event) {
+			updateAnnotations(false);
+		}
+	};
+
+	private CoverageAnnotationModel(XtextEditor editor, IDocument document) {
+		this.editor = editor;
+		this.document = document;
+		updateAnnotations(true);
+	}
+
+	/**
+	 * External modification is not supported.
+	 */
+	@Override
+	public void addAnnotation(Annotation annotation, Position position) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void addAnnotationModelListener(IAnnotationModelListener listener) {
+		if (!annotationModelListeners.contains(listener)) {
+			annotationModelListeners.add(listener);
+			fireModelChanged(new AnnotationModelEvent(this, true));
+		}
+	}
+
+	@Override
+	public void connect(IDocument document2) {
+		if (this.document != document2) {
+			throw new IllegalArgumentException("Can't connect to different document.");
+		}
+		for (final CoverageAnnotation ca : annotations) {
+			try {
+				document2.addPosition(ca.getPosition());
+			} catch (BadLocationException ex) {
+				CoverageUIPlugin.log(ex);
+			}
+		}
+		if (openConnections++ == 0) {
+			CoverageTools.addBslCoverageListener(coverageListener);
+			document2.addDocumentListener(documentListener);
+		}
+	}
+
+	@Override
+	public void disconnect(IDocument document2) {
+		if (this.document != document2) {
+			throw new IllegalArgumentException("Can't disconnect from different document.");
+		}
+		for (final CoverageAnnotation ca : annotations) {
+			document2.removePosition(ca.getPosition());
+		}
+		if (--openConnections == 0) {
+			CoverageTools.removeBslCoverageListener(coverageListener);
+			document2.removeDocumentListener(documentListener);
+		}
+	}
+
+	@Override
+	public Iterator getAnnotationIterator() {
+		return annotations.iterator();
+	}
+
+	@Override
+	public Position getPosition(Annotation annotation) {
+		if (annotation instanceof CoverageAnnotation)
+			return ((CoverageAnnotation) annotation).getPosition();
+
+		return null;
+	}
+
+	/**
+	 * External modification is not supported.
+	 */
+	@Override
+	public void removeAnnotation(Annotation annotation) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void removeAnnotationModelListener(IAnnotationModelListener listener) {
+		annotationModelListeners.remove(listener);
 	}
 
 	private void clear() {
@@ -211,17 +262,16 @@ public final class CoverageAnnotationModel implements IAnnotationModel {
 		fireModelChanged(event);
 	}
 
-	@Override
-	public void addAnnotationModelListener(IAnnotationModelListener listener) {
-		if (!annotationModelListeners.contains(listener)) {
-			annotationModelListeners.add(listener);
-			fireModelChanged(new AnnotationModelEvent(this, true));
+	private ISourceNode findSourceCoverageForEditor() {
+		if (editor.isDirty()) {
+			return null;
 		}
-	}
+		final IEditorInput input = editor.getEditorInput();
+		if (input == null)
+			return null;
 
-	@Override
-	public void removeAnnotationModelListener(IAnnotationModelListener listener) {
-		annotationModelListeners.remove(listener);
+		final Object element = input.getAdapter(IResource.class);
+		return findSourceCoverageForElement(element);
 	}
 
 	private void fireModelChanged(AnnotationModelEvent event) {
@@ -237,65 +287,19 @@ public final class CoverageAnnotationModel implements IAnnotationModel {
 		}
 	}
 
-	@Override
-	public void connect(IDocument document2) {
-		if (this.document != document2) {
-			throw new IllegalArgumentException("Can't connect to different document."); //$NON-NLS-1$
-		}
-		for (final CoverageAnnotation ca : annotations) {
-			try {
-				document2.addPosition(ca.getPosition());
-			} catch (BadLocationException ex) {
-				CoverageUIPlugin.log(ex);
+	private void updateAnnotations(boolean force) {
+		final ISourceNode coverage = findSourceCoverageForEditor();
+		if (coverage != null) {
+			if (!annotated || force) {
+				createAnnotations(coverage);
+				annotated = true;
+			}
+		} else {
+			if (annotated) {
+				clear();
+				annotated = false;
 			}
 		}
-		if (openConnections++ == 0) {
-			CoverageTools.addBslCoverageListener(coverageListener);
-			document2.addDocumentListener(documentListener);
-		}
-	}
-
-	@Override
-	public void disconnect(IDocument document2) {
-		if (this.document != document2) {
-			throw new IllegalArgumentException("Can't disconnect from different document.");
-		}
-		for (final CoverageAnnotation ca : annotations) {
-			document2.removePosition(ca.getPosition());
-		}
-		if (--openConnections == 0) {
-			CoverageTools.removeBslCoverageListener(coverageListener);
-			document2.removeDocumentListener(documentListener);
-		}
-	}
-
-	/**
-	 * External modification is not supported.
-	 */
-	@Override
-	public void addAnnotation(Annotation annotation, Position position) {
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * External modification is not supported.
-	 */
-	@Override
-	public void removeAnnotation(Annotation annotation) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public Iterator getAnnotationIterator() {
-		return annotations.iterator();
-	}
-
-	@Override
-	public Position getPosition(Annotation annotation) {
-		if (annotation instanceof CoverageAnnotation)
-			return ((CoverageAnnotation) annotation).getPosition();
-
-		return null;
 	}
 
 }

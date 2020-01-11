@@ -21,7 +21,6 @@ import java.util.List;
 import org.eclipse.core.commands.IHandler;
 import org.eclipse.jdt.ui.actions.IJavaEditorActionDefinitionIds;
 import org.eclipse.jdt.ui.actions.JdtActionConstants;
-import org.eclipse.jdt.ui.actions.OpenAction;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.viewers.CellLabelProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
@@ -60,6 +59,7 @@ import ru.capralow.dt.coverage.core.analysis.IBslCoverageListener;
 import ru.capralow.dt.coverage.internal.ui.ContextHelp;
 import ru.capralow.dt.coverage.internal.ui.RedGreenBar;
 import ru.capralow.dt.coverage.internal.ui.UIMessages;
+import ru.capralow.dt.coverage.internal.ui.actions.OpenAction;
 
 /**
  * Implementation of the coverage view.
@@ -73,17 +73,17 @@ public class CoverageView extends ViewPart implements IShowInTarget {
 	 */
 	public static final Object LOADING_ELEMENT = new Object();
 
-	private final ViewSettings settings = new ViewSettings();
-
-	private final CellTextConverter cellTextConverter = new CellTextConverter(settings);
-
-	private final MaxTotalCache maxTotalCache = new MaxTotalCache(settings);
-
 	protected static final int COLUMN_ELEMENT = 0;
+
 	protected static final int COLUMN_RATIO = 1;
+
 	protected static final int COLUMN_COVERED = 2;
+
 	protected static final int COLUMN_MISSED = 3;
 	protected static final int COLUMN_TOTAL = 4;
+	private final ViewSettings settings = new ViewSettings();
+	private final CellTextConverter cellTextConverter = new CellTextConverter(settings);
+	private final MaxTotalCache maxTotalCache = new MaxTotalCache(settings);
 
 	private TreeViewer viewer;
 
@@ -119,19 +119,6 @@ public class CoverageView extends ViewPart implements IShowInTarget {
 		maxTotalCache.reset();
 		viewer.setInput(CoverageTools.getBslModelCoverage());
 	});
-
-	@Override
-	public void init(IViewSite site, IMemento memento) throws PartInitException {
-		super.init(site, memento);
-		settings.init(memento);
-	}
-
-	@Override
-	public void saveState(IMemento memento) {
-		settings.storeColumnWidth(viewer);
-		settings.save(memento);
-		super.saveState(memento);
-	}
 
 	@Override
 	public void createPartControl(Composite parent) {
@@ -278,19 +265,44 @@ public class CoverageView extends ViewPart implements IShowInTarget {
 		CoverageTools.addBslCoverageListener(coverageListener);
 	}
 
-	/**
-	 * Create local handlers.
-	 */
-	private void createHandlers() {
-		activateHandler(SelectRootElementsHandler.ID, new SelectRootElementsHandler(settings, this));
-		activateHandler(SelectCountersHandler.ID, new SelectCountersHandler(settings, this));
-		activateHandler(HideUnusedElementsHandler.ID, new HideUnusedElementsHandler(settings, this));
-		activateHandler(IWorkbenchCommandConstants.EDIT_COPY,
-				new CopyHandler(settings, getSite().getShell().getDisplay(), viewer));
-		activateHandler(IWorkbenchCommandConstants.FILE_REFRESH,
-				new RefreshSessionHandler(CoverageTools.getSessionManager()));
-		activateHandler(IWorkbenchCommandConstants.NAVIGATE_COLLAPSE_ALL, new CollapseAllHandler(viewer));
-		activateHandler(LinkWithSelectionHandler.ID, new LinkWithSelectionHandler(settings, selectiontracker));
+	@Override
+	public void dispose() {
+		for (IHandler h : handlers) {
+			h.dispose();
+		}
+		handlers.clear();
+		CoverageTools.removeBslCoverageListener(coverageListener);
+		CoverageTools.getSessionManager().removeSessionListener(descriptionUpdater);
+		selectiontracker.dispose();
+		super.dispose();
+	}
+
+	@Override
+	public void init(IViewSite site, IMemento memento) throws PartInitException {
+		super.init(site, memento);
+		settings.init(memento);
+	}
+
+	@Override
+	public void saveState(IMemento memento) {
+		settings.storeColumnWidth(viewer);
+		settings.save(memento);
+		super.saveState(memento);
+	}
+
+	@Override
+	public void setFocus() {
+		viewer.getTree().setFocus();
+	}
+
+	@Override
+	public boolean show(ShowInContext context) {
+		final ISelection selection = context.getSelection();
+		if (selection instanceof IStructuredSelection) {
+			viewer.setSelection(selection);
+			return true;
+		}
+		return false;
 	}
 
 	private void activateHandler(String id, IHandler handler) {
@@ -317,37 +329,25 @@ public class CoverageView extends ViewPart implements IShowInTarget {
 		viewer.addSelectionChangedListener(propertiesAction);
 	}
 
-	@Override
-	public void setFocus() {
-		viewer.getTree().setFocus();
-	}
-
-	@Override
-	public void dispose() {
-		for (IHandler h : handlers) {
-			h.dispose();
-		}
-		handlers.clear();
-		CoverageTools.removeBslCoverageListener(coverageListener);
-		CoverageTools.getSessionManager().removeSessionListener(descriptionUpdater);
-		selectiontracker.dispose();
-		super.dispose();
+	/**
+	 * Create local handlers.
+	 */
+	private void createHandlers() {
+		activateHandler(SelectRootElementsHandler.ID, new SelectRootElementsHandler(settings, this));
+		activateHandler(SelectCountersHandler.ID, new SelectCountersHandler(settings, this));
+		activateHandler(HideUnusedElementsHandler.ID, new HideUnusedElementsHandler(settings, this));
+		activateHandler(IWorkbenchCommandConstants.EDIT_COPY,
+				new CopyHandler(settings, getSite().getShell().getDisplay(), viewer));
+		activateHandler(IWorkbenchCommandConstants.FILE_REFRESH,
+				new RefreshSessionHandler(CoverageTools.getSessionManager()));
+		activateHandler(IWorkbenchCommandConstants.NAVIGATE_COLLAPSE_ALL, new CollapseAllHandler(viewer));
+		activateHandler(LinkWithSelectionHandler.ID, new LinkWithSelectionHandler(settings, selectiontracker));
 	}
 
 	protected void refreshViewer() {
 		maxTotalCache.reset();
 		settings.updateColumnHeaders(viewer);
 		viewer.refresh();
-	}
-
-	@Override
-	public boolean show(ShowInContext context) {
-		final ISelection selection = context.getSelection();
-		if (selection instanceof IStructuredSelection) {
-			viewer.setSelection(selection);
-			return true;
-		}
-		return false;
 	}
 
 }

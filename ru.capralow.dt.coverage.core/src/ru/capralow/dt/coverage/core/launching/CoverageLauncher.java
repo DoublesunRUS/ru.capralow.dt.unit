@@ -39,28 +39,12 @@ import ru.capralow.dt.coverage.internal.core.launching.CoverageLaunch;
 /**
  * Abstract base class for coverage mode launchers. Coverage launchers perform
  * adjust the launch configuration to inject the JaCoCo coverage agent and then
- * delegate to the corresponding launcher responsible for the "run" mode.
+ * delegate to the corresponding launcher responsible for the "debug" mode.
  */
 public abstract class CoverageLauncher implements ICoverageLauncher, IExecutableExtension {
 
 	/** Launch mode for the launch delegates used internally. */
-	public static final String DELEGATELAUNCHMODE = ILaunchManager.RUN_MODE;
-
-	protected ILaunchConfigurationDelegate launchdelegate;
-
-	protected ILaunchConfigurationDelegate2 launchdelegate2;
-
-	// IExecutableExtension interface:
-
-	@Override
-	public void setInitializationData(IConfigurationElement config, String propertyName, Object data)
-			throws CoreException {
-		final String launchtype = config.getAttribute("type"); //$NON-NLS-1$
-		launchdelegate = getLaunchDelegate(launchtype);
-		if (launchdelegate instanceof ILaunchConfigurationDelegate2) {
-			launchdelegate2 = (ILaunchConfigurationDelegate2) launchdelegate;
-		}
-	}
+	public static final String DELEGATELAUNCHMODE = ILaunchManager.DEBUG_MODE;
 
 	private static ILaunchConfigurationDelegate getLaunchDelegate(String launchtype) throws CoreException {
 		ILaunchConfigurationType type = DebugPlugin.getDefault().getLaunchManager()
@@ -71,7 +55,38 @@ public abstract class CoverageLauncher implements ICoverageLauncher, IExecutable
 		return type.getDelegates(Collections.singleton(DELEGATELAUNCHMODE))[0].getDelegate();
 	}
 
+	protected ILaunchConfigurationDelegate launchdelegate;
+
+	// IExecutableExtension interface:
+
+	protected ILaunchConfigurationDelegate2 launchdelegate2;
+
+	@Override
+	public boolean buildForLaunch(ILaunchConfiguration configuration, String mode, IProgressMonitor monitor)
+			throws CoreException {
+		if (launchdelegate2 == null)
+			return true;
+
+		return launchdelegate2.buildForLaunch(configuration, DELEGATELAUNCHMODE, monitor);
+	}
+
 	// ILaunchConfigurationDelegate interface:
+
+	@Override
+	public boolean finalLaunchCheck(ILaunchConfiguration configuration, String mode, IProgressMonitor monitor)
+			throws CoreException {
+		if (launchdelegate2 == null)
+			return true;
+
+		return launchdelegate2.finalLaunchCheck(configuration, DELEGATELAUNCHMODE, monitor);
+	}
+
+	// ILaunchConfigurationDelegate2 interface:
+
+	@Override
+	public ILaunch getLaunch(ILaunchConfiguration configuration, String mode) throws CoreException {
+		return new CoverageLaunch(configuration, ScopeUtils.getConfiguredScope(configuration));
+	}
 
 	@Override
 	public void launch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor)
@@ -91,22 +106,6 @@ public abstract class CoverageLauncher implements ICoverageLauncher, IExecutable
 		monitor.done();
 	}
 
-	// ILaunchConfigurationDelegate2 interface:
-
-	@Override
-	public ILaunch getLaunch(ILaunchConfiguration configuration, String mode) throws CoreException {
-		return new CoverageLaunch(configuration, ScopeUtils.getConfiguredScope(configuration));
-	}
-
-	@Override
-	public boolean buildForLaunch(ILaunchConfiguration configuration, String mode, IProgressMonitor monitor)
-			throws CoreException {
-		if (launchdelegate2 == null)
-			return true;
-
-		return launchdelegate2.buildForLaunch(configuration, DELEGATELAUNCHMODE, monitor);
-	}
-
 	@Override
 	public boolean preLaunchCheck(ILaunchConfiguration configuration, String mode, IProgressMonitor monitor)
 			throws CoreException {
@@ -117,12 +116,13 @@ public abstract class CoverageLauncher implements ICoverageLauncher, IExecutable
 	}
 
 	@Override
-	public boolean finalLaunchCheck(ILaunchConfiguration configuration, String mode, IProgressMonitor monitor)
+	public void setInitializationData(IConfigurationElement config, String propertyName, Object data)
 			throws CoreException {
-		if (launchdelegate2 == null)
-			return true;
-
-		return launchdelegate2.finalLaunchCheck(configuration, DELEGATELAUNCHMODE, monitor);
+		final String launchtype = config.getAttribute("type"); //$NON-NLS-1$
+		launchdelegate = getLaunchDelegate(launchtype);
+		if (launchdelegate instanceof ILaunchConfigurationDelegate2) {
+			launchdelegate2 = (ILaunchConfigurationDelegate2) launchdelegate;
+		}
 	}
 
 }

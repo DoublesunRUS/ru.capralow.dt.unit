@@ -38,27 +38,45 @@
             label="%JavaApplicationShortcut.label"
             icon="$nl$/icons/full/etool16/java_launch.png"
             modes="coverage"
-            class="ru.capralow.dt.coverage.ui.launching.CoverageLaunchShortcut:org.eclipse.jdt.debug.ui.localJavaShortcut"
+            class="ru.capralow.dt.coverage.ui.launching.CoverageLaunchShortcut:com._1c.g5.v8.dt.internal.launching.ui.launchconfigurations.shortcuts.ThinClientLaunchShortcut"
             id="ru.capralow.dt.coverage.ui.localJavaShortcut">
          <contextualLaunch>
            <enablement>
-             <with variable="selection">
-               <test property="ru.capralow.dt.coverage.ui.launchable" args="org.eclipse.jdt.debug.ui.localJavaShortcut"/>
-             </with>
+ 				<and>
+					<with variable="selection">
+						<iterate>
+							<adapt type="org.eclipse.core.resources.IProject">
+								<test
+									property="org.eclipse.core.resources.projectNature"
+									value="com._1c.g5.v8.dt.core.V8ExtensionNature"/>
+							</adapt>
+						</iterate>
+					</with>
+					<test property="com._1c.g5.v8.dt.platform.services.ui.infobasePersistenceSupported"/>
+				</and>
            </enablement>
          </contextualLaunch>
       </shortcut>
       <shortcut
             label="%JUnitTestShortcut.label"
             icon="$nl$/icons/full/etool16/junit_launch.png"
-            class="ru.capralow.dt.coverage.ui.launching.CoverageLaunchShortcut:org.eclipse.jdt.junit.junitShortcut"
+            class="ru.capralow.dt.coverage.ui.launching.CoverageLaunchShortcut:ru.capralow.dt.internal.launching.ui.launchconfigurations.shortcuts.UnitTestLaunchShortcut"
             modes="coverage"
             id="ru.capralow.dt.coverage.ui.junitShortcut">
          <contextualLaunch>
            <enablement>
-             <with variable="selection">
-               <test property="ru.capralow.dt.coverage.ui.launchable" args="org.eclipse.jdt.junit.junitShortcut"/>
-             </with>
+				<and>
+					<with variable="selection">
+						<iterate>
+							<adapt type="org.eclipse.core.resources.IProject">
+								<test
+									property="org.eclipse.core.resources.projectNature"
+									value="com._1c.g5.v8.dt.core.V8ExtensionNature"/>
+							</adapt>
+						</iterate>
+					</with>
+					<test property="com._1c.g5.v8.dt.platform.services.ui.infobasePersistenceSupported"/>
+				</and>
            </enablement>
          </contextualLaunch>
       </shortcut>

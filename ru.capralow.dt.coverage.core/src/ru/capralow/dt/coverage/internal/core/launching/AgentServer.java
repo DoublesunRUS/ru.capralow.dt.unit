@@ -46,6 +46,10 @@ public class AgentServer {
 		this.profilingService = CoverageCorePlugin.getInstance().getInjector().getInstance(IProfilingService.class);
 	}
 
+	public boolean hasDataReceived() {
+		return dataReceived;
+	}
+
 	public void start() {
 		profilingService.toggleTargetWaitingState(true);
 	}
@@ -65,10 +69,6 @@ public class AgentServer {
 				launch.getLaunchConfiguration());
 
 		sessionManager.addSession(session, preferences.getActivateNewSessions(), launch);
-	}
-
-	public boolean hasDataReceived() {
-		return dataReceived;
 	}
 
 	private String createDescription() {

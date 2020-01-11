@@ -32,12 +32,12 @@ import com.google.inject.Inject;
 import ru.capralow.dt.coverage.internal.ui.CoverageUIPlugin;
 
 /**
- * The coverage tab group simply uses the tab group for the launch type "run"
+ * The coverage tab group simply uses the tab group for the launch type "debug"
  * and inserts the "Coverage" tab at the second position.
  */
 public class CoverageTabGroup implements ILaunchConfigurationTabGroup, IExecutableExtension {
 
-	private static final String DELEGATE_LAUNCHMODE = ILaunchManager.RUN_MODE;
+	private static final String DELEGATE_LAUNCHMODE = ILaunchManager.DEBUG_MODE;
 	private static final String EXPOINT_TABGROUP = "org.eclipse.debug.ui.launchConfigurationTabGroups"; //$NON-NLS-1$
 	private static final String CONFIGATTR_TYPE = "type"; //$NON-NLS-1$
 
@@ -52,9 +52,55 @@ public class CoverageTabGroup implements ILaunchConfigurationTabGroup, IExecutab
 	// IExecutableExtension interface
 
 	@Override
+	public void createTabs(ILaunchConfigurationDialog dialog, String mode) {
+		tabGroupDelegate.createTabs(dialog, mode);
+		coverageTab = createCoverageTab(dialog, mode);
+	}
+
+	@Override
+	public void dispose() {
+		tabGroupDelegate.dispose();
+		coverageTab.dispose();
+	}
+
+	// ILaunchConfigurationTabGroup interface
+
+	@Override
+	public ILaunchConfigurationTab[] getTabs() {
+		return insertCoverageTab(tabGroupDelegate.getTabs(), coverageTab);
+	}
+
+	@Override
+	public void initializeFrom(ILaunchConfiguration configuration) {
+		tabGroupDelegate.initializeFrom(configuration);
+		coverageTab.initializeFrom(configuration);
+	}
+
+	@Override
+	public void launched(ILaunch launch) {
+		// deprecated method will not be called
+	}
+
+	@Override
+	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
+		tabGroupDelegate.performApply(configuration);
+		coverageTab.performApply(configuration);
+	}
+
+	@Override
+	public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
+		tabGroupDelegate.setDefaults(configuration);
+		coverageTab.setDefaults(configuration);
+	}
+
+	@Override
 	public void setInitializationData(IConfigurationElement config, String propertyName, Object data)
 			throws CoreException {
 		tabGroupDelegate = createDelegate(config.getAttribute(CONFIGATTR_TYPE));
+	}
+
+	protected ILaunchConfigurationTab createCoverageTab(ILaunchConfigurationDialog dialog, String mode) {
+		return new CoverageTab(projectManager, resourceLookup);
 	}
 
 	protected ILaunchConfigurationTabGroup createDelegate(String type) throws CoreException {
@@ -83,23 +129,6 @@ public class CoverageTabGroup implements ILaunchConfigurationTabGroup, IExecutab
 		return (ILaunchConfigurationTabGroup) element.createExecutableExtension("class"); //$NON-NLS-1$
 	}
 
-	// ILaunchConfigurationTabGroup interface
-
-	@Override
-	public void createTabs(ILaunchConfigurationDialog dialog, String mode) {
-		tabGroupDelegate.createTabs(dialog, mode);
-		coverageTab = createCoverageTab(dialog, mode);
-	}
-
-	protected ILaunchConfigurationTab createCoverageTab(ILaunchConfigurationDialog dialog, String mode) {
-		return new CoverageTab(projectManager, resourceLookup);
-	}
-
-	@Override
-	public ILaunchConfigurationTab[] getTabs() {
-		return insertCoverageTab(tabGroupDelegate.getTabs(), coverageTab);
-	}
-
 	protected ILaunchConfigurationTab[] insertCoverageTab(ILaunchConfigurationTab[] delegateTabs,
 			ILaunchConfigurationTab coverageTab2) {
 		ILaunchConfigurationTab[] tabs = new ILaunchConfigurationTab[delegateTabs.length + 1];
@@ -107,35 +136,6 @@ public class CoverageTabGroup implements ILaunchConfigurationTabGroup, IExecutab
 		tabs[1] = coverageTab2;
 		System.arraycopy(delegateTabs, 1, tabs, 2, delegateTabs.length - 1);
 		return tabs;
-	}
-
-	@Override
-	public void dispose() {
-		tabGroupDelegate.dispose();
-		coverageTab.dispose();
-	}
-
-	@Override
-	public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
-		tabGroupDelegate.setDefaults(configuration);
-		coverageTab.setDefaults(configuration);
-	}
-
-	@Override
-	public void initializeFrom(ILaunchConfiguration configuration) {
-		tabGroupDelegate.initializeFrom(configuration);
-		coverageTab.initializeFrom(configuration);
-	}
-
-	@Override
-	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
-		tabGroupDelegate.performApply(configuration);
-		coverageTab.performApply(configuration);
-	}
-
-	@Override
-	public void launched(ILaunch launch) {
-		// deprecated method will not be called
 	}
 
 }
