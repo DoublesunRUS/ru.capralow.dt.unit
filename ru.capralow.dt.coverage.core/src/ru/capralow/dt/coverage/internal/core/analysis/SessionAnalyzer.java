@@ -23,7 +23,10 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.osgi.util.NLS;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.jacoco.core.analysis.ICoverageNode.ElementType;
 import org.jacoco.core.data.ExecutionData;
 import org.jacoco.core.data.ExecutionDataStore;
@@ -31,19 +34,24 @@ import org.jacoco.core.data.SessionInfo;
 import org.jacoco.core.data.SessionInfoStore;
 
 import com._1c.g5.v8.dt.bm.index.emf.IBmEmfIndexManager;
-import com._1c.g5.v8.dt.bm.index.emf.IBmEmfIndexProvider;
 import com._1c.g5.v8.dt.bsl.model.Method;
 import com._1c.g5.v8.dt.bsl.model.Module;
+import com._1c.g5.v8.dt.bsl.model.Statement;
+import com._1c.g5.v8.dt.core.platform.IConfigurationProject;
+import com._1c.g5.v8.dt.core.platform.IExtensionProject;
+import com._1c.g5.v8.dt.core.platform.IExternalObjectProject;
 import com._1c.g5.v8.dt.core.platform.IResourceLookup;
+import com._1c.g5.v8.dt.core.platform.IV8Project;
 import com._1c.g5.v8.dt.core.platform.IV8ProjectManager;
 import com._1c.g5.v8.dt.debug.core.model.BslModuleReference;
 import com._1c.g5.v8.dt.debug.core.model.IBslModuleLocator;
-import com._1c.g5.v8.dt.metadata.mdclass.MdObject;
+import com._1c.g5.v8.dt.metadata.mdclass.Configuration;
 import com._1c.g5.v8.dt.profiling.core.ILineProfilingResult;
 import com._1c.g5.v8.dt.profiling.core.IProfilingResult;
 import com.google.inject.Inject;
 
 import ru.capralow.dt.coverage.core.ICoverageSession;
+import ru.capralow.dt.coverage.core.MdUtils;
 import ru.capralow.dt.coverage.core.analysis.IBslModelCoverage;
 import ru.capralow.dt.coverage.internal.core.CoreMessages;
 import ru.capralow.dt.coverage.internal.core.DebugOptions;
@@ -81,12 +89,46 @@ public class SessionAnalyzer {
 		PERFORMANCE.startTimer();
 		PERFORMANCE.startMemoryUsage();
 
-		BslModelCoverage modelCoverage = new BslModelCoverage();
 		Collection<URI> roots = session.getScope();
+
 		monitor.beginTask(NLS.bind(CoreMessages.AnalyzingCoverageSession_task, session.getDescription()),
 				1 + roots.size());
+
+		BslModelCoverage modelCoverage = new BslModelCoverage();
 		List<IProfilingResult> profilingResults = session.getProfilingResults();
+
 		monitor.worked(1);
+
+		for (URI root : roots) {
+			IV8Project v8Project = projectManager.getProject(root);
+			Configuration configuration = null;
+			if (v8Project instanceof IConfigurationProject)
+				configuration = ((IConfigurationProject) v8Project).getConfiguration();
+			else if (v8Project instanceof IExtensionProject)
+				configuration = ((IExtensionProject) v8Project).getConfiguration();
+			else if (v8Project instanceof IExternalObjectProject)
+				configuration = ((IExternalObjectProject) v8Project).getParent().getConfiguration();
+
+			URI configurationURI = EcoreUtil.getURI(configuration);
+
+			Module module = MdUtils.getModuleByURI(root);
+			if (module == null)
+				continue;
+
+			for (Method method : module.allMethods()) {
+				BslNodeImpl methodCoverage = new BslNodeImpl(ElementType.METHOD, method.getName());
+
+				for (Statement statement : method.allStatements()) {
+					ICompositeNode statementNode = NodeModelUtils.findActualNodeFor(statement);
+
+					methodCoverage
+							.increment(CounterImpl.COUNTER_1_0, CounterImpl.COUNTER_0_0, statementNode.getStartLine());
+				}
+
+				modelCoverage.putMethod(EcoreUtil.getURI(method), root, configurationURI, methodCoverage);
+			}
+
+		}
 
 		for (IProfilingResult profilingResult : profilingResults) {
 			if (monitor.isCanceled())
@@ -109,22 +151,27 @@ public class SessionAnalyzer {
 				if (moduleMethods.isEmpty())
 					continue;
 
-				IBmEmfIndexProvider bmEmfIndexProvider = bmEmfIndexManager.getEmfIndexProvider(project);
-
-				ModuleNodeImpl projectCoverage = new ModuleNodeImpl(ElementType.GROUP, project.getName());
-
-				ModuleNodeImpl moduleCoverage = new ModuleNodeImpl(ElementType.CLASS, module.getUniqueName());
-
-				ModuleNodeImpl methodCoverage = new ModuleNodeImpl(ElementType.METHOD, moduleMethods.get(0).getName());
-
-				CounterImpl moduleCounter = CounterImpl.COUNTER_0_0;
-
 				for (ILineProfilingResult profilingLine : profilingResult.getResultsForModule(moduleReference)) {
-					moduleCoverage
-							.increment(CounterImpl.COUNTER_0_1, CounterImpl.COUNTER_0_1, profilingLine.getLineNo());
-				}
+					URI profilingMethod = null;
+					for (Method method : moduleMethods) {
+						if (method.getName().equals(profilingLine.getMethodSignature().substring(0,
+								profilingLine.getMethodSignature().indexOf('(')))) {
 
-				modelCoverage.putMethod(moduleMethods.get(0), (MdObject) module.getOwner(), moduleCoverage);
+							profilingMethod = EcoreUtil.getURI(method);
+							break;
+						}
+					}
+
+					if (profilingMethod == null)
+						continue;
+
+					BslNodeImpl methodCoverage = (BslNodeImpl) modelCoverage.getCoverageFor(profilingMethod);
+					if (methodCoverage == null)
+						continue;
+
+					methodCoverage
+							.increment(CounterImpl.COUNTER_0_1, CounterImpl.COUNTER_0_0, profilingLine.getLineNo());
+				}
 			}
 
 		}

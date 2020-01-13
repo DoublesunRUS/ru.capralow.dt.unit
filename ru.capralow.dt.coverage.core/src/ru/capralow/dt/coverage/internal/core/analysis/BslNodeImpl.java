@@ -6,7 +6,7 @@ import org.jacoco.core.analysis.ICounter;
 import org.jacoco.core.analysis.ILine;
 import org.jacoco.core.analysis.ISourceNode;
 
-public class ModuleNodeImpl implements ISourceNode {
+public class BslNodeImpl implements ISourceNode {
 
 	private final ElementType elementType;
 	private final String name;
@@ -20,7 +20,7 @@ public class ModuleNodeImpl implements ISourceNode {
 	private LineImpl[] lines;
 	private int offset;
 
-	public ModuleNodeImpl(ElementType elementType, String name) {
+	public BslNodeImpl(ElementType elementType, String name) {
 		this.elementType = elementType;
 		this.name = name;
 		branchCounter = CounterImpl.COUNTER_0_0;
@@ -140,7 +140,7 @@ public class ModuleNodeImpl implements ISourceNode {
 
 	@Override
 	public ISourceNode getPlainCopy() {
-		ModuleNodeImpl copy = new ModuleNodeImpl(elementType, name);
+		BslNodeImpl copy = new BslNodeImpl(elementType, name);
 		instructionCounter = CounterImpl.getInstance(instructionCounter);
 		branchCounter = CounterImpl.getInstance(branchCounter);
 		lineCounter = CounterImpl.getInstance(lineCounter);

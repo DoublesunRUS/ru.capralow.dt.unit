@@ -5,25 +5,7 @@
 	<extension
 			point="org.eclipse.core.runtime.adapters">
 		<factory
-				adaptableType="com._1c.g5.v8.dt.core.platform.IV8Project"
-				class="ru.capralow.dt.coverage.internal.core.analysis.ModuleCoverageAdapterFactory">
-			<adapter type="org.jacoco.core.analysis.ICoverageNode"/>
-			<adapter type="org.jacoco.core.analysis.ISourceNode"/>
-		</factory>
-		<factory
-				adaptableType="com._1c.g5.v8.dt.metadata.mdclass.Subsystem"
-				class="ru.capralow.dt.coverage.internal.core.analysis.ModuleCoverageAdapterFactory">
-			<adapter type="org.jacoco.core.analysis.ICoverageNode"/>
-			<adapter type="org.jacoco.core.analysis.ISourceNode"/>
-		</factory>
-		<factory
-				adaptableType="com._1c.g5.v8.dt.metadata.mdclass.MdObject"
-				class="ru.capralow.dt.coverage.internal.core.analysis.ModuleCoverageAdapterFactory">
-			<adapter type="org.jacoco.core.analysis.ICoverageNode"/>
-			<adapter type="org.jacoco.core.analysis.ISourceNode"/>
-		</factory>
-		<factory
-				adaptableType="com._1c.g5.v8.dt.bsl.model.Method"
+				adaptableType="org.eclipse.emf.common.util.URI"
 				class="ru.capralow.dt.coverage.internal.core.analysis.ModuleCoverageAdapterFactory">
 			<adapter type="org.jacoco.core.analysis.ICoverageNode"/>
 			<adapter type="org.jacoco.core.analysis.ISourceNode"/>

@@ -14,14 +14,12 @@
  ******************************************************************************/
 package ru.capralow.dt.coverage.core.analysis;
 
+import org.eclipse.emf.common.util.URI;
 import org.jacoco.core.analysis.ICounter;
 import org.jacoco.core.analysis.ICoverageNode;
-import org.jacoco.core.internal.analysis.CounterImpl;
+import org.jacoco.core.analysis.ISourceNode;
 
-import com._1c.g5.v8.dt.bsl.model.Method;
-import com._1c.g5.v8.dt.core.platform.IV8Project;
-import com._1c.g5.v8.dt.metadata.mdclass.MdObject;
-import com._1c.g5.v8.dt.metadata.mdclass.Subsystem;
+import ru.capralow.dt.coverage.internal.core.analysis.CounterImpl;
 
 /**
  * The interface for coverage information attached to the Java model. It allows
@@ -37,37 +35,12 @@ public interface IBslModelCoverage extends ICoverageNode {
 	IBslModelCoverage LOADING = new IBslModelCoverage() {
 
 		@Override
-		public ElementType getElementType() {
-			return ElementType.GROUP;
-		}
-
-		@Override
-		public String getName() {
-			return "LOADING"; //$NON-NLS-1$
-		}
-
-		@Override
-		public ICounter getInstructionCounter() {
-			return CounterImpl.COUNTER_0_0;
+		public boolean containsCode() {
+			return false;
 		}
 
 		@Override
 		public ICounter getBranchCounter() {
-			return CounterImpl.COUNTER_0_0;
-		}
-
-		@Override
-		public ICounter getLineCounter() {
-			return CounterImpl.COUNTER_0_0;
-		}
-
-		@Override
-		public ICounter getComplexityCounter() {
-			return CounterImpl.COUNTER_0_0;
-		}
-
-		@Override
-		public ICounter getMethodCounter() {
 			return CounterImpl.COUNTER_0_0;
 		}
 
@@ -77,8 +50,48 @@ public interface IBslModelCoverage extends ICoverageNode {
 		}
 
 		@Override
+		public ICounter getComplexityCounter() {
+			return CounterImpl.COUNTER_0_0;
+		}
+
+		@Override
 		public ICounter getCounter(CounterEntity entity) {
 			return CounterImpl.COUNTER_0_0;
+		}
+
+		@Override
+		public ISourceNode getCoverageFor(URI element) {
+			return null;
+		}
+
+		@Override
+		public ElementType getElementType() {
+			return ElementType.GROUP;
+		}
+
+		@Override
+		public ICounter getInstructionCounter() {
+			return CounterImpl.COUNTER_0_0;
+		}
+
+		@Override
+		public ICounter getLineCounter() {
+			return CounterImpl.COUNTER_0_0;
+		}
+
+		@Override
+		public URI[] getMdObjects() {
+			return new URI[0];
+		}
+
+		@Override
+		public ICounter getMethodCounter() {
+			return CounterImpl.COUNTER_0_0;
+		}
+
+		@Override
+		public String getName() {
+			return "LOADING"; //$NON-NLS-1$
 		}
 
 		@Override
@@ -87,57 +100,21 @@ public interface IBslModelCoverage extends ICoverageNode {
 		}
 
 		@Override
-		public IV8Project[] getProjects() {
-			return new IV8Project[0];
+		public URI[] getProjects() {
+			return new URI[0];
 		}
 
 		@Override
-		public Subsystem[] getSubsystems() {
-			return new Subsystem[0];
-		}
-
-		@Override
-		public MdObject[] getMdObjects() {
-			return new MdObject[0];
-		}
-
-		@Override
-		public ICoverageNode getCoverageFor(IV8Project element) {
-			return null;
-		}
-
-		@Override
-		public ICoverageNode getCoverageFor(Subsystem element) {
-			return null;
-		}
-
-		@Override
-		public ICoverageNode getCoverageFor(MdObject element) {
-			return null;
-		}
-
-		@Override
-		public ICoverageNode getCoverageFor(Method element) {
-			return null;
-		}
-
-		@Override
-		public boolean containsCode() {
-			return false;
+		public URI[] getSubsystems() {
+			return new URI[0];
 		}
 	};
 
-	IV8Project[] getProjects();
+	ISourceNode getCoverageFor(URI element);
 
-	Subsystem[] getSubsystems();
+	URI[] getMdObjects();
 
-	MdObject[] getMdObjects();
+	URI[] getProjects();
 
-	ICoverageNode getCoverageFor(IV8Project element);
-
-	ICoverageNode getCoverageFor(Subsystem element);
-
-	ICoverageNode getCoverageFor(MdObject element);
-
-	ICoverageNode getCoverageFor(Method element);
+	URI[] getSubsystems();
 }

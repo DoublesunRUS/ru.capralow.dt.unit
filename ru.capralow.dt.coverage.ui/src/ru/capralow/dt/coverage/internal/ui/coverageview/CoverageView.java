@@ -74,13 +74,11 @@ public class CoverageView extends ViewPart implements IShowInTarget {
 	public static final Object LOADING_ELEMENT = new Object();
 
 	protected static final int COLUMN_ELEMENT = 0;
-
 	protected static final int COLUMN_RATIO = 1;
-
 	protected static final int COLUMN_COVERED = 2;
-
 	protected static final int COLUMN_MISSED = 3;
 	protected static final int COLUMN_TOTAL = 4;
+
 	private final ViewSettings settings = new ViewSettings();
 	private final CellTextConverter cellTextConverter = new CellTextConverter(settings);
 	private final MaxTotalCache maxTotalCache = new MaxTotalCache(settings);
@@ -92,7 +90,8 @@ public class CoverageView extends ViewPart implements IShowInTarget {
 
 	private final List<IHandler> handlers = new ArrayList<>();
 
-	private SelectionTracker selectiontracker;
+	private SelectionTracker selectionTracker;
+
 	private CoverageViewSorter sorter = new CoverageViewSorter(settings, this);
 
 	private final ISessionListener descriptionUpdater = new ISessionListener() {
@@ -249,7 +248,7 @@ public class CoverageView extends ViewPart implements IShowInTarget {
 		viewer.setInput(CoverageTools.getBslModelCoverage());
 		getSite().setSelectionProvider(viewer);
 
-		selectiontracker = new SelectionTracker(this, viewer);
+		selectionTracker = new SelectionTracker(this, viewer);
 
 		createHandlers();
 		createActions();
@@ -273,7 +272,7 @@ public class CoverageView extends ViewPart implements IShowInTarget {
 		handlers.clear();
 		CoverageTools.removeBslCoverageListener(coverageListener);
 		CoverageTools.getSessionManager().removeSessionListener(descriptionUpdater);
-		selectiontracker.dispose();
+		selectionTracker.dispose();
 		super.dispose();
 	}
 
@@ -341,7 +340,7 @@ public class CoverageView extends ViewPart implements IShowInTarget {
 		activateHandler(IWorkbenchCommandConstants.FILE_REFRESH,
 				new RefreshSessionHandler(CoverageTools.getSessionManager()));
 		activateHandler(IWorkbenchCommandConstants.NAVIGATE_COLLAPSE_ALL, new CollapseAllHandler(viewer));
-		activateHandler(LinkWithSelectionHandler.ID, new LinkWithSelectionHandler(settings, selectiontracker));
+		activateHandler(LinkWithSelectionHandler.ID, new LinkWithSelectionHandler(settings, selectionTracker));
 	}
 
 	protected void refreshViewer() {

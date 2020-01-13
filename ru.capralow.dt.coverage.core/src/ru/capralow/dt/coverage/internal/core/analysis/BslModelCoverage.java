@@ -19,15 +19,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.URI;
 import org.jacoco.core.analysis.CoverageNodeImpl;
-import org.jacoco.core.analysis.ICoverageNode;
+import org.jacoco.core.analysis.ISourceNode;
 
-import com._1c.g5.v8.dt.bsl.model.Method;
+import com._1c.g5.v8.dt.bsl.model.Module;
 import com._1c.g5.v8.dt.core.platform.IV8Project;
 import com._1c.g5.v8.dt.core.platform.IV8ProjectManager;
-import com._1c.g5.v8.dt.metadata.mdclass.MdObject;
-import com._1c.g5.v8.dt.metadata.mdclass.Subsystem;
 
+import ru.capralow.dt.coverage.core.MdUtils;
 import ru.capralow.dt.coverage.core.analysis.IBslModelCoverage;
 import ru.capralow.dt.coverage.internal.core.CoverageCorePlugin;
 
@@ -37,17 +37,29 @@ import ru.capralow.dt.coverage.internal.core.CoverageCorePlugin;
  */
 public class BslModelCoverage extends CoverageNodeImpl implements IBslModelCoverage {
 
-	/** Maps MdObject to coverage objects */
-	private Map<MdObject, ICoverageNode> coverageMap = new HashMap<>();
+	/** Maps URI to coverage objects */
+	private Map<URI, ISourceNode> coverageMap = new HashMap<>();
+
+	/** Maps modules to projects objects */
+	private Map<URI, URI> projectsMap = new HashMap<>();
+
+	/** Maps modules to subsystems objects */
+	private Map<URI, URI> subsystemsMap = new HashMap<>();
+
+	/** Maps methods to modules objects */
+	private Map<URI, URI> modulesMap = new HashMap<>();
 
 	/** List of all IV8Project objects with coverage information attached */
-	private List<IV8Project> projects = new ArrayList<>();
+	private List<URI> projects = new ArrayList<>();
 
 	/** List of all Subsystem objects with coverage information */
-	private List<Subsystem> subsystems = new ArrayList<>();
+	private List<URI> subsystems = new ArrayList<>();
 
-	/** List of all MdObject objects with coverage information */
-	private List<MdObject> mdObjects = new ArrayList<>();
+	/** List of all Module objects with coverage information */
+	private List<URI> modules = new ArrayList<>();
+
+	/** List of all Method objects with coverage information */
+	private List<URI> methods = new ArrayList<>();
 
 	private IV8ProjectManager projectManager;
 
@@ -57,67 +69,56 @@ public class BslModelCoverage extends CoverageNodeImpl implements IBslModelCover
 		this.projectManager = CoverageCorePlugin.getInstance().getInjector().getInstance(IV8ProjectManager.class);
 	}
 
-	public void putMethod(Method method, MdObject mdObject, ICoverageNode coverage) {
-		coverageMap.put(mdObject, coverage);
-		mdObjects.add(mdObject);
-		projects.add(projectManager.getProject(mdObject));
+	@Override
+	public ISourceNode getCoverageFor(URI element) {
+		ISourceNode coverage = coverageMap.get(element);
+		if (coverage != null) {
+			return coverage;
+		}
+
+		return null;
 	}
 
 	@Override
-	public IV8Project[] getProjects() {
-		IV8Project[] arr = new IV8Project[projects.size()];
+	public URI[] getMdObjects() {
+		URI[] arr = new URI[modules.size()];
+		return modules.toArray(arr);
+	}
+
+	@Override
+	public URI[] getProjects() {
+		URI[] arr = new URI[projects.size()];
 		return projects.toArray(arr);
 	}
 
 	@Override
-	public Subsystem[] getSubsystems() {
-		Subsystem[] arr = new Subsystem[subsystems.size()];
+	public URI[] getSubsystems() {
+		URI[] arr = new URI[subsystems.size()];
 		return subsystems.toArray(arr);
 	}
 
-	@Override
-	public MdObject[] getMdObjects() {
-		MdObject[] arr = new MdObject[mdObjects.size()];
-		return mdObjects.toArray(arr);
-	}
+	public void putMethod(URI methodURI, URI moduleURI, URI configurationURI, ISourceNode methodCoverage) {
+		Module module = MdUtils.getModuleByURI(moduleURI);
+		IV8Project project = projectManager.getProject(module);
 
-	@Override
-	public ICoverageNode getCoverageFor(MdObject element) {
-		ICoverageNode coverage = coverageMap.get(element);
-		if (coverage != null) {
-			return coverage;
+		coverageMap.put(methodURI, methodCoverage);
+
+		BslNodeImpl moduleCoverage = (BslNodeImpl) getCoverageFor(moduleURI);
+		if (moduleCoverage == null) {
+			modules.add(moduleURI);
+
+			moduleCoverage = new BslNodeImpl(ElementType.CLASS, module.getUniqueName());
+			coverageMap.put(moduleURI, moduleCoverage);
 		}
+		moduleCoverage.increment(methodCoverage);
 
-		return null;
-	}
+		BslNodeImpl projectCoverage = (BslNodeImpl) getCoverageFor(configurationURI);
+		if (projectCoverage == null) {
+			projects.add(configurationURI);
 
-	@Override
-	public ICoverageNode getCoverageFor(IV8Project element) {
-		ICoverageNode coverage = coverageMap.get(element);
-		if (coverage != null) {
-			return coverage;
+			projectCoverage = new BslNodeImpl(ElementType.GROUP, project.getProject().getName());
+			coverageMap.put(configurationURI, projectCoverage);
 		}
-
-		return null;
-	}
-
-	@Override
-	public ICoverageNode getCoverageFor(Subsystem element) {
-		ICoverageNode coverage = coverageMap.get(element);
-		if (coverage != null) {
-			return coverage;
-		}
-
-		return null;
-	}
-
-	@Override
-	public ICoverageNode getCoverageFor(Method element) {
-		ICoverageNode coverage = coverageMap.get(element);
-		if (coverage != null) {
-			return coverage;
-		}
-
-		return null;
+		projectCoverage.increment(moduleCoverage);
 	}
 }

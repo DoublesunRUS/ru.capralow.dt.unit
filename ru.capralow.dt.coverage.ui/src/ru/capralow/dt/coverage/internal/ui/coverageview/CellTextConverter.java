@@ -17,6 +17,7 @@ package ru.capralow.dt.coverage.internal.ui.coverageview;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
@@ -52,17 +53,13 @@ class CellTextConverter {
 		this.v8ProjectManager = CoverageUIPlugin.getInstance().getInjector().getInstance(IV8ProjectManager.class);
 	}
 
-	String getElementName(Object element) {
-		String text = getSimpleTextForModuleElement(element);
-		if (element instanceof Module && ElementType.BUNDLE.equals(settings.getRootType())) {
-			IV8Project project = v8ProjectManager.getProject((EObject) element);
-			text += " - " //$NON-NLS-1$
-					+ getElementName(project.getProject().getName());
-		}
-		return text;
+	private ICounter getCounter(Object element) {
+		return CoverageTools.getCoverageInfo(element).getCounter(settings.getCounters());
 	}
 
-	private String getSimpleTextForModuleElement(Object element) {
+	private String getSimpleTextForModuleElement(URI element) {
+		element.fragment();
+
 		if (element instanceof Module) {
 			final Module root = (Module) element;
 
@@ -73,6 +70,24 @@ class CellTextConverter {
 		return workbenchLabelProvider.getText(element);
 	}
 
+	String getCovered(Object element) {
+		return COUNTER_VALUE.format(getCounter(element).getCoveredCount());
+	}
+
+	String getElementName(Object element) {
+		String text = getSimpleTextForModuleElement((URI) element);
+		if (element instanceof Module && ElementType.BUNDLE.equals(settings.getRootType())) {
+			IV8Project project = v8ProjectManager.getProject((EObject) element);
+			text += " - " //$NON-NLS-1$
+					+ getElementName(project.getProject().getName());
+		}
+		return text;
+	}
+
+	String getMissed(Object element) {
+		return COUNTER_VALUE.format(getCounter(element).getMissedCount());
+	}
+
 	String getRatio(Object element) {
 		ICounter counter = getCounter(element);
 		if (counter.getTotalCount() == 0)
@@ -81,20 +96,8 @@ class CellTextConverter {
 		return COVERAGE_VALUE.format(counter.getCoveredRatio());
 	}
 
-	String getCovered(Object element) {
-		return COUNTER_VALUE.format(getCounter(element).getCoveredCount());
-	}
-
-	String getMissed(Object element) {
-		return COUNTER_VALUE.format(getCounter(element).getMissedCount());
-	}
-
 	String getTotal(Object element) {
 		return COUNTER_VALUE.format(getCounter(element).getTotalCount());
-	}
-
-	private ICounter getCounter(Object element) {
-		return CoverageTools.getCoverageInfo(element).getCounter(settings.getCounters());
 	}
 
 }

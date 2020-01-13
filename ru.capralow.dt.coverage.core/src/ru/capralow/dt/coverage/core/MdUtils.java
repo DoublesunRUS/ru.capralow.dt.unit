@@ -2,11 +2,19 @@ package ru.capralow.dt.coverage.core;
 
 import java.util.Iterator;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.IEObjectDescription;
 
 import com._1c.g5.v8.dt.bm.index.emf.IBmEmfIndexProvider;
+import com._1c.g5.v8.dt.bsl.model.BslPackage;
+import com._1c.g5.v8.dt.bsl.model.Module;
 import com._1c.g5.v8.dt.metadata.mdclass.MdClassPackage;
 import com._1c.g5.v8.dt.metadata.mdclass.MdObject;
 
@@ -28,6 +36,18 @@ public class MdUtils {
 			return null;
 
 		return object;
+	}
+
+	public static Module getModuleByURI(URI moduleURI) {
+		EObject newObject = EcoreFactory.eINSTANCE.createEObject();
+		((InternalEObject) newObject).eSetProxyURI(moduleURI);
+
+		Module module = (Module) EcoreUtil.resolve(newObject, BslPackage.Literals.MODULE);
+
+		if (module.eResource() instanceof DerivedStateAwareResource)
+			((DerivedStateAwareResource) module.eResource()).installDerivedState(false);
+
+		return module;
 	}
 
 	private static QualifiedName getConfigurationObjectQualifiedName(String objectFullName, EClass mdLiteral) {
