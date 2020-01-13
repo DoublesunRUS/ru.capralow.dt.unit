@@ -26,7 +26,6 @@ import javax.inject.Inject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import com._1c.g5.v8.dt.core.platform.IConfigurationProject;
@@ -68,14 +67,16 @@ public class BslApplicationLauncher extends CoverageLauncher {
 		List<URI> modules = new ArrayList<>();
 
 		for (CommonModule commonModule : v8Configuration.getCommonModules())
-			modules.add((EcoreUtil.getURI((EObject) commonModule.getModule())));
+			modules.add((EcoreUtil.getURI(commonModule.getModule())));
 
 		if (v8Project instanceof IConfigurationProject)
 			for (IExtensionProject extensionProject : projectManager.getProjects(IExtensionProject.class)) {
 				if (extensionProject.getParent().equals(v8Project)) {
 					Configuration extensionConfiguration = extensionProject.getConfiguration();
-					for (CommonModule commonModule : extensionConfiguration.getCommonModules())
-						modules.add((EcoreUtil.getURI((EObject) commonModule.getModule())));
+					for (CommonModule commonModule : extensionConfiguration.getCommonModules()) {
+						URI moduleURI = EcoreUtil.getURI(commonModule.getModule());
+						modules.add(moduleURI);
+					}
 				}
 			}
 

@@ -15,6 +15,7 @@
 package ru.capralow.dt.coverage.internal.core.launching;
 
 import java.text.MessageFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -57,7 +58,8 @@ public class AgentServer {
 	public void stop() {
 		profilingService.toggleTargetWaitingState(false);
 
-		List<IProfilingResult> profilingResults = profilingService.getResults();
+		List<IProfilingResult> profilingResults = Arrays
+				.asList(profilingService.getResults().get(profilingService.getResults().size() - 1));
 		if (profilingResults.isEmpty())
 			return;
 

@@ -18,9 +18,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocument;
@@ -41,12 +41,7 @@ import org.jacoco.core.analysis.ICoverageNode;
 import org.jacoco.core.analysis.ILine;
 import org.jacoco.core.analysis.ISourceNode;
 
-import com._1c.g5.v8.dt.bm.index.emf.IBmEmfIndexManager;
-import com._1c.g5.v8.dt.bm.index.emf.IBmEmfIndexProvider;
-import com._1c.g5.v8.dt.metadata.mdclass.CommonModule;
-
 import ru.capralow.dt.coverage.core.CoverageTools;
-import ru.capralow.dt.coverage.core.MdUtils;
 import ru.capralow.dt.coverage.core.analysis.IBslCoverageListener;
 import ru.capralow.dt.coverage.internal.ui.CoverageUIPlugin;
 
@@ -104,17 +99,12 @@ public final class CoverageAnnotationModel implements IAnnotationModel {
 	}
 
 	private static ISourceNode findSourceCoverageForElement(Object element) {
-		IBmEmfIndexManager bmEmfIndexManager = CoverageUIPlugin.getInstance().getInjector()
-				.getInstance(IBmEmfIndexManager.class);
-		IProject project = ((IResource) element).getProject();
-		IBmEmfIndexProvider bmEmfIndexProvider = bmEmfIndexManager.getEmfIndexProvider(project);
-
 		IPath objectFullPath = ((IResource) element).getFullPath();
-		String objectFullName = objectFullPath.segment(2).concat(".").concat(objectFullPath.segment(3)); //$NON-NLS-1$
 
-		CommonModule module = (CommonModule) MdUtils.getConfigurationObject(objectFullName, bmEmfIndexProvider);
+		URI uri = URI.createPlatformResourceURI(objectFullPath.toString(), false);
+		uri = uri.appendFragment("/0"); //$NON-NLS-1$
 
-		ICoverageNode coverage = CoverageTools.getCoverageInfo(module);
+		ICoverageNode coverage = CoverageTools.getCoverageInfo(uri);
 		if (coverage instanceof ISourceNode) {
 			return (ISourceNode) coverage;
 		}

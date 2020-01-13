@@ -28,8 +28,10 @@ import com._1c.g5.v8.dt.bsl.model.Module;
 import com._1c.g5.v8.dt.core.platform.IV8Project;
 import com._1c.g5.v8.dt.core.platform.IV8ProjectManager;
 import com._1c.g5.v8.dt.metadata.mdclass.CommonModule;
+import com._1c.g5.v8.dt.metadata.mdclass.Configuration;
 
 import ru.capralow.dt.coverage.core.CoverageTools;
+import ru.capralow.dt.coverage.core.MdUtils;
 import ru.capralow.dt.coverage.internal.ui.CoverageUIPlugin;
 import ru.capralow.dt.coverage.internal.ui.UIMessages;
 
@@ -45,12 +47,12 @@ class CellTextConverter {
 	private final ViewSettings settings;
 	private final ILabelProvider workbenchLabelProvider;
 
-	private IV8ProjectManager v8ProjectManager;
+	private IV8ProjectManager projectManager;
 
 	CellTextConverter(ViewSettings settings) {
 		this.settings = settings;
 		this.workbenchLabelProvider = new WorkbenchLabelProvider();
-		this.v8ProjectManager = CoverageUIPlugin.getInstance().getInjector().getInstance(IV8ProjectManager.class);
+		this.projectManager = CoverageUIPlugin.getInstance().getInjector().getInstance(IV8ProjectManager.class);
 	}
 
 	private ICounter getCounter(Object element) {
@@ -58,16 +60,19 @@ class CellTextConverter {
 	}
 
 	private String getSimpleTextForModuleElement(URI element) {
-		element.fragment();
+		IV8Project v8Project = projectManager.getProject(element);
+		if (v8Project == null)
+			return workbenchLabelProvider.getText(element);
 
-		if (element instanceof Module) {
-			final Module root = (Module) element;
+		EObject eObject = MdUtils.getEObjectByURI(element);
 
-			return ((CommonModule) root.getOwner()).getName();
+		if (eObject instanceof Configuration)
+			return ((Configuration) eObject).getName();
 
-		}
+		else if (eObject instanceof Module)
+			return ((CommonModule) ((Module) eObject).getOwner()).getName();
 
-		return workbenchLabelProvider.getText(element);
+		return v8Project.getProject().getName();
 	}
 
 	String getCovered(Object element) {
@@ -77,7 +82,7 @@ class CellTextConverter {
 	String getElementName(Object element) {
 		String text = getSimpleTextForModuleElement((URI) element);
 		if (element instanceof Module && ElementType.BUNDLE.equals(settings.getRootType())) {
-			IV8Project project = v8ProjectManager.getProject((EObject) element);
+			IV8Project project = projectManager.getProject((EObject) element);
 			text += " - " //$NON-NLS-1$
 					+ getElementName(project.getProject().getName());
 		}

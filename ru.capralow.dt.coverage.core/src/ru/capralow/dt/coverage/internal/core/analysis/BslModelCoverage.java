@@ -47,7 +47,7 @@ public class BslModelCoverage extends CoverageNodeImpl implements IBslModelCover
 	private Map<URI, URI> subsystemsMap = new HashMap<>();
 
 	/** Maps methods to modules objects */
-	private Map<URI, URI> modulesMap = new HashMap<>();
+	private Map<URI, List<URI>> modulesMap = new HashMap<>();
 
 	/** List of all IV8Project objects with coverage information attached */
 	private List<URI> projects = new ArrayList<>();
@@ -98,7 +98,7 @@ public class BslModelCoverage extends CoverageNodeImpl implements IBslModelCover
 	}
 
 	public void putMethod(URI methodURI, URI moduleURI, URI configurationURI, ISourceNode methodCoverage) {
-		Module module = MdUtils.getModuleByURI(moduleURI);
+		Module module = (Module) MdUtils.getEObjectByURI(moduleURI);
 		IV8Project project = projectManager.getProject(module);
 
 		coverageMap.put(methodURI, methodCoverage);
@@ -107,10 +107,14 @@ public class BslModelCoverage extends CoverageNodeImpl implements IBslModelCover
 		if (moduleCoverage == null) {
 			modules.add(moduleURI);
 
+			modulesMap.put(moduleURI, new ArrayList<>());
+
 			moduleCoverage = new BslNodeImpl(ElementType.CLASS, module.getUniqueName());
 			coverageMap.put(moduleURI, moduleCoverage);
 		}
 		moduleCoverage.increment(methodCoverage);
+		List<URI> methodsList = modulesMap.get(moduleURI);
+		methodsList.add(methodURI);
 
 		BslNodeImpl projectCoverage = (BslNodeImpl) getCoverageFor(configurationURI);
 		if (projectCoverage == null) {
@@ -120,5 +124,13 @@ public class BslModelCoverage extends CoverageNodeImpl implements IBslModelCover
 			coverageMap.put(configurationURI, projectCoverage);
 		}
 		projectCoverage.increment(moduleCoverage);
+	}
+
+	public void updateModuleCoverage(URI moduleUri) {
+		BslNodeImpl moduleCoverage = (BslNodeImpl) coverageMap.get(moduleUri);
+		for (URI methodURI : modulesMap.get(moduleUri)) {
+			BslNodeImpl methodCoverage = (BslNodeImpl) coverageMap.get(methodURI);
+			moduleCoverage.increment(methodCoverage);
+		}
 	}
 }

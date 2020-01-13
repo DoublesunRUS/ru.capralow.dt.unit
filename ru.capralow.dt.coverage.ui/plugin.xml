@@ -547,7 +547,7 @@
          <command
                commandId="ru.capralow.dt.coverage.ui.selectRootElements"
                icon="icons/full/elcl16/showpackageroots.png"
-               label="%SelectPackageRootsMenu.label"
+               label="%SelectSubsystemsMenu.label"
                style="radio">
             <parameter
                   name="type"
@@ -557,21 +557,21 @@
          <command
                commandId="ru.capralow.dt.coverage.ui.selectRootElements"
                icon="icons/full/elcl16/showpackages.png"
-               label="%SelectPackagesMenu.label"
+               label="%SelectModulesMenu.label"
                style="radio">
             <parameter
                   name="type"
-                  value="PACKAGE">
+                  value="CLASS">
             </parameter>
          </command>
          <command
                commandId="ru.capralow.dt.coverage.ui.selectRootElements"
                icon="icons/full/elcl16/showtypes.png"
-               label="%SelectTypesMenu.label"
+               label="%SelectMethodsMenu.label"
                style="radio">
             <parameter
                   name="type"
-                  value="CLASS">
+                  value="METHOD">
             </parameter>
          </command>
          <separator

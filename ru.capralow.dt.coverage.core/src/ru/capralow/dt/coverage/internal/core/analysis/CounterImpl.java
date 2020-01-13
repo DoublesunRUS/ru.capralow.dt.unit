@@ -102,12 +102,12 @@ public abstract class CounterImpl implements ICounter {
 
 	@Override
 	public double getCoveredRatio() {
-		return covered / (missed + covered);
+		return Double.valueOf(covered) / (missed + covered);
 	}
 
 	@Override
 	public double getMissedRatio() {
-		return missed / (missed + covered);
+		return Double.valueOf(missed) / (missed + covered);
 	}
 
 	@Override

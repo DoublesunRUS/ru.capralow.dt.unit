@@ -8,7 +8,6 @@ import java.util.List;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragment;
@@ -37,7 +36,6 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.texteditor.IEditorStatusLine;
 
 import com._1c.g5.v8.dt.core.platform.IResourceLookup;
-import com._1c.g5.v8.dt.metadata.mdclass.CommonModule;
 import com._1c.g5.v8.dt.ui.util.OpenHelper;
 
 import ru.capralow.dt.coverage.internal.ui.CoverageUIPlugin;
@@ -171,9 +169,7 @@ public class OpenAction extends SelectionDispatchAction {
 
 		for (int i = 0; i < elements.length; i++) {
 			Object element = elements[i];
-			EObject bslElement = (EObject) element;
-
-			URI uri = resourceLookup.getPlatformResourceUri(bslElement);
+			URI uri = (URI) element;
 
 			OpenHelper openHelper = new OpenHelper();
 			openHelper.openEditor(uri, null);
@@ -202,7 +198,7 @@ public class OpenAction extends SelectionDispatchAction {
 			return false;
 		for (Iterator<?> iter = selection.iterator(); iter.hasNext();) {
 			Object element = iter.next();
-			if (element instanceof CommonModule)
+			if (element instanceof URI)
 				continue;
 			return false;
 		}

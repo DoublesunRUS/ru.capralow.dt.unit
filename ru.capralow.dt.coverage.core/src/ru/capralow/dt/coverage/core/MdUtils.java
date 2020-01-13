@@ -13,10 +13,17 @@ import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.IEObjectDescription;
 
 import com._1c.g5.v8.dt.bm.index.emf.IBmEmfIndexProvider;
-import com._1c.g5.v8.dt.bsl.model.BslPackage;
-import com._1c.g5.v8.dt.bsl.model.Module;
+import com._1c.g5.v8.dt.bm.xtext.BmAwareResourceSetProvider;
+import com._1c.g5.v8.dt.core.platform.IConfigurationProject;
+import com._1c.g5.v8.dt.core.platform.IExtensionProject;
+import com._1c.g5.v8.dt.core.platform.IExternalObjectProject;
+import com._1c.g5.v8.dt.core.platform.IV8Project;
+import com._1c.g5.v8.dt.core.platform.IV8ProjectManager;
+import com._1c.g5.v8.dt.metadata.mdclass.Configuration;
 import com._1c.g5.v8.dt.metadata.mdclass.MdClassPackage;
 import com._1c.g5.v8.dt.metadata.mdclass.MdObject;
+
+import ru.capralow.dt.coverage.internal.core.CoverageCorePlugin;
 
 public class MdUtils {
 
@@ -38,16 +45,31 @@ public class MdUtils {
 		return object;
 	}
 
-	public static Module getModuleByURI(URI moduleURI) {
+	public static EObject getEObjectByURI(URI moduleURI) {
+		IV8ProjectManager projectManager = CoverageCorePlugin.getInstance().getInjector()
+				.getInstance(IV8ProjectManager.class);
+
+		BmAwareResourceSetProvider bmAwareResourceSetProvider = CoverageCorePlugin.getInstance().getInjector()
+				.getInstance(BmAwareResourceSetProvider.class);
+
+		IV8Project v8Project = projectManager.getProject(moduleURI);
+		Configuration configuration = null;
+		if (v8Project instanceof IConfigurationProject)
+			configuration = ((IConfigurationProject) v8Project).getConfiguration();
+		else if (v8Project instanceof IExtensionProject)
+			configuration = ((IExtensionProject) v8Project).getConfiguration();
+		else if (v8Project instanceof IExternalObjectProject)
+			configuration = ((IExternalObjectProject) v8Project).getParent().getConfiguration();
+
 		EObject newObject = EcoreFactory.eINSTANCE.createEObject();
 		((InternalEObject) newObject).eSetProxyURI(moduleURI);
 
-		Module module = (Module) EcoreUtil.resolve(newObject, BslPackage.Literals.MODULE);
+		EObject mdObject = EcoreUtil.resolve(newObject, configuration);
 
-		if (module.eResource() instanceof DerivedStateAwareResource)
-			((DerivedStateAwareResource) module.eResource()).installDerivedState(false);
+		if (mdObject.eResource() instanceof DerivedStateAwareResource)
+			((DerivedStateAwareResource) mdObject.eResource()).installDerivedState(false);
 
-		return module;
+		return mdObject;
 	}
 
 	private static QualifiedName getConfigurationObjectQualifiedName(String objectFullName, EClass mdLiteral) {
