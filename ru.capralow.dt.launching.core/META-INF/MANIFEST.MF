@@ -11,7 +11,5 @@ Bundle-Vendor: %providerName
 Bundle-ClassPath: .
 Export-Package: ru.capralow.dt.internal.launching.core;x-internal:=true
 Import-Package: org.antlr.stringtemplate,
- org.eclipse.core.runtime,
- ru.capralow.dt.unit.launcher.plugin.core,
- ru.capralow.dt.unit.launcher.plugin.core.frameworks,
- ru.capralow.dt.unit.launcher.plugin.core.frameworks.gson
+ org.eclipse.core.runtime
+Require-Bundle: ru.capralow.dt.unit.launcher.plugin.core;bundle-version="[0.1.0,1.0.0)"

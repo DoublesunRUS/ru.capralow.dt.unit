@@ -32,14 +32,17 @@
 
 	<modules>
 		<module>../target</module>
+		
 		<module>../ru.capralow.dt.launching.core</module>
 		<module>../ru.capralow.dt.launching.ui</module>
 		
-<!-- 		<module>../ru.capralow.dt.coverage.core</module> -->
+		<module>../ru.capralow.dt.coverage.core</module>
 <!-- 		<module>../ru.capralow.dt.coverage.core.tests</module> -->
-<!-- 		<module>../ru.capralow.dt.coverage.ui</module> -->
+		<module>../ru.capralow.dt.coverage.ui</module>
 <!-- 		<module>../ru.capralow.dt.coverage.ui.tests</module> -->
 		
+		<module>../ru.capralow.dt.framework.va</module>
+
 		<module>../ru.capralow.dt.unit.launcher.plugin.core</module>
 		<module>../ru.capralow.dt.unit.launcher.plugin.core.tests</module>
 		
@@ -47,6 +50,7 @@
 		<module>../ru.capralow.dt.unit.launcher.plugin.ui.tests</module>
 		
 		<module>../ru.capralow.dt.unit.launcher.plugin.feature</module>
+		
 		<module>../repository</module>
 	</modules>
 

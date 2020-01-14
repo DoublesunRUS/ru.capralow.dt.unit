@@ -28,6 +28,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 import com._1c.g5.v8.dt.core.platform.IV8ProjectManager;
 import com._1c.g5.v8.dt.internal.launching.ui.LaunchingUiPlugin;
@@ -127,7 +128,7 @@ public class UnitTestLaunchTab extends AbstractRuntimeClientTab
 		if (image == null) {
 			ImageRegistry registry = LaunchingUiPlugin.getDefault().getImageRegistry();
 			registry.put(imagePath,
-					LaunchingUiPlugin.imageDescriptorFromPlugin("ru.capralow.dt.launching.ui", //$NON-NLS-1$
+					AbstractUIPlugin.imageDescriptorFromPlugin("ru.capralow.dt.launching.ui", //$NON-NLS-1$
 							"icons/obj16/1Unit.png")); //$NON-NLS-1$
 			image = registry.get(imagePath);
 		}

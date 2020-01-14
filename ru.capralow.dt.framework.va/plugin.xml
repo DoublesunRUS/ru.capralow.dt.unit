@@ -10,6 +10,9 @@
 		<contexts file="bslTestFramework.xml" plugin="com._1c.g5.v8.dt.platform.doc_v8_3_12"/>
 		<contexts file="bslTestFramework.xml" plugin="com._1c.g5.v8.dt.platform.doc_v8_3_13"/>
 		<contexts file="bslTestFramework.xml" plugin="com._1c.g5.v8.dt.platform.doc_v8_3_14"/>
+		<contexts file="bslTestFramework.xml" plugin="com._1c.g5.v8.dt.platform.doc_v8_3_15"/>
+		<contexts file="bslTestFramework.xml" plugin="com._1c.g5.v8.dt.platform.doc_v8_3_16"/>
+		<contexts file="bslTestFramework.xml" plugin="com._1c.g5.v8.dt.platform.doc_v8_3_17"/>
 	</extension>
 	
 </plugin>

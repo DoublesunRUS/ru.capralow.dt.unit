@@ -10,9 +10,7 @@ Bundle-RequiredExecutionEnvironment: JavaSE-11
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Import-Package: com._1c.g5.v8.dt.metadata.mdclass.impl,
- com.google.common.io,
- ru.capralow.dt.unit.launcher.plugin.core,
- ru.capralow.dt.unit.launcher.plugin.core.frameworks,
- ru.capralow.dt.unit.launcher.plugin.core.frameworks.gson
+ com.google.common.io
 Export-Package: ru.capralow.dt.internal.launching.ui.launchconfigurations;x-internal:=true,
  ru.capralow.dt.internal.launching.ui.launchconfigurations.shortcuts;x-internal:=true
+Require-Bundle: ru.capralow.dt.unit.launcher.plugin.core;bundle-version="[0.1.0,1.0.0)"

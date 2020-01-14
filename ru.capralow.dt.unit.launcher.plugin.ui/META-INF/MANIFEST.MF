@@ -9,7 +9,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.debug.core,
  org.jacoco.core;bundle-version="0.8.3",
  org.eclipse.jdt.junit;bundle-version="[3.2.0,4.0.0)",
- org.eclipse.jdt.junit.core;bundle-version="[3.6.0,4.0.0)"
+ org.eclipse.jdt.junit.core;bundle-version="[3.6.0,4.0.0)",
+ ru.capralow.dt.unit.launcher.plugin.core;bundle-version="[0.1.0,1.0.0)"
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: dt.unit.launcher.plugin.ui
@@ -54,10 +55,7 @@ Import-Package: com._1c.g5.modeling.xtext.scoping,
  org.eclipse.xtext.resource,
  org.eclipse.xtext.scoping,
  org.eclipse.xtext.ui.editor.hyperlinking,
- org.eclipse.xtext.util,
- ru.capralow.dt.unit.launcher.plugin.core,
- ru.capralow.dt.unit.launcher.plugin.core.frameworks,
- ru.capralow.dt.unit.launcher.plugin.core.frameworks.gson
+ org.eclipse.xtext.util
 Bundle-ClassPath: .
 Bundle-Activator: ru.capralow.dt.unit.launcher.plugin.internal.ui.UnitLauncherUiPlugin
 Export-Package: ru.capralow.dt.unit.launcher.plugin.internal.ui;x-internal:=true,

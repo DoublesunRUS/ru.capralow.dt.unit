@@ -38,10 +38,9 @@ import ru.capralow.dt.unit.launcher.plugin.core.frameworks.gson.TestFramework;
 import ru.capralow.dt.unit.launcher.plugin.internal.core.UnitLauncherCorePlugin;
 
 public class FrameworkUtils {
-	private static final String FRAMEWORK_PLUGIN = "ru.capralow.dt.unit.launcher.plugin.core"; //$NON-NLS-1$
-
 	public static final String PARAMS_FILE_NAME = "params.json"; //$NON-NLS-1$
 	public static final String FRAMEWORK_FILE_NAME = "framework.epf"; //$NON-NLS-1$
+	public static final String FRAMEWORK_FILES_ROOT_PATH = "/framework/"; //$NON-NLS-1$
 
 	public static final String FEATURE_EXTENSION = ".feature"; //$NON-NLS-1$
 
@@ -143,7 +142,7 @@ public class FrameworkUtils {
 
 	public static FeatureSettings getFeatureSettings() {
 		TestFramework framework = getCurrentFramework();
-		String jsonContent = readContents(getFileInputSupplier(framework.getResourcePath() + "feature.json")); //$NON-NLS-1$
+		String jsonContent = readContents(getFileInputSupplier("/framework/feature.json", framework.getBundleName())); //$NON-NLS-1$
 
 		FeatureSettings featureSettings = new Gson().fromJson(jsonContent, FeatureSettings.class);
 
@@ -154,25 +153,26 @@ public class FrameworkUtils {
 	}
 
 	public static Bundle getFrameworkBundle() {
-		return Platform.getBundle(FRAMEWORK_PLUGIN);
+		TestFramework framework = getCurrentFramework();
+		return Platform.getBundle(framework.getBundleName());
 	}
 
 	public static FrameworkMetaTypes getFrameworkMetaTypes() {
 		TestFramework framework = getCurrentFramework();
-		String jsonContent = readContents(getFileInputSupplier(framework.getResourcePath() + "metaTypes.json")); //$NON-NLS-1$
+		String jsonContent = readContents(getFileInputSupplier("/framework/metaTypes.json", framework.getBundleName())); //$NON-NLS-1$
 
 		return new Gson().fromJson(jsonContent, FrameworkMetaTypes.class);
 	}
 
 	public static FrameworksList getFrameworks() {
-		String jsonContent = readContents(getFileInputSupplier("/frameworks/frameworks.json")); //$NON-NLS-1$
+		String jsonContent = readContents(getFileInputSupplier("/frameworks.json", UnitLauncherCorePlugin.ID)); //$NON-NLS-1$
 
 		return new Gson().fromJson(jsonContent, FrameworksList.class);
 	}
 
 	public static FrameworkSettings getFrameworkSettings() {
 		TestFramework framework = getCurrentFramework();
-		String jsonContent = readContents(getFileInputSupplier(framework.getResourcePath() + "settings.json")); //$NON-NLS-1$
+		String jsonContent = readContents(getFileInputSupplier("/framework/settings.json", framework.getBundleName())); //$NON-NLS-1$
 
 		return new Gson().fromJson(jsonContent, FrameworkSettings.class);
 	}
@@ -180,6 +180,10 @@ public class FrameworkUtils {
 	public static String getFrameworkStartupOptions(FrameworkSettings frameworkSettings, String paramsFilePathName) {
 		String startupOptions = frameworkSettings.getStartupOptions();
 		return startupOptions.replace("$ParamsFilePathName$", paramsFilePathName + PARAMS_FILE_NAME); //$NON-NLS-1$
+	}
+
+	public static String getFrameworkEpfName(FrameworkSettings frameworkSettings) {
+		return frameworkSettings.getEpfName();
 	}
 
 	public static String getModuleByName(String extensionModuleName, IProject project,
@@ -282,9 +286,10 @@ public class FrameworkUtils {
 		return tagsList;
 	}
 
-	private static CharSource getFileInputSupplier(String partName) {
-		return Resources.asCharSource(UnitTestLaunchConfigurationAttributes.class.getResource(partName),
-				StandardCharsets.UTF_8);
+	private static CharSource getFileInputSupplier(String partName, String bundleName) {
+		Bundle bundle = Platform.getBundle(bundleName);
+
+		return Resources.asCharSource(bundle.getResource(partName), StandardCharsets.UTF_8);
 	}
 
 	private static File getResourceFile(URI uri) {
