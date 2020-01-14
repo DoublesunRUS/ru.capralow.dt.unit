@@ -14,7 +14,6 @@
  ******************************************************************************/
 package ru.capralow.dt.coverage.core;
 
-import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.runtime.IAdaptable;
@@ -47,14 +46,14 @@ public interface ICoverageSession extends IAdaptable, IExecutionDataSource {
 	 *
 	 * @return readable description
 	 */
-	public String getDescription();
+	String getDescription();
 
 	/**
 	 * Returns the set of package fragment roots defining the scope of this session.
 	 *
 	 * @return session scope as set of {@link IPackageFragmentRoot}
 	 */
-	public Set<URI> getScope();
+	Set<URI> getScope();
 
 	/**
 	 * If this session was the result of a Eclipse launch this method returns the
@@ -62,8 +61,8 @@ public interface ICoverageSession extends IAdaptable, IExecutionDataSource {
 	 *
 	 * @return launch configuration or <code>null</code>
 	 */
-	public ILaunchConfiguration getLaunchConfiguration();
+	ILaunchConfiguration getLaunchConfiguration();
 
-	public List<IProfilingResult> getProfilingResults();
+	IProfilingResult getProfilingResult();
 
 }

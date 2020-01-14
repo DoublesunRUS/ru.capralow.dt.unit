@@ -16,7 +16,6 @@ package ru.capralow.dt.coverage.internal.core;
 
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.runtime.CoreException;
@@ -37,14 +36,14 @@ public class CoverageSession extends PlatformObject implements ICoverageSession 
 
 	private String description;
 	private Set<URI> scope;
-	private List<IProfilingResult> profilingResults;
+	private IProfilingResult profilingResult;
 	private ILaunchConfiguration launchConfiguration;
 
-	public CoverageSession(String description, Set<URI> set, List<IProfilingResult> profilingResults,
+	public CoverageSession(String description, Set<URI> set, IProfilingResult profilingResult,
 			ILaunchConfiguration launchConfiguration) {
 		this.description = description;
 		this.scope = Collections.unmodifiableSet(new HashSet<>(set));
-		this.profilingResults = profilingResults;
+		this.profilingResult = profilingResult;
 		this.launchConfiguration = launchConfiguration;
 	}
 
@@ -61,8 +60,8 @@ public class CoverageSession extends PlatformObject implements ICoverageSession 
 	}
 
 	@Override
-	public List<IProfilingResult> getProfilingResults() {
-		return profilingResults;
+	public IProfilingResult getProfilingResult() {
+		return profilingResult;
 	}
 
 	@Override

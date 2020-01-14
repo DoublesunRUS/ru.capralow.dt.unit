@@ -33,6 +33,7 @@ import org.jacoco.core.data.SessionInfo;
 import org.jacoco.core.data.SessionInfoStore;
 
 import com._1c.g5.v8.dt.bsl.model.Conditional;
+import com._1c.g5.v8.dt.bsl.model.EmptyStatement;
 import com._1c.g5.v8.dt.bsl.model.IfStatement;
 import com._1c.g5.v8.dt.bsl.model.Method;
 import com._1c.g5.v8.dt.bsl.model.Module;
@@ -40,7 +41,6 @@ import com._1c.g5.v8.dt.bsl.model.Statement;
 import com._1c.g5.v8.dt.core.platform.IConfigurationProject;
 import com._1c.g5.v8.dt.core.platform.IExtensionProject;
 import com._1c.g5.v8.dt.core.platform.IExternalObjectProject;
-import com._1c.g5.v8.dt.core.platform.IResourceLookup;
 import com._1c.g5.v8.dt.core.platform.IV8Project;
 import com._1c.g5.v8.dt.core.platform.IV8ProjectManager;
 import com._1c.g5.v8.dt.debug.core.model.BslModuleReference;
@@ -69,9 +69,6 @@ public class SessionAnalyzer {
 	private IBslModuleLocator bslModuleLocator;
 
 	@Inject
-	private IResourceLookup resourceLookup;
-
-	@Inject
 	private IV8ProjectManager projectManager;
 
 	public Collection<ExecutionData> getExecutionData() {
@@ -82,57 +79,64 @@ public class SessionAnalyzer {
 		return sessionInfoStore.getInfos();
 	}
 
-	private void processStatement(Statement statement, BslNodeImpl methodCoverage) {
+	private void processElseIfParts(IfStatement ifStatement, BslNodeImpl methodCoverage) {
+		for (Conditional conditional : ifStatement.getElsIfParts()) {
+			ICompositeNode conditionalNode = NodeModelUtils.findActualNodeFor(conditional);
+			int conditionalLineNum = conditionalNode.getStartLine();
+			LineImpl conditionalLine = methodCoverage.getLine(conditionalLineNum);
+
+			if (conditionalLine == null || conditionalLine.equals(LineImpl.EMPTY))
+				methodCoverage.increment(CounterImpl.COUNTER_1_0, CounterImpl.COUNTER_1_0, conditionalLineNum);
+			else
+				methodCoverage.increment(CounterImpl.COUNTER_0_0, CounterImpl.COUNTER_0_1, conditionalLineNum);
+
+			for (Statement subStatement : conditional.getStatements())
+				processStatement(subStatement, methodCoverage);
+		}
+	}
+
+	private void processIfStatement(IfStatement ifStatement, BslNodeImpl methodCoverage) {
+		ICompositeNode statementNode = NodeModelUtils.findActualNodeFor(ifStatement);
+		int statementLineNum = statementNode.getStartLine();
+
+		processElseIfParts(ifStatement, methodCoverage);
+
+		boolean ifBranchCovered = false;
+		boolean elseBranchCovered = ifStatement.getElseStatements().isEmpty();
+
+		for (Statement subStatement : ifStatement.getIfPart().getStatements()) {
+			boolean statementCovered = processStatement(subStatement, methodCoverage);
+			ifBranchCovered = ifBranchCovered || statementCovered;
+		}
+
+		for (Statement subStatement : ifStatement.getElseStatements()) {
+			boolean statementCovered = processStatement(subStatement, methodCoverage);
+			elseBranchCovered = elseBranchCovered || statementCovered;
+		}
+
+		if (ifBranchCovered && elseBranchCovered)
+			methodCoverage.increment(CounterImpl.COUNTER_0_0, CounterImpl.COUNTER_0_1, statementLineNum);
+		else
+			methodCoverage.increment(CounterImpl.COUNTER_0_0, CounterImpl.COUNTER_1_0, statementLineNum);
+	}
+
+	private boolean processStatement(Statement statement, BslNodeImpl methodCoverage) {
+		if (statement instanceof EmptyStatement)
+			return false;
 
 		ICompositeNode statementNode = NodeModelUtils.findActualNodeFor(statement);
 		int statementLineNum = statementNode.getStartLine();
 		LineImpl statementLine = methodCoverage.getLine(statementLineNum);
 
-		if (statement instanceof IfStatement) {
-			if (statementLine == null || statementLine.equals(LineImpl.EMPTY))
-				methodCoverage.increment(CounterImpl.COUNTER_1_0, CounterImpl.COUNTER_1_0, statementLineNum);
-			else
-				methodCoverage.increment(CounterImpl.COUNTER_0_0, CounterImpl.COUNTER_0_1, statementLineNum);
+		boolean branchNotCovered = statementLine == null || statementLine.equals(LineImpl.EMPTY);
 
-			IfStatement ifStatement = ((IfStatement) statement);
+		if (branchNotCovered)
+			methodCoverage.increment(CounterImpl.COUNTER_1_0, CounterImpl.COUNTER_0_0, statementLineNum);
 
-			for (Statement subStatement : ifStatement.getIfPart().getStatements())
-				processStatement(subStatement, methodCoverage);
+		if (statement instanceof IfStatement)
+			processIfStatement((IfStatement) statement, methodCoverage);
 
-			for (Conditional conditional : ifStatement.getElsIfParts()) {
-				ICompositeNode conditionalNode = NodeModelUtils.findActualNodeFor(conditional);
-				int conditionalLineNum = statementNode.getStartLine();
-				LineImpl conditionalLine = methodCoverage.getLine(conditionalLineNum);
-
-				if (conditionalLine == null || conditionalLine.equals(LineImpl.EMPTY))
-					methodCoverage.increment(CounterImpl.COUNTER_1_0, CounterImpl.COUNTER_1_0, conditionalLineNum);
-				else
-					methodCoverage.increment(CounterImpl.COUNTER_0_0, CounterImpl.COUNTER_0_1, conditionalLineNum);
-
-				for (Statement subStatement : conditional.getStatements())
-					processStatement(subStatement, methodCoverage);
-			}
-
-			EList<Statement> elseStatements = ifStatement.getElseStatements();
-			if (!elseStatements.isEmpty()) {
-				ICompositeNode elseNode = NodeModelUtils.findActualNodeFor(elseStatements.get(0));
-				int elseLineNum = elseNode.getStartLine() - 1;
-				LineImpl elseLine = methodCoverage.getLine(elseLineNum);
-
-				if (elseLine == null || elseLine.equals(LineImpl.EMPTY))
-					methodCoverage.increment(CounterImpl.COUNTER_1_0, CounterImpl.COUNTER_1_0, elseLineNum);
-				else
-					methodCoverage.increment(CounterImpl.COUNTER_0_0, CounterImpl.COUNTER_0_1, elseLineNum);
-			}
-			for (Statement subStatement : elseStatements)
-				processStatement(subStatement, methodCoverage);
-
-		} else {
-			if (statementLine == null)
-				methodCoverage
-						.increment(CounterImpl.COUNTER_1_0, CounterImpl.COUNTER_0_0, statementNode.getStartLine());
-		}
-
+		return !branchNotCovered;
 	}
 
 	public IBslModelCoverage processSession(ICoverageSession session, IProgressMonitor monitor) {
@@ -145,11 +149,14 @@ public class SessionAnalyzer {
 				1 + roots.size());
 
 		BslModelCoverage modelCoverage = new BslModelCoverage();
-		List<IProfilingResult> profilingResults = session.getProfilingResults();
+		IProfilingResult profilingResult = session.getProfilingResult();
 
 		monitor.worked(1);
 
 		for (URI root : roots) {
+			if (monitor.isCanceled())
+				break;
+
 			IV8Project v8Project = projectManager.getProject(root);
 			Configuration configuration = null;
 			if (v8Project instanceof IConfigurationProject)
@@ -171,59 +178,55 @@ public class SessionAnalyzer {
 			}
 		}
 
-		for (IProfilingResult profilingResult : profilingResults) {
+		for (BslModuleReference moduleReference : profilingResult.getReferences()) {
 			if (monitor.isCanceled())
 				break;
 
-			for (BslModuleReference moduleReference : profilingResult.getReferences()) {
-				if (monitor.isCanceled())
-					break;
+			IProject project = moduleReference.getProject();
 
-				IProject project = moduleReference.getProject();
+			if (project == null)
+				continue;
 
-				if (project == null)
+			Module module = bslModuleLocator.getModule(moduleReference, true);
+			if (module == null || !roots.contains(EcoreUtil.getURI(module)))
+				continue;
+
+			EList<Method> moduleMethods = module.allMethods();
+			if (moduleMethods.isEmpty())
+				continue;
+
+			for (ILineProfilingResult profilingLine : profilingResult.getResultsForModule(moduleReference)) {
+				if (profilingLine.getLine().contains(profilingLine.getMethodSignature())
+						|| profilingLine.getLine().isBlank())
 					continue;
 
-				Module module = bslModuleLocator.getModule(moduleReference, true);
-				if (module == null || !roots.contains(EcoreUtil.getURI(module)))
-					continue;
+				URI profilingMethod = null;
+				for (Method method : moduleMethods) {
+					if (method.getName().equals(profilingLine.getMethodSignature().substring(0,
+							profilingLine.getMethodSignature().indexOf('(')))) {
 
-				EList<Method> moduleMethods = module.allMethods();
-				if (moduleMethods.isEmpty())
-					continue;
-
-				for (ILineProfilingResult profilingLine : profilingResult.getResultsForModule(moduleReference)) {
-					if (profilingLine.getLine().contains(profilingLine.getMethodSignature())
-							|| profilingLine.getLine().isBlank())
-						continue;
-
-					URI profilingMethod = null;
-					for (Method method : moduleMethods) {
-						if (method.getName().equals(profilingLine.getMethodSignature().substring(0,
-								profilingLine.getMethodSignature().indexOf('(')))) {
-
-							profilingMethod = EcoreUtil.getURI(method);
-							break;
-						}
+						profilingMethod = EcoreUtil.getURI(method);
+						break;
 					}
-
-					if (profilingMethod == null)
-						continue;
-
-					BslNodeImpl methodCoverage = (BslNodeImpl) modelCoverage.getCoverageFor(profilingMethod);
-					if (methodCoverage == null)
-						continue;
-
-					methodCoverage
-							.increment(CounterImpl.COUNTER_0_1, CounterImpl.COUNTER_0_0, profilingLine.getLineNo());
-
 				}
+
+				if (profilingMethod == null)
+					continue;
+
+				BslNodeImpl methodCoverage = (BslNodeImpl) modelCoverage.getCoverageFor(profilingMethod);
+				if (methodCoverage == null)
+					continue;
+
+				methodCoverage.increment(CounterImpl.COUNTER_0_1, CounterImpl.COUNTER_0_0, profilingLine.getLineNo());
 
 			}
 
 		}
 
 		for (URI root : roots) {
+			if (monitor.isCanceled())
+				break;
+
 			EObject module = MdUtils.getEObjectByURI(root);
 			if (!(module instanceof Module))
 				continue;

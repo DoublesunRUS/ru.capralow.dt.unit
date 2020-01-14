@@ -14,7 +14,6 @@
  ******************************************************************************/
 package ru.capralow.dt.coverage.core;
 
-import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.runtime.CoreException;
@@ -35,7 +34,7 @@ public interface ISessionImporter {
 	 * @param description
 	 *            textual description of the session
 	 */
-	public void setDescription(String description);
+	void setDescription(String description);
 
 	/**
 	 * Sets the source for execution data.
@@ -44,7 +43,7 @@ public interface ISessionImporter {
 	 *            profiling results
 	 */
 
-	public void setProfilingResults(List<IProfilingResult> source);
+	void setProfilingResult(IProfilingResult source);
 
 	/**
 	 * Sets the set of package fragment roots that should be considered for coverage
@@ -53,7 +52,7 @@ public interface ISessionImporter {
 	 * @param scope
 	 *            scope for analysis
 	 */
-	public void setScope(Set<URI> scope);
+	void setScope(Set<URI> scope);
 
 	/**
 	 * A call to this method triggers the actual import process.
@@ -63,6 +62,6 @@ public interface ISessionImporter {
 	 * @throws CoreException
 	 *             if something goes wrong during export
 	 */
-	public void importSession(IProgressMonitor monitor) throws CoreException;
+	void importSession(IProgressMonitor monitor) throws CoreException;
 
 }

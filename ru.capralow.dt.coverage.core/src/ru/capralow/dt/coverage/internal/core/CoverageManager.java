@@ -50,7 +50,7 @@ public class CoverageManager implements IManagedService {
 					if (launch instanceof CoverageLaunch) {
 						CoverageLaunch coverageLaunch = (CoverageLaunch) launch;
 						coverageLaunch.getAgentServer().stop();
-						checkExecutionData(coverageLaunch);
+						// checkExecutionData(coverageLaunch);
 					}
 
 				}

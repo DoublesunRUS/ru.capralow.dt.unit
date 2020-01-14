@@ -14,7 +14,6 @@
  ******************************************************************************/
 package ru.capralow.dt.coverage.internal.core;
 
-import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.runtime.CoreException;
@@ -34,7 +33,7 @@ public class SessionImporter implements ISessionImporter {
 	private final ISessionManager sessionManager;
 
 	private String description;
-	private List<IProfilingResult> profilingResults;
+	private IProfilingResult profilingResult;
 	private Set<URI> scope;
 
 	public SessionImporter(ISessionManager sessionManager) {
@@ -47,8 +46,8 @@ public class SessionImporter implements ISessionImporter {
 	}
 
 	@Override
-	public void setProfilingResults(final List<IProfilingResult> source) {
-		this.profilingResults = source;
+	public void setProfilingResult(final IProfilingResult source) {
+		this.profilingResult = source;
 	}
 
 	@Override
@@ -60,7 +59,7 @@ public class SessionImporter implements ISessionImporter {
 	public void importSession(IProgressMonitor monitor) throws CoreException {
 		monitor.beginTask(CoreMessages.ImportingSession_task, 2);
 		monitor.worked(1);
-		final CoverageSession session = new CoverageSession(description, scope, profilingResults, null);
+		final CoverageSession session = new CoverageSession(description, scope, profilingResult, null);
 		sessionManager.addSession(session, true, null);
 		monitor.done();
 	}
