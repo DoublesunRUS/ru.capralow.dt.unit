@@ -36,6 +36,8 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Tree;
+import org.eclipse.swt.widgets.TreeColumn;
+import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IMemento;
 import org.eclipse.ui.IViewSite;
@@ -105,12 +107,118 @@ public class CoverageView extends ViewPart implements IShowInTarget {
 
 		@Override
 		public void sessionAdded(ICoverageSession addedSession) {
-			// Nothing to do
+			// Нечего делать
 		}
 
 		@Override
 		public void sessionRemoved(ICoverageSession removedSession) {
-			// Nothing to do
+			// Нечего делать
+		}
+	};
+
+	private CellLabelProvider column0LabelProvider = new CellLabelProvider() {
+
+		private final ILabelProvider delegate = new WorkbenchLabelProvider();
+
+		@Override
+		public void update(ViewerCell cell) {
+			if (cell.getElement() == LOADING_ELEMENT) {
+				cell.setText(UIMessages.CoverageView_loadingMessage);
+				cell.setImage(null);
+			} else {
+				cell.setText(cellTextConverter.getElementName(cell.getElement()));
+				cell.setImage(delegate.getImage(cell.getElement()));
+			}
+		}
+	};
+
+	OwnerDrawLabelProvider column1LabelProvider = new OwnerDrawLabelProvider() {
+
+		@Override
+		public void update(ViewerCell cell) {
+			if (cell.getElement() == LOADING_ELEMENT) {
+				cell.setText(""); //$NON-NLS-1$
+			} else {
+				cell.setText(cellTextConverter.getRatio(cell.getElement()));
+			}
+		}
+
+		@Override
+		protected void erase(Event event, Object element) {
+			// Нечего делать
+		}
+
+		@Override
+		protected void measure(Event event, Object element) {
+			// Нечего делать
+		}
+
+		@Override
+		protected void paint(Event event, Object element) {
+			final ICoverageNode coverage = CoverageTools.getCoverageInfo(element);
+			if (coverage != null) {
+				TreeColumn column1 = ((TreeItem) event.item).getParent().getColumn(1);
+
+				final ICounter counter = coverage.getCounter(settings.getCounters());
+				RedGreenBar.draw(event, column1.getWidth(), counter, maxTotalCache.getMaxTotal(element));
+			}
+		}
+	};
+
+	CellLabelProvider column2LabelProvider = new CellLabelProvider() {
+
+		@Override
+		public void update(ViewerCell cell) {
+			if (cell.getElement() == LOADING_ELEMENT) {
+				cell.setText(""); //$NON-NLS-1$
+			} else {
+				cell.setText(cellTextConverter.getCovered(cell.getElement()));
+			}
+		}
+	};
+
+	CellLabelProvider column3LabelProvider = new CellLabelProvider() {
+
+		@Override
+		public void update(ViewerCell cell) {
+			if (cell.getElement() == LOADING_ELEMENT) {
+				cell.setText(""); //$NON-NLS-1$
+			} else {
+				cell.setText(cellTextConverter.getMissed(cell.getElement()));
+			}
+		}
+	};
+
+	CellLabelProvider column4LabelProvider = new CellLabelProvider() {
+
+		@Override
+		public void update(ViewerCell cell) {
+			if (cell.getElement() == LOADING_ELEMENT) {
+				cell.setText(""); //$NON-NLS-1$
+			} else {
+				cell.setText(cellTextConverter.getTotal(cell.getElement()));
+			}
+		}
+	};
+
+	ViewerFilter viewerFilter = new ViewerFilter() {
+		@Override
+		public boolean select(Viewer viewer2, Object parentElement, Object element) {
+			if (element == LOADING_ELEMENT)
+				return true;
+
+			final ICoverageNode c = CoverageTools.getCoverageInfo(element);
+			if (c == null) {
+				return false;
+			}
+			final ICounter instructions = c.getInstructionCounter();
+			if (instructions.getTotalCount() == 0) {
+				return false;
+			}
+			if (settings.getHideUnusedElements() && instructions.getCoveredCount() == 0)
+				return false;
+
+			return true;
 		}
 	};
 
@@ -128,119 +236,26 @@ public class CoverageView extends ViewPart implements IShowInTarget {
 
 		viewer = new TreeViewer(tree);
 		final TreeViewerColumn column0 = new TreeViewerColumn(viewer, SWT.LEFT);
-		column0.setLabelProvider(new CellLabelProvider() {
-
-			private final ILabelProvider delegate = new WorkbenchLabelProvider();
-
-			@Override
-			public void update(ViewerCell cell) {
-				if (cell.getElement() == LOADING_ELEMENT) {
-					cell.setText(UIMessages.CoverageView_loadingMessage);
-					cell.setImage(null);
-				} else {
-					cell.setText(cellTextConverter.getElementName(cell.getElement()));
-					cell.setImage(delegate.getImage(cell.getElement()));
-				}
-			}
-		});
+		column0.setLabelProvider(column0LabelProvider);
 		sorter.addColumn(column0, COLUMN_ELEMENT);
 
 		final TreeViewerColumn column1 = new TreeViewerColumn(viewer, SWT.RIGHT);
-		column1.setLabelProvider(new OwnerDrawLabelProvider() {
-
-			@Override
-			public void update(ViewerCell cell) {
-				if (cell.getElement() == LOADING_ELEMENT) {
-					cell.setText(""); //$NON-NLS-1$
-				} else {
-					cell.setText(cellTextConverter.getRatio(cell.getElement()));
-				}
-			}
-
-			@Override
-			protected void erase(Event event, Object element) {
-				// Нечего делать
-			}
-
-			@Override
-			protected void measure(Event event, Object element) {
-				// Нечего делать
-			}
-
-			@Override
-			protected void paint(Event event, Object element) {
-				final ICoverageNode coverage = CoverageTools.getCoverageInfo(element);
-				if (coverage != null) {
-					final ICounter counter = coverage.getCounter(settings.getCounters());
-					RedGreenBar
-							.draw(event, column1.getColumn().getWidth(), counter, maxTotalCache.getMaxTotal(element));
-				}
-			}
-		});
+		column1.setLabelProvider(column1LabelProvider);
 		sorter.addColumn(column1, COLUMN_RATIO);
 
 		final TreeViewerColumn column2 = new TreeViewerColumn(viewer, SWT.RIGHT);
-		column2.setLabelProvider(new CellLabelProvider() {
-
-			@Override
-			public void update(ViewerCell cell) {
-				if (cell.getElement() == LOADING_ELEMENT) {
-					cell.setText(""); //$NON-NLS-1$
-				} else {
-					cell.setText(cellTextConverter.getCovered(cell.getElement()));
-				}
-			}
-		});
+		column2.setLabelProvider(column2LabelProvider);
 		sorter.addColumn(column2, COLUMN_COVERED);
 
 		final TreeViewerColumn column3 = new TreeViewerColumn(viewer, SWT.RIGHT);
-		column3.setLabelProvider(new CellLabelProvider() {
-
-			@Override
-			public void update(ViewerCell cell) {
-				if (cell.getElement() == LOADING_ELEMENT) {
-					cell.setText(""); //$NON-NLS-1$
-				} else {
-					cell.setText(cellTextConverter.getMissed(cell.getElement()));
-				}
-			}
-		});
+		column3.setLabelProvider(column3LabelProvider);
 		sorter.addColumn(column3, COLUMN_MISSED);
 
 		final TreeViewerColumn column4 = new TreeViewerColumn(viewer, SWT.RIGHT);
-		column4.setLabelProvider(new CellLabelProvider() {
-
-			@Override
-			public void update(ViewerCell cell) {
-				if (cell.getElement() == LOADING_ELEMENT) {
-					cell.setText(""); //$NON-NLS-1$
-				} else {
-					cell.setText(cellTextConverter.getTotal(cell.getElement()));
-				}
-			}
-		});
+		column4.setLabelProvider(column4LabelProvider);
 		sorter.addColumn(column4, COLUMN_TOTAL);
 
-		viewer.addFilter(new ViewerFilter() {
-			@Override
-			public boolean select(Viewer viewer2, Object parentElement, Object element) {
-				if (element == LOADING_ELEMENT)
-					return true;
-
-				final ICoverageNode c = CoverageTools.getCoverageInfo(element);
-				if (c == null) {
-					return false;
-				}
-				final ICounter instructions = c.getInstructionCounter();
-				if (instructions.getTotalCount() == 0) {
-					return false;
-				}
-				if (settings.getHideUnusedElements() && instructions.getCoveredCount() == 0)
-					return false;
-
-				return true;
-			}
-		});
+		viewer.addFilter(viewerFilter);
 		settings.updateColumnHeaders(viewer);
 		settings.restoreColumnWidth(viewer);
 		viewer.setComparator(sorter);

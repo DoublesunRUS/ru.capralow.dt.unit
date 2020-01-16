@@ -9,6 +9,8 @@
  * Contributors:
  *    Marc R. Hoffmann - initial API and implementation
  *
+ * Adapted by Alexander Kapralov
+ *
  ******************************************************************************/
 package ru.capralow.dt.coverage.internal.ui;
 
@@ -184,9 +186,9 @@ public class CoverageUIPlugin extends AbstractUIPlugin {
 
 	public static void log(Throwable t) {
 		String message = t.getMessage();
-		if (message == null) {
-			message = "Internal Error"; //$NON-NLS-1$
-		}
+		if (message == null)
+			message = "Internal Error";
+
 		instance.getLog().log(errorStatus(message, t));
 	}
 

@@ -17,12 +17,10 @@ package ru.capralow.dt.coverage.internal.ui.coverageview;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipse.jdt.core.IJavaElement;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.ui.model.WorkbenchContentProvider;
 import org.jacoco.core.analysis.ICoverageNode;
-
-import com._1c.g5.v8.dt.bsl.model.Module;
 
 import ru.capralow.dt.coverage.core.CoverageTools;
 
@@ -34,7 +32,7 @@ class MaxTotalCache {
 	private final ViewSettings settings;
 	private final ITreeContentProvider contentProvider;
 
-	private Map<Module, Integer> maxTotals;
+	private Map<URI, Integer> maxTotals;
 
 	MaxTotalCache(ViewSettings settings) {
 		this.settings = settings;
@@ -43,24 +41,22 @@ class MaxTotalCache {
 	}
 
 	int getMaxTotal(Object element) {
-		return 0;
-		// final IJavaElement parent = ((IJavaElement) element).getParent();
-		// Integer max = maxTotals.get(parent);
-		// if (max == null) {
-		// max = Integer.valueOf(calculateMaxTotal(parent));
-		// maxTotals.put(parent, max);
-		// }
-		// return max.intValue();
+		Integer max = maxTotals.get(element);
+		if (max == null) {
+			max = Integer.valueOf(calculateMaxTotal((URI) element));
+			maxTotals.put((URI) element, max);
+		}
+		return max.intValue();
 	}
 
-	private int calculateMaxTotal(IJavaElement parent) {
+	private int calculateMaxTotal(URI uri) {
 		int max = 0;
-		for (Object sibling : contentProvider.getChildren(parent)) {
-			final ICoverageNode coverage = CoverageTools.getCoverageInfo(sibling);
-			if (coverage != null) {
-				max = Math.max(max, coverage.getCounter(settings.getCounters()).getTotalCount());
-			}
+		// for (Object sibling : contentProvider.getChildren(parent)) {
+		final ICoverageNode coverage = CoverageTools.getCoverageInfo(uri);
+		if (coverage != null) {
+			max = Math.max(max, coverage.getCounter(settings.getCounters()).getTotalCount());
 		}
+		// }
 		return max;
 	}
 
