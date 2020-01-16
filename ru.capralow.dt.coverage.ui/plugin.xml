@@ -386,8 +386,18 @@
             verticalRulerPreferenceValue="true"/>
    </extension>
    
-   <extension
-         point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+	<extension
+			point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+
+		<launchConfigurationTabGroup
+			class="ru.capralow.dt.coverage.internal.ui.ExecutableExtensionFactory:ru.capralow.dt.coverage.ui.launching.CoverageTabGroup"
+			helpContextId="ru.capralow.dt.coverage.ui.coverage_launch_tab_context"
+			id="com._1c.g5.v8.dt.launching.ui.launchConfigurationTabGroup.RuntimeClient"
+			type="com._1c.g5.v8.dt.launching.core.RuntimeClient">
+			<launchMode
+				mode="coverage"/>
+		</launchConfigurationTabGroup>
+
 		<launchConfigurationTabGroup
 			class="ru.capralow.dt.coverage.internal.ui.ExecutableExtensionFactory:ru.capralow.dt.coverage.ui.launching.CoverageTabGroup"
 			helpContextId="ru.capralow.dt.coverage.ui.coverage_launch_tab_context"
@@ -396,8 +406,8 @@
 			<launchMode
 				mode="coverage"/>
 		</launchConfigurationTabGroup>
-   </extension>
-   
+	</extension>
+
    <extension
          point="org.eclipse.debug.core.statusHandlers">
       <statusHandler

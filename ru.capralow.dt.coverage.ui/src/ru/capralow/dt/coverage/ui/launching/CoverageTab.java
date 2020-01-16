@@ -45,7 +45,7 @@ import ru.capralow.dt.coverage.internal.ui.UIMessages;
  */
 public class CoverageTab extends AbstractLaunchConfigurationTab {
 
-	private ScopeViewer classesviewer;
+	private ScopeViewer classesViewer;
 
 	private IV8ProjectManager projectManager;
 	private IResourceLookup resourceLookup;
@@ -73,11 +73,11 @@ public class CoverageTab extends AbstractLaunchConfigurationTab {
 		GridLayout layout = new GridLayout();
 		layout.numColumns = 2;
 		group.setLayout(layout);
-		classesviewer = new ScopeViewer(group, SWT.BORDER, projectManager, resourceLookup);
+		classesViewer = new ScopeViewer(group, SWT.BORDER, projectManager, resourceLookup);
 		GridData gd = new GridData(GridData.FILL_BOTH);
 		gd.horizontalSpan = 2;
-		classesviewer.getTable().setLayoutData(gd);
-		classesviewer.addSelectionChangedListener(event -> {
+		classesViewer.getTable().setLayoutData(gd);
+		classesViewer.addSelectionChangedListener(event -> {
 			setDirty(true);
 			updateErrorStatus();
 			updateLaunchConfigurationDialog();
@@ -87,7 +87,7 @@ public class CoverageTab extends AbstractLaunchConfigurationTab {
 		buttonSelectAll.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				classesviewer.selectAll();
+				classesViewer.selectAll();
 				setDirty(true);
 				updateLaunchConfigurationDialog();
 			}
@@ -97,7 +97,7 @@ public class CoverageTab extends AbstractLaunchConfigurationTab {
 		buttonDeselectAll.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				classesviewer.deselectAll();
+				classesViewer.deselectAll();
 				setDirty(true);
 				updateLaunchConfigurationDialog();
 			}
@@ -112,8 +112,8 @@ public class CoverageTab extends AbstractLaunchConfigurationTab {
 	@Override
 	public void initializeFrom(ILaunchConfiguration configuration) {
 		try {
-			classesviewer.setInput(ScopeUtils.getOverallScope(configuration));
-			classesviewer.setSelectedScope(ScopeUtils.getConfiguredScope(configuration));
+			classesViewer.setInput(ScopeUtils.getOverallScope(configuration));
+			classesViewer.setSelectedScope(ScopeUtils.getConfiguredScope(configuration));
 		} catch (CoreException e) {
 			CoverageUIPlugin.log(e);
 		}
@@ -124,14 +124,14 @@ public class CoverageTab extends AbstractLaunchConfigurationTab {
 	@Override
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
 		if (isDirty()) {
-			final List<String> ids = ScopeUtils.writeScope(classesviewer.getSelectedScope());
+			final List<String> ids = ScopeUtils.writeScope(classesViewer.getSelectedScope());
 			configuration.setAttribute(ICoverageLaunchConfigurationConstants.ATTR_SCOPE_IDS, ids);
 		}
 	}
 
 	@Override
 	public boolean isValid(ILaunchConfiguration launchConfig) {
-		return !classesviewer.getSelection().isEmpty();
+		return !classesViewer.getSelection().isEmpty();
 	}
 
 	@Override
@@ -145,7 +145,7 @@ public class CoverageTab extends AbstractLaunchConfigurationTab {
 	}
 
 	private void updateErrorStatus() {
-		if (classesviewer.getSelection().isEmpty()) {
+		if (classesViewer.getSelection().isEmpty()) {
 			setErrorMessage(UIMessages.CoverageTabEmptyAnalysisScope_message);
 		} else {
 			setErrorMessage(null);
