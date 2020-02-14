@@ -21,14 +21,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.jdt.core.IJavaModel;
-import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.jdt.core.JavaModelException;
 
 import com._1c.g5.v8.dt.bsl.model.Module;
 
@@ -121,12 +116,12 @@ public class ScopeUtils {
 	 *
 	 * @return all package fragment roots
 	 */
-	public static Set<URI> getWorkspaceScope() throws JavaModelException {
+	public static Set<URI> getWorkspaceScope() {
 		Set<URI> scope = new HashSet<>();
-		IJavaModel model = JavaCore.create(ResourcesPlugin.getWorkspace().getRoot());
-		for (IJavaProject p : model.getJavaProjects()) {
-			// scope.addAll(Arrays.asList(p.getPackageFragmentRoots()));
-		}
+		// IJavaModel model = JavaCore.create(ResourcesPlugin.getWorkspace().getRoot());
+		// for (IJavaProject p : model.getJavaProjects()) {
+		// // scope.addAll(Arrays.asList(p.getPackageFragmentRoots()));
+		// }
 		return filterUnsupportedEntries(scope);
 	}
 
@@ -137,7 +132,7 @@ public class ScopeUtils {
 	 *            set to filter
 	 * @return filtered set without JRE runtime entries
 	 */
-	public static Set<URI> filterUnsupportedEntries(Collection<URI> scope) throws JavaModelException {
+	public static Set<URI> filterUnsupportedEntries(Collection<URI> scope) {
 		Set<URI> filtered = new HashSet<>();
 		for (URI root : scope) {
 			// final IClasspathEntry entry = root.getRawClasspathEntry();

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde version="3.8"?>
-<target name="1C:EDT Topaz Platform" sequenceNumber="1">
+<target name="1C:EDT Sapphire Platform" sequenceNumber="1">
 <locations>
 	<!-- EDT -->
 	<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
@@ -103,24 +103,14 @@
 		<unit id="com._1c.g5.v8.dt.bp.scheme.feature.feature.group" version="0.0.0"/>
 		<unit id="com._1c.g5.v8.dt.profiling.feature.feature.group" version="0.0.0"/>
 		<unit id="com._1c.g5.v8.dt.diagram.framework.feature.feature.group" version="0.0.0"/>
-		<repository id="dt_repository" location="https://edt.1c.ru/releases/topaz/1.16.0/"/>
+		<repository id="dt_repository" location="https://edt.1c.ru/releases/sapphire/2020.1/"/>
 	</location>
 	<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
-		<!-- Plug-in Spy -->
-		<unit id="org.eclipse.pde.source.feature.group" version="0.0.0"/>
-		<!-- JDT -->
-		<unit id="org.eclipse.jdt.feature.group" version="0.0.0"/>
-		<repository location="https://download.eclipse.org/eclipse/updates/4.12/"/>
-	</location>
-	<!-- SWTBot -->
-	<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
+		<!-- SWTBot -->
 		<unit id="org.eclipse.swtbot.eclipse.finder" version="0.0.0"/>
 		<unit id="org.eclipse.swtbot.swt.finder" version="0.0.0"/>
 		<unit id="org.hamcrest.library" version="0.0.0"/>
-		<repository location="https://download.eclipse.org/releases/2019-06/"/>
-	</location>
-	<!-- Jacoco -->
-	<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
+		<!-- Jacoco -->
 		<unit id="org.objectweb.asm" version="7.0.0.v20181030-2244"/>
 		<unit id="org.objectweb.asm.commons" version="7.0.0.v20181030-2244"/>
 		<unit id="org.objectweb.asm.tree" version="7.0.0.v20181030-2244"/>
@@ -128,6 +118,13 @@
 		<unit id="org.jacoco.core" version="0.0.0"/>
 		<unit id="org.jacoco.report" version="0.0.0"/>
 		<repository location="https://download.eclipse.org/releases/2019-06/"/>
+	</location>
+	<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
+		<!-- Plug-in Spy -->
+		<unit id="org.eclipse.pde.source.feature.group" version="0.0.0"/>
+		<!-- JDT -->
+		<unit id="org.eclipse.jdt.feature.group" version="0.0.0"/>
+		<repository location="https://download.eclipse.org/eclipse/updates/4.12/"/>
 	</location>
 </locations>
 </target>

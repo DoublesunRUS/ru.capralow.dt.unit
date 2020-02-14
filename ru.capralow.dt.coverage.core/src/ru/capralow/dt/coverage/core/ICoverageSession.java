@@ -19,7 +19,6 @@ import java.util.Set;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.jdt.core.IPackageFragmentRoot;
 
 import com._1c.g5.v8.dt.profiling.core.IProfilingResult;
 

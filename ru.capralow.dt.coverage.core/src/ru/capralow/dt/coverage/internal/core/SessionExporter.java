@@ -23,17 +23,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Reader;
-import java.io.StringReader;
-import java.util.Map;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubProgressMonitor;
-import org.eclipse.jdt.core.IPackageFragment;
-import org.eclipse.jdt.core.IPackageFragmentRoot;
-import org.eclipse.jdt.core.ISourceReference;
-import org.eclipse.jdt.core.JavaModelException;
-import org.eclipse.jdt.core.formatter.IndentManipulation;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.osgi.util.NLS;
 import org.jacoco.core.data.ExecutionDataWriter;
 import org.jacoco.report.FileMultiReportOutput;
@@ -58,30 +52,31 @@ public class SessionExporter implements ISessionExporter {
 
 	private abstract static class AbstractSourceFileLocator implements ISourceFileLocator {
 
-		protected final IPackageFragmentRoot root;
+		protected final URI root;
 		private final int tabWidth;
 
-		public AbstractSourceFileLocator(IPackageFragmentRoot root) {
+		public AbstractSourceFileLocator(URI root) {
 			this.root = root;
-			final Map<?, ?> options = root.getJavaProject().getOptions(true);
-			this.tabWidth = IndentManipulation.getTabWidth(options);
+			this.tabWidth = 100;
+			// final Map<?, ?> options = root.getJavaProject().getOptions(true);
+			// this.tabWidth = IndentManipulation.getTabWidth(options);
 		}
 
 		@Override
 		public final Reader getSourceFile(String packagename, String sourcename) throws IOException {
-			try {
-				packagename = packagename.replace('/', '.');
-				final IPackageFragment pkg = root.getPackageFragment(packagename);
-				final String source = getSourceReference(pkg, sourcename).getSource();
-				if (source != null)
-					return new StringReader(source);
+			// try {
+			// packagename = packagename.replace('/', '.');
+			// final URI pkg = root.getPackageFragment(packagename);
+			// final String source = getSourceReference(pkg, sourcename).getSource();
+			// if (source != null)
+			// return new StringReader(source);
 
-				return null;
+			return null;
 
-			} catch (CoreException e) {
-				final IOException ioException = new IOException(e.getMessage());
-				throw (IOException) ioException.initCause(e);
-			}
+			// } catch (CoreException e) {
+			// final IOException ioException = new IOException(e.getMessage());
+			// throw (IOException) ioException.initCause(e);
+			// }
 		}
 
 		@Override
@@ -89,43 +84,44 @@ public class SessionExporter implements ISessionExporter {
 			return tabWidth;
 		}
 
-		protected abstract ISourceReference getSourceReference(IPackageFragment pkg, String sourcename)
-				throws CoreException;
+		protected abstract URI getSourceReference(URI pkg, String sourcename) throws CoreException;
 
 	}
 
 	private static class LibrarySourceFileLocator extends AbstractSourceFileLocator {
 
-		public LibrarySourceFileLocator(IPackageFragmentRoot root) {
+		public LibrarySourceFileLocator(URI root) {
 			super(root);
 		}
 
 		@Override
-		protected ISourceReference getSourceReference(IPackageFragment pkg, String sourcename) throws CoreException {
-			int idx = sourcename.lastIndexOf('.');
-			if (idx != -1) {
-				sourcename = sourcename.substring(0, idx);
-			}
-			return pkg.getClassFile(sourcename + ".class"); //$NON-NLS-1$
+		protected URI getSourceReference(URI pkg, String sourcename) throws CoreException {
+			return null;
+			// int idx = sourcename.lastIndexOf('.');
+			// if (idx != -1) {
+			// sourcename = sourcename.substring(0, idx);
+			// }
+			// return pkg.getClassFile(sourcename + ".class"); //$NON-NLS-1$
 		}
 	}
 
 	private static class SourceFolderSourceFileLocator extends AbstractSourceFileLocator {
 
-		public SourceFolderSourceFileLocator(IPackageFragmentRoot root) {
+		public SourceFolderSourceFileLocator(URI root) {
 			super(root);
 		}
 
 		@Override
-		protected ISourceReference getSourceReference(IPackageFragment pkg, String sourcename) throws CoreException {
-			return pkg.getCompilationUnit(sourcename);
+		protected URI getSourceReference(URI pkg, String sourcename) throws CoreException {
+			return null;
+			// return pkg.getCompilationUnit(sourcename);
 		}
 
 	}
 
-	private static ISourceFileLocator createSourceFileLocator(IPackageFragmentRoot root) throws JavaModelException {
-		if (root.getKind() == IPackageFragmentRoot.K_SOURCE)
-			return new SourceFolderSourceFileLocator(root);
+	private static ISourceFileLocator createSourceFileLocator(URI root) {
+		// if (root.getKind() == IPackageFragmentRoot.K_SOURCE)
+		// return new SourceFolderSourceFileLocator(root);
 
 		return new LibrarySourceFileLocator(root);
 	}

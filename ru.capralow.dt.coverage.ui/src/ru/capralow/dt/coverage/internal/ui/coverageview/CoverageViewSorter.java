@@ -12,7 +12,6 @@
  ******************************************************************************/
 package ru.capralow.dt.coverage.internal.ui.coverageview;
 
-import org.eclipse.jdt.ui.JavaElementComparator;
 import org.eclipse.jface.viewers.TreeViewerColumn;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerComparator;
@@ -32,7 +31,7 @@ class CoverageViewSorter extends ViewerComparator {
 
 	private final ViewSettings settings;
 	private final CoverageView view;
-	private final ViewerComparator elementsorter = new JavaElementComparator();
+	private final ViewerComparator elementsorter = new ViewerComparator();
 
 	public CoverageViewSorter(ViewSettings settings, CoverageView view) {
 		this.settings = settings;

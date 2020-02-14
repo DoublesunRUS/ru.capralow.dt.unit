@@ -20,7 +20,6 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.model.ILaunchConfigurationDelegate2;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.jdt.core.IPackageFragmentRoot;
 
 /**
  * The launch delegate for coverage configurations.
@@ -38,6 +37,6 @@ public interface ICoverageLauncher extends ILaunchConfigurationDelegate2 {
 	 *
 	 * @throws CoreException
 	 */
-	public Set<URI> getOverallScope(ILaunchConfiguration configuration) throws CoreException;
+	Set<URI> getOverallScope(ILaunchConfiguration configuration) throws CoreException;
 
 }

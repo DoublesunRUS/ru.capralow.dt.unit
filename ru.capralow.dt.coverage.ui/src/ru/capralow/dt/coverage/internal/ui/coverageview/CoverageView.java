@@ -19,8 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.commands.IHandler;
-import org.eclipse.jdt.ui.actions.IJavaEditorActionDefinitionIds;
-import org.eclipse.jdt.ui.actions.JdtActionConstants;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.viewers.CellLabelProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
@@ -331,8 +329,8 @@ public class CoverageView extends ViewPart implements IShowInTarget {
 		final IActionBars ab = getViewSite().getActionBars();
 
 		openAction = new OpenAction(getSite());
-		openAction.setActionDefinitionId(IJavaEditorActionDefinitionIds.OPEN_EDITOR);
-		ab.setGlobalActionHandler(JdtActionConstants.OPEN, openAction);
+		// openAction.setActionDefinitionId(IJavaEditorActionDefinitionIds.OPEN_EDITOR);
+		// ab.setGlobalActionHandler(JdtActionConstants.OPEN, openAction);
 		openAction.setEnabled(false);
 		viewer.addSelectionChangedListener(openAction);
 

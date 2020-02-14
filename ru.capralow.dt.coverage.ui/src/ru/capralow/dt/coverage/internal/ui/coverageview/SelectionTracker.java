@@ -9,14 +9,13 @@
  * Contributors:
  *    Brock Janiczak - initial API and implementation (SF #1774547)
  *
+ * Adapted by Alexander Kapralov
+ * 
  ******************************************************************************/
 package ru.capralow.dt.coverage.internal.ui.coverageview;
 
 import org.eclipse.core.runtime.IAdaptable;
-import org.eclipse.jdt.core.IClassFile;
-import org.eclipse.jdt.core.ICompilationUnit;
-import org.eclipse.jdt.core.IJavaElement;
-import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.text.IMarkSelection;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.viewers.ISelection;
@@ -39,7 +38,7 @@ class SelectionTracker {
 	private final StructuredViewer target;
 
 	private boolean enabled = false;
-	private IJavaElement currentSelection = null;
+	private URI currentSelection = null;
 
 	private final ISelectionListener listener = new ISelectionListener() {
 		/**
@@ -49,13 +48,13 @@ class SelectionTracker {
 		 *            base object
 		 * @return java element handle or <code>null</code>
 		 */
-		private IJavaElement getJavaElement(Object object) {
-			if (object instanceof IJavaElement) {
-				return (IJavaElement) object;
+		private URI getJavaElement(Object object) {
+			if (object instanceof URI) {
+				return (URI) object;
 			}
 			if (object instanceof IAdaptable) {
 				IAdaptable a = (IAdaptable) object;
-				return a.getAdapter(IJavaElement.class);
+				return a.getAdapter(URI.class);
 			}
 			return null;
 		}
@@ -71,7 +70,7 @@ class SelectionTracker {
 		 *            selection within this unit
 		 * @return nested element or the unit itself
 		 */
-		private IJavaElement findElementAtCursor(IJavaElement unit, ISelection selection) {
+		private URI findElementAtCursor(URI unit, ISelection selection) {
 			int pos = -1;
 			if (selection instanceof ITextSelection) {
 				pos = ((ITextSelection) selection).getOffset();
@@ -81,19 +80,17 @@ class SelectionTracker {
 			}
 			if (pos == -1)
 				return unit;
-			IJavaElement element = null;
-			try {
-				switch (unit.getElementType()) {
-				case IJavaElement.COMPILATION_UNIT:
-					element = ((ICompilationUnit) unit).getElementAt(pos);
-					break;
-				case IJavaElement.CLASS_FILE:
-					element = ((IClassFile) unit).getElementAt(pos);
-					break;
-				}
-			} catch (JavaModelException e) {
-				// we ignore this
-			}
+			URI element = null;
+			// try {
+			// switch (unit.getElementType()) {
+			// case IJavaElement.COMPILATION_UNIT:
+			// element = ((ICompilationUnit) unit).getElementAt(pos);
+			// break;
+			// case IJavaElement.CLASS_FILE:
+			// element = ((IClassFile) unit).getElementAt(pos);
+			// break;
+			// }
+			// }
 			return element == null ? unit : element;
 		}
 
@@ -103,14 +100,14 @@ class SelectionTracker {
 				if (selection instanceof IStructuredSelection) {
 					IStructuredSelection ssel = (IStructuredSelection) selection;
 					if (ssel.size() == 1) {
-						IJavaElement element = getJavaElement(ssel.getFirstElement());
+						URI element = getJavaElement(ssel.getFirstElement());
 						if (element != null)
 							applySelection(element, false);
 					}
 					return;
 				}
 				if (part instanceof IEditorPart) {
-					IJavaElement element = getJavaElement(((IEditorPart) part).getEditorInput());
+					URI element = getJavaElement(((IEditorPart) part).getEditorInput());
 					if (element != null) {
 						element = findElementAtCursor(element, selection);
 						applySelection(element, false);
@@ -130,7 +127,7 @@ class SelectionTracker {
 	 * @param force
 	 *            if <code>true</code> the selection is applied in any case
 	 */
-	private void applySelection(IJavaElement element, boolean force) {
+	private void applySelection(URI element, boolean force) {
 		currentSelection = element;
 		if (force || (enabled && targetview != targetview.getSite().getPage().getActivePart())) {
 			target.setSelection(new StructuredSelection(element), true);

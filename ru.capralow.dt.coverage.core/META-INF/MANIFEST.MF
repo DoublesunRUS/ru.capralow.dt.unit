@@ -5,16 +5,16 @@ Bundle-SymbolicName: ru.capralow.dt.coverage.core;singleton:=true
 Bundle-Version: 0.3.0.qualifier
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Export-Package: ru.capralow.dt.coverage.core;x-friends:="ru.capralow.dt.coverage.ui,ru.capralow.dt.coverage.ui.test",
+Export-Package: 
+ ru.capralow.dt.coverage.core;x-friends:="ru.capralow.dt.coverage.ui,ru.capralow.dt.coverage.ui.test",
  ru.capralow.dt.coverage.core.analysis;x-friends:="ru.capralow.dt.coverage.ui",
  ru.capralow.dt.coverage.core.launching;x-friends:="ru.capralow.dt.coverage.ui",
  ru.capralow.dt.coverage.internal.core;x-internal:=true,
  ru.capralow.dt.coverage.internal.core.analysis;x-internal:=true,
  ru.capralow.dt.coverage.internal.core.launching;x-internal:=true
-Require-Bundle: org.eclipse.core.runtime,
+Require-Bundle: 
+ org.eclipse.core.runtime,
  org.eclipse.debug.core,
- org.eclipse.jdt.core,
- org.eclipse.jdt.launching,
  org.jacoco.core;bundle-version="[0.8.3,0.8.4)",
  org.jacoco.agent;bundle-version="[0.8.3,0.8.4)",
  org.jacoco.report;bundle-version="[0.8.3,0.8.4)"
@@ -22,7 +22,8 @@ Bundle-Activator: ru.capralow.dt.coverage.internal.core.CoverageCorePlugin
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: dt.coverage.core
-Import-Package: com._1c.g5.v8.bm.integration,
+Import-Package: 
+ com._1c.g5.v8.bm.integration,
  com._1c.g5.v8.dt.bm.index.emf,
  com._1c.g5.v8.dt.bm.xtext,
  com._1c.g5.v8.dt.bsl.model,

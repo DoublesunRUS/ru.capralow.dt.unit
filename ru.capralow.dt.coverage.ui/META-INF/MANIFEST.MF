@@ -5,20 +5,20 @@ Bundle-SymbolicName: ru.capralow.dt.coverage.ui;singleton:=true
 Bundle-Version: 0.3.0.qualifier
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Require-Bundle: ru.capralow.dt.coverage.core,
+Require-Bundle: 
+ ru.capralow.dt.coverage.core,
  org.jacoco.core;bundle-version="[0.8.3,0.8.4)",
  org.eclipse.core.expressions,
  org.eclipse.core.runtime,
  org.eclipse.debug.ui,
- org.eclipse.jdt.core,
- org.eclipse.jdt.ui,
  org.eclipse.jface.text,
  org.eclipse.ui,
  org.eclipse.ui.forms,
  org.eclipse.ui.ide,
  org.eclipse.ui.workbench.texteditor
 Bundle-Activator: ru.capralow.dt.coverage.internal.ui.CoverageUIPlugin
-Export-Package: ru.capralow.dt.coverage.internal.ui;x-friends:="ru.capralow.dt.coverage.ui.test",
+Export-Package: 
+ ru.capralow.dt.coverage.internal.ui;x-friends:="ru.capralow.dt.coverage.ui.test",
  ru.capralow.dt.coverage.internal.ui.actions;x-internal:=true,
  ru.capralow.dt.coverage.internal.ui.annotation;x-internal:=true,
  ru.capralow.dt.coverage.internal.ui.coverageview;x-internal:=true,
@@ -32,7 +32,8 @@ Export-Package: ru.capralow.dt.coverage.internal.ui;x-friends:="ru.capralow.dt.c
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: dt.coverage.ui
-Import-Package: com._1c.g5.v8.dt.bm.index.emf,
+Import-Package: 
+ com._1c.g5.v8.dt.bm.index.emf,
  com._1c.g5.v8.dt.bsl.model,
  com._1c.g5.v8.dt.core.platform,
  com._1c.g5.v8.dt.md.ui.editor.base,
@@ -45,7 +46,6 @@ Import-Package: com._1c.g5.v8.dt.bm.index.emf,
  org.eclipse.emf.common.notify,
  org.eclipse.emf.common.util,
  org.eclipse.emf.ecore,
- org.eclipse.jdt.internal.core.manipulation.search,
  org.eclipse.ui.texteditor,
  org.eclipse.xtext.resource,
  org.eclipse.xtext.ui.editor

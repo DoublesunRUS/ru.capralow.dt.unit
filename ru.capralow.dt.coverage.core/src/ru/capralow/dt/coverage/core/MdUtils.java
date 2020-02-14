@@ -13,7 +13,6 @@ import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.IEObjectDescription;
 
 import com._1c.g5.v8.dt.bm.index.emf.IBmEmfIndexProvider;
-import com._1c.g5.v8.dt.bm.xtext.BmAwareResourceSetProvider;
 import com._1c.g5.v8.dt.core.platform.IConfigurationProject;
 import com._1c.g5.v8.dt.core.platform.IExtensionProject;
 import com._1c.g5.v8.dt.core.platform.IExternalObjectProject;
@@ -48,9 +47,6 @@ public class MdUtils {
 	public static EObject getEObjectByURI(URI moduleURI) {
 		IV8ProjectManager projectManager = CoverageCorePlugin.getInstance().getInjector()
 				.getInstance(IV8ProjectManager.class);
-
-		BmAwareResourceSetProvider bmAwareResourceSetProvider = CoverageCorePlugin.getInstance().getInjector()
-				.getInstance(BmAwareResourceSetProvider.class);
 
 		IV8Project v8Project = projectManager.getProject(moduleURI);
 		Configuration configuration = null;

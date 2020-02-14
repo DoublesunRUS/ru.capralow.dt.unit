@@ -9,6 +9,8 @@
  * Contributors:
  *    Marc R. Hoffmann - initial API and implementation
  *
+ * Adapted by Alexander Kapralov
+ *
  ******************************************************************************/
 package ru.capralow.dt.coverage.internal.ui.wizards;
 
@@ -17,7 +19,6 @@ import java.util.Date;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
@@ -30,14 +31,12 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-import com._1c.g5.v8.dt.bm.index.emf.IBmEmfIndexManager;
 import com._1c.g5.v8.dt.core.platform.IResourceLookup;
 import com._1c.g5.v8.dt.core.platform.IV8ProjectManager;
 import com.google.inject.Inject;
 
 import ru.capralow.dt.coverage.core.ScopeUtils;
 import ru.capralow.dt.coverage.internal.ui.ContextHelp;
-import ru.capralow.dt.coverage.internal.ui.CoverageUIPlugin;
 import ru.capralow.dt.coverage.internal.ui.ScopeViewer;
 import ru.capralow.dt.coverage.internal.ui.UIMessages;
 
@@ -57,8 +56,6 @@ public class SessionImportPage2 extends WizardPage {
 	private ScopeViewer scopeviewer;
 	private Button binariescheck;
 
-	@Inject
-	private IBmEmfIndexManager bmEmfIndexManager;
 	@Inject
 	private IV8ProjectManager projectManager;
 	@Inject
@@ -102,11 +99,7 @@ public class SessionImportPage2 extends WizardPage {
 
 	private void createScopeBlock(Composite parent) {
 		scopeviewer = new ScopeViewer(parent, SWT.BORDER, projectManager, resourceLookup);
-		try {
-			scopeviewer.setInput(ScopeUtils.getWorkspaceScope());
-		} catch (JavaModelException e) {
-			CoverageUIPlugin.log(e);
-		}
+		scopeviewer.setInput(ScopeUtils.getWorkspaceScope());
 		scopeviewer.addSelectionChangedListener(event -> update());
 		GridData gd = new GridData(GridData.FILL_BOTH);
 		gd.widthHint = convertHorizontalDLUsToPixels(120);
