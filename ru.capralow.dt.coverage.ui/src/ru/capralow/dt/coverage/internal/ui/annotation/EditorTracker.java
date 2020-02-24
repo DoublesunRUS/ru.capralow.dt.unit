@@ -14,6 +14,7 @@
  ******************************************************************************/
 package ru.capralow.dt.coverage.internal.ui.annotation;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.IPartListener2;
 import org.eclipse.ui.IWindowListener;
@@ -25,7 +26,6 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 
 import com._1c.g5.v8.dt.md.ui.editor.base.DtGranularEditor;
-import com._1c.g5.v8.dt.metadata.mdclass.CommonModule;
 
 import ru.capralow.dt.coverage.internal.ui.EditorUtility;
 
@@ -37,7 +37,8 @@ public class EditorTracker {
 	private static void annotateEditor(IWorkbenchPartReference partref) {
 		IWorkbenchPart part = partref.getPart(false);
 		if (part instanceof DtGranularEditor) {
-			XtextEditor editor = EditorUtility.getModuleEditor((DtGranularEditor<CommonModule>) part);
+			@SuppressWarnings("unchecked")
+			XtextEditor editor = EditorUtility.getModuleEditor((DtGranularEditor<EObject>) part);
 
 			if (editor == null)
 				return;

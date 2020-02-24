@@ -1,5 +1,6 @@
 package ru.capralow.dt.coverage.internal.ui;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.IWorkbenchPage;
@@ -13,47 +14,58 @@ import com._1c.g5.v8.dt.ui.editor.input.IDtEditorInput;
 
 public class EditorUtility {
 
-	public static XtextEditor getModuleEditor(DtGranularEditor<CommonModule> editor) {
+	public static XtextEditor getModuleEditor(DtGranularEditor<EObject> editor) {
 		IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 
 		for (IEditorReference editorReference : page.getEditorReferences()) {
 			final IEditorPart[] editorPart = new IEditorPart[1];
 			editorPart[0] = editorReference.getEditor(false);
-			if (editorPart[0] == null)
+
+			XtextEditor xtextEditor = getXtextEditorFromEditorPart(editorPart[0], editor);
+			if (xtextEditor == null)
 				continue;
 
-			if (editorPart[0] instanceof XtextEditor) {
-				// Если же мы идем по первой ветке, то есть у нас нет "formEditor", то берем
-				// EditorInput, он должен быть файловым, и по файлу уже определяем, например,
-				// при помощи сервиса
-				// com._1c.g5.v8.dt.core.filesystem.IQualifiedNameFilePathConverter
-
-				return (XtextEditor) editorPart[0];
-
-			} else if (editorPart[0] instanceof FormEditor) {
-				FormEditor formEditor = (FormEditor) editorPart[0];
-				if (!(formEditor instanceof DtGranularEditor))
-					continue;
-
-				@SuppressWarnings("unchecked")
-				IDtEditorInput<CommonModule> editorInput = ((DtGranularEditor<CommonModule>) formEditor)
-						.getEditorInput();
-				if (!editorInput.exists())
-					continue;
-
-				if (!editorInput.getModel().getUuid().equals(editor.getModel().getUuid()))
-					continue;
-
-				return formEditor.findPage("editors.pages.module").getAdapter(XtextEditor.class); //$NON-NLS-1$
-
-			} else if (editorPart[0] != null) {
-				return editorPart[0].getAdapter(XtextEditor.class);
-
-			}
-
+			return xtextEditor;
 		}
 
 		return null;
+	}
+
+	private static XtextEditor getXtextEditorFromEditorPart(IEditorPart editorPart, DtGranularEditor<EObject> editor) {
+		if (editorPart == null)
+			return null;
+
+		if (editorPart instanceof XtextEditor) {
+			// Если же мы идем по первой ветке, то есть у нас нет "formEditor", то берем
+			// EditorInput, он должен быть файловым, и по файлу уже определяем, например,
+			// при помощи сервиса
+			// com._1c.g5.v8.dt.core.filesystem.IQualifiedNameFilePathConverter
+
+			return (XtextEditor) editorPart;
+
+		} else if (editorPart instanceof FormEditor) {
+			FormEditor formEditor = (FormEditor) editorPart;
+			if (!(formEditor instanceof DtGranularEditor))
+				return null;
+
+			@SuppressWarnings("unchecked")
+			IDtEditorInput<CommonModule> editorInput = ((DtGranularEditor<CommonModule>) formEditor).getEditorInput();
+			if (!editorInput.exists())
+				return null;
+
+			EObject editorModel = editor.getModel();
+			if (!(editorModel instanceof CommonModule))
+				return null;
+
+			if (!editorInput.getModel().getUuid().equals(((CommonModule) editorModel).getUuid()))
+				return null;
+
+			return formEditor.findPage("editors.pages.module").getAdapter(XtextEditor.class); //$NON-NLS-1$
+
+		} else {
+			return editorPart.getAdapter(XtextEditor.class);
+
+		}
 	}
 
 }
