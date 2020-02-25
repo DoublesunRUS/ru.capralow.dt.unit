@@ -47,6 +47,18 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
    <requires>
       <import plugin="com._1c.g5.v8.dt.product.application" version="1.17.0" match="greaterOrEqual"/>
+      
+      <import feature="ru.capralow.dt.framework.va" version="1.2.28.20200225-0950"/>
+      
+      <import plugin="org.eclipse.jdt.junit"/>
+      <import plugin="org.eclipse.jdt.junit.core"/>
+      
+      <import plugin="org.objectweb.asm"/>
+      <import plugin="org.objectweb.asm.commons"/>
+      <import plugin="org.objectweb.asm.tree"/>
+      <import plugin="org.jacoco.agent"/>
+      <import plugin="org.jacoco.core"/>
+      <import plugin="org.jacoco.report"/>
    </requires>
 
    <plugin
