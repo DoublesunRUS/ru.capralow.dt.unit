@@ -94,17 +94,12 @@
 					<filters>
 						<filter>
 							<type>eclipse-plugin</type>
-							<id>framework_va</id>
+							<id>ru.capralow.dt.framework.va.feature.group</id>
 							<removeAll />
 						</filter>
 						<filter>
 							<type>eclipse-plugin</type>
-							<id>eclipse_releases</id>
-							<removeAll />
-						</filter>
-						<filter>
-							<type>eclipse-plugin</type>
-							<id>eclipse_updates</id>
+							<id>org.eclipse.jdt.feature.group</id>
 							<removeAll />
 						</filter>
 					</filters>
