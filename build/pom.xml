@@ -94,12 +94,12 @@
 					<filters>
 						<filter>
 							<type>eclipse-plugin</type>
-							<id>ru.capralow.dt.framework.va.feature.group</id>
+							<id>ru.capralow.dt.framework.va</id>
 							<removeAll />
 						</filter>
 						<filter>
 							<type>eclipse-plugin</type>
-							<id>org.eclipse.jdt.feature.group</id>
+							<id>org.eclipse.jdt</id>
 							<removeAll />
 						</filter>
 					</filters>
