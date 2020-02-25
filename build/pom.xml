@@ -91,13 +91,6 @@
 							<arch>x86_64</arch>
 						</environment>
 					</environments>
-					<filters>
-						<filter>
-							<type>eclipse-plugin</type>
-							<id>ru.capralow.dt.framework.va</id>
-							<removeAll />
-						</filter>
-					</filters>
 				</configuration>
 			</plugin>
 			
