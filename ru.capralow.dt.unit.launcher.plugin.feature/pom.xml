@@ -29,7 +29,6 @@
 				<configuration>
 					<excludes>
 						<feature id="org.eclipse.jdt"/>
-						<feature id="ru.capralow.dt.framework.va"/>
 					</excludes>
 				</configuration>
 			</plugin>
@@ -46,7 +45,7 @@
 				</executions>
 				<configuration>
 					<excludes>
-						<feature id="ru.capralow.dt.framework.va"/>
+						<feature id="org.eclipse.jdt"/>
 					</excludes>
 				</configuration>
 			</plugin>
