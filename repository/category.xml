@@ -6,10 +6,7 @@
 	</feature>
 
 	<category-def name="ru.capralow.thirdparty.category.optional" label="Сторонние компоненты"/>
-	<bundle id="org.eclipse.jdt.junit">
-		<category name="ru.capralow.thirdparty.category.optional"/>
-	</bundle>
-	<bundle id="org.eclipse.jdt.junit.core">
+	<bundle id="org.eclipse.jdt">
 		<category name="ru.capralow.thirdparty.category.optional"/>
 	</bundle>
 	<bundle id="org.objectweb.asm" version="7.0.0.v20181030-2244">
@@ -32,6 +29,4 @@
 	</bundle>
 
 	<repository-reference location="http://capralow.ru/edt/unit.framework.va/latest/" enabled="true" />
-	<repository-reference location="https://download.eclipse.org/releases/2019-06/" enabled="true" />
-	<repository-reference location="https://download.eclipse.org/eclipse/updates/4.12/" enabled="true" />
 </site>
