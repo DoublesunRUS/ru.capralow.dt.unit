@@ -129,7 +129,7 @@
 		<unit id="org.eclipse.pde.source.feature.group" version="0.0.0"/>
 		<!-- JDT -->
 		<unit id="org.eclipse.jdt.feature.group" version="0.0.0"/>
-		<repository id="eclipse_updates" location="https://download.eclipse.org/eclipse/updates/4.12/"/>
+		<repository id="eclipse_updates" location="http://download.eclipse.org/eclipse/updates/4.12/"/>
 	</location>
 </locations>
 </target>

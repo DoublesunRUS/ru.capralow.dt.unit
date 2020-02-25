@@ -9,7 +9,8 @@ Require-Bundle: org.eclipse.ui,
  com.google.inject,
  org.eclipse.emf.ecore,
  org.eclipse.emf.ecore.xcore.lib,
- org.eclipse.xtext.xbase.lib
+ org.eclipse.xtext.xbase.lib,
+ ru.capralow.dt.framework.va.exec;bundle-version="[1.2.0,1.3.0)"
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: ru.capralow.dt.unit.launcher.plugin.core
