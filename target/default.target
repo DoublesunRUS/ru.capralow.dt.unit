@@ -108,7 +108,7 @@
 	<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
 		<!-- VA Framework -->
 		<unit id="ru.capralow.dt.framework.va.feature.group" version="0.0.0"/>
-		<repository location="http://capralow.ru/edt/unit.framework.va/latest/"/>
+		<repository id="framework_va" location="http://capralow.ru/edt/unit.framework.va/latest/"/>
 	</location>
 	<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
 		<!-- SWTBot -->
@@ -122,14 +122,14 @@
 		<unit id="org.jacoco.agent" version="0.0.0"/>
 		<unit id="org.jacoco.core" version="0.0.0"/>
 		<unit id="org.jacoco.report" version="0.0.0"/>
-		<repository location="https://download.eclipse.org/releases/2019-06/"/>
+		<repository id="eclipse_releases" location="https://download.eclipse.org/releases/2019-06/"/>
 	</location>
 	<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
 		<!-- Plug-in Spy -->
 		<unit id="org.eclipse.pde.source.feature.group" version="0.0.0"/>
 		<!-- JDT -->
 		<unit id="org.eclipse.jdt.feature.group" version="0.0.0"/>
-		<repository location="https://download.eclipse.org/eclipse/updates/4.12/"/>
+		<repository id="eclipse_updates" location="https://download.eclipse.org/eclipse/updates/4.12/"/>
 	</location>
 </locations>
 </target>
