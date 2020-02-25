@@ -43,11 +43,6 @@
 						</goals>
 					</execution>
 				</executions>
-				<configuration>
-					<excludes>
-						<feature id="org.eclipse.jdt"/>
-					</excludes>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
