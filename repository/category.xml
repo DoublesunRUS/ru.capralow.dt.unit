@@ -25,6 +25,6 @@
    <category-def name="ru.capralow.dt.plugin.category.framework" label="Фреймворки тестирования"/>
    <category-def name="ru.capralow.thirdparty.category.optional" label="Сторонние компоненты"/>
    <repository-reference location="http://capralow.ru/edt/unit.framework.va/latest/" enabled="true" />
-   <repository-reference location="https://download.eclipse.org/releases/2019-06/" enabled="false" />
-   <repository-reference location="http://download.eclipse.org/eclipse/updates/4.12/" enabled="false" />
+   <repository-reference location="https://download.eclipse.org/releases/2019-06/" enabled="true" />
+   <repository-reference location="http://download.eclipse.org/eclipse/updates/4.12/" enabled="true" />
 </site>
