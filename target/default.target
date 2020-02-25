@@ -106,6 +106,11 @@
 		<repository id="dt_repository" location="https://edt.1c.ru/releases/sapphire/2020.1/"/>
 	</location>
 	<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
+		<!-- VA Framework -->
+		<unit id="ru.capralow.dt.framework.va.feature.group" version="0.0.0"/>
+		<repository location="http://capralow.ru/edt/unit.framework.va/latest/"/>
+	</location>
+	<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
 		<!-- SWTBot -->
 		<unit id="org.eclipse.swtbot.eclipse.finder" version="0.0.0"/>
 		<unit id="org.eclipse.swtbot.swt.finder" version="0.0.0"/>

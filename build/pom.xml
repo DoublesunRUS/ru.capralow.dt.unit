@@ -41,8 +41,6 @@
 		<module>../ru.capralow.dt.coverage.ui</module>
 <!-- 		<module>../ru.capralow.dt.coverage.ui.tests</module> -->
 		
-		<module>../ru.capralow.dt.framework.va</module>
-
 		<module>../ru.capralow.dt.unit.launcher.plugin.core</module>
 		<module>../ru.capralow.dt.unit.launcher.plugin.core.tests</module>
 		

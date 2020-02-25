@@ -29,7 +29,7 @@
 ### Фреймворки тестирования
 Фреймворки тестирования поставляются вместе с плагином и не требуют отдельной установки.<br>
 Поддерживаемые фреймворки:<br>
-[Vanessa Automation](https://github.com/Pr-Mex/vanessa-automation) 1.2.025.
+[Vanessa Automation](https://github.com/Pr-Mex/vanessa-automation) 1.2.
 
 ### Использование Vanessa automation в качестве фреймворка тестирования
 В папке [МодульныеТестыVA](https://github.com/DoublesunRUS/ru.capralow.dt.unit.launcher/tree/master/МодульныеТестыVA) находится расширение, демонстрирующее основные возможности программного интерфейса фреймворка тестирования<br>

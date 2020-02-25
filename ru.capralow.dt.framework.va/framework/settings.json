@@ -1,5 +1,0 @@
-{
-	"version": "1.2.028.12",
-	"epf-name": "vanessa-automation-single.epf",
-	"startupOptions": "StartFeaturePlayer;DisableUserSettingsLoader;VBParams=$ParamsFilePathName$"
-}
