@@ -17,8 +17,7 @@ Require-Bundle:
  org.eclipse.debug.core,
  org.jacoco.core;bundle-version="[0.8.3,0.8.4)",
  org.jacoco.agent;bundle-version="[0.8.3,0.8.4)",
- org.jacoco.report;bundle-version="[0.8.3,0.8.4)",
- ru.capralow.dt.framework.va;bundle-version="[1.2.0,1.3.0)";resolution:=optional
+ org.jacoco.report;bundle-version="[0.8.3,0.8.4)"
 Bundle-Activator: ru.capralow.dt.coverage.internal.core.CoverageCorePlugin
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-11
