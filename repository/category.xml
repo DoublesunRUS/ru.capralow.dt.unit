@@ -6,12 +6,9 @@
    <feature id="ru.capralow.dt.framework.va">
       <category name="ru.capralow.dt.plugin.category.framework"/>
    </feature>
-   <bundle id="org.eclipse.jdt.junit">
+   <feature id="org.eclipse.jdt">
       <category name="ru.capralow.thirdparty.category.optional"/>
-   </bundle>
-   <bundle id="org.eclipse.jdt.junit.core">
-      <category name="ru.capralow.thirdparty.category.optional"/>
-   </bundle>
+   </feature>
    <bundle id="org.jacoco.agent">
       <category name="ru.capralow.thirdparty.category.optional"/>
    </bundle>
@@ -25,6 +22,6 @@
    <category-def name="ru.capralow.dt.plugin.category.framework" label="Фреймворки тестирования"/>
    <category-def name="ru.capralow.thirdparty.category.optional" label="Сторонние компоненты"/>
    <repository-reference location="http://capralow.ru/edt/unit.framework.va/latest/" enabled="true" />
-   <repository-reference location="https://download.eclipse.org/releases/2019-06/" enabled="true" />
-   <repository-reference location="http://download.eclipse.org/eclipse/updates/4.12/" enabled="true" />
+   <repository-reference location="https://download.eclipse.org/releases/2019-06/" enabled="false" />
+   <repository-reference location="http://download.eclipse.org/eclipse/updates/4.12/" enabled="false" />
 </site>
