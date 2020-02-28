@@ -128,7 +128,10 @@ public class BslModelCoverage extends CoverageNodeImpl implements IBslModelCover
 
 	public void updateModuleCoverage(URI moduleUri) {
 		BslNodeImpl moduleCoverage = (BslNodeImpl) coverageMap.get(moduleUri);
-		for (URI methodURI : modulesMap.get(moduleUri)) {
+		List<URI> moduleMethods = modulesMap.get(moduleUri);
+		if (moduleCoverage == null || moduleMethods == null)
+			return;
+		for (URI methodURI : moduleMethods) {
 			BslNodeImpl methodCoverage = (BslNodeImpl) coverageMap.get(methodURI);
 			moduleCoverage.increment(methodCoverage);
 		}
