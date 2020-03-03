@@ -49,6 +49,8 @@ public class BslApplicationLauncher extends CoverageLauncher {
 
 		String configurationProjectName = configuration.getAttribute(IDebugConfigurationAttributes.PROJECT_NAME,
 				(String) null);
+		if (configurationProjectName == null)
+			return Collections.emptySet();
 
 		IV8Project v8Project = projectManager.getProject(configurationProjectName);
 
