@@ -35,11 +35,11 @@
    <extension
          point="org.eclipse.debug.ui.launchShortcuts">
       <shortcut
-            label="%JavaApplicationShortcut.label"
+            label="%ThinClientLaunchShortcut.label"
             icon="$nl$/icons/full/etool16/java_launch.png"
             modes="coverage"
             class="ru.capralow.dt.coverage.ui.launching.CoverageLaunchShortcut:com._1c.g5.v8.dt.internal.launching.ui.launchconfigurations.shortcuts.ThinClientLaunchShortcut"
-            id="ru.capralow.dt.coverage.ui.localJavaShortcut">
+            id="ru.capralow.dt.coverage.ui.thinClientLaunchShortcut">
          <contextualLaunch>
            <enablement>
  				<and>
@@ -58,11 +58,11 @@
          </contextualLaunch>
       </shortcut>
       <shortcut
-            label="%JUnitTestShortcut.label"
+            label="%UnitTestLaunchShortcut.label"
             icon="$nl$/icons/full/etool16/junit_launch.png"
             class="ru.capralow.dt.coverage.ui.launching.CoverageLaunchShortcut:ru.capralow.dt.internal.launching.ui.launchconfigurations.shortcuts.UnitTestLaunchShortcut"
             modes="coverage"
-            id="ru.capralow.dt.coverage.ui.junitShortcut">
+            id="ru.capralow.dt.coverage.ui.unitTestLaunchShortcut">
          <contextualLaunch>
            <enablement>
 				<and>
@@ -153,14 +153,14 @@
             name="%OpenCoverageConfigurationsCommand.name"/>
       <command
             categoryId="org.eclipse.debug.ui.category.run"
-            description="%CoverageJavaApplicationCommand.description"
+            description="%CoverageThinClientCommand.description"
             id="ru.capralow.dt.coverage.ui.localJavaShortcut.coverage"
-            name="%CoverageJavaApplicationCommand.name"/>
+            name="%CoverageThinClientCommand.name"/>
       <command
             categoryId="org.eclipse.debug.ui.category.run"
-            description="%CoverageJUnitTestCommand.description"
+            description="%CoverageUnitTestCommand.description"
             id="ru.capralow.dt.coverage.ui.junitShortcut.coverage"
-            name="%CoverageJUnitTestCommand.name"/>
+            name="%CoverageUnitTestCommand.name"/>
       <command
             categoryId="ru.capralow.dt.coverage.ui"
             id="ru.capralow.dt.coverage.ui.selectRootElements"
