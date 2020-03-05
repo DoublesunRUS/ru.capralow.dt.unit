@@ -14,6 +14,8 @@
  ******************************************************************************/
 package ru.capralow.dt.coverage.internal.core.analysis;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -34,10 +36,13 @@ import org.jacoco.core.data.SessionInfoStore;
 
 import com._1c.g5.v8.dt.bsl.model.Conditional;
 import com._1c.g5.v8.dt.bsl.model.EmptyStatement;
+import com._1c.g5.v8.dt.bsl.model.ForStatement;
+import com._1c.g5.v8.dt.bsl.model.ForToStatement;
 import com._1c.g5.v8.dt.bsl.model.IfStatement;
 import com._1c.g5.v8.dt.bsl.model.Method;
 import com._1c.g5.v8.dt.bsl.model.Module;
 import com._1c.g5.v8.dt.bsl.model.Statement;
+import com._1c.g5.v8.dt.bsl.model.TryExceptStatement;
 import com._1c.g5.v8.dt.core.platform.IConfigurationProject;
 import com._1c.g5.v8.dt.core.platform.IExtensionProject;
 import com._1c.g5.v8.dt.core.platform.IExternalObjectProject;
@@ -70,6 +75,17 @@ public class SessionAnalyzer {
 
 	@Inject
 	private IV8ProjectManager projectManager;
+
+	private static final ArrayList<String> excludedStatements = new ArrayList<>(Arrays.asList("конецпроцедуры", //$NON-NLS-1$
+			"endprocedure", //$NON-NLS-1$
+			"конецфункции", //$NON-NLS-1$
+			"endfunction", //$NON-NLS-1$
+			"конецпопытки", //$NON-NLS-1$
+			"endtry", //$NON-NLS-1$
+			"конецесли", //$NON-NLS-1$
+			"endif", //$NON-NLS-1$
+			"конеццикла", //$NON-NLS-1$
+			"enddo")); //$NON-NLS-1$
 
 	public Collection<ExecutionData> getExecutionData() {
 		return executionDataStore.getContents();
@@ -124,6 +140,26 @@ public class SessionAnalyzer {
 		if (statement instanceof EmptyStatement)
 			return false;
 
+		if (statement instanceof TryExceptStatement) {
+			for (Statement tryStatement : ((TryExceptStatement) statement).getTryStatements())
+				processStatement(tryStatement, methodCoverage);
+			for (Statement exceptStatement : ((TryExceptStatement) statement).getExceptStatements())
+				processStatement(exceptStatement, methodCoverage);
+			return true;
+		}
+
+		if (statement instanceof ForStatement) {
+			for (Statement forStatement : ((ForStatement) statement).getStatements())
+				processStatement(forStatement, methodCoverage);
+			return true;
+		}
+
+		if (statement instanceof ForToStatement) {
+			for (Statement forToStatement : ((ForToStatement) statement).getStatements())
+				processStatement(forToStatement, methodCoverage);
+			return true;
+		}
+
 		ICompositeNode statementNode = NodeModelUtils.findActualNodeFor(statement);
 		int statementLineNum = statementNode.getStartLine();
 		LineImpl statementLine = methodCoverage.getLine(statementLineNum);
@@ -143,13 +179,16 @@ public class SessionAnalyzer {
 		PERFORMANCE.startTimer();
 		PERFORMANCE.startMemoryUsage();
 
+		List<IProfilingResult> profilingResults = session.getProfilingResults();
+		if (profilingResults.isEmpty())
+			return null;
+
 		Collection<URI> roots = session.getScope();
 
 		monitor.beginTask(NLS.bind(CoreMessages.AnalyzingCoverageSession_task, session.getDescription()),
 				1 + roots.size());
 
 		BslModelCoverage modelCoverage = new BslModelCoverage();
-		List<IProfilingResult> profilingResults = session.getProfilingResults();
 
 		monitor.worked(1);
 
@@ -216,6 +255,17 @@ public class SessionAnalyzer {
 
 					BslNodeImpl methodCoverage = (BslNodeImpl) modelCoverage.getCoverageFor(profilingMethod);
 					if (methodCoverage == null)
+						continue;
+
+					String line = profilingLine.getLine().toLowerCase().trim();
+					boolean excludeStatement = false;
+					for (int i = 0; i < excludedStatements.size(); i++)
+						if (line.startsWith(excludedStatements.get(i))) {
+							excludeStatement = true;
+							break;
+						}
+
+					if (excludeStatement)
 						continue;
 
 					methodCoverage
