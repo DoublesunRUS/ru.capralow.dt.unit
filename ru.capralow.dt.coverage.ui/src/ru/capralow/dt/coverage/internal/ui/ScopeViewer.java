@@ -157,7 +157,7 @@ public class ScopeViewer implements ISelectionProvider {
 		viewer.setSorter(new ModuleSorter(resourceLookup));
 		viewer.addFilter(new ViewerFilter() {
 			@Override
-			public boolean select(Viewer viewer, Object parentElement, Object element) {
+			public boolean select(Viewer viewer1, Object parentElement, Object element) {
 				return element instanceof URI;
 			}
 		});

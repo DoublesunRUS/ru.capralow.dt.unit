@@ -149,7 +149,7 @@ public class SessionAnalyzer {
 				1 + roots.size());
 
 		BslModelCoverage modelCoverage = new BslModelCoverage();
-		IProfilingResult profilingResult = session.getProfilingResult();
+		List<IProfilingResult> profilingResults = session.getProfilingResults();
 
 		monitor.worked(1);
 
@@ -178,50 +178,52 @@ public class SessionAnalyzer {
 			}
 		}
 
-		for (BslModuleReference moduleReference : profilingResult.getReferences()) {
-			if (monitor.isCanceled())
-				break;
+		for (IProfilingResult profilingResult : profilingResults)
+			for (BslModuleReference moduleReference : profilingResult.getReferences()) {
+				if (monitor.isCanceled())
+					break;
 
-			IProject project = moduleReference.getProject();
+				IProject project = moduleReference.getProject();
 
-			if (project == null)
-				continue;
-
-			Module module = bslModuleLocator.getModule(moduleReference, true);
-			if (module == null || !roots.contains(EcoreUtil.getURI(module)))
-				continue;
-
-			EList<Method> moduleMethods = module.allMethods();
-			if (moduleMethods.isEmpty())
-				continue;
-
-			for (ILineProfilingResult profilingLine : profilingResult.getResultsForModule(moduleReference)) {
-				if (profilingLine.getLine().contains(profilingLine.getMethodSignature())
-						|| profilingLine.getLine().isBlank())
+				if (project == null)
 					continue;
 
-				URI profilingMethod = null;
-				for (Method method : moduleMethods) {
-					if (method.getName().equals(profilingLine.getMethodSignature().substring(0,
-							profilingLine.getMethodSignature().indexOf('(')))) {
+				Module module = bslModuleLocator.getModule(moduleReference, true);
+				if (module == null || !roots.contains(EcoreUtil.getURI(module)))
+					continue;
 
-						profilingMethod = EcoreUtil.getURI(method);
-						break;
+				EList<Method> moduleMethods = module.allMethods();
+				if (moduleMethods.isEmpty())
+					continue;
+
+				for (ILineProfilingResult profilingLine : profilingResult.getResultsForModule(moduleReference)) {
+					if (profilingLine.getLine().contains(profilingLine.getMethodSignature())
+							|| profilingLine.getLine().isBlank())
+						continue;
+
+					URI profilingMethod = null;
+					for (Method method : moduleMethods) {
+						if (method.getName().equals(profilingLine.getMethodSignature().substring(0,
+								profilingLine.getMethodSignature().indexOf('(')))) {
+
+							profilingMethod = EcoreUtil.getURI(method);
+							break;
+						}
 					}
+
+					if (profilingMethod == null)
+						continue;
+
+					BslNodeImpl methodCoverage = (BslNodeImpl) modelCoverage.getCoverageFor(profilingMethod);
+					if (methodCoverage == null)
+						continue;
+
+					methodCoverage
+							.increment(CounterImpl.COUNTER_0_1, CounterImpl.COUNTER_0_0, profilingLine.getLineNo());
+
 				}
 
-				if (profilingMethod == null)
-					continue;
-
-				BslNodeImpl methodCoverage = (BslNodeImpl) modelCoverage.getCoverageFor(profilingMethod);
-				if (methodCoverage == null)
-					continue;
-
-				methodCoverage.increment(CounterImpl.COUNTER_0_1, CounterImpl.COUNTER_0_0, profilingLine.getLineNo());
-
 			}
-
-		}
 
 		for (URI root : roots) {
 			if (monitor.isCanceled())

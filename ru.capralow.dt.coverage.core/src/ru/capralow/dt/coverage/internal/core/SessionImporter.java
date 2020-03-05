@@ -22,6 +22,7 @@ import org.eclipse.emf.common.util.URI;
 
 import com._1c.g5.v8.dt.profiling.core.IProfilingResult;
 
+import ru.capralow.dt.coverage.core.ICoverageSession;
 import ru.capralow.dt.coverage.core.ISessionImporter;
 import ru.capralow.dt.coverage.core.ISessionManager;
 
@@ -59,8 +60,9 @@ public class SessionImporter implements ISessionImporter {
 	public void importSession(IProgressMonitor monitor) throws CoreException {
 		monitor.beginTask(CoreMessages.ImportingSession_task, 2);
 		monitor.worked(1);
-		final CoverageSession session = new CoverageSession(description, scope, profilingResult, null);
+		ICoverageSession session = new CoverageSession(description, scope, null);
 		sessionManager.addSession(session, true, null);
+		session.accept(profilingResult);
 		monitor.done();
 	}
 

@@ -38,6 +38,7 @@ Import-Package:
  com._1c.g5.v8.dt.core.platform,
  com._1c.g5.v8.dt.md.ui.editor.base,
  com._1c.g5.v8.dt.metadata.mdclass,
+ com._1c.g5.v8.dt.profiling.core,
  com._1c.g5.v8.dt.ui.editor.input,
  com._1c.g5.v8.dt.ui.util,
  com._1c.g5.wiring,

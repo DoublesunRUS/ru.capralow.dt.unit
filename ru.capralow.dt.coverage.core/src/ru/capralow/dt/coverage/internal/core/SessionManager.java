@@ -25,6 +25,8 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.debug.core.ILaunch;
 
+import com._1c.g5.v8.dt.profiling.core.IProfilingResult;
+
 import ru.capralow.dt.coverage.core.ICoverageSession;
 import ru.capralow.dt.coverage.core.ISessionListener;
 import ru.capralow.dt.coverage.core.ISessionManager;
@@ -38,14 +40,14 @@ public class SessionManager implements ISessionManager {
 	private List<ISessionListener> listeners;
 
 	private List<ICoverageSession> sessions;
-	private Map<Object, List<ICoverageSession>> launchmap;
+	private Map<Object, List<ICoverageSession>> launchMap;
 	private ICoverageSession activeSession;
 
 	public SessionManager() {
 		this.lock = new Object();
 		this.listeners = new ArrayList<>();
 		this.sessions = new ArrayList<>();
-		this.launchmap = new HashMap<>();
+		this.launchMap = new HashMap<>();
 		this.activeSession = null;
 	}
 
@@ -58,10 +60,10 @@ public class SessionManager implements ISessionManager {
 			if (!sessions.contains(session)) {
 				sessions.add(session);
 				if (launch != null) {
-					List<ICoverageSession> l = launchmap.get(launch);
+					List<ICoverageSession> l = launchMap.get(launch);
 					if (l == null) {
 						l = new ArrayList<>();
-						launchmap.put(launch, l);
+						launchMap.put(launch, l);
 					}
 					l.add(session);
 				}
@@ -84,7 +86,7 @@ public class SessionManager implements ISessionManager {
 	@Override
 	public void removeSessionsFor(ILaunch launch) {
 		synchronized (lock) {
-			List<ICoverageSession> sessionsToRemove = launchmap.get(launch);
+			List<ICoverageSession> sessionsToRemove = launchMap.get(launch);
 			if (sessionsToRemove != null) {
 				removeSessions(sessionsToRemove);
 			}
@@ -107,7 +109,7 @@ public class SessionManager implements ISessionManager {
 		for (ICoverageSession s : sessionsToRemove) {
 			if (sessions.remove(s)) {
 				removedSessions.add(s);
-				for (List<ICoverageSession> mappedSessions : launchmap.values()) {
+				for (List<ICoverageSession> mappedSessions : launchMap.values()) {
 					mappedSessions.remove(s);
 				}
 			}
@@ -163,9 +165,9 @@ public class SessionManager implements ISessionManager {
 	}
 
 	@Override
-	public ICoverageSession mergeSessions(Collection<ICoverageSession> sessions, String description,
+	public ICoverageSession mergeSessions(Collection<ICoverageSession> sessions1, String description,
 			IProgressMonitor monitor) throws CoreException {
-		monitor.beginTask(CoreMessages.MergingCoverageSessions_task, sessions.size());
+		monitor.beginTask(CoreMessages.MergingCoverageSessions_task, sessions1.size());
 
 		// // Merge all sessions
 		// final Set<URI> scope = new HashSet<>();
@@ -237,6 +239,16 @@ public class SessionManager implements ISessionManager {
 		for (ISessionListener l : new ArrayList<>(listeners)) {
 			l.sessionActivated(session);
 		}
+	}
+
+	@Override
+	public boolean profilingResultAnalyzed(IProfilingResult newProfilingResult) {
+		for (ICoverageSession session : sessions)
+			for (IProfilingResult profilingResult : session.getProfilingResults())
+				if (profilingResult.equals(newProfilingResult))
+					return true;
+
+		return false;
 	}
 
 }

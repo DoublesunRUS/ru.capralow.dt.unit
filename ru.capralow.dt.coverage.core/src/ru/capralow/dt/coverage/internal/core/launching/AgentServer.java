@@ -16,12 +16,14 @@ package ru.capralow.dt.coverage.internal.core.launching;
 
 import java.text.MessageFormat;
 import java.util.Date;
+import java.util.List;
 
 import com._1c.g5.v8.dt.profiling.core.IProfilingResult;
 import com._1c.g5.v8.dt.profiling.core.IProfilingResultListener;
 import com._1c.g5.v8.dt.profiling.core.IProfilingService;
 
 import ru.capralow.dt.coverage.core.ICorePreferences;
+import ru.capralow.dt.coverage.core.ICoverageSession;
 import ru.capralow.dt.coverage.core.ISessionManager;
 import ru.capralow.dt.coverage.core.launching.ICoverageLaunch;
 import ru.capralow.dt.coverage.internal.core.CoreMessages;
@@ -34,30 +36,27 @@ public class AgentServer implements IProfilingResultListener {
 	private ISessionManager sessionManager;
 	private ICorePreferences preferences;
 
-	private boolean dataReceived;
-
 	private IProfilingService profilingService;
 
 	public AgentServer(ICoverageLaunch launch, ISessionManager sessionManager, ICorePreferences preferences) {
 		this.preferences = preferences;
 		this.launch = launch;
 		this.sessionManager = sessionManager;
-		this.dataReceived = false;
 		this.profilingService = CoverageCorePlugin.getInstance().getInjector().getInstance(IProfilingService.class);
 	}
 
-	public boolean hasDataReceived() {
-		return dataReceived;
-	}
-
 	public void start() {
-		profilingService.addProfilingResultsListener(this);
 		profilingService.toggleTargetWaitingState(true);
 	}
 
 	public void stop() {
 		profilingService.toggleTargetWaitingState(false);
-		// profilingService.removeProfilingResultsListener(this);
+
+		ICoverageSession session = new CoverageSession(createDescription(),
+				launch.getScope(),
+				launch.getLaunchConfiguration());
+
+		sessionManager.addSession(session, preferences.getActivateNewSessions(), launch);
 	}
 
 	private String createDescription() {
@@ -77,13 +76,16 @@ public class AgentServer implements IProfilingResultListener {
 
 	@Override
 	public void resultsUpdated(IProfilingResult profilingResult) {
-		dataReceived = !profilingResult.getProfilingResults().isEmpty();
+		if (sessionManager.profilingResultAnalyzed(profilingResult))
+			return;
 
-		CoverageSession session = new CoverageSession(createDescription(),
-				launch.getScope(),
-				profilingResult,
-				launch.getLaunchConfiguration());
+		List<ICoverageSession> sessions = sessionManager.getSessions();
+		if (sessions.isEmpty())
+			return;
 
-		sessionManager.addSession(session, preferences.getActivateNewSessions(), launch);
+		ICoverageSession session = sessions.get(sessions.size() - 1);
+
+		session.accept(profilingResult);
+		sessionManager.refreshActiveSession();
 	}
 }

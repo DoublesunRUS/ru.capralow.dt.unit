@@ -14,6 +14,7 @@
  ******************************************************************************/
 package ru.capralow.dt.coverage.core;
 
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.runtime.IAdaptable;
@@ -62,6 +63,8 @@ public interface ICoverageSession extends IAdaptable, IExecutionDataSource {
 	 */
 	ILaunchConfiguration getLaunchConfiguration();
 
-	IProfilingResult getProfilingResult();
+	List<IProfilingResult> getProfilingResults();
+
+	void accept(IProfilingResult profilingResult);
 
 }

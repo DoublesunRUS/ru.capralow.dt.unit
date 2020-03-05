@@ -19,6 +19,8 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.debug.core.ILaunch;
 
+import com._1c.g5.v8.dt.profiling.core.IProfilingResult;
+
 /**
  * The session manager holds a list of currently available sessions. One of the
  * sessions in the list may be the active session, which is the one that is used
@@ -43,7 +45,7 @@ public interface ISessionManager {
 	 * @param launch
 	 *            launch this session will be assigned to or <code>null</code>
 	 */
-	public void addSession(ICoverageSession session, boolean activate, ILaunch launch);
+	void addSession(ICoverageSession session, boolean activate, ILaunch launch);
 
 	/**
 	 * Merges the given sessions into a new one with the given name, then adds and
@@ -58,8 +60,8 @@ public interface ISessionManager {
 	 *            progress monitor
 	 * @return the new session
 	 */
-	public ICoverageSession mergeSessions(Collection<ICoverageSession> sessions, String description,
-			IProgressMonitor monitor) throws CoreException;
+	ICoverageSession mergeSessions(Collection<ICoverageSession> sessions, String description, IProgressMonitor monitor)
+			throws CoreException;
 
 	/**
 	 * Removes the given session. If the session is not in included in this session
@@ -69,7 +71,7 @@ public interface ISessionManager {
 	 * @param session
 	 *            session to remove
 	 */
-	public void removeSession(ICoverageSession session);
+	void removeSession(ICoverageSession session);
 
 	/**
 	 * Removes all sessions that has been assigned to the given launch. If there is
@@ -80,12 +82,12 @@ public interface ISessionManager {
 	 * @param launch
 	 *            launch of the sessions to remove
 	 */
-	public void removeSessionsFor(ILaunch launch);
+	void removeSessionsFor(ILaunch launch);
 
 	/**
 	 * Removes all registered sessions.
 	 */
-	public void removeAllSessions();
+	void removeAllSessions();
 
 	/**
 	 * Returns all sessions that have been registered with this session manager.
@@ -93,7 +95,7 @@ public interface ISessionManager {
 	 * @see #addSession(ICoverageSession, boolean, Object)
 	 * @return list of registered session
 	 */
-	public List<ICoverageSession> getSessions();
+	List<ICoverageSession> getSessions();
 
 	/**
 	 * Activates the given session. If the session is not in included in this
@@ -102,20 +104,20 @@ public interface ISessionManager {
 	 * @param session
 	 *            session to activate
 	 */
-	public void activateSession(ICoverageSession session);
+	void activateSession(ICoverageSession session);
 
 	/**
 	 * Returns the active session or <code>null</code> if there is no session.
 	 *
 	 * @return active session or <code>null</null>
 	 */
-	public ICoverageSession getActiveSession();
+	ICoverageSession getActiveSession();
 
 	/**
 	 * Triggers a reload of the active session. If there is no active session this
 	 * method has no effect.
 	 */
-	public void refreshActiveSession();
+	void refreshActiveSession();
 
 	/**
 	 * Adds the given session listener unless it has been added before.
@@ -123,7 +125,7 @@ public interface ISessionManager {
 	 * @param listener
 	 *            session listener to add
 	 */
-	public void addSessionListener(ISessionListener listener);
+	void addSessionListener(ISessionListener listener);
 
 	/**
 	 * Removes the given session listener. If the listener has not been added before
@@ -132,6 +134,8 @@ public interface ISessionManager {
 	 * @param listener
 	 *            session listener to remove
 	 */
-	public void removeSessionListener(ISessionListener listener);
+	void removeSessionListener(ISessionListener listener);
+
+	boolean profilingResultAnalyzed(IProfilingResult newProfilingResult);
 
 }

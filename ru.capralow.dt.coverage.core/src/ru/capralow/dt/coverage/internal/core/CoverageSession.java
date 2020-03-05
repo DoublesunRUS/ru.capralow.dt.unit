@@ -14,8 +14,10 @@
  ******************************************************************************/
 package ru.capralow.dt.coverage.internal.core;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.runtime.CoreException;
@@ -36,15 +38,14 @@ public class CoverageSession extends PlatformObject implements ICoverageSession 
 
 	private String description;
 	private Set<URI> scope;
-	private IProfilingResult profilingResult;
 	private ILaunchConfiguration launchConfiguration;
+	private List<IProfilingResult> profilingResults;
 
-	public CoverageSession(String description, Set<URI> set, IProfilingResult profilingResult,
-			ILaunchConfiguration launchConfiguration) {
+	public CoverageSession(String description, Set<URI> set, ILaunchConfiguration launchConfiguration) {
 		this.description = description;
 		this.scope = Collections.unmodifiableSet(new HashSet<>(set));
-		this.profilingResult = profilingResult;
 		this.launchConfiguration = launchConfiguration;
+		this.profilingResults = new ArrayList<>();
 	}
 
 	// ICoverageSession implementation
@@ -60,19 +61,24 @@ public class CoverageSession extends PlatformObject implements ICoverageSession 
 	}
 
 	@Override
-	public IProfilingResult getProfilingResult() {
-		return profilingResult;
-	}
-
-	@Override
 	public ILaunchConfiguration getLaunchConfiguration() {
 		return launchConfiguration;
 	}
 
 	@Override
+	public void accept(IProfilingResult profilingResult) {
+		profilingResults.add(profilingResult);
+	}
+
+	@Override
 	public void accept(IExecutionDataVisitor executionDataVisitor, ISessionInfoVisitor sessionInfoVisitor)
 			throws CoreException {
-		// Нечего делать
+		// Для BSL используется IProfilingResult
+	}
+
+	@Override
+	public List<IProfilingResult> getProfilingResults() {
+		return profilingResults;
 	}
 
 }

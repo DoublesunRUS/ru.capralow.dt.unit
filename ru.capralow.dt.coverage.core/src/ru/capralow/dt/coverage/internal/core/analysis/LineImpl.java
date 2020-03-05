@@ -25,8 +25,8 @@ public abstract class LineImpl implements ILine {
 		}
 
 		@Override
-		public LineImpl increment(ICounter instructions, ICounter branches) {
-			return getInstance(this.instructions.increment(instructions), this.branches.increment(branches));
+		public LineImpl increment(ICounter instructions1, ICounter branches1) {
+			return getInstance(this.instructions.increment(instructions1), this.branches.increment(branches1));
 		}
 
 	}
@@ -38,9 +38,9 @@ public abstract class LineImpl implements ILine {
 		}
 
 		@Override
-		public LineImpl increment(ICounter instructions, ICounter branches) {
-			this.instructions = this.instructions.increment(instructions);
-			this.branches = this.branches.increment(branches);
+		public LineImpl increment(ICounter instructions1, ICounter branches1) {
+			this.instructions = this.instructions.increment(instructions1);
+			this.branches = this.branches.increment(branches1);
 			return this;
 		}
 	}
