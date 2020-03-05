@@ -66,6 +66,19 @@ public class SessionAnalyzer {
 
 	private static final ITracer PERFORMANCE = DebugOptions.PERFORMANCETRACER;
 
+	private static final ArrayList<String> excludedStatements = new ArrayList<>(Arrays.asList("конецпроцедуры", //$NON-NLS-1$
+			"endprocedure", //$NON-NLS-1$
+			"конецфункции", //$NON-NLS-1$
+			"endfunction", //$NON-NLS-1$
+			"конецпопытки", //$NON-NLS-1$
+			"endtry", //$NON-NLS-1$
+			"конецесли", //$NON-NLS-1$
+			"endif", //$NON-NLS-1$
+			"конеццикла", //$NON-NLS-1$
+			"enddo", //$NON-NLS-1$
+			"иначеесли", //$NON-NLS-1$
+			"endif")); //$NON-NLS-1$
+
 	private ExecutionDataStore executionDataStore;
 
 	private SessionInfoStore sessionInfoStore;
@@ -76,17 +89,6 @@ public class SessionAnalyzer {
 	@Inject
 	private IV8ProjectManager projectManager;
 
-	private static final ArrayList<String> excludedStatements = new ArrayList<>(Arrays.asList("конецпроцедуры", //$NON-NLS-1$
-			"endprocedure", //$NON-NLS-1$
-			"конецфункции", //$NON-NLS-1$
-			"endfunction", //$NON-NLS-1$
-			"конецпопытки", //$NON-NLS-1$
-			"endtry", //$NON-NLS-1$
-			"конецесли", //$NON-NLS-1$
-			"endif", //$NON-NLS-1$
-			"конеццикла", //$NON-NLS-1$
-			"enddo")); //$NON-NLS-1$
-
 	public Collection<ExecutionData> getExecutionData() {
 		return executionDataStore.getContents();
 	}
@@ -95,19 +97,116 @@ public class SessionAnalyzer {
 		return sessionInfoStore.getInfos();
 	}
 
+	public IBslModelCoverage processSession(ICoverageSession session, IProgressMonitor monitor) {
+		if (monitor.isCanceled())
+			return null;
+
+		List<IProfilingResult> profilingResults = session.getProfilingResults();
+		if (profilingResults.isEmpty())
+			return null;
+
+		PERFORMANCE.startTimer();
+		PERFORMANCE.startMemoryUsage();
+
+		Collection<URI> roots = session.getScope();
+
+		monitor.beginTask(NLS.bind(CoreMessages.AnalyzingCoverageSession_task, session.getDescription()),
+				1 + roots.size() * 2 + profilingResults.size());
+
+		monitor.worked(1);
+
+		BslModelCoverage modelCoverage = new BslModelCoverage();
+
+		fillCoverageMethods(roots, modelCoverage, monitor);
+
+		processProfilingResults(roots, profilingResults, modelCoverage, monitor);
+
+		fillMissedStatements(roots, modelCoverage, monitor);
+
+		monitor.done();
+
+		PERFORMANCE.stopTimer("loading " + session.getDescription()); //$NON-NLS-1$
+		PERFORMANCE.stopMemoryUsage("loading " + session.getDescription()); //$NON-NLS-1$
+
+		return modelCoverage;
+	}
+
+	private void fillCoverageMethods(Collection<URI> roots, BslModelCoverage modelCoverage, IProgressMonitor monitor) {
+		if (monitor.isCanceled())
+			return;
+
+		for (URI root : roots) {
+			if (monitor.isCanceled())
+				return;
+
+			monitor.worked(1);
+
+			IV8Project v8Project = projectManager.getProject(root);
+			Configuration configuration = null;
+			if (v8Project instanceof IConfigurationProject)
+				configuration = ((IConfigurationProject) v8Project).getConfiguration();
+			else if (v8Project instanceof IExtensionProject)
+				configuration = ((IExtensionProject) v8Project).getConfiguration();
+			else if (v8Project instanceof IExternalObjectProject)
+				configuration = ((IExternalObjectProject) v8Project).getParent().getConfiguration();
+
+			URI configurationURI = EcoreUtil.getURI(configuration);
+
+			EObject module = MdUtils.getEObjectByURI(root);
+			if (!(module instanceof Module))
+				continue;
+
+			for (Method method : ((Module) module).allMethods()) {
+				BslNodeImpl methodCoverage = new BslNodeImpl(ElementType.METHOD, method.getName());
+				modelCoverage.putMethod(EcoreUtil.getURI(method), root, configurationURI, methodCoverage);
+			}
+		}
+	}
+
+	private void fillMissedStatements(Collection<URI> roots, BslModelCoverage modelCoverage, IProgressMonitor monitor) {
+		if (monitor.isCanceled())
+			return;
+
+		for (URI root : roots) {
+			if (monitor.isCanceled())
+				return;
+
+			monitor.worked(1);
+
+			EObject module = MdUtils.getEObjectByURI(root);
+			if (!(module instanceof Module))
+				continue;
+
+			for (Method method : ((Module) module).allMethods()) {
+				if (monitor.isCanceled())
+					return;
+
+				BslNodeImpl methodCoverage = (BslNodeImpl) modelCoverage.getCoverageFor(EcoreUtil.getURI(method));
+
+				for (Statement statement : method.allStatements())
+					processStatement(statement, methodCoverage);
+			}
+
+			modelCoverage.updateModuleCoverage(root);
+		}
+
+	}
+
 	private void processElseIfParts(IfStatement ifStatement, BslNodeImpl methodCoverage) {
 		for (Conditional conditional : ifStatement.getElsIfParts()) {
 			ICompositeNode conditionalNode = NodeModelUtils.findActualNodeFor(conditional);
 			int conditionalLineNum = conditionalNode.getStartLine();
-			LineImpl conditionalLine = methodCoverage.getLine(conditionalLineNum);
 
-			if (conditionalLine == null || conditionalLine.equals(LineImpl.EMPTY))
-				methodCoverage.increment(CounterImpl.COUNTER_1_0, CounterImpl.COUNTER_1_0, conditionalLineNum);
+			boolean elseIfBranchCovered = false;
+			for (Statement subStatement : conditional.getStatements()) {
+				boolean statementCovered = processStatement(subStatement, methodCoverage);
+				elseIfBranchCovered = elseIfBranchCovered || statementCovered;
+			}
+
+			if (elseIfBranchCovered)
+				methodCoverage.increment(CounterImpl.COUNTER_0_1, CounterImpl.COUNTER_0_1, conditionalLineNum);
 			else
-				methodCoverage.increment(CounterImpl.COUNTER_0_0, CounterImpl.COUNTER_0_1, conditionalLineNum);
-
-			for (Statement subStatement : conditional.getStatements())
-				processStatement(subStatement, methodCoverage);
+				methodCoverage.increment(CounterImpl.COUNTER_1_0, CounterImpl.COUNTER_1_0, conditionalLineNum);
 		}
 	}
 
@@ -131,9 +230,84 @@ public class SessionAnalyzer {
 		}
 
 		if (ifBranchCovered && elseBranchCovered)
-			methodCoverage.increment(CounterImpl.COUNTER_0_0, CounterImpl.COUNTER_0_1, statementLineNum);
+			methodCoverage.increment(CounterImpl.COUNTER_0_1, CounterImpl.COUNTER_0_1, statementLineNum);
 		else
-			methodCoverage.increment(CounterImpl.COUNTER_0_0, CounterImpl.COUNTER_1_0, statementLineNum);
+			methodCoverage.increment(CounterImpl.COUNTER_1_0, CounterImpl.COUNTER_1_0, statementLineNum);
+	}
+
+	private void processModuleReference(BslModuleReference moduleReference, IProfilingResult profilingResult,
+			Collection<URI> roots, BslModelCoverage modelCoverage, IProgressMonitor monitor) {
+		if (monitor.isCanceled())
+			return;
+
+		IProject project = moduleReference.getProject();
+
+		if (project == null)
+			return;
+
+		Module module = bslModuleLocator.getModule(moduleReference, true);
+		if (module == null || !roots.contains(EcoreUtil.getURI(module)))
+			return;
+
+		EList<Method> moduleMethods = module.allMethods();
+		if (moduleMethods.isEmpty())
+			return;
+
+		for (ILineProfilingResult profilingLine : profilingResult.getResultsForModule(moduleReference))
+			processProfilingLine(profilingLine, moduleMethods, modelCoverage);
+
+	}
+
+	private void processProfilingLine(ILineProfilingResult profilingLine, EList<Method> moduleMethods,
+			BslModelCoverage modelCoverage) {
+		if (profilingLine.getLine().contains(profilingLine.getMethodSignature()) || profilingLine.getLine().isBlank())
+			return;
+
+		URI profilingMethod = null;
+		for (Method method : moduleMethods) {
+			if (method.getName().equals(
+					profilingLine.getMethodSignature().substring(0, profilingLine.getMethodSignature().indexOf('(')))) {
+
+				profilingMethod = EcoreUtil.getURI(method);
+				break;
+			}
+		}
+
+		if (profilingMethod == null)
+			return;
+
+		BslNodeImpl methodCoverage = (BslNodeImpl) modelCoverage.getCoverageFor(profilingMethod);
+		if (methodCoverage == null)
+			return;
+
+		String line = profilingLine.getLine().toLowerCase().trim();
+		boolean excludeStatement = false;
+		for (int i = 0; i < excludedStatements.size(); i++)
+			if (line.startsWith(excludedStatements.get(i))) {
+				excludeStatement = true;
+				break;
+			}
+
+		if (excludeStatement)
+			return;
+
+		methodCoverage.increment(CounterImpl.COUNTER_0_1, CounterImpl.COUNTER_0_0, profilingLine.getLineNo());
+	}
+
+	private void processProfilingResults(Collection<URI> roots, List<IProfilingResult> profilingResults,
+			BslModelCoverage modelCoverage, IProgressMonitor monitor) {
+		if (monitor.isCanceled())
+			return;
+
+		for (IProfilingResult profilingResult : profilingResults) {
+			if (monitor.isCanceled())
+				return;
+
+			monitor.worked(1);
+
+			for (BslModuleReference moduleReference : profilingResult.getReferences())
+				processModuleReference(moduleReference, profilingResult, roots, modelCoverage, monitor);
+		}
 	}
 
 	private boolean processStatement(Statement statement, BslNodeImpl methodCoverage) {
@@ -173,130 +347,6 @@ public class SessionAnalyzer {
 			processIfStatement((IfStatement) statement, methodCoverage);
 
 		return !branchNotCovered;
-	}
-
-	public IBslModelCoverage processSession(ICoverageSession session, IProgressMonitor monitor) {
-		PERFORMANCE.startTimer();
-		PERFORMANCE.startMemoryUsage();
-
-		List<IProfilingResult> profilingResults = session.getProfilingResults();
-		if (profilingResults.isEmpty())
-			return null;
-
-		Collection<URI> roots = session.getScope();
-
-		monitor.beginTask(NLS.bind(CoreMessages.AnalyzingCoverageSession_task, session.getDescription()),
-				1 + roots.size());
-
-		BslModelCoverage modelCoverage = new BslModelCoverage();
-
-		monitor.worked(1);
-
-		for (URI root : roots) {
-			if (monitor.isCanceled())
-				break;
-
-			IV8Project v8Project = projectManager.getProject(root);
-			Configuration configuration = null;
-			if (v8Project instanceof IConfigurationProject)
-				configuration = ((IConfigurationProject) v8Project).getConfiguration();
-			else if (v8Project instanceof IExtensionProject)
-				configuration = ((IExtensionProject) v8Project).getConfiguration();
-			else if (v8Project instanceof IExternalObjectProject)
-				configuration = ((IExternalObjectProject) v8Project).getParent().getConfiguration();
-
-			URI configurationURI = EcoreUtil.getURI(configuration);
-
-			EObject module = MdUtils.getEObjectByURI(root);
-			if (!(module instanceof Module))
-				continue;
-
-			for (Method method : ((Module) module).allMethods()) {
-				BslNodeImpl methodCoverage = new BslNodeImpl(ElementType.METHOD, method.getName());
-				modelCoverage.putMethod(EcoreUtil.getURI(method), root, configurationURI, methodCoverage);
-			}
-		}
-
-		for (IProfilingResult profilingResult : profilingResults)
-			for (BslModuleReference moduleReference : profilingResult.getReferences()) {
-				if (monitor.isCanceled())
-					break;
-
-				IProject project = moduleReference.getProject();
-
-				if (project == null)
-					continue;
-
-				Module module = bslModuleLocator.getModule(moduleReference, true);
-				if (module == null || !roots.contains(EcoreUtil.getURI(module)))
-					continue;
-
-				EList<Method> moduleMethods = module.allMethods();
-				if (moduleMethods.isEmpty())
-					continue;
-
-				for (ILineProfilingResult profilingLine : profilingResult.getResultsForModule(moduleReference)) {
-					if (profilingLine.getLine().contains(profilingLine.getMethodSignature())
-							|| profilingLine.getLine().isBlank())
-						continue;
-
-					URI profilingMethod = null;
-					for (Method method : moduleMethods) {
-						if (method.getName().equals(profilingLine.getMethodSignature().substring(0,
-								profilingLine.getMethodSignature().indexOf('(')))) {
-
-							profilingMethod = EcoreUtil.getURI(method);
-							break;
-						}
-					}
-
-					if (profilingMethod == null)
-						continue;
-
-					BslNodeImpl methodCoverage = (BslNodeImpl) modelCoverage.getCoverageFor(profilingMethod);
-					if (methodCoverage == null)
-						continue;
-
-					String line = profilingLine.getLine().toLowerCase().trim();
-					boolean excludeStatement = false;
-					for (int i = 0; i < excludedStatements.size(); i++)
-						if (line.startsWith(excludedStatements.get(i))) {
-							excludeStatement = true;
-							break;
-						}
-
-					if (excludeStatement)
-						continue;
-
-					methodCoverage
-							.increment(CounterImpl.COUNTER_0_1, CounterImpl.COUNTER_0_0, profilingLine.getLineNo());
-
-				}
-
-			}
-
-		for (URI root : roots) {
-			if (monitor.isCanceled())
-				break;
-
-			EObject module = MdUtils.getEObjectByURI(root);
-			if (!(module instanceof Module))
-				continue;
-
-			for (Method method : ((Module) module).allMethods()) {
-				BslNodeImpl methodCoverage = (BslNodeImpl) modelCoverage.getCoverageFor(EcoreUtil.getURI(method));
-
-				for (Statement statement : method.allStatements())
-					processStatement(statement, methodCoverage);
-			}
-
-			modelCoverage.updateModuleCoverage(root);
-		}
-
-		monitor.done();
-		PERFORMANCE.stopTimer("loading " + session.getDescription()); //$NON-NLS-1$
-		PERFORMANCE.stopMemoryUsage("loading " + session.getDescription()); //$NON-NLS-1$
-		return modelCoverage;
 	}
 
 }

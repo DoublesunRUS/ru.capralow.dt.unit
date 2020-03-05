@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ff28dc82-988b-4e4f-9f46-0c2d04e5ee71">
+  <name>Тест_Покрытие</name>
+  <synonym>
+    <key>ru</key>
+    <value>Покрытие</value>
+  </synonym>
+  <server>true</server>
+</mdclass:CommonModule>

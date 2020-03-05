@@ -43,24 +43,25 @@
     </extension>
     <languageCode>ru</languageCode>
   </languages>
-  <commonModules>CommonModule.Тест_ВызватьИсключение</commonModules>
+  <commonModules>CommonModule.Тест_АсинхронныеВызовыВызовСервера</commonModules>
   <commonModules>CommonModule.Тест_АсинхронныеВызовыКлиент</commonModules>
   <commonModules>CommonModule.Тест_АсинхронныеВызовыСервер</commonModules>
-  <commonModules>CommonModule.Тест_АсинхронныеВызовыВызовСервера</commonModules>
-  <commonModules>CommonModule.Тест_БулевоУспех</commonModules>
-  <commonModules>CommonModule.Тест_ДатаУспех</commonModules>
-  <commonModules>CommonModule.Тест_СтрокаУспех</commonModules>
-  <commonModules>CommonModule.Тест_ЧислоУспех</commonModules>
-  <commonModules>CommonModule.Тест_ВыполнитьУспех</commonModules>
-  <commonModules>CommonModule.Тест_ЗначениеЗаполненоУспех</commonModules>
-  <commonModules>CommonModule.Тест_ТипУспех</commonModules>
-  <commonModules>CommonModule.Тест_КоллекцииУспех</commonModules>
   <commonModules>CommonModule.Тест_БулевоОшибка</commonModules>
-  <commonModules>CommonModule.Тест_ДатаОшибка</commonModules>
-  <commonModules>CommonModule.Тест_СтрокаОшибка</commonModules>
-  <commonModules>CommonModule.Тест_ЧислоОшибка</commonModules>
+  <commonModules>CommonModule.Тест_БулевоУспех</commonModules>
+  <commonModules>CommonModule.Тест_ВызватьИсключение</commonModules>
   <commonModules>CommonModule.Тест_ВыполнитьОшибка</commonModules>
+  <commonModules>CommonModule.Тест_ВыполнитьУспех</commonModules>
+  <commonModules>CommonModule.Тест_ДатаОшибка</commonModules>
+  <commonModules>CommonModule.Тест_ДатаУспех</commonModules>
   <commonModules>CommonModule.Тест_ЗначениеЗаполненоОшибка</commonModules>
-  <commonModules>CommonModule.Тест_ТипУспехОшибка</commonModules>
+  <commonModules>CommonModule.Тест_ЗначениеЗаполненоУспех</commonModules>
   <commonModules>CommonModule.Тест_КоллекцииОшибка</commonModules>
+  <commonModules>CommonModule.Тест_КоллекцииУспех</commonModules>
+  <commonModules>CommonModule.Тест_Покрытие</commonModules>
+  <commonModules>CommonModule.Тест_СтрокаОшибка</commonModules>
+  <commonModules>CommonModule.Тест_СтрокаУспех</commonModules>
+  <commonModules>CommonModule.Тест_ТипУспех</commonModules>
+  <commonModules>CommonModule.Тест_ТипУспехОшибка</commonModules>
+  <commonModules>CommonModule.Тест_ЧислоОшибка</commonModules>
+  <commonModules>CommonModule.Тест_ЧислоУспех</commonModules>
 </mdclass:Configuration>
