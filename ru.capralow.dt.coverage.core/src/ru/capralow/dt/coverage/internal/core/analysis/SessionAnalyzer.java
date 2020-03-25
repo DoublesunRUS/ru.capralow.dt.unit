@@ -275,17 +275,20 @@ public class SessionAnalyzer {
 		if (monitor.isCanceled())
 			return;
 
-		Iterator<IProfilingResult> itr = profilingResults.iterator();
-		while (itr.hasNext()) {
+		Iterator<IProfilingResult> resultItr = profilingResults.iterator();
+		while (resultItr.hasNext()) {
 			if (monitor.isCanceled())
 				return;
 
 			monitor.worked(1);
 
-			IProfilingResult profilingResult = itr.next();
+			IProfilingResult profilingResult = resultItr.next();
 
-			for (BslModuleReference moduleReference : profilingResult.getReferences())
+			Iterator<BslModuleReference> moduleItr = profilingResult.getReferences().iterator();
+			while (moduleItr.hasNext()) {
+				BslModuleReference moduleReference = moduleItr.next();
 				processModuleReference(moduleReference, profilingResult, roots, modelCoverage, monitor);
+			}
 		}
 	}
 
