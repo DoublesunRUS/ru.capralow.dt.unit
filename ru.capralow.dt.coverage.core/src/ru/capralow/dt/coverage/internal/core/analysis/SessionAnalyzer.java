@@ -101,7 +101,7 @@ public class SessionAnalyzer {
 		if (monitor.isCanceled())
 			return null;
 
-		List<IProfilingResult> profilingResults = session.getProfilingResults();
+		final List<IProfilingResult> profilingResults = session.getProfilingResults();
 		if (profilingResults.isEmpty())
 			return null;
 
@@ -117,8 +117,6 @@ public class SessionAnalyzer {
 
 		BslModelCoverage modelCoverage = new BslModelCoverage();
 
-		fillCoverageMethods(roots, modelCoverage, monitor);
-
 		processProfilingResults(roots, profilingResults, modelCoverage, monitor);
 
 		fillMissedStatements(roots, modelCoverage, monitor);
@@ -131,47 +129,17 @@ public class SessionAnalyzer {
 		return modelCoverage;
 	}
 
-	private void fillCoverageMethods(Collection<URI> roots, BslModelCoverage modelCoverage, IProgressMonitor monitor) {
-		if (monitor.isCanceled())
-			return;
-
-		for (URI root : roots) {
-			if (monitor.isCanceled())
-				return;
-
-			monitor.worked(1);
-
-			IV8Project v8Project = projectManager.getProject(root);
-			Configuration configuration = null;
-			if (v8Project instanceof IConfigurationProject)
-				configuration = ((IConfigurationProject) v8Project).getConfiguration();
-			else if (v8Project instanceof IExtensionProject)
-				configuration = ((IExtensionProject) v8Project).getConfiguration();
-			else if (v8Project instanceof IExternalObjectProject)
-				configuration = ((IExternalObjectProject) v8Project).getParent().getConfiguration();
-
-			URI configurationURI = EcoreUtil.getURI(configuration);
-
-			EObject module = MdUtils.getEObjectByURI(root);
-			if (!(module instanceof Module))
-				continue;
-
-			for (Method method : ((Module) module).allMethods()) {
-				BslNodeImpl methodCoverage = new BslNodeImpl(ElementType.METHOD, method.getName());
-				modelCoverage.putMethod(EcoreUtil.getURI(method), root, configurationURI, methodCoverage);
-			}
-		}
-	}
-
 	private void fillMissedStatements(Collection<URI> roots, BslModelCoverage modelCoverage, IProgressMonitor monitor) {
 		if (monitor.isCanceled())
 			return;
 
 		for (URI root : roots) {
-			if (monitor.isCanceled())
-				return;
-
 			monitor.worked(1);
+
+			if (Boolean.FALSE.equals(modelCoverage.isModuleCovered(root))) {
+				modelCoverage.putEmptyModule(root);
+				continue;
+			}
 
 			EObject module = MdUtils.getEObjectByURI(root);
 			if (!(module instanceof Module))
@@ -253,30 +221,37 @@ public class SessionAnalyzer {
 		if (moduleMethods.isEmpty())
 			return;
 
+		IV8Project v8Project = projectManager.getProject(project);
+		Configuration configuration = null;
+		if (v8Project instanceof IConfigurationProject)
+			configuration = ((IConfigurationProject) v8Project).getConfiguration();
+		else if (v8Project instanceof IExtensionProject)
+			configuration = ((IExtensionProject) v8Project).getConfiguration();
+		else if (v8Project instanceof IExternalObjectProject)
+			configuration = ((IExternalObjectProject) v8Project).getParent().getConfiguration();
+		URI configurationURI = EcoreUtil.getURI(configuration);
+
+		URI moduleURI = EcoreUtil.getURI(module);
+
+		for (Method method : module.allMethods()) {
+			BslNodeImpl methodCoverage = new BslNodeImpl(ElementType.METHOD, method.getName());
+			modelCoverage.putMethod(EcoreUtil.getURI(method), moduleURI, configurationURI, methodCoverage);
+		}
+
 		for (ILineProfilingResult profilingLine : profilingResult.getResultsForModule(moduleReference))
-			processProfilingLine(profilingLine, moduleMethods, modelCoverage);
+			processProfilingLine(profilingLine, moduleURI, modelCoverage);
 
 	}
 
-	private void processProfilingLine(ILineProfilingResult profilingLine, EList<Method> moduleMethods,
+	private void processProfilingLine(ILineProfilingResult profilingLine, URI moduleURI,
 			BslModelCoverage modelCoverage) {
 		if (profilingLine.getLine().contains(profilingLine.getMethodSignature()) || profilingLine.getLine().isBlank())
 			return;
 
-		URI profilingMethod = null;
-		for (Method method : moduleMethods) {
-			if (method.getName().equals(
-					profilingLine.getMethodSignature().substring(0, profilingLine.getMethodSignature().indexOf('(')))) {
+		String methodName = profilingLine.getMethodSignature().substring(0,
+				profilingLine.getMethodSignature().indexOf('('));
 
-				profilingMethod = EcoreUtil.getURI(method);
-				break;
-			}
-		}
-
-		if (profilingMethod == null)
-			return;
-
-		BslNodeImpl methodCoverage = (BslNodeImpl) modelCoverage.getCoverageFor(profilingMethod);
+		BslNodeImpl methodCoverage = (BslNodeImpl) modelCoverage.getCoverageFor(methodName, moduleURI);
 		if (methodCoverage == null)
 			return;
 

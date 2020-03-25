@@ -31,9 +31,9 @@ class CoveredElementsContentProvider extends WorkbenchContentProvider {
 	@Override
 	public Object[] getElements(Object element) {
 		IBslModelCoverage coverage = (IBslModelCoverage) element;
-		if (coverage == IBslModelCoverage.LOADING) {
+		if (coverage == IBslModelCoverage.LOADING)
 			return new Object[] { CoverageView.LOADING_ELEMENT };
-		}
+
 		if (coverage != null) {
 			switch (settings.getRootType()) {
 			case GROUP:
@@ -41,7 +41,7 @@ class CoveredElementsContentProvider extends WorkbenchContentProvider {
 			case BUNDLE:
 				return coverage.getSubsystems();
 			case CLASS:
-				return coverage.getMdObjects();
+				return coverage.getModules();
 			case METHOD:
 				break;
 			case PACKAGE:

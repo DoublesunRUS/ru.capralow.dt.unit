@@ -206,17 +206,14 @@ public class CoverageView extends ViewPart implements IShowInTarget {
 				return true;
 
 			final ICoverageNode c = CoverageTools.getCoverageInfo(element);
-			if (c == null) {
-				return false;
-			}
-			final ICounter instructions = c.getInstructionCounter();
-			if (instructions.getTotalCount() == 0) {
-				return false;
-			}
-			if (settings.getHideUnusedElements() && instructions.getCoveredCount() == 0)
+			if (c == null)
 				return false;
 
-			return true;
+			final ICounter methods = c.getMethodCounter();
+			if (methods.getTotalCount() == 0)
+				return false;
+
+			return !(settings.getHideUnusedElements() && methods.getCoveredCount() == 0);
 		}
 	};
 

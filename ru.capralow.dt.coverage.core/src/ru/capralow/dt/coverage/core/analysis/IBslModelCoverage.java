@@ -60,6 +60,11 @@ public interface IBslModelCoverage extends ICoverageNode {
 		}
 
 		@Override
+		public ISourceNode getCoverageFor(String methodName, URI module) {
+			return null;
+		}
+
+		@Override
 		public ISourceNode getCoverageFor(URI element) {
 			return null;
 		}
@@ -80,7 +85,7 @@ public interface IBslModelCoverage extends ICoverageNode {
 		}
 
 		@Override
-		public URI[] getMdObjects() {
+		public URI[] getModules() {
 			return new URI[0];
 		}
 
@@ -110,9 +115,11 @@ public interface IBslModelCoverage extends ICoverageNode {
 		}
 	};
 
+	ISourceNode getCoverageFor(String methodName, URI module);
+
 	ISourceNode getCoverageFor(URI element);
 
-	URI[] getMdObjects();
+	URI[] getModules();
 
 	URI[] getProjects();
 

@@ -81,19 +81,45 @@ public class CoverageUIPlugin extends AbstractUIPlugin {
 
 	private static CoverageUIPlugin instance;
 
-	private Injector injector;
-
-	private EditorTracker editorTracker;
-
-	public synchronized Injector getInjector() {
-		if (injector == null)
-			injector = createInjector();
-
-		return injector;
-	}
-
 	public static IStatus createErrorStatus(String message, Throwable throwable) {
 		return new Status(IStatus.ERROR, ID, 0, message, throwable);
+	}
+
+	public static IStatus errorStatus(String message, Throwable t) {
+		return new Status(IStatus.ERROR, ID, IStatus.ERROR, message, t);
+	}
+
+	public static ImageDescriptor getCoverageOverlay(double ratio) {
+		int idx = (int) Math.round(ratio * OBJ_COVERAGE_OVERLAY.length);
+		if (idx < 0)
+			idx = 0;
+		if (idx >= OBJ_COVERAGE_OVERLAY.length)
+			idx = OBJ_COVERAGE_OVERLAY.length - 1;
+		return getImageDescriptor(OBJ_COVERAGE_OVERLAY[idx]);
+	}
+
+	public static Image getImage(String key) {
+		return loadImage(key).get(key);
+	}
+
+	public static ImageDescriptor getImageDescriptor(String key) {
+		return loadImage(key).getDescriptor(key);
+	}
+
+	public static CoverageUIPlugin getInstance() {
+		return instance;
+	}
+
+	public static void log(IStatus status) {
+		getInstance().getLog().log(status);
+	}
+
+	public static void log(Throwable t) {
+		String message = t.getMessage();
+		if (message == null)
+			message = "Internal Error";
+
+		instance.getLog().log(errorStatus(message, t));
 	}
 
 	private static Injector createInjector() {
@@ -109,11 +135,25 @@ public class CoverageUIPlugin extends AbstractUIPlugin {
 		}
 	}
 
-	public static void log(IStatus status) {
-		getInstance().getLog().log(status);
+	private static ImageRegistry loadImage(String path) {
+		ImageRegistry reg = getInstance().getImageRegistry();
+		if (reg.getDescriptor(path) == null) {
+			URL url = instance.getBundle().getEntry(path);
+			reg.put(path, ImageDescriptor.createFromURL(url));
+		}
+		return reg;
 	}
 
+	private Injector injector;
+
+	private EditorTracker editorTracker;
+
 	private ISessionListener sessionListener = new ISessionListener() {
+		@Override
+		public void sessionActivated(ICoverageSession session) {
+			// Нечего делать
+		}
+
 		@Override
 		public void sessionAdded(ICoverageSession addedSession) {
 			if (getPreferenceStore().getBoolean(UIPreferences.PREF_SHOW_COVERAGE_VIEW)) {
@@ -123,11 +163,6 @@ public class CoverageUIPlugin extends AbstractUIPlugin {
 
 		@Override
 		public void sessionRemoved(ICoverageSession removedSession) {
-			// Нечего делать
-		}
-
-		@Override
-		public void sessionActivated(ICoverageSession session) {
 			// Нечего делать
 		}
 
@@ -147,6 +182,17 @@ public class CoverageUIPlugin extends AbstractUIPlugin {
 		}
 
 	};
+
+	public synchronized Injector getInjector() {
+		if (injector == null)
+			injector = createInjector();
+
+		return injector;
+	}
+
+	public Shell getShell() {
+		return getWorkbench().getActiveWorkbenchWindow().getShell();
+	}
 
 	@Override
 	public void start(BundleContext context) throws Exception {
@@ -170,52 +216,6 @@ public class CoverageUIPlugin extends AbstractUIPlugin {
 		CoverageTools.getSessionManager().removeSessionListener(sessionListener);
 
 		super.stop(context);
-	}
-
-	public static CoverageUIPlugin getInstance() {
-		return instance;
-	}
-
-	public Shell getShell() {
-		return getWorkbench().getActiveWorkbenchWindow().getShell();
-	}
-
-	public static IStatus errorStatus(String message, Throwable t) {
-		return new Status(IStatus.ERROR, ID, IStatus.ERROR, message, t);
-	}
-
-	public static void log(Throwable t) {
-		String message = t.getMessage();
-		if (message == null)
-			message = "Internal Error";
-
-		instance.getLog().log(errorStatus(message, t));
-	}
-
-	public static ImageDescriptor getImageDescriptor(String key) {
-		return loadImage(key).getDescriptor(key);
-	}
-
-	public static Image getImage(String key) {
-		return loadImage(key).get(key);
-	}
-
-	public static ImageDescriptor getCoverageOverlay(double ratio) {
-		int idx = (int) Math.round(ratio * OBJ_COVERAGE_OVERLAY.length);
-		if (idx < 0)
-			idx = 0;
-		if (idx >= OBJ_COVERAGE_OVERLAY.length)
-			idx = OBJ_COVERAGE_OVERLAY.length - 1;
-		return getImageDescriptor(OBJ_COVERAGE_OVERLAY[idx]);
-	}
-
-	private static ImageRegistry loadImage(String path) {
-		ImageRegistry reg = getInstance().getImageRegistry();
-		if (reg.getDescriptor(path) == null) {
-			URL url = instance.getBundle().getEntry(path);
-			reg.put(path, ImageDescriptor.createFromURL(url));
-		}
-		return reg;
 	}
 
 }

@@ -184,6 +184,10 @@ public class BslNodeImpl implements ISourceNode {
 		}
 	}
 
+	public void setTotalMethods(int amount) {
+		methodCounter = CounterImpl.getInstance(amount, 0);
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();

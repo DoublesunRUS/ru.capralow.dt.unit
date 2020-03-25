@@ -254,11 +254,6 @@
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="M3+M2+E T"/>
       <key
-            commandId="ru.capralow.dt.coverage.ui.workbenchShortcut.coverage"
-            contextId="org.eclipse.ui.globalScope"
-            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
-            sequence="M3+M2+E E"/>
-      <key
             commandId="ru.capralow.dt.coverage.ui.commands.CoverageLast"
             contextId="org.eclipse.ui.contexts.window"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"

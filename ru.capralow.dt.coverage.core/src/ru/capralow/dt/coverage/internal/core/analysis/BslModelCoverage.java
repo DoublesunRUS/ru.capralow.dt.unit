@@ -47,7 +47,8 @@ public class BslModelCoverage extends CoverageNodeImpl implements IBslModelCover
 	private Map<URI, URI> subsystemsMap = new HashMap<>();
 
 	/** Maps methods to modules objects */
-	private Map<URI, List<URI>> modulesMap = new HashMap<>();
+	private Map<URI, List<URI>> methodsURIMap = new HashMap<>();
+	private Map<URI, Map<String, URI>> methodsStringMap = new HashMap<>();
 
 	/** List of all IV8Project objects with coverage information attached */
 	private List<URI> projects = new ArrayList<>();
@@ -70,6 +71,19 @@ public class BslModelCoverage extends CoverageNodeImpl implements IBslModelCover
 	}
 
 	@Override
+	public ISourceNode getCoverageFor(String methodName, URI module) {
+		Map<String, URI> moduleMethods = methodsStringMap.get(module);
+		if (moduleMethods == null)
+			return null;
+
+		URI element = moduleMethods.get(methodName);
+		if (element == null)
+			return null;
+
+		return getCoverageFor(element);
+	}
+
+	@Override
 	public ISourceNode getCoverageFor(URI element) {
 		ISourceNode coverage = coverageMap.get(element);
 		if (coverage != null) {
@@ -80,7 +94,7 @@ public class BslModelCoverage extends CoverageNodeImpl implements IBslModelCover
 	}
 
 	@Override
-	public URI[] getMdObjects() {
+	public URI[] getModules() {
 		URI[] arr = new URI[modules.size()];
 		return modules.toArray(arr);
 	}
@@ -97,7 +111,29 @@ public class BslModelCoverage extends CoverageNodeImpl implements IBslModelCover
 		return subsystems.toArray(arr);
 	}
 
-	public void putMethod(URI methodURI, URI moduleURI, URI configurationURI, ISourceNode methodCoverage) {
+	public Boolean isModuleCovered(URI moduleURI) {
+		return modules.contains(moduleURI);
+	}
+
+	public BslNodeImpl putEmptyModule(URI moduleURI) {
+		BslNodeImpl moduleCoverage = (BslNodeImpl) coverageMap.get(moduleURI);
+		if (moduleCoverage != null)
+			return moduleCoverage;
+
+		modules.add(moduleURI);
+
+		methodsURIMap.put(moduleURI, new ArrayList<>());
+
+		Module module = (Module) MdUtils.getEObjectByURI(moduleURI);
+		moduleCoverage = new BslNodeImpl(ElementType.CLASS, module.getUniqueName());
+		coverageMap.put(moduleURI, moduleCoverage);
+
+		moduleCoverage.setTotalMethods(module.allMethods().size());
+
+		return moduleCoverage;
+	}
+
+	public void putMethod(URI methodURI, URI moduleURI, URI configurationURI, BslNodeImpl methodCoverage) {
 		Module module = (Module) MdUtils.getEObjectByURI(moduleURI);
 		IV8Project project = projectManager.getProject(module);
 
@@ -105,15 +141,17 @@ public class BslModelCoverage extends CoverageNodeImpl implements IBslModelCover
 
 		BslNodeImpl moduleCoverage = (BslNodeImpl) getCoverageFor(moduleURI);
 		if (moduleCoverage == null) {
-			modules.add(moduleURI);
-
-			modulesMap.put(moduleURI, new ArrayList<>());
-
-			moduleCoverage = new BslNodeImpl(ElementType.CLASS, module.getUniqueName());
-			coverageMap.put(moduleURI, moduleCoverage);
+			moduleCoverage = putEmptyModule(moduleURI);
+			moduleCoverage.setTotalMethods(0);
 		}
+
+		methodCoverage.methodCounter = CounterImpl.COUNTER_0_1;
+
+		Map<String, URI> moduleMethods = methodsStringMap.computeIfAbsent(moduleURI, k -> new HashMap<>());
+		moduleMethods.put(methodCoverage.getName(), methodURI);
+
 		moduleCoverage.increment(methodCoverage);
-		List<URI> methodsList = modulesMap.get(moduleURI);
+		List<URI> methodsList = methodsURIMap.get(moduleURI);
 		methodsList.add(methodURI);
 
 		BslNodeImpl projectCoverage = (BslNodeImpl) getCoverageFor(configurationURI);
@@ -126,9 +164,9 @@ public class BslModelCoverage extends CoverageNodeImpl implements IBslModelCover
 		projectCoverage.increment(moduleCoverage);
 	}
 
-	public void updateModuleCoverage(URI moduleUri) {
-		BslNodeImpl moduleCoverage = (BslNodeImpl) coverageMap.get(moduleUri);
-		List<URI> moduleMethods = modulesMap.get(moduleUri);
+	public void updateModuleCoverage(URI moduleURI) {
+		BslNodeImpl moduleCoverage = (BslNodeImpl) coverageMap.get(moduleURI);
+		List<URI> moduleMethods = methodsURIMap.get(moduleURI);
 		if (moduleCoverage == null || moduleMethods == null)
 			return;
 		for (URI methodURI : moduleMethods) {
