@@ -17,6 +17,7 @@ package ru.capralow.dt.coverage.internal.core.analysis;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.resources.IProject;
@@ -101,7 +102,7 @@ public class SessionAnalyzer {
 		if (monitor.isCanceled())
 			return null;
 
-		final List<IProfilingResult> profilingResults = session.getProfilingResults();
+		List<IProfilingResult> profilingResults = session.getProfilingResults();
 		if (profilingResults.isEmpty())
 			return null;
 
@@ -274,11 +275,14 @@ public class SessionAnalyzer {
 		if (monitor.isCanceled())
 			return;
 
-		for (IProfilingResult profilingResult : profilingResults) {
+		Iterator<IProfilingResult> itr = profilingResults.iterator();
+		while (itr.hasNext()) {
 			if (monitor.isCanceled())
 				return;
 
 			monitor.worked(1);
+
+			IProfilingResult profilingResult = itr.next();
 
 			for (BslModuleReference moduleReference : profilingResult.getReferences())
 				processModuleReference(moduleReference, profilingResult, roots, modelCoverage, monitor);

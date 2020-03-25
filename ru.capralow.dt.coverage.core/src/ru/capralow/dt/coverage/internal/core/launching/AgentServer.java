@@ -45,25 +45,6 @@ public class AgentServer implements IProfilingResultListener {
 		this.profilingService = CoverageCorePlugin.getInstance().getInjector().getInstance(IProfilingService.class);
 	}
 
-	public void start() {
-		profilingService.toggleTargetWaitingState(true);
-	}
-
-	public void stop() {
-		profilingService.toggleTargetWaitingState(false);
-
-		ICoverageSession session = new CoverageSession(createDescription(),
-				launch.getScope(),
-				launch.getLaunchConfiguration());
-
-		sessionManager.addSession(session, preferences.getActivateNewSessions(), launch);
-	}
-
-	private String createDescription() {
-		Object[] args = new Object[] { launch.getLaunchConfiguration().getName(), new Date() };
-		return MessageFormat.format(CoreMessages.LaunchSessionDescription_value, args);
-	}
-
 	@Override
 	public void resultRenamed(IProfilingResult profilingResult, String newName) {
 		// Нечего делать
@@ -87,5 +68,24 @@ public class AgentServer implements IProfilingResultListener {
 
 		session.accept(profilingResult);
 		sessionManager.refreshActiveSession();
+	}
+
+	public void start() {
+		profilingService.toggleTargetWaitingState(true);
+
+		ICoverageSession session = new CoverageSession(createDescription(),
+				launch.getScope(),
+				launch.getLaunchConfiguration());
+
+		sessionManager.addSession(session, preferences.getActivateNewSessions(), launch);
+	}
+
+	public void stop() {
+		profilingService.toggleTargetWaitingState(false);
+	}
+
+	private String createDescription() {
+		Object[] args = new Object[] { launch.getLaunchConfiguration().getName(), new Date() };
+		return MessageFormat.format(CoreMessages.LaunchSessionDescription_value, args);
 	}
 }
