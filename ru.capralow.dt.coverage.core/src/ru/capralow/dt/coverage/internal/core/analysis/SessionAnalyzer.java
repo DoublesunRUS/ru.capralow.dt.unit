@@ -17,6 +17,7 @@ package ru.capralow.dt.coverage.internal.core.analysis;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.List;
 
@@ -127,27 +128,31 @@ public class SessionAnalyzer {
 		Collection<URI> roots = session.getScope();
 
 		monitor.beginTask(NLS.bind(CoreMessages.AnalyzingCoverageSession_task, session.getDescription()),
-				1 + roots.size() * 2);
+				1 + profilingResult.getReferences().size() + roots.size());
 
 		monitor.worked(1);
 
 		BslModelCoverage modelCoverage = new BslModelCoverage();
 
-		processProfilingResult(roots, profilingResult, modelCoverage, monitor);
-
-		fillMissedStatements(roots, modelCoverage, monitor);
+		boolean success = processProfilingResult(roots, profilingResult, modelCoverage, monitor);
+		if (Boolean.TRUE.equals(success))
+			success = fillMissedStatements(roots, modelCoverage, monitor);
 
 		monitor.done();
 
 		PERFORMANCE.stopTimer("loading " + session.getDescription()); //$NON-NLS-1$
 		PERFORMANCE.stopMemoryUsage("loading " + session.getDescription()); //$NON-NLS-1$
 
+		if (Boolean.FALSE.equals(success))
+			return null;
+
 		return modelCoverage;
 	}
 
-	private void fillMissedStatements(Collection<URI> roots, BslModelCoverage modelCoverage, IProgressMonitor monitor) {
+	private boolean fillMissedStatements(Collection<URI> roots, BslModelCoverage modelCoverage,
+			IProgressMonitor monitor) {
 		if (monitor.isCanceled())
-			return;
+			return false;
 
 		for (URI root : roots) {
 			monitor.worked(1);
@@ -163,7 +168,7 @@ public class SessionAnalyzer {
 
 			for (Method method : ((Module) module).allMethods()) {
 				if (monitor.isCanceled())
-					return;
+					return false;
 
 				BslNodeImpl methodCoverage = (BslNodeImpl) modelCoverage.getCoverageFor(EcoreUtil.getURI(method));
 
@@ -174,6 +179,7 @@ public class SessionAnalyzer {
 			modelCoverage.updateModuleCoverage(root);
 		}
 
+		return true;
 	}
 
 	private void processElseIfParts(IfStatement ifStatement, BslNodeImpl methodCoverage) {
@@ -287,19 +293,29 @@ public class SessionAnalyzer {
 		methodCoverage.increment(CounterImpl.COUNTER_0_1, CounterImpl.COUNTER_0_0, profilingLine.getLineNo());
 	}
 
-	private void processProfilingResult(Collection<URI> roots, IProfilingResult profilingResult,
+	private boolean processProfilingResult(Collection<URI> roots, IProfilingResult profilingResult,
 			BslModelCoverage modelCoverage, IProgressMonitor monitor) {
 		if (monitor.isCanceled())
-			return;
+			return false;
 
 		Iterator<BslModuleReference> moduleItr = profilingResult.getReferences().iterator();
 		while (moduleItr.hasNext()) {
 			if (monitor.isCanceled())
-				return;
+				return false;
 
-			BslModuleReference moduleReference = moduleItr.next();
-			processModuleReference(moduleReference, profilingResult, roots, modelCoverage, monitor);
+			monitor.worked(1);
+
+			try {
+				BslModuleReference moduleReference = moduleItr.next();
+				processModuleReference(moduleReference, profilingResult, roots, modelCoverage, monitor);
+
+			} catch (ConcurrentModificationException e) {
+				return false;
+
+			}
 		}
+
+		return true;
 	}
 
 	private boolean processStatement(Statement statement, BslNodeImpl methodCoverage) {
