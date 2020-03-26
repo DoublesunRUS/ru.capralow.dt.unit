@@ -36,15 +36,33 @@ public class CoverageCorePlugin extends Plugin {
 
 	public static final String ID = "ru.capralow.dt.coverage.core"; //$NON-NLS-1$
 
-	private ICorePreferences preferences = ICorePreferences.DEFAULT;
-
 	private static CoverageCorePlugin instance;
+
+	public static IStatus createErrorStatus(String message, Throwable throwable) {
+		return new Status(IStatus.ERROR, ID, 0, message, throwable);
+	}
+
+	public static CoverageCorePlugin getInstance() {
+		return instance;
+	}
+
+	public static void log(IStatus status) {
+		getInstance().getLog().log(status);
+	}
+
+	private ICorePreferences preferences = ICorePreferences.DEFAULT;
 
 	private Injector injector;
 
 	private ISessionManager sessionManager;
 
 	private BslCoverageLoader coverageLoader;
+
+	private InjectorAwareServiceRegistrator registrator;
+
+	public BslCoverageLoader getBslCoverageLoader() {
+		return coverageLoader;
+	}
 
 	public synchronized Injector getInjector() {
 		if (injector == null)
@@ -53,8 +71,43 @@ public class CoverageCorePlugin extends Plugin {
 		return injector;
 	}
 
-	public static IStatus createErrorStatus(String message, Throwable throwable) {
-		return new Status(IStatus.ERROR, ID, 0, message, throwable);
+	public ICorePreferences getPreferences() {
+		return this.preferences;
+	}
+
+	public ISessionManager getSessionManager() {
+		return sessionManager;
+	}
+
+	public void setPreferences(ICorePreferences preferences) {
+		this.preferences = preferences;
+	}
+
+	@Override
+	public void start(BundleContext context) throws Exception {
+		super.start(context);
+		instance = this;
+
+		sessionManager = new SessionManager();
+
+		coverageLoader = new BslCoverageLoader(sessionManager);
+
+		registrator = new InjectorAwareServiceRegistrator(context, this::getInjector);
+
+		ServiceInitialization.schedule(() -> registrator.activateManagedService(CoverageManager.class));
+	}
+
+	@Override
+	public void stop(BundleContext context) throws Exception {
+		instance = null;
+		super.stop(context);
+
+		registrator.deactivateManagedServices(this);
+
+		coverageLoader.dispose();
+		coverageLoader = null;
+
+		sessionManager = null;
 	}
 
 	private Injector createInjector() {
@@ -68,60 +121,5 @@ public class CoverageCorePlugin extends Plugin {
 			return injector;
 
 		}
-	}
-
-	public static void log(IStatus status) {
-		getInstance().getLog().log(status);
-	}
-
-	private InjectorAwareServiceRegistrator registrator;
-
-	@Override
-	public void start(BundleContext context) throws Exception {
-		super.start(context);
-
-		sessionManager = new SessionManager();
-
-		coverageLoader = new BslCoverageLoader(sessionManager);
-
-		registrator = new InjectorAwareServiceRegistrator(context, this::getInjector);
-
-		ServiceInitialization.schedule(() -> registrator.activateManagedService(CoverageManager.class));
-
-		instance = this;
-	}
-
-	@Override
-	public void stop(BundleContext context) throws Exception {
-		instance = null;
-
-		registrator.deactivateManagedServices(this);
-
-		coverageLoader.dispose();
-		coverageLoader = null;
-
-		sessionManager = null;
-
-		super.stop(context);
-	}
-
-	public static CoverageCorePlugin getInstance() {
-		return instance;
-	}
-
-	public void setPreferences(ICorePreferences preferences) {
-		this.preferences = preferences;
-	}
-
-	public ICorePreferences getPreferences() {
-		return this.preferences;
-	}
-
-	public ISessionManager getSessionManager() {
-		return sessionManager;
-	}
-
-	public BslCoverageLoader getBslCoverageLoader() {
-		return coverageLoader;
 	}
 }

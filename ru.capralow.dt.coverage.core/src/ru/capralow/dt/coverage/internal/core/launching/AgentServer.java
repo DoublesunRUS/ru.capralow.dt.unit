@@ -14,6 +14,11 @@
  ******************************************************************************/
 package ru.capralow.dt.coverage.internal.core.launching;
 
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.IViewPart;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.PlatformUI;
+
 import com._1c.g5.v8.dt.profiling.core.IProfilingResult;
 import com._1c.g5.v8.dt.profiling.core.IProfilingResultListener;
 import com._1c.g5.v8.dt.profiling.core.IProfilingService;
@@ -60,10 +65,14 @@ public class AgentServer implements IProfilingResultListener {
 			sessionManager.addSession(session, preferences.getActivateNewSessions(), launch);
 		}
 
-		if (preferences.getActivateNewSessions())
-			sessionManager.activateSession(session);
-
 		sessionManager.refreshActiveSession();
+
+		Display.getDefault().asyncExec(() -> {
+			IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+			IViewPart view = page.findView("com._1c.g5.v8.dt.profiling.ui.view.ProfilingView"); //$NON-NLS-1$
+			if (view != null)
+				page.hideView(view);
+		});
 	}
 
 	public void start() {
