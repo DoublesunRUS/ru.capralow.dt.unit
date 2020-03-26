@@ -106,16 +106,6 @@ public class SessionAnalyzer {
 		if (monitor.isCanceled())
 			return null;
 
-		PERFORMANCE.startTimer();
-		PERFORMANCE.startMemoryUsage();
-
-		Collection<URI> roots = session.getScope();
-
-		monitor.beginTask(NLS.bind(CoreMessages.AnalyzingCoverageSession_task, session.getDescription()),
-				1 + roots.size() * 2);
-
-		monitor.worked(1);
-
 		IProfilingResult profilingResult = null;
 		for (IProfilingResult profilingResults : profilingService.getResults()) {
 			if (monitor.isCanceled())
@@ -130,6 +120,16 @@ public class SessionAnalyzer {
 
 		if (profilingResult == null)
 			return null;
+
+		PERFORMANCE.startTimer();
+		PERFORMANCE.startMemoryUsage();
+
+		Collection<URI> roots = session.getScope();
+
+		monitor.beginTask(NLS.bind(CoreMessages.AnalyzingCoverageSession_task, session.getDescription()),
+				1 + roots.size() * 2);
+
+		monitor.worked(1);
 
 		BslModelCoverage modelCoverage = new BslModelCoverage();
 
@@ -264,8 +264,10 @@ public class SessionAnalyzer {
 		if (profilingLine.getLine().contains(profilingLine.getMethodSignature()) || profilingLine.getLine().isBlank())
 			return;
 
-		String methodName = profilingLine.getMethodSignature().substring(0,
-				profilingLine.getMethodSignature().indexOf('('));
+		String methodName = profilingLine.getMethodSignature();
+		int methodEndIndex = methodName.indexOf('(');
+		if (methodEndIndex != -1)
+			methodName = methodName.substring(0, methodEndIndex);
 
 		BslNodeImpl methodCoverage = (BslNodeImpl) modelCoverage.getCoverageFor(methodName, moduleURI);
 		if (methodCoverage == null)
