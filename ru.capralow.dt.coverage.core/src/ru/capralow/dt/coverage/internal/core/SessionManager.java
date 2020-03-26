@@ -25,8 +25,6 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.debug.core.ILaunch;
 
-import com._1c.g5.v8.dt.profiling.core.IProfilingResult;
-
 import ru.capralow.dt.coverage.core.ICoverageSession;
 import ru.capralow.dt.coverage.core.ISessionListener;
 import ru.capralow.dt.coverage.core.ISessionManager;
@@ -41,6 +39,7 @@ public class SessionManager implements ISessionManager {
 
 	private List<ICoverageSession> sessions;
 	private Map<Object, List<ICoverageSession>> launchMap;
+	private Map<String, ICoverageSession> profileMap;
 	private ICoverageSession activeSession;
 
 	public SessionManager() {
@@ -48,7 +47,18 @@ public class SessionManager implements ISessionManager {
 		this.listeners = new ArrayList<>();
 		this.sessions = new ArrayList<>();
 		this.launchMap = new HashMap<>();
+		this.profileMap = new HashMap<>();
 		this.activeSession = null;
+	}
+
+	@Override
+	public void activateSession(ICoverageSession session) {
+		synchronized (lock) {
+			if (sessions.contains(session) && !session.equals(activeSession)) {
+				activeSession = session;
+				fireSessionActivated(session);
+			}
+		}
 	}
 
 	@Override
@@ -67,6 +77,7 @@ public class SessionManager implements ISessionManager {
 					}
 					l.add(session);
 				}
+				profileMap.put(session.getProfileName(), session);
 				fireSessionAdded(session);
 			}
 			if (activate) {
@@ -77,73 +88,13 @@ public class SessionManager implements ISessionManager {
 	}
 
 	@Override
-	public void removeSession(ICoverageSession session) {
+	public void addSessionListener(ISessionListener listener) {
+		if (listener == null) {
+			throw new IllegalArgumentException();
+		}
 		synchronized (lock) {
-			removeSessions(Collections.singleton(session));
-		}
-	}
-
-	@Override
-	public void removeSessionsFor(ILaunch launch) {
-		synchronized (lock) {
-			List<ICoverageSession> sessionsToRemove = launchMap.get(launch);
-			if (sessionsToRemove != null) {
-				removeSessions(sessionsToRemove);
-			}
-		}
-	}
-
-	@Override
-	public void removeAllSessions() {
-		synchronized (lock) {
-			removeSessions(sessions);
-		}
-	}
-
-	private void removeSessions(Collection<ICoverageSession> sessionsToRemove) {
-		// Clone as in some scenarios we're modifying the caller's instance
-		sessionsToRemove = new ArrayList<>(sessionsToRemove);
-
-		// Remove Sessions
-		List<ICoverageSession> removedSessions = new ArrayList<>();
-		for (ICoverageSession s : sessionsToRemove) {
-			if (sessions.remove(s)) {
-				removedSessions.add(s);
-				for (List<ICoverageSession> mappedSessions : launchMap.values()) {
-					mappedSessions.remove(s);
-				}
-			}
-		}
-
-		// Activate other session if active session was removed:
-		boolean actived = sessionsToRemove.contains(activeSession);
-		if (actived) {
-			int size = sessions.size();
-			activeSession = size == 0 ? null : sessions.get(size - 1);
-		}
-
-		// Fire events:
-		for (ICoverageSession s : removedSessions) {
-			fireSessionRemoved(s);
-		}
-		if (actived) {
-			fireSessionActivated(activeSession);
-		}
-	}
-
-	@Override
-	public List<ICoverageSession> getSessions() {
-		synchronized (lock) {
-			return new ArrayList<>(sessions);
-		}
-	}
-
-	@Override
-	public void activateSession(ICoverageSession session) {
-		synchronized (lock) {
-			if (sessions.contains(session) && !session.equals(activeSession)) {
-				activeSession = session;
-				fireSessionActivated(session);
+			if (!listeners.contains(listener)) {
+				listeners.add(listener);
 			}
 		}
 	}
@@ -156,11 +107,14 @@ public class SessionManager implements ISessionManager {
 	}
 
 	@Override
-	public void refreshActiveSession() {
+	public ICoverageSession getSessionByName(String name) {
+		return profileMap.get(name);
+	}
+
+	@Override
+	public List<ICoverageSession> getSessions() {
 		synchronized (lock) {
-			if (activeSession != null) {
-				fireSessionActivated(activeSession);
-			}
+			return new ArrayList<>(sessions);
 		}
 	}
 
@@ -202,14 +156,25 @@ public class SessionManager implements ISessionManager {
 	}
 
 	@Override
-	public void addSessionListener(ISessionListener listener) {
-		if (listener == null) {
-			throw new IllegalArgumentException();
-		}
+	public void refreshActiveSession() {
 		synchronized (lock) {
-			if (!listeners.contains(listener)) {
-				listeners.add(listener);
+			if (activeSession != null) {
+				fireSessionActivated(activeSession);
 			}
+		}
+	}
+
+	@Override
+	public void removeAllSessions() {
+		synchronized (lock) {
+			removeSessions(sessions);
+		}
+	}
+
+	@Override
+	public void removeSession(ICoverageSession session) {
+		synchronized (lock) {
+			removeSessions(Collections.singleton(session));
 		}
 	}
 
@@ -217,6 +182,23 @@ public class SessionManager implements ISessionManager {
 	public void removeSessionListener(ISessionListener listener) {
 		synchronized (lock) {
 			listeners.remove(listener);
+		}
+	}
+
+	@Override
+	public void removeSessionsFor(ILaunch launch) {
+		synchronized (lock) {
+			List<ICoverageSession> sessionsToRemove = launchMap.get(launch);
+			if (sessionsToRemove != null) {
+				removeSessions(sessionsToRemove);
+			}
+		}
+	}
+
+	private void fireSessionActivated(ICoverageSession session) {
+		// copy to avoid concurrent modification issues
+		for (ISessionListener l : new ArrayList<>(listeners)) {
+			l.sessionActivated(session);
 		}
 	}
 
@@ -234,21 +216,35 @@ public class SessionManager implements ISessionManager {
 		}
 	}
 
-	private void fireSessionActivated(ICoverageSession session) {
-		// copy to avoid concurrent modification issues
-		for (ISessionListener l : new ArrayList<>(listeners)) {
-			l.sessionActivated(session);
+	private void removeSessions(Collection<ICoverageSession> sessionsToRemove) {
+		// Clone as in some scenarios we're modifying the caller's instance
+		sessionsToRemove = new ArrayList<>(sessionsToRemove);
+
+		// Remove Sessions
+		List<ICoverageSession> removedSessions = new ArrayList<>();
+		for (ICoverageSession s : sessionsToRemove) {
+			if (sessions.remove(s)) {
+				removedSessions.add(s);
+				for (List<ICoverageSession> mappedSessions : launchMap.values()) {
+					mappedSessions.remove(s);
+				}
+			}
 		}
-	}
 
-	@Override
-	public boolean profilingResultAnalyzed(IProfilingResult newProfilingResult) {
-		for (ICoverageSession session : sessions)
-			for (IProfilingResult profilingResult : session.getProfilingResults())
-				if (profilingResult.equals(newProfilingResult))
-					return true;
+		// Activate other session if active session was removed:
+		boolean actived = sessionsToRemove.contains(activeSession);
+		if (actived) {
+			int size = sessions.size();
+			activeSession = size == 0 ? null : sessions.get(size - 1);
+		}
 
-		return false;
+		// Fire events:
+		for (ICoverageSession s : removedSessions) {
+			fireSessionRemoved(s);
+		}
+		if (actived) {
+			fireSessionActivated(activeSession);
+		}
 	}
 
 }

@@ -42,6 +42,15 @@ public class SessionImporter implements ISessionImporter {
 	}
 
 	@Override
+	public void importSession(IProgressMonitor monitor) throws CoreException {
+		monitor.beginTask(CoreMessages.ImportingSession_task, 2);
+		monitor.worked(1);
+		ICoverageSession session = new CoverageSession(profilingResult, scope, null);
+		sessionManager.addSession(session, true, null);
+		monitor.done();
+	}
+
+	@Override
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -54,16 +63,6 @@ public class SessionImporter implements ISessionImporter {
 	@Override
 	public void setScope(Set<URI> scope) {
 		this.scope = scope;
-	}
-
-	@Override
-	public void importSession(IProgressMonitor monitor) throws CoreException {
-		monitor.beginTask(CoreMessages.ImportingSession_task, 2);
-		monitor.worked(1);
-		ICoverageSession session = new CoverageSession(description, scope, null);
-		sessionManager.addSession(session, true, null);
-		session.accept(profilingResult);
-		monitor.done();
 	}
 
 }

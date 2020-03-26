@@ -54,6 +54,7 @@ import com._1c.g5.v8.dt.debug.core.model.IBslModuleLocator;
 import com._1c.g5.v8.dt.metadata.mdclass.Configuration;
 import com._1c.g5.v8.dt.profiling.core.ILineProfilingResult;
 import com._1c.g5.v8.dt.profiling.core.IProfilingResult;
+import com._1c.g5.v8.dt.profiling.core.IProfilingService;
 import com.google.inject.Inject;
 
 import ru.capralow.dt.coverage.core.ICoverageSession;
@@ -88,6 +89,9 @@ public class SessionAnalyzer {
 	private IBslModuleLocator bslModuleLocator;
 
 	@Inject
+	private IProfilingService profilingService;
+
+	@Inject
 	private IV8ProjectManager projectManager;
 
 	public Collection<ExecutionData> getExecutionData() {
@@ -102,23 +106,34 @@ public class SessionAnalyzer {
 		if (monitor.isCanceled())
 			return null;
 
-		List<IProfilingResult> profilingResults = session.getProfilingResults();
-		if (profilingResults.isEmpty())
-			return null;
-
 		PERFORMANCE.startTimer();
 		PERFORMANCE.startMemoryUsage();
 
 		Collection<URI> roots = session.getScope();
 
 		monitor.beginTask(NLS.bind(CoreMessages.AnalyzingCoverageSession_task, session.getDescription()),
-				1 + roots.size() * 2 + profilingResults.size());
+				1 + roots.size() * 2);
 
 		monitor.worked(1);
 
+		IProfilingResult profilingResult = null;
+		for (IProfilingResult profilingResults : profilingService.getResults()) {
+			if (monitor.isCanceled())
+				return null;
+
+			if (!profilingResults.getName().equals(session.getProfileName()))
+				continue;
+
+			profilingResult = profilingResults;
+			break;
+		}
+
+		if (profilingResult == null)
+			return null;
+
 		BslModelCoverage modelCoverage = new BslModelCoverage();
 
-		processProfilingResults(roots, profilingResults, modelCoverage, monitor);
+		processProfilingResult(roots, profilingResult, modelCoverage, monitor);
 
 		fillMissedStatements(roots, modelCoverage, monitor);
 
@@ -270,25 +285,18 @@ public class SessionAnalyzer {
 		methodCoverage.increment(CounterImpl.COUNTER_0_1, CounterImpl.COUNTER_0_0, profilingLine.getLineNo());
 	}
 
-	private void processProfilingResults(Collection<URI> roots, List<IProfilingResult> profilingResults,
+	private void processProfilingResult(Collection<URI> roots, IProfilingResult profilingResult,
 			BslModelCoverage modelCoverage, IProgressMonitor monitor) {
 		if (monitor.isCanceled())
 			return;
 
-		Iterator<IProfilingResult> resultItr = profilingResults.iterator();
-		while (resultItr.hasNext()) {
+		Iterator<BslModuleReference> moduleItr = profilingResult.getReferences().iterator();
+		while (moduleItr.hasNext()) {
 			if (monitor.isCanceled())
 				return;
 
-			monitor.worked(1);
-
-			IProfilingResult profilingResult = resultItr.next();
-
-			Iterator<BslModuleReference> moduleItr = profilingResult.getReferences().iterator();
-			while (moduleItr.hasNext()) {
-				BslModuleReference moduleReference = moduleItr.next();
-				processModuleReference(moduleReference, profilingResult, roots, modelCoverage, monitor);
-			}
+			BslModuleReference moduleReference = moduleItr.next();
+			processModuleReference(moduleReference, profilingResult, roots, modelCoverage, monitor);
 		}
 	}
 

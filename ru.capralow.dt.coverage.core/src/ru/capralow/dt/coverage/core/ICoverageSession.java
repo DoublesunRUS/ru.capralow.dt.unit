@@ -14,14 +14,11 @@
  ******************************************************************************/
 package ru.capralow.dt.coverage.core;
 
-import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.emf.common.util.URI;
-
-import com._1c.g5.v8.dt.profiling.core.IProfilingResult;
 
 /**
  * A coverage session is the result of a coverage run (or multiple merged runs)
@@ -49,13 +46,6 @@ public interface ICoverageSession extends IAdaptable, IExecutionDataSource {
 	String getDescription();
 
 	/**
-	 * Returns the set of package fragment roots defining the scope of this session.
-	 *
-	 * @return session scope as set of {@link IPackageFragmentRoot}
-	 */
-	Set<URI> getScope();
-
-	/**
 	 * If this session was the result of a Eclipse launch this method returns the
 	 * respective launch configuration. Otherwise <code>null</code> is returned.
 	 *
@@ -63,8 +53,13 @@ public interface ICoverageSession extends IAdaptable, IExecutionDataSource {
 	 */
 	ILaunchConfiguration getLaunchConfiguration();
 
-	List<IProfilingResult> getProfilingResults();
+	String getProfileName();
 
-	void accept(IProfilingResult profilingResult);
+	/**
+	 * Returns the set of package fragment roots defining the scope of this session.
+	 *
+	 * @return session scope as set of {@link IPackageFragmentRoot}
+	 */
+	Set<URI> getScope();
 
 }

@@ -14,10 +14,10 @@
  ******************************************************************************/
 package ru.capralow.dt.coverage.internal.core;
 
-import java.util.ArrayList;
+import java.text.MessageFormat;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.runtime.CoreException;
@@ -39,36 +39,18 @@ public class CoverageSession extends PlatformObject implements ICoverageSession 
 	private String description;
 	private Set<URI> scope;
 	private ILaunchConfiguration launchConfiguration;
-	private List<IProfilingResult> profilingResults;
+	private String profileName;
 
-	public CoverageSession(String description, Set<URI> set, ILaunchConfiguration launchConfiguration) {
-		this.description = description;
+	public CoverageSession(IProfilingResult profilingResult, Set<URI> set, ILaunchConfiguration launchConfiguration) {
+		Object[] args = new Object[] { profilingResult.getName(), new Date() };
+
+		this.profileName = profilingResult.getName();
+		this.description = MessageFormat.format(CoreMessages.LaunchSessionDescription_value, args);
 		this.scope = Collections.unmodifiableSet(new HashSet<>(set));
 		this.launchConfiguration = launchConfiguration;
-		this.profilingResults = new ArrayList<>();
 	}
 
 	// ICoverageSession implementation
-
-	@Override
-	public String getDescription() {
-		return description;
-	}
-
-	@Override
-	public Set<URI> getScope() {
-		return scope;
-	}
-
-	@Override
-	public ILaunchConfiguration getLaunchConfiguration() {
-		return launchConfiguration;
-	}
-
-	@Override
-	public void accept(IProfilingResult profilingResult) {
-		profilingResults.add(profilingResult);
-	}
 
 	@Override
 	public void accept(IExecutionDataVisitor executionDataVisitor, ISessionInfoVisitor sessionInfoVisitor)
@@ -77,8 +59,23 @@ public class CoverageSession extends PlatformObject implements ICoverageSession 
 	}
 
 	@Override
-	public List<IProfilingResult> getProfilingResults() {
-		return profilingResults;
+	public String getDescription() {
+		return description;
+	}
+
+	@Override
+	public ILaunchConfiguration getLaunchConfiguration() {
+		return launchConfiguration;
+	}
+
+	@Override
+	public String getProfileName() {
+		return profileName;
+	}
+
+	@Override
+	public Set<URI> getScope() {
+		return scope;
 	}
 
 }

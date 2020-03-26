@@ -14,10 +14,6 @@
  ******************************************************************************/
 package ru.capralow.dt.coverage.internal.core.launching;
 
-import java.text.MessageFormat;
-import java.util.Date;
-import java.util.List;
-
 import com._1c.g5.v8.dt.profiling.core.IProfilingResult;
 import com._1c.g5.v8.dt.profiling.core.IProfilingResultListener;
 import com._1c.g5.v8.dt.profiling.core.IProfilingService;
@@ -26,7 +22,6 @@ import ru.capralow.dt.coverage.core.ICorePreferences;
 import ru.capralow.dt.coverage.core.ICoverageSession;
 import ru.capralow.dt.coverage.core.ISessionManager;
 import ru.capralow.dt.coverage.core.launching.ICoverageLaunch;
-import ru.capralow.dt.coverage.internal.core.CoreMessages;
 import ru.capralow.dt.coverage.internal.core.CoverageCorePlugin;
 import ru.capralow.dt.coverage.internal.core.CoverageSession;
 
@@ -57,35 +52,25 @@ public class AgentServer implements IProfilingResultListener {
 
 	@Override
 	public void resultsUpdated(IProfilingResult profilingResult) {
-		if (sessionManager.profilingResultAnalyzed(profilingResult))
-			return;
+		ICoverageSession session = sessionManager.getSessionByName(profilingResult.getName());
 
-		List<ICoverageSession> sessions = sessionManager.getSessions();
-		if (sessions.isEmpty())
-			return;
+		if (session == null) {
+			session = new CoverageSession(profilingResult, launch.getScope(), launch.getLaunchConfiguration());
 
-		ICoverageSession session = sessions.get(sessions.size() - 1);
+			sessionManager.addSession(session, preferences.getActivateNewSessions(), launch);
+		}
 
-		session.accept(profilingResult);
+		if (preferences.getActivateNewSessions())
+			sessionManager.activateSession(session);
+
 		sessionManager.refreshActiveSession();
 	}
 
 	public void start() {
 		profilingService.toggleTargetWaitingState(true);
-
-		ICoverageSession session = new CoverageSession(createDescription(),
-				launch.getScope(),
-				launch.getLaunchConfiguration());
-
-		sessionManager.addSession(session, preferences.getActivateNewSessions(), launch);
 	}
 
 	public void stop() {
 		profilingService.toggleTargetWaitingState(false);
-	}
-
-	private String createDescription() {
-		Object[] args = new Object[] { launch.getLaunchConfiguration().getName(), new Date() };
-		return MessageFormat.format(CoreMessages.LaunchSessionDescription_value, args);
 	}
 }
