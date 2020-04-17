@@ -1,0 +1,10 @@
+
+
+// @unit-test
+// Params:
+// 	Framework - TestFramework - Test framework
+Procedure TestProcedure(Framework) Export
+	
+	Raise "Test not implemented.";
+	
+EndProcedure
