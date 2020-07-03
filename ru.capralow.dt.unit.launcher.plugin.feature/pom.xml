@@ -28,7 +28,7 @@
 				</executions>
 				<configuration>
 					<excludes>
-						<feature id="org.eclipse.jdt"/>
+						<feature id="org.eclipse.jdt" />
 					</excludes>
 				</configuration>
 			</plugin>

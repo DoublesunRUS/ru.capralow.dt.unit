@@ -108,7 +108,7 @@
 	<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
 		<!-- VA Framework -->
 		<unit id="ru.capralow.dt.framework.va.feature.group" version="0.0.0"/>
-		<repository id="framework_va" location="http://capralow.ru/edt/unit.framework.va/latest/"/>
+		<repository id="framework_va" location="http://capralow.ru/edt/unit.framework.va/1.2.33/"/>
 	</location>
 	<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
 		<!-- SWTBot -->

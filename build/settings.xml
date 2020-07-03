@@ -6,7 +6,7 @@
 			<password>${env.partners_v8_1c_ru_password}</password>
 		</server>
 	</servers>
-	
+
 	<mirrors>
 	</mirrors>
 
