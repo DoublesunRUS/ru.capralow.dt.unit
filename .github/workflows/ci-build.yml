@@ -53,7 +53,7 @@ jobs:
     - name: Upload repo
       uses: actions/upload-artifact@v2
       with:
-        name: dt-framework-va-repository
+        name: dt-unit-repository
         path: repositories/ru.capralow.dt.unit.repository/target/repository/
         
     - name: Upload JaCoCo exec data
