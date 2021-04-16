@@ -1,9 +1,9 @@
 ﻿![Build](https://github.com/DoublesunRUS/ru.capralow.dt.unit/workflows/CI/badge.svg)
 
 
-## Запуск модульных тестов для [1C:Enterprise Development Tools](http://v8.1c.ru/overview/IDE/) 2020.6
+## Запуск модульных тестов для [1C:Enterprise Development Tools](http://v8.1c.ru/overview/IDE/) 2021.1
 
-Минимальная версия EDT: 2020.6
+Минимальная версия EDT: 2021.1
 
 Текущий релиз в ветке [master: 0.4.1](https://github.com/DoublesunRUS/ru.capralow.dt.unit/tree/master).<br>
 Разработка ведется в ветке [dev](https://github.com/DoublesunRUS/ru.capralow.dt.unit/tree/dev).<br>
