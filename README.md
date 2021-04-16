@@ -1,16 +1,16 @@
-﻿# 1Unit [![Build Status](https://travis-ci.com/DoublesunRUS/ru.capralow.dt.unit.launcher.svg)](https://travis-ci.com/DoublesunRUS/ru.capralow.dt.unit.launcher) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=DoublesunRUS_ru.capralow.dt.unit.launcher&metric=alert_status)](https://sonarcloud.io/dashboard?id=DoublesunRUS_ru.capralow.dt.unit.launcher) [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=DoublesunRUS_ru.capralow.dt.unit.launcher&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=DoublesunRUS_ru.capralow.dt.unit.launcher) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=DoublesunRUS_ru.capralow.dt.unit.launcher&metric=coverage)](https://sonarcloud.io/dashboard?id=DoublesunRUS_ru.capralow.dt.unit.launcher)
+﻿![Build](https://github.com/DoublesunRUS/ru.capralow.dt.unit/workflows/CI/badge.svg)
 
 
-## Запуск модульных тестов для [1C:Enterprise Development Tools](http://v8.1c.ru/overview/IDE/) 2020.1
+## Запуск модульных тестов для [1C:Enterprise Development Tools](http://v8.1c.ru/overview/IDE/) 2020.6
 
-Минимальная версия EDT: 2020.1
+Минимальная версия EDT: 2020.6
 
-Текущий релиз в ветке [master: 0.4.0](https://github.com/DoublesunRUS/ru.capralow.dt.unit.launcher/tree/master).<br>
-Разработка ведется в ветке [dev](https://github.com/DoublesunRUS/ru.capralow.dt.unit.launcher/tree/dev).<br>
+Текущий релиз в ветке [master: 0.4.1](https://github.com/DoublesunRUS/ru.capralow.dt.unit/tree/master).<br>
+Разработка ведется в ветке [dev](https://github.com/DoublesunRUS/ru.capralow.dt.unit/tree/dev).<br>
 
 В данном репозитории хранятся только исходники.<br>
 
-Плагин можно установить в EDT через пункт "Установить новое ПО" указав сайт обновления http://capralow.ru/edt/unit.launcher/latest/ . Для установки может потребоваться запуск EDT под правами администратора.<br>
+Плагин можно установить в EDT через пункт "Установить новое ПО" указав сайт обновления http://capralow.ru/edt/1unit/latest/ . Для установки может потребоваться запуск EDT под правами администратора.<br>
 Для самостоятельной сборки плагина необходимо иметь доступ к сайту https://releases.1c.ru и настроить соответствующим образом Maven. Подробности настройки написаны [здесь](https://github.com/1C-Company/dt-example-plugins/blob/master/simple-plugin/README.md).
 
 ### Возможности
@@ -33,7 +33,7 @@
 [Vanessa Automation](https://github.com/Pr-Mex/vanessa-automation) 1.2.
 
 ### Использование Vanessa automation в качестве фреймворка тестирования
-В папке [МодульныеТестыVA](https://github.com/DoublesunRUS/ru.capralow.dt.unit.launcher/tree/master/МодульныеТестыVA) находится расширение, демонстрирующее основные возможности программного интерфейса фреймворка тестирования<br>
+В папке [МодульныеТестыVA](https://github.com/DoublesunRUS/ru.capralow.dt.unit/tree/master/МодульныеТестыVA) находится расширение, демонстрирующее основные возможности программного интерфейса фреймворка тестирования<br>
 Расширение можно установить вместе с любой конфигурацией и запустить тестирование.
 
 ### Настройки запуска тестов
@@ -41,5 +41,5 @@
 Для запуска тестов только одного общего модуля или всех тестов определенного теста необходимо донастроить конфигурацию запуска.
 
 ### Инструкции
-* Установка: [видео](https://youtu.be/2rro6MFjh2s) или [текст](http://capralow.ru/edt/unit.launcher/instructions/install/result.html).<br>
-* Начальная настройка: [видео](https://youtu.be/hIgdgZDlTUQ) или [текст](http://capralow.ru/edt/unit.launcher/instructions/setup/result.html).
+* Установка: [видео](https://youtu.be/2rro6MFjh2s) или [текст](http://capralow.ru/edt/1unit/instructions/install/result.html).<br>
+* Начальная настройка: [видео](https://youtu.be/hIgdgZDlTUQ) или [текст](http://capralow.ru/edt/1unit/instructions/setup/result.html).

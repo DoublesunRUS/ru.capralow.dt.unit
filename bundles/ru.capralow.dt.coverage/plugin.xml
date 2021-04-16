@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+
+	<extension
+			point="org.eclipse.core.runtime.adapters">
+		<factory
+				adaptableType="org.eclipse.emf.common.util.URI"
+				class="ru.capralow.dt.coverage.internal.analysis.ModuleCoverageAdapterFactory">
+			<adapter type="org.jacoco.core.analysis.ICoverageNode"/>
+			<adapter type="org.jacoco.core.analysis.ISourceNode"/>
+		</factory>
+	</extension>
+	
+	<extension
+			point="org.eclipse.debug.core.launchModes">
+		<launchMode
+				label="%coverage"
+				mode="coverage"/>
+	</extension>
+	
+	<extension
+			point="org.eclipse.debug.core.launchDelegates">
+			
+		<launchDelegate
+			delegate="ru.capralow.dt.coverage.internal.ExecutableExtensionFactory:ru.capralow.dt.coverage.launching.BslApplicationLauncher"
+			id="ru.capralow.dt.coverage.bslApplicationLauncher"
+			modes="coverage"
+			name="%bslDelegateName"
+			type="com._1c.g5.v8.dt.launching.core.RuntimeClient"/>
+
+		<launchDelegate
+			delegate="ru.capralow.dt.coverage.internal.ExecutableExtensionFactory:ru.capralow.dt.coverage.launching.BslApplicationLauncher"
+			id="ru.capralow.dt.coverage.unitTestApplicationLauncher"
+			modes="coverage"
+			name="%unitTestDelegateName"
+			type="ru.capralow.dt.unit.launcher.ui.UnitTestLaunch"/>
+	
+	</extension>
+	
+	<extension
+			point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+				file-extensions="exec"
+				id="ru.capralow.dt.coverage.executiondata"
+				name="%execFileContentType"
+				priority="normal">
+			<describer
+					class="org.eclipse.core.runtime.content.BinarySignatureDescriber">
+				<parameter
+						name="signature"
+						value="01, C0, C0">
+				</parameter>
+				<parameter
+						name="offset"
+						value="0">
+				</parameter>
+			</describer>
+		</content-type>
+	</extension>
+	
+</plugin>

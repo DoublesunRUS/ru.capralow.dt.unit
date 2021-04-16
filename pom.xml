@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>ru.capralow.dt.unit</groupId>
+		<artifactId>bom</artifactId>
+		<version>0.4.1-SNAPSHOT</version>
+		<relativePath>./bom/pom.xml</relativePath>
+	</parent>
+
+	<groupId>ru.capralow.dt.unit</groupId>
+	<artifactId>parent</artifactId>
+	<version>0.4.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>1Unit EDT</name>
+
+	<modules>
+		<module>targets</module>
+		<module>bundles</module>
+		<module>features</module>
+		<module>repositories</module>
+		<module>tests</module>
+	</modules>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>tycho-p2-repository-plugin</artifactId>
+					<configuration>
+						<repositoryName>${project.name}</repositoryName>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+</project>

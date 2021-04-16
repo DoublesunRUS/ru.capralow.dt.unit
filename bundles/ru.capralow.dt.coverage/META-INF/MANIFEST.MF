@@ -1,0 +1,47 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: ru.capralow.dt.coverage;singleton:=true
+Bundle-Version: 0.4.1.qualifier
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Export-Package: 
+ ru.capralow.dt.coverage;x-friends:="ru.capralow.dt.coverage.ui,ru.capralow.dt.coverage.ui.test",
+ ru.capralow.dt.coverage.analysis;x-friends:="ru.capralow.dt.coverage.ui",
+ ru.capralow.dt.coverage.internal;x-internal:=true,
+ ru.capralow.dt.coverage.internal.analysis;x-internal:=true,
+ ru.capralow.dt.coverage.internal.launching;x-internal:=true,
+ ru.capralow.dt.coverage.launching;x-friends:="ru.capralow.dt.coverage.ui"
+Require-Bundle: 
+ org.eclipse.core.runtime;bundle-version="[3.15.0,4.0.0)",
+ org.eclipse.debug.core;bundle-version="[3.13.0,4.0.0)",
+ org.eclipse.emf.common;bundle-version="[2.16.0,3.0.0)",
+ org.eclipse.emf.ecore;bundle-version="[2.18.0,3.0.0)",
+ org.eclipse.xtext;bundle-version="[2.18.0,3.0.0)",
+ org.eclipse.xtext.ui;bundle-version="[2.18.0,3.0.0)",
+ org.eclipse.ui;bundle-version="[3.113.0,4.0.0)",
+ org.eclipse.swt;bundle-version="[3.111.0,4.0.0)",
+ org.jacoco.core;bundle-version="[0.8.3,0.9.0)",
+ org.jacoco.agent;bundle-version="[0.8.3,0.9.0)",
+ org.jacoco.report;bundle-version="[0.8.3,0.9.0)"
+Bundle-Activator: ru.capralow.dt.coverage.internal.CoverageCorePlugin
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Automatic-Module-Name: ru.capralow.dt.coverage
+Import-Package: 
+ com._1c.g5.v8.bm.integration;version="[9.0.0,10.0.0)",
+ com._1c.g5.v8.dt.bm.index.emf;version="[7.0.0,8.0.0)",
+ com._1c.g5.v8.dt.bm.xtext;version="[14.0.0,15.0.0)",
+ com._1c.g5.v8.dt.bsl.model;version="[4.0.0,5.0.0)",
+ com._1c.g5.v8.dt.core.platform;version="[10.0.0,11.0.0)",
+ com._1c.g5.v8.dt.debug.core;version="[5.1.0,6.0.0)",
+ com._1c.g5.v8.dt.debug.core.model;version="[4.0.0,5.0.0)",
+ com._1c.g5.v8.dt.debug.model.base.data;version="[3.0.0,4.0.0)",
+ com._1c.g5.v8.dt.mcore;version="[6.0.0,7.0.0)",
+ com._1c.g5.v8.dt.metadata.mdclass;version="[8.0.0,9.0.0)",
+ com._1c.g5.v8.dt.platform;version="[5.0.0,6.0.0)",
+ com._1c.g5.v8.dt.platform.version;version="[2.7.0,3.0.0)",
+ com._1c.g5.v8.dt.profiling.core;version="[3.0.0,4.0.0)",
+ com._1c.g5.wiring;version="[2.0.0,3.0.0)",
+ com._1c.g5.wiring.binder;version="[1.1.0,2.0.0)",
+ com.google.inject;version="[1.3.0,2.0.0)"

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature id="ru.capralow.dt.unit.feature">
+      <category name="ru.capralow.dt.category.public"/>
+   </feature>
+   <feature id="ru.capralow.dt.framework.va.feature">
+      <category name="ru.capralow.dt.category.framework"/>
+   </feature>
+   <feature id="org.eclipse.jdt">
+      <category name="ru.capralow.thirdparty.category.optional"/>
+   </feature>
+   <bundle id="org.objectweb.asm" version="7.0.0.v20181030-2244">
+      <category name="ru.capralow.thirdparty.category.optional"/>
+   </bundle>
+   <bundle id="org.objectweb.asm.commons" version="7.0.0.v20181030-2244">
+      <category name="ru.capralow.thirdparty.category.optional"/>
+   </bundle>
+   <bundle id="org.objectweb.asm.tree" version="7.0.0.v20181030-2244">
+      <category name="ru.capralow.thirdparty.category.optional"/>
+   </bundle>
+   <bundle id="org.jacoco.agent">
+      <category name="ru.capralow.thirdparty.category.optional"/>
+   </bundle>
+   <bundle id="org.jacoco.core">
+      <category name="ru.capralow.thirdparty.category.optional"/>
+   </bundle>
+   <bundle id="org.jacoco.report">
+      <category name="ru.capralow.thirdparty.category.optional"/>
+   </bundle>
+   <category-def name="ru.capralow.dt.category.public" label="Плагины для EDT"/>
+   <category-def name="ru.capralow.dt.category.framework" label="Фреймворки тестирования"/>
+   <category-def name="ru.capralow.thirdparty.category.optional" label="Сторонние компоненты"/>
+   <repository-reference location="http://capralow.ru/edt/unit.framework.va/latest/" enabled="true" />
+   <repository-reference location="https://download.eclipse.org/releases/2019-06/" enabled="false" />
+   <repository-reference location="http://download.eclipse.org/eclipse/updates/4.12/" enabled="false" />
+</site>

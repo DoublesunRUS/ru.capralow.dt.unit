@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>ru.capralow.dt.unit</groupId>
+		<artifactId>parent</artifactId>
+		<version>0.4.1-SNAPSHOT</version>
+	</parent>
+
+	<groupId>ru.capralow.dt.unit</groupId>
+	<artifactId>bundles</artifactId>
+	<packaging>pom</packaging>
+	<name>Bundles</name>
+
+	<modules>
+		<module>ru.capralow.dt.coverage</module>
+		<module>ru.capralow.dt.coverage.ui</module>
+		<module>ru.capralow.dt.launching.core</module>
+		<module>ru.capralow.dt.launching.ui</module>
+		<module>ru.capralow.dt.unit.launcher</module>
+		<module>ru.capralow.dt.unit.launcher.ui</module>
+	</modules>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-source-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>run-checkstyle</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

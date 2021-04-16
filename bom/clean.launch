@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.m2e.Maven2LaunchConfigurationType">
+    <booleanAttribute key="M2_DEBUG_OUTPUT" value="false"/>
+    <stringAttribute key="M2_GOALS" value="clean"/>
+    <booleanAttribute key="M2_NON_RECURSIVE" value="false"/>
+    <booleanAttribute key="M2_OFFLINE" value="false"/>
+    <stringAttribute key="M2_PROFILES" value=""/>
+    <listAttribute key="M2_PROPERTIES"/>
+    <stringAttribute key="M2_RUNTIME" value="EMBEDDED"/>
+    <booleanAttribute key="M2_SKIP_TESTS" value="false"/>
+    <intAttribute key="M2_THREADS" value="1"/>
+    <booleanAttribute key="M2_UPDATE_SNAPSHOTS" value="true"/>
+    <stringAttribute key="M2_USER_SETTINGS" value=""/>
+    <booleanAttribute key="M2_WORKSPACE_RESOLUTION" value="false"/>
+    <stringAttribute key="org.eclipse.debug.core.ATTR_REFRESH_SCOPE" value="${workspace}"/>
+    <listAttribute key="org.eclipse.debug.ui.favoriteGroups">
+        <listEntry value="org.eclipse.debug.ui.launchGroup.run"/>
+    </listAttribute>
+    <booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_CLASSPATH_ONLY_JAR" value="false"/>
+    <booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD" value="true"/>
+    <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Xms80m&#13;&#10;-Dlog4j.configuration=platform:/plugin/com._1c.g5.v8.dt.logging/log4j.properties&#13;&#10;-Dosgi.framework.extensions=org.eclipse.fx.osgi&#13;&#10;-Dosgi.module.lock.timeout=240&#13;&#10;-Xmx8g"/>
+    <stringAttribute key="org.eclipse.jdt.launching.WORKING_DIRECTORY" value="${project_loc:bom}/../"/>
+</launchConfiguration>

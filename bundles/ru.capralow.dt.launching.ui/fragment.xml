@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<fragment>
+	
+	<extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+		<launchConfigurationTabGroup
+			class="com._1c.g5.v8.dt.internal.launching.ui.LaunchingUiExecutableExtensionFactory:ru.capralow.dt.internal.launching.ui.launchconfigurations.UnitTestLaunchTabGroup"
+			id="ru.capralow.dt.unit.UnitTestLaunchTabGroup"
+			type="ru.capralow.dt.unit.UnitTestLaunch">
+		</launchConfigurationTabGroup>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+		<launchConfigurationTypeImage
+			configTypeID="ru.capralow.dt.unit.UnitTestLaunch"
+			icon="icons/obj16/1Unit.png"
+			id="ru.capralow.dt.unit.launcher.ui.launchConfigurationTypeImage.UnitTestLaunch">
+		</launchConfigurationTypeImage>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchShortcuts">
+		<shortcut
+			class="com._1c.g5.v8.dt.internal.launching.ui.LaunchingUiExecutableExtensionFactory:ru.capralow.dt.internal.launching.ui.launchconfigurations.shortcuts.UnitTestLaunchShortcut"
+			description="%UnitTestShortcutDescription"
+			icon="icons/obj16/1Unit.png"
+			id="ru.capralow.dt.launching.ui.shortcut.UnitTest"
+			label="%UnitTestShortcutLabel"
+			modes="run, debug">
+			<contextualLaunch>
+				<enablement>
+					<and>
+						<with variable="selection">
+							<iterate>
+								<adapt type="org.eclipse.core.resources.IProject">
+									<test
+										property="org.eclipse.core.resources.projectNature"
+										value="com._1c.g5.v8.dt.core.V8ExtensionNature"/>
+								</adapt>
+							</iterate>
+						</with>
+						<test property="com._1c.g5.v8.dt.platform.services.ui.infobasePersistenceSupported"/>
+					</and>
+				</enablement>
+			</contextualLaunch>
+			<configurationType
+				id="ru.capralow.dt.unit.UnitTestLaunch">
+			</configurationType>
+		</shortcut>
+	</extension>
+	
+</fragment>
