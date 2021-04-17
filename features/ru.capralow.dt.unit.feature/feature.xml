@@ -48,11 +48,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
    <requires>
       <import plugin="com._1c.g5.v8.dt.product.application" version="1.22.0" match="greaterOrEqual"/>
 
-      <import plugin="org.eclipse.jdt.junit" version="3.2.0" match="compatible"/>
-      <import plugin="org.eclipse.jdt.junit.core" version="3.6.0" match="compatible"/>
-      <import plugin="org.jacoco.core" version="0.8.3" match="compatible"/>
-      <import plugin="org.jacoco.agent" version="0.8.3" match="compatible"/>
-      <import plugin="org.jacoco.report" version="0.8.3" match="compatible"/>
+      <import plugin="org.eclipse.jdt.junit" version="3.11.0" match="compatible"/>
+      <import plugin="org.eclipse.jdt.junit.core" version="3.10.0" match="compatible"/>
+      <import plugin="org.jacoco.core" version="0.8.6" match="compatible"/>
+      <import plugin="org.jacoco.agent" version="0.8.6" match="compatible"/>
+      <import plugin="org.jacoco.report" version="0.8.6" match="compatible"/>
       <import plugin="ru.capralow.dt.framework.va.exec" version="1.2.0" match="greaterOrEqual"/>
    </requires>
 
