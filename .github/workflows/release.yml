@@ -22,6 +22,14 @@ jobs:
         server-username: MAVEN_USERNAME
         server-password: MAVEN_CENTRAL_TOKEN
 
+    - name: Free disk space
+      run: |
+        sudo swapoff -a
+        sudo rm -f /swapfile
+        sudo apt clean
+        docker rmi $(docker image ls -aq)
+        df -h
+
     - name: Cache maven repo
       uses: actions/cache@v1
       if: github.event_name == 'push'
