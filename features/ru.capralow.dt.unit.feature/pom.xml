@@ -17,14 +17,14 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.eclipse.tycho.extras</groupId>
-				<artifactId>tycho-source-feature-plugin</artifactId>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-source-plugin</artifactId>
 				<executions>
 					<execution>
 						<id>source-feature</id>
 						<phase>package</phase>
 						<goals>
-							<goal>source-feature</goal>
+							<goal>feature-source</goal>
 						</goals>
 					</execution>
 				</executions>
@@ -35,6 +35,7 @@
 				<artifactId>tycho-p2-plugin</artifactId>
 				<executions>
 					<execution>
+						<id>attach-p2-metadata</id>
 						<phase>package</phase>
 						<goals>
 							<goal>p2-metadata</goal>
