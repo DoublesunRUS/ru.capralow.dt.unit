@@ -1,3 +1,6 @@
+/**
+ * Copyright (c) 2021, Aleksandr Kapralov
+ */
 package ru.capralow.dt.unit.internal.junit.launcher;
 
 import java.io.File;

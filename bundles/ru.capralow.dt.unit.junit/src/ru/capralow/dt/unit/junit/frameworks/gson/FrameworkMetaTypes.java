@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020, Alexander Kapralov
+ * Copyright (c) 2021, Aleksandr Kapralov
  */
 package ru.capralow.dt.unit.junit.frameworks.gson;
 

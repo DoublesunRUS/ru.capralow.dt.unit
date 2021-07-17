@@ -1,3 +1,6 @@
+/**
+ * Copyright (c) 2021, Aleksandr Kapralov
+ */
 package ru.capralow.dt.unit.internal.junit;
 
 import java.util.ArrayList;
@@ -64,8 +67,8 @@ public class JUnitPreferencesConstants
 
     public static String[] getFilterPatterns()
     {
-        return JUnitPreferencesConstants.parseList(Platform.getPreferencesService()
-            .getString(JUnitPlugin.ID, PREF_ACTIVE_FILTERS_LIST, null, null));
+        return JUnitPreferencesConstants.parseList(
+            Platform.getPreferencesService().getString(JUnitPlugin.ID, PREF_ACTIVE_FILTERS_LIST, null, null));
     }
 
     public static boolean getFilterStack()

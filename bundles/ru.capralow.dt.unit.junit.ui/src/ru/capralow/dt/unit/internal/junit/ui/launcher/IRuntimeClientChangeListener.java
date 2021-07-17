@@ -1,3 +1,6 @@
+/**
+ * Copyright (c) 2021, Aleksandr Kapralov
+ */
 package ru.capralow.dt.unit.internal.junit.ui.launcher;
 
 import org.eclipse.core.resources.IProject;

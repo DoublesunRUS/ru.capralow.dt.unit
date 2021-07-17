@@ -1,3 +1,6 @@
+/**
+ * Copyright (c) 2021, Aleksandr Kapralov
+ */
 package ru.capralow.dt.unit.internal.junit.ui;
 
 import org.eclipse.swt.graphics.Image;

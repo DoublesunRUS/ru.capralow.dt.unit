@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2021, Alexander Kapralov
+ * Copyright (c) 2021, Aleksandr Kapralov
  */
 package ru.capralow.dt.unit.internal.junit.ui.launcher;
 

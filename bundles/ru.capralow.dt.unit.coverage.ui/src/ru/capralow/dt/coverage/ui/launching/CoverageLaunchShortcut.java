@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020, Alexander Kapralov
+ * Copyright (c) 2020, Aleksandr Kapralov
  */
 package ru.capralow.dt.coverage.ui.launching;
 

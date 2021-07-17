@@ -9,7 +9,7 @@
  * Contributors:
  *    Marc R. Hoffmann - initial API and implementation
  *
- * Adapted by Alexander Kapralov
+ * Adapted by Aleksandr Kapralov
  *
  ******************************************************************************/
 package ru.capralow.dt.coverage.internal.core;
