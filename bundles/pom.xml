@@ -21,7 +21,6 @@
 <!-- 		<module>ru.capralow.dt.coverage.ui</module> -->
 		<module>ru.capralow.dt.unit.junit</module>
 		<module>ru.capralow.dt.unit.junit.ui</module>
-		<module>ru.capralow.dt.launching.core</module>
 	</modules>
 
 	<build>
