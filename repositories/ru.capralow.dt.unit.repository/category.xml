@@ -6,9 +6,6 @@
    <feature id="ru.capralow.dt.framework.va.feature">
       <category name="ru.capralow.dt.category.framework"/>
    </feature>
-   <feature id="org.eclipse.jdt">
-      <category name="ru.capralow.thirdparty.category.optional"/>
-   </feature>
    <bundle id="org.objectweb.asm" version="8.0.1.v20200420-1007">
       <category name="ru.capralow.thirdparty.category.optional"/>
    </bundle>

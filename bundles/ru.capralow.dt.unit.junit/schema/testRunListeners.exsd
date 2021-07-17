@@ -55,8 +55,8 @@
          <attribute name="class" type="string" use="required">
             <annotation>
                <documentation>
-                  A test run listener that extends org.eclipse.jdt.junit.TestRunListener (since 3.6).
-&lt;em&gt;Note: Also accepts org.eclipse.jdt.junit.ITestRunListener, but that interface is deprecated.&lt;/em&gt;
+                  A test run listener that extends ru.capralow.dt.unit.junit.TestRunListener (since 3.6).
+&lt;em&gt;Note: Also accepts ru.capralow.dt.unit.junit.ITestRunListener, but that interface is deprecated.&lt;/em&gt;
                </documentation>
                <appinfo>
                   <meta.attribute kind="java" basedOn="ru.capralow.dt.unit.junit.TestRunListener:ru.capralow.dt.unit.junit.ITestRunListener"/>

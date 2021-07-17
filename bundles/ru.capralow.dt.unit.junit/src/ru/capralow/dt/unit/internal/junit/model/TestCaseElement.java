@@ -22,7 +22,7 @@ public class TestCaseElement
 
     /**
      * {@inheritDoc}
-     * @see org.eclipse.jdt.junit.model.ITestCaseElement#getTestClassName()
+     * @see ru.capralow.dt.unit.junit.model.ITestCaseElement#getTestClassName()
      */
     @Override
     public String getTestClassName()
@@ -32,7 +32,7 @@ public class TestCaseElement
 
     /**
      * {@inheritDoc}
-     * @see org.eclipse.jdt.junit.model.ITestCaseElement#getTestMethodName()
+     * @see ru.capralow.dt.unit.junit.model.ITestCaseElement#getTestMethodName()
      * @see ru.capralow.dt.unit.internal.junit.runner.jdt.internal.junit.runner.MessageIds#TEST_IDENTIFIER_MESSAGE_FORMAT
      * @see ru.capralow.dt.unit.internal.junit.runner.jdt.internal.junit.runner.MessageIds#IGNORED_TEST_PREFIX
      */
@@ -50,7 +50,7 @@ public class TestCaseElement
     }
 
     /*
-     * @see org.eclipse.jdt.internal.junit.model.TestElement#getTestResult(boolean)
+     * @see ru.capralow.dt.unit.internal.junit.model.TestElement#getTestResult(boolean)
      */
     @Override
     public Result getTestResult(boolean includeChildren)

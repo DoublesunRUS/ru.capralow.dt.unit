@@ -65,10 +65,10 @@ public abstract class TestElement
     /**
      * Running time in seconds. Contents depend on the current {@link #getProgressState()}:
      * <ul>
-     * <li>{@link org.eclipse.jdt.junit.model.ITestElement.ProgressState#NOT_STARTED}: {@link Double#NaN}</li>
-     * <li>{@link org.eclipse.jdt.junit.model.ITestElement.ProgressState#RUNNING}: negated start time</li>
-     * <li>{@link org.eclipse.jdt.junit.model.ITestElement.ProgressState#STOPPED}: elapsed time</li>
-     * <li>{@link org.eclipse.jdt.junit.model.ITestElement.ProgressState#COMPLETED}: elapsed time</li>
+     * <li>{@link ru.capralow.dt.unit.junit.model.ITestElement.ProgressState#NOT_STARTED}: {@link Double#NaN}</li>
+     * <li>{@link ru.capralow.dt.unit.junit.model.ITestElement.ProgressState#RUNNING}: negated start time</li>
+     * <li>{@link ru.capralow.dt.unit.junit.model.ITestElement.ProgressState#STOPPED}: elapsed time</li>
+     * <li>{@link ru.capralow.dt.unit.junit.model.ITestElement.ProgressState#COMPLETED}: elapsed time</li>
      * </ul>
      */
     /* default */ double fTime = Double.NaN;
@@ -107,7 +107,7 @@ public abstract class TestElement
 
     /**
      * @return return the class name
-     * @see org.eclipse.jdt.internal.junit.runner.ITestIdentifier#getName()
+     * @see ru.capralow.dt.unit.internal.junit.runner.ITestIdentifier#getName()
      * @see ru.capralow.dt.unit.internal.junit.runner.jdt.internal.junit.runner.MessageIds#TEST_IDENTIFIER_MESSAGE_FORMAT
      */
     public String getClassName()

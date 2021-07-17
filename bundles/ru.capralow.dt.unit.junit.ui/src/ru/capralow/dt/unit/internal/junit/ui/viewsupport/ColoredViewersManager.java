@@ -15,10 +15,11 @@ public class ColoredViewersManager
     implements IPropertyChangeListener
 {
 
-    public static final String INHERITED_COLOR_NAME = "org.eclipse.jdt.ui.ColoredLabels.inherited"; //$NON-NLS-1$
+    public static final String INHERITED_COLOR_NAME = "ru.capralow.dt.unit.junit.ui.ColoredLabels.inherited"; //$NON-NLS-1$
 
-    public static final String HIGHLIGHT_BG_COLOR_NAME = "org.eclipse.jdt.ui.ColoredLabels.match_highlight"; //$NON-NLS-1$
-    public static final String HIGHLIGHT_WRITE_BG_COLOR_NAME = "org.eclipse.jdt.ui.ColoredLabels.writeaccess_highlight"; //$NON-NLS-1$
+    public static final String HIGHLIGHT_BG_COLOR_NAME = "ru.capralow.dt.unit.junit.ui.ColoredLabels.match_highlight"; //$NON-NLS-1$
+    public static final String HIGHLIGHT_WRITE_BG_COLOR_NAME =
+        "ru.capralow.dt.unit.junit.ui.ColoredLabels.writeaccess_highlight"; //$NON-NLS-1$
 
     private static ColoredViewersManager fgInstance = new ColoredViewersManager();
 

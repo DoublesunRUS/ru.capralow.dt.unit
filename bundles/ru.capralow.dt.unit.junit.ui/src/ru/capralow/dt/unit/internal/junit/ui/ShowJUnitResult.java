@@ -26,7 +26,7 @@ public class ShowJUnitResult
     implements IDebugEventSetListener
 {
 
-    public static final String JUNIT_PANEL_ID = "org.eclipse.jdt.junit.ResultView"; //$NON-NLS-1$
+    public static final String JUNIT_PANEL_ID = "ru.capralow.dt.unit.junit.ResultView"; //$NON-NLS-1$
 
     private static void showJUnitResult(IProcess process)
     {

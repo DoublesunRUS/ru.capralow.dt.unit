@@ -297,7 +297,7 @@ public class TestRunSession
     }
 
     /*
-     * @see org.eclipse.jdt.junit.model.ITestRunSession#getJavaProject()
+     * @see ru.capralow.dt.unit.junit.model.ITestRunSession#getJavaProject()
      */
     @Override
     public IV8Project getLaunchedProject()

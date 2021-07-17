@@ -3,6 +3,12 @@
 <target name="1C:EDT Ruby Platform" sequenceNumber="1">
 <locations>
 
+<!-- VA Framework -->
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="ru.capralow.dt.framework.va.feature.feature.group" version="0.0.0"/>
+<repository id="framework_va" location="http://capralow.ru/edt/unit.framework.va/latest/"/>
+</location>
+
 <!-- EDT -->
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
 <repository id="dt_repository" location="https://edt.1c.ru/downloads/releases/ruby/2021.2/"/>
@@ -119,12 +125,6 @@
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.license.feature.group" version="0.0.0"/>
 <repository location="http://download.eclipse.org/cbi/updates/license/2.0.2.v20181016-2210"/>
-</location>
-
-<!-- VA Framework -->
-<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
-<unit id="ru.capralow.dt.framework.va.feature.feature.group" version="0.0.0"/>
-<repository id="framework_va" location="http://capralow.ru/edt/unit.framework.va/latest/"/>
 </location>
 
 <!-- Eclipse -->

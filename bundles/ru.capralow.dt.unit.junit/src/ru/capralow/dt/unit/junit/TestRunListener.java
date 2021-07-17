@@ -5,7 +5,7 @@ import ru.capralow.dt.unit.junit.model.ITestRunSession;
 
 /**
  * A test run listener that can be registered at {@link JUnitCore#addTestRunListener(TestRunListener)}
- * or as a contribution to the <code>org.eclipse.jdt.junit.testRunListeners</code> extension point.
+ * or as a contribution to the <code>ru.capralow.dt.unit.junit.testRunListeners</code> extension point.
  * The latter approach has the advantage that the contributing plug-in is automatically loaded when a test run starts.
  * <p>
  * A test run starts with the call to {@link #sessionLaunched(ITestRunSession)} and
