@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+	<extension-point id="ru.capralow.dt.unit.junit.testRunListeners" name="%testRunListeners.name" schema="schema/testRunListeners.exsd"/>
+
+	<extension point="org.eclipse.debug.core.launchConfigurationTypes">
+		<launchConfigurationType
+			name="%UnitTestLaunch"
+			delegate="ru.capralow.dt.unit.internal.junit.ExecutableExtensionFactory:ru.capralow.dt.unit.internal.junit.launcher.RuntimeUnitLauncherLaunchDelegate"
+			modes="run, debug"
+			id="ru.capralow.dt.unit.UnitTestLaunch">
+		</launchConfigurationType>
+	</extension>
+
+</plugin>

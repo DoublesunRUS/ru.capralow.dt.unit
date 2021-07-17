@@ -16,8 +16,8 @@
 	<name>Tests</name>
 
 	<modules>
-		<module>ru.capralow.dt.unit.launcher.tests</module>
-		<module>ru.capralow.dt.unit.launcher.ui.tests</module>
+		<module>ru.capralow.dt.unit.junit.tests</module>
+		<module>ru.capralow.dt.unit.junit.ui.tests</module>
 	</modules>
 
 	<profiles>

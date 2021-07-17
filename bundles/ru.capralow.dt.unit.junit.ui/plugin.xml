@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+	
+	<extension point="org.eclipse.xtext.builder.participant">
+		<participant
+			class="ru.capralow.dt.unit.internal.junit.ui.ExecutableExtensionFactory:ru.capralow.dt.unit.internal.junit.ui.xtextbuilder.UnitLauncherXtextBuilderParticipant"
+			fileExtensions="bsl">
+		</participant>
+	</extension>
+	
+	<extension point="org.eclipse.ui.commands">
+		<command
+			id="ru.capralow.dt.unit.junit.ui.commands.OpenFeaturesFolder"
+			name="%OpenFeaturesFolder_label">
+		</command>
+		<command
+			id="ru.capralow.dt.unit.junit.ui.commands.AddUnitTestToModule"
+			name="%AddUnitTestToModule_label">
+		</command>
+	</extension>
+	
+	<extension point="org.eclipse.ui.handlers">
+		<handler
+			commandId="ru.capralow.dt.unit.junit.ui.commands.OpenFeaturesFolder"
+			class="ru.capralow.dt.unit.internal.junit.ui.ExecutableExtensionFactory:ru.capralow.dt.unit.internal.junit.ui.xtextbuilder.OpenFeaturesFolderHandler">
+		</handler>
+		<handler
+			commandId="ru.capralow.dt.unit.junit.ui.commands.AddUnitTestToModule"
+			class="ru.capralow.dt.unit.internal.junit.ui.ExecutableExtensionFactory:ru.capralow.dt.unit.internal.junit.ui.addtest.AddUnitTestToModuleHandler">
+		</handler>
+	</extension>
+	
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution
+			locationURI="popup:com._1c.g5.v8.dt.navigator.ui.navigator.popup">
+			<command
+				commandId="ru.capralow.dt.unit.junit.ui.commands.OpenFeaturesFolder"
+				style="push"
+				label="%OpenFeaturesFolder_label">
+ 
+				<visibleWhen>
+					<and>
+						<count value="+" />
+						<iterate operator="or">
+							<instanceof value="com._1c.g5.v8.dt.metadata.mdclass.Configuration" />
+						</iterate>
+					</and>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+		<menuContribution
+			locationURI="popup:#BslEditorContext?after=additions">
+			<command
+				commandId="ru.capralow.dt.unit.junit.ui.commands.AddUnitTestToModule"
+				style="push"
+				label="%AddUnitTestToModule_label">
+ 
+				<visibleWhen
+					checkEnabled="false">
+					<and>
+						<reference
+							definitionId="com._1c.g5.v8.dt.bsl.Bsl.Editor.opened">
+						</reference>
+						<reference
+							definitionId="com._1c.g5.v8.dt.bsl.Bsl.Editor.editable">
+						</reference>
+					</and>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	
+	<extension point="com._1c.g5.v8.dt.bsl.externalMetaTypesExtension">
+		<bslExternalMetaTypes
+			class="ru.capralow.dt.unit.internal.junit.ui.ExecutableExtensionFactory:ru.capralow.dt.unit.internal.junit.ui.metatypes.FrameworkMetaTypesProvider">
+		</bslExternalMetaTypes>
+	</extension>
+
+	<extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+		<launchConfigurationTabGroup
+			class="ru.capralow.dt.unit.internal.junit.ui.ExecutableExtensionFactory:ru.capralow.dt.unit.internal.junit.ui.launcher.UnitTestLaunchTabGroup"
+			id="ru.capralow.dt.unit.UnitTestLaunchTabGroup"
+			type="ru.capralow.dt.unit.UnitTestLaunch">
+		</launchConfigurationTabGroup>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+		<launchConfigurationTypeImage
+			configTypeID="ru.capralow.dt.unit.UnitTestLaunch"
+			icon="icons/obj16/1Unit.png"
+			id="ru.capralow.dt.unit.launchConfigurationTypeImage.UnitTestLaunch">
+		</launchConfigurationTypeImage>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchShortcuts">
+		<shortcut
+			class="ru.capralow.dt.unit.internal.junit.ui.ExecutableExtensionFactory:ru.capralow.dt.unit.internal.junit.ui.launcher.UnitTestLaunchShortcut"
+			description="%UnitTestShortcutDescription"
+			icon="icons/obj16/1Unit.png"
+			id="ru.capralow.dt.unit.shortcut.UnitTest"
+			label="%UnitTestShortcutLabel"
+			modes="run, debug">
+			<contextualLaunch>
+				<enablement>
+					<and>
+						<with variable="selection">
+							<iterate>
+								<adapt type="org.eclipse.core.resources.IProject">
+									<test
+										property="org.eclipse.core.resources.projectNature"
+										value="com._1c.g5.v8.dt.core.V8ExtensionNature"/>
+								</adapt>
+							</iterate>
+						</with>
+						<test property="com._1c.g5.v8.dt.platform.services.ui.infobasePersistenceSupported"/>
+					</and>
+				</enablement>
+			</contextualLaunch>
+			<configurationType
+				id="ru.capralow.dt.unit.UnitTestLaunch">
+			</configurationType>
+		</shortcut>
+	</extension>
+
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            name="%View.label"
+            icon="$nl$/icons/eview16/junit.png"
+            category="com._1c.g5.v8.dt.ui.v8category"
+            fastViewWidthRatio="0.40"
+            class="ru.capralow.dt.unit.internal.junit.ui.TestRunnerViewPart"
+            id="ru.capralow.dt.unit.ResultView">
+      </view>
+   </extension>
+
+</plugin>

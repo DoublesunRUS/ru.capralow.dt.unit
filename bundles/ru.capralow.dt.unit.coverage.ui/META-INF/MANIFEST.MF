@@ -1,0 +1,43 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: ru.capralow.dt.unit.coverage.ui;singleton:=true
+Bundle-Version: 0.4.1.qualifier
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Require-Bundle: 
+ ru.capralow.dt.unit.coverage;bundle-version="[0.1.0,1.0.0)",
+ org.jacoco.core;bundle-version="[0.8.3,0.9.0)",
+ org.eclipse.core.expressions;bundle-version="[3.6.0,4.0.0)",
+ org.eclipse.debug.ui;bundle-version="[3.14.0,4.0.0)",
+ org.eclipse.ui.forms;bundle-version="[3.8.0,4.0.0)",
+ org.eclipse.ui.ide;bundle-version="[3.15.0,4.0.0)",
+ org.eclipse.ui.workbench.texteditor;bundle-version="[3.12.0,4.0.0)",
+ org.eclipse.xtext.ui;bundle-version="[2.18.0,3.0.0)"
+Bundle-Activator: ru.capralow.dt.coverage.internal.ui.CoverageUiPlugin
+Export-Package: 
+ ru.capralow.dt.coverage.internal.ui;x-friends:="ru.capralow.dt.coverage.ui.test",
+ ru.capralow.dt.coverage.internal.ui.actions;x-internal:=true,
+ ru.capralow.dt.coverage.internal.ui.annotation;x-internal:=true,
+ ru.capralow.dt.coverage.internal.ui.coverageview;x-internal:=true,
+ ru.capralow.dt.coverage.internal.ui.decorators;x-internal:=true,
+ ru.capralow.dt.coverage.internal.ui.dialogs;x-internal:=true,
+ ru.capralow.dt.coverage.internal.ui.editors;x-internal:=true,
+ ru.capralow.dt.coverage.internal.ui.handlers;x-internal:=true,
+ ru.capralow.dt.coverage.internal.ui.launching;x-internal:=true,
+ ru.capralow.dt.coverage.internal.ui.wizards;x-internal:=true,
+ ru.capralow.dt.coverage.ui.launching;x-friends:="ru.capralow.dt.coverage.ui.test"
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Automatic-Module-Name: dt.coverage.ui
+Import-Package: 
+ com._1c.g5.v8.dt.bm.index.emf;version="[7.0.0,8.0.0)",
+ com._1c.g5.v8.dt.bsl.model;version="[4.0.0,5.0.0)",
+ com._1c.g5.v8.dt.core.platform;version="[10.0.0,11.0.0)",
+ com._1c.g5.v8.dt.md.ui.editor.base;version="[10.0.0,11.0.0)",
+ com._1c.g5.v8.dt.metadata.mdclass;version="[8.0.0,9.0.0)",
+ com._1c.g5.v8.dt.ui.editor.input;version="[5.0.0,6.0.0)",
+ com._1c.g5.v8.dt.ui.util;version="[6.0.0,7.0.0)",
+ com._1c.g5.wiring;version="[2.0.0,3.0.0)",
+ com._1c.g5.wiring.binder;version="[1.1.0,2.0.0)",
+ com.google.inject;version="[1.3.0,2.0.0)"

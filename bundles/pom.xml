@@ -17,12 +17,11 @@
 	<name>Bundles</name>
 
 	<modules>
-		<module>ru.capralow.dt.coverage</module>
-		<module>ru.capralow.dt.coverage.ui</module>
+<!-- 		<module>ru.capralow.dt.coverage</module> -->
+<!-- 		<module>ru.capralow.dt.coverage.ui</module> -->
+		<module>ru.capralow.dt.unit.junit</module>
+		<module>ru.capralow.dt.unit.junit.ui</module>
 		<module>ru.capralow.dt.launching.core</module>
-		<module>ru.capralow.dt.launching.ui</module>
-		<module>ru.capralow.dt.unit.launcher</module>
-		<module>ru.capralow.dt.unit.launcher.ui</module>
 	</modules>
 
 	<build>

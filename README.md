@@ -1,16 +1,16 @@
 ﻿![Build](https://github.com/DoublesunRUS/ru.capralow.dt.unit/workflows/CI/badge.svg)
 
 
-## Запуск модульных тестов для [1C:Enterprise Development Tools](http://v8.1c.ru/overview/IDE/) 2021.1
+## Запуск модульных тестов для [1C:Enterprise Development Tools](http://v8.1c.ru/overview/IDE/) 2021.2
 
-Минимальная версия EDT: 2021.1
+Минимальная версия EDT: 2021.2
 
 Текущий релиз в ветке [master: 0.4.1](https://github.com/DoublesunRUS/ru.capralow.dt.unit/tree/master).<br>
 Разработка ведется в ветке [dev](https://github.com/DoublesunRUS/ru.capralow.dt.unit/tree/dev).<br>
 
 В данном репозитории хранятся только исходники.<br>
 
-Плагин можно установить в EDT через пункт "Установить новое ПО" указав сайт обновления http://capralow.ru/edt/1unit/latest/ . Для установки может потребоваться запуск EDT под правами администратора.<br>
+Плагин можно установить в EDT через пункт "Установить новое ПО" указав сайт обновления http://capralow.ru/edt/1unit/0.4.1/ . Для установки может потребоваться запуск EDT под правами администратора.<br>
 Для самостоятельной сборки плагина необходимо иметь доступ к сайту https://releases.1c.ru и настроить соответствующим образом Maven. Подробности настройки написаны [здесь](https://github.com/1C-Company/dt-example-plugins/blob/master/simple-plugin/README.md).
 
 ### Возможности

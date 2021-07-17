@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Schema file written by PDE -->
+<schema targetNamespace="ru.capralow.dt.unit.junit" xmlns="http://www.w3.org/2001/XMLSchema">
+<annotation>
+      <appinfo>
+         <meta.schema plugin="ru.capralow.dt.unit.junit" id="testRunListeners" name="Test Run Listeners"/>
+      </appinfo>
+      <documentation>
+         Extension point to register additional test run listeners. A test run listener is notified about the execution of a test run.
+      </documentation>
+   </annotation>
+
+   <element name="extension">
+      <annotation>
+         <appinfo>
+            <meta.element />
+         </appinfo>
+         <documentation>
+            a fully qualified identifier of the target extension point
+         </documentation>
+      </annotation>
+      <complexType>
+         <sequence>
+            <element ref="testRunListener"/>
+         </sequence>
+         <attribute name="point" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="id" type="string">
+            <annotation>
+               <documentation>
+                  a fully qualified identifier of the target extension point
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="name" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appinfo>
+                  <meta.attribute translatable="true"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="testRunListener">
+      <complexType>
+         <attribute name="class" type="string" use="required">
+            <annotation>
+               <documentation>
+                  A test run listener that extends org.eclipse.jdt.junit.TestRunListener (since 3.6).
+&lt;em&gt;Note: Also accepts org.eclipse.jdt.junit.ITestRunListener, but that interface is deprecated.&lt;/em&gt;
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="java" basedOn="ru.capralow.dt.unit.junit.TestRunListener:ru.capralow.dt.unit.junit.ITestRunListener"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+
+   <annotation>
+      <appinfo>
+         <meta.section type="examples"/>
+      </appinfo>
+      <documentation>
+         The following is an example of a test run listener contribution:
+
+&lt;p&gt;
+&lt;pre&gt;
+ &lt;extension point=&quot;ru.capralow.dt.unit.junit.testRunListeners&quot;&gt;
+  &lt;testRunListener class=&quot;com.example.SampleTestRunListener&quot;/&gt;
+ &lt;/extension&gt;
+&lt;/pre&gt;
+&lt;/p&gt;
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="apiInfo"/>
+      </appinfo>
+      <documentation>
+         Test run listeners should extend ru.capralow.dt.unit.junit.TestRunListener.
+In previous versions, they could also implement the ru.capralow.dt.unit.junit.ITestRunListener interface, but that one is deprecated now.
+      </documentation>
+   </annotation>
+
+
+
+</schema>
