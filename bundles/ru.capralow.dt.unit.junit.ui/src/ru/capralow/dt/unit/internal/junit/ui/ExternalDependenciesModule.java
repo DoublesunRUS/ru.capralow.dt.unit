@@ -16,6 +16,7 @@ import com._1c.g5.v8.dt.platform.services.core.runtimes.execution.IRuntimeCompon
 import com._1c.g5.v8.dt.platform.version.IRuntimeVersionSupport;
 import com._1c.g5.v8.dt.profiling.core.IProfilingService;
 import com._1c.g5.wiring.AbstractServiceAwareModule;
+import com.e1c.g5.dt.applications.IApplicationManager;
 
 public class ExternalDependenciesModule
     extends AbstractServiceAwareModule
@@ -30,6 +31,7 @@ public class ExternalDependenciesModule
     protected void doConfigure()
     {
         bind(ExternalObjectExtractor.class).toService();
+        bind(IApplicationManager.class).toService();
         bind(IBmEmfIndexManager.class).toService();
         bind(IInfobaseManager.class).toService();
         bind(IProcessEncodingProvider.class).toService();
