@@ -109,13 +109,14 @@ public class UnitTestLaunchShortcut
             configuration.getAttribute(IDebugConfigurationAttributes.RUNTIME_INSTALLATION_USE_AUTO, false);
         final String runtime =
             configuration.getAttribute(IDebugConfigurationAttributes.RUNTIME_INSTALLATION, (String)null);
-        final boolean isRuntimeValid = runtimeUseAuto
-            || (runtime != null && this.resolvableRuntimeInstallationManager.deserialize(runtime) != null);
+        final boolean isRuntimeValid =
+            runtimeUseAuto || runtime != null && this.resolvableRuntimeInstallationManager.deserialize(runtime) != null;
 
 //        String externalObjectDumpPath =
 //            configuration.getAttribute(JUnitLaunchConfigurationConstants.EXTERNAL_OBJECT_DUMP_PATH, (String)null);
 //        String externalObjectStartupOptions =
-//            configuration.getAttribute(JUnitLaunchConfigurationConstants.EXTERNAL_OBJECT_STARTUP_OPTIONS, (String)null);
+//            configuration.getAttribute(JUnitLaunchConfigurationConstants.EXTERNAL_OBJECT_STARTUP_OPTIONS,
+        //(String)null);
 //        Boolean isExternalObjectValid =
 //            !Strings.isNullOrEmpty(externalObjectDumpPath) && !Strings.isNullOrEmpty(externalObjectStartupOptions);
 

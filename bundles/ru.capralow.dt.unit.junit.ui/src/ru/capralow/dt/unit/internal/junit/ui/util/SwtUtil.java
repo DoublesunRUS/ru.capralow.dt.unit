@@ -33,7 +33,7 @@ import org.eclipse.ui.PlatformUI;
 /**
  * Utility class to simplify access to some SWT resources.
  */
-public class SWTUtil
+public final class SwtUtil
 {
 
     /**
@@ -172,7 +172,7 @@ public class SWTUtil
      * <b>Note:</b> This is a NOP if the button's layout data is not
      * an instance of <code>GridData</code>.
      *
-     * @param button	the button for which to set the dimension hint
+     * @param button - the button for which to set the dimension hint
      */
     public static void setButtonDimensionHint(Button button)
     {
@@ -199,7 +199,7 @@ public class SWTUtil
         combo.setVisibleItemCount(COMBO_VISIBLE_ITEM_COUNT);
     }
 
-    private SWTUtil()
+    private SwtUtil()
     {
     }
 

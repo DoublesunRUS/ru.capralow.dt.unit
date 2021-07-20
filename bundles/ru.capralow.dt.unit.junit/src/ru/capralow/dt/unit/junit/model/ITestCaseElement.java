@@ -6,7 +6,7 @@ package ru.capralow.dt.unit.junit.model;
 public interface ITestCaseElement
     extends ITestElement
 {
-    public String getTestClassName();
+    String getTestClassName();
 
-    public String getTestMethodName();
+    String getTestMethodName();
 }

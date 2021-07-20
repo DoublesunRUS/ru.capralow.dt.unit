@@ -12,7 +12,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-import ru.capralow.dt.unit.internal.junit.ui.util.SWTUtil;
+import ru.capralow.dt.unit.internal.junit.ui.util.SwtUtil;
 
 public class CounterPanel
     extends Composite
@@ -71,8 +71,9 @@ public class CounterPanel
         String runString;
         if (ignoredCount == 0 && assumptionFailureCount == 0)
         {
-            runStringTooltip = runString = MessageFormat.format(Messages.CounterPanel_runcount,
+            runString = MessageFormat.format(Messages.CounterPanel_runcount,
                 (Object[])new String[] { Integer.toString(value), Integer.toString(this.fTotal) });
+            runStringTooltip = runString;
         }
         else if (ignoredCount != 0 && assumptionFailureCount == 0)
         {
@@ -137,7 +138,7 @@ public class CounterPanel
         label.setLayoutData(new GridData(32));
         Text value = new Text(this, 8);
         value.setText(init);
-        SWTUtil.fixReadonlyTextBackground(value);
+        SwtUtil.fixReadonlyTextBackground(value);
         value.setLayoutData(new GridData(800));
         return value;
     }

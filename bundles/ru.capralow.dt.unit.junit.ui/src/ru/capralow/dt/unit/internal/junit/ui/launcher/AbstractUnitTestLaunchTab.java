@@ -140,7 +140,7 @@ public abstract class AbstractUnitTestLaunchTab
     protected void setVisible(boolean visible, Control... controls)
     {
         Preconditions.checkArgument(controls.length > 0, "Controls cannot be empty"); //$NON-NLS-1$
-        Preconditions.checkArgument((!Arrays.asList(controls).contains(null)), "Controls cannot contain nulls"); //$NON-NLS-1$
+        Preconditions.checkArgument(!Arrays.asList(controls).contains(null), "Controls cannot contain nulls"); //$NON-NLS-1$
         boolean visibilityChanged = Iterables.any(Arrays.asList(controls), input -> {
             GridData data = (GridData)input.getLayoutData();
             return !(data.exclude != visible && input.isVisible() == visible);

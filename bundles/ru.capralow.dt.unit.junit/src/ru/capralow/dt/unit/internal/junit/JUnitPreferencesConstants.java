@@ -14,7 +14,7 @@ import org.eclipse.core.runtime.preferences.InstanceScope;
 /**
  * Defines constants which are used to refer to values in the plugin's preference store.
  */
-public class JUnitPreferencesConstants
+public final class JUnitPreferencesConstants
 {
     /**
      * Boolean preference controlling whether the failure stack should be
@@ -53,7 +53,7 @@ public class JUnitPreferencesConstants
      */
     public static final String MAX_TEST_RUNS = JUnitPlugin.ID + ".max_test_runs"; //$NON-NLS-1$
 
-    private static final String[] fgDefaultFilterPatterns = new String[] { };
+    private static final String[] FG_DEFAULT_FILTER_PATTERNS = new String[] { };
 
     /**
      * Returns the default list of active stack filters.
@@ -62,7 +62,7 @@ public class JUnitPreferencesConstants
      */
     public static List<String> createDefaultStackFiltersList()
     {
-        return Arrays.asList(fgDefaultFilterPatterns);
+        return Arrays.asList(FG_DEFAULT_FILTER_PATTERNS);
     }
 
     public static String[] getFilterPatterns()

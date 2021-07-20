@@ -10,10 +10,8 @@ import org.osgi.service.prefs.BackingStoreException;
 
 /**
  * Defines constants which are used to refer to values in the plugin's preference store.
- *
- * @since 3.7
  */
-public class JUnitUIPreferencesConstants
+public final class JunitUiPreferencesConstants
 {
     /**
      * Boolean preference controlling whether newly launched JUnit tests should be shown in all
@@ -21,7 +19,8 @@ public class JUnitUIPreferencesConstants
      */
     public static final String SHOW_IN_ALL_VIEWS = JUnitUiPlugin.ID + ".show_in_all_views"; //$NON-NLS-1$
 
-    public static final boolean SHOW_IN_ALL_VIEWS_DEFAULT = false; // would need a PreferenceInitializer if this was changed to true!
+    // would need a PreferenceInitializer if this was changed to true!
+    public static final boolean SHOW_IN_ALL_VIEWS_DEFAULT = false;
 
     private static final String CODEASSIST_FAVORITE_STATIC_MEMBERS_MIGRATED =
         JUnitUiPlugin.ID + ".content_assist_favorite_static_members_migrated"; //$NON-NLS-1$
@@ -66,7 +65,7 @@ public class JUnitUIPreferencesConstants
         }
     }
 
-    private JUnitUIPreferencesConstants()
+    private JunitUiPreferencesConstants()
     {
         // no instance
     }

@@ -36,8 +36,8 @@ public class TestCaseElement
     /**
      * {@inheritDoc}
      * @see ru.capralow.dt.unit.junit.model.ITestCaseElement#getTestMethodName()
-     * @see ru.capralow.dt.unit.internal.junit.runner.jdt.internal.junit.runner.MessageIds#TEST_IDENTIFIER_MESSAGE_FORMAT
-     * @see ru.capralow.dt.unit.internal.junit.runner.jdt.internal.junit.runner.MessageIds#IGNORED_TEST_PREFIX
+     * @see ru.capralow.dt.unit.internal.junit.runner.MessageIds#TEST_IDENTIFIER_MESSAGE_FORMAT
+     * @see ru.capralow.dt.unit.internal.junit.runner.MessageIds#IGNORED_TEST_PREFIX
      */
     @Override
     public String getTestMethodName()

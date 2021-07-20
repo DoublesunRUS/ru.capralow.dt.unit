@@ -29,7 +29,7 @@ public class CopyFailureListAction
         super(Messages.CopyFailureList_action_label);
         fRunner = runner;
         fClipboard = clipboard;
-        PlatformUI.getWorkbench().getHelpSystem().setHelp(this, IJUnitHelpContextIds.COPYFAILURELIST_ACTION);
+        PlatformUI.getWorkbench().getHelpSystem().setHelp(this, IJunitHelpContextIds.COPYFAILURELIST_ACTION);
     }
 
     public String getAllFailureTraces()

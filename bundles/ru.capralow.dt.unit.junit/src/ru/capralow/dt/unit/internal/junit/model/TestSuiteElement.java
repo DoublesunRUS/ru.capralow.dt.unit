@@ -134,7 +134,8 @@ public class TestSuiteElement
 
     private Status getCumulatedStatus()
     {
-        TestElement[] children = fChildren.toArray(new TestElement[fChildren.size()]); // copy list to avoid concurreny problems
+        // copy list to avoid concurreny problems
+        TestElement[] children = fChildren.toArray(new TestElement[fChildren.size()]);
         if (children.length == 0)
             return getSuiteStatus();
 

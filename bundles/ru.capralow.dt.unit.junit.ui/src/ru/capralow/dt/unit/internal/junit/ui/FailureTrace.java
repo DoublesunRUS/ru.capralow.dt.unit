@@ -249,10 +249,10 @@ public class FailureTrace
             clear();
             return;
         }
-        trace = trace.trim();
+        var traceTrimmed = trace.trim();
         fTable.setRedraw(false);
         fTable.removeAll();
-        new TextualTrace(trace, getFilterPatterns()).display(fFailureTableDisplay, MAX_LABEL_LENGTH);
+        new TextualTrace(traceTrimmed, getFilterPatterns()).display(fFailureTableDisplay, MAX_LABEL_LENGTH);
         fTable.setRedraw(true);
     }
 

@@ -9,11 +9,11 @@ import com._1c.g5.v8.dt.platform.services.model.InfobaseReference;
 
 public interface IRuntimeClientChangeListener
 {
-    public void infobaseChanged(InfobaseReference var1);
+    void infobaseChanged(InfobaseReference var1);
 
-    public void projectChanged(IProject var1);
+    void projectChanged(IProject var1);
 
-    public void runtimeClientAutoSelected();
+    void runtimeClientAutoSelected();
 
-    public void runtimeClientChanged(String var1);
+    void runtimeClientChanged(String var1);
 }

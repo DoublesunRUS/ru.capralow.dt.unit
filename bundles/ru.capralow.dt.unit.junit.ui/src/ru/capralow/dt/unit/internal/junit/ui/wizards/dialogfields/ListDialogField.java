@@ -40,7 +40,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 
-import ru.capralow.dt.unit.internal.junit.ui.util.SWTUtil;
+import ru.capralow.dt.unit.internal.junit.ui.util.SwtUtil;
 import ru.capralow.dt.unit.internal.junit.ui.util.TableLayoutComposite;
 
 /**
@@ -896,7 +896,7 @@ public class ListDialogField<E>
         gd.horizontalAlignment = GridData.FILL;
         gd.grabExcessHorizontalSpace = true;
         gd.verticalAlignment = GridData.BEGINNING;
-        gd.widthHint = SWTUtil.getButtonWidthHint(button);
+        gd.widthHint = SwtUtil.getButtonWidthHint(button);
 
         button.setLayoutData(gd);
 

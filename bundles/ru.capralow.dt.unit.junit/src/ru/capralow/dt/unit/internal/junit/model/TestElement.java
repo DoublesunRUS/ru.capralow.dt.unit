@@ -23,15 +23,14 @@ public abstract class TestElement
         if (index < 0)
             return testNameString;
         int end = testNameString.lastIndexOf(')');
-        testNameString = testNameString.substring(index + 1, end > index ? end : testNameString.length());
-        return testNameString;
+        return testNameString.substring(index + 1, end > index ? end : testNameString.length());
     }
 
     private static String extractClassName(String testNameString)
     {
-        testNameString = extractRawClassName(testNameString);
-        testNameString = testNameString.replace('$', '.'); // see bug 178503
-        return testNameString;
+        var result = extractRawClassName(testNameString);
+        result = testNameString.replace('$', '.'); // see bug 178503
+        return result;
     }
 
     private final TestSuiteElement fParent;
@@ -111,7 +110,7 @@ public abstract class TestElement
     /**
      * @return return the class name
      * @see ru.capralow.dt.unit.internal.junit.runner.ITestIdentifier#getName()
-     * @see ru.capralow.dt.unit.internal.junit.runner.jdt.internal.junit.runner.MessageIds#TEST_IDENTIFIER_MESSAGE_FORMAT
+     * @see ru.capralow.dt.unit.internal.junit.runner.MessageIds#TEST_IDENTIFIER_MESSAGE_FORMAT
      */
     public String getClassName()
     {
@@ -150,7 +149,7 @@ public abstract class TestElement
     {
         var testResult = getTestResult(false);
         if (testResult == Result.ERROR || testResult == Result.FAILURE
-            || (testResult == Result.IGNORED && fTrace != null))
+            || testResult == Result.IGNORED && fTrace != null)
         {
             return new FailureTrace(fTrace, fExpected, fActual);
         }
@@ -354,7 +353,7 @@ public abstract class TestElement
         {
             if (one.isNotRun() && two.isNotRun())
                 return NOT_RUN;
-            else if ((one.isDone() && two.isDone()) || (!one.isRunning() && !two.isRunning()))
+            else if (one.isDone() && two.isDone() || !one.isRunning() && !two.isRunning())
             { // One done, one not-run -> a parent failed and its children are not run
                 return OK;
             }

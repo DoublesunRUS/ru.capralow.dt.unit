@@ -37,7 +37,7 @@ public class JUnitCopyAction
     {
         super(Messages.CopyTrace_action_label);
         Assert.isNotNull(clipboard);
-        PlatformUI.getWorkbench().getHelpSystem().setHelp(this, IJUnitHelpContextIds.COPYTRACE_ACTION);
+        PlatformUI.getWorkbench().getHelpSystem().setHelp(this, IJunitHelpContextIds.COPYTRACE_ACTION);
         fView = view;
         fClipboard = clipboard;
     }
@@ -84,10 +84,10 @@ public class JUnitCopyAction
 
     private String convertLineTerminators(String in)
     {
-        StringWriter stringWriter = new StringWriter();
-        PrintWriter printWriter = new PrintWriter(stringWriter);
-        StringReader stringReader = new StringReader(in);
-        BufferedReader bufferedReader = new BufferedReader(stringReader);
+        var stringWriter = new StringWriter();
+        var printWriter = new PrintWriter(stringWriter);
+        var stringReader = new StringReader(in);
+        var bufferedReader = new BufferedReader(stringReader);
         String line;
         try
         {

@@ -20,7 +20,7 @@ public class OpenEditorAtLineAction
     public OpenEditorAtLineAction(TestRunnerViewPart testRunner, String className, int line)
     {
         super(testRunner, className);
-        PlatformUI.getWorkbench().getHelpSystem().setHelp(this, IJUnitHelpContextIds.OPENEDITORATLINE_ACTION);
+        PlatformUI.getWorkbench().getHelpSystem().setHelp(this, IJunitHelpContextIds.OPENEDITORATLINE_ACTION);
         fLineNumber = line;
     }
 

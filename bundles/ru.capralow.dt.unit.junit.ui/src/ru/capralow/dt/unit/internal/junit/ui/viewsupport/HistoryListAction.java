@@ -36,7 +36,7 @@ import ru.capralow.dt.unit.internal.junit.ui.wizards.dialogfields.StringDialogFi
 
     private ViewHistory<E> fHistory;
 
-    public HistoryListAction(ViewHistory<E> history)
+    HistoryListAction(ViewHistory<E> history)
     {
         super(null, IAction.AS_RADIO_BUTTON);
         fHistory = history;
@@ -49,7 +49,7 @@ import ru.capralow.dt.unit.internal.junit.ui.wizards.dialogfields.StringDialogFi
     @Override
     public void run()
     {
-        HistoryListDialog dialog = new HistoryListDialog();
+        var dialog = new HistoryListDialog();
         if (dialog.open() == Window.OK)
         {
             fHistory.setHistoryEntries(dialog.getRemaining(), dialog.getResult());
@@ -57,7 +57,7 @@ import ru.capralow.dt.unit.internal.junit.ui.wizards.dialogfields.StringDialogFi
         }
     }
 
-    private class HistoryListDialog
+    private final class HistoryListDialog
         extends StatusDialog
     {
         private static final int MAX_MAX_ENTRIES = 100;

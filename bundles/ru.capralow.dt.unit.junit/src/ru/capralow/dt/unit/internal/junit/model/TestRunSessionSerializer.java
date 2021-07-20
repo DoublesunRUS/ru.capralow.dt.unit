@@ -37,12 +37,12 @@ public class TestRunSessionSerializer
     private static final String CDATA = "CDATA"; //$NON-NLS-1$
     private static final Attributes NO_ATTS = new AttributesImpl();
 
-    private static void addCDATA(AttributesImpl atts, String name, int value)
+    private static void addCdata(AttributesImpl atts, String name, int value)
     {
-        addCDATA(atts, name, Integer.toString(value));
+        addCdata(atts, name, Integer.toString(value));
     }
 
-    private static void addCDATA(AttributesImpl atts, String name, String value)
+    private static void addCdata(AttributesImpl atts, String name, String value)
     {
         atts.addAttribute(EMPTY, EMPTY, name, CDATA, value);
     }
@@ -89,7 +89,8 @@ public class TestRunSessionSerializer
 
     private ErrorHandler fErrorHandler;
 
-    private final NumberFormat timeFormat = new DecimalFormat("0.0##", new DecimalFormatSymbols(Locale.US)); //$NON-NLS-1$ // not localized, parseable by Double.parseDouble(..)
+    // not localized, parseable by Double.parseDouble(..)
+    private final NumberFormat timeFormat = new DecimalFormat("0.0##", new DecimalFormatSymbols(Locale.US)); //$NON-NLS-1$
 
     /**
      * @param testRunSession the test run session to serialize
@@ -203,33 +204,33 @@ public class TestRunSessionSerializer
 
         if (testElement.isAssumptionFailure())
         {
-            startElement(IXMLTags.NODE_SKIPPED, NO_ATTS);
+            startElement(IXmlTags.NODE_SKIPPED, NO_ATTS);
             if (failureTrace != null)
             {
                 addCharacters(failureTrace.getTrace());
             }
-            endElement(IXMLTags.NODE_SKIPPED);
+            endElement(IXmlTags.NODE_SKIPPED);
 
         }
         else if (failureTrace != null)
         {
             AttributesImpl failureAtts = new AttributesImpl();
             String failureKind =
-                testElement.getTestResult(false) == Result.ERROR ? IXMLTags.NODE_ERROR : IXMLTags.NODE_FAILURE;
+                testElement.getTestResult(false) == Result.ERROR ? IXmlTags.NODE_ERROR : IXmlTags.NODE_FAILURE;
             startElement(failureKind, failureAtts);
             String expected = failureTrace.getExpected();
             String actual = failureTrace.getActual();
             if (expected != null)
             {
-                startElement(IXMLTags.NODE_EXPECTED, NO_ATTS);
+                startElement(IXmlTags.NODE_EXPECTED, NO_ATTS);
                 addCharacters(expected);
-                endElement(IXMLTags.NODE_EXPECTED);
+                endElement(IXmlTags.NODE_EXPECTED);
             }
             if (actual != null)
             {
-                startElement(IXMLTags.NODE_ACTUAL, NO_ATTS);
+                startElement(IXmlTags.NODE_ACTUAL, NO_ATTS);
                 addCharacters(actual);
-                endElement(IXMLTags.NODE_ACTUAL);
+                endElement(IXmlTags.NODE_ACTUAL);
             }
             String trace = failureTrace.getTrace();
             addCharacters(trace);
@@ -250,27 +251,27 @@ public class TestRunSessionSerializer
 
             AttributesImpl atts = new AttributesImpl();
             // Need to store the full #getTestName instead of only the #getSuiteTypeName for test factory methods
-            addCDATA(atts, IXMLTags.ATTR_NAME, testSuiteElement.getTestName());
+            addCdata(atts, IXmlTags.ATTR_NAME, testSuiteElement.getTestName());
             if (!Double.isNaN(testSuiteElement.getElapsedTimeInSeconds()))
-                addCDATA(atts, IXMLTags.ATTR_TIME, timeFormat.format(testSuiteElement.getElapsedTimeInSeconds()));
+                addCdata(atts, IXmlTags.ATTR_TIME, timeFormat.format(testSuiteElement.getElapsedTimeInSeconds()));
             if (testElement.getProgressState() != ProgressState.COMPLETED
                 || testElement.getTestResult(false) != Result.UNDEFINED)
-                addCDATA(atts, IXMLTags.ATTR_INCOMPLETE, Boolean.TRUE.toString());
+                addCdata(atts, IXmlTags.ATTR_INCOMPLETE, Boolean.TRUE.toString());
             if (testSuiteElement.getDisplayName() != null)
             {
-                addCDATA(atts, IXMLTags.ATTR_DISPLAY_NAME, testSuiteElement.getDisplayName());
+                addCdata(atts, IXmlTags.ATTR_DISPLAY_NAME, testSuiteElement.getDisplayName());
             }
             String[] paramTypes = testSuiteElement.getParameterTypes();
             if (paramTypes != null)
             {
                 String paramTypesStr = Arrays.stream(paramTypes).collect(Collectors.joining(",")); //$NON-NLS-1$
-                addCDATA(atts, IXMLTags.ATTR_PARAMETER_TYPES, paramTypesStr);
+                addCdata(atts, IXmlTags.ATTR_PARAMETER_TYPES, paramTypesStr);
             }
             if (testSuiteElement.getUniqueId() != null)
             {
-                addCDATA(atts, IXMLTags.ATTR_UNIQUE_ID, testSuiteElement.getUniqueId());
+                addCdata(atts, IXmlTags.ATTR_UNIQUE_ID, testSuiteElement.getUniqueId());
             }
-            startElement(IXMLTags.NODE_TESTSUITE, atts);
+            startElement(IXmlTags.NODE_TESTSUITE, atts);
             addFailure(testSuiteElement);
 
             ITestElement[] children = testSuiteElement.getChildren();
@@ -278,7 +279,7 @@ public class TestRunSessionSerializer
             {
                 handleTestElement(child);
             }
-            endElement(IXMLTags.NODE_TESTSUITE);
+            endElement(IXmlTags.NODE_TESTSUITE);
 
         }
         else if (testElement instanceof TestCaseElement)
@@ -286,36 +287,36 @@ public class TestRunSessionSerializer
             TestCaseElement testCaseElement = (TestCaseElement)testElement;
 
             AttributesImpl atts = new AttributesImpl();
-            addCDATA(atts, IXMLTags.ATTR_NAME, testCaseElement.getTestMethodName());
-            addCDATA(atts, IXMLTags.ATTR_CLASSNAME, testCaseElement.getClassName());
+            addCdata(atts, IXmlTags.ATTR_NAME, testCaseElement.getTestMethodName());
+            addCdata(atts, IXmlTags.ATTR_CLASSNAME, testCaseElement.getClassName());
             if (!Double.isNaN(testCaseElement.getElapsedTimeInSeconds()))
-                addCDATA(atts, IXMLTags.ATTR_TIME, timeFormat.format(testCaseElement.getElapsedTimeInSeconds()));
+                addCdata(atts, IXmlTags.ATTR_TIME, timeFormat.format(testCaseElement.getElapsedTimeInSeconds()));
             if (testElement.getProgressState() != ProgressState.COMPLETED)
-                addCDATA(atts, IXMLTags.ATTR_INCOMPLETE, Boolean.TRUE.toString());
+                addCdata(atts, IXmlTags.ATTR_INCOMPLETE, Boolean.TRUE.toString());
             if (testCaseElement.isIgnored())
-                addCDATA(atts, IXMLTags.ATTR_IGNORED, Boolean.TRUE.toString());
+                addCdata(atts, IXmlTags.ATTR_IGNORED, Boolean.TRUE.toString());
             if (testCaseElement.isDynamicTest())
             {
-                addCDATA(atts, IXMLTags.ATTR_DYNAMIC_TEST, Boolean.TRUE.toString());
+                addCdata(atts, IXmlTags.ATTR_DYNAMIC_TEST, Boolean.TRUE.toString());
             }
             if (testCaseElement.getDisplayName() != null)
             {
-                addCDATA(atts, IXMLTags.ATTR_DISPLAY_NAME, testCaseElement.getDisplayName());
+                addCdata(atts, IXmlTags.ATTR_DISPLAY_NAME, testCaseElement.getDisplayName());
             }
             String[] paramTypes = testCaseElement.getParameterTypes();
             if (paramTypes != null)
             {
                 String paramTypesStr = Arrays.stream(paramTypes).collect(Collectors.joining(",")); //$NON-NLS-1$
-                addCDATA(atts, IXMLTags.ATTR_PARAMETER_TYPES, paramTypesStr);
+                addCdata(atts, IXmlTags.ATTR_PARAMETER_TYPES, paramTypesStr);
             }
             if (testCaseElement.getUniqueId() != null)
             {
-                addCDATA(atts, IXMLTags.ATTR_UNIQUE_ID, testCaseElement.getUniqueId());
+                addCdata(atts, IXmlTags.ATTR_UNIQUE_ID, testCaseElement.getUniqueId());
             }
-            startElement(IXMLTags.NODE_TESTCASE, atts);
+            startElement(IXmlTags.NODE_TESTCASE, atts);
             addFailure(testCaseElement);
 
-            endElement(IXMLTags.NODE_TESTCASE);
+            endElement(IXmlTags.NODE_TESTCASE);
 
         }
         else
@@ -328,16 +329,16 @@ public class TestRunSessionSerializer
     private void handleTestRun() throws SAXException
     {
         AttributesImpl atts = new AttributesImpl();
-        addCDATA(atts, IXMLTags.ATTR_NAME, fTestRunSession.getTestRunName());
+        addCdata(atts, IXmlTags.ATTR_NAME, fTestRunSession.getTestRunName());
         IV8Project project = fTestRunSession.getLaunchedProject();
         if (project != null)
-            addCDATA(atts, IXMLTags.ATTR_PROJECT, project.getProject().getName());
-        addCDATA(atts, IXMLTags.ATTR_TESTS, fTestRunSession.getTotalCount());
-        addCDATA(atts, IXMLTags.ATTR_STARTED, fTestRunSession.getStartedCount());
-        addCDATA(atts, IXMLTags.ATTR_FAILURES, fTestRunSession.getFailureCount());
-        addCDATA(atts, IXMLTags.ATTR_ERRORS, fTestRunSession.getErrorCount());
-        addCDATA(atts, IXMLTags.ATTR_IGNORED, fTestRunSession.getIgnoredCount());
-        startElement(IXMLTags.NODE_TESTRUN, atts);
+            addCdata(atts, IXmlTags.ATTR_PROJECT, project.getProject().getName());
+        addCdata(atts, IXmlTags.ATTR_TESTS, fTestRunSession.getTotalCount());
+        addCdata(atts, IXmlTags.ATTR_STARTED, fTestRunSession.getStartedCount());
+        addCdata(atts, IXmlTags.ATTR_FAILURES, fTestRunSession.getFailureCount());
+        addCdata(atts, IXmlTags.ATTR_ERRORS, fTestRunSession.getErrorCount());
+        addCdata(atts, IXmlTags.ATTR_IGNORED, fTestRunSession.getIgnoredCount());
+        startElement(IXmlTags.NODE_TESTRUN, atts);
 
         TestRoot testRoot = fTestRunSession.getTestRoot();
         ITestElement[] topSuites = testRoot.getChildren();
@@ -346,7 +347,7 @@ public class TestRunSessionSerializer
             handleTestElement(topSuite);
         }
 
-        endElement(IXMLTags.NODE_TESTRUN);
+        endElement(IXmlTags.NODE_TESTRUN);
     }
 
     private void startElement(String name, Attributes atts) throws SAXException

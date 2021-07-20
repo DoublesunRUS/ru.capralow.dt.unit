@@ -290,7 +290,7 @@ public class TestRunnerViewPart
     /**
      * A Job that periodically updates view description, counters, and progress bar.
      */
-    private UpdateUIJob fUpdateJob;
+    private UpdateUiJob fUpdateJob;
     /**
      * A Job that runs as long as a test run is running.
      * It is used to show busyness for running jobs in the view (title in italics).
@@ -362,7 +362,7 @@ public class TestRunnerViewPart
     {
         fImagesToDispose = new ArrayList<>();
 
-        fStackViewIcon = createManagedImage("eview16/stackframe.png");//$NON-NLS-1$
+        fStackViewIcon = createManagedImage("eview16/stackframe.png"); //$NON-NLS-1$
         fTestRunOKIcon = createManagedImage("eview16/junitsucc.png"); //$NON-NLS-1$
         fTestRunFailIcon = createManagedImage("eview16/juniterr.png"); //$NON-NLS-1$
         fTestRunOKDirtyIcon = createManagedImage("eview16/junitsuccq.png"); //$NON-NLS-1$
@@ -418,7 +418,7 @@ public class TestRunnerViewPart
 
         fOriginalViewImage = getTitleImage();
         fProgressImages = new ProgressImages();
-        PlatformUI.getWorkbench().getHelpSystem().setHelp(parent, IJUnitHelpContextIds.RESULTS_VIEW);
+        PlatformUI.getWorkbench().getHelpSystem().setHelp(parent, IJunitHelpContextIds.RESULTS_VIEW);
 
         getViewSite().getPage().addPartListener(fPartListener);
 
@@ -1322,7 +1322,8 @@ action enablement
 
             }
             else
-            /* old or fresh session: don't want jobs at this stage */ {
+            /* old or fresh session: don't want jobs at this stage */
+            {
                 stopUpdateJobs();
 
                 fStopAction.setEnabled(false);
@@ -1353,7 +1354,7 @@ action enablement
 
     private void setOrientation(int orientation)
     {
-        if ((fSashForm == null) || fSashForm.isDisposed())
+        if (fSashForm == null || fSashForm.isDisposed())
             return;
         boolean horizontal = orientation == VIEW_ORIENTATION_HORIZONTAL;
         fSashForm.setOrientation(horizontal ? SWT.HORIZONTAL : SWT.VERTICAL);
@@ -1402,7 +1403,7 @@ action enablement
         fJUnitIsRunningLock.acquire();
         getProgressService().schedule(fJUnitIsRunningJob);
 
-        fUpdateJob = new UpdateUIJob(Messages.TestRunnerViewPart_jobName);
+        fUpdateJob = new UpdateUiJob(Messages.TestRunnerViewPart_jobName);
         fUpdateJob.schedule(REFRESH_INTERVAL);
     }
 
@@ -1575,7 +1576,7 @@ action enablement
     private class ActivateOnErrorAction
         extends Action
     {
-        public ActivateOnErrorAction()
+        ActivateOnErrorAction()
         {
             super(Messages.TestRunnerViewPart_activate_on_failure_only, IAction.AS_CHECK_BOX);
             update();
@@ -1599,7 +1600,7 @@ action enablement
     private class ClearAction
         extends Action
     {
-        public ClearAction()
+        ClearAction()
         {
             setText(Messages.TestRunnerViewPart_clear_history_label);
 
@@ -1645,7 +1646,7 @@ action enablement
         private final TestRunSession fTestRunSession;
         private final Shell fShell;
 
-        public ExportTestRunSessionAction(Shell shell, TestRunSession testRunSession)
+        ExportTestRunSessionAction(Shell shell, TestRunSession testRunSession)
         {
             super(Messages.TestRunnerViewPart_ExportTestRunSessionAction_name);
             fShell = shell;
@@ -1699,7 +1700,7 @@ action enablement
     private class FailuresOnlyFilterAction
         extends Action
     {
-        public FailuresOnlyFilterAction()
+        FailuresOnlyFilterAction()
         {
             super(Messages.TestRunnerViewPart_show_failures_only, AS_CHECK_BOX);
             setToolTipText(Messages.TestRunnerViewPart_show_failures_only);
@@ -1716,7 +1717,7 @@ action enablement
     private class IgnoredOnlyFilterAction
         extends Action
     {
-        public IgnoredOnlyFilterAction()
+        IgnoredOnlyFilterAction()
         {
             super(Messages.TestRunnerViewPart_show_ignored_only, AS_CHECK_BOX);
             setToolTipText(Messages.TestRunnerViewPart_show_ignored_only);
@@ -1735,7 +1736,7 @@ action enablement
     {
         private final Shell fShell;
 
-        public ImportTestRunSessionAction(Shell shell)
+        ImportTestRunSessionAction(Shell shell)
         {
             super(Messages.TestRunnerViewPart_ImportTestRunSessionAction_name);
             fShell = shell;
@@ -1773,14 +1774,14 @@ action enablement
         }
     }
 
-    private static class ImportTestRunSessionFromURLAction
+    private static class ImportTestRunSessionFromUrlAction
         extends Action
     {
         private static final String DIALOG_SETTINGS = "ImportTestRunSessionFromURLAction"; //$NON-NLS-1$
 
         private final Shell fShell;
 
-        public ImportTestRunSessionFromURLAction(Shell shell)
+        ImportTestRunSessionFromUrlAction(Shell shell)
         {
             super(Messages.TestRunnerViewPart_ImportTestRunSessionFromURLAction_import_from_url);
             fShell = shell;
@@ -1795,7 +1796,7 @@ action enablement
             final IDialogSettings dialogSettings = JUnitUiPlugin.getInstance().getDialogSettings();
             String url = dialogSettings.get(PREF_LAST_URL);
 
-            IInputValidator validator = new URLValidator();
+            IInputValidator validator = new UrlValidator();
 
             InputDialog inputDialog = new InputDialog(fShell, title, message, url, validator)
             {
@@ -1840,7 +1841,7 @@ action enablement
             }
         }
 
-        private static class URLValidator
+        private static class UrlValidator
             implements IInputValidator
         {
             @Override
@@ -1866,7 +1867,7 @@ action enablement
     private class JUnitIsRunningJob
         extends Job
     {
-        public JUnitIsRunningJob(String name)
+        JUnitIsRunningJob(String name)
         {
             super(name);
             setSystem(true);
@@ -1893,7 +1894,7 @@ action enablement
         private final Shell fShell;
         private Clipboard fClipboard;
 
-        public JUnitPasteAction(Shell shell, Clipboard clipboard)
+        JUnitPasteAction(Shell shell, Clipboard clipboard)
         {
             super(Messages.TestRunnerViewPart_JUnitPasteAction_label);
             Assert.isNotNull(clipboard);
@@ -1939,7 +1940,7 @@ action enablement
     private class RerunLastAction
         extends Action
     {
-        public RerunLastAction()
+        RerunLastAction()
         {
             setText(Messages.TestRunnerViewPart_rerunaction_label);
             setToolTipText(Messages.TestRunnerViewPart_rerunaction_tooltip);
@@ -1958,7 +1959,7 @@ action enablement
     private class RerunLastFailedFirstAction
         extends Action
     {
-        public RerunLastFailedFirstAction()
+        RerunLastFailedFirstAction()
         {
             setText(Messages.TestRunnerViewPart_rerunfailuresaction_label);
             setToolTipText(Messages.TestRunnerViewPart_rerunfailuresaction_tooltip);
@@ -1984,7 +1985,7 @@ action enablement
             manager.appendToGroup(IWorkbenchActionConstants.MB_ADDITIONS,
                 new ImportTestRunSessionAction(fParent.getShell()));
             manager.appendToGroup(IWorkbenchActionConstants.MB_ADDITIONS,
-                new ImportTestRunSessionFromURLAction(fParent.getShell()));
+                new ImportTestRunSessionFromUrlAction(fParent.getShell()));
             manager.appendToGroup(IWorkbenchActionConstants.MB_ADDITIONS, fPasteAction);
             if (fTestRunSession != null)
                 manager.appendToGroup(IWorkbenchActionConstants.MB_ADDITIONS,
@@ -2126,7 +2127,7 @@ action enablement
         extends Action
     {
 
-        public ShowTestHierarchyAction()
+        ShowTestHierarchyAction()
         {
             super(Messages.TestRunnerViewPart_hierarchical_layout, IAction.AS_CHECK_BOX);
             setImageDescriptor(JUnitUiPlugin.getImageDescriptor("elcl16/hierarchicalLayout.png")); //$NON-NLS-1$
@@ -2144,7 +2145,7 @@ action enablement
         extends Action
     {
 
-        public ShowTimeAction()
+        ShowTimeAction()
         {
             super(Messages.TestRunnerViewPart_show_execution_time, IAction.AS_CHECK_BOX);
         }
@@ -2159,7 +2160,7 @@ action enablement
     private class StopAction
         extends Action
     {
-        public StopAction()
+        StopAction()
         {
             setText(Messages.TestRunnerViewPart_stopaction_text);
             setToolTipText(Messages.TestRunnerViewPart_stopaction_tooltip);
@@ -2181,7 +2182,7 @@ action enablement
         public void sessionAdded(final TestRunSession testRunSession)
         {
             getDisplay().asyncExec(() -> {
-                if (JUnitUIPreferencesConstants.getShowInAllViews()
+                if (JunitUiPreferencesConstants.getShowInAllViews()
                     || getSite().getWorkbenchWindow() == JUnitUiPlugin.getActiveWorkbenchWindow())
                 {
                     if (fInfoMessage == null)
@@ -2349,17 +2350,18 @@ action enablement
             fTestViewer.registerViewerUpdate(testElement);
 
             // show the view on the first error only
-            if (fShowOnErrorOnly && (getErrorsPlusFailures() == 1))
+            if (fShowOnErrorOnly && getErrorsPlusFailures() == 1)
                 postShowTestResultsView();
 
             //TODO:
             // [Bug 35590] JUnit window doesn't report errors from junit.extensions.TestSetup [JUnit]
             // when a failure occurs in test setup then no test is running
             // to update the views we artificially signal the end of a test run
-//		    if (!fTestIsRunning) {
-//				fTestIsRunning= false;
-//				testEnded(testCaseElement);
-//			}
+//            if (!fTestIsRunning)
+//            {
+//                fTestIsRunning = false;
+//                testEnded(testCaseElement);
+//            }
         }
 
         @Override
@@ -2402,7 +2404,7 @@ action enablement
     {
         private final int fActionOrientation;
 
-        public ToggleOrientationAction(int orientation)
+        ToggleOrientationAction(int orientation)
         {
             super("", AS_RADIO_BUTTON); //$NON-NLS-1$
             switch (orientation)
@@ -2425,7 +2427,7 @@ action enablement
             fActionOrientation = orientation;
             PlatformUI.getWorkbench()
                 .getHelpSystem()
-                .setHelp(this, IJUnitHelpContextIds.RESULTS_VIEW_TOGGLE_ORIENTATION_ACTION);
+                .setHelp(this, IJunitHelpContextIds.RESULTS_VIEW_TOGGLE_ORIENTATION_ACTION);
         }
 
         public int getOrientation()
@@ -2449,7 +2451,7 @@ action enablement
     {
         private final SortingCriterion fActionSortingCriterion;
 
-        public ToggleSortingAction(SortingCriterion sortingCriterion)
+        ToggleSortingAction(SortingCriterion sortingCriterion)
         {
             super("", AS_RADIO_BUTTON); //$NON-NLS-1$
             switch (sortingCriterion)
@@ -2484,12 +2486,12 @@ action enablement
         }
     }
 
-    private class UpdateUIJob
+    private class UpdateUiJob
         extends UIJob
     {
         private boolean fRunning = true;
 
-        public UpdateUIJob(String name)
+        UpdateUiJob(String name)
         {
             super(name);
             setSystem(true);

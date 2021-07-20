@@ -83,25 +83,25 @@ public class TestRunHandler
         switch (qName)
         {
         // OK
-        case IXMLTags.NODE_TESTRUN:
+        case IXmlTags.NODE_TESTRUN:
             break;
         // OK
-        case IXMLTags.NODE_TESTSUITES:
+        case IXmlTags.NODE_TESTSUITES:
             break;
-        case IXMLTags.NODE_TESTSUITE:
+        case IXmlTags.NODE_TESTSUITE:
             handleTestElementEnd(fTestSuite);
             fTestSuite = fTestSuite.getParent();
             break;
         // OK
-        case IXMLTags.NODE_PROPERTIES:
-        case IXMLTags.NODE_PROPERTY:
+        case IXmlTags.NODE_PROPERTIES:
+        case IXmlTags.NODE_PROPERTY:
             break;
-        case IXMLTags.NODE_TESTCASE:
+        case IXmlTags.NODE_TESTCASE:
             handleTestElementEnd(fTestCase);
             fTestCase = null;
             break;
-        case IXMLTags.NODE_FAILURE:
-        case IXMLTags.NODE_ERROR:
+        case IXmlTags.NODE_FAILURE:
+        case IXmlTags.NODE_ERROR:
             {
                 TestElement testElement = fTestCase;
                 if (testElement == null)
@@ -109,7 +109,7 @@ public class TestRunHandler
                 handleFailure(testElement);
                 break;
             }
-        case IXMLTags.NODE_EXPECTED:
+        case IXmlTags.NODE_EXPECTED:
             fInExpected = false;
             if (fFailureBuffer != null)
             {
@@ -117,7 +117,7 @@ public class TestRunHandler
                 fFailureBuffer.setLength(0);
             }
             break;
-        case IXMLTags.NODE_ACTUAL:
+        case IXmlTags.NODE_ACTUAL:
             fInActual = false;
             if (fFailureBuffer != null)
             {
@@ -126,10 +126,10 @@ public class TestRunHandler
             }
             break;
         // OK
-        case IXMLTags.NODE_SYSTEM_OUT:
-        case IXMLTags.NODE_SYSTEM_ERR:
+        case IXmlTags.NODE_SYSTEM_OUT:
+        case IXmlTags.NODE_SYSTEM_ERR:
             break;
-        case IXMLTags.NODE_SKIPPED:
+        case IXmlTags.NODE_SKIPPED:
             {
                 TestElement testElement = fTestCase;
                 if (testElement == null)
@@ -199,11 +199,11 @@ public class TestRunHandler
 
         switch (qName)
         {
-        case IXMLTags.NODE_TESTRUN:
+        case IXmlTags.NODE_TESTRUN:
             if (fTestRunSession == null)
             {
-                String name = attributes.getValue(IXMLTags.ATTR_NAME);
-                String project = attributes.getValue(IXMLTags.ATTR_PROJECT);
+                String name = attributes.getValue(IXmlTags.ATTR_NAME);
+                String project = attributes.getValue(IXmlTags.ATTR_PROJECT);
                 IV8Project configurationProject = null;
                 if (project != null)
                 {
@@ -219,21 +219,21 @@ public class TestRunHandler
             fTestSuite = fTestRunSession.getTestRoot();
             break;
         // support Ant's 'junitreport' task; create suite from NODE_TESTSUITE
-        case IXMLTags.NODE_TESTSUITES:
+        case IXmlTags.NODE_TESTSUITES:
             break;
-        case IXMLTags.NODE_TESTSUITE:
+        case IXmlTags.NODE_TESTSUITE:
             {
-                String name = attributes.getValue(IXMLTags.ATTR_NAME);
+                String name = attributes.getValue(IXmlTags.ATTR_NAME);
                 if (fTestRunSession == null)
                 {
                     // support standalone suites and Ant's 'junitreport' task:
                     fTestRunSession = new TestRunSession(name, null);
                     fTestSuite = fTestRunSession.getTestRoot();
                 }
-                String pack = attributes.getValue(IXMLTags.ATTR_PACKAGE);
+                String pack = attributes.getValue(IXmlTags.ATTR_PACKAGE);
                 String suiteName = pack == null ? name : pack + "." + name; //$NON-NLS-1$
-                String displayName = attributes.getValue(IXMLTags.ATTR_DISPLAY_NAME);
-                String paramTypesStr = attributes.getValue(IXMLTags.ATTR_PARAMETER_TYPES);
+                String displayName = attributes.getValue(IXmlTags.ATTR_DISPLAY_NAME);
+                String paramTypesStr = attributes.getValue(IXmlTags.ATTR_PARAMETER_TYPES);
                 String[] paramTypes;
                 if (paramTypesStr != null && !paramTypesStr.trim().isEmpty())
                 {
@@ -244,7 +244,7 @@ public class TestRunHandler
                 {
                     paramTypes = null;
                 }
-                String uniqueId = attributes.getValue(IXMLTags.ATTR_UNIQUE_ID);
+                String uniqueId = attributes.getValue(IXmlTags.ATTR_UNIQUE_ID);
                 if (uniqueId != null && uniqueId.trim().isEmpty())
                 {
                     uniqueId = null;
@@ -252,21 +252,21 @@ public class TestRunHandler
                 fTestSuite = (TestSuiteElement)fTestRunSession.createTestElement(fTestSuite, getNextId(), suiteName,
                     true, 0, false, displayName, paramTypes, uniqueId);
                 readTime(fTestSuite, attributes);
-                fNotRun.push(Boolean.valueOf(attributes.getValue(IXMLTags.ATTR_INCOMPLETE)));
+                fNotRun.push(Boolean.valueOf(attributes.getValue(IXmlTags.ATTR_INCOMPLETE)));
                 break;
             }
         // not interested
-        case IXMLTags.NODE_PROPERTIES:
-        case IXMLTags.NODE_PROPERTY:
+        case IXmlTags.NODE_PROPERTIES:
+        case IXmlTags.NODE_PROPERTY:
             break;
-        case IXMLTags.NODE_TESTCASE:
+        case IXmlTags.NODE_TESTCASE:
             {
-                String name = attributes.getValue(IXMLTags.ATTR_NAME);
-                String classname = attributes.getValue(IXMLTags.ATTR_CLASSNAME);
+                String name = attributes.getValue(IXmlTags.ATTR_NAME);
+                String classname = attributes.getValue(IXmlTags.ATTR_CLASSNAME);
                 String testName = name + '(' + classname + ')';
-                boolean isDynamicTest = Boolean.parseBoolean(attributes.getValue(IXMLTags.ATTR_DYNAMIC_TEST));
-                String displayName = attributes.getValue(IXMLTags.ATTR_DISPLAY_NAME);
-                String paramTypesStr = attributes.getValue(IXMLTags.ATTR_PARAMETER_TYPES);
+                boolean isDynamicTest = Boolean.parseBoolean(attributes.getValue(IXmlTags.ATTR_DYNAMIC_TEST));
+                String displayName = attributes.getValue(IXmlTags.ATTR_DISPLAY_NAME);
+                String paramTypesStr = attributes.getValue(IXmlTags.ATTR_PARAMETER_TYPES);
                 String[] paramTypes;
                 if (paramTypesStr != null && !paramTypesStr.trim().isEmpty())
                 {
@@ -277,46 +277,46 @@ public class TestRunHandler
                 {
                     paramTypes = null;
                 }
-                String uniqueId = attributes.getValue(IXMLTags.ATTR_UNIQUE_ID);
+                String uniqueId = attributes.getValue(IXmlTags.ATTR_UNIQUE_ID);
                 if (uniqueId != null && uniqueId.trim().isEmpty())
                 {
                     uniqueId = null;
                 }
                 fTestCase = (TestCaseElement)fTestRunSession.createTestElement(fTestSuite, getNextId(), testName, false,
                     0, isDynamicTest, displayName, paramTypes, uniqueId);
-                fNotRun.push(Boolean.parseBoolean(attributes.getValue(IXMLTags.ATTR_INCOMPLETE)));
-                fTestCase.setIgnored(Boolean.parseBoolean(attributes.getValue(IXMLTags.ATTR_IGNORED)));
+                fNotRun.push(Boolean.parseBoolean(attributes.getValue(IXmlTags.ATTR_INCOMPLETE)));
+                fTestCase.setIgnored(Boolean.parseBoolean(attributes.getValue(IXmlTags.ATTR_IGNORED)));
                 readTime(fTestCase, attributes);
                 break;
             }
-        case IXMLTags.NODE_ERROR:
+        case IXmlTags.NODE_ERROR:
             //TODO: multiple failures: https://bugs.eclipse.org/bugs/show_bug.cgi?id=125296
             fStatus = Status.ERROR;
             fFailureBuffer = new StringBuffer();
             break;
-        case IXMLTags.NODE_FAILURE:
+        case IXmlTags.NODE_FAILURE:
             //TODO: multiple failures: https://bugs.eclipse.org/bugs/show_bug.cgi?id=125296
             fStatus = Status.FAILURE;
             fFailureBuffer = new StringBuffer();
             break;
-        case IXMLTags.NODE_EXPECTED:
+        case IXmlTags.NODE_EXPECTED:
             fInExpected = true;
             fExpectedBuffer = new StringBuffer();
             break;
-        case IXMLTags.NODE_ACTUAL:
+        case IXmlTags.NODE_ACTUAL:
             fInActual = true;
             fActualBuffer = new StringBuffer();
             break;
         // not interested
-        case IXMLTags.NODE_SYSTEM_OUT:
-        case IXMLTags.NODE_SYSTEM_ERR:
+        case IXmlTags.NODE_SYSTEM_OUT:
+        case IXmlTags.NODE_SYSTEM_ERR:
             break;
-        case IXMLTags.NODE_SKIPPED:
+        case IXmlTags.NODE_SKIPPED:
             // before Ant 1.9.0: not an Ant JUnit tag, see https://bugs.eclipse.org/bugs/show_bug.cgi?id=276068
             // later: child of <suite> or <test>, see https://issues.apache.org/bugzilla/show_bug.cgi?id=43969
             fStatus = Status.OK;
             fFailureBuffer = new StringBuffer();
-            String message = attributes.getValue(IXMLTags.ATTR_MESSAGE);
+            String message = attributes.getValue(IXmlTags.ATTR_MESSAGE);
             if (message != null)
             {
                 fFailureBuffer.append(message).append('\n');
@@ -373,7 +373,7 @@ public class TestRunHandler
 
     private void readTime(TestElement testElement, Attributes attributes)
     {
-        var timeString = attributes.getValue(IXMLTags.ATTR_TIME);
+        var timeString = attributes.getValue(IXmlTags.ATTR_TIME);
         if (timeString != null)
         {
             try

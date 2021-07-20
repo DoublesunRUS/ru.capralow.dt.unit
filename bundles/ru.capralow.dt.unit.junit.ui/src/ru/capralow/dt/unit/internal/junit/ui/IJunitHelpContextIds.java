@@ -6,7 +6,7 @@ package ru.capralow.dt.unit.internal.junit.ui;
 /**
  * Help context ids for the JUnit UI.
  */
-public interface IJUnitHelpContextIds
+public interface IJunitHelpContextIds
 {
     String PREFIX = JUnitUiPlugin.ID + '.';
 

@@ -52,7 +52,7 @@ public class TestSessionLabelProvider
 
         if (element instanceof TestCaseElement)
         {
-            TestCaseElement testCaseElement = ((TestCaseElement)element);
+            TestCaseElement testCaseElement = (TestCaseElement)element;
             if (testCaseElement.isIgnored())
                 return fTestRunnerPart.fTestIgnoredIcon;
 

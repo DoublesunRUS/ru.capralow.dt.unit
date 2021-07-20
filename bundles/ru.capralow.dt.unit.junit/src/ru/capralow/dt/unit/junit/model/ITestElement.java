@@ -5,19 +5,19 @@ package ru.capralow.dt.unit.junit.model;
 
 public interface ITestElement
 {
-    public double getElapsedTimeInSeconds();
+    double getElapsedTimeInSeconds();
 
-    public FailureTrace getFailureTrace();
+    FailureTrace getFailureTrace();
 
-    public ITestElementContainer getParentContainer();
+    ITestElementContainer getParentContainer();
 
-    public ProgressState getProgressState();
+    ProgressState getProgressState();
 
-    public Result getTestResult(boolean var1);
+    Result getTestResult(boolean var1);
 
-    public ITestRunSession getTestRunSession();
+    ITestRunSession getTestRunSession();
 
-    public static final class FailureTrace
+    final class FailureTrace
     {
         private final String fActual;
         private final String fExpected;
@@ -46,7 +46,7 @@ public interface ITestElement
         }
     }
 
-    public static final class ProgressState
+    final class ProgressState
     {
         public static final ProgressState NOT_STARTED = new ProgressState("Not Started");
         public static final ProgressState RUNNING = new ProgressState("Running");
@@ -66,7 +66,7 @@ public interface ITestElement
         }
     }
 
-    public static final class Result
+    final class Result
     {
         public static final Result UNDEFINED = new Result("Undefined");
         public static final Result OK = new Result("OK");

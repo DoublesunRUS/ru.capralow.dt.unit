@@ -8,10 +8,9 @@ import org.eclipse.jface.action.Action;
 class ShowPreviousFailureAction
     extends Action
 {
-
     private TestRunnerViewPart fPart;
 
-    public ShowPreviousFailureAction(TestRunnerViewPart part)
+    ShowPreviousFailureAction(TestRunnerViewPart part)
     {
         super(Messages.ShowPreviousFailureAction_label);
         setDisabledImageDescriptor(JUnitUiPlugin.getImageDescriptor("dlcl16/select_prev.png")); //$NON-NLS-1$

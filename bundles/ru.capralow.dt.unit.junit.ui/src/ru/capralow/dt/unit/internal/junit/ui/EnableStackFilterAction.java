@@ -26,7 +26,7 @@ public class EnableStackFilterAction
         setDisabledImageDescriptor(JUnitUiPlugin.getImageDescriptor("dlcl16/cfilter.png")); //$NON-NLS-1$
         setHoverImageDescriptor(JUnitUiPlugin.getImageDescriptor("elcl16/cfilter.png")); //$NON-NLS-1$
         setImageDescriptor(JUnitUiPlugin.getImageDescriptor("elcl16/cfilter.png")); //$NON-NLS-1$
-        PlatformUI.getWorkbench().getHelpSystem().setHelp(this, IJUnitHelpContextIds.ENABLEFILTER_ACTION);
+        PlatformUI.getWorkbench().getHelpSystem().setHelp(this, IJunitHelpContextIds.ENABLEFILTER_ACTION);
 
         fView = view;
         setChecked(JUnitPreferencesConstants.getFilterStack());

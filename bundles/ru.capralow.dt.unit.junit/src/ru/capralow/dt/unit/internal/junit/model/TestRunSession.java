@@ -535,7 +535,8 @@ public class TestRunSession
 
     private TestElement addTreeEntry(String treeEntry)
     {
-        // format: testId","testName","isSuite","testcount","isDynamicTest","parentId","displayName","parameterTypes","uniqueId
+        // format: "testId","testName","isSuite","testcount","isDynamicTest",
+        // "parentId","displayName","parameterTypes","uniqueId"
         int index0 = treeEntry.indexOf(',');
         String id = treeEntry.substring(0, index0);
 
@@ -719,7 +720,7 @@ public class TestRunSession
         public TestSuiteElement fTestSuiteElement;
         public int fOutstandingChildren;
 
-        public IncompleteTestSuite(TestSuiteElement testSuiteElement, int outstandingChildren)
+        IncompleteTestSuite(TestSuiteElement testSuiteElement, int outstandingChildren)
         {
             fTestSuiteElement = testSuiteElement;
             fOutstandingChildren = outstandingChildren;

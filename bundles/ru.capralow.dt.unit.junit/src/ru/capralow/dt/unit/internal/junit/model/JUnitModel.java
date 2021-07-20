@@ -230,7 +230,8 @@ public final class JUnitModel
             }
             else
             {
-                importThread.interrupt(); // have to kill the thread since we don't control URLConnection and XML parsing
+                // have to kill the thread since we don't control URLConnection and XML parsing
+                importThread.interrupt();
                 throw new InterruptedException();
             }
         }

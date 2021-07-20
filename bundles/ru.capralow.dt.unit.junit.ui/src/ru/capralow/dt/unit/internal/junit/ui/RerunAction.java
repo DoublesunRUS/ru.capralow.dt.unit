@@ -35,7 +35,7 @@ public class RerunAction
         String testDisplayName, String uniqueId, String launchMode)
     {
         super(actionName);
-        PlatformUI.getWorkbench().getHelpSystem().setHelp(this, IJUnitHelpContextIds.RERUN_ACTION);
+        PlatformUI.getWorkbench().getHelpSystem().setHelp(this, IJunitHelpContextIds.RERUN_ACTION);
         fTestRunner = runner;
         fTestId = testId;
         fClassName = className;

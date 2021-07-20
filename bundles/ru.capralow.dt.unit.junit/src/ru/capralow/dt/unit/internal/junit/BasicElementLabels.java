@@ -13,7 +13,7 @@ import org.eclipse.osgi.util.TextProcessor;
  * A label provider for basic elements like paths. The label provider will make sure that the labels are correctly
  * shown in RTL environments.
  */
-public class BasicElementLabels
+public final class BasicElementLabels
 {
 
     /**
@@ -24,7 +24,7 @@ public class BasicElementLabels
      */
     public static String getFilePattern(String name)
     {
-        return markLTR(name, "*.?/\\:."); //$NON-NLS-1$
+        return markLtr(name, "*.?/\\:."); //$NON-NLS-1$
     }
 
     /**
@@ -37,7 +37,7 @@ public class BasicElementLabels
      */
     public static String getJavaElementName(String name)
     {
-        return markLTR(name, "<>()?,{}.:"); //$NON-NLS-1$
+        return markLtr(name, "<>()?,{}.:"); //$NON-NLS-1$
     }
 
     /**
@@ -48,20 +48,20 @@ public class BasicElementLabels
      */
     public static String getPathLabel(File file)
     {
-        return markLTR(file.getAbsolutePath(), "/\\:."); //$NON-NLS-1$
+        return markLtr(file.getAbsolutePath(), "/\\:."); //$NON-NLS-1$
     }
 
     /**
      * Returns the label of a path.
      *
      * @param path the path
-     * @param isOSPath if <code>true</code>, the path represents an OS path, if <code>false</code> it is a workspace path.
+     * @param isOSPath if <code>true</code>, the path represents an OS path, else it is a workspace path.
      * @return the label of the path to be used in the UI.
      */
-    public static String getPathLabel(IPath path, boolean isOSPath)
+    public static String getPathLabel(IPath path, boolean isOsPath)
     {
         String label;
-        if (isOSPath)
+        if (isOsPath)
         {
             label = path.toOSString();
         }
@@ -69,7 +69,7 @@ public class BasicElementLabels
         {
             label = path.makeRelative().toString();
         }
-        return markLTR(label, "/\\:."); //$NON-NLS-1$
+        return markLtr(label, "/\\:."); //$NON-NLS-1$
     }
 
     /**
@@ -80,7 +80,7 @@ public class BasicElementLabels
      */
     public static String getResourceName(IResource resource)
     {
-        return markLTR(resource.getName(), ":."); //$NON-NLS-1$
+        return markLtr(resource.getName(), ":."); //$NON-NLS-1$
     }
 
     /**
@@ -91,7 +91,7 @@ public class BasicElementLabels
      */
     public static String getResourceName(String resourceName)
     {
-        return markLTR(resourceName, ":."); //$NON-NLS-1$
+        return markLtr(resourceName, ":."); //$NON-NLS-1$
     }
 
     /**
@@ -100,9 +100,9 @@ public class BasicElementLabels
      * @param name the URL string
      * @return the label of the URL.
      */
-    public static String getURLPart(String name)
+    public static String getUrlPart(String name)
     {
-        return markLTR(name, ":@?-#/\\:."); //$NON-NLS-1$
+        return markLtr(name, ":@?-#/\\:."); //$NON-NLS-1$
     }
 
     /**
@@ -113,7 +113,7 @@ public class BasicElementLabels
      */
     public static String getVersionName(String name)
     {
-        return markLTR(name, ":."); //$NON-NLS-1$
+        return markLtr(name, ":."); //$NON-NLS-1$
     }
 
     /**
@@ -123,7 +123,7 @@ public class BasicElementLabels
      * @param delimiters the additional delimiters
      * @return the processed styled string
      */
-    private static String markLTR(String string, String delimiters)
+    private static String markLtr(String string, String delimiters)
     {
         return TextProcessor.process(string, delimiters);
     }

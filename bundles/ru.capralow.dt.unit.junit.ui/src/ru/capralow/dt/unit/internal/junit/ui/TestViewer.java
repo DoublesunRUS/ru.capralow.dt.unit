@@ -823,7 +823,7 @@ public class TestViewer
     private class CollapseAllAction
         extends Action
     {
-        public CollapseAllAction()
+        CollapseAllAction()
         {
             setText(Messages.CollapseAllAction_text);
             setToolTipText(Messages.CollapseAllAction_tooltip);
@@ -839,7 +839,7 @@ public class TestViewer
     private class ExpandAllAction
         extends Action
     {
-        public ExpandAllAction()
+        ExpandAllAction()
         {
             setText(Messages.ExpandAllAction_text);
             setToolTipText(Messages.ExpandAllAction_tooltip);
@@ -857,7 +857,7 @@ public class TestViewer
     {
         public boolean select(TestElement testElement)
         {
-            Status status = testElement.getStatus();
+            var status = testElement.getStatus();
             if (status.isErrorOrFailure())
                 return true;
             else
@@ -867,7 +867,7 @@ public class TestViewer
         @Override
         public boolean select(Viewer viewer, Object parentElement, Object element)
         {
-            return select(((TestElement)element));
+            return select((TestElement)element);
         }
     }
 
@@ -885,7 +885,7 @@ public class TestViewer
         @Override
         public boolean select(Viewer viewer, Object parentElement, Object element)
         {
-            return select(((TestElement)element));
+            return select((TestElement)element);
         }
 
         /**
@@ -922,7 +922,7 @@ public class TestViewer
     {
         private final List<E> fList;
 
-        public ReverseList(List<E> list)
+        ReverseList(List<E> list)
         {
             fList = list;
         }

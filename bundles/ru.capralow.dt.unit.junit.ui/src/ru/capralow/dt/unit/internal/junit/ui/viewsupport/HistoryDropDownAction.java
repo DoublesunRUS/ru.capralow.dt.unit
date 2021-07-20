@@ -29,7 +29,7 @@ import org.eclipse.ui.IWorkbenchActionConstants;
 
     private Menu fMenu;
 
-    public HistoryDropDownAction(ViewHistory<E> history)
+    HistoryDropDownAction(ViewHistory<E> history)
     {
         fHistory = history;
         fMenu = null;
@@ -48,7 +48,7 @@ import org.eclipse.ui.IWorkbenchActionConstants;
     {
         private final E fElement;
 
-        public HistoryAction(E element, int accelerator)
+        HistoryAction(E element, int accelerator)
         {
             super("", AS_RADIO_BUTTON); //$NON-NLS-1$
             Assert.isNotNull(element);

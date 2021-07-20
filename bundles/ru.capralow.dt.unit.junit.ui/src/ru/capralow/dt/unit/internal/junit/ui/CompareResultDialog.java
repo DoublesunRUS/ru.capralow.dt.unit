@@ -140,7 +140,7 @@ public class CompareResultDialog
     {
         super.configureShell(newShell);
         newShell.setText(Messages.CompareResultDialog_title);
-        PlatformUI.getWorkbench().getHelpSystem().setHelp(newShell, IJUnitHelpContextIds.RESULT_COMPARE_DIALOG);
+        PlatformUI.getWorkbench().getHelpSystem().setHelp(newShell, IJunitHelpContextIds.RESULT_COMPARE_DIALOG);
     }
 
     @Override
@@ -188,7 +188,7 @@ public class CompareResultDialog
     {
         private String fContent;
 
-        public CompareElement(String content)
+        CompareElement(String content)
         {
             fContent = content;
         }
@@ -224,7 +224,7 @@ public class CompareResultDialog
         }
     }
 
-    private static class CompareResultMergeViewer
+    private static final class CompareResultMergeViewer
         extends TextMergeViewer
     {
         private CompareResultMergeViewer(Composite parent, int style, CompareConfiguration configuration)
@@ -246,7 +246,7 @@ public class CompareResultDialog
         protected void createControls(Composite composite)
         {
             super.createControls(composite);
-            PlatformUI.getWorkbench().getHelpSystem().setHelp(composite, IJUnitHelpContextIds.RESULT_COMPARE_DIALOG);
+            PlatformUI.getWorkbench().getHelpSystem().setHelp(composite, IJunitHelpContextIds.RESULT_COMPARE_DIALOG);
         }
     }
 
@@ -255,7 +255,7 @@ public class CompareResultDialog
     {
         private final int[] fPrefixSuffixOffsets;
 
-        public CompareResultViewerConfiguration(int[] prefixSuffixOffsets)
+        CompareResultViewerConfiguration(int[] prefixSuffixOffsets)
         {
             fPrefixSuffixOffsets = prefixSuffixOffsets;
         }
@@ -276,7 +276,7 @@ public class CompareResultDialog
             private IDocument fDocument;
             private final int[] fPrefixSuffixOffsets2;
 
-            public SimpleDamagerRepairer(int[] prefixSuffixOffsets)
+            SimpleDamagerRepairer(int[] prefixSuffixOffsets)
             {
                 fPrefixSuffixOffsets2 = prefixSuffixOffsets;
             }

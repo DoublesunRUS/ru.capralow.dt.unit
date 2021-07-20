@@ -27,7 +27,7 @@ public class JUnitProgressBar
     private int fCurrentTickCount = 0;
     private int fMaxTickCount = 0;
     private int fColorBarWidth = 0;
-    private Color fOKColor;
+    private Color fOkColor;
     private Color fFailureColor;
     private Color fStoppedColor;
     private boolean fError;
@@ -49,7 +49,7 @@ public class JUnitProgressBar
         addPaintListener(this::paint);
         Display display = parent.getDisplay();
         fFailureColor = new Color(display, 159, 63, 63);
-        fOKColor = new Color(display, 95, 191, 95);
+        fOkColor = new Color(display, 95, 191, 95);
         fStoppedColor = new Color(display, 120, 120, 120);
     }
 
@@ -154,8 +154,8 @@ public class JUnitProgressBar
         GC gc = new GC(this);
         setStatusColor(gc);
         Rectangle rect = getClientArea();
-        startX = Math.max(1, startX);
-        gc.fillRectangle(startX, 1, endX - startX, rect.height - 2);
+        var startXmax = Math.max(1, startX);
+        gc.fillRectangle(startXmax, 1, endX - startXmax, rect.height - 2);
         gc.dispose();
     }
 
@@ -177,7 +177,7 @@ public class JUnitProgressBar
         else if (fError)
             gc.setBackground(fFailureColor);
         else
-            gc.setBackground(fOKColor);
+            gc.setBackground(fOkColor);
     }
 
 }

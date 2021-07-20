@@ -23,7 +23,7 @@ public class ScrollLockAction
         setDisabledImageDescriptor(JUnitUiPlugin.getImageDescriptor("dlcl16/lock.png")); //$NON-NLS-1$
         setHoverImageDescriptor(JUnitUiPlugin.getImageDescriptor("elcl16/lock.png")); //$NON-NLS-1$
         setImageDescriptor(JUnitUiPlugin.getImageDescriptor("elcl16/lock.png")); //$NON-NLS-1$
-        PlatformUI.getWorkbench().getHelpSystem().setHelp(this, IJUnitHelpContextIds.OUTPUT_SCROLL_LOCK_ACTION);
+        PlatformUI.getWorkbench().getHelpSystem().setHelp(this, IJunitHelpContextIds.OUTPUT_SCROLL_LOCK_ACTION);
         setChecked(false);
     }
 

@@ -207,7 +207,7 @@ public abstract class AbstractUnitTestLaunchShortcut
         final String runtime =
             configuration.getAttribute(IDebugConfigurationAttributes.RUNTIME_INSTALLATION, (String)null);
         final boolean isRuntimeValid =
-            runtimeUseAuto || (runtime != null && resolvableRuntimeInstallationManager.deserialize(runtime) != null);
+            runtimeUseAuto || runtime != null && resolvableRuntimeInstallationManager.deserialize(runtime) != null;
         return isRuntimeValid && super.isValid(configuration, mode);
     }
 

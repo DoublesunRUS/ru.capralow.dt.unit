@@ -36,7 +36,8 @@ public class TableLayoutComposite
      * To ensure there are N pixels available for the content of the column,
      * assign N+COLUMN_TRIM for the column width.
      * <p>
-     * XXX: Should either switch to use {@link org.eclipse.jface.layout.TableColumnLayout} or get API from JFace or SWT, see https://bugs.eclipse.org/bugs/show_bug.cgi?id=218483
+     * XXX: Should either switch to use {@link org.eclipse.jface.layout.TableColumnLayout}
+     * or get API from JFace or SWT, see https://bugs.eclipse.org/bugs/show_bug.cgi?id=218483
      * </p>
      */
     private static int COLUMN_TRIM;

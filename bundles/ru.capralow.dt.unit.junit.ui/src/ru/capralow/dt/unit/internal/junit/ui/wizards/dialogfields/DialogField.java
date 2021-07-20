@@ -257,7 +257,7 @@ public class DialogField
      */
     protected final boolean isOkToUse(Control control)
     {
-        return (control != null) && (Display.getCurrent() != null) && !control.isDisposed();
+        return control != null && Display.getCurrent() != null && !control.isDisposed();
     }
 
     /**

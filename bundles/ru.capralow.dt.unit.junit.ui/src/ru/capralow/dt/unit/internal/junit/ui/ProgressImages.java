@@ -16,7 +16,7 @@ public class ProgressImages
     private static final String FAILURE = "ff"; //$NON-NLS-1$
     private static final String OK = "ss"; //$NON-NLS-1$
 
-    private Image[] fOKImages = new Image[PROGRESS_STEPS];
+    private Image[] fOkImages = new Image[PROGRESS_STEPS];
     private Image[] fFailureImages = new Image[PROGRESS_STEPS];
 
     public void dispose()
@@ -26,8 +26,8 @@ public class ProgressImages
 
         for (int i = 0; i < PROGRESS_STEPS; i++)
         {
-            fOKImages[i].dispose();
-            fOKImages[i] = null;
+            fOkImages[i].dispose();
+            fOkImages[i] = null;
             fFailureImages[i].dispose();
             fFailureImages[i] = null;
         }
@@ -39,12 +39,12 @@ public class ProgressImages
             load();
 
         if (total == 0)
-            return fOKImages[0];
+            return fOkImages[0];
         int index = ((current * PROGRESS_STEPS) / total) - 1;
         index = Math.min(Math.max(0, index), PROGRESS_STEPS - 1);
 
         if (errors + failures == 0)
-            return fOKImages[index];
+            return fOkImages[index];
         return fFailureImages[index];
     }
 
@@ -55,7 +55,7 @@ public class ProgressImages
 
     private boolean isLoaded()
     {
-        return fOKImages[0] != null;
+        return fOkImages[0] != null;
     }
 
     private void load()
@@ -66,7 +66,7 @@ public class ProgressImages
         for (int i = 0; i < PROGRESS_STEPS; i++)
         {
             String okname = BASE + OK + Integer.toString(i + 1) + ".png"; //$NON-NLS-1$
-            fOKImages[i] = createImage(okname);
+            fOkImages[i] = createImage(okname);
             String failurename = BASE + FAILURE + Integer.toString(i + 1) + ".png"; //$NON-NLS-1$
             fFailureImages[i] = createImage(failurename);
         }

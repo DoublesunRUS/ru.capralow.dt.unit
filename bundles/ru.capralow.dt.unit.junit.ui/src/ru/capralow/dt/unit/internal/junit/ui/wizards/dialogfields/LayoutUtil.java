@@ -10,7 +10,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 
-public class LayoutUtil
+public final class LayoutUtil
 {
 
     /**
@@ -159,7 +159,7 @@ public class LayoutUtil
         Object ld = control.getLayoutData();
         if (ld instanceof GridData)
         {
-            GridData gd = ((GridData)ld);
+            GridData gd = (GridData)ld;
             gd.grabExcessVerticalSpace = true;
             gd.verticalAlignment = SWT.FILL;
         }
@@ -175,7 +175,7 @@ public class LayoutUtil
      * @return the indent of dependent controls, in pixels.
      * @since 3.9
      */
-    public static final int getIndent()
+    public static int getIndent()
     {
         return LayoutConstants.getIndent();
     }

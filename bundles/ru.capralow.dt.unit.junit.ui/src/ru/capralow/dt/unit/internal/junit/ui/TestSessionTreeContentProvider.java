@@ -14,7 +14,7 @@ public class TestSessionTreeContentProvider
     implements ITreeContentProvider
 {
 
-    private final Object[] NO_CHILDREN = new Object[0];
+    private static final Object[] NO_CHILDREN = new Object[0];
 
     @Override
     public void dispose()

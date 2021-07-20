@@ -291,9 +291,8 @@ public class AbstractUnitTestLaunchDelegate
         final ILaunchConfiguration configuration) throws CoreException
     {
         final List<ILaunch> sameSameDebugSession = new ArrayList<>();
-        ILaunch[] launches;
-        for (int length = (launches = DebugPlugin.getDefault().getLaunchManager().getLaunches()).length,
-            i = 0; i < length; ++i)
+        ILaunch[] launches = DebugPlugin.getDefault().getLaunchManager().getLaunches();
+        for (int length = launches.length, i = 0; i < length; ++i)
         {
             final ILaunch candidate = launches[i];
             if (candidate != launch && !candidate.isTerminated() && DEBUG.equals(candidate.getLaunchMode())

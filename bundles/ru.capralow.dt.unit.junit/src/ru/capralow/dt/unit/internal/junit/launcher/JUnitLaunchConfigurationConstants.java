@@ -16,7 +16,7 @@ import ru.capralow.dt.unit.internal.junit.JUnitPlugin;
  * Attribute keys used by the IJUnitLaunchConfiguration. Note that these constants are not API and
  * might change in the future.
  */
-public class JUnitLaunchConfigurationConstants
+public final class JUnitLaunchConfigurationConstants
 {
 
     public static final String RUN_EXTENSION_TESTS = JUnitPlugin.ID + ".ATTR_RUN_EXTENSION_TESTS"; //$NON-NLS-1$

@@ -131,12 +131,14 @@ public class JUnitUiPlugin
 
     public static void log(Throwable throwable)
     {
-        IStatus status;
         var top = throwable;
-        if (throwable instanceof CoreException
-            && (status = ((CoreException)throwable).getStatus()).getException() != null)
+        if (throwable instanceof CoreException)
         {
-            top = status.getException();
+            IStatus status = ((CoreException)throwable).getStatus();
+            if (status.getException() != null)
+            {
+                top = status.getException();
+            }
         }
         log(new Status(4, ID, Messages.JUnitUiPlugin_Internal_error, top));
     }

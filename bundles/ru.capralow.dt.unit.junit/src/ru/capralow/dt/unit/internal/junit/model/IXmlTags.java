@@ -3,7 +3,7 @@
  */
 package ru.capralow.dt.unit.internal.junit.model;
 
-public interface IXMLTags
+public interface IXmlTags
 {
 
     String NODE_TESTRUN = "testrun"; //$NON-NLS-1$
