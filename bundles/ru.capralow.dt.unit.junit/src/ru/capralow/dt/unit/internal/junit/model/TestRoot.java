@@ -5,12 +5,19 @@ package ru.capralow.dt.unit.internal.junit.model;
 
 import ru.capralow.dt.unit.junit.model.ITestRunSession;
 
+/**
+ * @author Aleksandr Kapralov
+ *
+ */
 public class TestRoot
     extends TestSuiteElement
 {
 
     private final ITestRunSession fSession;
 
+    /**
+     * @param session
+     */
     public TestRoot(ITestRunSession session)
     {
         super(null, "-1", session.getTestRunName(), 1, session.getTestRunName(), null, null); //$NON-NLS-1$

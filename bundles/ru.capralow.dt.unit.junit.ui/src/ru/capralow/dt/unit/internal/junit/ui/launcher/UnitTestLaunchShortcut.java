@@ -23,6 +23,10 @@ import com.google.common.base.Strings;
 import ru.capralow.dt.unit.internal.junit.launcher.JUnitLaunchConfigurationConstants;
 import ru.capralow.dt.unit.internal.junit.ui.JUnitUiPlugin;
 
+/**
+ * @author Aleksandr Kapralov
+ *
+ */
 public class UnitTestLaunchShortcut
     extends AbstractUnitTestLaunchShortcut
 {

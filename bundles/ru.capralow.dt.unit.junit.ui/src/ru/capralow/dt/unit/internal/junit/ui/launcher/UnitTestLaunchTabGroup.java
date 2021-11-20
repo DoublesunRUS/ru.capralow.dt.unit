@@ -20,6 +20,10 @@ import com.google.inject.Provider;
 
 import ru.capralow.dt.unit.internal.junit.ui.JUnitUiPlugin;
 
+/**
+ * @author Aleksandr Kapralov
+ *
+ */
 public class UnitTestLaunchTabGroup
     extends AbstractLaunchConfigurationTabGroup
     implements IExecutableExtension

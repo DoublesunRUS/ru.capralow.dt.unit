@@ -15,24 +15,46 @@ import org.eclipse.jface.viewers.ViewerColumn;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyleRange;
 
+/**
+ * @author Aleksandr Kapralov
+ *
+ */
 public class ColoringLabelProvider
     extends DecoratingStyledCellLabelProvider
     implements ILabelProvider
 {
 
+    /**
+     *
+     */
     public static final Styler HIGHLIGHT_STYLE =
         StyledString.createColorRegistryStyler(null, ColoredViewersManager.HIGHLIGHT_BG_COLOR_NAME);
+
+    /**
+     *
+     */
     public static final Styler HIGHLIGHT_WRITE_STYLE =
         StyledString.createColorRegistryStyler(null, ColoredViewersManager.HIGHLIGHT_WRITE_BG_COLOR_NAME);
 
+    /**
+     *
+     */
     public static final Styler INHERITED_STYLER =
         StyledString.createColorRegistryStyler(ColoredViewersManager.INHERITED_COLOR_NAME, null);
 
+    /**
+     * @param labelProvider
+     */
     public ColoringLabelProvider(IStyledLabelProvider labelProvider)
     {
         this(labelProvider, null, null);
     }
 
+    /**
+     * @param labelProvider
+     * @param decorator
+     * @param decorationContext
+     */
     public ColoringLabelProvider(IStyledLabelProvider labelProvider, ILabelDecorator decorator,
         IDecorationContext decorationContext)
     {
@@ -61,6 +83,9 @@ public class ColoringLabelProvider
         super.initialize(viewer, column);
     }
 
+    /**
+     *
+     */
     public void update()
     {
         ColumnViewer viewer = getViewer();
@@ -97,6 +122,7 @@ public class ColoringLabelProvider
             styleRange.borderStyle = SWT.BORDER_DOT;
             return styleRange;
         }
+
         return super.prepareStyleRange(styleRange, applyColors);
     }
 

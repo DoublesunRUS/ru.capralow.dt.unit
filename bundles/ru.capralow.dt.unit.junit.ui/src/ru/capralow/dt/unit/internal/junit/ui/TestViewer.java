@@ -52,6 +52,10 @@ import ru.capralow.dt.unit.internal.junit.ui.viewsupport.SelectionProviderMediat
 import ru.capralow.dt.unit.junit.model.ITestElement;
 import ru.capralow.dt.unit.junit.model.ITestElement.Result;
 
+/**
+ * @author Aleksandr Kapralov
+ *
+ */
 public class TestViewer
 {
     private final FailuresOnlyFilter fFailuresOnlyFilter = new FailuresOnlyFilter();
@@ -86,6 +90,11 @@ public class TestViewer
     private LinkedList<TestSuiteElement> fAutoClose;
     private HashSet<TestSuiteElement> fAutoExpand;
 
+    /**
+     * @param parent
+     * @param clipboard
+     * @param runner
+     */
     public TestViewer(Composite parent, Clipboard clipboard, TestRunnerViewPart runner)
     {
         fTestRunnerPart = runner;
@@ -100,11 +109,17 @@ public class TestViewer
         initContextMenu();
     }
 
+    /**
+     *
+     */
     public void expandFirstLevel()
     {
         fTreeViewer.expandToLevel(2);
     }
 
+    /**
+     * @return StructuredViewer
+     */
     public StructuredViewer getActiveViewer()
     {
         if (fLayoutMode == TestRunnerViewPart.LAYOUT_HIERARCHICAL)
@@ -115,6 +130,9 @@ public class TestViewer
         return fTableViewer;
     }
 
+    /**
+     * @return Control
+     */
     public Control getTestViewerControl()
     {
         return fViewerbook;
@@ -196,6 +214,9 @@ public class TestViewer
         autoScrollInUI();
     }
 
+    /**
+     * @param testRunSession
+     */
     public synchronized void registerActiveSession(TestRunSession testRunSession)
     {
         fTestRunSession = testRunSession;
@@ -203,11 +224,17 @@ public class TestViewer
         registerViewersRefresh();
     }
 
+    /**
+     * @param testCaseElement
+     */
     public void registerAutoScrollTarget(TestCaseElement testCaseElement)
     {
         fAutoScrollTarget = testCaseElement;
     }
 
+    /**
+     * @param testElement
+     */
     public synchronized void registerFailedForAutoScroll(TestElement testElement)
     {
         TestSuiteElement parent = (TestSuiteElement)fTreeContentProvider.getParent(testElement);
@@ -227,6 +254,9 @@ public class TestViewer
         fTableNeedsRefresh = true;
     }
 
+    /**
+     *
+     */
     public synchronized void registerViewersRefresh()
     {
         fTreeNeedsRefresh = true;
@@ -234,11 +264,17 @@ public class TestViewer
         clearUpdateAndExpansion();
     }
 
+    /**
+     * @param testElement
+     */
     public synchronized void registerViewerUpdate(final TestElement testElement)
     {
         fNeedUpdate.add(testElement);
     }
 
+    /**
+     * @param showNext
+     */
     public void selectFailure(boolean showNext)
     {
         IStructuredSelection selection = (IStructuredSelection)getActiveViewer().getSelection();
@@ -260,6 +296,9 @@ public class TestViewer
         }
     }
 
+    /**
+     *
+     */
     public void selectFirstFailure()
     {
         TestElement firstFailure = getNextChildFailure(fTestRunSession.getTestRoot(), true);
@@ -362,6 +401,9 @@ public class TestViewer
         }
     }
 
+    /**
+     * @param showTime
+     */
     public synchronized void setShowTime(boolean showTime)
     {
         try
@@ -376,6 +418,9 @@ public class TestViewer
         }
     }
 
+    /**
+     * @param sortingCriterion
+     */
     public synchronized void setSortingCriterion(SortingCriterion sortingCriterion)
     {
         ViewerComparator viewerComparator;

@@ -3,6 +3,10 @@
  */
 package ru.capralow.dt.unit.internal.junit.model;
 
+/**
+ * @author Aleksandr Kapralov
+ *
+ */
 public interface ITestRunSessionListener
 {
 
@@ -11,6 +15,9 @@ public interface ITestRunSessionListener
      */
     void sessionAdded(TestRunSession testRunSession);
 
+    /**
+     * @param testRunSession
+     */
     void sessionRemoved(TestRunSession testRunSession);
 
 }

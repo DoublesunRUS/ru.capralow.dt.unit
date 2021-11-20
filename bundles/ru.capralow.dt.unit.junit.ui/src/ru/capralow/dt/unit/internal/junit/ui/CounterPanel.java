@@ -14,6 +14,10 @@ import org.eclipse.swt.widgets.Text;
 
 import ru.capralow.dt.unit.internal.junit.ui.util.SwtUtil;
 
+/**
+ * @author Aleksandr Kapralov
+ *
+ */
 public class CounterPanel
     extends Composite
 {
@@ -26,6 +30,9 @@ public class CounterPanel
     private final Image fErrorIcon = JUnitUiPlugin.createImage("ovr16/error_ovr.png"); //$NON-NLS-1$
     private final Image fFailureIcon = JUnitUiPlugin.createImage("ovr16/failed_ovr.png"); //$NON-NLS-1$
 
+    /**
+     * @param parent
+     */
     public CounterPanel(Composite parent)
     {
         super(parent, 64);
@@ -40,11 +47,17 @@ public class CounterPanel
         this.addDisposeListener(e -> this.disposeIcons());
     }
 
+    /**
+     * @return int
+     */
     public int getTotal()
     {
         return this.fTotal;
     }
 
+    /**
+     *
+     */
     public void reset()
     {
         this.setErrorValue(0);
@@ -53,18 +66,29 @@ public class CounterPanel
         this.fTotal = 0;
     }
 
+    /**
+     * @param value
+     */
     public void setErrorValue(int value)
     {
         this.fNumberOfErrors.setText(Integer.toString(value));
         this.redraw();
     }
 
+    /**
+     * @param value
+     */
     public void setFailureValue(int value)
     {
         this.fNumberOfFailures.setText(Integer.toString(value));
         this.redraw();
     }
 
+    /**
+     * @param value
+     * @param ignoredCount
+     * @param assumptionFailureCount
+     */
     public void setRunValue(int value, int ignoredCount, int assumptionFailureCount)
     {
         String runStringTooltip;
@@ -119,6 +143,9 @@ public class CounterPanel
         this.fAssumptionFailedCount = assumptionFailureCount;
     }
 
+    /**
+     * @param value
+     */
     public void setTotal(int value)
     {
         this.fTotal = value;

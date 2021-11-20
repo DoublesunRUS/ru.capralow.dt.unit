@@ -17,6 +17,9 @@ public class EnableStackFilterAction
 
     private FailureTrace fView;
 
+    /**
+     * @param view
+     */
     public EnableStackFilterAction(FailureTrace view)
     {
         super(Messages.EnableStackFilterAction_action_label);

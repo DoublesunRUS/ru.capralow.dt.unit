@@ -33,50 +33,92 @@ import com._1c.g5.wiring.ServiceInitialization;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
+/**
+ * @author Aleksandr Kapralov
+ *
+ */
 public class JUnitUiPlugin
     extends AbstractUIPlugin
 {
+    /**
+     *
+     */
     public static final String ID = "ru.capralow.dt.unit.junit.ui"; //$NON-NLS-1$
 
     private static final IPath ICONS_PATH = new Path("$nl$/icons"); //$NON-NLS-1$
 
     private static JUnitUiPlugin instance;
 
+    /**
+     * @param externalObjects
+     * @return Collection
+     */
     public static Collection<MdObject> availableForLaunch(Collection<MdObject> externalObjects)
     {
         return externalObjects.stream().filter(JUnitUiPlugin::availableForLaunch).collect(Collectors.toList());
     }
 
+    /**
+     * @param externalObject
+     * @return boolean
+     */
     public static boolean availableForLaunch(MdObject externalObject)
     {
         return externalObject instanceof ExternalDataProcessor;
     }
 
+    /**
+     * @param message
+     * @return IStatus
+     */
     public static IStatus createErrorStatus(String message)
     {
         return new Status(IStatus.ERROR, ID, 0, message, (Throwable)null);
     }
 
+    /**
+     * @param message
+     * @param code
+     * @return IStatus
+     */
     public static IStatus createErrorStatus(String message, int code)
     {
         return new Status(IStatus.ERROR, ID, code, message, (Throwable)null);
     }
 
+    /**
+     * @param message
+     * @param code
+     * @param throwable
+     * @return IStatus
+     */
     public static IStatus createErrorStatus(String message, int code, Throwable throwable)
     {
         return new Status(IStatus.ERROR, ID, code, message, throwable);
     }
 
+    /**
+     * @param message
+     * @param throwable
+     * @return IStatus
+     */
     public static IStatus createErrorStatus(String message, Throwable throwable)
     {
         return new Status(IStatus.ERROR, ID, 0, message, throwable);
     }
 
+    /**
+     * @param path
+     * @return Image
+     */
     public static Image createImage(String path)
     {
         return getImageDescriptor(path).createImage();
     }
 
+    /**
+     * @return Shell
+     */
     public static Shell getActiveWorkbenchShell()
     {
         IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
@@ -114,26 +156,43 @@ public class JUnitUiPlugin
         return workBench.getActiveWorkbenchWindow();
     }
 
+    /**
+     * @param symbolicName
+     * @return Image
+     */
     public static Image getImage(String symbolicName)
     {
         return instance.getImageRegistry().get(symbolicName);
     }
 
+    /**
+     * @param symbolicName
+     * @return ImageDescriptor
+     */
     public static ImageDescriptor getImageDescriptor(String symbolicName)
     {
         return instance.getImageRegistry().getDescriptor(symbolicName);
     }
 
+    /**
+     * @return instance
+     */
     public static JUnitUiPlugin getInstance()
     {
         return instance;
     }
 
+    /**
+     * @param status
+     */
     public static void log(IStatus status)
     {
         getInstance().getLog().log(status);
     }
 
+    /**
+     * @param throwable
+     */
     public static void log(Throwable throwable)
     {
         Throwable top = throwable;
@@ -220,6 +279,10 @@ public class JUnitUiPlugin
 
     private Injector injector;
 
+    /**
+     * @param name
+     * @return IDialogSettings
+     */
     public IDialogSettings getDialogSettingsSection(String name)
     {
         IDialogSettings dialogSettings = getDialogSettings();
@@ -231,6 +294,9 @@ public class JUnitUiPlugin
         return section;
     }
 
+    /**
+     * @return injector
+     */
     public synchronized Injector getInjector()
     {
         if (injector == null)

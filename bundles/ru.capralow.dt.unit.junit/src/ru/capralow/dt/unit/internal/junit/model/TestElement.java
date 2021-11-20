@@ -9,9 +9,17 @@ import ru.capralow.dt.unit.junit.model.ITestElement;
 import ru.capralow.dt.unit.junit.model.ITestElementContainer;
 import ru.capralow.dt.unit.junit.model.ITestRunSession;
 
+/**
+ * @author Aleksandr Kapralov
+ *
+ */
 public abstract class TestElement
     implements ITestElement
 {
+    /**
+     * @param testNameString
+     * @return String
+     */
     public static String extractRawClassName(String testNameString)
     {
         if (testNameString.startsWith("[") && testNameString.endsWith("]")) //$NON-NLS-1$//$NON-NLS-2$
@@ -106,6 +114,9 @@ public abstract class TestElement
         }
     }
 
+    /**
+     * @return String
+     */
     public String getActual()
     {
         return fActual;
@@ -143,6 +154,9 @@ public abstract class TestElement
         return fTime;
     }
 
+    /**
+     * @return String
+     */
     public String getExpected()
     {
         return fExpected;
@@ -160,6 +174,9 @@ public abstract class TestElement
         return null;
     }
 
+    /**
+     * @return String
+     */
     public String getId()
     {
         return fId;
@@ -199,16 +216,25 @@ public abstract class TestElement
         return getStatus().convertToProgressState();
     }
 
+    /**
+     * @return TestRoot
+     */
     public TestRoot getRoot()
     {
         return getParent().getRoot();
     }
 
+    /**
+     * @return Status
+     */
     public Status getStatus()
     {
         return fStatus;
     }
 
+    /**
+     * @return String
+     */
     public String getTestName()
     {
         return fTestName;
@@ -230,6 +256,9 @@ public abstract class TestElement
         return getRoot().getTestRunSession();
     }
 
+    /**
+     * @return String
+     */
     public String getTrace()
     {
         return fTrace;
@@ -246,31 +275,49 @@ public abstract class TestElement
         return fUniqueId;
     }
 
+    /**
+     * @return boolean
+     */
     public boolean isAssumptionFailure()
     {
         return fAssumptionFailed;
     }
 
+    /**
+     * @return boolean
+     */
     public boolean isComparisonFailure()
     {
         return fExpected != null && fActual != null;
     }
 
+    /**
+     * @param assumptionFailed
+     */
     public void setAssumptionFailed(boolean assumptionFailed)
     {
         fAssumptionFailed = assumptionFailed;
     }
 
+    /**
+     * @param time
+     */
     public void setElapsedTimeInSeconds(double time)
     {
         fTime = time;
     }
 
+    /**
+     * @param name
+     */
     public void setName(String name)
     {
         fTestName = name;
     }
 
+    /**
+     * @param status
+     */
     public void setStatus(Status status)
     {
         if (status == Status.RUNNING)
@@ -294,6 +341,12 @@ public abstract class TestElement
         }
     }
 
+    /**
+     * @param status
+     * @param trace
+     * @param expected
+     * @param actual
+     */
     public void setStatus(Status status, String trace, String expected, String actual)
     {
         if (trace != null && fTrace != null)
@@ -316,19 +369,49 @@ public abstract class TestElement
         return getProgressState() + " - " + getTestResult(true); //$NON-NLS-1$
     }
 
+    /**
+     * @author Aleksandr Kapralov
+     *
+     */
     public static final class Status
     {
+        /**
+         *
+         */
         public static final Status RUNNING_ERROR = new Status("RUNNING_ERROR", 5); //$NON-NLS-1$
+        /**
+         *
+         */
         public static final Status RUNNING_FAILURE = new Status("RUNNING_FAILURE", 6); //$NON-NLS-1$
+        /**
+         *
+         */
         public static final Status RUNNING = new Status("RUNNING", 3); //$NON-NLS-1$
 
+        /**
+         *
+         */
         public static final Status ERROR = new Status("ERROR", /*1*/ITestRunListener2.STATUS_ERROR); //$NON-NLS-1$
+        /**
+         *
+         */
         public static final Status FAILURE = new Status("FAILURE", /*2*/ITestRunListener2.STATUS_FAILURE); //$NON-NLS-1$
+        /**
+         *
+         */
         public static final Status OK = new Status("OK", /*0*/ITestRunListener2.STATUS_OK); //$NON-NLS-1$
+        /**
+         *
+         */
         public static final Status NOT_RUN = new Status("NOT_RUN", 4); //$NON-NLS-1$
 
         private static final Status[] OLD_CODE = { OK, ERROR, FAILURE };
 
+        /**
+         * @param one
+         * @param two
+         * @return Status
+         */
         public static Status combineStatus(Status one, Status two)
         {
             Status progress = combineProgress(one, two);
@@ -420,6 +503,9 @@ public abstract class TestElement
             fOldCode = oldCode;
         }
 
+        /**
+         * @return ProgressState
+         */
         public ProgressState convertToProgressState()
         {
             if (isRunning())
@@ -435,6 +521,9 @@ public abstract class TestElement
 
         /* progress state predicates */
 
+        /**
+         * @return Result
+         */
         public Result convertToResult()
         {
             if (isNotRun())
@@ -460,41 +549,65 @@ public abstract class TestElement
             return Result.OK;
         }
 
+        /**
+         * @return int
+         */
         public int getOldCode()
         {
             return fOldCode;
         }
 
+        /**
+         * @return boolean
+         */
         public boolean isDone()
         {
             return this == OK || this == FAILURE || this == ERROR;
         }
 
+        /**
+         * @return boolean
+         */
         public boolean isError()
         {
             return this == ERROR || this == RUNNING_ERROR;
         }
 
+        /**
+         * @return boolean
+         */
         public boolean isErrorOrFailure()
         {
             return isError() || isFailure();
         }
 
+        /**
+         * @return boolean
+         */
         public boolean isFailure()
         {
             return this == FAILURE || this == RUNNING_FAILURE;
         }
 
+        /**
+         * @return boolean
+         */
         public boolean isNotRun()
         {
             return this == NOT_RUN;
         }
 
+        /**
+         * @return boolean
+         */
         public boolean isOK()
         {
             return this == OK || this == RUNNING || this == NOT_RUN;
         }
 
+        /**
+         * @return boolean
+         */
         public boolean isRunning()
         {
             return this == RUNNING || this == RUNNING_FAILURE || this == RUNNING_ERROR;

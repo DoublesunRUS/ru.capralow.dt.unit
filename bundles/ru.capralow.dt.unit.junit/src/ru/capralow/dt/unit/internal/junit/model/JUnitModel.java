@@ -91,6 +91,12 @@ public final class JUnitModel
         }
     }
 
+    /**
+     * @param testRunSession
+     * @param out
+     * @throws TransformerFactoryConfigurationError
+     * @throws TransformerException
+     */
     public static void exportTestRunSession(TestRunSession testRunSession, OutputStream out)
         throws TransformerFactoryConfigurationError, TransformerException
     {
@@ -119,6 +125,11 @@ public final class JUnitModel
         transformer.transform(source, result);
     }
 
+    /**
+     * @param swapFile
+     * @param testRunSession
+     * @throws CoreException
+     */
     public static void importIntoTestRunSession(File swapFile, TestRunSession testRunSession) throws CoreException
     {
         try
@@ -305,6 +316,9 @@ public final class JUnitModel
         notifyTestRunSessionAdded(testRunSession);
     }
 
+    /**
+     * @param listener
+     */
     public void addTestRunSessionListener(ITestRunSessionListener listener)
     {
         fTestRunSessionListeners.add(listener);
@@ -340,6 +354,9 @@ public final class JUnitModel
         testRunSession.removeSwapFile();
     }
 
+    /**
+     * @param listener
+     */
     public void removeTestRunSessionListener(ITestRunSessionListener listener)
     {
         fTestRunSessionListeners.remove(listener);
@@ -355,7 +372,7 @@ public final class JUnitModel
     }
 
     /**
-     * Stops the model (called by the {@link JUnitCorePlugin} on shutdown).
+     * Stops the model (called by the {@link JUnitPlugin} on shutdown).
      */
     public void stop()
     {

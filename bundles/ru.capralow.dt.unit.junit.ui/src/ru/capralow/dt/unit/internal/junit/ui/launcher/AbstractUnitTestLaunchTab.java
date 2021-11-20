@@ -24,6 +24,10 @@ import com.google.common.collect.Collections2;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
+/**
+ * @author Aleksandr Kapralov
+ *
+ */
 public abstract class AbstractUnitTestLaunchTab
     extends AbstractLaunchConfigurationTab
     implements IRuntimeClientChangeListener

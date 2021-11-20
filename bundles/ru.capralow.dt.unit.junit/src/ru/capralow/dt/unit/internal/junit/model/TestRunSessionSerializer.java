@@ -29,6 +29,10 @@ import ru.capralow.dt.unit.junit.model.ITestElement.FailureTrace;
 import ru.capralow.dt.unit.junit.model.ITestElement.ProgressState;
 import ru.capralow.dt.unit.junit.model.ITestElement.Result;
 
+/**
+ * @author Aleksandr Kapralov
+ *
+ */
 public class TestRunSessionSerializer
     implements XMLReader
 {

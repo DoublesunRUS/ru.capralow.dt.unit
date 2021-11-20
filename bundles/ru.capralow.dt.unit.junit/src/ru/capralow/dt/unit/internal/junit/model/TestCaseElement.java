@@ -7,6 +7,10 @@ import org.eclipse.core.runtime.Assert;
 
 import ru.capralow.dt.unit.junit.model.ITestCaseElement;
 
+/**
+ * @author Aleksandr Kapralov
+ *
+ */
 public class TestCaseElement
     extends TestElement
     implements ITestCaseElement
@@ -15,6 +19,15 @@ public class TestCaseElement
     private boolean fIgnored;
     private boolean fIsDynamicTest;
 
+    /**
+     * @param parent
+     * @param id
+     * @param testName
+     * @param displayName
+     * @param isDynamicTest
+     * @param parameterTypes
+     * @param uniqueId
+     */
     public TestCaseElement(TestSuiteElement parent, String id, String testName, String displayName,
         boolean isDynamicTest, String[] parameterTypes, String uniqueId)
     {
@@ -70,16 +83,25 @@ public class TestCaseElement
         return super.getTestResult(includeChildren);
     }
 
+    /**
+     * @return boolean
+     */
     public boolean isDynamicTest()
     {
         return fIsDynamicTest;
     }
 
+    /**
+     * @return boolean
+     */
     public boolean isIgnored()
     {
         return fIgnored;
     }
 
+    /**
+     * @param ignored
+     */
     public void setIgnored(boolean ignored)
     {
         fIgnored = ignored;

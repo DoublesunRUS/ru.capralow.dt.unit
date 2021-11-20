@@ -51,16 +51,34 @@ import ru.capralow.dt.unit.internal.junit.ui.JUnitUiPlugin;
 import ru.capralow.dt.unit.junit.frameworks.FrameworkUtils;
 import ru.capralow.dt.unit.junit.frameworks.gson.FeatureSettings;
 
+/**
+ * @author Aleksandr Kapralov
+ *
+ */
 public class UnitLauncherXtextBuilderParticipant
     implements org.eclipse.xtext.builder.IXtextBuilderParticipant
 {
     private static final String DEFAULT_FEATURE_FOLDER_NAME = "all"; //$NON-NLS-1$
 
+    /**
+     * @param projectLocation
+     * @return String
+     */
     public static String getFeaturesLocation(IPath projectLocation)
     {
         return projectLocation + "/features/"; //$NON-NLS-1$
     }
 
+    /**
+     * @param featureSettings
+     * @param lang
+     * @param projectName
+     * @param moduleName
+     * @param methodsNames
+     * @param forServer
+     * @param forClient
+     * @return String
+     */
     public static StringBuilder getFeatureText(FeatureSettings featureSettings, String lang, String projectName,
         String moduleName, List<String> methodsNames, Boolean forServer, Boolean forClient)
     {
@@ -93,6 +111,10 @@ public class UnitLauncherXtextBuilderParticipant
         return fileText;
     }
 
+    /**
+     * @param methodText
+     * @return String
+     */
     public static String getUnitTestKeyFromMethodText(String methodText)
     {
         String[] methodLines = methodText.split("\\r?\\n"); //$NON-NLS-1$
@@ -116,6 +138,12 @@ public class UnitLauncherXtextBuilderParticipant
         return null;
     }
 
+    /**
+     * @param keyName
+     * @param projectLocation
+     * @param moduleName
+     * @param featureTest
+     */
     public static void saveFeatures(String keyName, IPath projectLocation, String moduleName, StringBuilder featureTest)
     {
 

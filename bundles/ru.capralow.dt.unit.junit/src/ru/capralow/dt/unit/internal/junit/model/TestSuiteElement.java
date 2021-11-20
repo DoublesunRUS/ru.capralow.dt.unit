@@ -9,6 +9,10 @@ import java.util.List;
 import ru.capralow.dt.unit.junit.model.ITestElement;
 import ru.capralow.dt.unit.junit.model.ITestSuiteElement;
 
+/**
+ * @author Aleksandr Kapralov
+ *
+ */
 public class TestSuiteElement
     extends TestElement
     implements ITestSuiteElement
@@ -17,6 +21,15 @@ public class TestSuiteElement
     private List<TestElement> fChildren;
     private Status fChildrenStatus;
 
+    /**
+     * @param parent
+     * @param id
+     * @param testName
+     * @param childrenCount
+     * @param displayName
+     * @param parameterTypes
+     * @param uniqueId
+     */
     public TestSuiteElement(TestSuiteElement parent, String id, String testName, int childrenCount, String displayName,
         String[] parameterTypes, String uniqueId)
     {
@@ -24,11 +37,18 @@ public class TestSuiteElement
         fChildren = new ArrayList<>(childrenCount);
     }
 
+    /**
+     * @param child
+     */
     public void addChild(TestElement child)
     {
         fChildren.add(child);
     }
 
+    /**
+     * @param child
+     * @param childStatus
+     */
     public void childChangedStatus(TestElement child, Status childStatus)
     {
         int childCount = fChildren.size();
@@ -97,6 +117,9 @@ public class TestSuiteElement
         }
     }
 
+    /**
+     * @return Status
+     */
     public Status getSuiteStatus()
     {
         return super.getStatus();
@@ -121,6 +144,9 @@ public class TestSuiteElement
         }
     }
 
+    /**
+     * @param child
+     */
     public void removeChild(TestElement child)
     {
         fChildren.remove(child);

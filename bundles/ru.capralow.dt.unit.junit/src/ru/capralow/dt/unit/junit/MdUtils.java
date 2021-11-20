@@ -13,9 +13,18 @@ import com._1c.g5.v8.dt.bm.index.emf.IBmEmfIndexProvider;
 import com._1c.g5.v8.dt.metadata.mdclass.MdClassPackage;
 import com._1c.g5.v8.dt.metadata.mdclass.MdObject;
 
+/**
+ * @author Aleksandr Kapralov
+ *
+ */
 public final class MdUtils
 {
 
+    /**
+     * @param objectFullName
+     * @param bmEmfIndexProvider
+     * @return MdObject
+     */
     public static MdObject getConfigurationObject(String objectFullName, IBmEmfIndexProvider bmEmfIndexProvider)
     {
         EClass mdLiteral = getMdLiteral(objectFullName);

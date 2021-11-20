@@ -15,6 +15,9 @@ public class ScrollLockAction
 
     private TestRunnerViewPart fRunnerViewPart;
 
+    /**
+     * @param viewer
+     */
     public ScrollLockAction(TestRunnerViewPart viewer)
     {
         super(Messages.ScrollLockAction_action_label);

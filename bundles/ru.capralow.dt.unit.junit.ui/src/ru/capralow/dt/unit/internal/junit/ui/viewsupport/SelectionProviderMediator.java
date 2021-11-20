@@ -119,6 +119,10 @@ public class SelectionProviderMediator
         }
     }
 
+    /**
+     * @param selection
+     * @param reveal
+     */
     public void setSelection(ISelection selection, boolean reveal)
     {
         if (fViewerInFocus != null)

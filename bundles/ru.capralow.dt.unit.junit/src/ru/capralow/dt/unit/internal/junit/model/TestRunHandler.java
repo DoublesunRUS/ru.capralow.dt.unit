@@ -19,6 +19,10 @@ import com._1c.g5.v8.dt.core.platform.IV8Project;
 
 import ru.capralow.dt.unit.internal.junit.model.TestElement.Status;
 
+/**
+ * @author Aleksandr Kapralov
+ *
+ */
 public class TestRunHandler
     extends DefaultHandler
 {
@@ -43,16 +47,25 @@ public class TestRunHandler
     private IProgressMonitor fMonitor;
     private int fLastReportedLine;
 
+    /**
+     *
+     */
     public TestRunHandler()
     {
 
     }
 
+    /**
+     * @param monitor
+     */
     public TestRunHandler(IProgressMonitor monitor)
     {
         fMonitor = monitor;
     }
 
+    /**
+     * @param testRunSession
+     */
     public TestRunHandler(TestRunSession testRunSession)
     {
         fTestRunSession = testRunSession;

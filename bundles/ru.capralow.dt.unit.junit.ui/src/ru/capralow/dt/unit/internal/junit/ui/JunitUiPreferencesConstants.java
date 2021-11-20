@@ -20,23 +20,35 @@ public final class JunitUiPreferencesConstants
     public static final String SHOW_IN_ALL_VIEWS = JUnitUiPlugin.ID + ".show_in_all_views"; //$NON-NLS-1$
 
     // would need a PreferenceInitializer if this was changed to true!
+    /**
+     *
+     */
     public static final boolean SHOW_IN_ALL_VIEWS_DEFAULT = false;
 
     private static final String CODEASSIST_FAVORITE_STATIC_MEMBERS_MIGRATED =
         JUnitUiPlugin.ID + ".content_assist_favorite_static_members_migrated"; //$NON-NLS-1$
 
+    /**
+     * @return boolean
+     */
     public static boolean getShowInAllViews()
     {
         return Platform.getPreferencesService()
             .getBoolean(JUnitUiPlugin.ID, SHOW_IN_ALL_VIEWS, SHOW_IN_ALL_VIEWS_DEFAULT, null);
     }
 
+    /**
+     * @return boolean
+     */
     public static boolean isCodeassistFavoriteStaticMembersMigrated()
     {
         return Platform.getPreferencesService()
             .getBoolean(JUnitUiPlugin.ID, CODEASSIST_FAVORITE_STATIC_MEMBERS_MIGRATED, false, null);
     }
 
+    /**
+     * @param migrated
+     */
     public static void setCodeassistFavoriteStaticMembersMigrated(boolean migrated)
     {
         IEclipsePreferences preferences = InstanceScope.INSTANCE.getNode(JUnitUiPlugin.ID);
@@ -51,6 +63,9 @@ public final class JunitUiPreferencesConstants
         }
     }
 
+    /**
+     * @param show
+     */
     public static void setShowInAllViews(boolean show)
     {
         IEclipsePreferences preferences = InstanceScope.INSTANCE.getNode(JUnitUiPlugin.ID);

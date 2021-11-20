@@ -31,6 +31,9 @@ public class StringDialogField
     private Text fTextControl;
     private ModifyListener fModifyListener;
 
+    /**
+     *
+     */
     public StringDialogField()
     {
         super();

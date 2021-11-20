@@ -14,28 +14,51 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IWorkbenchPreferenceConstants;
 import org.eclipse.ui.PlatformUI;
 
+/**
+ * @author Aleksandr Kapralov
+ *
+ */
 public class ColoredViewersManager
     implements IPropertyChangeListener
 {
 
+    /**
+     *
+     */
     public static final String INHERITED_COLOR_NAME = "ru.capralow.dt.unit.junit.ui.ColoredLabels.inherited"; //$NON-NLS-1$
 
+    /**
+     *
+     */
     public static final String HIGHLIGHT_BG_COLOR_NAME = "ru.capralow.dt.unit.junit.ui.ColoredLabels.match_highlight"; //$NON-NLS-1$
+
+    /**
+     *
+     */
     public static final String HIGHLIGHT_WRITE_BG_COLOR_NAME =
         "ru.capralow.dt.unit.junit.ui.ColoredLabels.writeaccess_highlight"; //$NON-NLS-1$
 
     private static ColoredViewersManager fgInstance = new ColoredViewersManager();
 
+    /**
+     * @param labelProvider
+     */
     public static void install(ColoringLabelProvider labelProvider)
     {
         fgInstance.installColoredLabels(labelProvider);
     }
 
+    /**
+     * @return boolean
+     */
     public static boolean showColoredLabels()
     {
         return PlatformUI.getPreferenceStore().getBoolean(IWorkbenchPreferenceConstants.USE_COLORED_LABELS);
     }
 
+    /**
+     * @param labelProvider
+     */
     public static void uninstall(ColoringLabelProvider labelProvider)
     {
         fgInstance.uninstallColoredLabels(labelProvider);
@@ -43,11 +66,17 @@ public class ColoredViewersManager
 
     private Set<ColoringLabelProvider> fManagedLabelProviders;
 
+    /**
+     *
+     */
     public ColoredViewersManager()
     {
         fManagedLabelProviders = new HashSet<>();
     }
 
+    /**
+     * @param labelProvider
+     */
     public void installColoredLabels(ColoringLabelProvider labelProvider)
     {
         if (fManagedLabelProviders.contains(labelProvider))
@@ -77,6 +106,9 @@ public class ColoredViewersManager
         }
     }
 
+    /**
+     * @param labelProvider
+     */
     public void uninstallColoredLabels(ColoringLabelProvider labelProvider)
     {
         if (!fManagedLabelProviders.remove(labelProvider))

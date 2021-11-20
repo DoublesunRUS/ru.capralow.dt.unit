@@ -68,6 +68,10 @@ import com.google.inject.Inject;
 
 import ru.capralow.dt.unit.internal.junit.JUnitPlugin;
 
+/**
+ * @author Aleksandr Kapralov
+ *
+ */
 public class AbstractUnitTestLaunchDelegate
     extends AbstractRuntimeDebugAwareLaunchDelegate
 {

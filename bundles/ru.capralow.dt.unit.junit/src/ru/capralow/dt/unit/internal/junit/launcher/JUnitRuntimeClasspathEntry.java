@@ -5,18 +5,29 @@ package ru.capralow.dt.unit.internal.junit.launcher;
 
 import java.util.Objects;
 
+/**
+ * @author Aleksandr Kapralov
+ *
+ */
 public class JUnitRuntimeClasspathEntry
 {
     private final String fPluginId;
 
     private final String fPluginRelativePath;
 
+    /**
+     * @param pluginId
+     * @param jarFile
+     */
     public JUnitRuntimeClasspathEntry(String pluginId, String jarFile)
     {
         fPluginId = pluginId;
         fPluginRelativePath = jarFile;
     }
 
+    /**
+     * @return JUnitRuntimeClasspathEntry
+     */
     public JUnitRuntimeClasspathEntry developmentModeEntry()
     {
         return new JUnitRuntimeClasspathEntry(getPluginId(), "bin"); //$NON-NLS-1$
@@ -37,11 +48,17 @@ public class JUnitRuntimeClasspathEntry
         return Objects.equals(fPluginRelativePath, other.getPluginRelativePath());
     }
 
+    /**
+     * @return String
+     */
     public String getPluginId()
     {
         return fPluginId;
     }
 
+    /**
+     * @return String
+     */
     public String getPluginRelativePath()
     {
         return fPluginRelativePath;

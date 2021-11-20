@@ -33,6 +33,9 @@ public class JUnitProgressBar
     private boolean fError;
     private boolean fStopped = false;
 
+    /**
+     * @param parent
+     */
     public JUnitProgressBar(Composite parent)
     {
         super(parent, SWT.NONE);
@@ -69,12 +72,18 @@ public class JUnitProgressBar
         return size;
     }
 
+    /**
+     * @param hasErrors
+     */
     public void refresh(boolean hasErrors)
     {
         fError = hasErrors;
         redraw();
     }
 
+    /**
+     *
+     */
     public void reset()
     {
         fError = false;
@@ -85,6 +94,12 @@ public class JUnitProgressBar
         redraw();
     }
 
+    /**
+     * @param hasErrors
+     * @param stopped
+     * @param ticksDone
+     * @param maximum
+     */
     public void reset(boolean hasErrors, boolean stopped, int ticksDone, int maximum)
     {
         boolean noChange =
@@ -100,11 +115,17 @@ public class JUnitProgressBar
         }
     }
 
+    /**
+     * @param max
+     */
     public void setMaximum(int max)
     {
         fMaxTickCount = max;
     }
 
+    /**
+     * @param failures
+     */
     public void step(int failures)
     {
         fCurrentTickCount++;
@@ -124,6 +145,9 @@ public class JUnitProgressBar
         paintStep(x, fColorBarWidth);
     }
 
+    /**
+     *
+     */
     public void stopped()
     {
         fStopped = true;

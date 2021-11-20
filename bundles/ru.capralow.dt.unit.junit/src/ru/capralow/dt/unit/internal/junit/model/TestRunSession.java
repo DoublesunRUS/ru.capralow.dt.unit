@@ -113,6 +113,11 @@ public class TestRunSession
 
     volatile boolean fIsStopped;
 
+    /**
+     * @param launch
+     * @param configurationProject
+     * @param testExtensionName
+     */
     public TestRunSession(ILaunch launch, IV8Project configurationProject, String testExtensionName)
     {
         Assert.isNotNull(launch);
@@ -206,12 +211,27 @@ public class TestRunSession
         fSessionListeners = new ListenerList<>();
     }
 
+    /**
+     * @param listener
+     */
     public synchronized void addTestSessionListener(ITestSessionListener listener)
     {
         swapIn();
         fSessionListeners.add(listener);
     }
 
+    /**
+     * @param parent
+     * @param id
+     * @param testName
+     * @param isSuite
+     * @param testCount
+     * @param isDynamicTest
+     * @param displayName
+     * @param parameterTypes
+     * @param uniqueId
+     * @return TestElement
+     */
     public TestElement createTestElement(TestSuiteElement parent, String id, String testName, boolean isSuite,
         int testCount, boolean isDynamicTest, String displayName, String[] parameterTypes, String uniqueId)
     {
@@ -243,6 +263,9 @@ public class TestRunSession
         return testElement;
     }
 
+    /**
+     * @return TestElement
+     */
     public TestElement[] getAllFailedTestElements()
     {
         ArrayList<ITestElement> failures = new ArrayList<>();
@@ -250,6 +273,9 @@ public class TestRunSession
         return failures.toArray(new TestElement[failures.size()]);
     }
 
+    /**
+     * @return int
+     */
     public int getAssumptionFailureCount()
     {
         return fAssumptionFailureCount;
@@ -272,11 +298,17 @@ public class TestRunSession
         return fTestRoot.getElapsedTimeInSeconds();
     }
 
+    /**
+     * @return int
+     */
     public int getErrorCount()
     {
         return fErrorCount;
     }
 
+    /**
+     * @return int
+     */
     public int getFailureCount()
     {
         return fFailureCount;
@@ -288,6 +320,9 @@ public class TestRunSession
         return null;
     }
 
+    /**
+     * @return int
+     */
     public int getIgnoredCount()
     {
         return fIgnoredCount;
@@ -330,16 +365,26 @@ public class TestRunSession
         return ProgressState.COMPLETED;
     }
 
+    /**
+     * @return int
+     */
     public int getStartedCount()
     {
         return fStartedCount;
     }
 
+    /**
+     * @return long
+     */
     public long getStartTime()
     {
         return fStartTime;
     }
 
+    /**
+     * @param id
+     * @return TestElement
+     */
     public TestElement getTestElement(String id)
     {
         return fIdToTest.get(id);
@@ -358,6 +403,9 @@ public class TestRunSession
         }
     }
 
+    /**
+     * @return TestRoot
+     */
     public synchronized TestRoot getTestRoot()
     {
         swapIn();
@@ -376,6 +424,9 @@ public class TestRunSession
         return this;
     }
 
+    /**
+     * @return int
+     */
     public int getTotalCount()
     {
         return fTotalCount;
@@ -389,6 +440,9 @@ public class TestRunSession
         return fIsRunning;
     }
 
+    /**
+     * @return boolean
+     */
     public boolean isStarting()
     {
         return getStartTime() == 0 && fLaunch != null && !fLaunch.isTerminated();
@@ -402,6 +456,10 @@ public class TestRunSession
         return fIsStopped;
     }
 
+    /**
+     * @param testElement
+     * @param completed
+     */
     public void registerTestEnded(TestElement testElement, boolean completed)
     {
         if (testElement instanceof TestCaseElement)
@@ -428,6 +486,13 @@ public class TestRunSession
         }
     }
 
+    /**
+     * @param testElement
+     * @param status
+     * @param trace
+     * @param expected
+     * @param actual
+     */
     public void registerTestFailureStatus(TestElement testElement, Status status, String trace, String expected,
         String actual)
     {
@@ -445,6 +510,9 @@ public class TestRunSession
         }
     }
 
+    /**
+     *
+     */
     public void removeSwapFile()
     {
         File swapFile = getSwapFile();
@@ -454,11 +522,17 @@ public class TestRunSession
         }
     }
 
+    /**
+     * @param listener
+     */
     public void removeTestSessionListener(ITestSessionListener listener)
     {
         fSessionListeners.remove(listener);
     }
 
+    /**
+     *
+     */
     public void stopTestRun()
     {
         if (isRunning())
@@ -469,6 +543,9 @@ public class TestRunSession
 //            fTestRunnerClient.stopTest();
     }
 
+    /**
+     *
+     */
     public synchronized void swapIn()
     {
         if (fTestRoot != null)
@@ -488,6 +565,9 @@ public class TestRunSession
         }
     }
 
+    /**
+     *
+     */
     public synchronized void swapOut()
     {
         if (fTestRoot == null)

@@ -24,9 +24,16 @@ import com.google.inject.Injector;
 import ru.capralow.dt.unit.internal.junit.model.JUnitModel;
 import ru.capralow.dt.unit.junit.TestRunListener;
 
+/**
+ * @author Aleksandr Kapralov
+ *
+ */
 public class JUnitPlugin
     extends Plugin
 {
+    /**
+     *
+     */
     public static final String ID = "ru.capralow.dt.unit.junit"; //$NON-NLS-1$
 
     private static JUnitPlugin instance;
@@ -35,28 +42,55 @@ public class JUnitPlugin
 
     private static final String HISTORY_DIR_NAME = "history"; //$NON-NLS-1$
 
+    /**
+     *
+     */
     public static final String ID_EXTENSION_POINT_TESTRUN_LISTENERS = ID + "." + "testRunListeners"; //$NON-NLS-1$ //$NON-NLS-2$
 
+    /**
+     * @param message
+     * @return IStatus
+     */
     public static IStatus createErrorStatus(String message)
     {
         return new Status(IStatus.ERROR, ID, 0, message, (Throwable)null);
     }
 
+    /**
+     * @param message
+     * @param code
+     * @return IStatus
+     */
     public static IStatus createErrorStatus(String message, int code)
     {
         return new Status(IStatus.ERROR, ID, code, message, (Throwable)null);
     }
 
+    /**
+     * @param message
+     * @param code
+     * @param throwable
+     * @return IStatus
+     */
     public static IStatus createErrorStatus(String message, int code, Throwable throwable)
     {
         return new Status(IStatus.ERROR, ID, code, message, throwable);
     }
 
+    /**
+     * @param message
+     * @param throwable
+     * @return IStatus
+     */
     public static IStatus createErrorStatus(String message, Throwable throwable)
     {
         return new Status(IStatus.ERROR, ID, 0, message, throwable);
     }
 
+    /**
+     * @return File
+     * @throws IllegalStateException
+     */
     public static File getHistoryDirectory() throws IllegalStateException
     {
         File historyDir = getInstance().getStateLocation().append(HISTORY_DIR_NAME).toFile();
@@ -67,26 +101,41 @@ public class JUnitPlugin
         return historyDir;
     }
 
+    /**
+     * @return instance
+     */
     public static JUnitPlugin getInstance()
     {
         return instance;
     }
 
+    /**
+     * @return fJUnitModel
+     */
     public static JUnitModel getModel()
     {
         return getInstance().fJUnitModel;
     }
 
+    /**
+     * @return boolean
+     */
     public static boolean isStopped()
     {
         return fIsStopped;
     }
 
+    /**
+     * @param status
+     */
     public static void log(IStatus status)
     {
         getInstance().getLog().log(status);
     }
 
+    /**
+     * @param e
+     */
     public static void log(Throwable e)
     {
         log(new Status(IStatus.ERROR, ID, IStatus.ERROR, "Error", e)); //$NON-NLS-1$
@@ -101,6 +150,9 @@ public class JUnitPlugin
      */
     private ListenerList<TestRunListener> fNewTestRunListeners;
 
+    /**
+     * @return injector
+     */
     public synchronized Injector getInjector()
     {
         if (injector == null)

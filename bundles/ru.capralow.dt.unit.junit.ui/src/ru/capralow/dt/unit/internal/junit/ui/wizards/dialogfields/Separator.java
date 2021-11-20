@@ -19,6 +19,9 @@ public class Separator
     private Label fSeparator;
     private int fStyle;
 
+    /**
+     *
+     */
     public Separator()
     {
         this(SWT.NONE);
@@ -38,7 +41,10 @@ public class Separator
 
     /**
      * Creates the separator and fills it in a MGridLayout.
+     * @param parent
+     * @param nColumns
      * @param height The height of the separator
+     * @return Control
      */
     public Control[] doFillIntoGrid(Composite parent, int nColumns, int height)
     {
@@ -84,6 +90,7 @@ public class Separator
      * Creates or returns the created separator.
      * @param parent The parent composite or <code>null</code> if the widget has
      * already been created.
+     * @return Control
      */
     public Control getSeparator(Composite parent)
     {

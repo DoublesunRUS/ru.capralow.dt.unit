@@ -17,10 +17,17 @@ import com._1c.g5.v8.dt.platform.services.core.runtimes.environments.IResolvable
 import com._1c.g5.v8.dt.platform.services.core.runtimes.execution.IRuntimeComponentManager;
 import com._1c.g5.wiring.AbstractServiceAwareModule;
 
+/**
+ * @author Aleksandr Kapralov
+ *
+ */
 public class ExternalDependenciesModule
     extends AbstractServiceAwareModule
 {
 
+    /**
+     * @param bundle
+     */
     public ExternalDependenciesModule(Plugin bundle)
     {
         super(bundle);

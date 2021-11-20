@@ -10,11 +10,17 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 
+/**
+ * @author Aleksandr Kapralov
+ *
+ */
 public final class LayoutUtil
 {
 
     /**
      * Calculates the number of columns needed by field editors
+     * @param editors
+     * @return int
      */
     public static int getNumberOfColumns(DialogField[] editors)
     {
@@ -28,6 +34,8 @@ public final class LayoutUtil
 
     /**
      * Creates a composite and fills in the given editors.
+     * @param parent
+     * @param editors
      * @param labelOnTop Defines if the label of all fields should be on top of the fields
      */
     public static void doDefaultLayout(Composite parent, DialogField[] editors, boolean labelOnTop)
@@ -37,6 +45,8 @@ public final class LayoutUtil
 
     /**
      * Creates a composite and fills in the given editors.
+     * @param parent
+     * @param editors
      * @param labelOnTop Defines if the label of all fields should be on top of the fields
      * @param marginWidth The margin width to be used by the composite
      * @param marginHeight The margin height to be used by the composite
@@ -86,6 +96,8 @@ public final class LayoutUtil
 
     /**
      * Sets the span of a control. Assumes that GridData is used.
+     * @param control
+     * @param span
      */
     public static void setHorizontalSpan(Control control, int span)
     {
@@ -104,6 +116,8 @@ public final class LayoutUtil
 
     /**
      * Sets the width hint of a control. Assumes that GridData is used.
+     * @param control
+     * @param widthHint
      */
     public static void setWidthHint(Control control, int widthHint)
     {
@@ -116,6 +130,8 @@ public final class LayoutUtil
 
     /**
      * Sets the heightHint hint of a control. Assumes that GridData is used.
+     * @param control
+     * @param heightHint
      */
     public static void setHeightHint(Control control, int heightHint)
     {
@@ -128,6 +144,7 @@ public final class LayoutUtil
 
     /**
      * Sets the horizontal indent of a dependent control. Assumes that GridData is used.
+     * @param control
      */
     public static void setHorizontalIndent(Control control)
     {
@@ -140,6 +157,7 @@ public final class LayoutUtil
 
     /**
      * Sets the horizontal grabbing of a control to true. Assumes that GridData is used.
+     * @param control
      */
     public static void setHorizontalGrabbing(Control control)
     {
@@ -152,6 +170,7 @@ public final class LayoutUtil
 
     /**
      * Sets the vertical grabbing of a control to true. Assumes that GridData is used.
+     * @param control
      * @since 3.6
      */
     public static void setVerticalGrabbing(Control control)

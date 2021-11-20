@@ -40,16 +40,41 @@ import ru.capralow.dt.unit.junit.frameworks.gson.FrameworkSettings;
 import ru.capralow.dt.unit.junit.frameworks.gson.FrameworksList;
 import ru.capralow.dt.unit.junit.frameworks.gson.TestFramework;
 
+/**
+ * @author Aleksandr Kapralov
+ *
+ */
 public final class FrameworkUtils
 {
+    /**
+     *
+     */
     public static final String PARAMS_FILE_NAME = "params.json"; //$NON-NLS-1$
+
+    /**
+     *
+     */
     public static final String FRAMEWORK_FILE_NAME = "framework.epf"; //$NON-NLS-1$
+
+    /**
+     *
+     */
     public static final String FRAMEWORK_FILES_ROOT_PATH = "/framework/"; //$NON-NLS-1$
 
+    /**
+     *
+     */
     public static final String FEATURE_EXTENSION = ".feature"; //$NON-NLS-1$
 
+    /**
+     *
+     */
     public static final String MODULE_NAME = "$ModuleName$"; //$NON-NLS-1$
 
+    /**
+     * @param configuration
+     * @return String
+     */
     public static String getConfigurationFilesPath(ILaunchConfiguration configuration)
     {
         Bundle bundle = getFrameworkBundle();
@@ -57,6 +82,12 @@ public final class FrameworkUtils
         return resourcePath + "/" + configuration.getName() + "/"; //$NON-NLS-1$ //$NON-NLS-2$
     }
 
+    /**
+     * @param configuration
+     * @param projectManager
+     * @return IProject
+     * @throws CoreException
+     */
     public static IProject getConfigurationProject(ILaunchConfiguration configuration, IV8ProjectManager projectManager)
         throws CoreException
     {
@@ -79,6 +110,11 @@ public final class FrameworkUtils
         throw new CoreException(JUnitPlugin.createErrorStatus(msg));
     }
 
+    /**
+     * @param extensionProjectName
+     * @param projectManager
+     * @return IProject
+     */
     public static IProject getConfigurationProject(String extensionProjectName, IV8ProjectManager projectManager)
     {
         Collection<IProject> projects = getExtensionProjects(projectManager);
@@ -96,6 +132,9 @@ public final class FrameworkUtils
         return null;
     }
 
+    /**
+     * @return TestFramework
+     */
     public static TestFramework getCurrentFramework()
     {
         FrameworksList frameworks = getFrameworks();
@@ -103,6 +142,11 @@ public final class FrameworkUtils
         return frameworks.getList()[0];
     }
 
+    /**
+     * @param project
+     * @param projectManager
+     * @return IPath
+     */
     public static IPath getExtensionProjectLocation(IProject project, IV8ProjectManager projectManager)
     {
         if (project == null || projectManager == null)
@@ -120,6 +164,10 @@ public final class FrameworkUtils
         return project.getLocation();
     }
 
+    /**
+     * @param projectManager
+     * @return Collection
+     */
     public static Collection<IProject> getExtensionProjects(IV8ProjectManager projectManager)
     {
         return projectManager.getProjects(IExtensionProject.class)
@@ -128,6 +176,13 @@ public final class FrameworkUtils
             .collect(Collectors.toList());
     }
 
+    /**
+     * @param featureSettings
+     * @param lang
+     * @param moduleName
+     * @param methodName
+     * @return List
+     */
     public static List<String> getFeatureClientScript(FeatureSettings featureSettings, String lang, String moduleName,
         String methodName)
     {
@@ -141,6 +196,13 @@ public final class FrameworkUtils
         return elements;
     }
 
+    /**
+     * @param featureSettings
+     * @param lang
+     * @param projectName
+     * @param moduleName
+     * @return List
+     */
     public static List<String> getFeatureDescription(FeatureSettings featureSettings, String lang, String projectName,
         String moduleName)
     {
@@ -154,6 +216,13 @@ public final class FrameworkUtils
         return elements;
     }
 
+    /**
+     * @param featureSettings
+     * @param lang
+     * @param moduleName
+     * @param methodName
+     * @return List
+     */
     public static List<String> getFeatureServerScript(FeatureSettings featureSettings, String lang, String moduleName,
         String methodName)
     {
@@ -167,6 +236,9 @@ public final class FrameworkUtils
         return elements;
     }
 
+    /**
+     * @return FeatureSettings
+     */
     public static FeatureSettings getFeatureSettings()
     {
         TestFramework framework = getCurrentFramework();
@@ -181,17 +253,27 @@ public final class FrameworkUtils
         return featureSettings;
     }
 
+    /**
+     * @return Bundle
+     */
     public static Bundle getFrameworkBundle()
     {
         TestFramework framework = getCurrentFramework();
         return Platform.getBundle(framework.getBundleName());
     }
 
+    /**
+     * @param frameworkSettings
+     * @return String
+     */
     public static String getFrameworkEpfName(FrameworkSettings frameworkSettings)
     {
         return frameworkSettings.getEpfName();
     }
 
+    /**
+     * @return FrameworkMetaTypes
+     */
     public static FrameworkMetaTypes getFrameworkMetaTypes()
     {
         TestFramework framework = getCurrentFramework();
@@ -200,6 +282,9 @@ public final class FrameworkUtils
         return new Gson().fromJson(jsonContent, FrameworkMetaTypes.class);
     }
 
+    /**
+     * @return FrameworksList
+     */
     public static FrameworksList getFrameworks()
     {
         String jsonContent = readContents(getFileInputSupplier("/frameworks.json", JUnitPlugin.ID)); //$NON-NLS-1$
@@ -207,6 +292,9 @@ public final class FrameworkUtils
         return new Gson().fromJson(jsonContent, FrameworksList.class);
     }
 
+    /**
+     * @return FrameworkSettings
+     */
     public static FrameworkSettings getFrameworkSettings()
     {
         TestFramework framework = getCurrentFramework();
@@ -215,12 +303,23 @@ public final class FrameworkUtils
         return new Gson().fromJson(jsonContent, FrameworkSettings.class);
     }
 
+    /**
+     * @param frameworkSettings
+     * @param paramsFilePathName
+     * @return String
+     */
     public static String getFrameworkStartupOptions(FrameworkSettings frameworkSettings, String paramsFilePathName)
     {
         String startupOptions = frameworkSettings.getStartupOptions();
         return startupOptions.replace("$ParamsFilePathName$", paramsFilePathName + PARAMS_FILE_NAME); //$NON-NLS-1$
     }
 
+    /**
+     * @param extensionModuleName
+     * @param project
+     * @param projectManager
+     * @return String
+     */
     public static String getModuleByName(String extensionModuleName, IProject project, IV8ProjectManager projectManager)
     {
         if (project == null)
@@ -244,6 +343,12 @@ public final class FrameworkUtils
         return null;
     }
 
+    /**
+     * @param configuration
+     * @param projectManager
+     * @return String
+     * @throws CoreException
+     */
     public static String getModuleFromConfiguration(ILaunchConfiguration configuration,
         IV8ProjectManager projectManager) throws CoreException
     {
@@ -256,6 +361,10 @@ public final class FrameworkUtils
         return getModuleByName(extensionModuleName, project, projectManager);
     }
 
+    /**
+     * @param fileName
+     * @return URI
+     */
     public static URI getResourceUriForPlugin(String fileName)
     {
         URI uri = URI.createPlatformResourceURI(fileName, false);
@@ -265,6 +374,12 @@ public final class FrameworkUtils
         return URI.createFileURI(file.getPath());
     }
 
+    /**
+     * @param extensionTagName
+     * @param project
+     * @param projectManager
+     * @return String
+     */
     public static String getTagByName(String extensionTagName, IProject project, IV8ProjectManager projectManager)
     {
         if (project == null)
@@ -288,6 +403,12 @@ public final class FrameworkUtils
         return null;
     }
 
+    /**
+     * @param configuration
+     * @param projectManager
+     * @return String
+     * @throws CoreException
+     */
     public static String getTagFromConfiguration(ILaunchConfiguration configuration, IV8ProjectManager projectManager)
         throws CoreException
     {
@@ -299,6 +420,10 @@ public final class FrameworkUtils
         return getTagByName(extensionTagName, project, projectManager);
     }
 
+    /**
+     * @param projectLocation
+     * @return List
+     */
     public static List<String> getTestModules(IPath projectLocation)
     {
         if (projectLocation == null)
@@ -323,6 +448,10 @@ public final class FrameworkUtils
         return modulesList;
     }
 
+    /**
+     * @param projectLocation
+     * @return List
+     */
     public static List<String> getTestTags(IPath projectLocation)
     {
         if (projectLocation == null)

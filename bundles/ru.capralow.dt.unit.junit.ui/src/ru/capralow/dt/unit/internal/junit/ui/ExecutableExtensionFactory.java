@@ -8,6 +8,10 @@ import org.osgi.framework.Bundle;
 import com._1c.g5.wiring.AbstractGuiceAwareExecutableExtensionFactory;
 import com.google.inject.Injector;
 
+/**
+ * @author Aleksandr Kapralov
+ *
+ */
 public class ExecutableExtensionFactory
     extends AbstractGuiceAwareExecutableExtensionFactory
 {

@@ -43,6 +43,10 @@ import ru.capralow.dt.unit.internal.junit.JUnitPlugin;
 import ru.capralow.dt.unit.junit.frameworks.FrameworkUtils;
 import ru.capralow.dt.unit.junit.frameworks.gson.FrameworkSettings;
 
+/**
+ * @author Aleksandr Kapralov
+ *
+ */
 public class RuntimeUnitLauncherLaunchDelegate
     extends AbstractUnitTestLaunchDelegate
 {

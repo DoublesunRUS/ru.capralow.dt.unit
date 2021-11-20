@@ -140,6 +140,11 @@ public final class SwtUtil
         return null;
     }
 
+    /**
+     * @param table
+     * @param rows
+     * @return int
+     */
     public static int getTableHeightHint(Table table, int rows)
     {
         if (table.getFont().equals(JFaceResources.getDefaultFont()))
@@ -154,6 +159,10 @@ public final class SwtUtil
         return result;
     }
 
+    /**
+     * @param columns
+     * @return GridLayout
+     */
     public static GridLayout newLayoutNoMargins(int columns)
     {
         GridLayout layout = new GridLayout(columns, false);

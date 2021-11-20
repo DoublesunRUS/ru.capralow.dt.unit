@@ -10,6 +10,10 @@ import ru.capralow.dt.unit.internal.junit.model.TestElement;
 import ru.capralow.dt.unit.internal.junit.model.TestRoot;
 import ru.capralow.dt.unit.internal.junit.model.TestSuiteElement;
 
+/**
+ * @author Aleksandr Kapralov
+ *
+ */
 public class TestSessionTreeContentProvider
     implements ITreeContentProvider
 {

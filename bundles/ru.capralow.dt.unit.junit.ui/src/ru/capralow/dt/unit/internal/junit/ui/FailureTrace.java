@@ -47,6 +47,12 @@ public class FailureTrace
     private IPropertyChangeListener fFontPropertyChangeListener;
 //    private ShowStackTraceInConsoleViewAction fShowTraceInConsoleAction;
 
+    /**
+     * @param parent
+     * @param clipboard
+     * @param testRunner
+     * @param toolBar
+     */
     public FailureTrace(Composite parent, Clipboard clipboard, TestRunnerViewPart testRunner, ToolBar toolBar)
     {
         Assert.isNotNull(clipboard);
@@ -101,26 +107,41 @@ public class FailureTrace
         fInputTrace = null;
     }
 
+    /**
+     *
+     */
     public void dispose()
     {
         JFaceResources.getFontRegistry().removeListener(fFontPropertyChangeListener);
     }
 
+    /**
+     * @return TestElement
+     */
     public TestElement getFailedTest()
     {
         return fFailure;
     }
 
+    /**
+     * @return FailureTableDisplay
+     */
     public FailureTableDisplay getFailureTableDisplay()
     {
         return fFailureTableDisplay;
     }
 
+    /**
+     * @return Shell
+     */
     public Shell getShell()
     {
         return fTable.getShell();
     }
 
+    /**
+     * @return String
+     */
     public String getTrace()
     {
         return fInputTrace;
@@ -184,6 +205,9 @@ public class FailureTrace
         updateTable(trace);
     }
 
+    /**
+     * @param test
+     */
     public void updateEnablement(TestElement test)
     {
         boolean enableCompare = test != null && test.isComparisonFailure();

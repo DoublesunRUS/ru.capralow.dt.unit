@@ -9,18 +9,40 @@ import java.io.PrintWriter;
 import java.io.StringReader;
 import java.io.StringWriter;
 
+/**
+ * @author Aleksandr Kapralov
+ *
+ */
 public class TextualTrace
 {
+    /**
+     *
+     */
     public static final int LINE_TYPE_EXCEPTION = 1;
+    /**
+     *
+     */
     public static final int LINE_TYPE_NORMAL = 0;
+    /**
+     *
+     */
     public static final int LINE_TYPE_STACKFRAME = 2;
+
     private final String fTrace;
 
+    /**
+     * @param trace
+     * @param filterPatterns
+     */
     public TextualTrace(String trace, String[] filterPatterns)
     {
         this.fTrace = this.filterStack(trace, filterPatterns);
     }
 
+    /**
+     * @param display
+     * @param maxLabelLength
+     */
     public void display(ITraceDisplay display, int maxLabelLength)
     {
         StringReader stringReader = new StringReader(this.fTrace);

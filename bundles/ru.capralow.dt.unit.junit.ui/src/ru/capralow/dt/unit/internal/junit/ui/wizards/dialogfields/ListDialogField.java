@@ -124,6 +124,8 @@ public class ListDialogField<E>
 
     /**
      * Adds an element at the end of the list.
+     * @param element
+     * @return boolean
      */
     public boolean addElement(E element)
     {
@@ -132,6 +134,9 @@ public class ListDialogField<E>
 
     /**
      * Adds an element at a position.
+     * @param element
+     * @param index
+     * @return boolean
      */
     public boolean addElement(E element, int index)
     {
@@ -152,6 +157,8 @@ public class ListDialogField<E>
 
     /**
      * Adds elements at the end of the list.
+     * @param elements
+     * @return boolean
      */
     public boolean addElements(List<E> elements)
     {
@@ -160,6 +167,9 @@ public class ListDialogField<E>
 
     /**
      * Adds elements at the given index
+     * @param elements
+     * @param index
+     * @return boolean
      */
     public boolean addElements(List<E> elements, int index)
     {
@@ -204,6 +214,9 @@ public class ListDialogField<E>
         return false;
     }
 
+    /**
+     * @return boolean
+     */
     public boolean canMoveDown()
     {
         if (isOkToUse(fTableControl))
@@ -221,6 +234,9 @@ public class ListDialogField<E>
         return false;
     }
 
+    /**
+     * @return boolean
+     */
     public boolean canMoveUp()
     {
         if (isOkToUse(fTableControl))
@@ -290,6 +306,9 @@ public class ListDialogField<E>
 
     // ------ layout helpers
 
+    /**
+     * @param element
+     */
     public void editElement(Object element)
     {
         if (isOkToUse(fTableControl))
@@ -301,6 +320,8 @@ public class ListDialogField<E>
 
     /**
      * Notifies clients that the element has changed.
+     * @param element
+     * @throws IllegalArgumentException
      */
     public void elementChanged(E element) throws IllegalArgumentException
     {
@@ -320,6 +341,8 @@ public class ListDialogField<E>
 
     /**
      * Sets a button enabled or disabled.
+     * @param index
+     * @param enable
      */
     public void enableButton(int index, boolean enable)
     {
@@ -337,6 +360,7 @@ public class ListDialogField<E>
      * will be created.
      * @param parent The parent composite when called the first time, or <code>null</code>
      * after.
+     * @return Composite
      */
     public Composite getButtonBox(Composite parent)
     {
@@ -398,6 +422,8 @@ public class ListDialogField<E>
 
     /**
      * Gets the elements shown at the given index.
+     * @param index
+     * @return E
      */
     public E getElement(int index)
     {
@@ -407,6 +433,7 @@ public class ListDialogField<E>
     /**
      * Gets the elements shown in the list.
      * The list returned is a copy, so it can be modified by the user.
+     * @return List
      */
     public List<E> getElements()
     {
@@ -415,6 +442,8 @@ public class ListDialogField<E>
 
     /**
     * Gets the index of an element in the list or -1 if element is not in list.
+     * @param elem
+     * @return int
     */
     public int getIndexOfElement(E elem)
     {
@@ -425,6 +454,7 @@ public class ListDialogField<E>
      * Returns the list control. When called the first time, the control will be created.
      * @param parent The parent composite when called the first time, or <code>null</code>
      * after.
+     * @return Control
      */
     public Control getListControl(Composite parent)
     {
@@ -507,6 +537,7 @@ public class ListDialogField<E>
 
     /**
      * Returns the selected elements.
+     * @return List
      */
     public List<E> getSelectedElements()
     {
@@ -530,6 +561,7 @@ public class ListDialogField<E>
 
     /**
      * Gets the number of elements
+     * @return int
      */
     public int getSize()
     {
@@ -538,12 +570,16 @@ public class ListDialogField<E>
 
     /**
      * Returns the internally used table viewer.
+     * @return TableViewer
      */
     public TableViewer getTableViewer()
     {
         return fTable;
     }
 
+    /**
+     * @param selection
+     */
     public void postSetSelection(final ISelection selection)
     {
         if (isOkToUse(fTableControl))
@@ -591,6 +627,8 @@ public class ListDialogField<E>
 
     /**
      * Removes an element from the list.
+     * @param element
+     * @throws IllegalArgumentException
      */
     public void removeElement(Object element) throws IllegalArgumentException
     {
@@ -610,6 +648,7 @@ public class ListDialogField<E>
 
     /**
      * Removes elements from the list.
+     * @param elements
      */
     public void removeElements(List<E> elements)
     {
@@ -626,6 +665,9 @@ public class ListDialogField<E>
 
     /**
      * Replaces an element.
+     * @param oldElement
+     * @param newElement
+     * @throws IllegalArgumentException
      */
     public void replaceElement(E oldElement, E newElement) throws IllegalArgumentException
     {
@@ -651,6 +693,9 @@ public class ListDialogField<E>
         }
     }
 
+    /**
+     * @param selection
+     */
     public void selectElements(ISelection selection)
     {
         fSelectionWhenEnabled = selection;
@@ -662,6 +707,9 @@ public class ListDialogField<E>
 
     // ------ model access
 
+    /**
+     *
+     */
     public void selectFirstElement()
     {
         Object element = null;
@@ -689,6 +737,7 @@ public class ListDialogField<E>
 
     /**
      * Sets the minimal width of the buttons. Must be called after widget creation.
+     * @param minWidth
      */
     public void setButtonsMinWidth(int minWidth)
     {
@@ -702,6 +751,7 @@ public class ListDialogField<E>
      * Sets the index of the 'down' button in the button label array passed in the constructor.
      * The behavior of the button marked as the 'down' button will then be handled internally.
      * (enable state, button invocation behavior)
+     * @param downButtonIndex
      */
     public void setDownButtonIndex(int downButtonIndex)
     {
@@ -711,6 +761,7 @@ public class ListDialogField<E>
 
     /**
      * Sets the elements shown in the list.
+     * @param elements
      */
     public void setElements(Collection<E> elements)
     {
@@ -739,6 +790,7 @@ public class ListDialogField<E>
      * Sets the index of the 'remove' button in the button label array passed in the constructor.
      * The behavior of the button marked as the 'remove' button will then be handled internally.
      * (enable state, button invocation behavior)
+     * @param removeButtonIndex
      */
     public void setRemoveButtonIndex(int removeButtonIndex)
     {
@@ -746,6 +798,9 @@ public class ListDialogField<E>
         fRemoveButtonIndex = removeButtonIndex;
     }
 
+    /**
+     * @param column
+     */
     public void setTableColumns(ColumnsDescription column)
     {
         fTableColumns = column;
@@ -755,6 +810,7 @@ public class ListDialogField<E>
      * Sets the index of the 'up' button in the button label array passed in the constructor.
      * The behavior of the button marked as the 'up' button will then be handled internally.
      * (enable state, button invocation behavior)
+     * @param upButtonIndex
      */
     public void setUpButtonIndex(int upButtonIndex)
     {
@@ -1055,6 +1111,10 @@ public class ListDialogField<E>
         updateButtonState();
     }
 
+    /**
+     * @author Aleksandr Kapralov
+     *
+     */
     public static class ColumnsDescription
     {
         private static ColumnLayoutData[] createColumnWeightData(int nColumns)
@@ -1072,6 +1132,11 @@ public class ListDialogField<E>
 
         private boolean drawLines;
 
+        /**
+         * @param columns
+         * @param headers
+         * @param drawLines
+         */
         public ColumnsDescription(ColumnLayoutData[] columns, String[] headers, boolean drawLines)
         {
             this.columns = columns;
@@ -1079,11 +1144,19 @@ public class ListDialogField<E>
             this.drawLines = drawLines;
         }
 
+        /**
+         * @param nColumns
+         * @param drawLines
+         */
         public ColumnsDescription(int nColumns, boolean drawLines)
         {
             this(createColumnWeightData(nColumns), null, drawLines);
         }
 
+        /**
+         * @param headers
+         * @param drawLines
+         */
         public ColumnsDescription(String[] headers, boolean drawLines)
         {
             this(createColumnWeightData(headers.length), headers, drawLines);

@@ -22,10 +22,17 @@ import com.google.common.base.Strings;
 import ru.capralow.dt.unit.internal.junit.launcher.JUnitLaunchConfigurationConstants;
 import ru.capralow.dt.unit.junit.frameworks.FrameworkUtils;
 
+/**
+ * @author Aleksandr Kapralov
+ *
+ */
 public class ShowJUnitResult
     implements IDebugEventSetListener
 {
 
+    /**
+     *
+     */
     public static final String JUNIT_PANEL_ID = "ru.capralow.dt.unit.junit.ResultView"; //$NON-NLS-1$
 
     private static void showJUnitResult(IProcess process)

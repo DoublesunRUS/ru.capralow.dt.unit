@@ -54,6 +54,10 @@ import com.google.inject.Inject;
 
 import ru.capralow.dt.unit.internal.junit.ui.JUnitUiPlugin;
 
+/**
+ * @author Aleksandr Kapralov
+ *
+ */
 public class AddUnitTestToModuleHandler
     extends AbstractHandler
 {
@@ -121,6 +125,9 @@ public class AddUnitTestToModuleHandler
         return null;
     }
 
+    /**
+     * @param target
+     */
     public void execute(XtextEditor target)
     {
         Shell shell = target.getShell();

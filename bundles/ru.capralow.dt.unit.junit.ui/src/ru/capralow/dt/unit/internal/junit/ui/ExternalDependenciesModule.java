@@ -18,10 +18,17 @@ import com._1c.g5.v8.dt.profiling.core.IProfilingService;
 import com._1c.g5.wiring.AbstractServiceAwareModule;
 import com.e1c.g5.dt.applications.IApplicationManager;
 
+/**
+ * @author Aleksandr Kapralov
+ *
+ */
 public class ExternalDependenciesModule
     extends AbstractServiceAwareModule
 {
 
+    /**
+     * @param bundle
+     */
     public ExternalDependenciesModule(Plugin bundle)
     {
         super(bundle);

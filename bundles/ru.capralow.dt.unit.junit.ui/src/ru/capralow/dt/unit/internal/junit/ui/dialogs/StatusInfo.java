@@ -17,6 +17,9 @@ public class StatusInfo
     implements IStatus
 {
 
+    /**
+     *
+     */
     public static final IStatus OK_STATUS = new StatusInfo();
 
     private String fStatusMessage;
@@ -101,6 +104,7 @@ public class StatusInfo
 
     /**
      *  Returns if the status' severity is ERROR.
+     * @return boolean
      */
     public boolean isError()
     {
@@ -109,6 +113,7 @@ public class StatusInfo
 
     /**
      *  Returns if the status' severity is INFO.
+     * @return boolean
      */
     public boolean isInfo()
     {
@@ -136,6 +141,7 @@ public class StatusInfo
 
     /**
      *  Returns if the status' severity is WARNING.
+     * @return boolean
      */
     public boolean isWarning()
     {

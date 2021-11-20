@@ -17,6 +17,9 @@ public class CompareResultsAction
     private FailureTrace fView;
     private CompareResultDialog fOpenDialog;
 
+    /**
+     * @param view
+     */
     public CompareResultsAction(FailureTrace view)
     {
         super(Messages.CompareResultsAction_label);
@@ -52,6 +55,9 @@ public class CompareResultsAction
         }
     }
 
+    /**
+     * @param failedTest
+     */
     public void updateOpenDialog(TestElement failedTest)
     {
         if (fOpenDialog != null)

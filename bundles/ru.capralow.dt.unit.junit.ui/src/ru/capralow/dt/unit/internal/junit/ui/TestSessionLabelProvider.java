@@ -20,6 +20,10 @@ import ru.capralow.dt.unit.internal.junit.model.TestElement.Status;
 import ru.capralow.dt.unit.internal.junit.model.TestSuiteElement;
 import ru.capralow.dt.unit.junit.model.ITestElement;
 
+/**
+ * @author Aleksandr Kapralov
+ *
+ */
 public class TestSessionLabelProvider
     extends LabelProvider
     implements IStyledLabelProvider
@@ -31,6 +35,10 @@ public class TestSessionLabelProvider
 
     private boolean fShowTime;
 
+    /**
+     * @param testRunnerPart
+     * @param layoutMode
+     */
     public TestSessionLabelProvider(TestRunnerViewPart testRunnerPart, int layoutMode)
     {
         fTestRunnerPart = testRunnerPart;
@@ -157,6 +165,9 @@ public class TestSessionLabelProvider
         return addElapsedTime(label, testElement.getElapsedTimeInSeconds());
     }
 
+    /**
+     * @param showTime
+     */
     public void setShowTime(boolean showTime)
     {
         fShowTime = showTime;

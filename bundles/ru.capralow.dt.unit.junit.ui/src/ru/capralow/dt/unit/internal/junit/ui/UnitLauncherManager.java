@@ -17,6 +17,10 @@ import org.eclipse.ui.PlatformUI;
 
 import com._1c.g5.wiring.IManagedService;
 
+/**
+ * @author Aleksandr Kapralov
+ *
+ */
 public class UnitLauncherManager
     implements IManagedService
 {

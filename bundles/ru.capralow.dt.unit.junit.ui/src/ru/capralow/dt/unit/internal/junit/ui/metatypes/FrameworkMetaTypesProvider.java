@@ -33,6 +33,10 @@ import ru.capralow.dt.unit.junit.frameworks.gson.FrameworkMethod;
 import ru.capralow.dt.unit.junit.frameworks.gson.FrameworkMethodParameter;
 import ru.capralow.dt.unit.junit.frameworks.gson.FrameworkProperty;
 
+/**
+ * @author Aleksandr Kapralov
+ *
+ */
 public class FrameworkMetaTypesProvider
     implements IExternalMetaTypesProvider
 {

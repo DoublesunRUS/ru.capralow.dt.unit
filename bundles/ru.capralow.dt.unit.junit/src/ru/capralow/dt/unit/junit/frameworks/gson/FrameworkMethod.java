@@ -5,14 +5,27 @@ package ru.capralow.dt.unit.junit.frameworks.gson;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * @author Aleksandr Kapralov
+ *
+ */
 public class FrameworkMethod
 {
+    /**
+     *
+     */
     @SerializedName("name-en")
     public String nameEn = ""; //$NON-NLS-1$
 
+    /**
+     *
+     */
     @SerializedName("name-ru")
     public String nameRu = ""; //$NON-NLS-1$
 
+    /**
+     *
+     */
     @SerializedName("params")
     public FrameworkMethodParameter[] params = { };
 
@@ -22,6 +35,9 @@ public class FrameworkMethod
     @SerializedName("returnedValues")
     private String[] returnedValues = { };
 
+    /**
+     * @return int
+     */
     public int getMinParams()
     {
         int minParams = params.length;
@@ -37,6 +53,9 @@ public class FrameworkMethod
         return minParams;
     }
 
+    /**
+     * @return String
+     */
     public String[] getReturnedValues()
     {
         if (returnedValue.isEmpty() && returnedValues != null)

@@ -33,6 +33,10 @@ public class JUnitCopyAction
 
     private TestElement fTestElement;
 
+    /**
+     * @param view
+     * @param clipboard
+     */
     public JUnitCopyAction(FailureTrace view, Clipboard clipboard)
     {
         super(Messages.CopyTrace_action_label);
@@ -42,6 +46,9 @@ public class JUnitCopyAction
         fClipboard = clipboard;
     }
 
+    /**
+     * @param test
+     */
     public void handleTestSelected(TestElement test)
     {
         fTestElement = test;

@@ -3,20 +3,47 @@
  */
 package ru.capralow.dt.unit.junit.model;
 
+/**
+ * @author Aleksandr Kapralov
+ *
+ */
 public interface ITestElement
 {
+    /**
+     * @return double
+     */
     double getElapsedTimeInSeconds();
 
+    /**
+     * @return FailureTrace
+     */
     FailureTrace getFailureTrace();
 
+    /**
+     * @return ITestElementContainer
+     */
     ITestElementContainer getParentContainer();
 
+    /**
+     * @return ProgressState
+     */
     ProgressState getProgressState();
 
+    /**
+     * @param var1
+     * @return Result
+     */
     Result getTestResult(boolean var1);
 
+    /**
+     * @return ITestRunSession
+     */
     ITestRunSession getTestRunSession();
 
+    /**
+     * @author Aleksandr Kapralov
+     *
+     */
     final class FailureTrace
     {
         private final String fActual;
@@ -46,6 +73,10 @@ public interface ITestElement
         }
     }
 
+    /**
+     * @author Aleksandr Kapralov
+     *
+     */
     final class ProgressState
     {
         public static final ProgressState NOT_STARTED = new ProgressState("Not Started");
@@ -66,6 +97,10 @@ public interface ITestElement
         }
     }
 
+    /**
+     * @author Aleksandr Kapralov
+     *
+     */
     final class Result
     {
         public static final Result UNDEFINED = new Result("Undefined");

@@ -118,6 +118,9 @@ public class TestRunnerViewPart
     extends ViewPart
 {
 
+    /**
+     *
+     */
     public static final String NAME = "ru.capralow.dt.unit.junit.ResultView"; //$NON-NLS-1$
 
     private static final String RERUN_LAST_COMMAND = "ru.capralow.dt.unit.junit.junitShortcut.rerunLast"; //$NON-NLS-1$
@@ -125,7 +128,13 @@ public class TestRunnerViewPart
 
     static final int REFRESH_INTERVAL = 200;
 
+    /**
+     *
+     */
     public static final int LAYOUT_FLAT = 0;
+    /**
+     *
+     */
     public static final int LAYOUT_HIERARCHICAL = 1;
 
     // Persistence tags.
@@ -149,6 +158,10 @@ public class TestRunnerViewPart
     static final int VIEW_ORIENTATION_HORIZONTAL = 1;
 
     static final int VIEW_ORIENTATION_AUTOMATIC = 2;
+
+    /**
+     *
+     */
     public static final Object FAMILY_JUNIT_RUN = new Object();
 
     static boolean getShowOnErrorOnly()
@@ -358,6 +371,9 @@ public class TestRunnerViewPart
 
     protected boolean fPartIsVisible = false;
 
+    /**
+     *
+     */
     public TestRunnerViewPart()
     {
         fImagesToDispose = new ArrayList<>();
@@ -476,6 +492,9 @@ public class TestRunnerViewPart
         }
     }
 
+    /**
+     * @return FailureTrace
+     */
     public FailureTrace getFailureTrace()
     {
         return fFailureTrace;
@@ -489,16 +508,25 @@ public class TestRunnerViewPart
         return fTestRunSession == null ? null : fTestRunSession.getLaunchedProject();
     }
 
+    /**
+     * @return SortingCriterion
+     */
     public SortingCriterion getSortingCriterion()
     {
         return fSortingCriterion;
     }
 
+    /**
+     * @return TestRunSession
+     */
     public TestRunSession getTestRunSession()
     {
         return fTestRunSession;
     }
 
+    /**
+     * @return TestViewer
+     */
     public TestViewer getTestViewer()
     {
         return fTestViewer;
@@ -522,6 +550,9 @@ public class TestRunnerViewPart
         return fViewImage;
     }
 
+    /**
+     * @param test
+     */
     public void handleTestSelected(TestElement test)
     {
         showFailure(test);
@@ -540,11 +571,22 @@ public class TestRunnerViewPart
         }
     }
 
+    /**
+     * @return boolean
+     */
     public boolean isAutoScroll()
     {
         return fAutoScroll;
     }
 
+    /**
+     * @param testId
+     * @param className
+     * @param testName
+     * @param testDisplayName
+     * @param uniqueId
+     * @param launchMode
+     */
     public void rerunTest(String testId, String className, String testName, String testDisplayName, String uniqueId,
         String launchMode)
     {
@@ -591,6 +633,9 @@ public class TestRunnerViewPart
             Messages.TestRunnerViewPart_cannotrerurn_message);
     }
 
+    /**
+     *
+     */
     public void rerunTestFailedFirst()
     {
         ILaunch launch = fTestRunSession.getLaunch();
@@ -667,16 +712,25 @@ public class TestRunnerViewPart
         memento.putInteger(TAG_SORTING_CRITERION, fSortingCriterion.ordinal());
     }
 
+    /**
+     *
+     */
     public void selectNextFailure()
     {
         fTestViewer.selectFailure(true);
     }
 
+    /**
+     *
+     */
     public void selectPreviousFailure()
     {
         fTestViewer.selectFailure(false);
     }
 
+    /**
+     * @param scroll
+     */
     public void setAutoScroll(boolean scroll)
     {
         fAutoScroll = scroll;
@@ -691,11 +745,17 @@ public class TestRunnerViewPart
         }
     }
 
+    /**
+     * @param mode
+     */
     public void setLayoutMode(int mode)
     {
         setFilterAndLayout(fFailuresOnlyFilterAction.isChecked(), fIgnoredOnlyFilterAction.isChecked(), mode);
     }
 
+    /**
+     * @param sortingCriterion
+     */
     public void setSortingCriterion(SortingCriterion sortingCriterion)
     {
         fSortingCriterion = sortingCriterion;
@@ -705,6 +765,9 @@ public class TestRunnerViewPart
         }
     }
 
+    /**
+     *
+     */
     public void showTestResultsView()
     {
         IWorkbenchWindow window = getSite().getWorkbenchWindow();
@@ -751,6 +814,9 @@ public class TestRunnerViewPart
         }
     }
 
+    /**
+     *
+     */
     public void warnOfContentChange()
     {
         IWorkbenchSiteProgressService service = getProgressService();
@@ -1655,10 +1721,23 @@ action enablement
         setFilterAndLayout(false /*failuresOnly must be off*/, ignoredOnly, fLayout);
     }
 
+    /**
+     * @author Aleksandr Kapralov
+     *
+     */
     public enum SortingCriterion
     {
+        /**
+         *
+         */
         SORT_BY_NAME,
+        /**
+         *
+         */
         SORT_BY_EXECUTION_ORDER,
+        /**
+         *
+         */
         SORT_BY_EXECUTION_TIME
     }
 

@@ -15,10 +15,17 @@ import org.osgi.framework.Bundle;
 
 import ru.capralow.dt.unit.junit.frameworks.FrameworkUtils;
 
+/**
+ * @author Aleksandr Kapralov
+ *
+ */
 public class FrameworkUtilsTest
 {
     private static final String PLUGIN_ID = "ru.capralow.dt.unit.junit.tests"; //$NON-NLS-1$
 
+    /**
+     *
+     */
     @Test
     public void testGetModulesForProjectEmpty()
     {
@@ -27,6 +34,9 @@ public class FrameworkUtilsTest
         assertEquals("Список модулей: пустой", new ArrayList<String>(), modules); //$NON-NLS-1$
     }
 
+    /**
+     *
+     */
     @Test
     public void testGetModulesForProjectNoFeatures()
     {
@@ -38,6 +48,9 @@ public class FrameworkUtilsTest
         assertEquals("Список модулей: без фич", new ArrayList<String>(), modules); //$NON-NLS-1$
     }
 
+    /**
+     *
+     */
     @Test
     public void testGetTagsForProjectEmpty()
     {
@@ -46,6 +59,9 @@ public class FrameworkUtilsTest
         assertEquals("Список тегов: пустой", new ArrayList<String>(), tags); //$NON-NLS-1$
     }
 
+    /**
+     *
+     */
     @Test
     public void testGetTagsForProjectNoFeatures()
     {

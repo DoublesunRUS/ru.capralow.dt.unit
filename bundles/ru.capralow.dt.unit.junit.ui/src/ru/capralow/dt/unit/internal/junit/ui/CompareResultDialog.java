@@ -45,6 +45,10 @@ import org.eclipse.ui.PlatformUI;
 
 import ru.capralow.dt.unit.internal.junit.model.TestElement;
 
+/**
+ * @author Aleksandr Kapralov
+ *
+ */
 public class CompareResultDialog
     extends TrayDialog
 {
@@ -66,6 +70,10 @@ public class CompareResultDialog
     private final int[] fPrefixSuffix = new int[2];
     private CompareViewerPane fCompareViewerPane;
 
+    /**
+     * @param parentShell
+     * @param element
+     */
     public CompareResultDialog(Shell parentShell, TestElement element)
     {
         super(parentShell);
@@ -73,6 +81,9 @@ public class CompareResultDialog
         setFailedTest(element);
     }
 
+    /**
+     * @param failedTest
+     */
     public void setInput(TestElement failedTest)
     {
         setFailedTest(failedTest);

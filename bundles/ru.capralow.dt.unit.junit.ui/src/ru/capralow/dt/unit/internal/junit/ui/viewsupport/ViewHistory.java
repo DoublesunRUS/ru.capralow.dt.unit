@@ -19,6 +19,9 @@ import org.eclipse.swt.widgets.Shell;
 public abstract class ViewHistory<E>
 {
 
+    /**
+     * @param manager
+     */
     public abstract void addMenuEntries(MenuManager manager);
 
     /**
@@ -61,8 +64,14 @@ public abstract class ViewHistory<E>
      */
     public abstract List<E> getHistoryEntries();
 
+    /**
+     * @return String
+     */
     public abstract String getHistoryListDialogMessage();
 
+    /**
+     * @return String
+     */
     public abstract String getHistoryListDialogTitle();
 
     /**
@@ -71,10 +80,19 @@ public abstract class ViewHistory<E>
      */
     public abstract ImageDescriptor getImageDescriptor(Object element);
 
+    /**
+     * @return int
+     */
     public abstract int getMaxEntries();
 
+    /**
+     * @return String
+     */
     public abstract String getMaxEntriesMessage();
 
+    /**
+     * @return Shell
+     */
     public abstract Shell getShell();
 
     /**
@@ -94,6 +112,9 @@ public abstract class ViewHistory<E>
      */
     public abstract void setHistoryEntries(List<E> remainingEntries, E activeEntry);
 
+    /**
+     * @param maxEntries
+     */
     public abstract void setMaxEntries(int maxEntries);
 
 }

@@ -73,6 +73,9 @@ public class DialogField
 
     private boolean fEnabled;
 
+    /**
+     *
+     */
     public DialogField()
     {
         fEnabled = true;

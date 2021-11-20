@@ -34,6 +34,9 @@ public final class JUnitPreferencesConstants
      */
     public static final String ENABLE_ASSERTIONS = JUnitPlugin.ID + ".enable_assertions"; //$NON-NLS-1$
 
+    /**
+     *
+     */
     public static final boolean ENABLE_ASSERTIONS_DEFAULT = true;
 
     /**
@@ -65,12 +68,18 @@ public final class JUnitPreferencesConstants
         return Arrays.asList(FG_DEFAULT_FILTER_PATTERNS);
     }
 
+    /**
+     * @return String
+     */
     public static String[] getFilterPatterns()
     {
         return JUnitPreferencesConstants.parseList(
             Platform.getPreferencesService().getString(JUnitPlugin.ID, PREF_ACTIVE_FILTERS_LIST, null, null));
     }
 
+    /**
+     * @return boolean
+     */
     public static boolean getFilterStack()
     {
         return Platform.getPreferencesService().getBoolean(JUnitPlugin.ID, DO_FILTER_STACK, true, null);
@@ -109,6 +118,9 @@ public final class JUnitPreferencesConstants
         return String.join(String.valueOf(','), list);
     }
 
+    /**
+     * @param filter
+     */
     public static void setFilterStack(boolean filter)
     {
         InstanceScope.INSTANCE.getNode(JUnitPlugin.ID).putBoolean(DO_FILTER_STACK, filter);

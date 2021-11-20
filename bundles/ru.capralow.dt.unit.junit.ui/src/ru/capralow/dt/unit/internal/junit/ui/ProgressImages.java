@@ -19,6 +19,9 @@ public class ProgressImages
     private Image[] fOkImages = new Image[PROGRESS_STEPS];
     private Image[] fFailureImages = new Image[PROGRESS_STEPS];
 
+    /**
+     *
+     */
     public void dispose()
     {
         if (!isLoaded())
@@ -35,6 +38,13 @@ public class ProgressImages
         }
     }
 
+    /**
+     * @param current
+     * @param total
+     * @param errors
+     * @param failures
+     * @return Image
+     */
     public Image getImage(int current, int total, int errors, int failures)
     {
         if (!isLoaded())

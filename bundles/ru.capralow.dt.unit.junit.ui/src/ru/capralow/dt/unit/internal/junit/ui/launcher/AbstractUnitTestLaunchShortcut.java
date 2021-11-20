@@ -41,6 +41,10 @@ import com.google.inject.Inject;
 
 import ru.capralow.dt.unit.internal.junit.ui.JUnitUiPlugin;
 
+/**
+ * @author Aleksandr Kapralov
+ *
+ */
 public abstract class AbstractUnitTestLaunchShortcut
     extends AbstractLaunchShortcut
 {

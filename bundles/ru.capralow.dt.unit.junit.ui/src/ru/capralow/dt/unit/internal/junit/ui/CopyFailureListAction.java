@@ -24,6 +24,10 @@ public class CopyFailureListAction
     private final Clipboard fClipboard;
     private final TestRunnerViewPart fRunner;
 
+    /**
+     * @param runner
+     * @param clipboard
+     */
     public CopyFailureListAction(TestRunnerViewPart runner, Clipboard clipboard)
     {
         super(Messages.CopyFailureList_action_label);
@@ -32,6 +36,9 @@ public class CopyFailureListAction
         PlatformUI.getWorkbench().getHelpSystem().setHelp(this, IJunitHelpContextIds.COPYFAILURELIST_ACTION);
     }
 
+    /**
+     * @return String
+     */
     public String getAllFailureTraces()
     {
         StringBuilder buf = new StringBuilder();

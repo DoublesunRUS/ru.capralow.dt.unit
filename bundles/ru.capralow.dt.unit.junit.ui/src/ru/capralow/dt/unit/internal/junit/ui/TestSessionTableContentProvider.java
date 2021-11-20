@@ -13,6 +13,10 @@ import ru.capralow.dt.unit.internal.junit.model.TestRoot;
 import ru.capralow.dt.unit.internal.junit.model.TestSuiteElement;
 import ru.capralow.dt.unit.junit.model.ITestElement;
 
+/**
+ * @author Aleksandr Kapralov
+ *
+ */
 public class TestSessionTableContentProvider
     implements IStructuredContentProvider
 {

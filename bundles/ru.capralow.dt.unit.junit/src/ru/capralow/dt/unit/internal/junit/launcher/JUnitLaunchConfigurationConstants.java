@@ -19,16 +19,41 @@ import ru.capralow.dt.unit.internal.junit.JUnitPlugin;
 public final class JUnitLaunchConfigurationConstants
 {
 
+    /**
+     *
+     */
     public static final String RUN_EXTENSION_TESTS = JUnitPlugin.ID + ".ATTR_RUN_EXTENSION_TESTS"; //$NON-NLS-1$
+    /**
+     *
+     */
     public static final String RUN_MODULE_TESTS = JUnitPlugin.ID + ".ATTR_RUN_MODULE_TESTS"; //$NON-NLS-1$
+    /**
+     *
+     */
     public static final String RUN_TAG_TESTS = JUnitPlugin.ID + ".ATTR_RUN_TAG_TESTS"; //$NON-NLS-1$
 
+    /**
+     *
+     */
     public static final String EXTENSION_PROJECT_TO_TEST = JUnitPlugin.ID + ".ATTR_EXTENSION_PROJECT_TO_TEST"; //$NON-NLS-1$
+    /**
+     *
+     */
     public static final String EXTENSION_MODULE_TO_TEST = JUnitPlugin.ID + ".ATTR_EXTENSION_MODULE_TO_TEST"; //$NON-NLS-1$
+    /**
+     *
+     */
     public static final String EXTENSION_TAG_TO_TEST = JUnitPlugin.ID + ".ATTR_EXTENSION_TAG_TO_TEST"; //$NON-NLS-1$
 
+    /**
+     *
+     */
     public static final String MODE_RUN_QUIETLY_MODE = "runQuietly"; //$NON-NLS-1$
 
+    /**
+     * @param configuration
+     * @return IV8Project
+     */
     public static IV8Project getV8Project(ILaunchConfiguration configuration)
     {
         try

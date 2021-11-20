@@ -41,6 +41,10 @@ import ru.capralow.dt.unit.internal.junit.launcher.JUnitLaunchConfigurationConst
 import ru.capralow.dt.unit.internal.junit.ui.JUnitUiPlugin;
 import ru.capralow.dt.unit.junit.frameworks.FrameworkUtils;
 
+/**
+ * @author Aleksandr Kapralov
+ *
+ */
 public class UnitTestLaunchTab
     extends AbstractUnitTestLaunchTab
     implements SelectionListener, ISelectionChangedListener
@@ -57,6 +61,9 @@ public class UnitTestLaunchTab
     private Button runModuleTests;
     private Button runTagTests;
 
+    /**
+     *
+     */
     public UnitTestLaunchTab()
     {
         setMessage(Messages.UnitTestLaunchTab_Tab_message);

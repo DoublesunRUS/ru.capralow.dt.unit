@@ -17,6 +17,11 @@ public class OpenEditorAtLineAction
 
     private int fLineNumber;
 
+    /**
+     * @param testRunner
+     * @param className
+     * @param line
+     */
     public OpenEditorAtLineAction(TestRunnerViewPart testRunner, String className, int line)
     {
         super(testRunner, className);

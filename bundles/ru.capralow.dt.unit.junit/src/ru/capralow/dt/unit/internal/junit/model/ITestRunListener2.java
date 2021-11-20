@@ -3,6 +3,10 @@
  */
 package ru.capralow.dt.unit.internal.junit.model;
 
+/**
+ * @author Aleksandr Kapralov
+ *
+ */
 public interface ITestRunListener2
 {
 

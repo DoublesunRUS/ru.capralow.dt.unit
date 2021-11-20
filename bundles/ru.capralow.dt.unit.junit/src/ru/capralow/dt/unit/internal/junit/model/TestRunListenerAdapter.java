@@ -19,6 +19,9 @@ public class TestRunListenerAdapter
 
     private final TestRunSession fSession;
 
+    /**
+     * @param session
+     */
     public TestRunListenerAdapter(TestRunSession session)
     {
         fSession = session;

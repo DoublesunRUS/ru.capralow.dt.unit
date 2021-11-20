@@ -9,10 +9,17 @@ import org.junit.Test;
 
 import ru.capralow.dt.unit.internal.junit.ui.xtextbuilder.UnitLauncherXtextBuilderParticipant;
 
+/**
+ * @author Aleksandr Kapralov
+ *
+ */
 public class UnitLauncherXtextBuilderParticipantTest
 {
     private static final String UNIT_TEST = "// @unit-test"; //$NON-NLS-1$
 
+    /**
+     *
+     */
     @Test
     public void testGetUnitTestKeyFromMethodTextDefaultKey()
     {
@@ -24,6 +31,9 @@ public class UnitLauncherXtextBuilderParticipantTest
         assertEquals("Ключ теста: ключ по умолчанию", "", keyName); //$NON-NLS-1$ //$NON-NLS-2$
     }
 
+    /**
+     *
+     */
     @Test
     public void testGetUnitTestKeyFromMethodTextEmpty()
     {
@@ -33,6 +43,9 @@ public class UnitLauncherXtextBuilderParticipantTest
         assertEquals("Ключ теста: пустой", null, keyName); //$NON-NLS-1$
     }
 
+    /**
+     *
+     */
     @Test
     public void testGetUnitTestKeyFromMethodTextKeyAndSubkey()
     {
@@ -44,6 +57,9 @@ public class UnitLauncherXtextBuilderParticipantTest
         assertEquals("Ключ теста: одна строка с модификаторами", "slow", keyName); //$NON-NLS-1$ //$NON-NLS-2$
     }
 
+    /**
+     *
+     */
     @Test
     public void testGetUnitTestKeyFromMethodTextKeyAndSubkeyAndTrash()
     {
@@ -55,6 +71,9 @@ public class UnitLauncherXtextBuilderParticipantTest
         assertEquals("Ключ теста: одна строка с модификаторами и мусорным текстом", "slow", keyName); //$NON-NLS-1$ //$NON-NLS-2$
     }
 
+    /**
+     *
+     */
     @Test
     public void testGetUnitTestKeyFromMethodTextKeyAndSubkeyNonCanonical()
     {
@@ -66,6 +85,9 @@ public class UnitLauncherXtextBuilderParticipantTest
         assertEquals("Ключ теста: одна строка с модификаторами неканоническая", "slow", keyName); //$NON-NLS-1$ //$NON-NLS-2$
     }
 
+    /**
+     *
+     */
     @Test
     public void testGetUnitTestKeyFromMethodTextKeyAndTrash()
     {
@@ -77,6 +99,9 @@ public class UnitLauncherXtextBuilderParticipantTest
         assertEquals("Ключ теста: одна строка c мусорным текстом", "", keyName); //$NON-NLS-1$ //$NON-NLS-2$
     }
 
+    /**
+     *
+     */
     @Test
     public void testGetUnitTestKeyFromMethodTextKeyOnly()
     {
@@ -88,6 +113,9 @@ public class UnitLauncherXtextBuilderParticipantTest
         assertEquals("Ключ теста: одна строка без модификаторов", "", keyName); //$NON-NLS-1$ //$NON-NLS-2$
     }
 
+    /**
+     *
+     */
     @Test
     public void testGetUnitTestKeyFromMethodTextKeyOnlyMultiline1()
     {
@@ -100,6 +128,9 @@ public class UnitLauncherXtextBuilderParticipantTest
         assertEquals("Ключ теста: несколько строк 1", "", keyName); //$NON-NLS-1$ //$NON-NLS-2$
     }
 
+    /**
+     *
+     */
     @Test
     public void testGetUnitTestKeyFromMethodTextKeyOnlyMultiline2()
     {
@@ -112,6 +143,9 @@ public class UnitLauncherXtextBuilderParticipantTest
         assertEquals("Ключ теста: несколько строк 2", "", keyName); //$NON-NLS-1$ //$NON-NLS-2$
     }
 
+    /**
+     *
+     */
     @Test
     public void testGetUnitTestKeyFromMethodTextKeyOnlyMultiline3()
     {
@@ -124,6 +158,9 @@ public class UnitLauncherXtextBuilderParticipantTest
         assertEquals("Ключ теста: несколько строк 3", "", keyName); //$NON-NLS-1$ //$NON-NLS-2$
     }
 
+    /**
+     *
+     */
     @Test
     public void testGetUnitTestKeyFromMethodTextKeyOnlyNonCanonical()
     {
