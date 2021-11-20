@@ -7,7 +7,7 @@ package ru.capralow.dt.unit.internal.junit.model;
  * @author Aleksandr Kapralov
  *
  */
-public interface IXmlTags
+public @interface IXmlTags
 {
 
     /**

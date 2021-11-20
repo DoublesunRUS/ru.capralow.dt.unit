@@ -6,7 +6,7 @@ package ru.capralow.dt.unit.internal.junit.ui;
 /**
  * Help context ids for the JUnit UI.
  */
-public interface IJunitHelpContextIds
+public @interface IJunitHelpContextIds
 {
     /**
      *
@@ -90,5 +90,4 @@ public interface IJunitHelpContextIds
      *
      */
     String RESULT_COMPARE_DIALOG = PREFIX + "result_compare_context"; //$NON-NLS-1$
-
 }
