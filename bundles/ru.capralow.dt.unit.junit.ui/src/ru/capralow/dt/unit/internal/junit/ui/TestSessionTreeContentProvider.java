@@ -26,9 +26,13 @@ public class TestSessionTreeContentProvider
     public Object[] getChildren(Object parentElement)
     {
         if (parentElement instanceof TestSuiteElement)
+        {
             return ((TestSuiteElement)parentElement).getChildren();
+        }
         else
+        {
             return NO_CHILDREN;
+        }
     }
 
     @Override
@@ -47,9 +51,11 @@ public class TestSessionTreeContentProvider
     public boolean hasChildren(Object element)
     {
         if (element instanceof TestSuiteElement)
+        {
             return ((TestSuiteElement)element).getChildren().length != 0;
-        else
-            return false;
+        }
+
+        return false;
     }
 
     @Override

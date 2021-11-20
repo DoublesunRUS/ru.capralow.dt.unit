@@ -25,6 +25,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.URIUtil;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
+import org.osgi.framework.Bundle;
 
 import com._1c.g5.v8.dt.core.platform.IV8Project;
 import com._1c.g5.v8.dt.core.platform.IV8ProjectManager;
@@ -40,6 +41,7 @@ import com.google.inject.Inject;
 
 import ru.capralow.dt.unit.internal.junit.JUnitPlugin;
 import ru.capralow.dt.unit.junit.frameworks.FrameworkUtils;
+import ru.capralow.dt.unit.junit.frameworks.gson.FrameworkSettings;
 
 public class RuntimeUnitLauncherLaunchDelegate
     extends AbstractUnitTestLaunchDelegate
@@ -67,15 +69,15 @@ public class RuntimeUnitLauncherLaunchDelegate
 
     private static boolean saveFrameworkToFile(ILaunchConfiguration configuration)
     {
-        var bundle = FrameworkUtils.getFrameworkBundle();
+        Bundle bundle = FrameworkUtils.getFrameworkBundle();
         try
         {
-            var frameworkSettings = FrameworkUtils.getFrameworkSettings();
+            FrameworkSettings frameworkSettings = FrameworkUtils.getFrameworkSettings();
             String frameworkEpfName = FrameworkUtils.getFrameworkEpfName(frameworkSettings);
 
-            var frameworkParamsBundleUrl =
+            URL frameworkParamsBundleUrl =
                 FileLocator.find(bundle, new Path(FrameworkUtils.FRAMEWORK_FILES_ROOT_PATH + frameworkEpfName), null);
-            var frameworkParamsUrl = FileLocator.toFileURL(frameworkParamsBundleUrl);
+            URL frameworkParamsUrl = FileLocator.toFileURL(frameworkParamsBundleUrl);
 
             if (frameworkParamsUrl == null)
             {
@@ -85,7 +87,7 @@ public class RuntimeUnitLauncherLaunchDelegate
                 JUnitPlugin.log(JUnitPlugin.createErrorStatus(msg, new IOException()));
                 return false;
             }
-            var file = URIUtil.toFile(URIUtil.toURI(frameworkParamsUrl));
+            File file = URIUtil.toFile(URIUtil.toURI(frameworkParamsUrl));
 
             if (!file.exists())
             {
@@ -120,17 +122,21 @@ public class RuntimeUnitLauncherLaunchDelegate
     {
 
         if (!saveParamsToFile(configuration))
+        {
             return;
+        }
 
         if (!saveFrameworkToFile(configuration))
+        {
             return;
+        }
 
         super.doLaunch(configuration, mode, launch, monitor);
     }
 
     private String getFeaturesPath(ILaunchConfiguration configuration)
     {
-        var featuresPath = ""; //$NON-NLS-1$
+        String featuresPath = ""; //$NON-NLS-1$
         try
         {
             boolean runExtensionTests =
@@ -144,12 +150,17 @@ public class RuntimeUnitLauncherLaunchDelegate
 
             featuresPath = project.getLocation() + "/features/"; //$NON-NLS-1$
             if (runExtensionTests)
+            {
                 featuresPath += "all/"; //$NON-NLS-1$
+            }
             else if (runModuleTests)
+            {
                 featuresPath += "all/" + commonModule + ".feature"; //$NON-NLS-1$ //$NON-NLS-2$
+            }
             else if (runTagTests)
+            {
                 featuresPath += tag + "/"; //$NON-NLS-1$
-
+            }
         }
         catch (CoreException e)
         {
@@ -163,7 +174,7 @@ public class RuntimeUnitLauncherLaunchDelegate
 
     private String getProjectPath(ILaunchConfiguration configuration)
     {
-        var projectPath = ""; //$NON-NLS-1$
+        String projectPath = ""; //$NON-NLS-1$
         try
         {
             IProject project = FrameworkUtils.getConfigurationProject(configuration, projectManager);
@@ -188,14 +199,16 @@ public class RuntimeUnitLauncherLaunchDelegate
         String featuresPath = getFeaturesPath(configuration);
 
         String templateContent = readContents(getFileInputSupplier(frameworkParamsUrl));
-        var template = new StringTemplate(templateContent);
+        StringTemplate template = new StringTemplate(templateContent);
         template.setAttribute("ProjectPath", projectPath); //$NON-NLS-1$
         template.setAttribute("FeaturesPath", featuresPath); //$NON-NLS-1$
         template.setAttribute("JUnitPath", paramsFilePathName); //$NON-NLS-1$
 
-        var paramsFilePath = new File(paramsFilePathName);
+        File paramsFilePath = new File(paramsFilePathName);
         if (!paramsFilePath.exists())
+        {
             paramsFilePath.mkdirs();
+        }
 
         try (var outputStream = new FileOutputStream(paramsFilePathName + FrameworkUtils.PARAMS_FILE_NAME);
             var outputStreamWriter = new OutputStreamWriter(outputStream, StandardCharsets.UTF_8);
@@ -210,12 +223,12 @@ public class RuntimeUnitLauncherLaunchDelegate
 
     private boolean saveParamsToFile(ILaunchConfiguration configuration)
     {
-        var bundle = FrameworkUtils.getFrameworkBundle();
+        Bundle bundle = FrameworkUtils.getFrameworkBundle();
         try
         {
-            var frameworkParamsBundleUrl = FileLocator.find(bundle,
+            URL frameworkParamsBundleUrl = FileLocator.find(bundle,
                 new Path(FrameworkUtils.FRAMEWORK_FILES_ROOT_PATH + FrameworkUtils.PARAMS_FILE_NAME), null);
-            var frameworkParamsUrl = FileLocator.toFileURL(frameworkParamsBundleUrl);
+            URL frameworkParamsUrl = FileLocator.toFileURL(frameworkParamsBundleUrl);
 
             if (frameworkParamsUrl == null)
             {
@@ -225,7 +238,7 @@ public class RuntimeUnitLauncherLaunchDelegate
                 JUnitPlugin.log(JUnitPlugin.createErrorStatus(msg, new IOException()));
                 return false;
             }
-            var file = URIUtil.toFile(URIUtil.toURI(frameworkParamsUrl));
+            File file = URIUtil.toFile(URIUtil.toURI(frameworkParamsUrl));
 
             if (!file.exists())
             {
@@ -256,23 +269,29 @@ public class RuntimeUnitLauncherLaunchDelegate
         final IV8Project v8project, final InfobaseReference infobase, final IProgressMonitor monitor)
         throws CoreException
     {
-        var arguments = super.buildExecutionArguments(configuration, v8project, infobase, monitor);
+        RuntimeExecutionArguments arguments =
+            super.buildExecutionArguments(configuration, v8project, infobase, monitor);
 
         String paramsFilePathName = FrameworkUtils.getConfigurationFilesPath(configuration);
 
-        var frameworkSettings = FrameworkUtils.getFrameworkSettings();
+        FrameworkSettings frameworkSettings = FrameworkUtils.getFrameworkSettings();
         String externalObjectStartupOptions =
             FrameworkUtils.getFrameworkStartupOptions(frameworkSettings, paramsFilePathName);
 
         final String externalObjectDumpPath = paramsFilePathName + "framework.epf"; //$NON-NLS-1$
-        var file = new File(externalObjectDumpPath);
+        File file = new File(externalObjectDumpPath);
         arguments.setExternalObjectDumpPath(file.toPath());
 
         String startupOptions = configuration.getAttribute(ILaunchConfigurationAttributes.STARTUP_OPTION, (String)null);
         if (Strings.isNullOrEmpty(startupOptions))
+        {
             startupOptions = externalObjectStartupOptions;
+        }
         else
+        {
             startupOptions = externalObjectStartupOptions + ";" + startupOptions; //$NON-NLS-1$
+        }
+
         arguments.setStartupOption(startupOptions);
 
         return arguments;
@@ -283,7 +302,9 @@ public class RuntimeUnitLauncherLaunchDelegate
     {
         IStatus parentStatus = super.isValid(configuration, mode);
         if (parentStatus != Status.OK_STATUS)
+        {
             return parentStatus;
+        }
 
         String extensionProjectToTest =
             configuration.getAttribute(JUnitLaunchConfigurationConstants.EXTENSION_PROJECT_TO_TEST, (String)null);

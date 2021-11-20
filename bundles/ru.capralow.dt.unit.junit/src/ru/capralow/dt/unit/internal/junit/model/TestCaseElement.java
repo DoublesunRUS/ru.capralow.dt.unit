@@ -45,10 +45,14 @@ public class TestCaseElement
         String testName = getTestName();
         int index = testName.lastIndexOf('(');
         if (index > 0)
+        {
             return testName.substring(0, index);
+        }
         index = testName.indexOf('@');
         if (index > 0)
+        {
             return testName.substring(0, index);
+        }
         return testName;
     }
 
@@ -59,9 +63,11 @@ public class TestCaseElement
     public Result getTestResult(boolean includeChildren)
     {
         if (fIgnored)
+        {
             return Result.IGNORED;
-        else
-            return super.getTestResult(includeChildren);
+        }
+
+        return super.getTestResult(includeChildren);
     }
 
     public boolean isDynamicTest()

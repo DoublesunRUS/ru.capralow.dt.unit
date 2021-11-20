@@ -59,7 +59,7 @@ public class JUnitPlugin
 
     public static File getHistoryDirectory() throws IllegalStateException
     {
-        var historyDir = getInstance().getStateLocation().append(HISTORY_DIR_NAME).toFile();
+        File historyDir = getInstance().getStateLocation().append(HISTORY_DIR_NAME).toFile();
         if (!historyDir.isDirectory())
         {
             historyDir.mkdir();
@@ -104,7 +104,9 @@ public class JUnitPlugin
     public synchronized Injector getInjector()
     {
         if (injector == null)
+        {
             injector = createInjector();
+        }
 
         return injector;
     }
@@ -121,7 +123,7 @@ public class JUnitPlugin
             return null;
         }
         IConfigurationElement[] configs = extensionPoint.getConfigurationElements();
-        var status = new MultiStatus(ID, IStatus.OK, "Could not load some testRunner extension points", null);
+        MultiStatus status = new MultiStatus(ID, IStatus.OK, "Could not load some testRunner extension points", null);
         for (IConfigurationElement config : configs)
         {
             try

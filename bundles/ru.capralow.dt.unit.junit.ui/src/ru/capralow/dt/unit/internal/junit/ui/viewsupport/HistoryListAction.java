@@ -49,7 +49,7 @@ import ru.capralow.dt.unit.internal.junit.ui.wizards.dialogfields.StringDialogFi
     @Override
     public void run()
     {
-        var dialog = new HistoryListDialog();
+        HistoryListAction<E>.HistoryListDialog dialog = new HistoryListDialog();
         if (dialog.open() == Window.OK)
         {
             fHistory.setHistoryEntries(dialog.getRemaining(), dialog.getResult());
@@ -153,10 +153,14 @@ import ru.capralow.dt.unit.internal.junit.ui.wizards.dialogfields.StringDialogFi
                     valid = false;
                 }
                 if (valid)
+                {
                     updateStatus(StatusInfo.OK_STATUS);
+                }
                 else
+                {
                     updateStatus(new StatusInfo(IStatus.ERROR, MessageFormat
                         .format(Messages.HistoryListAction_max_entries_constraint, Integer.toString(MAX_MAX_ENTRIES))));
+                }
             });
             fMaxEntriesField.setText(Integer.toString(fHistory.getMaxEntries()));
         }
@@ -268,7 +272,9 @@ import ru.capralow.dt.unit.internal.junit.ui.wizards.dialogfields.StringDialogFi
         {
             Object cached = fImages.get(imageDescriptor);
             if (cached != null)
+            {
                 return (Image)cached;
+            }
             Image image = imageDescriptor.createImage(fHistory.getShell().getDisplay());
             fImages.put(imageDescriptor, image);
             return image;

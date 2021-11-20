@@ -27,8 +27,12 @@ public class FrameworkMethod
         int minParams = params.length;
 
         for (FrameworkMethodParameter param : params)
+        {
             if (Boolean.TRUE.equals(param.isDefaultValue))
+            {
                 minParams--;
+            }
+        }
 
         return minParams;
     }

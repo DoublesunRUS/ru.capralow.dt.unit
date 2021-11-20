@@ -51,7 +51,9 @@ public class ColoredViewersManager
     public void installColoredLabels(ColoringLabelProvider labelProvider)
     {
         if (fManagedLabelProviders.contains(labelProvider))
+        {
             return;
+        }
 
         if (fManagedLabelProviders.isEmpty())
         {
@@ -78,7 +80,9 @@ public class ColoredViewersManager
     public void uninstallColoredLabels(ColoringLabelProvider labelProvider)
     {
         if (!fManagedLabelProviders.remove(labelProvider))
+        {
             return; // not installed
+        }
 
         if (fManagedLabelProviders.isEmpty())
         {

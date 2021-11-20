@@ -27,10 +27,14 @@ public final class MdUtils
             bmEmfIndexProvider.getEObjectIndexByType(mdLiteral, qnObjectName, true);
         Iterator<IEObjectDescription> objectItr = objectIndex.iterator();
         if (objectItr.hasNext())
+        {
             object = (MdObject)objectItr.next().getEObjectOrProxy();
+        }
 
         if (object == null)
+        {
             return null;
+        }
 
         return object;
     }
@@ -43,15 +47,21 @@ public final class MdUtils
         for (String objectValue : objectArray)
         {
             if (qnObjectName == null)
+            {
                 qnObjectName = QualifiedName.create(mdLiteral.getName(), objectValue);
+            }
 
             else
             {
                 if (mdLiteral.equals(MdClassPackage.Literals.SUBSYSTEM))
+                {
                     qnObjectName = qnObjectName.append(QualifiedName.create(mdLiteral.getName(), objectValue));
+                }
 
                 else
+                {
                     qnObjectName = qnObjectName.append(QualifiedName.create(objectValue));
+                }
 
             }
 
@@ -67,28 +77,44 @@ public final class MdUtils
         String objectType = objectFullName.substring(0, objectFullName.indexOf('.'));
 
         if (objectType.equals("Подсистема")) //$NON-NLS-1$
+        {
             mdLiteral = MdClassPackage.Literals.SUBSYSTEM;
+        }
 
         else if (objectType.equals("ОбщийМодуль")) //$NON-NLS-1$
+        {
             mdLiteral = MdClassPackage.Literals.COMMON_MODULE;
+        }
 
         else if (objectType.equals("Справочник")) //$NON-NLS-1$
+        {
             mdLiteral = MdClassPackage.Literals.CATALOG;
+        }
 
         else if (objectType.equals("Документ")) //$NON-NLS-1$
+        {
             mdLiteral = MdClassPackage.Literals.DOCUMENT;
+        }
 
         else if (objectType.equals("Перечисление")) //$NON-NLS-1$
+        {
             mdLiteral = MdClassPackage.Literals.ENUM;
+        }
 
         else if (objectType.equals("ПланВидовХарактеристик")) //$NON-NLS-1$
+        {
             mdLiteral = MdClassPackage.Literals.CHART_OF_CHARACTERISTIC_TYPES;
+        }
 
         else if (objectType.equals("ПланВидовРасчета")) //$NON-NLS-1$
+        {
             mdLiteral = MdClassPackage.Literals.CHART_OF_CALCULATION_TYPES;
+        }
 
         else if (objectType.equals("РегистрСведений")) //$NON-NLS-1$
+        {
             mdLiteral = MdClassPackage.Literals.INFORMATION_REGISTER;
+        }
 
         return mdLiteral;
     }

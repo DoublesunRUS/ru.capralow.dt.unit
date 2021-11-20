@@ -69,7 +69,9 @@ import org.eclipse.ui.IWorkbenchActionConstants;
         public void run()
         {
             if (isChecked())
+            {
                 fHistory.setActiveEntry(fElement);
+            }
         }
     }
 
@@ -143,7 +145,9 @@ import org.eclipse.ui.IWorkbenchActionConstants;
                         boolean check = entry.equals(fHistory.getCurrentEntry());
                         action.setChecked(check);
                         if (check)
+                        {
                             checkOthers = false;
+                        }
                         manager2.add(action);
                     }
                     return checkOthers;

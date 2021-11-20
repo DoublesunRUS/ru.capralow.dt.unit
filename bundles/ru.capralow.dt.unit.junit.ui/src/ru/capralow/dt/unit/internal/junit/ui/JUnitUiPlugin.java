@@ -3,6 +3,7 @@
  */
 package ru.capralow.dt.unit.internal.junit.ui;
 
+import java.net.URL;
 import java.text.MessageFormat;
 import java.util.Collection;
 import java.util.stream.Collectors;
@@ -102,10 +103,14 @@ public class JUnitUiPlugin
     public static IWorkbenchWindow getActiveWorkbenchWindow()
     {
         if (instance == null)
+        {
             return null;
+        }
         IWorkbench workBench = PlatformUI.getWorkbench();
         if (workBench == null)
+        {
             return null;
+        }
         return workBench.getActiveWorkbenchWindow();
     }
 
@@ -131,7 +136,7 @@ public class JUnitUiPlugin
 
     public static void log(Throwable throwable)
     {
-        var top = throwable;
+        Throwable top = throwable;
         if (throwable instanceof CoreException)
         {
             IStatus status = ((CoreException)throwable).getStatus();
@@ -172,7 +177,7 @@ public class JUnitUiPlugin
      */
     private static ImageDescriptor createImageDescriptor(Bundle bundle, IPath path, boolean useMissingImageDescriptor)
     {
-        var url = FileLocator.find(bundle, path, null);
+        URL url = FileLocator.find(bundle, path, null);
         if (url != null)
         {
             return ImageDescriptor.createFromURL(url);
@@ -202,9 +207,11 @@ public class JUnitUiPlugin
     {
         ImageDescriptor id = createImageDescriptor("d" + type, relPath, false); //$NON-NLS-1$
         if (id != null)
+        {
             action.setDisabledImageDescriptor(id);
+        }
 
-        var descriptor = createImageDescriptor("e" + type, relPath, true); //$NON-NLS-1$
+        ImageDescriptor descriptor = createImageDescriptor("e" + type, relPath, true); //$NON-NLS-1$
         action.setHoverImageDescriptor(descriptor);
         action.setImageDescriptor(descriptor);
     }
@@ -227,7 +234,9 @@ public class JUnitUiPlugin
     public synchronized Injector getInjector()
     {
         if (injector == null)
+        {
             injector = createInjector();
+        }
 
         return injector;
     }

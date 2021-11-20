@@ -21,14 +21,16 @@ public abstract class TestElement
         }
         int index = testNameString.lastIndexOf('(');
         if (index < 0)
+        {
             return testNameString;
+        }
         int end = testNameString.lastIndexOf(')');
         return testNameString.substring(index + 1, end > index ? end : testNameString.length());
     }
 
     private static String extractClassName(String testNameString)
     {
-        var result = extractRawClassName(testNameString);
+        String result = extractRawClassName(testNameString);
         result = testNameString.replace('$', '.'); // see bug 178503
         return result;
     }
@@ -99,7 +101,9 @@ public abstract class TestElement
         fUniqueId = uniqueId;
         fStatus = Status.NOT_RUN;
         if (parent != null)
+        {
             parent.addChild(this);
+        }
     }
 
     public String getActual()
@@ -147,7 +151,7 @@ public abstract class TestElement
     @Override
     public FailureTrace getFailureTrace()
     {
-        var testResult = getTestResult(false);
+        Result testResult = getTestResult(false);
         if (testResult == Result.ERROR || testResult == Result.FAILURE
             || testResult == Result.IGNORED && fTrace != null)
         {
@@ -285,7 +289,9 @@ public abstract class TestElement
         fStatus = status;
         TestSuiteElement parent = getParent();
         if (parent != null)
+        {
             parent.childChangedStatus(this, status);
+        }
     }
 
     public void setStatus(Status status, String trace, String expected, String actual)
@@ -342,23 +348,33 @@ public abstract class TestElement
         private static Status combineError(Status one, Status two)
         {
             if (one.isError() || two.isError())
+            {
                 return ERROR;
+            }
             else if (one.isFailure() || two.isFailure())
+            {
                 return FAILURE;
+            }
             else
+            {
                 return OK;
+            }
         }
 
         private static Status combineProgress(Status one, Status two)
         {
             if (one.isNotRun() && two.isNotRun())
+            {
                 return NOT_RUN;
+            }
             else if (one.isDone() && two.isDone() || !one.isRunning() && !two.isRunning())
             { // One done, one not-run -> a parent failed and its children are not run
                 return OK;
             }
             else
+            {
                 return RUNNING;
+            }
         }
 
         private static Status combineProgressAndErrorStatus(Status progress, Status error)
@@ -366,9 +382,13 @@ public abstract class TestElement
             if (progress.isDone())
             {
                 if (error.isError())
+                {
                     return ERROR;
+                }
                 if (error.isFailure())
+                {
                     return FAILURE;
+                }
                 return OK;
             }
 
@@ -378,9 +398,13 @@ public abstract class TestElement
             }
 
             if (error.isError())
+            {
                 return RUNNING_ERROR;
+            }
             if (error.isFailure())
+            {
                 return RUNNING_FAILURE;
+            }
             return RUNNING;
         }
 
@@ -414,15 +438,25 @@ public abstract class TestElement
         public Result convertToResult()
         {
             if (isNotRun())
+            {
                 return Result.UNDEFINED;
+            }
+
             if (isError())
+            {
                 return Result.ERROR;
+            }
+
             if (isFailure())
+            {
                 return Result.FAILURE;
+            }
+
             if (isRunning())
             {
                 return Result.UNDEFINED;
             }
+
             return Result.OK;
         }
 

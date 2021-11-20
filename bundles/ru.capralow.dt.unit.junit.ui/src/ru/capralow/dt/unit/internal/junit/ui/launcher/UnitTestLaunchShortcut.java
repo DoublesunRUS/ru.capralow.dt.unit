@@ -42,7 +42,9 @@ public class UnitTestLaunchShortcut
         IV8Project v8Project = v8projectManager.getProject(project);
 
         if (!(v8Project instanceof IExtensionProject))
+        {
             throw new NullPointerException(Messages.UnitTestLaunchShortcut_Wrong_project_exception);
+        }
 
         IProject baseProject = getAppropriateBaseProject(v8Project);
 

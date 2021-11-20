@@ -45,7 +45,9 @@ public class TestSessionTableContentProvider
             if (element instanceof TestSuiteElement)
             {
                 if (((TestSuiteElement)element).getSuiteStatus().isErrorOrFailure())
+                {
                     all.add(element); // add failed suite to flat list too
+                }
                 addAll(all, (TestSuiteElement)element);
             }
             else if (element instanceof TestCaseElement)

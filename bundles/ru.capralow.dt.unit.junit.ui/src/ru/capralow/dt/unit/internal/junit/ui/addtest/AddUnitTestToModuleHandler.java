@@ -75,7 +75,9 @@ public class AddUnitTestToModuleHandler
         {
             IConfigurationProject parent = ((IExternalObjectProject)v8Project).getParent();
             if (parent == null)
+            {
                 return null;
+            }
             configuration = parent.getConfiguration();
         }
 
@@ -112,7 +114,9 @@ public class AddUnitTestToModuleHandler
         IWorkbenchPart part = HandlerUtil.getActivePart(event);
         XtextEditor target = BslHandlerUtil.extractXtextEditor(part);
         if (target != null)
+        {
             this.execute(target);
+        }
 
         return null;
     }
@@ -123,10 +127,14 @@ public class AddUnitTestToModuleHandler
         IFileEditorInput input = (IFileEditorInput)target.getEditorInput();
         IFile file = input.getFile();
         if (file == null)
+        {
             return;
+        }
         IProject project = file.getProject();
         if (project == null)
+        {
             return;
+        }
 
         IXtextDocument doc = target.getDocument();
 
@@ -184,7 +192,9 @@ public class AddUnitTestToModuleHandler
 
                         Method method = getNearestMethod(module, viewer.getSelectedRange().x);
                         if (method != null)
+                        {
                             return NodeModelUtils.findActualNodeFor(method).getTotalEndOffset();
+                        }
                     }
                 }
                 return viewer.getSelectedRange().x;
@@ -205,7 +215,9 @@ public class AddUnitTestToModuleHandler
                     if (obj instanceof Module)
                     {
                         if (((Module)obj).getModuleType() != ModuleType.COMMON_MODULE)
+                        {
                             return null;
+                        }
                         Module module = (Module)obj;
                         return EcoreUtil.resolve(module.getOwner(), module);
                     }
@@ -221,7 +233,9 @@ public class AddUnitTestToModuleHandler
         ILeafNode node = CustomNodeModelUtils.findLeafNodeAtOffset(moduleNode, offset);
         EObject actualObject = NodeModelUtils.findActualSemanticObjectFor(node);
         if (actualObject instanceof Method)
+        {
             return (Method)actualObject;
+        }
 
         return EcoreUtil2.getContainerOfType(actualObject, Method.class);
     }

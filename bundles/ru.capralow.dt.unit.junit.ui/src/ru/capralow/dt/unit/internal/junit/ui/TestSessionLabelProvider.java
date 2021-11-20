@@ -48,44 +48,72 @@ public class TestSessionLabelProvider
     public Image getImage(Object element)
     {
         if (element instanceof TestElement && ((TestElement)element).isAssumptionFailure())
+        {
             return fTestRunnerPart.fTestAssumptionFailureIcon;
+        }
 
         if (element instanceof TestCaseElement)
         {
             TestCaseElement testCaseElement = (TestCaseElement)element;
             if (testCaseElement.isIgnored())
+            {
                 return fTestRunnerPart.fTestIgnoredIcon;
+            }
 
             Status status = testCaseElement.getStatus();
             if (status.isNotRun())
+            {
                 return fTestRunnerPart.fTestIcon;
+            }
             else if (status.isRunning())
+            {
                 return fTestRunnerPart.fTestRunningIcon;
+            }
             else if (status.isError())
+            {
                 return fTestRunnerPart.fTestErrorIcon;
+            }
             else if (status.isFailure())
+            {
                 return fTestRunnerPart.fTestFailIcon;
+            }
             else if (status.isOK())
+            {
                 return fTestRunnerPart.fTestOkIcon;
+            }
             else
+            {
                 throw new IllegalStateException(element.toString());
+            }
 
         }
         else if (element instanceof TestSuiteElement)
         {
             Status status = ((TestSuiteElement)element).getStatus();
             if (status.isNotRun())
+            {
                 return fTestRunnerPart.fSuiteIcon;
+            }
             else if (status.isRunning())
+            {
                 return fTestRunnerPart.fSuiteRunningIcon;
+            }
             else if (status.isError())
+            {
                 return fTestRunnerPart.fSuiteErrorIcon;
+            }
             else if (status.isFailure())
+            {
                 return fTestRunnerPart.fSuiteFailIcon;
+            }
             else if (status.isOK())
+            {
                 return fTestRunnerPart.fSuiteOkIcon;
+            }
             else
+            {
                 throw new IllegalStateException(element.toString());
+            }
 
         }
         else

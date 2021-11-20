@@ -265,7 +265,9 @@ public class TestRunSession
     public double getElapsedTimeInSeconds()
     {
         if (fTestRoot == null)
+        {
             return Double.NaN;
+        }
 
         return fTestRoot.getElapsedTimeInSeconds();
     }
@@ -415,7 +417,9 @@ public class TestRunSession
                 fIgnoredCount++;
             }
             if (!testElement.getStatus().isErrorOrFailure())
+            {
                 setStatus(testElement, Status.OK);
+            }
         }
 
         if (testElement.isAssumptionFailure())
@@ -445,7 +449,9 @@ public class TestRunSession
     {
         File swapFile = getSwapFile();
         if (swapFile.exists())
+        {
             swapFile.delete();
+        }
     }
 
     public void removeTestSessionListener(ITestSessionListener listener)
@@ -456,7 +462,9 @@ public class TestRunSession
     public void stopTestRun()
     {
         if (isRunning())
+        {
             fIsStopped = true;
+        }
 //        if (fTestRunnerClient != null)
 //            fTestRunnerClient.stopTest();
     }
@@ -464,7 +472,9 @@ public class TestRunSession
     public synchronized void swapIn()
     {
         if (fTestRoot != null)
+        {
             return;
+        }
 
         try
         {
@@ -481,12 +491,16 @@ public class TestRunSession
     public synchronized void swapOut()
     {
         if (fTestRoot == null)
+        {
             return;
+        }
 
         for (ITestSessionListener registered : fSessionListeners)
         {
             if (!registered.acceptsSwapToDisk())
+            {
                 return;
+            }
         }
 
         try
@@ -636,7 +650,9 @@ public class TestRunSession
                 IncompleteTestSuite openSuite = fIncompleteTestSuites.get(suiteIndex);
                 openSuite.fOutstandingChildren--;
                 if (openSuite.fOutstandingChildren <= 0)
+                {
                     fIncompleteTestSuites.remove(suiteIndex);
+                }
                 return createTestElement(openSuite.fTestSuiteElement, id, testName, isSuite, testCount, isDynamicTest,
                     displayName, parameterTypes, uniqueId);
             }
@@ -689,9 +705,13 @@ public class TestRunSession
                 testName.append(c);
             }
             else if (c == ',')
+            {
                 break;
+            }
             else
+            {
                 testName.append(c);
+            }
         }
         return i;
     }
@@ -752,7 +772,9 @@ public class TestRunSession
             TestCaseElement testCaseElement = (TestCaseElement)testElement;
 
             if (testCaseElement.getStatus() == Status.RUNNING)
+            {
                 setStatus(testCaseElement, Status.OK);
+            }
 
             for (ITestSessionListener listener : fSessionListeners)
             {

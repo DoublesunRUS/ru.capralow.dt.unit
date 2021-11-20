@@ -87,7 +87,9 @@ public final class JUnitPreferencesConstants
         List<String> list = new ArrayList<>(10);
         StringTokenizer tokenizer = new StringTokenizer(listString, ","); //$NON-NLS-1$
         while (tokenizer.hasMoreTokens())
+        {
             list.add(tokenizer.nextToken());
+        }
         return list.toArray(new String[list.size()]);
     }
 
@@ -100,7 +102,9 @@ public final class JUnitPreferencesConstants
     public static String serializeList(String[] list)
     {
         if (list == null)
+        {
             return ""; //$NON-NLS-1$
+        }
 
         return String.join(String.valueOf(','), list);
     }

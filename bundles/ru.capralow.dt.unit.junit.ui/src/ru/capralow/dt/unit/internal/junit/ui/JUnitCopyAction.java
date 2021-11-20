@@ -64,7 +64,9 @@ public class JUnitCopyAction
             source = fTestElement.getTestName();
         }
         if (source == null || source.length() == 0)
+        {
             return;
+        }
 
         TextTransfer plainTextTransfer = TextTransfer.getInstance();
         try
@@ -75,19 +77,23 @@ public class JUnitCopyAction
         catch (SWTError e)
         {
             if (e.code != DND.ERROR_CANNOT_SET_CLIPBOARD)
+            {
                 throw e;
+            }
             if (MessageDialog.openQuestion(fView.getComposite().getShell(), Messages.CopyTraceAction_problem,
                 Messages.CopyTraceAction_clipboard_busy))
+            {
                 run();
+            }
         }
     }
 
     private String convertLineTerminators(String in)
     {
-        var stringWriter = new StringWriter();
-        var printWriter = new PrintWriter(stringWriter);
-        var stringReader = new StringReader(in);
-        var bufferedReader = new BufferedReader(stringReader);
+        StringWriter stringWriter = new StringWriter();
+        PrintWriter printWriter = new PrintWriter(stringWriter);
+        StringReader stringReader = new StringReader(in);
+        BufferedReader bufferedReader = new BufferedReader(stringReader);
         String line;
         try
         {

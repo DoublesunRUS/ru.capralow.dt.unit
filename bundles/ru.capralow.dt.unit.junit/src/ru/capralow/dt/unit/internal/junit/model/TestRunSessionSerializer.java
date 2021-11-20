@@ -68,7 +68,9 @@ public class TestRunSessionSerializer
                 buf.append("\\u"); //$NON-NLS-1$
                 String hex = Integer.toHexString(ch);
                 for (int j = hex.length(); j < 4; j++)
+                {
                     buf.append('0');
+                }
                 buf.append(hex);
             }
             else if (buf != null)
@@ -141,8 +143,9 @@ public class TestRunSessionSerializer
     public void parse(InputSource input) throws IOException, SAXException
     {
         if (fHandler == null)
+        {
             throw new SAXException("ContentHandler missing"); //$NON-NLS-1$
-
+        }
         fHandler.startDocument();
         handleTestRun();
         fHandler.endDocument();
@@ -253,10 +256,14 @@ public class TestRunSessionSerializer
             // Need to store the full #getTestName instead of only the #getSuiteTypeName for test factory methods
             addCdata(atts, IXmlTags.ATTR_NAME, testSuiteElement.getTestName());
             if (!Double.isNaN(testSuiteElement.getElapsedTimeInSeconds()))
+            {
                 addCdata(atts, IXmlTags.ATTR_TIME, timeFormat.format(testSuiteElement.getElapsedTimeInSeconds()));
+            }
             if (testElement.getProgressState() != ProgressState.COMPLETED
                 || testElement.getTestResult(false) != Result.UNDEFINED)
+            {
                 addCdata(atts, IXmlTags.ATTR_INCOMPLETE, Boolean.TRUE.toString());
+            }
             if (testSuiteElement.getDisplayName() != null)
             {
                 addCdata(atts, IXmlTags.ATTR_DISPLAY_NAME, testSuiteElement.getDisplayName());
@@ -290,11 +297,17 @@ public class TestRunSessionSerializer
             addCdata(atts, IXmlTags.ATTR_NAME, testCaseElement.getTestMethodName());
             addCdata(atts, IXmlTags.ATTR_CLASSNAME, testCaseElement.getClassName());
             if (!Double.isNaN(testCaseElement.getElapsedTimeInSeconds()))
+            {
                 addCdata(atts, IXmlTags.ATTR_TIME, timeFormat.format(testCaseElement.getElapsedTimeInSeconds()));
+            }
             if (testElement.getProgressState() != ProgressState.COMPLETED)
+            {
                 addCdata(atts, IXmlTags.ATTR_INCOMPLETE, Boolean.TRUE.toString());
+            }
             if (testCaseElement.isIgnored())
+            {
                 addCdata(atts, IXmlTags.ATTR_IGNORED, Boolean.TRUE.toString());
+            }
             if (testCaseElement.isDynamicTest())
             {
                 addCdata(atts, IXmlTags.ATTR_DYNAMIC_TEST, Boolean.TRUE.toString());
@@ -332,7 +345,9 @@ public class TestRunSessionSerializer
         addCdata(atts, IXmlTags.ATTR_NAME, fTestRunSession.getTestRunName());
         IV8Project project = fTestRunSession.getLaunchedProject();
         if (project != null)
+        {
             addCdata(atts, IXmlTags.ATTR_PROJECT, project.getProject().getName());
+        }
         addCdata(atts, IXmlTags.ATTR_TESTS, fTestRunSession.getTotalCount());
         addCdata(atts, IXmlTags.ATTR_STARTED, fTestRunSession.getStartedCount());
         addCdata(atts, IXmlTags.ATTR_FAILURES, fTestRunSession.getFailureCount());

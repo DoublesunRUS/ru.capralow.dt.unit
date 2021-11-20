@@ -14,7 +14,8 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.15.0,4.0.0)",
  org.eclipse.xtext;bundle-version="[2.18.0,3.0.0)",
  org.eclipse.jface.text;bundle-version="[3.16.0,4.0.0)",
  org.eclipse.ui.workbench.texteditor;bundle-version="[3.15.0,4.0.0)",
- org.eclipse.swt;bundle-version="[3.116.0,4.0.0)"
+ org.eclipse.swt;bundle-version="[3.116.0,4.0.0)",
+ org.eclipse.jdt.annotation;bundle-version="[2.2.0,3.0.0)";resolution:=optional
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: ru.capralow.dt.unit.junit

@@ -16,8 +16,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.TransformerFactoryConfigurationError;
@@ -93,10 +95,10 @@ public final class JUnitModel
         throws TransformerFactoryConfigurationError, TransformerException
     {
 
-        var transformer = TransformerFactory.newInstance().newTransformer();
-        var inputSource = new InputSource();
-        var source = new SAXSource(new TestRunSessionSerializer(testRunSession), inputSource);
-        var result = new StreamResult(out);
+        Transformer transformer = TransformerFactory.newInstance().newTransformer();
+        InputSource inputSource = new InputSource();
+        SAXSource source = new SAXSource(new TestRunSessionSerializer(testRunSession), inputSource);
+        StreamResult result = new StreamResult(out);
         transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8"); //$NON-NLS-1$
         transformer.setOutputProperty(OutputKeys.INDENT, "yes"); //$NON-NLS-1$
         /*
@@ -121,8 +123,8 @@ public final class JUnitModel
     {
         try
         {
-            var parserFactory = SAXParserFactory.newInstance();
-            var parser = parserFactory.newSAXParser();
+            SAXParserFactory parserFactory = SAXParserFactory.newInstance();
+            SAXParser parser = parserFactory.newSAXParser();
             TestRunHandler handler = new TestRunHandler(testRunSession);
             parser.parse(swapFile, handler);
         }
@@ -145,11 +147,11 @@ public final class JUnitModel
     {
         try
         {
-            var parserFactory = SAXParserFactory.newInstance();
-            var parser = parserFactory.newSAXParser();
-            var handler = new TestRunHandler();
+            SAXParserFactory parserFactory = SAXParserFactory.newInstance();
+            SAXParser parser = parserFactory.newSAXParser();
+            TestRunHandler handler = new TestRunHandler();
             parser.parse(file, handler);
-            var session = handler.getTestRunSession();
+            TestRunSession session = handler.getTestRunSession();
             JUnitPlugin.getModel().addTestRunSession(session);
             return session;
         }
@@ -175,7 +177,7 @@ public final class JUnitModel
     {
         monitor.beginTask(Messages.JUnitModel_importing_from_url, IProgressMonitor.UNKNOWN);
         final String trimmedUrl = url.trim().replaceAll("\r\n?|\n", ""); //$NON-NLS-1$ //$NON-NLS-2$
-        final var handler = new TestRunHandler(monitor);
+        final TestRunHandler handler = new TestRunHandler(monitor);
 
         final CoreException[] exception = { null };
         final TestRunSession[] session = { null };
@@ -187,8 +189,8 @@ public final class JUnitModel
             {
                 try
                 {
-                    var parserFactory = SAXParserFactory.newInstance();
-                    var parser = parserFactory.newSAXParser();
+                    SAXParserFactory parserFactory = SAXParserFactory.newInstance();
+                    SAXParser parser = parserFactory.newSAXParser();
                     parser.parse(trimmedUrl, handler);
                     session[0] = handler.getTestRunSession();
                 }
@@ -278,7 +280,7 @@ public final class JUnitModel
             Assert.isLegal(!fTestRunSessions.contains(testRunSession));
             fTestRunSessions.addFirst(testRunSession);
 
-            var maxCount = Platform.getPreferencesService()
+            int maxCount = Platform.getPreferencesService()
                 .getInt(JUnitPlugin.ID, JUnitPreferencesConstants.MAX_TEST_RUNS, 10, null);
             int size = fTestRunSessions.size();
             if (size > maxCount)
@@ -423,15 +425,21 @@ public final class JUnitModel
         public void launchChanged(final ILaunch launch)
         {
             if (!fTrackedLaunches.contains(launch))
+            {
                 return;
+            }
 
             ILaunchConfiguration config = launch.getLaunchConfiguration();
             if (config == null)
+            {
                 return;
+            }
 
             final IV8Project v8Project = JUnitLaunchConfigurationConstants.getV8Project(config);
             if (v8Project == null)
+            {
                 return;
+            }
 
             try
             {
@@ -439,7 +447,9 @@ public final class JUnitModel
                 String testProject =
                     config.getAttribute(JUnitLaunchConfigurationConstants.EXTENSION_PROJECT_TO_TEST, (String)null);
                 if (testProject == null)
+                {
                     return;
+                }
 
                 fTrackedLaunches.remove(launch);
                 connectTestRunner(launch, v8Project, testProject);
@@ -461,7 +471,7 @@ public final class JUnitModel
 
         private void connectTestRunner(ILaunch launch, IV8Project configurationProject, String testExtensionName)
         {
-            var testRunSession = new TestRunSession(launch, configurationProject, testExtensionName);
+            TestRunSession testRunSession = new TestRunSession(launch, configurationProject, testExtensionName);
             addTestRunSession(testRunSession);
 
             for (TestRunListener listener : JUnitPlugin.getInstance().getNewTestRunListeners())

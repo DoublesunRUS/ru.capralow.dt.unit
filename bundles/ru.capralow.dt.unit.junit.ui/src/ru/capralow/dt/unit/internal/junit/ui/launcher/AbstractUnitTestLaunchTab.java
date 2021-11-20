@@ -149,10 +149,10 @@ public abstract class AbstractUnitTestLaunchTab
         {
             Control[] arrcontrol = controls;
             int n = arrcontrol.length;
-            var n2 = 0;
+            int n2 = 0;
             while (n2 < n)
             {
-                var control = arrcontrol[n2];
+                Control control = arrcontrol[n2];
                 control.setVisible(visible);
                 GridData data = (GridData)control.getLayoutData();
                 data.exclude = !visible;

@@ -31,7 +31,9 @@ public class ShowJUnitResult
     private static void showJUnitResult(IProcess process)
     {
         if (process.getLabel().contains("dbgs")) //$NON-NLS-1$
+        {
             return;
+        }
 
         try
         {
@@ -40,7 +42,9 @@ public class ShowJUnitResult
             String extensionProjectName =
                 configuration.getAttribute(JUnitLaunchConfigurationConstants.EXTENSION_PROJECT_TO_TEST, (String)null);
             if (Strings.isNullOrEmpty(extensionProjectName))
+            {
                 return;
+            }
 
             String paramsFilePathName = FrameworkUtils.getConfigurationFilesPath(configuration);
 
@@ -87,7 +91,9 @@ public class ShowJUnitResult
         {
             Object source = event.getSource();
             if (event.getKind() == DebugEvent.TERMINATE && source instanceof IProcess)
+            {
                 showJUnitResult((IProcess)source);
+            }
         }
     }
 

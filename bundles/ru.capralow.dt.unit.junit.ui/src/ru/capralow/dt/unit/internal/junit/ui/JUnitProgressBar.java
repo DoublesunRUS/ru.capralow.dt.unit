@@ -59,9 +59,13 @@ public class JUnitProgressBar
         checkWidget();
         Point size = new Point(DEFAULT_WIDTH, DEFAULT_HEIGHT);
         if (wHint != SWT.DEFAULT)
+        {
             size.x = wHint;
+        }
         if (hHint != SWT.DEFAULT)
+        {
             size.y = hHint;
+        }
         return size;
     }
 
@@ -91,7 +95,9 @@ public class JUnitProgressBar
         fMaxTickCount = maximum;
         fColorBarWidth = scale(ticksDone);
         if (!noChange)
+        {
             redraw();
+        }
     }
 
     public void setMaximum(int max)
@@ -112,7 +118,9 @@ public class JUnitProgressBar
             x = 1;
         }
         if (fCurrentTickCount == fMaxTickCount)
+        {
             fColorBarWidth = getClientArea().width - 1;
+        }
         paintStep(x, fColorBarWidth);
     }
 
@@ -154,7 +162,7 @@ public class JUnitProgressBar
         GC gc = new GC(this);
         setStatusColor(gc);
         Rectangle rect = getClientArea();
-        var startXmax = Math.max(1, startX);
+        int startXmax = Math.max(1, startX);
         gc.fillRectangle(startXmax, 1, endX - startXmax, rect.height - 2);
         gc.dispose();
     }
@@ -165,7 +173,9 @@ public class JUnitProgressBar
         {
             Rectangle r = getClientArea();
             if (r.width != 0)
+            {
                 return Math.max(0, value * (r.width - 2) / fMaxTickCount);
+            }
         }
         return value;
     }
@@ -173,11 +183,17 @@ public class JUnitProgressBar
     private void setStatusColor(GC gc)
     {
         if (fStopped)
+        {
             gc.setBackground(fStoppedColor);
+        }
         else if (fError)
+        {
             gc.setBackground(fFailureColor);
+        }
         else
+        {
             gc.setBackground(fOkColor);
+        }
     }
 
 }

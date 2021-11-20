@@ -46,6 +46,7 @@ public class TableLayoutComposite
         String platform = SWT.getPlatform();
         boolean nomatch = false;
         if (platform != null)
+        {
             switch (platform)
             {
             case "win32": //$NON-NLS-1$
@@ -58,6 +59,7 @@ public class TableLayoutComposite
                 nomatch = true;
                 break;
             }
+        }
         if (nomatch)
         {
             COLUMN_TRIM = 3;
@@ -137,7 +139,9 @@ public class TableLayoutComposite
             }
         }
         if (width > result.x)
+        {
             result.x = width;
+        }
         return result;
     }
 
@@ -148,7 +152,9 @@ public class TableLayoutComposite
         // Layout to null so we make sure we run it only when
         // the value is OK.
         if (width <= 1)
+        {
             return;
+        }
 
         TableColumn[] tableColumns = table.getColumns();
         int size = Math.min(columns.size(), tableColumns.length);
@@ -204,7 +210,9 @@ public class TableLayoutComposite
                     int weight = cw.weight;
                     int pixels = totalWeight == 0 ? 0 : weight * rest / totalWeight;
                     if (pixels < cw.minimumWidth)
+                    {
                         pixels = cw.minimumWidth;
+                    }
                     totalDistributed += pixels;
                     widths[i] = pixels;
                 }
@@ -215,7 +223,9 @@ public class TableLayoutComposite
             for (int i = 0; diff > 0; ++i)
             {
                 if (i == size)
+                {
                     i = 0;
+                }
                 ColumnLayoutData col = columns.get(i);
                 if (col instanceof ColumnWeightData)
                 {

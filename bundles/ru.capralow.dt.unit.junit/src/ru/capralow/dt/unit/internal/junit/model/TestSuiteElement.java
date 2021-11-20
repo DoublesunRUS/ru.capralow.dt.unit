@@ -137,7 +137,9 @@ public class TestSuiteElement
         // copy list to avoid concurreny problems
         TestElement[] children = fChildren.toArray(new TestElement[fChildren.size()]);
         if (children.length == 0)
+        {
             return getSuiteStatus();
+        }
 
         Status cumulated = children[0].getStatus();
 
@@ -152,7 +154,9 @@ public class TestSuiteElement
     private void internalSetChildrenStatus(Status status)
     {
         if (fChildrenStatus == status)
+        {
             return;
+        }
 
         if (status == Status.RUNNING)
         {
@@ -177,7 +181,9 @@ public class TestSuiteElement
         fChildrenStatus = status;
         TestSuiteElement parent = getParent();
         if (parent != null)
+        {
             parent.childChangedStatus(this, getStatus());
+        }
     }
 
 }

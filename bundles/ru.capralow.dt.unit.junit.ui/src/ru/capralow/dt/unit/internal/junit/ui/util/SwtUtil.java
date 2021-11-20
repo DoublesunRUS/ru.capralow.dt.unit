@@ -113,17 +113,29 @@ public final class SwtUtil
     public static Shell getShell(Widget widget)
     {
         if (widget instanceof Control)
+        {
             return ((Control)widget).getShell();
+        }
         if (widget instanceof Caret)
+        {
             return ((Caret)widget).getParent().getShell();
+        }
         if (widget instanceof DragSource)
+        {
             return ((DragSource)widget).getControl().getShell();
+        }
         if (widget instanceof DropTarget)
+        {
             return ((DropTarget)widget).getControl().getShell();
+        }
         if (widget instanceof Menu)
+        {
             return ((Menu)widget).getParent().getShell();
+        }
         if (widget instanceof ScrollBar)
+        {
             return ((ScrollBar)widget).getParent().getShell();
+        }
 
         return null;
     }
@@ -131,10 +143,14 @@ public final class SwtUtil
     public static int getTableHeightHint(Table table, int rows)
     {
         if (table.getFont().equals(JFaceResources.getDefaultFont()))
+        {
             table.setFont(JFaceResources.getDialogFont());
+        }
         int result = table.getItemHeight() * rows + table.getHeaderHeight();
         if (table.getLinesVisible())
+        {
             result += table.getGridLineWidth() * (rows - 1);
+        }
         return result;
     }
 

@@ -22,7 +22,9 @@ public class ProgressImages
     public void dispose()
     {
         if (!isLoaded())
+        {
             return;
+        }
 
         for (int i = 0; i < PROGRESS_STEPS; i++)
         {
@@ -36,15 +38,21 @@ public class ProgressImages
     public Image getImage(int current, int total, int errors, int failures)
     {
         if (!isLoaded())
+        {
             load();
+        }
 
         if (total == 0)
+        {
             return fOkImages[0];
+        }
         int index = ((current * PROGRESS_STEPS) / total) - 1;
         index = Math.min(Math.max(0, index), PROGRESS_STEPS - 1);
 
         if (errors + failures == 0)
+        {
             return fOkImages[index];
+        }
         return fFailureImages[index];
     }
 
@@ -61,7 +69,9 @@ public class ProgressImages
     private void load()
     {
         if (isLoaded())
+        {
             return;
+        }
 
         for (int i = 0; i < PROGRESS_STEPS; i++)
         {

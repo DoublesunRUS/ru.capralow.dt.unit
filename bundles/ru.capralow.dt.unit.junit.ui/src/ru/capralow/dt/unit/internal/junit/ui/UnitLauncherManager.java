@@ -45,7 +45,9 @@ public class UnitLauncherManager
 
                 Tree junitPanelTree = junitPanelViewer.getTree();
                 for (Listener listener : junitPanelTree.getListeners(SWT.DefaultSelection))
+                {
                     junitPanelTree.removeListener(SWT.DefaultSelection, listener);
+                }
 
 //                junitPanelTree.addSelectionListener(testCaseListener);
 

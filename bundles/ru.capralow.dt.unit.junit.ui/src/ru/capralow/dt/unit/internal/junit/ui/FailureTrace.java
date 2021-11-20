@@ -78,7 +78,9 @@ public class FailureTrace
             {
                 Action a = createOpenEditorAction(getSelectedText());
                 if (a != null)
+                {
                     a.run();
+                }
             }
         });
 
@@ -131,11 +133,15 @@ public class FailureTrace
         {
             Action a = createOpenEditorAction(getSelectedText());
             if (a != null)
+            {
                 manager.add(a);
+            }
             manager.add(new JUnitCopyAction(FailureTrace.this, fClipboard));
         }
         if (fFailure != null && fFailure.isComparisonFailure())
+        {
             manager.add(fCompareAction);
+        }
     }
 
     /**
@@ -167,9 +173,13 @@ public class FailureTrace
         String trace = ""; //$NON-NLS-1$
         updateEnablement(test);
         if (test != null)
+        {
             trace = test.getTrace();
+        }
         if (fInputTrace.equals(trace))
+        {
             return;
+        }
         fInputTrace = trace;
         updateTable(trace);
     }
@@ -207,7 +217,9 @@ public class FailureTrace
             testName = testName.substring(0, testName.lastIndexOf('.'));
             int innerSeparatorIndex = testName.indexOf('$');
             if (innerSeparatorIndex != -1)
+            {
                 testName = testName.substring(0, innerSeparatorIndex);
+            }
 
             String lineNumber = traceLine;
             lineNumber = lineNumber.substring(lineNumber.indexOf(':') + 1, lineNumber.lastIndexOf(')'));
@@ -224,7 +236,9 @@ public class FailureTrace
     private String[] getFilterPatterns()
     {
         if (JUnitPreferencesConstants.getFilterStack())
+        {
             return JUnitPreferencesConstants.getFilterPatterns();
+        }
         return new String[0];
     }
 
@@ -249,7 +263,7 @@ public class FailureTrace
             clear();
             return;
         }
-        var traceTrimmed = trace.trim();
+        String traceTrimmed = trace.trim();
         fTable.setRedraw(false);
         fTable.removeAll();
         new TextualTrace(traceTrimmed, getFilterPatterns()).display(fFailureTableDisplay, MAX_LABEL_LENGTH);
@@ -278,12 +292,16 @@ public class FailureTrace
         public void propertyChange(PropertyChangeEvent event)
         {
             if (fTable == null)
+            {
                 return;
+            }
 
             String property = event.getProperty();
 
             if (FAILURE_FONT.equals(property))
+            {
                 fTable.setFont(JFaceResources.getFont(FAILURE_FONT));
+            }
         }
     }
 }

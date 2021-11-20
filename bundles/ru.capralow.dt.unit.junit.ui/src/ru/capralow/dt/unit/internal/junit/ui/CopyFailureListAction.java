@@ -79,10 +79,14 @@ public class CopyFailureListAction
         catch (SWTError e)
         {
             if (e.code != DND.ERROR_CANNOT_SET_CLIPBOARD)
+            {
                 throw e;
+            }
             if (MessageDialog.openQuestion(JUnitUiPlugin.getActiveWorkbenchShell(), Messages.CopyFailureList_problem,
                 Messages.CopyFailureList_clipboard_busy))
+            {
                 run();
+            }
         }
     }
 

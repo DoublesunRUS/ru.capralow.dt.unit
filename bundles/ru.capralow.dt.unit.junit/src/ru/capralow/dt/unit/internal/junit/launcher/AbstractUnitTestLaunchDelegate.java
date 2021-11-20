@@ -37,6 +37,7 @@ import com._1c.g5.v8.dt.core.platform.IV8Project;
 import com._1c.g5.v8.dt.debug.core.IDebugConfigurationAttributes;
 import com._1c.g5.v8.dt.debug.core.IDebugConstants;
 import com._1c.g5.v8.dt.debug.core.model.IRuntimeDebugClientTarget;
+import com._1c.g5.v8.dt.launching.core.ApplicationPrepareResult;
 import com._1c.g5.v8.dt.launching.core.ApplicationPublicationKind;
 import com._1c.g5.v8.dt.launching.core.DebugSessionCheckRequest;
 import com._1c.g5.v8.dt.launching.core.DebugSessionCheckResponse;
@@ -87,14 +88,14 @@ public class AbstractUnitTestLaunchDelegate
     {
         final IV8Project v8project = getProject(configuration);
         final IProject project = v8project.getProject();
-        final var progress = SubMonitor.convert(monitor, DEBUG.equals(mode) ? 60 : 50);
-        var context = new ExecutionContext();
+        final SubMonitor progress = SubMonitor.convert(monitor, DEBUG.equals(mode) ? 60 : 50);
+        ExecutionContext context = new ExecutionContext();
         final String clientTypeId = ClientTypeSelectionSupport.getExecutionClientTypeId(configuration,
             (IResolvableRuntimeInstallation)null, (InfobaseReference)null, runtimeComponentManager);
         final ApplicationPublicationKind publicationKind =
             IRuntimeComponentTypes.WEB_CLIENT.equalsIgnoreCase(clientTypeId) ? ApplicationPublicationKind.INFOBASE
                 : ApplicationPublicationKind.NONE;
-        final var applicationPrepareResult =
+        final ApplicationPrepareResult applicationPrepareResult =
             getOrPrepareApplication(configuration, launch, mode, project, publicationKind, progress.newChild(1));
         if (applicationPrepareResult.getApplication().isEmpty())
         {
@@ -151,7 +152,7 @@ public class AbstractUnitTestLaunchDelegate
             }
             else
             {
-                final var debugUrl = getDebugUrl(configuration, launch, applicationPrepareResult);
+                final URL debugUrl = getDebugUrl(configuration, launch, applicationPrepareResult);
                 attachDebugTarget(configuration, launch, application, debugUrl, getInstallation(configuration).get(),
                     progress.newChild(9));
                 arguments.setDebugServerUrl(debugUrl);
@@ -170,7 +171,7 @@ public class AbstractUnitTestLaunchDelegate
         final IV8Project v8project, final InfobaseReference infobase, final IProgressMonitor monitor)
         throws CoreException
     {
-        final var arguments = new RuntimeExecutionArguments();
+        final RuntimeExecutionArguments arguments = new RuntimeExecutionArguments();
         final boolean useInfobaseAccessUser =
             configuration.getAttribute(ILaunchConfigurationAttributes.LAUNCH_USER_USE_INFOBASE_ACCESS, false);
         if (useInfobaseAccessUser && infobase != null)
@@ -312,36 +313,36 @@ public class AbstractUnitTestLaunchDelegate
         switch (response)
         {
         case RESTART_APPLICATION:
+        {
+            for (final ILaunch candidate2 : sameSameDebugSession)
             {
-                for (final ILaunch candidate2 : sameSameDebugSession)
+                if (!candidate2.isTerminated())
                 {
-                    if (!candidate2.isTerminated())
+                    try
                     {
-                        try
-                        {
-                            Arrays.stream(candidate2.getDebugTargets()).forEach(candidate2::removeDebugTarget);
-                            candidate2.terminate();
-                        }
-                        catch (DebugException e)
-                        {
-                            JUnitPlugin.log(JUnitPlugin.createErrorStatus(e.getMessage(), e));
-                        }
+                        Arrays.stream(candidate2.getDebugTargets()).forEach(candidate2::removeDebugTarget);
+                        candidate2.terminate();
+                    }
+                    catch (DebugException e)
+                    {
+                        JUnitPlugin.log(JUnitPlugin.createErrorStatus(e.getMessage(), e));
                     }
                 }
-                return Status.OK_STATUS;
             }
+            return Status.OK_STATUS;
+        }
         case LAUNCH_ANYWAY:
-            {
-                return Status.OK_STATUS;
-            }
+        {
+            return Status.OK_STATUS;
+        }
         case CANCEL:
-            {
-                return Status.CANCEL_STATUS;
-            }
+        {
+            return Status.CANCEL_STATUS;
+        }
         default:
-            {
-                throw new IllegalStateException(MessageFormat.format("Unexpected result \"{0}\"", response)); //$NON-NLS-1$
-            }
+        {
+            throw new IllegalStateException(MessageFormat.format("Unexpected result \"{0}\"", response)); //$NON-NLS-1$
+        }
         }
     }
 

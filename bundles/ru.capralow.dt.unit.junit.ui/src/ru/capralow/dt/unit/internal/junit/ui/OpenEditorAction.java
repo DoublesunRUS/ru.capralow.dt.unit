@@ -65,7 +65,9 @@ public abstract class OpenEditorAction
     {
         int moduleNameIndex = fProjectAndModuleName.lastIndexOf('.');
         if (moduleNameIndex == -1)
+        {
             return;
+        }
 
         String projectName = fProjectAndModuleName.substring(0, moduleNameIndex);
         String moduleName = fProjectAndModuleName.substring(moduleNameIndex + 1);
@@ -73,14 +75,18 @@ public abstract class OpenEditorAction
 
         IV8Project v8Project = projectManager.getProject(projectName);
         if (v8Project == null)
+        {
             return;
+        }
         IProject project = v8Project.getProject();
         IBmEmfIndexProvider bmEmfIndexProvider = bmEmfIndexManager.getEmfIndexProvider(project);
 
         CommonModule testCommonModule = (CommonModule)MdUtils.getConfigurationObject("ОбщийМодуль." + moduleName, //$NON-NLS-1$
             bmEmfIndexProvider);
         if (testCommonModule == null)
+        {
             return;
+        }
 
         Method testMethod = null;
         for (Method method : testCommonModule.getModule().allMethods())
@@ -92,7 +98,9 @@ public abstract class OpenEditorAction
             }
         }
         if (testMethod == null)
+        {
             return;
+        }
 
         URI uri = resourceLookup.getPlatformResourceUri(testCommonModule);
 

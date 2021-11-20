@@ -84,8 +84,12 @@ public class CompareResultDialog
         int end = Math.min(fExpected.length(), fActual.length());
         int i = 0;
         for (; i < end; i++)
+        {
             if (fExpected.charAt(i) != fActual.charAt(i))
+            {
                 break;
+            }
+        }
         fPrefixSuffix[0] = i;
 
         int j = fExpected.length() - 1;
@@ -94,7 +98,9 @@ public class CompareResultDialog
         for (; k >= i && j >= i; k--, j--)
         {
             if (fExpected.charAt(j) != fActual.charAt(k))
+            {
                 break;
+            }
             l++;
         }
         fPrefixSuffix[1] = l;

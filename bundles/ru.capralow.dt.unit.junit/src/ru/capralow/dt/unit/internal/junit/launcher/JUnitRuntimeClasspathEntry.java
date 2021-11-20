@@ -26,10 +26,14 @@ public class JUnitRuntimeClasspathEntry
     public boolean equals(Object obj)
     {
         if (!(obj instanceof JUnitRuntimeClasspathEntry))
+        {
             return false;
+        }
         JUnitRuntimeClasspathEntry other = (JUnitRuntimeClasspathEntry)obj;
         if (!fPluginId.equals(other.getPluginId()))
+        {
             return false;
+        }
         return Objects.equals(fPluginRelativePath, other.getPluginRelativePath());
     }
 

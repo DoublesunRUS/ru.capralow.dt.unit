@@ -70,7 +70,9 @@ public final class FrameworkUtils
         {
             IProject candidate = itrProjects.next();
             if (candidate.getName().equals(extensionProjectName))
+            {
                 return candidate;
+            }
         }
 
         String msg = MessageFormat.format(Messages.FrameworkUtils_Extension_project_not_found_0, extensionProjectName);
@@ -86,7 +88,9 @@ public final class FrameworkUtils
         {
             IProject candidate = itrProjects.next();
             if (candidate.getName().equals(extensionProjectName))
+            {
                 return candidate;
+            }
         }
 
         return null;
@@ -102,7 +106,9 @@ public final class FrameworkUtils
     public static IPath getExtensionProjectLocation(IProject project, IV8ProjectManager projectManager)
     {
         if (project == null || projectManager == null)
+        {
             return null;
+        }
 
         IV8Project v8Project = projectManager.getProject(project);
         if (!(v8Project instanceof IExtensionProject))
@@ -129,8 +135,9 @@ public final class FrameworkUtils
 
         List<String> elements = new ArrayList<>();
         for (String element : frameworkFeature.getClientScript())
+        {
             elements.add(element.replace(MODULE_NAME, moduleName).replace("$MethodName$", methodName)); //$NON-NLS-1$
-
+        }
         return elements;
     }
 
@@ -141,8 +148,9 @@ public final class FrameworkUtils
 
         List<String> elements = new ArrayList<>();
         for (String element : frameworkFeature.getDescription())
+        {
             elements.add(element.replace("$ProjectName$", projectName).replace(MODULE_NAME, moduleName)); //$NON-NLS-1$
-
+        }
         return elements;
     }
 
@@ -153,8 +161,9 @@ public final class FrameworkUtils
 
         List<String> elements = new ArrayList<>();
         for (String element : frameworkFeature.getServerScript())
+        {
             elements.add(element.replace(MODULE_NAME, moduleName).replace("$MethodName$", methodName)); //$NON-NLS-1$
-
+        }
         return elements;
     }
 
@@ -166,8 +175,9 @@ public final class FrameworkUtils
         FeatureSettings featureSettings = new Gson().fromJson(jsonContent, FeatureSettings.class);
 
         for (FeatureFormat feature : featureSettings.getFeatureFormat())
+        {
             featureSettings.setFeature(feature.getLang(), feature);
-
+        }
         return featureSettings;
     }
 
@@ -214,16 +224,22 @@ public final class FrameworkUtils
     public static String getModuleByName(String extensionModuleName, IProject project, IV8ProjectManager projectManager)
     {
         if (project == null)
+        {
             return null;
+        }
 
         IPath projectLocation = getExtensionProjectLocation(project, projectManager);
 
         List<String> modules = getTestModules(projectLocation);
         if (modules.isEmpty())
+        {
             return null;
+        }
 
         if (modules.contains(extensionModuleName))
+        {
             return modules.get(modules.indexOf(extensionModuleName));
+        }
 
         return null;
     }
@@ -252,16 +268,22 @@ public final class FrameworkUtils
     public static String getTagByName(String extensionTagName, IProject project, IV8ProjectManager projectManager)
     {
         if (project == null)
+        {
             return null;
+        }
 
         IPath projectLocation = getExtensionProjectLocation(project, projectManager);
 
         List<String> tags = getTestTags(projectLocation);
         if (tags.isEmpty())
+        {
             return null;
+        }
 
         if (tags.contains(extensionTagName))
+        {
             return tags.get(tags.indexOf(extensionTagName));
+        }
 
         return null;
     }
@@ -280,26 +302,33 @@ public final class FrameworkUtils
     public static List<String> getTestModules(IPath projectLocation)
     {
         if (projectLocation == null)
+        {
             return new ArrayList<>();
+        }
 
         String featuresPath = projectLocation + "/features/all/"; //$NON-NLS-1$
         File featuresDir = new File(featuresPath);
         File[] featureFiles = featuresDir.listFiles((dir1, name) -> name.endsWith(FEATURE_EXTENSION));
         if (featureFiles == null)
+        {
             return new ArrayList<>();
+        }
 
         List<String> modulesList = new ArrayList<>();
 
         for (File featureFile : featureFiles)
+        {
             modulesList.add(featureFile.getName().substring(0, featureFile.getName().lastIndexOf(FEATURE_EXTENSION)));
-
+        }
         return modulesList;
     }
 
     public static List<String> getTestTags(IPath projectLocation)
     {
         if (projectLocation == null)
+        {
             return new ArrayList<>();
+        }
 
         String featuresPath = projectLocation + "/features/"; //$NON-NLS-1$
 
@@ -307,12 +336,16 @@ public final class FrameworkUtils
         File[] featureFiles =
             featuresDir.listFiles((dir1, name) -> dir1.isDirectory() && !name.equalsIgnoreCase("all")); //$NON-NLS-1$
         if (featureFiles == null)
+        {
             return new ArrayList<>();
+        }
 
         List<String> tagsList = new ArrayList<>();
 
         for (File featureFile : featureFiles)
+        {
             tagsList.add(featureFile.getName());
+        }
 
         return tagsList;
     }

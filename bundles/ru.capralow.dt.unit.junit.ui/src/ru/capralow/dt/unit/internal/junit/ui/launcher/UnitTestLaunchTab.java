@@ -99,7 +99,9 @@ public class UnitTestLaunchTab
 
             Collection<IProject> projects = FrameworkUtils.getExtensionProjects(projectManager);
             if (projects != null)
+            {
                 extensionProjectViewer.setInput(projects);
+            }
 
             IProject project = FrameworkUtils.getConfigurationProject(extensionProjectName, projectManager);
             extensionProjectViewer
@@ -239,11 +241,15 @@ public class UnitTestLaunchTab
 
                 List<String> modules = FrameworkUtils.getTestModules(project.getLocation());
                 if (modules != null)
+                {
                     extensionModuleViewer.setInput(modules);
+                }
 
                 List<String> tags = FrameworkUtils.getTestTags(project.getLocation());
                 if (tags != null)
+                {
                     extensionTagViewer.setInput(tags);
+                }
             }
 
             updateLaunchConfigurationDialog();

@@ -446,7 +446,9 @@ public class TestRunnerViewPart
     {
         fIsDisposed = true;
         if (fTestRunSessionListener != null)
+        {
             JUnitPlugin.getModel().removeTestRunSessionListener(fTestRunSessionListener);
+        }
 
         IHandlerService handlerService = getSite().getWorkbenchWindow().getService(IHandlerService.class);
         handlerService.deactivateHandler(fRerunLastActivation);
@@ -454,12 +456,16 @@ public class TestRunnerViewPart
         setActiveTestRunSession(null);
 
         if (fProgressImages != null)
+        {
             fProgressImages.dispose();
+        }
         getViewSite().getPage().removePartListener(fPartListener);
 
         disposeImages();
         if (fClipboard != null)
+        {
             fClipboard.dispose();
+        }
         if (fViewMenuListener != null)
         {
             getViewSite().getActionBars().getMenuManager().removeMenuListener(fViewMenuListener);
@@ -505,10 +511,14 @@ public class TestRunnerViewPart
     public Image getTitleImage()
     {
         if (fOriginalViewImage == null)
+        {
             fOriginalViewImage = super.getTitleImage();
+        }
 
         if (fViewImage == null)
+        {
             return super.getTitleImage();
+        }
         return fViewImage;
     }
 
@@ -525,7 +535,9 @@ public class TestRunnerViewPart
         fMemento = memento;
         IWorkbenchSiteProgressService progressService = getProgressService();
         if (progressService != null)
+        {
             progressService.showBusyForFamily(TestRunnerViewPart.FAMILY_JUNIT_RUN);
+        }
     }
 
     public boolean isAutoScroll()
@@ -556,7 +568,9 @@ public class TestRunnerViewPart
                         {
                             name = className;
                             if (testName != null)
+                            {
                                 name += "." + testName; //$NON-NLS-1$
+                            }
                         }
                         String configName = MessageFormat.format(Messages.TestRunnerViewPart_configName, name);
                         ILaunchConfigurationWorkingCopy tmp = launchConfiguration.copy(configName);
@@ -609,13 +623,19 @@ public class TestRunnerViewPart
     public void rerunTestRun()
     {
         if (fTestRunSession == null)
+        {
             return;
+        }
         ILaunch launch = fTestRunSession.getLaunch();
         if (launch == null)
+        {
             return;
+        }
         ILaunchConfiguration launchConfiguration = launch.getLaunchConfiguration();
         if (launchConfiguration == null)
+        {
             return;
+        }
 
         ILaunchConfiguration configuration = prepareLaunchConfigForRelaunch(launchConfiguration);
         relaunch(configuration, launch.getLaunchMode());
@@ -628,7 +648,9 @@ public class TestRunnerViewPart
         {
             // part has not been created
             if (fMemento != null) //Keep the old state;
+            {
                 memento.putMemento(fMemento);
+            }
             return;
         }
 
@@ -664,7 +686,9 @@ public class TestRunnerViewPart
     public void setFocus()
     {
         if (fTestViewer != null)
+        {
             fTestViewer.getTestViewerControl().setFocus();
+        }
     }
 
     public void setLayoutMode(int mode)
@@ -731,7 +755,9 @@ public class TestRunnerViewPart
     {
         IWorkbenchSiteProgressService service = getProgressService();
         if (service != null)
+        {
             service.warnOfContentChange();
+        }
     }
 
     private void addDropAdapter(Composite parent)
@@ -1001,16 +1027,22 @@ public class TestRunnerViewPart
     private int getErrorsPlusFailures()
     {
         if (fTestRunSession == null)
+        {
             return 0;
+        }
         else
+        {
             return fTestRunSession.getErrorCount() + fTestRunSession.getFailureCount();
+        }
     }
 
     private IWorkbenchSiteProgressService getProgressService()
     {
         Object siteService = getSite().getAdapter(IWorkbenchSiteProgressService.class);
         if (siteService != null)
+        {
             return (IWorkbenchSiteProgressService)siteService;
+        }
         return null;
     }
 
@@ -1034,7 +1066,9 @@ public class TestRunnerViewPart
             IEditorPart activeEditorPart = (IEditorPart)activePart;
             IEditorActionBarContributor contributor = activeEditorPart.getEditorSite().getActionBarContributor();
             if (contributor instanceof EditorActionBarContributor)
+            {
                 return ((EditorActionBarContributor)contributor).getActionBars().getStatusLineManager();
+            }
         }
         // no active part
         return getViewSite().getActionBars().getStatusLineManager();
@@ -1095,7 +1129,9 @@ public class TestRunnerViewPart
     private void postSyncRunnable(Runnable r)
     {
         if (!isDisposed())
+        {
             getDisplay().syncExec(r);
+        }
     }
 
     private ILaunchConfiguration prepareLaunchConfigForRelaunch(ILaunchConfiguration configuration)
@@ -1107,13 +1143,17 @@ public class TestRunnerViewPart
     private void processChangesInUI()
     {
         if (fSashForm.isDisposed())
+        {
             return;
+        }
 
         doShowInfoMessage();
         refreshCounters();
 
         if (!fPartIsVisible)
+        {
             updateViewTitleProgress();
+        }
         else
         {
             updateViewIcon();
@@ -1168,11 +1208,17 @@ public class TestRunnerViewPart
 
         int ticksDone;
         if (startedCount == 0)
+        {
             ticksDone = 0;
+        }
         else if (startedCount == totalCount && !fTestRunSession.isRunning())
+        {
             ticksDone = totalCount;
+        }
         else
+        {
             ticksDone = startedCount - 1;
+        }
 
         fProgressBar.reset(hasErrorsOrFailures, stopped, ticksDone, totalCount);
     }
@@ -1192,10 +1238,14 @@ public class TestRunnerViewPart
     {
         Integer ratio = memento.getInteger(TAG_RATIO);
         if (ratio != null)
+        {
             fSashForm.setWeights(new int[] { ratio, 1000 - ratio });
+        }
         Integer orientation = memento.getInteger(TAG_ORIENTATION);
         if (orientation != null)
+        {
             fOrientation = orientation;
+        }
         computeOrientation();
         String scrollLock = memento.getString(TAG_SCROLL);
         if (scrollLock != null)
@@ -1207,23 +1257,28 @@ public class TestRunnerViewPart
         Integer layout = memento.getInteger(TAG_LAYOUT);
         int layoutValue = LAYOUT_HIERARCHICAL;
         if (layout != null)
+        {
             layoutValue = layout;
+        }
 
         String failuresOnly = memento.getString(TAG_FAILURES_ONLY);
         boolean showFailuresOnly = false;
         if (failuresOnly != null)
+        {
             showFailuresOnly = failuresOnly.equals("true"); //$NON-NLS-1$
-
+        }
         String ignoredOnly = memento.getString(TAG_IGNORED_ONLY);
         boolean showIgnoredOnly = false;
         if (ignoredOnly != null)
+        {
             showIgnoredOnly = ignoredOnly.equals("true"); //$NON-NLS-1$
-
+        }
         String time = memento.getString(TAG_SHOW_TIME);
         boolean showTime = true;
         if (time != null)
+        {
             showTime = time.equals("true"); //$NON-NLS-1$
-
+        }
         SortingCriterion sortingCriterion = SortingCriterion.SORT_BY_EXECUTION_ORDER;
         Integer tagSortingCriterion = memento.getInteger(TAG_SORTING_CRITERION);
         if (tagSortingCriterion != null)
@@ -1264,7 +1319,9 @@ fFailureTrace
 action enablement
  */
         if (fTestRunSession == testRunSession)
+        {
             return null;
+        }
 
         deregisterTestSessionListener(true);
 
@@ -1302,7 +1359,9 @@ action enablement
                 fTestRunSession.addTestSessionListener(fTestSessionListener);
             }
             if (!fTestRunSession.isStarting() && !fShowOnErrorOnly)
+            {
                 showTestResultsView();
+            }
 
             setTitleToolTip();
 
@@ -1337,9 +1396,13 @@ action enablement
     private void setCounterColumns(GridLayout layout)
     {
         if (fCurrentOrientation == VIEW_ORIENTATION_HORIZONTAL)
+        {
             layout.numColumns = 2;
+        }
         else
+        {
             layout.numColumns = 1;
+        }
     }
 
     private void setFilterAndLayout(boolean failuresOnly, boolean ignoredOnly, int layoutMode)
@@ -1355,11 +1418,15 @@ action enablement
     private void setOrientation(int orientation)
     {
         if (fSashForm == null || fSashForm.isDisposed())
+        {
             return;
+        }
         boolean horizontal = orientation == VIEW_ORIENTATION_HORIZONTAL;
         fSashForm.setOrientation(horizontal ? SWT.HORIZONTAL : SWT.VERTICAL);
         for (ToggleOrientationAction toggleOrientationAction : fToggleOrientationActions)
+        {
             toggleOrientationAction.setChecked(fOrientation == toggleOrientationAction.getOrientation());
+        }
         fCurrentOrientation = orientation;
         GridLayout layout = (GridLayout)fCounterComposite.getLayout();
         setCounterColumns(layout);
@@ -1383,7 +1450,9 @@ action enablement
     {
         postSyncRunnable(() -> {
             if (!isDisposed())
+            {
                 fFailureTrace.showFailure(test);
+            }
         });
     }
 
@@ -1439,11 +1508,17 @@ action enablement
     {
         if (fTestRunSession == null || fTestRunSession.isStopped() || fTestRunSession.isRunning()
             || fTestRunSession.getStartedCount() == 0)
+        {
             fViewImage = fOriginalViewImage;
+        }
         else if (hasErrorsOrFailures())
+        {
             fViewImage = fTestRunFailIcon;
+        }
         else
+        {
             fViewImage = fTestRunOKIcon;
+        }
         firePropertyChange(IWorkbenchPart.PROP_TITLE);
     }
 
@@ -1500,7 +1575,9 @@ action enablement
     {
         postSyncRunnable(() -> {
             if (isDisposed())
+            {
                 return;
+            }
             showTestResultsView();
         });
     }
@@ -1518,17 +1595,25 @@ action enablement
     void codeHasChanged()
     {
         if (fViewImage == fTestRunOKIcon)
+        {
             fViewImage = fTestRunOKDirtyIcon;
+        }
         else if (fViewImage == fTestRunFailIcon)
+        {
             fViewImage = fTestRunFailDirtyIcon;
+        }
 
         Runnable r = () -> {
             if (isDisposed())
+            {
                 return;
+            }
             firePropertyChange(IWorkbenchPart.PROP_TITLE);
         };
         if (!isDisposed())
+        {
             getDisplay().asyncExec(r);
+        }
     }
 
     void computeOrientation()
@@ -1544,9 +1629,13 @@ action enablement
             if (size.x != 0 && size.y != 0)
             {
                 if (size.x > size.y)
+                {
                     setOrientation(VIEW_ORIENTATION_HORIZONTAL);
+                }
                 else
+                {
                     setOrientation(VIEW_ORIENTATION_VERTICAL);
+                }
             }
         }
     }
@@ -1668,7 +1757,9 @@ action enablement
             exportDialog.setFilterExtensions(new String[] { "*.xml", "*.*" }); //$NON-NLS-1$ //$NON-NLS-2$
             String path = exportDialog.open();
             if (path == null)
+            {
                 return;
+            }
 
             //TODO: MULTI: getFileNames()
             File file = new File(path);
@@ -1690,7 +1781,9 @@ action enablement
             String testRunName = fTestRunSession.getTestRunName();
             long startTime = fTestRunSession.getStartTime();
             if (startTime <= 0)
+            {
                 return testRunName;
+            }
 
             String isoTime = new SimpleDateFormat("yyyyMMdd-HHmmss").format(new Date(startTime)); //$NON-NLS-1$
             return testRunName + " " + isoTime + ".xml"; //$NON-NLS-1$ //$NON-NLS-2$
@@ -1756,7 +1849,9 @@ action enablement
             importDialog.setFilterExtensions(new String[] { "*.xml", "*.*" }); //$NON-NLS-1$ //$NON-NLS-2$
             String path = importDialog.open();
             if (path == null)
+            {
                 return;
+            }
 
             //TODO: MULTI: getFileNames()
             File file = new File(path);
@@ -1848,7 +1943,9 @@ action enablement
             public String isValid(String newText)
             {
                 if (newText.length() == 0)
+                {
                     return null;
+                }
                 try
                 {
                     @SuppressWarnings("unused")
@@ -1988,8 +2085,10 @@ action enablement
                 new ImportTestRunSessionFromUrlAction(fParent.getShell()));
             manager.appendToGroup(IWorkbenchActionConstants.MB_ADDITIONS, fPasteAction);
             if (fTestRunSession != null)
+            {
                 manager.appendToGroup(IWorkbenchActionConstants.MB_ADDITIONS,
                     new ExportTestRunSessionAction(fParent.getShell(), fTestRunSession));
+            }
         }
 
         @Override
@@ -2040,20 +2139,32 @@ action enablement
         {
             TestRunSession session = (TestRunSession)element;
             if (session.isStopped())
+            {
                 return fSuiteIconDescriptor;
+            }
 
             if (session.isRunning())
+            {
                 return fSuiteRunningIconDescriptor;
+            }
 
             Result result = session.getTestResult(true);
             if (result == Result.OK)
+            {
                 return fSuiteOkIconDescriptor;
+            }
             else if (result == Result.ERROR)
+            {
                 return fSuiteErrorIconDescriptor;
+            }
             else if (result == Result.FAILURE)
+            {
                 return fSuiteFailIconDescriptor;
+            }
             else
+            {
                 return fSuiteIconDescriptor;
+            }
         }
 
         @Override
@@ -2096,7 +2207,9 @@ action enablement
         {
             TestRunSession deactivatedSession = setActiveTestRunSession(entry);
             if (deactivatedSession != null)
+            {
                 deactivatedSession.swapOut();
+            }
         }
 
         @Override
@@ -2203,7 +2316,9 @@ action enablement
 
                     TestRunSession deactivatedSession = setActiveTestRunSession(testRunSession);
                     if (deactivatedSession != null)
+                    {
                         deactivatedSession.swapOut();
+                    }
                 }
             });
         }
@@ -2225,7 +2340,9 @@ action enablement
                         deactivatedSession = setActiveTestRunSession(null);
                     }
                     if (deactivatedSession != null)
+                    {
                         deactivatedSession.swapOut();
+                    }
                 }
             });
         }
@@ -2244,7 +2361,9 @@ action enablement
         public void runningBegins()
         {
             if (!fShowOnErrorOnly)
+            {
                 postShowTestResultsView();
+            }
         }
 
         @Override
@@ -2260,7 +2379,9 @@ action enablement
 
             postSyncRunnable(() -> {
                 if (isDisposed())
+                {
                     return;
+                }
                 fStopAction.setEnabled(false);
                 updateRerunFailedFirstAction();
                 processChangesInUI();
@@ -2351,7 +2472,9 @@ action enablement
 
             // show the view on the first error only
             if (fShowOnErrorOnly && getErrorsPlusFailures() == 1)
+            {
                 postShowTestResultsView();
+            }
 
             //TODO:
             // [Bug 35590] JUnit window doesn't report errors from junit.extensions.TestSetup [JUnit]
@@ -2390,7 +2513,9 @@ action enablement
         {
             postSyncRunnable(() -> {
                 if (isDisposed())
+                {
                     return;
+                }
                 resetViewIcon();
                 fStopAction.setEnabled(false);
                 updateRerunFailedFirstAction();

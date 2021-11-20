@@ -161,7 +161,8 @@ public abstract class AbstractUnitTestLaunchShortcut
         if (externalObjects.size() > 1)
         {
             final ILabelProvider labelProvider = new WorkbenchLabelProvider();
-            var dialog = new ElementListSelectionDialog(JUnitUiPlugin.getActiveWorkbenchShell(), labelProvider);
+            ElementListSelectionDialog dialog =
+                new ElementListSelectionDialog(JUnitUiPlugin.getActiveWorkbenchShell(), labelProvider);
             dialog.setElements(externalObjects.toArray(new MdObject[externalObjects.size()]));
             dialog.setTitle(Messages.AbstractRuntimeClientLaunchShortcut_External_Object_Selection);
             dialog.setMessage(Messages.AbstractRuntimeClientLaunchShortcut_Select_an_external_object_to_launch);
@@ -217,7 +218,7 @@ public abstract class AbstractUnitTestLaunchShortcut
     {
         try
         {
-            var resolvableAsString =
+            String resolvableAsString =
                 candidate.getAttribute(IDebugConfigurationAttributes.RUNTIME_INSTALLATION, (String)null);
             final IResolvableRuntimeInstallation resolvable = (resolvableAsString == null) ? null
                 : resolvableRuntimeInstallationManager.deserialize(resolvableAsString);

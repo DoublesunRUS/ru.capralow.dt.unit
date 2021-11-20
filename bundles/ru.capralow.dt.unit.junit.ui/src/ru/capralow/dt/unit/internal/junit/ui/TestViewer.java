@@ -108,9 +108,11 @@ public class TestViewer
     public StructuredViewer getActiveViewer()
     {
         if (fLayoutMode == TestRunnerViewPart.LAYOUT_HIERARCHICAL)
+        {
             return fTreeViewer;
-        else
-            return fTableViewer;
+        }
+
+        return fTableViewer;
     }
 
     public Control getTestViewerControl()
@@ -155,8 +157,12 @@ public class TestViewer
             if (!fTreeNeedsRefresh && toUpdate.length > 0)
             {
                 if (fTreeHasFilter)
+                {
                     for (Object element : toUpdate)
+                    {
                         updateElementInTree((TestElement)element);
+                    }
+                }
                 else
                 {
                     HashSet<Object> toUpdateWithParents = new HashSet<>(Arrays.asList(toUpdate));
@@ -175,10 +181,16 @@ public class TestViewer
             if (!fTableNeedsRefresh && toUpdate.length > 0)
             {
                 if (fTableHasFilter)
+                {
                     for (Object element : toUpdate)
+                    {
                         updateElementInTable((TestElement)element);
+                    }
+                }
                 else
+                {
                     fTableViewer.update(toUpdate, null);
+                }
             }
         }
         autoScrollInUI();
@@ -200,7 +212,9 @@ public class TestViewer
     {
         TestSuiteElement parent = (TestSuiteElement)fTreeContentProvider.getParent(testElement);
         if (parent != null)
+        {
             fAutoExpand.add(parent);
+        }
     }
 
     /**
@@ -241,14 +255,18 @@ public class TestViewer
         }
 
         if (next != null)
+        {
             getActiveViewer().setSelection(new StructuredSelection(next), true);
+        }
     }
 
     public void selectFirstFailure()
     {
         TestElement firstFailure = getNextChildFailure(fTestRunSession.getTestRoot(), true);
         if (firstFailure != null)
+        {
             getActiveViewer().setSelection(new StructuredSelection(firstFailure), true);
+        }
     }
 
     /**
@@ -429,7 +447,9 @@ public class TestViewer
         if (fLayoutMode == TestRunnerViewPart.LAYOUT_FLAT)
         {
             if (fAutoScrollTarget != null)
+            {
                 fTableViewer.reveal(fAutoScrollTarget);
+            }
             return;
         }
 
@@ -453,7 +473,9 @@ public class TestViewer
             {
                 TestSuiteElement previousAutoOpened = iter.previous();
                 if (previousAutoOpened.equals(parent))
+                {
                     break;
+                }
 
                 if (previousAutoOpened.getStatus() == TestElement.Status.OK)
                 {
@@ -471,7 +493,9 @@ public class TestViewer
             }
         }
         if (current != null)
+        {
             fTreeViewer.reveal(current);
+        }
     }
 
     private synchronized void clearAutoExpand()
@@ -533,17 +557,21 @@ public class TestViewer
     private boolean getActiveViewerHasFilter()
     {
         if (fLayoutMode == TestRunnerViewPart.LAYOUT_HIERARCHICAL)
+        {
             return fTreeHasFilter;
-        else
-            return fTableHasFilter;
+        }
+
+        return fTableHasFilter;
     }
 
     private boolean getActiveViewerNeedsRefresh()
     {
         if (fLayoutMode == TestRunnerViewPart.LAYOUT_HIERARCHICAL)
+        {
             return fTreeNeedsRefresh;
-        else
-            return fTableNeedsRefresh;
+        }
+
+        return fTableNeedsRefresh;
     }
 
     private Comparator<ITestElement> getComparator()
@@ -592,7 +620,9 @@ public class TestViewer
         }
         List<ITestElement> children = Arrays.asList(elements);
         if (!showNext)
+        {
             children = new ReverseList<>(children);
+        }
         for (ITestElement element : children)
         {
             TestElement child = (TestElement)element;
@@ -622,7 +652,9 @@ public class TestViewer
         {
             TestElement nextChild = getNextChildFailure((TestSuiteElement)selected, showNext);
             if (nextChild != null)
+            {
                 return nextChild;
+            }
         }
         return getNextFailureSibling(selected, showNext);
     }
@@ -631,7 +663,9 @@ public class TestViewer
     {
         TestSuiteElement parent = current.getParent();
         if (parent == null)
+        {
             return null;
+        }
 
         ITestElement[] elements = parent.getChildren();
         Comparator<ITestElement> comparator = getComparator();
@@ -642,7 +676,9 @@ public class TestViewer
         List<ITestElement> siblings = Arrays.asList(elements);
 
         if (!showNext)
+        {
             siblings = new ReverseList<>(siblings);
+        }
 
         int nextIndex = siblings.indexOf(current) + 1;
         for (int i = nextIndex; i < siblings.size(); i++)
@@ -687,17 +723,21 @@ public class TestViewer
     private void setActiveViewerHasFilter(boolean filter)
     {
         if (fLayoutMode == TestRunnerViewPart.LAYOUT_HIERARCHICAL)
+        {
             fTreeHasFilter = filter;
-        else
-            fTableHasFilter = filter;
+        }
+
+        fTableHasFilter = filter;
     }
 
     private void setActiveViewerNeedsRefresh(boolean needsRefresh)
     {
         if (fLayoutMode == TestRunnerViewPart.LAYOUT_HIERARCHICAL)
+        {
             fTreeNeedsRefresh = needsRefresh;
-        else
-            fTableNeedsRefresh = needsRefresh;
+        }
+
+        fTableNeedsRefresh = needsRefresh;
     }
 
     private void updateElementInTable(TestElement element)
@@ -712,7 +752,9 @@ public class TestViewer
                 {
                     TableItem item = (TableItem)fTableViewer.testFindItem(previous);
                     if (item != null)
+                    {
                         insertionIndex = fTableViewer.getTable().indexOf(item);
+                    }
                 }
                 fTableViewer.insert(element, insertionIndex);
             }
@@ -739,7 +781,9 @@ public class TestViewer
             do
             {
                 if (fTreeViewer.testFindItem(current) != null)
+                {
                     fTreeViewer.remove(current);
+                }
                 current = current.getParent();
             }
             while (!(current instanceof TestRoot) && !isShown(current));
@@ -755,7 +799,9 @@ public class TestViewer
     private void updateShownElementInTree(TestElement testElement)
     {
         if (testElement == null || testElement instanceof TestRoot) // paranoia null check
+        {
             return;
+        }
 
         TestSuiteElement parent = testElement.getParent();
         updateShownElementInTree(parent); // make sure parent is shown and up-to-date
@@ -774,7 +820,9 @@ public class TestViewer
     {
         IStructuredSelection selection = (IStructuredSelection)fSelectionProvider.getSelection();
         if (selection.size() != 1)
+        {
             return;
+        }
 
         TestElement testElement = (TestElement)selection.getFirstElement();
 
@@ -813,7 +861,9 @@ public class TestViewer
         if (fTestRunSession != null && fTestRunSession.getFailureCount() + fTestRunSession.getErrorCount() > 0)
         {
             if (fLayoutMode != TestRunnerViewPart.LAYOUT_HIERARCHICAL)
+            {
                 manager.add(new Separator());
+            }
             manager.add(new CopyFailureListAction(fTestRunnerPart, fClipboard));
         }
         manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
@@ -857,11 +907,13 @@ public class TestViewer
     {
         public boolean select(TestElement testElement)
         {
-            var status = testElement.getStatus();
+            Status status = testElement.getStatus();
             if (status.isErrorOrFailure())
+            {
                 return true;
-            else
-                return !fTestRunSession.isRunning() && status == Status.RUNNING; // rerunning
+            }
+
+            return !fTestRunSession.isRunning() && status == Status.RUNNING; // rerunning
         }
 
         @Override
@@ -877,9 +929,11 @@ public class TestViewer
         public boolean select(TestElement testElement)
         {
             if (hasIgnoredInTestResult(testElement))
+            {
                 return true;
-            else
-                return !fTestRunSession.isRunning() && testElement.getStatus() == Status.RUNNING; // rerunning
+            }
+
+            return !fTestRunSession.isRunning() && testElement.getStatus() == Status.RUNNING; // rerunning
         }
 
         @Override

@@ -102,10 +102,13 @@ public class UnitLauncherXtextBuilderParticipant
             {
                 String keyName = methodLine.substring(methodLine.toLowerCase().indexOf("@unit-test") + 10); //$NON-NLS-1$
                 if (!keyName.isEmpty() && keyName.startsWith(":") && !keyName.equalsIgnoreCase(":all")) //$NON-NLS-1$ //$NON-NLS-2$
+                {
                     keyName = keyName.substring(1).split("[ ]")[0]; //$NON-NLS-1$
+                }
                 else
+                {
                     keyName = ""; //$NON-NLS-1$
-
+                }
                 return keyName;
             }
         }
@@ -118,11 +121,14 @@ public class UnitLauncherXtextBuilderParticipant
 
         String featuresPathName = getFeaturesLocation(projectLocation);
         if (!keyName.isEmpty())
+        {
             featuresPathName += keyName.concat("/"); //$NON-NLS-1$
-
+        }
         File featuresPath = new File(featuresPathName);
         if (!featuresPath.exists())
+        {
             featuresPath.mkdirs();
+        }
 
         String fileName = String.format("%1$s/%2$s.feature", featuresPathName, moduleName); //$NON-NLS-1$
 
@@ -147,12 +153,15 @@ public class UnitLauncherXtextBuilderParticipant
     {
         Path pathToBeDeleted = Paths.get(getFeaturesLocation(projectLocation));
         if (!pathToBeDeleted.toFile().exists())
+        {
             return;
+        }
 
         try (Stream<Path> files = Files.walk(pathToBeDeleted);)
         {
             files.sorted(Comparator.reverseOrder()).map(Path::toFile).forEach(file -> {
                 if (file.exists() && file.isDirectory() && file.list().length == 0)
+                {
                     try
                     {
                         Files.delete(file.toPath());
@@ -164,6 +173,7 @@ public class UnitLauncherXtextBuilderParticipant
                             file.toPath());
                         JUnitUiPlugin.log(JUnitUiPlugin.createErrorStatus(msg, e));
                     }
+                }
             });
 
         }
@@ -181,13 +191,15 @@ public class UnitLauncherXtextBuilderParticipant
     {
         Path dirPath = Paths.get(getFeaturesLocation(projectLocation));
         if (!dirPath.toFile().exists())
+        {
             return;
-
+        }
         try (Stream<Path> files = Files.walk(dirPath);)
         {
             files.map(Path::toFile).sorted(Comparator.comparing(File::isDirectory)).forEach(file -> {
                 String fileName = moduleName + ".feature"; //$NON-NLS-1$
                 if (file.exists() && file.getName().endsWith(fileName))
+                {
                     try
                     {
                         Files.delete(file.toPath());
@@ -198,6 +210,7 @@ public class UnitLauncherXtextBuilderParticipant
                             Messages.UnitLauncherXtextBuilderParticipant_Unable_to_delete_feature_file_0, fileName);
                         JUnitUiPlugin.log(JUnitUiPlugin.createErrorStatus(msg, e));
                     }
+                }
             });
 
         }
@@ -217,7 +230,9 @@ public class UnitLauncherXtextBuilderParticipant
 
         IResourceDescription deltaDescription = delta.getNew();
         if (deltaDescription == null)
+        {
             return null;
+        }
 
         Iterator<IEObjectDescription> objectItr = deltaDescription.getExportedObjects().iterator();
         if (objectItr.hasNext())
@@ -236,11 +251,15 @@ public class UnitLauncherXtextBuilderParticipant
         }
 
         if (!(object instanceof Module))
+        {
             return null;
+        }
 
         Module module = (Module)EcoreUtil.resolve(object, configuration);
         if (!(module.getModuleType().equals(ModuleType.COMMON_MODULE)))
+        {
             return null;
+        }
 
         return module;
     }
@@ -262,7 +281,9 @@ public class UnitLauncherXtextBuilderParticipant
         {
             IConfigurationProject parent = ((IExternalObjectProject)v8Project).getParent();
             if (parent == null)
+            {
                 return null;
+            }
             configuration = parent.getConfiguration();
         }
 
@@ -276,11 +297,15 @@ public class UnitLauncherXtextBuilderParticipant
         {
             String keyName = getUnitTestKeyFromMethodText(NodeModelUtils.findActualNodeFor(method).getText());
             if (keyName == null)
+            {
                 continue;
+            }
 
             List<String> methodsNames = units.get(DEFAULT_FEATURE_FOLDER_NAME);
             if (methodsNames == null)
+            {
                 methodsNames = new ArrayList<>();
+            }
             methodsNames.add(method.getName());
             units.put(DEFAULT_FEATURE_FOLDER_NAME, methodsNames);
 
@@ -288,7 +313,9 @@ public class UnitLauncherXtextBuilderParticipant
             {
                 methodsNames = units.get(keyName);
                 if (methodsNames == null)
+                {
                     methodsNames = new ArrayList<>();
+                }
                 methodsNames.add(method.getName());
                 units.put(keyName, methodsNames);
             }
@@ -322,7 +349,9 @@ public class UnitLauncherXtextBuilderParticipant
         {
             Module module = getCommonModule(delta, configuration);
             if (module == null)
+            {
                 continue;
+            }
 
             Map<String, List<String>> units = getUnits(module);
 

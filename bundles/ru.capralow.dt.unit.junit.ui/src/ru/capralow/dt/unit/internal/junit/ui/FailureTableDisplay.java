@@ -60,9 +60,13 @@ public class FailureTableDisplay
     private void disposeIcons()
     {
         if (fExceptionIcon != null && !fExceptionIcon.isDisposed())
+        {
             fExceptionIcon.dispose();
+        }
         if (fStackIcon != null && !fStackIcon.isDisposed())
+        {
             fStackIcon.dispose();
+        }
     }
 
     TableItem newTableItem()
