@@ -9,6 +9,7 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.jface.text.TextSelection;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -111,7 +112,7 @@ public abstract class OpenEditorAction
         OpenHelper openHelper = new OpenHelper();
         openHelper.openEditor(uri, selection);
 
-        IEditorPart editor = null;
+        IEditorPart editor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
         if (!(editor instanceof ITextEditor))
         {
             fTestRunner.registerInfoMessage(Messages.OpenEditorAction_message_cannotopen);
