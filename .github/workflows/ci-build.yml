@@ -44,7 +44,7 @@ jobs:
       run: |
         Xvfb :5 -screen 0 1280x1024x8 -fbdir /tmp &
         export DISPLAY=:5
-        mvn clean verify -Pfind-bugs -Dtycho.localArtifacts=ignore -B -V
+        mvn clean verify -Pfind-bugs -Dtycho.localArtifacts=ignore -B -V  -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120
 
     - name: Publish Test Report
       uses: scacap/action-surefire-report@v1
