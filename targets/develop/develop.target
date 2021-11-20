@@ -113,6 +113,17 @@
 <repository id="framework_va" location="http://capralow.ru/edt/unit.framework.va/latest/"/>
 </location>
 
+<!-- Jacoco -->
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="org.objectweb.asm" version="8.0.1.v20200420-1007"/>
+<unit id="org.objectweb.asm.commons" version="8.0.1.v20200420-1007"/>
+<unit id="org.objectweb.asm.tree" version="8.0.1.v20200420-1007"/>
+<unit id="org.jacoco.agent" version="0.0.0"/>
+<unit id="org.jacoco.core" version="0.0.0"/>
+<unit id="org.jacoco.report" version="0.0.0"/>
+<repository id="eclipse_releases" location="https://download.eclipse.org/releases/2020-12/"/>
+</location>
+
 <!-- LIBS -->
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
 <unit id="org.mockito" version="0.0.0"/>
