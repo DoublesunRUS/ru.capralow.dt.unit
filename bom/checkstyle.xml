@@ -137,11 +137,7 @@
         <!--module name="ParenPad" /-->
         <module name="UnnecessaryParentheses" />
         <module name="Indentation">
-            <property name="basicOffset" value="4" />
-            <property name="lineWrappingIndentation" value="4" />
             <property name="caseIndent" value="0" />
-            <property name="throwsIndent" value="4" />
-            <property name="forceStrictCondition" value="false" />
         </module>
 
         <!-- Number format -->
@@ -177,5 +173,8 @@
             <property name="tokens" value="VARIABLE_DEF"/>
             <property name="id" value="IllegalVar"/>
         </module>
+        
+        <!-- JavaDoc -->
+        <module name="MissingJavadocMethod"/>
     </module>
 </module>
