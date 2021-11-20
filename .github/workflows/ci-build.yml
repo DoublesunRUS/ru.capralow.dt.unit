@@ -21,9 +21,6 @@ jobs:
       with:
         java-version: 11
         java-package: jdk+fx
-        server-id: dt_repository
-        server-username: MAVEN_USERNAME
-        server-password: MAVEN_CENTRAL_TOKEN
 
     - name: Free disk space
       run: |
@@ -34,18 +31,15 @@ jobs:
         df -h
 
     - name: Cache maven repo
-      uses: actions/cache@v1
-      if: github.event_name == 'push' || github.event_name == 'pull_request'
+      uses: actions/cache@v2
+      if: github.event_name == 'push' || github.event_name == 'pull_request' || github.event_name == 'pull_request_target'
       with:
         path: ~/.m2/repository/p2/osgi/bundle/com.?1c.*
-        key: ${{ runner.os }}-maven-latest-${{ hashFiles('**/pom.xml') }}-${{ hashFiles('targets/latest/latest.target') }}
+        key: ${{ runner.os }}-maven-latest-${{ hashFiles('**/pom.xml') }}-${{ hashFiles('targets/default/default.target') }}
         restore-keys: |
           ${{ runner.os }}-maven-latest-
   
     - name: Build with Maven
-      env:
-        MAVEN_USERNAME: ${{ secrets.P2_USER }}
-        MAVEN_CENTRAL_TOKEN: ${{ secrets.P2_TOKEN }}
       working-directory: ./
       run: |
         Xvfb :5 -screen 0 1280x1024x8 -fbdir /tmp &
