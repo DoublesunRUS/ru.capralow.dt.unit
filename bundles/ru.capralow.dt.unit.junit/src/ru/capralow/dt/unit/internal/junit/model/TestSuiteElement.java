@@ -83,16 +83,12 @@ public class TestSuiteElement
             if (fChildrenStatus == null || !fChildrenStatus.isErrorOrFailure())
             {
                 internalSetChildrenStatus(Status.RUNNING_FAILURE);
-                return;
             }
         }
-        else if (childStatus.isError())
+
+        else if (childStatus.isError() && (fChildrenStatus == null || !fChildrenStatus.isError()))
         {
-            if (fChildrenStatus == null || !fChildrenStatus.isError())
-            {
-                internalSetChildrenStatus(Status.RUNNING_ERROR);
-                return;
-            }
+            internalSetChildrenStatus(Status.RUNNING_ERROR);
         }
     }
 
@@ -195,13 +191,10 @@ public class TestSuiteElement
                 fTime = -System.currentTimeMillis() / 1000d;
             }
         }
-        else if (status.convertToProgressState() == ProgressState.COMPLETED)
-        {
-            if (fTime < 0)
-            { // assert ! Double.isNaN(fTime)
-                double endTime = System.currentTimeMillis() / 1000d;
-                fTime = endTime + fTime;
-            }
+        else if (status.convertToProgressState() == ProgressState.COMPLETED && fTime < 0)
+        { // assert ! Double.isNaN(fTime)
+            double endTime = System.currentTimeMillis() / 1000d;
+            fTime = endTime + fTime;
         }
 
         fChildrenStatus = status;

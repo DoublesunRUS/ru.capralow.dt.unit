@@ -1080,11 +1080,6 @@ public class TestRunnerViewPart
         }
     }
 
-    private String elapsedTimeAsString(long runTime)
-    {
-        return NumberFormat.getInstance().format((double)runTime / 1000);
-    }
-
     private Display getDisplay()
     {
         return getViewSite().getShell().getDisplay();
@@ -2086,13 +2081,10 @@ action enablement
             {
                 urlData = (String)fClipboard.getContents(TextTransfer.getInstance());
             }
-            if (urlData != null && urlData.length() > 0)
+            if (urlData != null && urlData.length() > 0 && isValidUrl(urlData))
             {
-                if (isValidUrl(urlData))
-                {
-                    importTestRunSession(urlData);
-                    return;
-                }
+                importTestRunSession(urlData);
+                return;
             }
             MessageDialog.openInformation(fShell, Messages.TestRunnerViewPart_JUnitPasteAction_cannotpaste_title,
                 Messages.TestRunnerViewPart_JUnitPasteAction_cannotpaste_message);
@@ -2601,6 +2593,12 @@ action enablement
             });
             stopUpdateJobs();
         }
+
+        private String elapsedTimeAsString(long runTime)
+        {
+            return NumberFormat.getInstance().format((double)runTime / 1000);
+        }
+
     }
 
     private class ToggleOrientationAction

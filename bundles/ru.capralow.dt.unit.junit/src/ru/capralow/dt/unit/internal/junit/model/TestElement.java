@@ -324,13 +324,10 @@ public abstract class TestElement
         {
             fTime = -System.currentTimeMillis() / 1000d;
         }
-        else if (status.convertToProgressState() == ProgressState.COMPLETED)
-        {
-            if (fTime < 0)
-            { // assert ! Double.isNaN(fTime)
-                double endTime = System.currentTimeMillis() / 1000.0d;
-                fTime = endTime + fTime;
-            }
+        else if (status.convertToProgressState() == ProgressState.COMPLETED && fTime < 0)
+        { // assert ! Double.isNaN(fTime)
+            double endTime = System.currentTimeMillis() / 1000.0d;
+            fTime = endTime + fTime;
         }
 
         fStatus = status;

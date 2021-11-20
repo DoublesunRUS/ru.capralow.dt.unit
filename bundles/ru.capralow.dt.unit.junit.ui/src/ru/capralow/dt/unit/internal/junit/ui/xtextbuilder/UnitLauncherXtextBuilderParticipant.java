@@ -80,7 +80,7 @@ public class UnitLauncherXtextBuilderParticipant
      * @return String
      */
     public static StringBuilder getFeatureText(FeatureSettings featureSettings, String lang, String projectName,
-        String moduleName, List<String> methodsNames, Boolean forServer, Boolean forClient)
+        String moduleName, List<String> methodsNames, boolean forServer, boolean forClient)
     {
         List<String> frameworkDescription =
             FrameworkUtils.getFeatureDescription(featureSettings, lang, projectName, moduleName);

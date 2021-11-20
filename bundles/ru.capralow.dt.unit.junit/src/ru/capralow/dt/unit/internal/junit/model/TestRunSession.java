@@ -632,118 +632,6 @@ public class TestRunSession
         }
     }
 
-    private TestElement addTreeEntry(String treeEntry)
-    {
-        // format: "testId","testName","isSuite","testcount","isDynamicTest",
-        // "parentId","displayName","parameterTypes","uniqueId"
-        int index0 = treeEntry.indexOf(',');
-        String id = treeEntry.substring(0, index0);
-
-        StringBuffer testNameBuffer = new StringBuffer(100);
-        int index1 = scanTestName(treeEntry, index0 + 1, testNameBuffer);
-        String testName = testNameBuffer.toString().trim();
-
-        int index2 = treeEntry.indexOf(',', index1 + 1);
-        boolean isSuite = treeEntry.substring(index1 + 1, index2).equals("true"); //$NON-NLS-1$
-
-        int testCount;
-        boolean isDynamicTest;
-        String parentId;
-        String displayName;
-        StringBuffer displayNameBuffer = new StringBuffer(100);
-        String[] parameterTypes;
-        StringBuffer parameterTypesBuffer = new StringBuffer(200);
-        String uniqueId;
-        StringBuffer uniqueIdBuffer = new StringBuffer(200);
-        int index3 = treeEntry.indexOf(',', index2 + 1);
-        if (index3 == -1)
-        {
-            testCount = Integer.parseInt(treeEntry.substring(index2 + 1));
-            isDynamicTest = false;
-            parentId = null;
-            displayName = null;
-            parameterTypes = null;
-            uniqueId = null;
-        }
-        else
-        {
-            testCount = Integer.parseInt(treeEntry.substring(index2 + 1, index3));
-
-            int index4 = treeEntry.indexOf(',', index3 + 1);
-            isDynamicTest = treeEntry.substring(index3 + 1, index4).equals("true"); //$NON-NLS-1$
-
-            int index5 = treeEntry.indexOf(',', index4 + 1);
-            parentId = treeEntry.substring(index4 + 1, index5);
-            if (parentId.equals("-1")) //$NON-NLS-1$
-            {
-                parentId = null;
-            }
-
-            int index6 = scanTestName(treeEntry, index5 + 1, displayNameBuffer);
-            displayName = displayNameBuffer.toString().trim();
-            if (displayName.equals(testName))
-            {
-                displayName = null;
-            }
-
-            int index7 = scanTestName(treeEntry, index6 + 1, parameterTypesBuffer);
-            String parameterTypesString = parameterTypesBuffer.toString().trim();
-            if (parameterTypesString.isEmpty())
-            {
-                parameterTypes = null;
-            }
-            else
-            {
-                parameterTypes = parameterTypesString.split(","); //$NON-NLS-1$
-                Arrays.parallelSetAll(parameterTypes, i -> parameterTypes[i].trim());
-            }
-
-            scanTestName(treeEntry, index7 + 1, uniqueIdBuffer);
-            uniqueId = uniqueIdBuffer.toString().trim();
-            if (uniqueId.isEmpty())
-            {
-                uniqueId = null;
-            }
-        }
-
-        if (isDynamicTest)
-        {
-            if (parentId != null)
-            {
-                for (IncompleteTestSuite suite : fFactoryTestSuites)
-                {
-                    if (parentId.equals(suite.fTestSuiteElement.getId()))
-                    {
-                        return createTestElement(suite.fTestSuiteElement, id, testName, isSuite, testCount,
-                            isDynamicTest, displayName, parameterTypes, uniqueId);
-                    }
-                }
-            }
-            return createTestElement(getUnrootedSuite(), id, testName, isSuite, testCount, isDynamicTest, displayName,
-                parameterTypes, uniqueId); // should not reach here
-        }
-        else
-        {
-            if (fIncompleteTestSuites.isEmpty())
-            {
-                return createTestElement(fTestRoot, id, testName, isSuite, testCount, isDynamicTest, displayName,
-                    parameterTypes, uniqueId);
-            }
-            else
-            {
-                int suiteIndex = fIncompleteTestSuites.size() - 1;
-                IncompleteTestSuite openSuite = fIncompleteTestSuites.get(suiteIndex);
-                openSuite.fOutstandingChildren--;
-                if (openSuite.fOutstandingChildren <= 0)
-                {
-                    fIncompleteTestSuites.remove(suiteIndex);
-                }
-                return createTestElement(openSuite.fTestSuiteElement, id, testName, isSuite, testCount, isDynamicTest,
-                    displayName, parameterTypes, uniqueId);
-            }
-        }
-    }
-
     private File getSwapFile() throws IllegalStateException
     {
         File historyDir = JUnitPlugin.getHistoryDirectory();
@@ -761,44 +649,6 @@ public class TestRunSession
                     0, false, Messages.TestRunSession_unrootedTests, null, null);
         }
         return fUnrootedSuite;
-    }
-
-    /**
-     * Append the test name from <code>s</code> to <code>testName</code>.
-     *
-     * @param s the string to scan
-     * @param start the offset of the first character in <code>s</code>
-     * @param testName the result
-     *
-     * @return the index of the next ','
-     */
-    private int scanTestName(String s, int start, StringBuffer testName)
-    {
-        boolean inQuote = false;
-        int i = start;
-        for (; i < s.length(); i++)
-        {
-            char c = s.charAt(i);
-            if (c == '\\' && !inQuote)
-            {
-                inQuote = true;
-                continue;
-            }
-            else if (inQuote)
-            {
-                inQuote = false;
-                testName.append(c);
-            }
-            else if (c == ',')
-            {
-                break;
-            }
-            else
-            {
-                testName.append(c);
-            }
-        }
-        return i;
     }
 
     private void setStatus(TestElement testElement, Status status)
@@ -1043,6 +893,155 @@ public class TestRunSession
         private void logUnexpectedTest(String testId, TestElement testElement)
         {
             JUnitPlugin.log(new Exception("Unexpected TestElement type for testId '" + testId + "': " + testElement)); //$NON-NLS-2$
+        }
+
+        /**
+         * Append the test name from <code>s</code> to <code>testName</code>.
+         *
+         * @param s the string to scan
+         * @param start the offset of the first character in <code>s</code>
+         * @param testName the result
+         *
+         * @return the index of the next ','
+         */
+        private int scanTestName(String s, int start, StringBuffer testName)
+        {
+            boolean inQuote = false;
+            int i = start;
+            for (; i < s.length(); i++)
+            {
+                char c = s.charAt(i);
+                if (c == '\\' && !inQuote)
+                {
+                    inQuote = true;
+                }
+                else if (inQuote)
+                {
+                    inQuote = false;
+                    testName.append(c);
+                }
+                else if (c == ',')
+                {
+                    break;
+                }
+                else
+                {
+                    testName.append(c);
+                }
+            }
+            return i;
+        }
+
+        private TestElement addTreeEntry(String treeEntry)
+        {
+            // format: "testId","testName","isSuite","testcount","isDynamicTest",
+            // "parentId","displayName","parameterTypes","uniqueId"
+            int index0 = treeEntry.indexOf(',');
+            String id = treeEntry.substring(0, index0);
+
+            StringBuffer testNameBuffer = new StringBuffer(100);
+            int index1 = scanTestName(treeEntry, index0 + 1, testNameBuffer);
+            String testName = testNameBuffer.toString().trim();
+
+            int index2 = treeEntry.indexOf(',', index1 + 1);
+            boolean isSuite = treeEntry.substring(index1 + 1, index2).equals("true"); //$NON-NLS-1$
+
+            int testCount;
+            boolean isDynamicTest;
+            String parentId;
+            String displayName;
+            StringBuffer displayNameBuffer = new StringBuffer(100);
+            String[] parameterTypes;
+            StringBuffer parameterTypesBuffer = new StringBuffer(200);
+            String uniqueId;
+            StringBuffer uniqueIdBuffer = new StringBuffer(200);
+            int index3 = treeEntry.indexOf(',', index2 + 1);
+            if (index3 == -1)
+            {
+                testCount = Integer.parseInt(treeEntry.substring(index2 + 1));
+                isDynamicTest = false;
+                parentId = null;
+                displayName = null;
+                parameterTypes = null;
+                uniqueId = null;
+            }
+            else
+            {
+                testCount = Integer.parseInt(treeEntry.substring(index2 + 1, index3));
+
+                int index4 = treeEntry.indexOf(',', index3 + 1);
+                isDynamicTest = treeEntry.substring(index3 + 1, index4).equals("true"); //$NON-NLS-1$
+
+                int index5 = treeEntry.indexOf(',', index4 + 1);
+                parentId = treeEntry.substring(index4 + 1, index5);
+                if (parentId.equals("-1")) //$NON-NLS-1$
+                {
+                    parentId = null;
+                }
+
+                int index6 = scanTestName(treeEntry, index5 + 1, displayNameBuffer);
+                displayName = displayNameBuffer.toString().trim();
+                if (displayName.equals(testName))
+                {
+                    displayName = null;
+                }
+
+                int index7 = scanTestName(treeEntry, index6 + 1, parameterTypesBuffer);
+                String parameterTypesString = parameterTypesBuffer.toString().trim();
+                if (parameterTypesString.isEmpty())
+                {
+                    parameterTypes = null;
+                }
+                else
+                {
+                    parameterTypes = parameterTypesString.split(","); //$NON-NLS-1$
+                    Arrays.parallelSetAll(parameterTypes, i -> parameterTypes[i].trim());
+                }
+
+                scanTestName(treeEntry, index7 + 1, uniqueIdBuffer);
+                uniqueId = uniqueIdBuffer.toString().trim();
+                if (uniqueId.isEmpty())
+                {
+                    uniqueId = null;
+                }
+            }
+
+            if (isDynamicTest)
+            {
+                if (parentId != null)
+                {
+                    for (IncompleteTestSuite suite : fFactoryTestSuites)
+                    {
+                        if (parentId.equals(suite.fTestSuiteElement.getId()))
+                        {
+                            return createTestElement(suite.fTestSuiteElement, id, testName, isSuite, testCount,
+                                isDynamicTest, displayName, parameterTypes, uniqueId);
+                        }
+                    }
+                }
+                return createTestElement(getUnrootedSuite(), id, testName, isSuite, testCount, isDynamicTest,
+                    displayName, parameterTypes, uniqueId); // should not reach here
+            }
+            else
+            {
+                if (fIncompleteTestSuites.isEmpty())
+                {
+                    return createTestElement(fTestRoot, id, testName, isSuite, testCount, isDynamicTest, displayName,
+                        parameterTypes, uniqueId);
+                }
+                else
+                {
+                    int suiteIndex = fIncompleteTestSuites.size() - 1;
+                    IncompleteTestSuite openSuite = fIncompleteTestSuites.get(suiteIndex);
+                    openSuite.fOutstandingChildren--;
+                    if (openSuite.fOutstandingChildren <= 0)
+                    {
+                        fIncompleteTestSuites.remove(suiteIndex);
+                    }
+                    return createTestElement(openSuite.fTestSuiteElement, id, testName, isSuite, testCount,
+                        isDynamicTest, displayName, parameterTypes, uniqueId);
+                }
+            }
         }
     }
 }

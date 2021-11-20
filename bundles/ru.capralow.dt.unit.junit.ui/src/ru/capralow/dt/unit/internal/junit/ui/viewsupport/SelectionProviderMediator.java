@@ -131,18 +131,6 @@ public class SelectionProviderMediator
         }
     }
 
-    private void doFocusChanged(Widget control)
-    {
-        for (StructuredViewer viewer : fViewers)
-        {
-            if (viewer.getControl() == control)
-            {
-                propagateFocusChanged(viewer);
-                return;
-            }
-        }
-    }
-
     private void firePostSelectionChanged()
     {
         if (fPostSelectionChangedListeners != null)
@@ -227,6 +215,19 @@ public class SelectionProviderMediator
         {
             doSelectionChanged(event);
         }
+
+        private void doFocusChanged(Widget control)
+        {
+            for (StructuredViewer viewer : fViewers)
+            {
+                if (viewer.getControl() == control)
+                {
+                    propagateFocusChanged(viewer);
+                    return;
+                }
+            }
+        }
+
     }
 
     private class InternalPostSelectionListener

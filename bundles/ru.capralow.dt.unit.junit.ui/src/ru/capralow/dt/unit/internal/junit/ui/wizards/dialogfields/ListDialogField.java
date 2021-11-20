@@ -614,7 +614,7 @@ public class ListDialogField<E>
      */
     public void removeAllElements()
     {
-        if (fElements.size() > 0)
+        if (!fElements.isEmpty())
         {
             fElements.clear();
             if (isOkToUse(fTableControl))
@@ -652,7 +652,7 @@ public class ListDialogField<E>
      */
     public void removeElements(List<E> elements)
     {
-        if (elements.size() > 0)
+        if (!elements.isEmpty())
         {
             fElements.removeAll(elements);
             if (isOkToUse(fTableControl))
@@ -724,7 +724,7 @@ public class ListDialogField<E>
         }
         else
         {
-            if (fElements.size() > 0)
+            if (!fElements.isEmpty())
             {
                 element = fElements.get(0);
             }
@@ -876,7 +876,7 @@ public class ListDialogField<E>
 
     private void moveDown(List<E> toMoveDown)
     {
-        if (toMoveDown.size() > 0)
+        if (!toMoveDown.isEmpty())
         {
             setElements(reverse(moveUp(reverse(fElements), toMoveDown)));
             fTable.reveal(toMoveDown.get(toMoveDown.size() - 1));
@@ -885,7 +885,7 @@ public class ListDialogField<E>
 
     private void moveUp(List<E> toMoveUp)
     {
-        if (toMoveUp.size() > 0)
+        if (!toMoveUp.isEmpty())
         {
             setElements(moveUp(fElements, toMoveUp));
             fTable.reveal(toMoveUp.get(0));
@@ -1019,12 +1019,10 @@ public class ListDialogField<E>
      */
     protected void handleKeyPressed(KeyEvent event)
     {
-        if (event.character == SWT.DEL && event.stateMask == 0)
+        if (event.character == SWT.DEL && event.stateMask == 0 && fRemoveButtonIndex != -1
+            && isButtonEnabled(fTable.getSelection(), fRemoveButtonIndex))
         {
-            if (fRemoveButtonIndex != -1 && isButtonEnabled(fTable.getSelection(), fRemoveButtonIndex))
-            {
-                managedButtonPressed(fRemoveButtonIndex);
-            }
+            managedButtonPressed(fRemoveButtonIndex);
         }
     }
 

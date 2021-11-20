@@ -190,7 +190,7 @@ import ru.capralow.dt.unit.internal.junit.ui.wizards.dialogfields.StringDialogFi
         private void doSelectionChanged()
         {
             List<E> selected = fHistoryList.getSelectedElements();
-            if (selected.size() >= 1)
+            if (!selected.isEmpty())
             {
                 fResult = selected.get(0);
             }
