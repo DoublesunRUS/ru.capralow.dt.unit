@@ -236,14 +236,17 @@ public class TestRunSession
         int testCount, boolean isDynamicTest, String displayName, String[] parameterTypes, String uniqueId)
     {
         TestElement testElement;
+
+        String[] modifiedParameterTypes = parameterTypes;
         if (parameterTypes != null && parameterTypes.length > 1)
         {
-            parameterTypes = Arrays.stream(parameterTypes).map(String::trim).toArray(String[]::new);
+            modifiedParameterTypes = Arrays.stream(parameterTypes).map(String::trim).toArray(String[]::new);
         }
+
         if (isSuite)
         {
             TestSuiteElement testSuiteElement =
-                new TestSuiteElement(parent, id, testName, testCount, displayName, parameterTypes, uniqueId);
+                new TestSuiteElement(parent, id, testName, testCount, displayName, modifiedParameterTypes, uniqueId);
             testElement = testSuiteElement;
             if (testCount > 0)
             {
@@ -257,9 +260,11 @@ public class TestRunSession
         else
         {
             testElement =
-                new TestCaseElement(parent, id, testName, displayName, isDynamicTest, parameterTypes, uniqueId);
+                new TestCaseElement(parent, id, testName, displayName, isDynamicTest, modifiedParameterTypes, uniqueId);
         }
+
         fIdToTest.put(id, testElement);
+
         return testElement;
     }
 

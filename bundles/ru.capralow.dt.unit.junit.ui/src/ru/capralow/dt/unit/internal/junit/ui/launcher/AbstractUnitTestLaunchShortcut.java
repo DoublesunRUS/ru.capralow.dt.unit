@@ -79,11 +79,13 @@ public abstract class AbstractUnitTestLaunchShortcut
         final String mode) throws CoreException
     {
         final IV8Project v8project = v8projectManager.getProject(project);
+        IProject launchProject = project;
         if (v8project instanceof IDependentProject)
         {
-            project = getAppropriateBaseProject(v8project);
+            launchProject = getAppropriateBaseProject(v8project);
         }
-        final ILaunchConfigurationWorkingCopy workingCopy = super.createLaunchConfiguration(project, object, mode);
+        final ILaunchConfigurationWorkingCopy workingCopy =
+            super.createLaunchConfiguration(launchProject, object, mode);
         if (!(v8project instanceof IExternalObjectProject))
         {
             return workingCopy;
@@ -235,28 +237,33 @@ public abstract class AbstractUnitTestLaunchShortcut
             final IV8Project v8project = v8projectManager.getProject(project);
             final boolean candiateHasExternalObject = externalProjectName != null && externalObjectType != null;
             boolean candidateHasCorrectExternalObject = !candiateHasExternalObject;
+            EObject runObject = object;
+
             if (v8project instanceof IExternalObjectProject)
             {
                 if (!candiateHasExternalObject)
                 {
                     return false;
                 }
-                if (object == null)
+                if (runObject == null)
                 {
-                    object = getExternalObject((IExternalObjectProject)v8project);
+                    runObject = getExternalObject((IExternalObjectProject)v8project);
                 }
             }
+
+            IProject runProject = project;
             if (v8project instanceof IDependentProject)
             {
                 final IProject baseProject = getAppropriateBaseProject(v8project);
                 if (baseProject != null)
                 {
-                    project = baseProject;
+                    runProject = baseProject;
                 }
             }
-            if (object != null && candiateHasExternalObject)
+
+            if (runObject != null && candiateHasExternalObject)
             {
-                final MdObject launchingExternalObject = externalObjectExtractor.getExternalObject(object);
+                final MdObject launchingExternalObject = externalObjectExtractor.getExternalObject(runObject);
                 if (launchingExternalObject != null && JUnitUiPlugin.availableForLaunch(launchingExternalObject))
                 {
                     final IV8Project externalObjectProject = v8projectManager.getProject(externalProjectName);
@@ -279,9 +286,9 @@ public abstract class AbstractUnitTestLaunchShortcut
             if (!forLaunch && resolvable != null)
             {
                 runtimeSupportsClientType &=
-                    getRuntimeComponentTypeId().equals(getExecutionClientTypeId(candidate, project, resolvable));
+                    getRuntimeComponentTypeId().equals(getExecutionClientTypeId(candidate, runProject, resolvable));
             }
-            return super.matches(project, application, object, candidate, forLaunch) && runtimeSupportsClientType;
+            return super.matches(runProject, application, runObject, candidate, forLaunch) && runtimeSupportsClientType;
         }
         catch (MatchingRuntimeNotFound ignored)
         {

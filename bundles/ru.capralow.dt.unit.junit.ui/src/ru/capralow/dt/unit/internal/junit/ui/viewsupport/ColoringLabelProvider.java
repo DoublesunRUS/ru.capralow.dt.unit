@@ -118,9 +118,9 @@ public class ColoringLabelProvider
     {
         if (!applyColors && styleRange.background != null)
         {
-            styleRange = super.prepareStyleRange(styleRange, applyColors);
-            styleRange.borderStyle = SWT.BORDER_DOT;
-            return styleRange;
+            StyleRange coloredStyleRange = super.prepareStyleRange(styleRange, applyColors);
+            coloredStyleRange.borderStyle = SWT.BORDER_DOT;
+            return coloredStyleRange;
         }
 
         return super.prepareStyleRange(styleRange, applyColors);

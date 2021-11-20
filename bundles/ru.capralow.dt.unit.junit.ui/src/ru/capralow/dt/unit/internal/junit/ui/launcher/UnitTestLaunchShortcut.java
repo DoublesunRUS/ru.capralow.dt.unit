@@ -67,15 +67,21 @@ public class UnitTestLaunchShortcut
         {
             return v8project.getProject();
         }
-        if (v8project instanceof IDependentProject
-            && (baseProject = ((IDependentProject)v8project).getParentProject()) != null)
+        if (v8project instanceof IDependentProject)
         {
-            return baseProject;
+            baseProject = ((IDependentProject)v8project).getParentProject();
+            if (baseProject != null)
+            {
+                return baseProject;
+            }
         }
-        if (v8project instanceof IExternalObjectProject
-            && (projects = this.v8projectManager.getProjects(IConfigurationProject.class)).size() == 1)
+        if (v8project instanceof IExternalObjectProject)
         {
-            return ((IConfigurationProject)projects.iterator().next()).getProject();
+            projects = this.v8projectManager.getProjects(IConfigurationProject.class);
+            if (projects.size() == 1)
+            {
+                return ((IConfigurationProject)projects.iterator().next()).getProject();
+            }
         }
         return v8project.getProject();
     }

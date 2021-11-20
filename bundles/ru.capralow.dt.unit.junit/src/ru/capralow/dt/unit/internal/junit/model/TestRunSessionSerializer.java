@@ -201,8 +201,8 @@ public class TestRunSessionSerializer
 
     private void addCharacters(String string) throws SAXException
     {
-        string = escapeNonUnicodeChars(string);
-        fHandler.characters(string.toCharArray(), 0, string.length());
+        String modifiedString = escapeNonUnicodeChars(string);
+        fHandler.characters(modifiedString.toCharArray(), 0, modifiedString.length());
     }
 
     private void addFailure(TestElement testElement) throws SAXException
