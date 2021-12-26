@@ -145,6 +145,8 @@ public class TestRunSession
         fIdToTest = new HashMap<>();
 
         // TODO: Нужно реализовать обработчик, который будет анализировать лог и отображать статус каждой проверки
+        ITestRunListener2[] listeners = new ITestRunListener2[] { new TestSessionNotifier() };
+
 //        fTestRunnerClient = new RemoteTestRunnerClient();
 //        fTestRunnerClient.startListening(new ITestRunListener2[] { new TestSessionNotifier() }, testExtensionName);
 

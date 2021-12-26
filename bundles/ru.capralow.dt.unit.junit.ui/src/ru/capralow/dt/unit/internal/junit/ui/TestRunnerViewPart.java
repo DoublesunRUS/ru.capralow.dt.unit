@@ -692,23 +692,23 @@ public class TestRunnerViewPart
         if (fSashForm == null)
         {
             // part has not been created
-            if (fMemento != null) //Keep the old state;
+            if (fMemento != null) // Keep the old state
             {
                 memento.putMemento(fMemento);
             }
             return;
         }
 
-        memento.putString(TAG_SCROLL, fScrollLockAction.isChecked() ? "true" : "false"); //$NON-NLS-1$ //$NON-NLS-2$
+        memento.putString(TAG_SCROLL, Boolean.toString(fScrollLockAction.isChecked()));
         int weigths[] = fSashForm.getWeights();
         int ratio = (weigths[0] * 1000) / (weigths[0] + weigths[1]);
         memento.putInteger(TAG_RATIO, ratio);
         memento.putInteger(TAG_ORIENTATION, fOrientation);
 
-        memento.putString(TAG_FAILURES_ONLY, fFailuresOnlyFilterAction.isChecked() ? "true" : "false"); //$NON-NLS-1$ //$NON-NLS-2$
-        memento.putString(TAG_IGNORED_ONLY, fIgnoredOnlyFilterAction.isChecked() ? "true" : "false"); //$NON-NLS-1$ //$NON-NLS-2$
+        memento.putString(TAG_FAILURES_ONLY, Boolean.toString(fFailuresOnlyFilterAction.isChecked()));
+        memento.putString(TAG_IGNORED_ONLY, Boolean.toString(fIgnoredOnlyFilterAction.isChecked()));
         memento.putInteger(TAG_LAYOUT, fLayout);
-        memento.putString(TAG_SHOW_TIME, fShowTimeAction.isChecked() ? "true" : "false"); //$NON-NLS-1$ //$NON-NLS-2$
+        memento.putString(TAG_SHOW_TIME, Boolean.toString(fShowTimeAction.isChecked()));
         memento.putInteger(TAG_SORTING_CRITERION, fSortingCriterion.ordinal());
     }
 
@@ -777,13 +777,14 @@ public class TestRunnerViewPart
         if (page != null)
         {
             try
-            { // show the result view
+            {
+                // show the result view
                 testRunner = (TestRunnerViewPart)page.findView(TestRunnerViewPart.NAME);
                 if (testRunner == null)
                 {
                     IWorkbenchPart activePart = page.getActivePart();
-                    testRunner =
-                        (TestRunnerViewPart)page.showView(TestRunnerViewPart.NAME, null, IWorkbenchPage.VIEW_VISIBLE);
+                    page.showView(TestRunnerViewPart.NAME, null, IWorkbenchPage.VIEW_VISIBLE);
+
                     //restore focus
                     page.activate(activePart);
                 }
@@ -875,7 +876,7 @@ public class TestRunnerViewPart
             @Override
             public void controlMoved(ControlEvent e)
             {
-                // Нечего делать
+                // Nothing to do
             }
 
             @Override
@@ -966,8 +967,8 @@ public class TestRunnerViewPart
         toolBar.add(fIgnoredOnlyFilterAction);
         toolBar.add(fScrollLockAction);
         toolBar.add(new Separator());
-        toolBar.add(fRerunLastTestAction);
-        toolBar.add(fRerunFailedFirstAction);
+//        toolBar.add(fRerunLastTestAction);
+//        toolBar.add(fRerunFailedFirstAction);
         toolBar.add(fStopAction);
         toolBar.add(fViewHistory.createHistoryDropDownAction());
 
