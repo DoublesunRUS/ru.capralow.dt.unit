@@ -9,7 +9,7 @@ import org.eclipse.osgi.util.NLS;
  * @author Aleksandr Kapralov
  *
  */
-public class Messages
+public class ModelMessages
     extends NLS
 {
     private static final String BUNDLE_NAME = "ru.capralow.dt.unit.internal.junit.model.messages"; //$NON-NLS-1$
@@ -49,6 +49,6 @@ public class Messages
     static
     {
         // initialize resource bundle
-        NLS.initializeMessages(BUNDLE_NAME, Messages.class);
+        NLS.initializeMessages(BUNDLE_NAME, ModelMessages.class);
     }
 }

@@ -131,7 +131,7 @@
             category="com._1c.g5.v8.dt.ui.v8category"
             fastViewWidthRatio="0.40"
             class="ru.capralow.dt.unit.internal.junit.ui.TestRunnerViewPart"
-            id="ru.capralow.dt.unit.ResultView">
+            id="ru.capralow.dt.unit.junit.ResultView">
       </view>
    </extension>
 

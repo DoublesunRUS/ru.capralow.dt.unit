@@ -197,7 +197,7 @@ public class FailureTrace
         {
             trace = test.getTrace();
         }
-        if (fInputTrace.equals(trace))
+        if (fInputTrace != null && fInputTrace.equals(trace))
         {
             return;
         }
@@ -252,7 +252,7 @@ public class FailureTrace
         }
         catch (NumberFormatException | IndexOutOfBoundsException e)
         {
-            // Нечего делать
+            // Nothing to do
         }
         return null;
     }

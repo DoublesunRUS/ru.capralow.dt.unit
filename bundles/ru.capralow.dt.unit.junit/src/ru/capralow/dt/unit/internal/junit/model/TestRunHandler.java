@@ -208,7 +208,7 @@ public class TestRunHandler
             {
                 line -= line % 20;
                 fLastReportedLine = line;
-                fMonitor.subTask(NLS.bind(Messages.TestRunHandler_lines_read, Integer.valueOf(line)));
+                fMonitor.subTask(NLS.bind(ModelMessages.TestRunHandler_lines_read, Integer.valueOf(line)));
             }
         }
         if (Thread.interrupted())

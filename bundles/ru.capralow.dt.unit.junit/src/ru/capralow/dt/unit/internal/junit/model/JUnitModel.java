@@ -186,7 +186,7 @@ public final class JUnitModel
     public static TestRunSession importTestRunSession(String url, IProgressMonitor monitor)
         throws InvocationTargetException, InterruptedException
     {
-        monitor.beginTask(Messages.JUnitModel_importing_from_url, IProgressMonitor.UNKNOWN);
+        monitor.beginTask(ModelMessages.JUnitModel_importing_from_url, IProgressMonitor.UNKNOWN);
         final String trimmedUrl = url.trim().replaceAll("\r\n?|\n", ""); //$NON-NLS-1$ //$NON-NLS-2$
         final TestRunHandler handler = new TestRunHandler(monitor);
 
@@ -219,7 +219,7 @@ public final class JUnitModel
             private void storeImportError(Exception e)
             {
                 exception[0] = new CoreException(new org.eclipse.core.runtime.Status(IStatus.ERROR, JUnitPlugin.ID,
-                    Messages.JUnitModel_could_not_import, e));
+                    ModelMessages.JUnitModel_could_not_import, e));
             }
         };
         importThread.start();
@@ -257,13 +257,13 @@ public final class JUnitModel
     private static void throwExportError(File file, Exception e) throws CoreException
     {
         throw new CoreException(new org.eclipse.core.runtime.Status(IStatus.ERROR, JUnitPlugin.ID,
-            MessageFormat.format(Messages.JUnitModel_could_not_write, BasicElementLabels.getPathLabel(file)), e));
+            MessageFormat.format(ModelMessages.JUnitModel_could_not_write, BasicElementLabels.getPathLabel(file)), e));
     }
 
     private static void throwImportError(File file, Exception e) throws CoreException
     {
         throw new CoreException(new org.eclipse.core.runtime.Status(IStatus.ERROR, JUnitPlugin.ID,
-            MessageFormat.format(Messages.JUnitModel_could_not_read, BasicElementLabels.getPathLabel(file)), e));
+            MessageFormat.format(ModelMessages.JUnitModel_could_not_read, BasicElementLabels.getPathLabel(file)), e));
     }
 
     private final ListenerList<ITestRunSessionListener> fTestRunSessionListeners = new ListenerList<>();
@@ -469,11 +469,15 @@ public final class JUnitModel
                 }
 
                 fTrackedLaunches.remove(launch);
-                connectTestRunner(launch, v8Project, testProject);
+
+                if (!config.isWorkingCopy())
+                {
+                    connectTestRunner(launch, v8Project, testProject);
+                }
             }
             catch (NumberFormatException | CoreException e)
             {
-                // Нечего делать
+                // nothing to do
             }
         }
 

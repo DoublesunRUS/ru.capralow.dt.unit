@@ -28,8 +28,6 @@ import org.osgi.framework.BundleContext;
 
 import com._1c.g5.v8.dt.metadata.mdclass.ExternalDataProcessor;
 import com._1c.g5.v8.dt.metadata.mdclass.MdObject;
-import com._1c.g5.wiring.InjectorAwareServiceRegistrator;
-import com._1c.g5.wiring.ServiceInitialization;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
@@ -166,12 +164,13 @@ public class JUnitUiPlugin
     }
 
     /**
-     * @param symbolicName
+     * @param relativePath
      * @return ImageDescriptor
      */
-    public static ImageDescriptor getImageDescriptor(String symbolicName)
+    public static ImageDescriptor getImageDescriptor(String relativePath)
     {
-        return instance.getImageRegistry().getDescriptor(symbolicName);
+        IPath path = ICONS_PATH.append(relativePath);
+        return createImageDescriptor(getInstance().getBundle(), path, true);
     }
 
     /**
@@ -275,8 +274,6 @@ public class JUnitUiPlugin
         action.setImageDescriptor(descriptor);
     }
 
-    private InjectorAwareServiceRegistrator registrator;
-
     private Injector injector;
 
     /**
@@ -312,10 +309,6 @@ public class JUnitUiPlugin
     {
         super.start(context);
 
-        registrator = new InjectorAwareServiceRegistrator(context, this::getInjector);
-
-        ServiceInitialization.schedule(() -> registrator.activateManagedService(UnitLauncherManager.class));
-
         instance = this;
     }
 
@@ -323,8 +316,6 @@ public class JUnitUiPlugin
     public void stop(BundleContext context) throws Exception
     {
         instance = null;
-
-        registrator.deactivateManagedServices(this);
 
         super.stop(context);
     }

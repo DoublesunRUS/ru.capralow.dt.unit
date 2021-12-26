@@ -8,9 +8,7 @@ import org.eclipse.osgi.util.NLS;
 final class Messages
     extends NLS
 {
-    private static final String BUNDLE_NAME = "ru.capralow.dt.unit.internal.junit.ui.junit.messages"; //$NON-NLS-1$
-
-    public static String Internal_class;
+    private static final String BUNDLE_NAME = "ru.capralow.dt.unit.internal.junit.ui.messages"; //$NON-NLS-1$
 
     public static String JUnitUiPlugin_Failed_to_create_injector_for_0;
     public static String JUnitUiPlugin_Internal_error;

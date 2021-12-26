@@ -4,6 +4,8 @@
 package ru.capralow.dt.unit.internal.junit.model;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -25,6 +27,8 @@ import com._1c.g5.v8.dt.core.platform.IV8Project;
 
 import ru.capralow.dt.unit.internal.junit.JUnitPlugin;
 import ru.capralow.dt.unit.internal.junit.model.TestElement.Status;
+import ru.capralow.dt.unit.junit.JUnitCore;
+import ru.capralow.dt.unit.junit.frameworks.FrameworkUtils;
 import ru.capralow.dt.unit.junit.model.ITestElement;
 import ru.capralow.dt.unit.junit.model.ITestElementContainer;
 import ru.capralow.dt.unit.junit.model.ITestRunSession;
@@ -47,6 +51,8 @@ public class TestRunSession
      * V8 project, or <code>null</code>.
      */
     private final IV8Project fConfigurationProject;
+
+    private RemoteTestRunnerClient fTestRunnerClient;
 
     private final ListenerList<ITestSessionListener> fSessionListeners;
 
@@ -138,7 +144,7 @@ public class TestRunSession
         fTestRoot = new TestRoot(this);
         fIdToTest = new HashMap<>();
 
-        // TODO: Тут вставить код ожидания результата от VA
+        // TODO: Нужно реализовать обработчик, который будет анализировать лог и отображать статус каждой проверки
 //        fTestRunnerClient = new RemoteTestRunnerClient();
 //        fTestRunnerClient.startListening(new ITestRunListener2[] { new TestSessionNotifier() }, testExtensionName);
 
@@ -148,26 +154,19 @@ public class TestRunSession
             @Override
             public void launchesAdded(ILaunch[] launches)
             {
-                // Нечего делать
+                // nothig to do
             }
 
             @Override
             public void launchesChanged(ILaunch[] launches)
             {
-                // Нечего делать
+                // nothig to do
             }
 
             @Override
             public void launchesRemoved(ILaunch[] launches)
             {
-                if (Arrays.asList(launches).contains(fLaunch))
-                {
-//                    if (fTestRunnerClient != null)
-//                    {
-//                        fTestRunnerClient.stopWaiting();
-//                    }
-                    launchManager.removeLaunchListener(this);
-                }
+                // nothing to do
             }
 
             @Override
@@ -175,10 +174,33 @@ public class TestRunSession
             {
                 if (Arrays.asList(launches).contains(fLaunch))
                 {
-//                    if (fTestRunnerClient != null)
-//                    {
-//                        fTestRunnerClient.stopWaiting();
-//                    }
+                    String paramsFilePathName =
+                        FrameworkUtils.getConfigurationFilesPath(fLaunch.getLaunchConfiguration());
+
+                    File file = new File(paramsFilePathName + File.separator + "junit.xml"); //$NON-NLS-1$
+                    if (!file.exists())
+                    {
+//                        String msg = MessageFormat.format(Messages.UnitTestLaunch_Unable_to_find_junit_xml_file_0,
+//                            file.getPath());
+//                        JUnitUiPlugin.log(JUnitUiPlugin.createErrorStatus(msg));
+                        return;
+                    }
+
+                    try
+                    {
+                        JUnitCore.importTestRunSession(file);
+                        Files.deleteIfExists(file.toPath());
+                    }
+                    catch (CoreException | IOException e)
+                    {
+                        // TODO Автоматически созданный блок catch
+                        e.printStackTrace();
+                    }
+
+                    if (fTestRunnerClient != null)
+                    {
+                        fTestRunnerClient.stopWaiting();
+                    }
                     launchManager.removeLaunchListener(this);
                 }
             }
@@ -206,7 +228,7 @@ public class TestRunSession
         fTestRoot = new TestRoot(this);
         fIdToTest = new HashMap<>();
 
-//        fTestRunnerClient = null;
+        fTestRunnerClient = null;
 
         fSessionListeners = new ListenerList<>();
     }
@@ -544,8 +566,10 @@ public class TestRunSession
         {
             fIsStopped = true;
         }
-//        if (fTestRunnerClient != null)
-//            fTestRunnerClient.stopTest();
+        if (fTestRunnerClient != null)
+        {
+            fTestRunnerClient.stopTest();
+        }
     }
 
     /**
@@ -595,7 +619,7 @@ public class TestRunSession
             JUnitModel.exportTestRunSession(this, swapFile);
             fTestResult = fTestRoot.getTestResult(true);
             fTestRoot = null;
-//            fTestRunnerClient = null;
+            fTestRunnerClient = null;
             fIdToTest = new HashMap<>();
             fIncompleteTestSuites = null;
             fFactoryTestSuites = null;
@@ -645,8 +669,8 @@ public class TestRunSession
         if (fUnrootedSuite == null)
         {
             fUnrootedSuite =
-                (TestSuiteElement)createTestElement(fTestRoot, "-2", Messages.TestRunSession_unrootedTests, true, //$NON-NLS-1$
-                    0, false, Messages.TestRunSession_unrootedTests, null, null);
+                (TestSuiteElement)createTestElement(fTestRoot, "-2", ModelMessages.TestRunSession_unrootedTests, true, //$NON-NLS-1$
+                    0, false, ModelMessages.TestRunSession_unrootedTests, null, null);
         }
         return fUnrootedSuite;
     }

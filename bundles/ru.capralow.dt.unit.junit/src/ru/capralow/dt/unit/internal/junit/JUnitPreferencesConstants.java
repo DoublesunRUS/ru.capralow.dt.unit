@@ -73,8 +73,8 @@ public final class JUnitPreferencesConstants
      */
     public static String[] getFilterPatterns()
     {
-        return JUnitPreferencesConstants.parseList(
-            Platform.getPreferencesService().getString(JUnitPlugin.ID, PREF_ACTIVE_FILTERS_LIST, null, null));
+        return JUnitPreferencesConstants
+            .parseList(Platform.getPreferencesService().getString(JUnitPlugin.ID, PREF_ACTIVE_FILTERS_LIST, "", null));
     }
 
     /**
